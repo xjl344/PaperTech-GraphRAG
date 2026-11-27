@@ -1,0 +1,209 @@
+{
+  "id": "28cda575-8788-5b6c-9294-7c160ecae7cf",
+  "inputs": {
+    "question": "STaRK 的 GPT-4 和 Claude3 重排器是在全部测试问题上、用相同候选数评测的吗？请指出这个说法省略的条件。"
+  },
+  "outputs": {
+    "expected_answer": "只用随机10%测试问题；合成问题k=20，人工问题k=10，不能宣称全量同k实验。",
+    "answerable": false,
+    "negative_kind": "false_or_overgeneralized_premise",
+    "source_references": [
+      {
+        "unit_id": "N04.S01",
+        "answer_point": "只用随机10%测试问题；合成问题k=20，人工问题k=10，不能宣称全量同k实验。",
+        "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+        "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+        "primary_chunk": "chunk_bb730573725b148aa7913e7f17bb9261",
+        "pages": [
+          7,
+          7
+        ],
+        "known_support_chunks": [
+          "chunk_bb730573725b148aa7913e7f17bb9261"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": "不得接受题干错误前提。",
+    "case_id": "N04",
+    "category": "negative",
+    "required_facts": [
+      {
+        "unit_id": "N04.S01",
+        "required_fact": "只用随机10%测试问题；合成问题k=20，人工问题k=10，不能宣称全量同k实验。",
+        "primary_chunk": "chunk_bb730573725b148aa7913e7f17bb9261",
+        "supporting_chunks": [
+          "chunk_bb730573725b148aa7913e7f17bb9261"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_bb730573725b148aa7913e7f17bb9261",
+        "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+        "parse_id": "parse_eb044438d75316972ee239a81710c919",
+        "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+        "source_relative_path": "Resources/002_STaRK Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases.pdf",
+        "page_start": 7,
+        "page_end": 7,
+        "source_spans": [
+          {
+            "pdf_page": 7,
+            "start_char": 2413,
+            "end_char": 3663,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1250,
+            "block_bboxes": [
+              [
+                108.0,
+                494.427,
+                504.004,
+                558.972
+              ],
+              [
+                107.691,
+                571.321,
+                452.128,
+                581.284
+              ],
+              [
+                108.0,
+                589.391,
+                504.004,
+                621.402
+              ],
+              [
+                108.0,
+                628.984,
+                505.247,
+                671.905
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "e3645042e8fa1db19322302d9398f691f06ddf5d1d132e559caa7e5dbad8ccae",
+        "section": "Experiments",
+        "text": "• LLM Rerankers: Claude3 and GPT-4 rerankers [11, 62]. These models improve the precision of\ntop-k ada-002 results by reranking them using large language models. We employ GPT-4-turbo\n(gpt-4-1106-preview) and Claude3 (claude-3-opus), setting k = 20 for synthesized\nqueries and k = 10 for human-generated queries. Given a query, the LLMs assign a satisfaction\nscore from 0 to 1 to each candidate entity based on textual and relational information. Due to high\ncomputational costs, we evaluate these rerankers on a random 10% sample of test queries.\nThe performance of these models are measured using standard retrieval metrics below.\n• Hit@k assesses whether the correct item is among the top-k results from the model. We used\nk = 1 and k = 5 for evaluation. At k = 1, it evaluates the accuracy of the top recommendation; at\nk = 5, it examines the model’s precision in a wider recommendation set.\n• Recall@k measures the proportion of relevant items in the top-k results. For synthesized queries,\nk = 20 is used, as the answer length of all of the queries in our benchmarks are equal or smaller\nthen 20. This metric offers insight into the model’s ability to identify all relevant items, particularly\nin scenarios where missing any could be critical.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_0d99e8c368a360985899fcc4ff0ba156"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "cross candidate_pool_coverage",
+      "negative_policy": "8道反例来源诊断单列，不计主召回，不评拒答正确率",
+      "semantic_review": "not assessed; no generation",
+      "source_pools": "unchanged, non-exhaustive, pre-frozen",
+      "pairing": "case-level win/tie/loss vs declared control; individual source-stage transitions also shown",
+      "causal_limit": "development set only; source-paper inclusion is not necessary-fact support"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索与证据评估（原冻结方案）",
+      "controls": {
+        "stage": "upstream_recall_width",
+        "fulltext_top": 20,
+        "rrf_k": 60,
+        "generation": false,
+        "embedding_calls": 0,
+        "named_policy": "existing named-paper reservation, not necessary-source reservation",
+        "no_gold_in_inputs": true,
+        "model_config": {
+          "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+          "CLOUD_BGE_PROVIDER": "cloudflare",
+          "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+          "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+          "LOCAL_RERANKER_DEVICE": "cuda",
+          "LOCAL_RERANKER_DTYPE": "float16",
+          "LOCAL_RERANKER_PERSISTENT": "true"
+        },
+        "dense_values": [
+          20,
+          40,
+          60
+        ],
+        "ann_query_k": 100,
+        "fusion_cap": "20+dense_k, no truncation",
+        "rerank_calls": 0,
+        "evidence_selection": false,
+        "query_vectors_sha256": "2397b125e1786d460e1facc84e62370c1f65ac49887636836dc1f9e58277faa6",
+        "index_requirement": "current corpus/model and top20 prefix identical to parent"
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Dense20 / Dense40 / Dense60 Experiments",
+      "fields": [
+        "候选通道完整排名与分数",
+        "全部候选原文及位置",
+        "必要来源上游/重排/预算缺口",
+        "逐题配对差异",
+        "时延/调用量与Token状态",
+        "证据原文/图路径",
+        "原始及本轮Experiment Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "N04.A01",
+        "requirement": "只用随机10%测试问题",
+        "unit_ids": [
+          "N04.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "N04.S01": [
+            "chunk_bb730573725b148aa7913e7f17bb9261"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "N04.A02",
+        "requirement": "合成问题k=20，人工问题k=10，不能宣称全量同k实验",
+        "unit_ids": [
+          "N04.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "N04.S01": [
+            "chunk_bb730573725b148aa7913e7f17bb9261"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "selection_bias": "这40题与来源已参与前轮诊断和本轮方案讨论；仅开发回归，不是新题泛化测试。"
+  },
+  "metadata": {
+    "case_id": "N04",
+    "category": "negative",
+    "benchmark": "benchmark-recall-width-v1",
+    "benchmark_sha256": "887b9fef53e0bbceaaf4db4e320af9650880e837f7dbc5d609f74dac7b4d56d4",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; exposed development set",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "negative"
+  ]
+}

@@ -1,0 +1,1063 @@
+{
+  "request_id": "240dab94-0d45-41ba-818a-5bb65b52ada1",
+  "status": "partial",
+  "answer": "该描述不准确。证据只表明：G-Retriever 在效率对比中包含“G-Retriever w/ LoRA”设置，且 Llama2-7b 的 LoRA 微调参数为 lora_r=8、lora_alpha=16，并非端到端更新全部权重[chunk_4b6090cd0a980f88cdd8316e0d8651a4]；PCST 检索参数按数据集设定 top k 节点与边及边成本[chunk_4b6090cd0a980f88cdd8316e0d8651a4]，但所给证据没有说明 PCST 检索模块是否可训练，也没有说明检索误差是否被消除[chunk_b8f804ce7bc81bbbf659aff60ac33d60][chunk_4b6090cd0a980f88cdd8316e0d8651a4]。因此，“同时端到端更新 Llama2-7b 全部权重以及可训练的 PCST 检索模块、从而消除检索误差”缺乏直接证据支持。",
+  "citations": [
+    {
+      "chunk_id": "chunk_4b6090cd0a980f88cdd8316e0d8651a4",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 14,
+      "page_end": 14,
+      "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 14,
+          "start_char": 962,
+          "end_char": 2495,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1533,
+          "block_bboxes": [
+            [
+              107.641,
+              283.364,
+              504.002,
+              337.004
+            ],
+            [
+              108.0,
+              343.2,
+              505.745,
+              418.847
+            ],
+            [
+              107.641,
+              425.106,
+              504.004,
+              467.963
+            ],
+            [
+              108.0,
+              484.392,
+              267.96,
+              494.354
+            ],
+            [
+              108.0,
+              505.267,
+              348.019,
+              515.23
+            ]
+          ]
+        }
+      ],
+      "quote": "LLM. We use the open-sourced Llama2-7b [42] as the LLM backbone. In fine-tuning the LLM with\nLoRA [10], the lora_r parameter (dimension for LoRA update matrices) is set to 8, and lora_alpha\n(scaling factor) is set to 16. The dropout rate is set to 0.05. In prompt tuning, the LLM is configured\nwith 10 virtual tokens. The number of max text length is 512, the number of max new tokens, i.e., the\nmaximum numbers of tokens to generate, is 32.\nPCST. For retrieval over graphs via PCST, for the SceneGraphs dataset, we select the top k nodes\nand edges, setting k to 3. Here, the cost of edges, denoted as Ce, is set to 1. Regarding the WebQSP\ndataset, we set k = 3 for nodes and k = 5 for edges, with the edge cost, Ce, adjusted to 0.5.\nFor the ExplaGraphs dataset, which is characterized by a small graph size averaging 5.17 nodes",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 9.829811096191406
+        }
+      ],
+      "rerank_score": 0.5720654726028442,
+      "context_bytes": 1914,
+      "eid": "E3"
+    },
+    {
+      "chunk_id": "chunk_b8f804ce7bc81bbbf659aff60ac33d60",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 19,
+      "page_end": 19,
+      "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 19,
+          "start_char": 78,
+          "end_char": 1538,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1460,
+          "block_bboxes": [
+            [
+              107.641,
+              117.682,
+              504.358,
+              226.08
+            ],
+            [
+              108.0,
+              240.925,
+              241.758,
+              250.888
+            ],
+            [
+              107.739,
+              261.092,
+              505.244,
+              292.948
+            ],
+            [
+              142.986,
+              312.098,
+              468.705,
+              322.309
+            ],
+            [
+              150.803,
+              333.919,
+              419.893,
+              343.882
+            ],
+            [
+              150.803,
+              350.033,
+              427.165,
+              370.906
+            ],
+            [
+              150.803,
+              377.057,
+              461.197,
+              397.929
+            ],
+            [
+              150.803,
+              404.081,
+              456.215,
+              424.953
+            ]
+          ]
+        }
+      ],
+      "quote": "Utilizing two A100 GPUs, each with 80GB of memory, we conducted tests on Llama2-7b and\nWebQSP datasets. Our experiments had a training batch size of 16 and an evaluation batch size of 32,\nyielding the following results.\nTable 12: Performance and Efficiency of Various Methods on the WebQSP dataset.\nSettting\nMethod\nHit@1\nTime\nInference-only\nQuestion only\n61.16\n31 min\nTextual graph and question\n41.06\n40 min\nFrozen LLM w/ PT\nPrompt Tuning\n48.34\n18.7 min/epoch\nG-Retriever\n70.49\n6.2 min/epoch\nTuned LLM\nLoRA\n66.03\n19 min/epoch\nG-Retriever w/ LoRA\n73.79\n6.9 min/epoch",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 10.495756149291992
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8086099624633789
+        }
+      ],
+      "rerank_score": 0.7132319211959839,
+      "context_bytes": 1861,
+      "eid": "E1"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_b8f804ce7bc81bbbf659aff60ac33d60",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 19,
+      "page_end": 19,
+      "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 19,
+          "start_char": 78,
+          "end_char": 1538,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1460,
+          "block_bboxes": [
+            [
+              107.641,
+              117.682,
+              504.358,
+              226.08
+            ],
+            [
+              108.0,
+              240.925,
+              241.758,
+              250.888
+            ],
+            [
+              107.739,
+              261.092,
+              505.244,
+              292.948
+            ],
+            [
+              142.986,
+              312.098,
+              468.705,
+              322.309
+            ],
+            [
+              150.803,
+              333.919,
+              419.893,
+              343.882
+            ],
+            [
+              150.803,
+              350.033,
+              427.165,
+              370.906
+            ],
+            [
+              150.803,
+              377.057,
+              461.197,
+              397.929
+            ],
+            [
+              150.803,
+              404.081,
+              456.215,
+              424.953
+            ]
+          ]
+        }
+      ],
+      "quote": "G-Retriever is framework integrate the strengths of GNNs, LLMs and GraphRAG. The LLM+X\nframework, which involves enriching LLMs with multi-modal capabilities by integrating an LLM\nwith an encoder from another modality, is a widely adopted approach. Notable examples include\nLlava, MiniGPT-4, and Flamingo, among others. They are not complex in terms of understanding\nor implementation. Regarding the integration of GraphRAG, it does not require training and can\nbe implemented during the preprocessing stage or on the fly. This approach does not significantly\nincrease time complexity or computational complexity. On the contrary, it can substantially reduce\nthe size of the graph (e.g., eliminating 99% of nodes in the WebQSP dataset), which in turn speeds\nup the overall running time (e.g., reducing it from 18.7 min/epoch to 6.2 min/epoch on the WebQSP\ndataset).\nE.2\nComputational Resources\nUtilizing two A100 GPUs, each with 80GB of memory, we conducted tests on Llama2-7b and\nWebQSP datasets. Our experiments had a training batch size of 16 and an evaluation batch size of 32,\nyielding the following results.\nTable 12: Performance and Efficiency of Various Methods on the WebQSP dataset.\nSettting\nMethod\nHit@1\nTime\nInference-only\nQuestion only\n61.16\n31 min\nTextual graph and question\n41.06\n40 min\nFrozen LLM w/ PT\nPrompt Tuning\n48.34\n18.7 min/epoch\nG-Retriever\n70.49\n6.2 min/epoch\nTuned LLM\nLoRA\n66.03\n19 min/epoch\nG-Retriever w/ LoRA\n73.79\n6.9 min/epoch\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 10.495756149291992
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8086099624633789
+        }
+      ],
+      "rerank_score": 0.7132319211959839,
+      "context_bytes": 1861
+    },
+    {
+      "chunk_id": "chunk_8db3e9d7320c34cbe75489a6c8adda4d",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 15,
+      "page_end": 16,
+      "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 15,
+          "start_char": 2177,
+          "end_char": 3469,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1292,
+          "block_bboxes": [
+            [
+              359.531,
+              452.413,
+              395.008,
+              456.674
+            ],
+            [
+              385.859,
+              477.634,
+              395.605,
+              482.747
+            ],
+            [
+              377.675,
+              484.732,
+              403.796,
+              488.993
+            ],
+            [
+              403.161,
+              432.378,
+              429.593,
+              436.355
+            ],
+            [
+              326.142,
+              476.781,
+              341.959,
+              481.042
+            ],
+            [
+              440.882,
+              438.791,
+              467.908,
+              481.499
+            ],
+            [
+              440.882,
+              486.244,
+              480.713,
+              498.685
+            ],
+            [
+              315.71,
+              429.044,
+              328.275,
+              433.02
+            ],
+            [
+              356.408,
+              511.16,
+              447.865,
+              520.285
+            ],
+            [
+              214.514,
+              527.986,
+              397.487,
+              538.125
+            ],
+            [
+              108.0,
+              565.674,
+              239.187,
+              575.636
+            ],
+            [
+              107.691,
+              586.84,
+              504.003,
+              607.787
+            ],
+            [
+              107.502,
+              614.187,
+              503.997,
+              635.084
+            ],
+            [
+              107.502,
+              641.496,
+              504.671,
+              684.2
+            ],
+            [
+              107.502,
+              690.459,
+              505.248,
+              722.407
+            ],
+            [
+              301.019,
+              742.332,
+              310.982,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 16,
+          "start_char": 0,
+          "end_char": 248,
+          "chunk_start_char": 1293,
+          "chunk_end_char": 1541,
+          "block_bboxes": [
+            [
+              152.457,
+              84.819,
+              158.955,
+              88.227
+            ],
+            [
+              143.883,
+              89.551,
+              167.534,
+              92.391
+            ],
+            [
+              161.263,
+              106.364,
+              167.761,
+              109.773
+            ],
+            [
+              155.808,
+              111.096,
+              173.221,
+              113.937
+            ],
+            [
+              124.443,
+              98.387,
+              130.371,
+              100.659
+            ],
+            [
+              172.798,
+              76.194,
+              190.419,
+              78.845
+            ],
+            [
+              197.945,
+              80.469,
+              215.962,
+              108.941
+            ]
+          ]
+        }
+      ],
+      "quote": "(Self Attention Layers)\nLLM\n(Text Embedder)\nbieber\njaxon\nProjection\nnode_id, node_attr\n15, justin bieber\n294, jaxon bieber\n356, jeremy bieber\n551, m.0gxnnwp\nsrc, edge_attr, dst\n294, parents, 356\n356, children, 15\n551, sibling, 294\n551, sibling, 15\nQuestion: What is the name\nof justin bieber brother?\nAnswer:\ntrainable\n(b) G-Retriever w/ LoRA\nFigure 6: Model configuration 3) Tuned LLM.\nB.3\nDetails of Ablation Study\nThis section illustrates the modifications made to the original architecture in the ablation study, as\npresented in Figure 7.\nWithout Graph Encoder (w/o GraphEncoder): In this setting, we replaced the graph encoder with\ntrainable soft tokens, setting the number of these virtual tokens to 10.\nWithout Projection Layer (w/o Projection Layer): Here, we removed the projection layer following\nthe graph encoder. We configured the output dimension of the graph encoder to be 4,096, matching the\nhidden dimension of Llama2-7b. This allows the output graph token (the yellow token in Figure 7b)\nto be concatenated directly with the LLM tokens (blue tokens).\nWithout Textualized Graph (w/o Textualized Graph): In this configuration, we modified the\ntextual input to the LLM. Rather than using a combination of the question and the textualized graph,\nwe solely used the question.\n15\n\nLLM\n(Self Attention Layers)\nLLM\n(Text Embedder)\nprompt\nbieber\njaxon\nnode_id, node_attr\n15, justin bieber\n294, jaxon bieber\n356, jeremy bieber\n551, m.0gxnnwp\nsrc, edge_attr, dst\n294, parents, 356\n356, children, 15\n551, sibling, 294\n551, sibling, 15\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 9.852058410644531
+        }
+      ],
+      "rerank_score": 0.6390605568885803,
+      "context_bytes": 1959
+    },
+    {
+      "chunk_id": "chunk_4b6090cd0a980f88cdd8316e0d8651a4",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 14,
+      "page_end": 14,
+      "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 14,
+          "start_char": 962,
+          "end_char": 2495,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1533,
+          "block_bboxes": [
+            [
+              107.641,
+              283.364,
+              504.002,
+              337.004
+            ],
+            [
+              108.0,
+              343.2,
+              505.745,
+              418.847
+            ],
+            [
+              107.641,
+              425.106,
+              504.004,
+              467.963
+            ],
+            [
+              108.0,
+              484.392,
+              267.96,
+              494.354
+            ],
+            [
+              108.0,
+              505.267,
+              348.019,
+              515.23
+            ]
+          ]
+        }
+      ],
+      "quote": "LLM. We use the open-sourced Llama2-7b [42] as the LLM backbone. In fine-tuning the LLM with\nLoRA [10], the lora_r parameter (dimension for LoRA update matrices) is set to 8, and lora_alpha\n(scaling factor) is set to 16. The dropout rate is set to 0.05. In prompt tuning, the LLM is configured\nwith 10 virtual tokens. The number of max text length is 512, the number of max new tokens, i.e., the\nmaximum numbers of tokens to generate, is 32.\nPCST. For retrieval over graphs via PCST, for the SceneGraphs dataset, we select the top k nodes\nand edges, setting k to 3. Here, the cost of edges, denoted as Ce, is set to 1. Regarding the WebQSP\ndataset, we set k = 3 for nodes and k = 5 for edges, with the edge cost, Ce, adjusted to 0.5.\nFor the ExplaGraphs dataset, which is characterized by a small graph size averaging 5.17 nodes\nand 4.25 edges (as detailed in Table 2), the entire graph can fit in the LLM’s context window size.\nConsequently, we aim to retrieve the whole graph by setting k to 0, effectively returning the original\ngraph unaltered.\nOptimization. We use the AdamW [27] optimizer. We set the initial learning rate at 1e-5, with a\nweight decay of 0.05. The learning rate decays with a half-cycle cosine decay after the warm-up\nperiod. The batch size is 4, and the number of epochs is 10. To prevent overfitting and ensure training\nefficiency, an early stopping mechanism is implemented with a patience setting of 2 epochs.\nB.2\nDetails of Model Configurations\nIn our experiments, we consider three model configurations:\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 9.829811096191406
+        }
+      ],
+      "rerank_score": 0.5720654726028442,
+      "context_bytes": 1914
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 36,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "text_only",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 6.278377900016494,
+      "inference_seconds": 0.7632305999286473,
+      "elapsed_seconds": 0.7678385999752209,
+      "peak_cuda_memory_bytes": 1197995008,
+      "request_count": 79,
+      "batch_size": 4
+    },
+    "evidence_count": 3,
+    "context_bytes": 5734,
+    "evidence_bytes": 5734,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5533,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "source_coverage": [],
+    "limitations": [],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 1929,
+    "total_tokens": 2248,
+    "completion_tokens": 319,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 1929
+    },
+    "completion_tokens_details": {
+      "text_tokens": 319
+    }
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "errors": [],
+  "raw": "{\"answer\":\"该描述不准确。证据只表明：G-Retriever 在效率对比中包含“G-Retriever w/ LoRA”设置，且 Llama2-7b 的 LoRA 微调参数为 lora_r=8、lora_alpha=16，并非端到端更新全部权重[chunk_4b6090cd0a980f88cdd8316e0d8651a4]；PCST 检索参数按数据集设定 top k 节点与边及边成本[chunk_4b6090cd0a980f88cdd8316e0d8651a4]，但所给证据没有说明 PCST 检索模块是否可训练，也没有说明检索误差是否被消除[chunk_b8f804ce7bc81bbbf659aff60ac33d60][chunk_4b6090cd0a980f88cdd8316e0d8651a4]。因此，“同时端到端更新 Llama2-7b 全部权重以及可训练的 PCST 检索模块、从而消除检索误差”缺乏直接证据支持。\",\"citations\":[{\"chunk_id\":\"chunk_4b6090cd0a980f88cdd8316e0d8651a4\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_b8f804ce7bc81bbbf659aff60ac33d60\",\"quote_id\":\"q2\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_b8f804ce7bc81bbbf659aff60ac33d60",
+      "score": 0.03200204813108039,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 10.495756149291992
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8086099624633789
+        }
+      ],
+      "rerank_score": 0.7132319211959839
+    },
+    {
+      "chunk_id": "chunk_8db3e9d7320c34cbe75489a6c8adda4d",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 9.852058410644531
+        }
+      ],
+      "rerank_score": 0.6390605568885803
+    },
+    {
+      "chunk_id": "chunk_4b6090cd0a980f88cdd8316e0d8651a4",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 9.829811096191406
+        }
+      ],
+      "rerank_score": 0.5720654726028442
+    },
+    {
+      "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 11.796157836914062
+        }
+      ],
+      "rerank_score": 0.5134474039077759
+    },
+    {
+      "chunk_id": "chunk_1c0665884871324e60a54bfc31c0d8b4",
+      "score": 0.0315136476426799,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 11.136528968811035
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7813887596130371
+        }
+      ],
+      "rerank_score": 0.4448360502719879
+    },
+    {
+      "chunk_id": "chunk_e2737c14a5cd36e6bd408af049fd0aac",
+      "score": 0.032018442622950824,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 9.97781753540039
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8092470169067383
+        }
+      ],
+      "rerank_score": 0.4421245753765106
+    },
+    {
+      "chunk_id": "chunk_255b9d4a6fbbac0cf6621acf84251f72",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 8.616867065429688
+        }
+      ],
+      "rerank_score": 0.3190152943134308
+    },
+    {
+      "chunk_id": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.380708694458008
+        }
+      ],
+      "rerank_score": 0.25534364581108093
+    },
+    {
+      "chunk_id": "chunk_225a913539412915d362a6f9dc524526",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.606934547424316
+        }
+      ],
+      "rerank_score": 0.2223622351884842
+    },
+    {
+      "chunk_id": "chunk_99b18cdbb0bd9a36674e8b314d553ad3",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.020135879516602
+        }
+      ],
+      "rerank_score": 0.19744445383548737
+    },
+    {
+      "chunk_id": "chunk_000fb51c29790f99fdf023d7b338666c",
+      "score": 0.030798389007344232,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.685330390930176
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7965145111083984
+        }
+      ],
+      "rerank_score": 0.18594719469547272
+    },
+    {
+      "chunk_id": "chunk_e1075e95da37350e255f0b8602384c99",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.6368207931518555
+        }
+      ],
+      "rerank_score": 0.16000336408615112
+    },
+    {
+      "chunk_id": "chunk_f800cd4e8fa59900491c3efa5f890329",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 6.745891571044922
+        }
+      ],
+      "rerank_score": 0.15804436802864075
+    },
+    {
+      "chunk_id": "chunk_0aebe5bfda4fb5843fd4e8a34f0b7ca3",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7761616706848145
+        }
+      ],
+      "rerank_score": 0.1399831771850586
+    },
+    {
+      "chunk_id": "chunk_5c9e14854565607ec53c355da481c451",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.309106826782227
+        }
+      ],
+      "rerank_score": 0.13318955898284912
+    },
+    {
+      "chunk_id": "chunk_3230a7429a621a89f8fef1361c527b3a",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.7251105308532715
+        }
+      ],
+      "rerank_score": 0.13095079362392426
+    },
+    {
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7766804695129395
+        }
+      ],
+      "rerank_score": 0.11899801343679428
+    },
+    {
+      "chunk_id": "chunk_675c20afd5f26d294c1e46627fdf87c2",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.044980525970459
+        }
+      ],
+      "rerank_score": 0.10725032538175583
+    },
+    {
+      "chunk_id": "chunk_0f20a533abc64e441acfeb96ebf313e2",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7708086967468262
+        }
+      ],
+      "rerank_score": 0.0844927504658699
+    },
+    {
+      "chunk_id": "chunk_9954ac297e86a9093f805de039efb2b4",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7698984146118164
+        }
+      ],
+      "rerank_score": 0.08404061198234558
+    },
+    {
+      "chunk_id": "chunk_13fff028f79bff64399cfcf345628f0e",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7704181671142578
+        }
+      ],
+      "rerank_score": 0.08314290642738342
+    },
+    {
+      "chunk_id": "chunk_eff9e47d69abba56a62073720f2bd77b",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7708735466003418
+        }
+      ],
+      "rerank_score": 0.053403329104185104
+    },
+    {
+      "chunk_id": "chunk_270d9350248b566ed224ba5147a295a2",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7768034934997559
+        }
+      ],
+      "rerank_score": 0.052327629178762436
+    },
+    {
+      "chunk_id": "chunk_33c8e2f0ed11ba682036fc475dffc954",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.010868072509766
+        }
+      ],
+      "rerank_score": 0.03810661658644676
+    },
+    {
+      "chunk_id": "chunk_169332db0b56d09ba086374fa84a2040",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.456465721130371
+        }
+      ],
+      "rerank_score": 0.029760092496871948
+    },
+    {
+      "chunk_id": "chunk_5804814c1d568658cfb52af78d4849db",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7781271934509277
+        }
+      ],
+      "rerank_score": 0.028328312560915947
+    },
+    {
+      "chunk_id": "chunk_e525eef8ade1dca2176ba5840df60cf2",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.015833854675293
+        }
+      ],
+      "rerank_score": 0.020606474950909615
+    },
+    {
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7701067924499512
+        }
+      ],
+      "rerank_score": 0.00982179306447506
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7895321846008301
+        }
+      ],
+      "rerank_score": 0.009449081495404243
+    },
+    {
+      "chunk_id": "chunk_a001225c0afa46199e503f9e9f8bd803",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 5.778705596923828
+        }
+      ],
+      "rerank_score": 0.00937623716890812
+    },
+    {
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7798938751220703
+        }
+      ],
+      "rerank_score": 0.0053640566766262054
+    },
+    {
+      "chunk_id": "chunk_cfe4f3279c22a4cc8b3c7352fd275bb6",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.776517391204834
+        }
+      ],
+      "rerank_score": 0.005001672077924013
+    },
+    {
+      "chunk_id": "chunk_9ee361c20d04e83b0eff8922a814fba1",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7710161209106445
+        }
+      ],
+      "rerank_score": 0.0029810327105224133
+    },
+    {
+      "chunk_id": "chunk_2cdccff3910b914ee3f18d9beda20684",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7771573066711426
+        }
+      ],
+      "rerank_score": 0.002199798123911023
+    },
+    {
+      "chunk_id": "chunk_4a2375c90c72af7a54caf6947e370e66",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7706918716430664
+        }
+      ],
+      "rerank_score": 0.0015854305820539594
+    },
+    {
+      "chunk_id": "chunk_beb4580eff94eef584b0b4d58d070c2c",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.775421142578125
+        }
+      ],
+      "rerank_score": 0.0007124459953047335
+    }
+  ],
+  "case_id": "H-N03",
+  "question": "根据 G-Retriever 论文，它在 Soft Prompt Tuning 阶段同时端到端更新了 Llama2-7b 全部权重以及可训练的 PCST 检索模块，从而消除了检索误差，这一描述准确吗？",
+  "category": "negative",
+  "arm": "Legacy-Hybrid",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.000938100041821599
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.03860020008869469
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 8.600065484642982e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.7713711999822408
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.001118200016207993
+    }
+  ],
+  "retrieval_compute_seconds": 0.8120363001944497,
+  "request_wall_seconds": 8.533258600044064,
+  "embedding_source": "shared Q00 cloud vectors across arms; live planned subquery vectors for Production-Final",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.240408599958755,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 4.801490200101398,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.483037400059402,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 3.7360469000414014,
+      "usage": "{\"prompt_tokens\": 1929, \"total_tokens\": 2248, \"completion_tokens\": 319}"
+    }
+  ],
+  "criterion_source_coverage": [],
+  "metrics": {
+    "recall5": 0.0,
+    "recall8": 1.0,
+    "mrr40": 0.14285714285714285,
+    "evidence_coverage": 0.0,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/ac3ac33e-2101-442e-80ac-b98e5f4098c8?poll=true"
+}

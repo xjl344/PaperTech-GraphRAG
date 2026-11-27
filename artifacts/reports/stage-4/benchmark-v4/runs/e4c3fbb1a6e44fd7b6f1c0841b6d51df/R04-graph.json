@@ -1,0 +1,2105 @@
+{
+  "request_id": "2ba6b670-6c0c-44b6-bd42-684afa1dd5d8",
+  "status": "ok",
+  "answer": "不相同。StructGPT 在推理过程中通过专门接口收集结构化证据：其摘要称“we construct the specialized interfaces to collect relevant evidence from structured data (i.e., reading)”，接口用于迭代读取，随后让 LLM 基于所收集信息推理 [chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad]。LPKG 则把 KG 用于训练数据构建：原文称“we start by grounding predefined patterns in an open-domain KG to extract numerous instances, which we then verbalize into complex questions and corresponding sub-questions”，并“create a large number of accurate planning data for fine-tuning” [chunk_072d1d7f534ffdbb7644a330aeea94fa]。其用途是增强 LLM 生成规划的能力，再由解析和执行这些规划得到答案 [chunk_072d1d7f534ffdbb7644a330aeea94fa]。作者还报告，用“planning data derived from the KG”微调后，规划能力有显著提升 [chunk_bca043f33502bdedb273cd4b0ffe1769]。因此，StructGPT 的专门接口用于推理阶段的证据读取，而 LPKG 的 KG 派生数据用于规划微调；两者知识进入系统的阶段不同。",
+  "citations": [
+    {
+      "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "parse_id": "parse_0f17805b3b51899f139913f99df23591",
+      "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/229_StructGPT A General Framework for Large Language Model to Reason over Structured Data.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 480,
+          "end_char": 1582,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1102,
+          "block_bboxes": [
+            [
+              157.758,
+              214.382,
+              202.243,
+              226.337
+            ],
+            [
+              87.565,
+              238.04,
+              273.783,
+              523.046
+            ],
+            [
+              70.866,
+              535.569,
+              153.68,
+              547.524
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nIn this paper, we aim to improve the reason-\ning ability of large language models (LLMs)\nover structured data in a unified way.\nIn-\nspired by the studies on tool augmentation for\nLLMs, we develop an Iterative Reading-then-\nReasoning (IRR) framework to solve question\nanswering tasks based on structured data, called\nStructGPT. In this framework, we construct\nthe specialized interfaces to collect relevant ev-\nidence from structured data (i.e., reading), and\nlet LLMs concentrate on the reasoning task\nbased on the collected information (i.e., rea-\nsoning). Specially, we propose an invoking-\nlinearization-generation procedure to support\nLLMs in reasoning on the structured data with\nthe help of the interfaces. By iterating this\nprocedure with provided interfaces, our ap-\nproach can gradually approach the target an-\nswers to a given query. Experiments conducted",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 4.222936153411865
+        },
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.6186652183532715,
+      "context_bytes": 1475
+    },
+    {
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 188,
+          "end_char": 1158,
+          "chunk_start_char": 0,
+          "chunk_end_char": 970,
+          "block_bboxes": [
+            [
+              70.473,
+              136.708,
+              291.045,
+              405.126
+            ]
+          ]
+        }
+      ],
+      "quote": "Knowledge Graphs (KGs) (Pan et al., 2017b,a)\nusually store accurate knowledge in a structured\nway. We find that a KG pattern can be viewed as\nthe abstract of a complex question, as shown in\nFigure 1, which reveals the connection between\nquestion planning and patterns. This opens up\nthe possibility of constructing training data to en-\nhance the planning capabilities of LLMs using KGs.\nSpecifically, we start by grounding predefined pat-\nterns in an open-domain KG to extract numerous\ninstances, which we then verbalize into complex\nquestions and corresponding sub-questions in nat-\nural language. In this way, we effectively create\na large number of accurate planning data for fine-\ntuning. Being fine-tuned with these planning data,\nLLMs’ capability of generating plans for complex\nquestions is enhanced, resulting in better final an-\nswers by parsing and executing these plans. We",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 2.8291640281677246
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8001704216003418
+        }
+      ],
+      "rerank_score": 0.7924642562866211,
+      "context_bytes": 1336
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 1144,
+          "end_char": 2413,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1269,
+          "block_bboxes": [
+            [
+              70.473,
+              452.738,
+              290.949,
+              775.361
+            ],
+            [
+              336.079,
+              416.562,
+              494.473,
+              468.517
+            ],
+            [
+              305.833,
+              483.527,
+              526.151,
+              505.475
+            ]
+          ]
+        }
+      ],
+      "quote": "At the same time, we also attempt to replace\nthe fine-tuned Mp with GPT-3.5 while keeping\nother parts unchanged, denoted as “ICLPKG(GPT-\n3.5)” in Table 2. Results show that even though\nfine-tuned Mp CodeQwen (7B) and Llama3 (8B)\nhave significantly fewer parameters than GPT-3.5\n(more than 175B), they can maintain or even sur-\npass GPT-3.5 in terms of planning ability. Next,\nwe replace the Mp fine-tuned on KG-sourced data\nwith their raw models, and the experimental re-\nsults are shown in Table 3. It can be observed that\nafter fine-tuning with planning data derived from\nthe KG, both CodeQwen1.5-7B-Chat and Llama3-\n8B-Instruct show significant improvements in plan-\nning ability. In particular, CodeQwen1.5-7B-Chat,\nwhich is significantly inferior to GPT-3.5 across\nall datasets in planning ability before fine-tuning,\nexhibits a notable enhancement after fine-tuning",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 2.758378744125366
+        }
+      ],
+      "rerank_score": 0.7778065800666809,
+      "context_bytes": 1650
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "parse_id": "parse_0f17805b3b51899f139913f99df23591",
+      "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/229_StructGPT A General Framework for Large Language Model to Reason over Structured Data.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 480,
+          "end_char": 1582,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1102,
+          "block_bboxes": [
+            [
+              157.758,
+              214.382,
+              202.243,
+              226.337
+            ],
+            [
+              87.565,
+              238.04,
+              273.783,
+              523.046
+            ],
+            [
+              70.866,
+              535.569,
+              153.68,
+              547.524
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nIn this paper, we aim to improve the reason-\ning ability of large language models (LLMs)\nover structured data in a unified way.\nIn-\nspired by the studies on tool augmentation for\nLLMs, we develop an Iterative Reading-then-\nReasoning (IRR) framework to solve question\nanswering tasks based on structured data, called\nStructGPT. In this framework, we construct\nthe specialized interfaces to collect relevant ev-\nidence from structured data (i.e., reading), and\nlet LLMs concentrate on the reasoning task\nbased on the collected information (i.e., rea-\nsoning). Specially, we propose an invoking-\nlinearization-generation procedure to support\nLLMs in reasoning on the structured data with\nthe help of the interfaces. By iterating this\nprocedure with provided interfaces, our ap-\nproach can gradually approach the target an-\nswers to a given query. Experiments conducted\non three types of structured data show that\nStructGPT greatly improves the performance\nof LLMs, under the few-shot and zero-shot set-\ntings. Our codes and data are publicly available\nat https://github.com/RUCAIBox/StructGPT.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 4.222936153411865
+        },
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.6186652183532715,
+      "context_bytes": 1475
+    },
+    {
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 188,
+          "end_char": 1158,
+          "chunk_start_char": 0,
+          "chunk_end_char": 970,
+          "block_bboxes": [
+            [
+              70.473,
+              136.708,
+              291.045,
+              405.126
+            ]
+          ]
+        }
+      ],
+      "quote": "Knowledge Graphs (KGs) (Pan et al., 2017b,a)\nusually store accurate knowledge in a structured\nway. We find that a KG pattern can be viewed as\nthe abstract of a complex question, as shown in\nFigure 1, which reveals the connection between\nquestion planning and patterns. This opens up\nthe possibility of constructing training data to en-\nhance the planning capabilities of LLMs using KGs.\nSpecifically, we start by grounding predefined pat-\nterns in an open-domain KG to extract numerous\ninstances, which we then verbalize into complex\nquestions and corresponding sub-questions in nat-\nural language. In this way, we effectively create\na large number of accurate planning data for fine-\ntuning. Being fine-tuned with these planning data,\nLLMs’ capability of generating plans for complex\nquestions is enhanced, resulting in better final an-\nswers by parsing and executing these plans. We\nrefer to this innovative framework as Learning to\nPlan from Knowledge Graphs (LPKG).\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 2.8291640281677246
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8001704216003418
+        }
+      ],
+      "rerank_score": 0.7924642562866211,
+      "context_bytes": 1336
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 1144,
+          "end_char": 2413,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1269,
+          "block_bboxes": [
+            [
+              70.473,
+              452.738,
+              290.949,
+              775.361
+            ],
+            [
+              336.079,
+              416.562,
+              494.473,
+              468.517
+            ],
+            [
+              305.833,
+              483.527,
+              526.151,
+              505.475
+            ]
+          ]
+        }
+      ],
+      "quote": "At the same time, we also attempt to replace\nthe fine-tuned Mp with GPT-3.5 while keeping\nother parts unchanged, denoted as “ICLPKG(GPT-\n3.5)” in Table 2. Results show that even though\nfine-tuned Mp CodeQwen (7B) and Llama3 (8B)\nhave significantly fewer parameters than GPT-3.5\n(more than 175B), they can maintain or even sur-\npass GPT-3.5 in terms of planning ability. Next,\nwe replace the Mp fine-tuned on KG-sourced data\nwith their raw models, and the experimental re-\nsults are shown in Table 3. It can be observed that\nafter fine-tuning with planning data derived from\nthe KG, both CodeQwen1.5-7B-Chat and Llama3-\n8B-Instruct show significant improvements in plan-\nning ability. In particular, CodeQwen1.5-7B-Chat,\nwhich is significantly inferior to GPT-3.5 across\nall datasets in planning ability before fine-tuning,\nexhibits a notable enhancement after fine-tuning\non KG-based planning data, especially achieving\nbetter results than GPT-3.5 on 2WikiMQA and\nMuSiQue. All these experimental phenomena fully\ndemonstrate the efficacy of using KG-sourced plan-\nning data in improving the planning ability of the\nLLMs.\nBamboogle\nLPKG(CodeQwen)\n0.280\nDLPKG(CodeQwen)\n0.216\nICLPKG(CodeQwen)\n0.192\nTable 4: Comparison with normal distillation methods.\nQA LLM is GPT-3.5.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 2.758378744125366
+        }
+      ],
+      "rerank_score": 0.7778065800666809,
+      "context_bytes": 1650
+    },
+    {
+      "chunk_id": "chunk_bd4734d2765e2147cac924fe8ba38d85",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "parse_id": "parse_0f17805b3b51899f139913f99df23591",
+      "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+      "page_start": 9,
+      "page_end": 10,
+      "source_relative_path": "Methods/229_StructGPT A General Framework for Large Language Model to Reason over Structured Data.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 2518,
+          "end_char": 3569,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1051,
+          "block_bboxes": [
+            [
+              306.142,
+              459.593,
+              381.209,
+              471.548
+            ],
+            [
+              306.142,
+              491.833,
+              526.225,
+              773.66
+            ]
+          ]
+        },
+        {
+          "pdf_page": 10,
+          "start_char": 0,
+          "end_char": 2,
+          "chunk_start_char": 1052,
+          "chunk_end_char": 1054,
+          "block_bboxes": [
+            [
+              70.866,
+              72.649,
+              147.917,
+              84.604
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nIn this work, we proposed a general framework for\nimproving the zero-shot reasoning ability of LLMs\nover structured data, namely StructGPT. In our ap-\nproach, we first constructed the specialized inter-\nfaces that support accurate and efficient data ac-\ncess, and then proposed an invoking-linearization-\ngeneration procedure that leverages LLMs to read\nand perform reasoning based on the interface. By\niterating the above procedure using the interfaces\nsequentially, LLMs can progressively capture more\nuseful and detailed evidence and finally generate\nthe answer.\nTo verify the effectiveness of our\napproach, we implemented our approach on KG\nbased QA, table based QA and DB based semantic\nparsing tasks. Experimental results on 8 datasets\nshow that our approach can boost the zero-shot per-\nformance of LLMs by a large margin, and achieve\ncomparable performance as full-data supervised-\ntuning methods. We also provide detailed error\nanalysis to point out the weakness of our approach,\nfor enlighting other researchers in related areas.\n\n7\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 3.9039978981018066
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7961897850036621
+        }
+      ],
+      "rerank_score": 0.5494290590286255,
+      "context_bytes": 1426
+    }
+  ],
+  "graph_paths": [
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "ef42239ea8e653696f407ba6d17839a46ae7b5218ae7b857107396b74a3dedcd",
+          "name": "complex QA planning",
+          "type": "Stage"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STAGE",
+          "claim_id": "62ca6febeb59a93847d60507becd0818860eb30f6ceaa2bd29b5d4b9caa4ad70",
+          "subject": "LPKG",
+          "object": "complex QA planning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "62ca6febeb59a93847d60507becd0818860eb30f6ceaa2bd29b5d4b9caa4ad70",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "HAS_STAGE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "41fe6d22f17dff3d48b5080d7647186deae9c8e0fca6fff69a953b5cc1f61431",
+          "name": "StructGPT",
+          "type": "Method",
+          "canonical": "structgpt"
+        },
+        {
+          "id": "a27feeb2002de116548cc24fa0ad6ee36cb880c352c70cc8a4b20f1809aa7951",
+          "name": "dedicated interface",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "54e154a73be7050d6aa60f6ed7ba772027af4e3d2f472b3c5388c9c1cf2052f6",
+          "subject": "StructGPT",
+          "object": "dedicated interface"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "54e154a73be7050d6aa60f6ed7ba772027af4e3d2f472b3c5388c9c1cf2052f6",
+          "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nIn this paper, we aim to improve the reason-\ning ability of large language models (LLMs)\nover structured data in a unified way.\nIn-\nspired by the studies on tool augmentation for\nLLMs, we develop an Iterative Reading-then-\nReasoning (IRR) framework to solve question\nanswering tasks based on structured data, called\nStructGPT. In this framework, we construct\nthe specialized interfaces to collect relevant ev-\nidence from structured data (i.e., reading), and\nlet LLMs concentrate on the reasoning task\nbased on the collected information (i.e., rea-\nsoning). Specially, we propose an invoking-\nlinearization-generation procedure to support\nLLMs in reasoning on the structured data with\nthe help of the interfaces. By iterating this\nprocedure with provided interfaces, our ap-\nproach can gradually approach the target an-\nswers to a given query. Experiments conducted\non three types of structured data show that\nStructGPT greatly improves the performance\nof LLMs, under the few-shot and zero-shot set-\ntings. Our codes and data are publicly available\nat https://github.com/RUCAIBox/StructGPT.\n1\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "86cec55f1d9a9014f91b93edb3d28fa922c44344100f5e890da04ea9e55a0bf7",
+          "name": "planning data",
+          "type": "TrainingSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_TRAINING_SIGNAL",
+          "claim_id": "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+          "subject": "LPKG",
+          "object": "planning data"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "USES_TRAINING_SIGNAL"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "ad06d1f3583b3f7c491c8d8ddd4ebed86ae5a3fce483cd2c07a307c0316743c3",
+          "name": "knowledge graph",
+          "type": "KnowledgeBase"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "DERIVES_TRAINING_DATA_FROM",
+          "claim_id": "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d",
+          "subject": "LPKG",
+          "object": "knowledge graph"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "DERIVES_TRAINING_DATA_FROM"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "69450b089ebadaf174d244738748fa9676e727c7f3635685a62b06546bc84c0f",
+          "name": "union",
+          "type": "QuestionType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "HAS_QUESTION_TYPE",
+          "claim_id": "0894771ec2fe1521d76a908ad04a6bc16f2a8f20bff410c23cadcbd30542027e",
+          "subject": "CLQA-Wiki",
+          "object": "union"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "0894771ec2fe1521d76a908ad04a6bc16f2a8f20bff410c23cadcbd30542027e",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "HAS_QUESTION_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "41fe6d22f17dff3d48b5080d7647186deae9c8e0fca6fff69a953b5cc1f61431",
+          "name": "StructGPT",
+          "type": "Method",
+          "canonical": "structgpt"
+        },
+        {
+          "id": "a27feeb2002de116548cc24fa0ad6ee36cb880c352c70cc8a4b20f1809aa7951",
+          "name": "dedicated interface",
+          "type": "Component"
+        },
+        {
+          "id": "142143365d691abf71b8eb39343a278c36c5bbf4c5d9c0642aec8ff6cd992338",
+          "name": "structured evidence",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "54e154a73be7050d6aa60f6ed7ba772027af4e3d2f472b3c5388c9c1cf2052f6",
+          "subject": "StructGPT",
+          "object": "dedicated interface"
+        },
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "124af8ece156a545dc3616270cb14f2579d5ef5fc9c91f760d37264595c7df7e",
+          "subject": "dedicated interface",
+          "object": "structured evidence"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "54e154a73be7050d6aa60f6ed7ba772027af4e3d2f472b3c5388c9c1cf2052f6",
+          "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nIn this paper, we aim to improve the reason-\ning ability of large language models (LLMs)\nover structured data in a unified way.\nIn-\nspired by the studies on tool augmentation for\nLLMs, we develop an Iterative Reading-then-\nReasoning (IRR) framework to solve question\nanswering tasks based on structured data, called\nStructGPT. In this framework, we construct\nthe specialized interfaces to collect relevant ev-\nidence from structured data (i.e., reading), and\nlet LLMs concentrate on the reasoning task\nbased on the collected information (i.e., rea-\nsoning). Specially, we propose an invoking-\nlinearization-generation procedure to support\nLLMs in reasoning on the structured data with\nthe help of the interfaces. By iterating this\nprocedure with provided interfaces, our ap-\nproach can gradually approach the target an-\nswers to a given query. Experiments conducted\non three types of structured data show that\nStructGPT greatly improves the performance\nof LLMs, under the few-shot and zero-shot set-\ntings. Our codes and data are publicly available\nat https://github.com/RUCAIBox/StructGPT.\n1\n",
+          "predicate": "USES_COMPONENT"
+        },
+        {
+          "claim_id": "124af8ece156a545dc3616270cb14f2579d5ef5fc9c91f760d37264595c7df7e",
+          "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nIn this paper, we aim to improve the reason-\ning ability of large language models (LLMs)\nover structured data in a unified way.\nIn-\nspired by the studies on tool augmentation for\nLLMs, we develop an Iterative Reading-then-\nReasoning (IRR) framework to solve question\nanswering tasks based on structured data, called\nStructGPT. In this framework, we construct\nthe specialized interfaces to collect relevant ev-\nidence from structured data (i.e., reading), and\nlet LLMs concentrate on the reasoning task\nbased on the collected information (i.e., rea-\nsoning). Specially, we propose an invoking-\nlinearization-generation procedure to support\nLLMs in reasoning on the structured data with\nthe help of the interfaces. By iterating this\nprocedure with provided interfaces, our ap-\nproach can gradually approach the target an-\nswers to a given query. Experiments conducted\non three types of structured data show that\nStructGPT greatly improves the performance\nof LLMs, under the few-shot and zero-shot set-\ntings. Our codes and data are publicly available\nat https://github.com/RUCAIBox/StructGPT.\n1\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "18670bf3d59dde015c4071b171ae64ddab44a4d94a892ee22e1e1ed737459059",
+          "name": "comparison",
+          "type": "QuestionType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "HAS_QUESTION_TYPE",
+          "claim_id": "47ac7877c4daf9c8b37d2cb00870e20a7084b0c709dfc3cec63c9ec61f746823",
+          "subject": "CLQA-Wiki",
+          "object": "comparison"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "47ac7877c4daf9c8b37d2cb00870e20a7084b0c709dfc3cec63c9ec61f746823",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "HAS_QUESTION_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "70d7c473f525fca92a276c7d8ea2550f002ea942a8c2f5b4b71ff0d085514c98",
+          "name": "Wikidata subset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "DERIVED_FROM",
+          "claim_id": "814bd7b0e4fc58587c2de6b50c1020f34e1a7f7ed2a8818571670bcafee3727f",
+          "subject": "CLQA-Wiki",
+          "object": "Wikidata subset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "814bd7b0e4fc58587c2de6b50c1020f34e1a7f7ed2a8818571670bcafee3727f",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "DERIVED_FROM"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "7c704ab0d736206fa2a251bf7b61909b0e36bf55ee7f9bfa90b547a0083bc240",
+          "name": "intersection",
+          "type": "QuestionType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "HAS_QUESTION_TYPE",
+          "claim_id": "8c690228dbfe146179535a777e52ecc2c27e6990fe633b3ddec8133ca82fbf9a",
+          "subject": "CLQA-Wiki",
+          "object": "intersection"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "8c690228dbfe146179535a777e52ecc2c27e6990fe633b3ddec8133ca82fbf9a",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "HAS_QUESTION_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "d44bdb53e23958308492616556fd366a24bb0d26f9c4400581b90c8511bbf2f2",
+          "name": "multi-hop",
+          "type": "QuestionType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "HAS_QUESTION_TYPE",
+          "claim_id": "d8ade555f6e62919f9c1e1b8549c44b14ebf0be76e917b4d232f47bb56b1a01d",
+          "subject": "CLQA-Wiki",
+          "object": "multi-hop"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "d8ade555f6e62919f9c1e1b8549c44b14ebf0be76e917b4d232f47bb56b1a01d",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "HAS_QUESTION_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "86cec55f1d9a9014f91b93edb3d28fa922c44344100f5e890da04ea9e55a0bf7",
+          "name": "planning data",
+          "type": "TrainingSignal"
+        },
+        {
+          "id": "3c0e7d1b31c4bca4136a62de1b401ce336d09e62bcef620566d026afc315dc78",
+          "name": "small model fine-tuning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_TRAINING_SIGNAL",
+          "claim_id": "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+          "subject": "LPKG",
+          "object": "planning data"
+        },
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "538bb8538d113afca1278ba72afac0de20240d749f461139f8cbfb3fb4f3a11c",
+          "subject": "planning data",
+          "object": "small model fine-tuning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "USES_TRAINING_SIGNAL"
+        },
+        {
+          "claim_id": "538bb8538d113afca1278ba72afac0de20240d749f461139f8cbfb3fb4f3a11c",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "ad06d1f3583b3f7c491c8d8ddd4ebed86ae5a3fce483cd2c07a307c0316743c3",
+          "name": "knowledge graph",
+          "type": "KnowledgeBase"
+        },
+        {
+          "id": "8d38eed418b4cbadd754671f98af91203bd28eca3b2db82c9618cd79c35dd3c5",
+          "name": "iterative beam search",
+          "type": "Algorithm"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "DERIVES_TRAINING_DATA_FROM",
+          "claim_id": "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d",
+          "subject": "LPKG",
+          "object": "knowledge graph"
+        },
+        {
+          "predicate": "RETRIEVES_FROM",
+          "claim_id": "cabe3e209774466c672401ebe30de4ce0094ddcdf574b2d39f061bff7f5e6a37",
+          "subject": "iterative beam search",
+          "object": "knowledge graph"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "DERIVES_TRAINING_DATA_FROM"
+        },
+        {
+          "claim_id": "cabe3e209774466c672401ebe30de4ce0094ddcdf574b2d39f061bff7f5e6a37",
+          "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following\nadvantages of ToG: 1) compared with LLMs, ToG has better deep reasoning power;\n2) ToG has the ability of knowledge traceability and knowledge correctability by\nleveraging LLMs reasoning and expert feedback; 3) ToG provides a flexible plug-\nand-play framework for different LLMs, KGs and prompting strategies without\nany additional training cost; 4) the performance of ToG with small LLM models\ncould exceed large LLM such as GPT-4 in certain scenarios and this reduces the\ncost of LLM deployment and application. As a training-free method with lower\ncomputational cost and better generality, ToG achieves overall SOTA in 6 out of\n9 datasets where most previous SOTAs rely on additional training. Our code is\npublicly available at https://github.com/IDEA-FinAI/ToG.\n1\n",
+          "predicate": "RETRIEVES_FROM"
+        }
+      ]
+    }
+  ],
+  "generation_paths": [
+    {
+      "nodes": [
+        {
+          "name": "StructGPT",
+          "type": "Method"
+        },
+        {
+          "name": "dedicated interface",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "54e154a73be7050d6aa60f6ed7ba772027af4e3d2f472b3c5388c9c1cf2052f6",
+          "subject": "StructGPT",
+          "object": "dedicated interface"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "54e154a73be7050d6aa60f6ed7ba772027af4e3d2f472b3c5388c9c1cf2052f6",
+          "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nIn this paper, we aim to improve the reason-\ning ability of large language models (LLMs)\nover structured data in a unified way.\nIn-\nspired by the studies on tool augmentation for\nLLMs, we develop an Iterative Reading-then-\nReasoning (IRR) framework to solve question\nanswering tasks based on structured data, called\nStructGPT. In this framework, we construct\nthe specialized interfaces to collect relevant ev-\nidence from structured data (i.e., reading), and\nlet LLMs concentrate on the reasoning task\nbased on the collected information (i.e., rea-\nsoning). Specially, we propose an invoking-\nlinearization-generation procedure to support\nLLMs in reasoning on the structured data with\nthe help of the interfaces. By iterating this\nprocedure with provided interfaces, our ap-\nproach can gradually approach the target an-\nswers to a given query. Experiments conducted\non three types of structured data show that\nStructGPT greatly improves the performance\nof LLMs, under the few-shot and zero-shot set-\ntings. Our codes and data are publicly available\nat https://github.com/RUCAIBox/StructGPT.\n1\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 36,
+    "graph_executed": true,
+    "graph_hits": 5,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_paths": 13,
+    "graph_audit": {
+      "backend": "isolated_sqlite",
+      "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "anchors": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "41fe6d22f17dff3d48b5080d7647186deae9c8e0fca6fff69a953b5cc1f61431",
+          "name": "StructGPT",
+          "type": "Method",
+          "canonical": "structgpt"
+        }
+      ],
+      "seed_count": 2,
+      "max_hops": 2,
+      "max_paths": 40,
+      "per_node": 8,
+      "deadline_seconds": 10,
+      "degree_truncated": [],
+      "reference_tables_access": "denied by SQLite authorizer",
+      "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+      "returned_paths": 13,
+      "expanded_nodes": 7,
+      "elapsed_seconds": 0.008868300001267926
+    },
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 4.804802499998914,
+      "inference_seconds": 0.8883153999995557,
+      "elapsed_seconds": 0.8913308000010147,
+      "peak_cuda_memory_bytes": 1155520512,
+      "request_count": 24
+    },
+    "evidence_count": 4,
+    "context_bytes": 6379,
+    "evidence_bytes": 5887,
+    "graph_context_bytes": 492,
+    "serialized_content_bytes": 6098,
+    "prompt_graph_paths": [
+      {
+        "nodes": [
+          {
+            "name": "StructGPT",
+            "type": "Method"
+          },
+          {
+            "name": "dedicated interface",
+            "type": "Component"
+          }
+        ],
+        "edges": [
+          {
+            "predicate": "USES_COMPONENT",
+            "claim_id": "54e154a73be7050d6aa60f6ed7ba772027af4e3d2f472b3c5388c9c1cf2052f6",
+            "subject": "StructGPT",
+            "object": "dedicated interface"
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+            "quote_ids": [
+              "q1",
+              "q2"
+            ],
+            "source_span": [
+              0,
+              1102
+            ],
+            "claim_id": "54e154a73be7050d6aa60f6ed7ba772027af4e3d2f472b3c5388c9c1cf2052f6"
+          }
+        ]
+      }
+    ],
+    "path_policy": "additional_path_budget",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "StructGPT",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "requested_names": [
+          "StructGPT"
+        ]
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "StructGPT",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "requested_names": [
+          "StructGPT"
+        ],
+        "eligible_candidate_count": 8,
+        "selected_chunk_ids": [
+          "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "chunk_bd4734d2765e2147cac924fe8ba38d85"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ],
+        "eligible_candidate_count": 12,
+        "selected_chunk_ids": [
+          "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+          "chunk_bca043f33502bdedb273cd4b0ffe1769"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "evidence_budget_bytes": 6000,
+    "path_budget_bytes": 1200,
+    "total_budget_bytes": 7200,
+    "context_budget_bytes": 7200,
+    "generation_path_count": 1,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 2025,
+    "total_tokens": 2426,
+    "completion_tokens": 401,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "image_tokens": 0,
+      "text_tokens": 2025
+    },
+    "completion_tokens_details": {
+      "text_tokens": 401
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"不相同。StructGPT 在推理过程中通过专门接口收集结构化证据：其摘要称“we construct the specialized interfaces to collect relevant evidence from structured data (i.e., reading)”，接口用于迭代读取，随后让 LLM 基于所收集信息推理 [chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad]。LPKG 则把 KG 用于训练数据构建：原文称“we start by grounding predefined patterns in an open-domain KG to extract numerous instances, which we then verbalize into complex questions and corresponding sub-questions”，并“create a large number of accurate planning data for fine-tuning” [chunk_072d1d7f534ffdbb7644a330aeea94fa]。其用途是增强 LLM 生成规划的能力，再由解析和执行这些规划得到答案 [chunk_072d1d7f534ffdbb7644a330aeea94fa]。作者还报告，用“planning data derived from the KG”微调后，规划能力有显著提升 [chunk_bca043f33502bdedb273cd4b0ffe1769]。因此，StructGPT 的专门接口用于推理阶段的证据读取，而 LPKG 的 KG 派生数据用于规划微调；两者知识进入系统的阶段不同。\",\"citations\":[{\"chunk_id\":\"chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_072d1d7f534ffdbb7644a330aeea94fa\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_bca043f33502bdedb273cd4b0ffe1769\",\"quote_id\":\"q1\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 0.02804284323271665,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 2.8291640281677246
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8001704216003418
+        }
+      ],
+      "rerank_score": 0.7924642562866211
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 2.758378744125366
+        }
+      ],
+      "rerank_score": 0.7778065800666809
+    },
+    {
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "score": 0.032266458495966696,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 4.93259334564209
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8059897422790527
+        }
+      ],
+      "rerank_score": 0.7661187648773193
+    },
+    {
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 3.10884428024292
+        }
+      ],
+      "rerank_score": 0.6819385886192322
+    },
+    {
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 3.607489585876465
+        }
+      ],
+      "rerank_score": 0.6365790963172913
+    },
+    {
+      "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+      "score": 0.03225806451612903,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 4.222936153411865
+        },
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.6186652183532715
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 4.004562854766846
+        }
+      ],
+      "rerank_score": 0.6167050004005432
+    },
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 0.028169014084507043,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 3.4195690155029297
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.795379638671875
+        }
+      ],
+      "rerank_score": 0.5841525197029114
+    },
+    {
+      "chunk_id": "chunk_9f421de75aed07b68340cb2f2471a79e",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 2.945034980773926
+        }
+      ],
+      "rerank_score": 0.5787457823753357
+    },
+    {
+      "chunk_id": "chunk_bd4734d2765e2147cac924fe8ba38d85",
+      "score": 0.029877369007803793,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 3.9039978981018066
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7961897850036621
+        }
+      ],
+      "rerank_score": 0.5494290590286255
+    },
+    {
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 0.027272727272727275,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 3.484480619430542
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7904777526855469
+        }
+      ],
+      "rerank_score": 0.4618358314037323
+    },
+    {
+      "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7978072166442871
+        }
+      ],
+      "rerank_score": 0.44863760471343994
+    },
+    {
+      "chunk_id": "chunk_b1bd739c57f6cdf536000af5bc1af59a",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.1043331623077393
+        }
+      ],
+      "rerank_score": 0.4128851890563965
+    },
+    {
+      "chunk_id": "chunk_87322251f12ca7f0c796684219017ccc",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.78912353515625
+        }
+      ],
+      "rerank_score": 0.4003976583480835
+    },
+    {
+      "chunk_id": "chunk_d4417adcf5fa74f507b8d4e876d17fce",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8083791732788086
+        }
+      ],
+      "rerank_score": 0.3752484917640686
+    },
+    {
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 0.028373015873015873,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 4.203124523162842
+        },
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7864608764648438
+        }
+      ],
+      "rerank_score": 0.3631950318813324
+    },
+    {
+      "chunk_id": "chunk_5d51520dac0417d5af9c88604241f9b0",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7940373420715332
+        }
+      ],
+      "rerank_score": 0.3579041063785553
+    },
+    {
+      "chunk_id": "chunk_10a50baa6a723ca329af697b75df36c4",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7867097854614258
+        }
+      ],
+      "rerank_score": 0.3363310694694519
+    },
+    {
+      "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.3018763065338135
+    },
+    {
+      "chunk_id": "chunk_e86107abde0e1c9bd07e9c18aeccb3e4",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 2.893522262573242
+        }
+      ],
+      "rerank_score": 0.25664564967155457
+    },
+    {
+      "chunk_id": "chunk_296f2400fee163aad415c87ede01d3fa",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7929897308349609
+        }
+      ],
+      "rerank_score": 0.24184732139110565
+    },
+    {
+      "chunk_id": "chunk_45c598ca774c47ab2be0c3b734efd4de",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8000931739807129
+        }
+      ],
+      "rerank_score": 0.23846149444580078
+    },
+    {
+      "chunk_id": "chunk_393f6af76087a71bf9db9f2bb64f4662",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 3.2619872093200684
+        }
+      ],
+      "rerank_score": 0.2354598045349121
+    },
+    {
+      "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.2130495309829712
+    },
+    {
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8013219833374023
+        }
+      ],
+      "rerank_score": 0.19636347889900208
+    },
+    {
+      "chunk_id": "chunk_3b1219cb1d1662112b070e7fdb73fd24",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7938828468322754
+        }
+      ],
+      "rerank_score": 0.16105617582798004
+    },
+    {
+      "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+      "score": 0.029513888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 3.332981586456299
+        },
+        {
+          "channel": "graph",
+          "rank": 4,
+          "score": 0.25
+        }
+      ],
+      "rerank_score": 0.1594790369272232
+    },
+    {
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7917799949645996
+        }
+      ],
+      "rerank_score": 0.129733145236969
+    },
+    {
+      "chunk_id": "chunk_56b9b6d8db707635c157f1ed38032494",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7967710494995117
+        }
+      ],
+      "rerank_score": 0.12517227232456207
+    },
+    {
+      "chunk_id": "chunk_5e3a3b8e4f92acaae396053b580967a8",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7956333160400391
+        }
+      ],
+      "rerank_score": 0.08079154044389725
+    },
+    {
+      "chunk_id": "chunk_09034eeaeeff6882308a8c1b9b9aceaf",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 3.1345107555389404
+        }
+      ],
+      "rerank_score": 0.07835980504751205
+    },
+    {
+      "chunk_id": "chunk_a7df67e7fd088df02cfb3cdf0e560925",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 3.789022445678711
+        }
+      ],
+      "rerank_score": 0.06153673678636551
+    },
+    {
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "score": 0.030621785881252923,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 3.5221259593963623
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8066301345825195
+        }
+      ],
+      "rerank_score": 0.06052938848733902
+    },
+    {
+      "chunk_id": "chunk_554414fc3894b4f266281da6de0b5d29",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7938919067382812
+        }
+      ],
+      "rerank_score": 0.0586685985326767
+    },
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 5,
+          "score": 0.2
+        }
+      ],
+      "rerank_score": 0.026708463206887245
+    },
+    {
+      "chunk_id": "chunk_2733af35ae204a6395a832128b6ae9ac",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 3.830857753753662
+        }
+      ],
+      "rerank_score": 0.001512938179075718
+    }
+  ],
+  "case_id": "R04",
+  "question": "StructGPT 和 LPKG 都使用结构化知识，但知识进入系统的阶段相同吗？请分别追踪专门接口与 KG 派生规划数据的用途。",
+  "category": "cross",
+  "arm": "Hybrid+Graph",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.00033179999991261866
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.04284479999842006
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 0.015705300000263378
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.891907799999899
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0014188999994075857
+    }
+  ],
+  "retrieval_compute_seconds": 0.9522085999979026,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.2579776000002312,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 3.3982735999998113,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.29606129999956465,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 2.780334999999468,
+      "usage": "{\"prompt_tokens\": 2025, \"total_tokens\": 2426, \"completion_tokens\": 401}"
+    }
+  ],
+  "metrics": {
+    "recall5": 0.0,
+    "recall8": 1.0,
+    "mrr40": 0.16666666666666666,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "execution_config": {
+    "benchmark": "benchmark-v4",
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    },
+    "models": {
+      "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+      "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+      "CLOUD_BGE_PROVIDER": "cloudflare",
+      "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+      "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+      "LOCAL_RERANKER_DEVICE": "cuda",
+      "LOCAL_RERANKER_DTYPE": "float16",
+      "LOCAL_RERANKER_PERSISTENT": "true"
+    },
+    "endpoint_fingerprints": {
+      "DEEPSEEK_BASE_URL": "aebde9d32c41ca5aff41444d1ef2feaa0f3574a19195d60c588f826a6ea88c01",
+      "CLOUD_BGE_BASE_URL": "73dd98c51038dadb140c44d42e350a9ae3c52013d53336b34e055aa1bf12087d",
+      "CLOUDFLARE_ACCOUNT_ID": "8157dbe7227fcba3fcada3a5c46dc0a3a12f71bebb5b653de5256c0ae456e407",
+      "NEO4J_URI": "b1d4217b5d8c41b8b641a146d7facd744b01a415fe2ac0d943188a78e5f007f0"
+    },
+    "dependencies": {
+      "neo4j": "6.4.1",
+      "langsmith": "0.14.17",
+      "langgraph": "1.2.21",
+      "httpx": "0.28.1"
+    },
+    "code_sha256": {
+      "scripts/eval-stage4.py": "3fda792fb4ceea527961fa1f6eca2fc335412b64ff087bd5120f2f6c26dcf60b",
+      "src/papertech/evaluation_runtime.py": "d433b2ce3a6f189f698f4775275430e82cd8898df8c0fa8a015095506d3c1ccc",
+      "src/papertech/isolated_graph.py": "039d27009ec94003cfc6f25024ae2015ab7c12b27f9f7cfe5dc21979f1c41586",
+      "src/papertech/workflow.py": "6fe7b530e355f19886c34bd61c98046b6cd10598b74f94220dae63d64130964a",
+      "src/papertech/graph_store.py": "485c50edfbc99e26554d903b0f637ae4893ecf06168be34a767cd986c4d07476",
+      "src/papertech/retrieval.py": "ef2480079acc98095c86394ce6ae5bf894a7034a47d0d394cf584f871e41ae65",
+      "src/papertech/evidence_context.py": "b9bfe29885ffe4b82086a78572ffe4d031d3de9c497b0681aa732525a46f89f6",
+      "src/papertech/entity_aliases.py": "2725c08d7ca72f46c3bf7adbb3207eb75331f963a1998826bc6397e375699ea6",
+      "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+      "src/papertech/citations.py": "6465c41be136683a5ec723720820fca5c246c9365836914ca8967e5805175372",
+      "src/papertech/evaluation.py": "cb3714275490177d79bf755ef156e14f485748dbea590a95b54ab769fde96e31",
+      "src/papertech/evaluation_details.py": "a88e734e7fbe7a0b1f977dfdbd88aeed27da5a952431da94e4a66bc74a9a2090",
+      "src/papertech/evaluation_datasets.py": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+      "src/papertech/local_models.py": "62f465e7615a7208a8f4bfda6c9f4b545843e3115ef91768d47f5a7e787edddb",
+      "src/papertech/rerank_service.py": "156293246350d8b4a8c7bd23d45edb26f471d1bfe690480412edcf942617d693",
+      "scripts/rerank-service.py": "562927f8ebd62834e8aca53ae55a436eac4d82f39b66e1ad92b017f1b73facf5"
+    },
+    "controls": {
+      "arms": [
+        "Hybrid",
+        "Hybrid+Graph"
+      ],
+      "backend": "neo4j",
+      "graph_backend": "isolated_sqlite",
+      "fulltext_top": 20,
+      "dense_top": 20,
+      "fusion_max": 40,
+      "graph_candidates_max": 20,
+      "graph_seed_chunks": 12,
+      "graph_seed_entities": 40,
+      "graph_max_paths": 40,
+      "graph_hops": 2,
+      "graph_per_node": 8,
+      "evidence_max": 8,
+      "evidence_bytes": 6000,
+      "path_bytes": 1200,
+      "context_bytes": 7200,
+      "path_budget_mode": "additional",
+      "generation_max_tokens": 2048,
+      "thinking": "disabled",
+      "generation_requests_max": 80,
+      "sampling": "provider default; one sample per arm",
+      "treatment_scope": "graph candidates plus up to 1200 additional path bytes; not an equal actual input-token ablation",
+      "execution_order": "alternate which arm goes first",
+      "query_vector": "one shared Cloudflare batch",
+      "gold_exclusion": "question text only; reference tables and claim unit/path IDs denied by SQLite authorizer"
+    },
+    "latency": "retrieval compute excludes audit upload, generation, and shared embedding batch; request wall time reported separately",
+    "status": "frozen_before_execution"
+  },
+  "request_wall_seconds": 6.213063899998815,
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_d4417adcf5fa74f507b8d4e876d17fce",
+      "score": 0.8083791732788086
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "score": 0.8066301345825195
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "score": 0.8059897422790527
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.8013219833374023
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 0.8001704216003418
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_45c598ca774c47ab2be0c3b734efd4de",
+      "score": 0.8000931739807129
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+      "score": 0.7978072166442871
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_56b9b6d8db707635c157f1ed38032494",
+      "score": 0.7967710494995117
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_bd4734d2765e2147cac924fe8ba38d85",
+      "score": 0.7961897850036621
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_5e3a3b8e4f92acaae396053b580967a8",
+      "score": 0.7956333160400391
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 0.795379638671875
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_5d51520dac0417d5af9c88604241f9b0",
+      "score": 0.7940373420715332
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_554414fc3894b4f266281da6de0b5d29",
+      "score": 0.7938919067382812
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_3b1219cb1d1662112b070e7fdb73fd24",
+      "score": 0.7938828468322754
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_296f2400fee163aad415c87ede01d3fa",
+      "score": 0.7929897308349609
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.7917799949645996
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 0.7904777526855469
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_87322251f12ca7f0c796684219017ccc",
+      "score": 0.78912353515625
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_10a50baa6a723ca329af697b75df36c4",
+      "score": 0.7867097854614258
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 0.7864608764648438
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "score": 4.93259334564209
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+      "score": 4.222936153411865
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 4.203124523162842
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 4.004562854766846
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_bd4734d2765e2147cac924fe8ba38d85",
+      "score": 3.9039978981018066
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_2733af35ae204a6395a832128b6ae9ac",
+      "score": 3.830857753753662
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_a7df67e7fd088df02cfb3cdf0e560925",
+      "score": 3.789022445678711
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "score": 3.607489585876465
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "score": 3.5221259593963623
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 3.484480619430542
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 3.4195690155029297
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+      "score": 3.332981586456299
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_393f6af76087a71bf9db9f2bb64f4662",
+      "score": 3.2619872093200684
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_09034eeaeeff6882308a8c1b9b9aceaf",
+      "score": 3.1345107555389404
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "score": 3.10884428024292
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_b1bd739c57f6cdf536000af5bc1af59a",
+      "score": 3.1043331623077393
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_9f421de75aed07b68340cb2f2471a79e",
+      "score": 2.945034980773926
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_e86107abde0e1c9bd07e9c18aeccb3e4",
+      "score": 2.893522262573242
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 2.8291640281677246
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "score": 2.758378744125366
+    },
+    {
+      "channel": "graph",
+      "rank": 1,
+      "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+      "score": 1.0
+    },
+    {
+      "channel": "graph",
+      "rank": 2,
+      "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+      "score": 0.5
+    },
+    {
+      "channel": "graph",
+      "rank": 3,
+      "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+      "score": 0.3333333333333333
+    },
+    {
+      "channel": "graph",
+      "rank": 4,
+      "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+      "score": 0.25
+    },
+    {
+      "channel": "graph",
+      "rank": 5,
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.2
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R04.C01",
+      "requirement": "StructGPT 通过专门接口取得结构化证据。",
+      "selected_matches_by_unit": {
+        "struct": [
+          "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "chunk_bd4734d2765e2147cac924fe8ba38d85"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R04.C02",
+      "requirement": "读取与基于证据推理迭代进行。",
+      "selected_matches_by_unit": {
+        "struct": [
+          "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "chunk_bd4734d2765e2147cac924fe8ba38d85"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R04.C03",
+      "requirement": "LPKG 用 KG 派生的规划数据微调规划能力。",
+      "selected_matches_by_unit": {
+        "lpdata": []
+      },
+      "missing_units": [
+        "lpdata"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R04.C04",
+      "requirement": "推理时接口访问与训练数据构建属于不同阶段。",
+      "selected_matches_by_unit": {
+        "struct": [
+          "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "chunk_bd4734d2765e2147cac924fe8ba38d85"
+        ],
+        "lpdata": []
+      },
+      "missing_units": [
+        "lpdata"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/4bfac8b1-ac95-43ba-b3f4-42ba25a53cca?poll=true"
+}

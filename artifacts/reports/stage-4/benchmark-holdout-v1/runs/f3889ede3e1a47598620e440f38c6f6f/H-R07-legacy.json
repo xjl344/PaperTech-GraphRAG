@@ -1,0 +1,1068 @@
+{
+  "request_id": "220ee9c5-60b7-4d2d-90c4-00d964f32f7d",
+  "status": "partial",
+  "answer": "预训练融合方面，Roadmap 给出 KEPLER 的做法：将知识图谱嵌入训练目标与 Masked token 预训练目标结合进一个共享的 transformer 编码器 [chunk_3beb28682a38078eab6b92eae915913a]；但所给证据未描述 DRAGON 的联合目标，因此其流程证据不足。推理期方法中，Tree-of-Traversals 被描述为零样本推理算法，通过为 LLM 配备与 KG 交互的动作，使其在可能的 thoughts 和 actions 上进行树搜索以寻找高置信推理路径 [chunk_c684fea40eeaf98c4d80f0c62119849d]；其结论也强调零样本、无模式依赖且无需训练 [chunk_4b9f25dbcd34cf81a689e230345e1d86]。MindMap 的接入机制在给定证据中证据不足：现有引句仅说明其比较对象与提示模板，未描述其如何在不微调黑盒 LLM 的前提下接入外部 KG [chunk_493b0a4135b6944dbb0486997cf4933d]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_3beb28682a38078eab6b92eae915913a",
+      "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+      "parse_id": "parse_ac25f303898d80df63f3fc436bb321a5",
+      "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Surveys/010_Unifying Large Language Models and Knowledge Graphs A Roadmap.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 493,
+          "end_char": 1870,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1377,
+          "block_bboxes": [
+            [
+              48.0,
+              234.208,
+              300.005,
+              497.588
+            ],
+            [
+              48.0,
+              513.494,
+              212.037,
+              522.994
+            ]
+          ]
+        }
+      ],
+      "quote": "The other line of work explicitly leverages the connec-\ntions with knowledge and input text. As shown in Fig. 9,\nERNIE [35] proposes a novel word-entity alignment training\nobjective as a pre-training objective. Specifically, ERNIE\nfeeds both sentences and corresponding entities mentioned\nin the text into LLMs, and then trains the LLMs to pre-\ndict alignment links between textual tokens and entities in\nknowledge graphs. Similarly, KALM [91] enhances the input\ntokens by incorporating entity embeddings and includes\nan entity prediction pre-training task in addition to the\ntoken-only pre-training objective. This approach aims to\nimprove the ability of LLMs to capture knowledge related\nto entities. Finally, KEPLER [40] directly employs both\nknowledge graph embedding training objective and Masked\ntoken pre-training objective into a shared transformer-based\nencoder.",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7937483787536621
+        }
+      ],
+      "rerank_score": 0.8720207810401917,
+      "context_bytes": 1725,
+      "eid": "E3"
+    },
+    {
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 301,
+          "end_char": 1126,
+          "chunk_start_char": 0,
+          "chunk_end_char": 825,
+          "block_bboxes": [
+            [
+              157.758,
+              214.382,
+              202.243,
+              226.337
+            ],
+            [
+              87.276,
+              237.786,
+              275.114,
+              462.507
+            ],
+            [
+              87.874,
+              464.499,
+              196.466,
+              474.462
+            ],
+            [
+              70.866,
+              497.049,
+              153.68,
+              509.004
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nKnowledge graphs (KGs) complement Large\nLanguage Models (LLMs) by providing\nreliable,\nstructured,\ndomain-specific,\nand\nup-to-date external knowledge. However, KGs\nand LLMs are often developed separately\nand must be integrated after training.\nWe\nintroduce Tree-of-Traversals, a novel zero-shot\nreasoning algorithm that enables augmentation\nof black-box LLMs with one or more KGs.\nThe algorithm equips a LLM with actions\nfor interfacing a KG and enables the LLM to\nperform tree search over possible thoughts\nand actions to find high confidence reasoning\npaths. We evaluate on two popular benchmark\ndatasets.\nOur results show that Tree-of-\nTraversals significantly improves performance\non question answering and KG question\nanswering tasks. Code is available at https:\n//github.com/amazon-science/\ntree-of-traversals\n1",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 10.428964614868164
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8092350959777832
+        }
+      ],
+      "rerank_score": 0.7774689197540283,
+      "context_bytes": 1195,
+      "eid": "E4"
+    },
+    {
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 9,
+      "page_end": 9,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 2004,
+          "end_char": 2406,
+          "chunk_start_char": 0,
+          "chunk_end_char": 402,
+          "block_bboxes": [
+            [
+              70.866,
+              659.558,
+              145.933,
+              671.513
+            ],
+            [
+              70.528,
+              681.468,
+              290.949,
+              773.635
+            ],
+            [
+              306.142,
+              73.552,
+              508.233,
+              84.461
+            ],
+            [
+              306.142,
+              97.271,
+              383.193,
+              109.226
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nTree-of-Traversals is a powerful algorithm that en-\nables LLMs to utilize KG reasoning with zero\nexamples, no schema dependency, and no train-\ning. We demonstrate its efficacy experimentally\non multiple LLMs and datasets. We hope Tree-of-\nTraversals continues to be developed and see value\nin studying integration with personalized user KGs\nas well as with other domain-specific datasets.\n7",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.359564781188965
+        }
+      ],
+      "rerank_score": 0.8521990180015564,
+      "context_bytes": 755,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_493b0a4135b6944dbb0486997cf4933d",
+      "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+      "parse_id": "parse_00c2e99c789a45ca4e3ef2e0c0973fb1",
+      "title": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+      "page_start": 12,
+      "page_end": 12,
+      "source_relative_path": "Methods/211_MindMap Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 12,
+          "start_char": 2932,
+          "end_char": 4439,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1507,
+          "block_bboxes": [
+            [
+              70.866,
+              408.82,
+              290.944,
+              582.335
+            ],
+            [
+              70.866,
+              595.163,
+              290.947,
+              701.099
+            ],
+            [
+              70.866,
+              714.777,
+              169.281,
+              726.732
+            ],
+            [
+              83.885,
+              736.662,
+              291.044,
+              775.496
+            ],
+            [
+              327.142,
+              371.4,
+              524.412,
+              436.473
+            ],
+            [
+              319.161,
+              459.555,
+              526.225,
+              524.676
+            ]
+          ]
+        }
+      ],
+      "quote": "thesize the results of multiple inference paths to\nobtain the final conclusion.\nD\nPrompt Engine\n• The instructions of MindMap components.\nTable 9 shows the instruction of Step I: en-\ntity recognition, which aims to identify and\nlabel medical entities in the user query. Table\n10 shows the templates of Step II (Evidence\nGraph Aggregation), which generates natural\nlanguage sentences from the evidence graph\nnodes and edges.\n• The instructions of baseline methods: Table\n11 shows the prompt template of two docu-\nment retrieval methods (BM25 Retrieval and\nEmbedding Retrieval). The input is the ques-\ntion and the most related document context.",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8067984580993652
+        }
+      ],
+      "rerank_score": 0.7565374970436096,
+      "context_bytes": 1897,
+      "eid": "E2"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 9,
+      "page_end": 9,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 2004,
+          "end_char": 2406,
+          "chunk_start_char": 0,
+          "chunk_end_char": 402,
+          "block_bboxes": [
+            [
+              70.866,
+              659.558,
+              145.933,
+              671.513
+            ],
+            [
+              70.528,
+              681.468,
+              290.949,
+              773.635
+            ],
+            [
+              306.142,
+              73.552,
+              508.233,
+              84.461
+            ],
+            [
+              306.142,
+              97.271,
+              383.193,
+              109.226
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nTree-of-Traversals is a powerful algorithm that en-\nables LLMs to utilize KG reasoning with zero\nexamples, no schema dependency, and no train-\ning. We demonstrate its efficacy experimentally\non multiple LLMs and datasets. We hope Tree-of-\nTraversals continues to be developed and see value\nin studying integration with personalized user KGs\nas well as with other domain-specific datasets.\n7\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.359564781188965
+        }
+      ],
+      "rerank_score": 0.8521990180015564,
+      "context_bytes": 755
+    },
+    {
+      "chunk_id": "chunk_493b0a4135b6944dbb0486997cf4933d",
+      "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+      "parse_id": "parse_00c2e99c789a45ca4e3ef2e0c0973fb1",
+      "title": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+      "page_start": 12,
+      "page_end": 12,
+      "source_relative_path": "Methods/211_MindMap Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 12,
+          "start_char": 2932,
+          "end_char": 4439,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1507,
+          "block_bboxes": [
+            [
+              70.866,
+              408.82,
+              290.944,
+              582.335
+            ],
+            [
+              70.866,
+              595.163,
+              290.947,
+              701.099
+            ],
+            [
+              70.866,
+              714.777,
+              169.281,
+              726.732
+            ],
+            [
+              83.885,
+              736.662,
+              291.044,
+              775.496
+            ],
+            [
+              327.142,
+              371.4,
+              524.412,
+              436.473
+            ],
+            [
+              319.161,
+              459.555,
+              526.225,
+              524.676
+            ]
+          ]
+        }
+      ],
+      "quote": "• KG retrieval + GPT-3.5 We compare with exist-\ning KG retrieval methods (Jia et al., 2021; Sun\net al., 2023), which aim to find the shortest KG\npath between every pair of question entities. The\nfinal prompt is then retrieved from KG to guide\nGPT-3.5 model to answer questions. For fair\ncomparisons, we use the same preliminary pro-\ncess as our method to recognize the entities in\nquestion query. The key differences between\nMindMap and these are that they do not think\non multiple evidence KG sub-graphs with multi-\nthought in LLM, and without backtracking evi-\ndence sources.\n• Tree-of-thought (TOT) We compare TOT as a\ntypical Chain-of-thought (Wei et al., 2022b) base-\nline with MindMap. TOT is a method that uses\na tree structure to solve complex problems(Yao\net al., 2023a). By extending one inference path\ninto multiple inference paths, the model can syn-\nthesize the results of multiple inference paths to\nobtain the final conclusion.\nD\nPrompt Engine\n• The instructions of MindMap components.\nTable 9 shows the instruction of Step I: en-\ntity recognition, which aims to identify and\nlabel medical entities in the user query. Table\n10 shows the templates of Step II (Evidence\nGraph Aggregation), which generates natural\nlanguage sentences from the evidence graph\nnodes and edges.\n• The instructions of baseline methods: Table\n11 shows the prompt template of two docu-\nment retrieval methods (BM25 Retrieval and\nEmbedding Retrieval). The input is the ques-\ntion and the most related document context.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8067984580993652
+        }
+      ],
+      "rerank_score": 0.7565374970436096,
+      "context_bytes": 1897
+    },
+    {
+      "chunk_id": "chunk_3beb28682a38078eab6b92eae915913a",
+      "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+      "parse_id": "parse_ac25f303898d80df63f3fc436bb321a5",
+      "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Surveys/010_Unifying Large Language Models and Knowledge Graphs A Roadmap.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 493,
+          "end_char": 1870,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1377,
+          "block_bboxes": [
+            [
+              48.0,
+              234.208,
+              300.005,
+              497.588
+            ],
+            [
+              48.0,
+              513.494,
+              212.037,
+              522.994
+            ]
+          ]
+        }
+      ],
+      "quote": "The other line of work explicitly leverages the connec-\ntions with knowledge and input text. As shown in Fig. 9,\nERNIE [35] proposes a novel word-entity alignment training\nobjective as a pre-training objective. Specifically, ERNIE\nfeeds both sentences and corresponding entities mentioned\nin the text into LLMs, and then trains the LLMs to pre-\ndict alignment links between textual tokens and entities in\nknowledge graphs. Similarly, KALM [91] enhances the input\ntokens by incorporating entity embeddings and includes\nan entity prediction pre-training task in addition to the\ntoken-only pre-training objective. This approach aims to\nimprove the ability of LLMs to capture knowledge related\nto entities. Finally, KEPLER [40] directly employs both\nknowledge graph embedding training objective and Masked\ntoken pre-training objective into a shared transformer-based\nencoder. Deterministic LLM [104] focuses on pre-training\nlanguage models to capture deterministic factual knowledge.\nIt only masks the span that has a deterministic entity as the\nquestion and introduces additional clue contrast learning\nand clue classification objective. WKLM [106] first replaces\nentities in the text with other same-type entities and then\nfeeds them into LLMs. The model is further pre-trained to\ndistinguish whether the entities have been replaced or not.\n4.1.2\nIntegrating KGs into LLM Inputs\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7937483787536621
+        }
+      ],
+      "rerank_score": 0.8720207810401917,
+      "context_bytes": 1725
+    },
+    {
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 301,
+          "end_char": 1126,
+          "chunk_start_char": 0,
+          "chunk_end_char": 825,
+          "block_bboxes": [
+            [
+              157.758,
+              214.382,
+              202.243,
+              226.337
+            ],
+            [
+              87.276,
+              237.786,
+              275.114,
+              462.507
+            ],
+            [
+              87.874,
+              464.499,
+              196.466,
+              474.462
+            ],
+            [
+              70.866,
+              497.049,
+              153.68,
+              509.004
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nKnowledge graphs (KGs) complement Large\nLanguage Models (LLMs) by providing\nreliable,\nstructured,\ndomain-specific,\nand\nup-to-date external knowledge. However, KGs\nand LLMs are often developed separately\nand must be integrated after training.\nWe\nintroduce Tree-of-Traversals, a novel zero-shot\nreasoning algorithm that enables augmentation\nof black-box LLMs with one or more KGs.\nThe algorithm equips a LLM with actions\nfor interfacing a KG and enables the LLM to\nperform tree search over possible thoughts\nand actions to find high confidence reasoning\npaths. We evaluate on two popular benchmark\ndatasets.\nOur results show that Tree-of-\nTraversals significantly improves performance\non question answering and KG question\nanswering tasks. Code is available at https:\n//github.com/amazon-science/\ntree-of-traversals\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 10.428964614868164
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8092350959777832
+        }
+      ],
+      "rerank_score": 0.7774689197540283,
+      "context_bytes": 1195
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 33,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "text_only",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 6.278377900016494,
+      "inference_seconds": 0.6761553999967873,
+      "elapsed_seconds": 0.681094600004144,
+      "peak_cuda_memory_bytes": 1197101056,
+      "request_count": 63,
+      "batch_size": 4
+    },
+    "evidence_count": 4,
+    "context_bytes": 5572,
+    "evidence_bytes": 5572,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5293,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ]
+      },
+      {
+        "name": "MindMap",
+        "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+        "requested_names": [
+          "MindMap"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ],
+        "eligible_candidate_count": 17,
+        "selected_chunk_ids": [
+          "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+          "chunk_c684fea40eeaf98c4d80f0c62119849d"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "MindMap",
+        "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+        "requested_names": [
+          "MindMap"
+        ],
+        "eligible_candidate_count": 10,
+        "selected_chunk_ids": [
+          "chunk_493b0a4135b6944dbb0486997cf4933d"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 1722,
+    "total_tokens": 2123,
+    "completion_tokens": 401,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 1722
+    },
+    "completion_tokens_details": {
+      "text_tokens": 401
+    }
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "errors": [],
+  "raw": "{\"answer\":\"预训练融合方面，Roadmap 给出 KEPLER 的做法：将知识图谱嵌入训练目标与 Masked token 预训练目标结合进一个共享的 transformer 编码器 [chunk_3beb28682a38078eab6b92eae915913a]；但所给证据未描述 DRAGON 的联合目标，因此其流程证据不足。推理期方法中，Tree-of-Traversals 被描述为零样本推理算法，通过为 LLM 配备与 KG 交互的动作，使其在可能的 thoughts 和 actions 上进行树搜索以寻找高置信推理路径 [chunk_c684fea40eeaf98c4d80f0c62119849d]；其结论也强调零样本、无模式依赖且无需训练 [chunk_4b9f25dbcd34cf81a689e230345e1d86]。MindMap 的接入机制在给定证据中证据不足：现有引句仅说明其比较对象与提示模板，未描述其如何在不微调黑盒 LLM 的前提下接入外部 KG [chunk_493b0a4135b6944dbb0486997cf4933d]。\",\"citations\":[{\"chunk_id\":\"chunk_3beb28682a38078eab6b92eae915913a\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_c684fea40eeaf98c4d80f0c62119849d\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_4b9f25dbcd34cf81a689e230345e1d86\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_493b0a4135b6944dbb0486997cf4933d\",\"quote_id\":\"q2\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_3beb28682a38078eab6b92eae915913a",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7937483787536621
+        }
+      ],
+      "rerank_score": 0.8720207810401917
+    },
+    {
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.359564781188965
+        }
+      ],
+      "rerank_score": 0.8521990180015564
+    },
+    {
+      "chunk_id": "chunk_3ca88dd0b19ec139e7b11b5359f2dbc2",
+      "score": 0.03177805800756621,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 9.9222412109375
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8195528984069824
+        }
+      ],
+      "rerank_score": 0.8294920325279236
+    },
+    {
+      "chunk_id": "chunk_bb6c258ff3a6d9e0cb0053c1e9330d43",
+      "score": 0.02532051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 7.103332042694092
+        },
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.792116641998291
+        }
+      ],
+      "rerank_score": 0.7834919095039368
+    },
+    {
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "score": 0.031754032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 10.428964614868164
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8092350959777832
+        }
+      ],
+      "rerank_score": 0.7774689197540283
+    },
+    {
+      "chunk_id": "chunk_493b0a4135b6944dbb0486997cf4933d",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8067984580993652
+        }
+      ],
+      "rerank_score": 0.7565374970436096
+    },
+    {
+      "chunk_id": "chunk_f70ecf566510384ae3cd521d25caafbf",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7919278144836426
+        }
+      ],
+      "rerank_score": 0.7354516386985779
+    },
+    {
+      "chunk_id": "chunk_50dee9a8765be04263849aca87ab67d3",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.455324172973633
+        }
+      ],
+      "rerank_score": 0.7268136143684387
+    },
+    {
+      "chunk_id": "chunk_2f4809d54362f998c1c0710e915a721b",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8022966384887695
+        }
+      ],
+      "rerank_score": 0.7119318842887878
+    },
+    {
+      "chunk_id": "chunk_12db03641fcfe27c25e6c6b5b44ba634",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8038721084594727
+        }
+      ],
+      "rerank_score": 0.6757646203041077
+    },
+    {
+      "chunk_id": "chunk_2fcb3be4369982ef1303ce09bbc849f7",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7916936874389648
+        }
+      ],
+      "rerank_score": 0.6629056334495544
+    },
+    {
+      "chunk_id": "chunk_c5f5d6aafa2e2a3f895d9c4588961777",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8108081817626953
+        }
+      ],
+      "rerank_score": 0.612831175327301
+    },
+    {
+      "chunk_id": "chunk_38127ddd5689cc678e530ff793d2a6e3",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7924609184265137
+        }
+      ],
+      "rerank_score": 0.6018276214599609
+    },
+    {
+      "chunk_id": "chunk_ac2dd6acd17189360638268b42945e7b",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 9.926953315734863
+        }
+      ],
+      "rerank_score": 0.5813624858856201
+    },
+    {
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 0.02904040404040404,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 9.595858573913574
+        },
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.795076847076416
+        }
+      ],
+      "rerank_score": 0.5752301216125488
+    },
+    {
+      "chunk_id": "chunk_a345d4e5c2926b4d18ef67d4f5f7d6ad",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8110394477844238
+        }
+      ],
+      "rerank_score": 0.5529924035072327
+    },
+    {
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.199407577514648
+        }
+      ],
+      "rerank_score": 0.525155782699585
+    },
+    {
+      "chunk_id": "chunk_e2267f27e994c288c8ff1de490f65ca7",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 8.282923698425293
+        }
+      ],
+      "rerank_score": 0.5097491145133972
+    },
+    {
+      "chunk_id": "chunk_c36c0155590c0da356beed7403c524ae",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8030366897583008
+        }
+      ],
+      "rerank_score": 0.48372459411621094
+    },
+    {
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.312259674072266
+        }
+      ],
+      "rerank_score": 0.4824290871620178
+    },
+    {
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "score": 0.028370221327967807,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.83983039855957
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7980780601501465
+        }
+      ],
+      "rerank_score": 0.4743572771549225
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 0.03047794966520434,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.705534934997559
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7970824241638184
+        }
+      ],
+      "rerank_score": 0.4344612956047058
+    },
+    {
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 9.443517684936523
+        }
+      ],
+      "rerank_score": 0.3093366026878357
+    },
+    {
+      "chunk_id": "chunk_959c988b96d931d1ebc6098683c56d6b",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.794039249420166
+        }
+      ],
+      "rerank_score": 0.30331891775131226
+    },
+    {
+      "chunk_id": "chunk_54195d498800a946748950b0238fda0f",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.974376678466797
+        }
+      ],
+      "rerank_score": 0.2994123697280884
+    },
+    {
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 0.02877846790890269,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.989274024963379
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.798983097076416
+        }
+      ],
+      "rerank_score": 0.24725967645645142
+    },
+    {
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.343162536621094
+        }
+      ],
+      "rerank_score": 0.21568095684051514
+    },
+    {
+      "chunk_id": "chunk_7c3a7be987627b104ec877903108110f",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.320951461791992
+        }
+      ],
+      "rerank_score": 0.19544048607349396
+    },
+    {
+      "chunk_id": "chunk_868afb825c9511cfd36467277d425595",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7924857139587402
+        }
+      ],
+      "rerank_score": 0.1678997427225113
+    },
+    {
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.382688522338867
+        }
+      ],
+      "rerank_score": 0.10212548077106476
+    },
+    {
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.408199787139893
+        }
+      ],
+      "rerank_score": 0.07120272517204285
+    },
+    {
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.831502437591553
+        }
+      ],
+      "rerank_score": 0.05399883911013603
+    },
+    {
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7931618690490723
+        }
+      ],
+      "rerank_score": 0.003765413537621498
+    }
+  ],
+  "case_id": "H-R07",
+  "question": "对比 Roadmap 综述中的预训练融合模型（如 KEPLER、DRAGON）与 Tree-of-Traversals、MindMap 这类推理期即插即用方法：前者通过什么联合目标在预训练期融合 KG，后两者又分别怎样在不微调黑盒 LLM 的前提下接入外部 KG？",
+  "category": "cross",
+  "arm": "Legacy-Hybrid",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.000848500058054924
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.05124870000872761
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 8.499948307871819e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.6824636000674218
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.002065200009383261
+    }
+  ],
+  "retrieval_compute_seconds": 0.7366345000918955,
+  "request_wall_seconds": 9.10072610003408,
+  "embedding_source": "shared Q00 cloud vectors across arms; live planned subquery vectors for Production-Final",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.1763812999706715,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 5.473521400010213,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.42870899999979883,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 4.494572800002061,
+      "usage": "{\"prompt_tokens\": 1722, \"total_tokens\": 2123, \"completion_tokens\": 401}"
+    }
+  ],
+  "criterion_source_coverage": [],
+  "metrics": {
+    "recall5": 0.3333333333333333,
+    "recall8": 0.3333333333333333,
+    "mrr40": 0.3333333333333333,
+    "evidence_coverage": 0.0,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/f771a73d-b6ca-4d6d-997b-0f5d67ed3a31?poll=true"
+}

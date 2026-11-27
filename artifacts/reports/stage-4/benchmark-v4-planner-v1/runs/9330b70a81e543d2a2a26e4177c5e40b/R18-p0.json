@@ -1,0 +1,2239 @@
+{
+  "request_id": "39cb2000-dd0e-4a5f-8190-bd3d4c8d28de",
+  "status": "ok",
+  "answer": "KG-GPT 的流程由三个明确阶段构成：句子分割、图检索、推理；其中“句子分割”归 KG-GPT [E2, E4]。KG-GPT 的检索对象不是预先规划的关系路径，而是先由子句中的实体和检索到的关系得到候选证据图（子图）池：“retrieves a potential pool of relations that could bridge the entities identified within the sub-sentences. Then, a candidate pool of evidence graphs (i.e. sub-KG) is obtained using the retrieved relations and the entity set” [E4]。RoG 则采用规划—检索—推理框架：规划模块“generates relation paths grounded by KGs as faithful plans”；检索—推理模块“first retrieves valid reasoning paths from KGs according to the plans, then conducts faithful reasoning based on retrieved reasoning paths” [E9]。因此，“关系路径规划”属于 RoG 的规划模块 [E1, E9]，RoG 的检索对象是由这些计划引导出的有效推理路径 [E9]；就所提供的证据看，KG-GPT 没有对应的“关系路径规划”步骤，其检索对象是候选证据子图 [E4]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1015,
+          "end_char": 2453,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1438,
+          "block_bboxes": [
+            [
+              70.866,
+              601.771,
+              128.645,
+              613.726
+            ],
+            [
+              70.866,
+              626.12,
+              289.139,
+              664.211
+            ],
+            [
+              70.866,
+              667.512,
+              290.95,
+              773.668
+            ],
+            [
+              306.142,
+              453.226,
+              526.217,
+              491.317
+            ],
+            [
+              306.142,
+              502.384,
+              438.251,
+              513.293
+            ],
+            [
+              305.804,
+              520.034,
+              526.321,
+              612.164
+            ],
+            [
+              306.142,
+              614.552,
+              526.224,
+              666.108
+            ],
+            [
+              306.142,
+              655.058,
+              526.222,
+              720.558
+            ],
+            [
+              306.142,
+              731.625,
+              407.073,
+              742.534
+            ]
+          ]
+        }
+      ],
+      "quote": "Method\nKG-GPT is composed of three stages: Sentence\nSegmentation, Graph Retrieval, and Inference, as\ndescribed in Fig. 1.\nWe assume a graph G (knowledge graph con-\nsisting of entities E and relations R), a sentence\nS (claim or question), and all entities involved in\nS, ES ⊂E are given. In order to derive a logical\nconclusion, we need an accurate evidence graph\nGE ⊂G, which we obtain in two stages, Sentence\nSegmentation and Graph Retrieval. Furthermore,\nall the aforementioned steps are executed employ-\ning the in-context learning methodology to max-\nimize the LLM’s reasoning ability. The prompts\nused for each stage are in Appendix A.\n2.1\nSentence Segmentation\nMany KG-based tasks require multi-hop reasoning.\nTo address this, we utilize a Divide-and-Conquer\napproach. By breaking down a sentence into sub-\nsentences that correspond to a single relation, iden-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.207502841949463
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8269991874694824
+        }
+      ],
+      "rerank_score": 0.5422876477241516,
+      "context_bytes": 1835,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 2506,
+          "end_char": 3983,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1477,
+          "block_bboxes": [
+            [
+              305.749,
+              366.076,
+              526.224,
+              512.56
+            ],
+            [
+              305.782,
+              516.95,
+              526.322,
+              704.081
+            ],
+            [
+              305.749,
+              708.471,
+              526.219,
+              773.66
+            ],
+            [
+              10.94,
+              264.37,
+              37.62,
+              609.89
+            ]
+          ]
+        }
+      ],
+      "quote": "To this end, we propose a new general frame-\nwork, called KG-GPT, that uses LLMs’ reasoning\ncapabilities to perform KG-based tasks. KG-GPT\nis similar to StructGPT (Jiang et al., 2023) in that\nboth reason on structured data using LLMs. How-\never, unlike StructGPT which identifies paths from\na seed entity to the final answer entity within KGs,\nKG-GPT retrieves the entire sub-graph and then\ninfers the answer. This means KG-GPT can be\nused not only for KGQA but also for tasks like\nKG-based fact verification.\nKG-GPT consists of three steps: 1) Sentence\n(Claim / Question) Segmentation, 2) Graph Re-\ntrieval, and 3) Inference. During Sentence Seg-\nmentation, a sentence is partitioned into discrete\nsub-sentences, each aligned with a single triple (i.e.\n[head, relation, tail]). The subsequent step, namely\nGraph Retrieval, retrieves a potential pool of rela-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.597626686096191
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8183755874633789
+        }
+      ],
+      "rerank_score": 0.488504558801651,
+      "context_bytes": 1859,
+      "eid": "E4"
+    },
+    {
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 2506,
+          "end_char": 3983,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1477,
+          "block_bboxes": [
+            [
+              305.749,
+              366.076,
+              526.224,
+              512.56
+            ],
+            [
+              305.782,
+              516.95,
+              526.322,
+              704.081
+            ],
+            [
+              305.749,
+              708.471,
+              526.219,
+              773.66
+            ],
+            [
+              10.94,
+              264.37,
+              37.62,
+              609.89
+            ]
+          ]
+        }
+      ],
+      "quote": "tions that could bridge the entities identified within\nthe sub-sentences. Then, a candidate pool of evi-\ndence graphs (i.e. sub-KG) is obtained using the\nretrieved relations and the entity set. In the final\nstep, the obtained graphs are used to derive a logi-\ncal conclusion, such as validating a given claim or\nanswering a given question.\nTo evaluate KG-GPT, we employ KG-based\nfact verification and KGQA benchmarks, both de-\nmanding complex reasoning that utilizes structured\nknowledge of KGs. In KG-based fact verification,\nwe use FACTKG (Kim et al., 2023), which includes\narXiv:2310.11220v1  [cs.CL]  17 Oct 2023",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.597626686096191
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8183755874633789
+        }
+      ],
+      "rerank_score": 0.488504558801651,
+      "context_bytes": 1859,
+      "eid": "E4"
+    },
+    {
+      "chunk_id": "chunk_f1d7104112d7a03c0f65e063819b90cd",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 3,
+      "page_end": 4,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 2529,
+          "end_char": 3511,
+          "chunk_start_char": 0,
+          "chunk_end_char": 982,
+          "block_bboxes": [
+            [
+              108.0,
+              542.884,
+              504.0,
+              596.685
+            ],
+            [
+              207.666,
+              581.511,
+              267.448,
+              595.421
+            ],
+            [
+              108.0,
+              581.721,
+              503.998,
+              606.38
+            ],
+            [
+              108.0,
+              615.996,
+              504.004,
+              671.019
+            ],
+            [
+              108.299,
+              686.738,
+              182.617,
+              698.693
+            ],
+            [
+              108.0,
+              710.837,
+              504.002,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 384,
+          "chunk_start_char": 983,
+          "chunk_end_char": 1367,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              84.092,
+              504.003,
+              116.149
+            ],
+            [
+              108.249,
+              130.547,
+              397.307,
+              140.51
+            ]
+          ]
+        }
+      ],
+      "quote": "nents: 1) a planning module that generates relation paths grounded by KGs as faithful plans; 2)\n3\n\nPublished as a conference paper at ICLR 2024\na retrieval-reasoning module that first retrieves valid reasoning paths from KGs according to the\nplans, then conducts faithful reasoning based on retrieved reasoning paths and generates answers\nwith interpretable explanations. The overall framework of RoG is illustrated in Figure 2.\n4.1\nREASONING ON GRAPHS: PLANNING-RETRIEVAL-REASONING",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8000040054321289
+        }
+      ],
+      "rerank_score": 0.18432661890983582,
+      "context_bytes": 1792,
+      "eid": "E9"
+    },
+    {
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1875,
+          "end_char": 3423,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1548,
+          "block_bboxes": [
+            [
+              108.0,
+              346.72,
+              504.003,
+              389.559
+            ],
+            [
+              226.429,
+              393.848,
+              279.387,
+              404.781
+            ],
+            [
+              282.835,
+              391.675,
+              297.231,
+              401.638
+            ],
+            [
+              282.148,
+              408.127,
+              297.35,
+              415.192
+            ],
+            [
+              299.573,
+              393.848,
+              504.0,
+              404.781
+            ],
+            [
+              108.0,
+              416.317,
+              504.002,
+              470.346
+            ],
+            [
+              108.249,
+              484.743,
+              255.003,
+              494.706
+            ],
+            [
+              108.0,
+              505.266,
+              504.003,
+              580.983
+            ]
+          ]
+        }
+      ],
+      "quote": "the question q, relation path z, and KG G, which is computed by the retrieval-reasoning module.\n4.2\nOPTIMIZATION FRAMEWORK\nDespite the advantage of generating relation paths as plans, the LLMs have zero knowledge of the\nrelations contained in KGs. Therefore, LLMs cannot directly generate relation paths grounded by\nKGs as faithful plans. Moreover, LLMs might not understand the reasoning paths correctly and\nconduct reasoning based on them. To address these issues, we design two instruction tuning tasks:\n1) planning optimization, which distills the knowledge from KGs into LLMs to generate faithful\nrelation paths as plans; 2) retrieval-reasoning optimization, which enables LLMs to reason based on\nthe retrieved reasoning paths.",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8098716735839844
+        }
+      ],
+      "rerank_score": 0.28666824102401733,
+      "context_bytes": 1917,
+      "eid": "E1"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1875,
+          "end_char": 3423,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1548,
+          "block_bboxes": [
+            [
+              108.0,
+              346.72,
+              504.003,
+              389.559
+            ],
+            [
+              226.429,
+              393.848,
+              279.387,
+              404.781
+            ],
+            [
+              282.835,
+              391.675,
+              297.231,
+              401.638
+            ],
+            [
+              282.148,
+              408.127,
+              297.35,
+              415.192
+            ],
+            [
+              299.573,
+              393.848,
+              504.0,
+              404.781
+            ],
+            [
+              108.0,
+              416.317,
+              504.002,
+              470.346
+            ],
+            [
+              108.249,
+              484.743,
+              255.003,
+              494.706
+            ],
+            [
+              108.0,
+              505.266,
+              504.003,
+              580.983
+            ]
+          ]
+        }
+      ],
+      "quote": "By treating relation paths as plans, we can make sure the plans are grounded by KGs, which enables\nLLMs to conduct faithful and interpretable reasoning on graphs. In a nutshell, we formulate our\nRoG as an optimization problem that aims to maximize the probability of reasoning the answer from\na knowledge graph G w.r.t the question q by generating relation paths z as the plan:\nPθ(a|q, G) =\nX\nz∈Z\nPθ(a|q, z, G)Pθ(z|q),\n(1)\nwhere θ denotes the parameters of LLMs, z denotes the relation paths (plans) generated by LLMs,\nand Z denotes the set of possible relation paths. The latter term Pθ(z|q) is the probability of gen-\nerating a faithful relation path z grounded by KG, given the question q, which is realized by the\nplanning module. The former term Pθ(a|q, z, G) is the probability of reasoning an answer a given\nthe question q, relation path z, and KG G, which is computed by the retrieval-reasoning module.\n4.2\nOPTIMIZATION FRAMEWORK\nDespite the advantage of generating relation paths as plans, the LLMs have zero knowledge of the\nrelations contained in KGs. Therefore, LLMs cannot directly generate relation paths grounded by\nKGs as faithful plans. Moreover, LLMs might not understand the reasoning paths correctly and\nconduct reasoning based on them. To address these issues, we design two instruction tuning tasks:\n1) planning optimization, which distills the knowledge from KGs into LLMs to generate faithful\nrelation paths as plans; 2) retrieval-reasoning optimization, which enables LLMs to reason based on\nthe retrieved reasoning paths.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8098716735839844
+        }
+      ],
+      "rerank_score": 0.28666824102401733,
+      "context_bytes": 1917
+    },
+    {
+      "chunk_id": "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1015,
+          "end_char": 2453,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1438,
+          "block_bboxes": [
+            [
+              70.866,
+              601.771,
+              128.645,
+              613.726
+            ],
+            [
+              70.866,
+              626.12,
+              289.139,
+              664.211
+            ],
+            [
+              70.866,
+              667.512,
+              290.95,
+              773.668
+            ],
+            [
+              306.142,
+              453.226,
+              526.217,
+              491.317
+            ],
+            [
+              306.142,
+              502.384,
+              438.251,
+              513.293
+            ],
+            [
+              305.804,
+              520.034,
+              526.321,
+              612.164
+            ],
+            [
+              306.142,
+              614.552,
+              526.224,
+              666.108
+            ],
+            [
+              306.142,
+              655.058,
+              526.222,
+              720.558
+            ],
+            [
+              306.142,
+              731.625,
+              407.073,
+              742.534
+            ]
+          ]
+        }
+      ],
+      "quote": "Method\nKG-GPT is composed of three stages: Sentence\nSegmentation, Graph Retrieval, and Inference, as\ndescribed in Fig. 1.\nWe assume a graph G (knowledge graph con-\nsisting of entities E and relations R), a sentence\nS (claim or question), and all entities involved in\nS, ES ⊂E are given. In order to derive a logical\nconclusion, we need an accurate evidence graph\nGE ⊂G, which we obtain in two stages, Sentence\nSegmentation and Graph Retrieval. Furthermore,\nall the aforementioned steps are executed employ-\ning the in-context learning methodology to max-\nimize the LLM’s reasoning ability. The prompts\nused for each stage are in Appendix A.\n2.1\nSentence Segmentation\nMany KG-based tasks require multi-hop reasoning.\nTo address this, we utilize a Divide-and-Conquer\napproach. By breaking down a sentence into sub-\nsentences that correspond to a single relation, iden-\ntifying relations in each sub-sentence becomes eas-\nier than finding n-hop relations connected to an\nentity from the original sentence all at once.\nWe assume S can be broken down into sub-\nsentences: S1, S2, ..., Sn where Si consists of a\nset of entities Ei ⊂E and a relation ri ∈R. Each\ne(j)\ni\n∈Ei can be a concrete entity (e.g. William An-\nders in Fig. 1-(1)), or a type (e.g. artificial satellite\nin Fig. 1-(1)). ri can be mapped to one or more\nitems in R, as there can be multiple relations with\nsimilar semantics (e.g. birthPlace, placeOfBirth).\n2.2\nGraph Retrieval\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.207502841949463
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8269991874694824
+        }
+      ],
+      "rerank_score": 0.5422876477241516,
+      "context_bytes": 1835
+    },
+    {
+      "chunk_id": "chunk_337b776419fe0d299cd973609da26513",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2937,
+          "end_char": 4100,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1163,
+          "block_bboxes": [
+            [
+              108.0,
+              584.821,
+              504.003,
+              682.456
+            ],
+            [
+              108.0,
+              689.253,
+              504.004,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 352,
+          "chunk_start_char": 1164,
+          "chunk_end_char": 1516,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              197.122,
+              189.969,
+              275.36,
+              203.572
+            ],
+            [
+              184.445,
+              182.938,
+              187.628,
+              188.768
+            ],
+            [
+              181.262,
+              167.835,
+              187.627,
+              173.665
+            ],
+            [
+              181.262,
+              152.732,
+              187.627,
+              158.562
+            ],
+            [
+              181.262,
+              137.629,
+              187.627,
+              143.46
+            ],
+            [
+              181.262,
+              122.527,
+              187.627,
+              128.357
+            ],
+            [
+              171.277,
+              116.764,
+              178.413,
+              190.932
+            ],
+            [
+              336.664,
+              189.969,
+              414.902,
+              203.572
+            ],
+            [
+              323.987,
+              182.938,
+              327.17,
+              188.768
+            ],
+            [
+              320.803,
+              170.237,
+              327.169,
+              176.067
+            ],
+            [
+              320.803,
+              157.537,
+              327.169,
+              163.367
+            ],
+            [
+              320.803,
+              144.836,
+              327.169,
+              150.666
+            ],
+            [
+              317.62,
+              132.136,
+              327.168,
+              137.966
+            ],
+            [
+              317.62,
+              119.435,
+              327.168,
+              125.265
+            ],
+            [
+              307.636,
+              116.764,
+              314.771,
+              190.932
+            ],
+            [
+              284.851,
+              182.772,
+              291.217,
+              188.602
+            ],
+            [
+              284.851,
+              171.855,
+              291.217,
+              177.685
+            ],
+            [
+              284.851,
+              160.937,
+              291.217,
+              166.767
+            ],
+            [
+              284.851,
+              150.02,
+              291.217,
+              155.85
+            ],
+            [
+              284.851,
+              139.102,
+              291.217,
+              144.932
+            ],
+            [
+              284.851,
+              128.185,
+              291.217,
+              134.015
+            ],
+            [
+              292.807,
+              125.092,
+              299.943,
+              182.621
+            ],
+            [
+              224.533,
+              111.974,
+              247.968,
+              119.109
+            ],
+            [
+              424.393,
+              173.999,
+              430.759,
+              179.829
+            ],
+            [
+              424.393,
+              154.216,
+              430.759,
+              160.046
+            ],
+            [
+              424.393,
+              134.433,
+              430.759,
+              140.263
+            ],
+            [
+              432.349,
+              125.092,
+              439.485,
+              182.621
+            ],
+            [
+              368.275,
+              111.974,
+              383.286,
+              119.109
+            ],
+            [
+              241.4,
+              88.347,
+              315.568,
+              104.589
+            ],
+            [
+              346.458,
+              88.347,
+              388.628,
+              104.578
+            ]
+          ]
+        }
+      ],
+      "quote": "Among other methods, retrieval-augmented approaches outperform conventional embedding-based\nmethods by retrieving relevant subgraphs from KGs, which reduces reasoning complexity. Fur-\nthermore, SR+NSM and SR+NSM+E2E adopt relation paths-based retrieval which achieves better\nperformance, highlighting the importance of relation paths. Semantic parsing methods perform bet-\nter than retrieval methods on WebQSP but worse on CWQ due to the complexity of generating\nlogical queries for complex questions in CWQ. Although LLMs-based methods achieve comparable\nperformance, they are limited by hallucinations and lack of knowledge as shown in Section 5.4. The\nLLMs+KGs methods achieve the second-best performance, which demonstrates the effectiveness of\nunifying KGs and LLMs for reasoning.\nAblation Study. We conduct an ablation study to analyze the effectiveness of the planning module\nand reasoning module in our method (RoG). We compare four variants: 1) w/o planning, where\nwe remove the planning module and perform reasoning without retrieved reasoning paths; 2) w/o\nreasoning, where we remove the reasoning module and use all answers from retrieved reasoning\n7\n\nPublished as a conference paper at ICLR 2024\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n10\n20\n30\n40\n# Retrieved Reasoning Paths\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n25\n50\n75\n100\n125\n# Retrieved Reasoning Paths\n30\n40\n50\n60\n70\n80\nAnswer Coverage (%)\nWebQSP\n20\n40\n60\nAnswer Coverage (%)\nCWQ\n# Retrieved Reasoning Paths\nRetrieval-Precision\nRetrieval-Recall\nReasoning-F1\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7961606979370117
+        }
+      ],
+      "rerank_score": 0.2278127372264862,
+      "context_bytes": 1912
+    },
+    {
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 2506,
+          "end_char": 3983,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1477,
+          "block_bboxes": [
+            [
+              305.749,
+              366.076,
+              526.224,
+              512.56
+            ],
+            [
+              305.782,
+              516.95,
+              526.322,
+              704.081
+            ],
+            [
+              305.749,
+              708.471,
+              526.219,
+              773.66
+            ],
+            [
+              10.94,
+              264.37,
+              37.62,
+              609.89
+            ]
+          ]
+        }
+      ],
+      "quote": "To this end, we propose a new general frame-\nwork, called KG-GPT, that uses LLMs’ reasoning\ncapabilities to perform KG-based tasks. KG-GPT\nis similar to StructGPT (Jiang et al., 2023) in that\nboth reason on structured data using LLMs. How-\never, unlike StructGPT which identifies paths from\na seed entity to the final answer entity within KGs,\nKG-GPT retrieves the entire sub-graph and then\ninfers the answer. This means KG-GPT can be\nused not only for KGQA but also for tasks like\nKG-based fact verification.\nKG-GPT consists of three steps: 1) Sentence\n(Claim / Question) Segmentation, 2) Graph Re-\ntrieval, and 3) Inference. During Sentence Seg-\nmentation, a sentence is partitioned into discrete\nsub-sentences, each aligned with a single triple (i.e.\n[head, relation, tail]). The subsequent step, namely\nGraph Retrieval, retrieves a potential pool of rela-\ntions that could bridge the entities identified within\nthe sub-sentences. Then, a candidate pool of evi-\ndence graphs (i.e. sub-KG) is obtained using the\nretrieved relations and the entity set. In the final\nstep, the obtained graphs are used to derive a logi-\ncal conclusion, such as validating a given claim or\nanswering a given question.\nTo evaluate KG-GPT, we employ KG-based\nfact verification and KGQA benchmarks, both de-\nmanding complex reasoning that utilizes structured\nknowledge of KGs. In KG-based fact verification,\nwe use FACTKG (Kim et al., 2023), which includes\narXiv:2310.11220v1  [cs.CL]  17 Oct 2023\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.597626686096191
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8183755874633789
+        }
+      ],
+      "rerank_score": 0.488504558801651,
+      "context_bytes": 1859
+    },
+    {
+      "chunk_id": "chunk_45c598ca774c47ab2be0c3b734efd4de",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1290,
+          "end_char": 1941,
+          "chunk_start_char": 0,
+          "chunk_end_char": 651,
+          "block_bboxes": [
+            [
+              70.866,
+              462.518,
+              145.933,
+              474.473
+            ],
+            [
+              70.353,
+              485.252,
+              289.138,
+              496.27
+            ],
+            [
+              70.866,
+              498.851,
+              290.949,
+              672.384
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nWe suggest KG-GPT, a versatile framework that\nutilizes LLMs for tasks that use KGs. KG-GPT is\ndivided into three stages: Sentence Segmentation,\nGraph Retrieval, and Inference, each designed for\nbreaking down sentences, sourcing related graph\nelements, and reaching reasoned outcomes, respec-\ntively. We assess KG-GPT’s efficacy using KG-\nbased fact verification and KGQA metrics, and\nthe model demonstrates consistent, impressive re-\nsults, even surpassing a number of fully-supervised\nmodels. Consequently, our research signifies a sub-\nstantial advancement in combining structured and\nunstructured data management in the LLMs’ con-\ntext.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 5.344728469848633
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8122076988220215
+        }
+      ],
+      "rerank_score": 0.3887920379638672,
+      "context_bytes": 988
+    },
+    {
+      "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 237,
+          "end_char": 1173,
+          "chunk_start_char": 0,
+          "chunk_end_char": 936,
+          "block_bboxes": [
+            [
+              157.758,
+              214.382,
+              202.243,
+              226.337
+            ],
+            [
+              87.516,
+              240.528,
+              273.87,
+              489.67
+            ],
+            [
+              70.866,
+              504.681,
+              153.68,
+              516.636
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nWhile large language models (LLMs) have\nmade considerable advancements in under-\nstanding and generating unstructured text, their\napplication in structured data remains underex-\nplored. Particularly, using LLMs for complex\nreasoning tasks on knowledge graphs (KGs)\nremains largely untouched. To address this,\nwe propose KG-GPT, a multi-purpose frame-\nwork leveraging LLMs for tasks employing\nKGs. KG-GPT comprises three steps: Sentence\nSegmentation, Graph Retrieval, and Inference,\neach aimed at partitioning sentences, retriev-\ning relevant graph components, and deriving\nlogical conclusions, respectively. We evalu-\nate KG-GPT using KG-based fact verification\nand KGQA benchmarks, with the model show-\ning competitive and robust performance, even\noutperforming several fully-supervised models.\nOur work, therefore, marks a significant step\nin unifying structured and unstructured data\nprocessing within the realm of LLMs.1\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.4520134925842285
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8044672012329102
+        }
+      ],
+      "rerank_score": 0.3621792793273926,
+      "context_bytes": 1308
+    },
+    {
+      "chunk_id": "chunk_3f7eb65828761447433c66c28ad111a4",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 57,
+          "end_char": 1493,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1436,
+          "block_bboxes": [
+            [
+              143.353,
+              97.415,
+              274.997,
+              143.495
+            ],
+            [
+              76.209,
+              164.205,
+              132.263,
+              173.955
+            ],
+            [
+              146.652,
+              146.04,
+              274.997,
+              180.181
+            ],
+            [
+              149.091,
+              158.232,
+              274.997,
+              192.29
+            ],
+            [
+              70.557,
+              205.158,
+              290.877,
+              239.106
+            ],
+            [
+              75.442,
+              254.684,
+              284.569,
+              273.404
+            ],
+            [
+              85.336,
+              296.402,
+              96.475,
+              304.752
+            ],
+            [
+              78.31,
+              275.807,
+              276.34,
+              367.731
+            ],
+            [
+              70.119,
+              390.658,
+              289.494,
+              424.606
+            ],
+            [
+              70.866,
+              449.144,
+              289.139,
+              487.235
+            ],
+            [
+              70.593,
+              490.24,
+              290.949,
+              650.24
+            ],
+            [
+              70.866,
+              663.055,
+              136.004,
+              673.964
+            ]
+          ]
+        }
+      ],
+      "quote": "full\nBERT\n65.20\nBlueBERT\n59.93\nzero-shot\nFlan-T5\n62.70\n12-shot\nChatGPT\n68.48\nWith Evidence\nfull\nGEAR\n77.65\n12-shot\nKG-GPT\n72.68\n8-shot\n67.68\n4-shot\n59.53\nTable 1: The performance of the models on FACTKG.\nExcept for ChatGPT and KG-GPT, all performances are\nobtained from Kim et al. (2023).\nTraining\nMethods\nMetaQA\nMetaQA\nMetaQA\nStrategy\n1-hop\n2-hop\n3-hop\nfull\nKV-Mem\n96.2\n82.7\n48.9\nGraftNet\n97.0\n94.8\n77.7\nEmbedKGQA\n97.5\n98.8\n94.8\nNSM\n97.1\n99.9\n98.9\nUniKGQA\n97.5\n99.0\n99.1\n12-shot\nChatGPT\n60.0\n23.0\n38.7\n12-shot\n96.3\n94.4\n94.0\n8-shot\nKG-GPT\n95.8\n93.8\n68.8\n4-shot\n94.7\n92.8\n46.6\nTable 2: The performance of the models on MetaQA\n(Hits@1). The best results for each task and those of\n12-shot KG-GPT are in bold.\nof the sentence segmentation and graph retrieval\nstages. The qualitative results including the graphs\nretrieved by KG-GPT are in Appendix E.1.\nNonetheless, when compared to GEAR, a fully\nsupervised model built upon KGs, KG-GPT ex-\nhibits certain limitations. KG-GPT achieves an ac-\ncuracy score of 72.68%, which is behind GEAR’s\n77.65%. This performance gap illustrates the ob-\nstacles encountered by KG-GPT in a few-shot sce-\nnario, namely the difficulty in amassing a suffi-\ncient volume of information from the restricted\ndata available. Hence, despite the notable progress\nachieved with KG-GPT, there is clear room for im-\nprovement to equal or surpass the performance of\nKG-specific supervised models like GEAR.\n4.2\nMetaQA\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 5.764638900756836
+        }
+      ],
+      "rerank_score": 0.28140559792518616,
+      "context_bytes": 1880
+    },
+    {
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+      "parse_id": "parse_ac25f303898d80df63f3fc436bb321a5",
+      "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Surveys/010_Unifying Large Language Models and Knowledge Graphs A Roadmap.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 4423,
+          "end_char": 5640,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1217,
+          "block_bboxes": [
+            [
+              312.0,
+              506.563,
+              563.997,
+              746.863
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 386,
+          "chunk_start_char": 1218,
+          "chunk_end_char": 1604,
+          "block_bboxes": [
+            [
+              48.0,
+              28.175,
+              564.0,
+              37.006
+            ],
+            [
+              48.0,
+              44.963,
+              299.997,
+              66.003
+            ],
+            [
+              48.0,
+              68.065,
+              299.997,
+              112.185
+            ],
+            [
+              48.0,
+              129.517,
+              199.411,
+              139.017
+            ]
+          ]
+        }
+      ],
+      "quote": "Instead of injecting factual knowledge into LLMs, the KGs\nInstruction-tuning aims to fine-tune LLMs to better com-\nprehend the structure of KGs and effectively follow user\ninstructions to conduct complex tasks. KGs Instruction-\ntuning utilizes both facts and the structure of KGs to cre-\nate instruction-tuning datasets. LLMs finetuned on these\ndatasets can extract both factual and structural knowledge\nfrom KGs, enhancing the reasoning ability of LLMs. KP-\nPLM [109] first designs several prompt templates to transfer\nstructural graphs into natural language text. Then, two self-\nsupervised tasks are proposed to finetune LLMs to further\nleverage the knowledge from these prompts. OntoPrompt\n[110] proposes an ontology-enhanced prompt-tuning that\ncan place knowledge of entities into the context of LLMs,\nwhich are further finetuned on several downstream tasks.\nChatKBQA [111] finetunes LLMs on KG structure to gener-\nate logical queries, which can be executed on KGs to obtain\nanswers. To better reason on graphs, RoG [112] presents a\nplanning-retrieval-reasoning framework. RoG is finetuned\non KG structure to generate relation paths grounded by KGs\nas faithful plans. These plans are then used to retrieve valid\n\nJOURNAL OF LATEX CLASS FILES, VOL. ??, NO. ??, MONTH 20YY\n9\nreasoning paths from the KGs for LLMs to conduct faithful\nreasoning and generate interpretable results.\nKGs Instruction-tuning can better leverage the knowl-\nedge from KGs for downstream tasks. However, it requires\nretraining the models, which is time-consuming and re-\nquires lots of resources.\n4.2\nKG-enhanced LLM Inference\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7993464469909668
+        }
+      ],
+      "rerank_score": 0.23475733399391174,
+      "context_bytes": 1958
+    },
+    {
+      "chunk_id": "chunk_f1d7104112d7a03c0f65e063819b90cd",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 3,
+      "page_end": 4,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 2529,
+          "end_char": 3511,
+          "chunk_start_char": 0,
+          "chunk_end_char": 982,
+          "block_bboxes": [
+            [
+              108.0,
+              542.884,
+              504.0,
+              596.685
+            ],
+            [
+              207.666,
+              581.511,
+              267.448,
+              595.421
+            ],
+            [
+              108.0,
+              581.721,
+              503.998,
+              606.38
+            ],
+            [
+              108.0,
+              615.996,
+              504.004,
+              671.019
+            ],
+            [
+              108.299,
+              686.738,
+              182.617,
+              698.693
+            ],
+            [
+              108.0,
+              710.837,
+              504.002,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 384,
+          "chunk_start_char": 983,
+          "chunk_end_char": 1367,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              84.092,
+              504.003,
+              116.149
+            ],
+            [
+              108.249,
+              130.547,
+              397.307,
+              140.51
+            ]
+          ]
+        }
+      ],
+      "quote": "rl\n−→el,\nwhere ei ∈E denotes the i-th entity and ri denotes the i-th relation in the relation path z.\nExample 1. Given a relation path: z = marry to →father of, a reasoning path instance\ncould be: wz = Alice\nmarry to\n−−−−−−→Bob\nfather of\n−−−−−−→Charlie, which denotes “Alice” is married to\n“Bob” and “Bob” is the father of “Charlie”.\nKnowledge Graph Question Answering (KGQA) is a typical reasoning task based on KGs. Given\na natural language question q and a KG G, the task aims to design a function f to predict answers\na ∈Aq based on knowledge from G, i.e., a = f(q, G). Following previous works (Sun et al., 2019;\nJiang et al., 2022), we assume the entities eq ∈Tq mentioned in q and answers a ∈Aq are labeled\nand linked to the corresponding entities in G, i.e., Tq, Aq ⊆E.\n4\nAPPROACH\nIn this section, we introduce our method: reasoning on graphs (RoG), which contains two compo-\nnents: 1) a planning module that generates relation paths grounded by KGs as faithful plans; 2)\n3\n\nPublished as a conference paper at ICLR 2024\na retrieval-reasoning module that first retrieves valid reasoning paths from KGs according to the\nplans, then conducts faithful reasoning based on retrieved reasoning paths and generates answers\nwith interpretable explanations. The overall framework of RoG is illustrated in Figure 2.\n4.1\nREASONING ON GRAPHS: PLANNING-RETRIEVAL-REASONING\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8000040054321289
+        }
+      ],
+      "rerank_score": 0.18432661890983582,
+      "context_bytes": 1792
+    },
+    {
+      "chunk_id": "chunk_cfe612908773552496db582da6b6b26c",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 0,
+          "end_char": 1015,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1015,
+          "block_bboxes": [
+            [
+              69.212,
+              359.705,
+              526.149,
+              393.657
+            ],
+            [
+              69.541,
+              395.57,
+              524.41,
+              417.544
+            ],
+            [
+              70.866,
+              419.555,
+              147.369,
+              429.518
+            ],
+            [
+              70.593,
+              453.226,
+              291.045,
+              586.161
+            ],
+            [
+              70.866,
+              601.771,
+              128.645,
+              613.726
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 1: An overview of KG-GPT. The framework comprises three distinct phases: Sentence Segmentation,\nGraph Retrieval, and Inference. The given example comes from FACTKG. It involves a 2-hop inference from\n‘William_Anders’ to ‘Frank_Borman’, requiring verification through an evidence graph consisting of three triples.\nBoth ‘William_Anders’ and ‘Frank_Borman’ serve as internal nodes in DBpedia (Lehmann et al., 2015), while\n“AFIT, M.S. 1962” acts as a leaf node. Moreover, artificial satellite represents the Type information absent from the\nprovided entity set.\nvarious graph reasoning patterns, and KG-GPT\nshows competitive performance compared to other\nfully-supervised models, even outperforming some.\nIn KGQA, we use MetaQA (Zhang et al., 2018), a\nQA dataset composed of 1-hop, 2-hop, and 3-hop\ninference tasks. KG-GPT shows performance com-\nparable to fully-supervised models. Notably, the\nperformance does not significantly decline with the\nincrease in the number of hops, demonstrating its\nrobustness.\n2\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.376431465148926
+        }
+      ],
+      "rerank_score": 0.18097352981567383,
+      "context_bytes": 1401
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 36,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 14.144518400018569,
+      "inference_seconds": 0.9247122000087984,
+      "elapsed_seconds": 0.9296295999665745,
+      "peak_cuda_memory_bytes": 1194297344,
+      "request_count": 99,
+      "batch_size": 4
+    },
+    "evidence_count": 10,
+    "context_bytes": 16850,
+    "evidence_bytes": 16850,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 16103,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ]
+      },
+      {
+        "name": "KG-GPT",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "requested_names": [
+          "KG-GPT"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ],
+        "eligible_candidate_count": 11,
+        "selected_chunk_ids": [
+          "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+          "chunk_337b776419fe0d299cd973609da26513",
+          "chunk_f1d7104112d7a03c0f65e063819b90cd"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "KG-GPT",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "requested_names": [
+          "KG-GPT"
+        ],
+        "eligible_candidate_count": 18,
+        "selected_chunk_ids": [
+          "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+          "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+          "chunk_45c598ca774c47ab2be0c3b734efd4de",
+          "chunk_61e96cb10e247f7d002b4163920cc737",
+          "chunk_3f7eb65828761447433c66c28ad111a4",
+          "chunk_cfe612908773552496db582da6b6b26c"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4517,
+    "total_tokens": 4846,
+    "completion_tokens": 329,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 4517
+    },
+    "completion_tokens_details": {
+      "text_tokens": 329
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"KG-GPT 的流程由三个明确阶段构成：句子分割、图检索、推理；其中“句子分割”归 KG-GPT [E2, E4]。KG-GPT 的检索对象不是预先规划的关系路径，而是先由子句中的实体和检索到的关系得到候选证据图（子图）池：“retrieves a potential pool of relations that could bridge the entities identified within the sub-sentences. Then, a candidate pool of evidence graphs (i.e. sub-KG) is obtained using the retrieved relations and the entity set” [E4]。RoG 则采用规划—检索—推理框架：规划模块“generates relation paths grounded by KGs as faithful plans”；检索—推理模块“first retrieves valid reasoning paths from KGs according to the plans, then conducts faithful reasoning based on retrieved reasoning paths” [E9]。因此，“关系路径规划”属于 RoG 的规划模块 [E1, E9]，RoG 的检索对象是由这些计划引导出的有效推理路径 [E9]；就所提供的证据看，KG-GPT 没有对应的“关系路径规划”步骤，其检索对象是候选证据子图 [E4]。\",\"citations\":[{\"eid\":\"E2\",\"quote_id\":\"q1\"},{\"eid\":\"E4\",\"quote_id\":\"q1\"},{\"eid\":\"E4\",\"quote_id\":\"q2\"},{\"eid\":\"E9\",\"quote_id\":\"q2\"},{\"eid\":\"E1\",\"quote_id\":\"q2\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+      "score": 0.029726775956284153,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.207502841949463
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8269991874694824
+        }
+      ],
+      "rerank_score": 0.5422876477241516
+    },
+    {
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "score": 0.03200204813108039,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.597626686096191
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8183755874633789
+        }
+      ],
+      "rerank_score": 0.488504558801651
+    },
+    {
+      "chunk_id": "chunk_45c598ca774c47ab2be0c3b734efd4de",
+      "score": 0.030330882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 5.344728469848633
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8122076988220215
+        }
+      ],
+      "rerank_score": 0.3887920379638672
+    },
+    {
+      "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+      "score": 0.03007688828584351,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.4520134925842285
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8044672012329102
+        }
+      ],
+      "rerank_score": 0.3621792793273926
+    },
+    {
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8098716735839844
+        }
+      ],
+      "rerank_score": 0.28666824102401733
+    },
+    {
+      "chunk_id": "chunk_3f7eb65828761447433c66c28ad111a4",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 5.764638900756836
+        }
+      ],
+      "rerank_score": 0.28140559792518616
+    },
+    {
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7993464469909668
+        }
+      ],
+      "rerank_score": 0.23475733399391174
+    },
+    {
+      "chunk_id": "chunk_337b776419fe0d299cd973609da26513",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7961606979370117
+        }
+      ],
+      "rerank_score": 0.2278127372264862
+    },
+    {
+      "chunk_id": "chunk_f1d7104112d7a03c0f65e063819b90cd",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8000040054321289
+        }
+      ],
+      "rerank_score": 0.18432661890983582
+    },
+    {
+      "chunk_id": "chunk_cfe612908773552496db582da6b6b26c",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.376431465148926
+        }
+      ],
+      "rerank_score": 0.18097352981567383
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8121271133422852
+        }
+      ],
+      "rerank_score": 0.15791445970535278
+    },
+    {
+      "chunk_id": "chunk_87322251f12ca7f0c796684219017ccc",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 4.346787452697754
+        }
+      ],
+      "rerank_score": 0.15102779865264893
+    },
+    {
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8155961036682129
+        }
+      ],
+      "rerank_score": 0.135232076048851
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7984657287597656
+        }
+      ],
+      "rerank_score": 0.12315455079078674
+    },
+    {
+      "chunk_id": "chunk_6d513ef9de004b3c675d2c25a69d5330",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 5.630955696105957
+        }
+      ],
+      "rerank_score": 0.11757213622331619
+    },
+    {
+      "chunk_id": "chunk_5a45fb18ce3f93eefe74c3067c19a571",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 2.8600802421569824
+        }
+      ],
+      "rerank_score": 0.1127954050898552
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7994475364685059
+        }
+      ],
+      "rerank_score": 0.10856642574071884
+    },
+    {
+      "chunk_id": "chunk_2a9b056cb06c6576369baa0b5f16404c",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 2.8600802421569824
+        }
+      ],
+      "rerank_score": 0.09807931631803513
+    },
+    {
+      "chunk_id": "chunk_3e800525fc7bf8692b9503022af4d656",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 2.8600802421569824
+        }
+      ],
+      "rerank_score": 0.07224299758672714
+    },
+    {
+      "chunk_id": "chunk_813477b074abcc4657cb828fdd775b2b",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7982163429260254
+        }
+      ],
+      "rerank_score": 0.06853749603033066
+    },
+    {
+      "chunk_id": "chunk_7d9e24b10c382d84f416c7e5d421edb4",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8044514656066895
+        }
+      ],
+      "rerank_score": 0.06828854233026505
+    },
+    {
+      "chunk_id": "chunk_3aa0cdece98e31f453ae4c5546e718b8",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 4.207502841949463
+        }
+      ],
+      "rerank_score": 0.0643000528216362
+    },
+    {
+      "chunk_id": "chunk_c8372b1b00fdee8ddcf8b17d0c6a629c",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.532276153564453
+        }
+      ],
+      "rerank_score": 0.060418423265218735
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8014183044433594
+        }
+      ],
+      "rerank_score": 0.041617799550294876
+    },
+    {
+      "chunk_id": "chunk_6e78701704145ab1d3f8f732821c9f72",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 2.8600802421569824
+        }
+      ],
+      "rerank_score": 0.03416481614112854
+    },
+    {
+      "chunk_id": "chunk_07c5e4db08e2494c1b3712c0d378b9cd",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 5.189606666564941
+        }
+      ],
+      "rerank_score": 0.03191915154457092
+    },
+    {
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 4.6362762451171875
+        }
+      ],
+      "rerank_score": 0.027954399585723877
+    },
+    {
+      "chunk_id": "chunk_8ff52490cf78a4324c98eaf422d29221",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 2.883406162261963
+        }
+      ],
+      "rerank_score": 0.02748069167137146
+    },
+    {
+      "chunk_id": "chunk_cb9bf1d80ff057c49b68a51673cbf674",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 4.775867462158203
+        }
+      ],
+      "rerank_score": 0.02437659725546837
+    },
+    {
+      "chunk_id": "chunk_646e3c0392b4a7b2a255e33664c8f173",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.177886962890625
+        }
+      ],
+      "rerank_score": 0.023689469322562218
+    },
+    {
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8013405799865723
+        }
+      ],
+      "rerank_score": 0.021165618672966957
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8028640747070312
+        }
+      ],
+      "rerank_score": 0.016657039523124695
+    },
+    {
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7980279922485352
+        }
+      ],
+      "rerank_score": 0.013955709524452686
+    },
+    {
+      "chunk_id": "chunk_bfa2a30300802f424fbbabe46b4f6157",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.547876834869385
+        }
+      ],
+      "rerank_score": 0.012624948285520077
+    },
+    {
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7994599342346191
+        }
+      ],
+      "rerank_score": 0.009898064658045769
+    },
+    {
+      "chunk_id": "chunk_c5b8fc7eb09bd990a0c7d6262a0ef0da",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7984161376953125
+        }
+      ],
+      "rerank_score": 0.009412589482963085
+    }
+  ],
+  "case_id": "R18",
+  "question": "把 KG-GPT 与 RoG 从问题处理到推理的步骤分别排好：句子分割属于谁，关系路径规划属于谁，检索对象又是什么？",
+  "category": "cross",
+  "arm": "P0-SingleQuery",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0009694000473245978
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.04311119997873902
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 1.4999997802078724e-05
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9313149999943562
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.002826299984008074
+    }
+  ],
+  "retrieval_compute_seconds": 0.97823690000223,
+  "request_wall_seconds": 9.080185000027996,
+  "embedding_source": "shared frozen Q00 vector + live batch for planned subqueries",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.4523200999828987,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 5.238589900021907,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4622660999884829,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 4.261062100005802,
+      "usage": "{\"prompt_tokens\": 4517, \"total_tokens\": 4846, \"completion_tokens\": 329}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+      "score": 0.8269991874694824
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "score": 0.8183755874633789
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "score": 0.8155961036682129
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_45c598ca774c47ab2be0c3b734efd4de",
+      "score": 0.8122076988220215
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "score": 0.8121271133422852
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "score": 0.8098716735839844
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+      "score": 0.8044672012329102
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_7d9e24b10c382d84f416c7e5d421edb4",
+      "score": 0.8044514656066895
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.8028640747070312
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 0.8014183044433594
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "score": 0.8013405799865723
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_f1d7104112d7a03c0f65e063819b90cd",
+      "score": 0.8000040054321289
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 0.7994599342346191
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "score": 0.7994475364685059
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.7993464469909668
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.7984657287597656
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_c5b8fc7eb09bd990a0c7d6262a0ef0da",
+      "score": 0.7984161376953125
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_813477b074abcc4657cb828fdd775b2b",
+      "score": 0.7982163429260254
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.7980279922485352
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_337b776419fe0d299cd973609da26513",
+      "score": 0.7961606979370117
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_3f7eb65828761447433c66c28ad111a4",
+      "score": 5.764638900756836
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_6d513ef9de004b3c675d2c25a69d5330",
+      "score": 5.630955696105957
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "score": 5.597626686096191
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_bfa2a30300802f424fbbabe46b4f6157",
+      "score": 5.547876834869385
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_c8372b1b00fdee8ddcf8b17d0c6a629c",
+      "score": 5.532276153564453
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+      "score": 5.4520134925842285
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_cfe612908773552496db582da6b6b26c",
+      "score": 5.376431465148926
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_45c598ca774c47ab2be0c3b734efd4de",
+      "score": 5.344728469848633
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_07c5e4db08e2494c1b3712c0d378b9cd",
+      "score": 5.189606666564941
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_646e3c0392b4a7b2a255e33664c8f173",
+      "score": 5.177886962890625
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_cb9bf1d80ff057c49b68a51673cbf674",
+      "score": 4.775867462158203
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 4.6362762451171875
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_87322251f12ca7f0c796684219017ccc",
+      "score": 4.346787452697754
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_3aa0cdece98e31f453ae4c5546e718b8",
+      "score": 4.207502841949463
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+      "score": 4.207502841949463
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_8ff52490cf78a4324c98eaf422d29221",
+      "score": 2.883406162261963
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_6e78701704145ab1d3f8f732821c9f72",
+      "score": 2.8600802421569824
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_5a45fb18ce3f93eefe74c3067c19a571",
+      "score": 2.8600802421569824
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_2a9b056cb06c6576369baa0b5f16404c",
+      "score": 2.8600802421569824
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_3e800525fc7bf8692b9503022af4d656",
+      "score": 2.8600802421569824
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R18.C01",
+      "requirement": "KG-GPT 顺序为句子分割、图检索、推理。",
+      "selected_matches_by_unit": {
+        "kggpt": [
+          "chunk_61e96cb10e247f7d002b4163920cc737"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R18.C02",
+      "requirement": "KG-GPT 检索相关图组件。",
+      "selected_matches_by_unit": {
+        "kggpt": [
+          "chunk_61e96cb10e247f7d002b4163920cc737"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R18.C03",
+      "requirement": "RoG 顺序为规划、检索、推理。",
+      "selected_matches_by_unit": {
+        "rog": []
+      },
+      "missing_units": [
+        "rog"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R18.C04",
+      "requirement": "RoG 用关系路径计划检索有效推理路径。",
+      "selected_matches_by_unit": {
+        "rog": []
+      },
+      "missing_units": [
+        "rog"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 0.25,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/e1e8e388-0629-481b-bda2-6adb6244c32e?poll=true"
+}

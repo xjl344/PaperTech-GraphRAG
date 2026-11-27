@@ -1,0 +1,663 @@
+{
+  "id": "7927c0dc-e2f4-5cfd-aaaa-903219e89fba",
+  "inputs": {
+    "question": "G-Retriever、Tree-of-Traversals、CuriousLLM 分别怎样处理上下文过大、搜索空间过大和证据缺口？这些机制是否足以给出统一速度排名？"
+  },
+  "outputs": {
+    "expected_answer": "G-Retriever 选择相关子图控制大图上下文；Tree-of-Traversals 限制搜索深度和扩展数；CuriousLLM 用追问查缺或用特殊 token 表示证据充分。不同控制对象不能代替相同条件下的速度实测。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "grscale",
+        "answer_point": "整图文本化会超过上下文窗口，直接截断丢信息；G-Retriever 选择相关子图以扩展到大图。",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "primary_chunk": "chunk_5c9e14854565607ec53c355da481c451",
+        "pages": [
+          2,
+          3
+        ],
+        "known_support_chunks": [
+          "chunk_5c9e14854565607ec53c355da481c451"
+        ]
+      },
+      {
+        "unit_id": "totbound",
+        "answer_point": "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+        "primary_chunk": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+        "pages": [
+          4,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ]
+      },
+      {
+        "unit_id": "curious",
+        "answer_point": "CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。作者明确将 CuriousLLM 描述为针对 KGP 的增强；其成本/幻觉评价归属于作者报告。",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "primary_chunk": "chunk_43145c0748762d6b4c650c65721f826f",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      }
+    ],
+    "relation_outline": "整图文本化会超过上下文窗口，直接截断丢信息；G-Retriever 选择相关子图以扩展到大图。；Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。；CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。作者明确将 CuriousLLM 描述为针对 KGP 的增强；其成本/幻觉评价归属于作者报告。",
+    "must_not_claim": "不能从机制差异直接推出统一条件下速度或 Token 优势。",
+    "case_id": "R21",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "grscale",
+        "required_fact": "整图文本化会超过上下文窗口，直接截断丢信息；G-Retriever 选择相关子图以扩展到大图。",
+        "primary_chunk": "chunk_5c9e14854565607ec53c355da481c451",
+        "supporting_chunks": [
+          "chunk_5c9e14854565607ec53c355da481c451"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "totbound",
+        "required_fact": "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。",
+        "primary_chunk": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+        "supporting_chunks": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "curious",
+        "required_fact": "CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。作者明确将 CuriousLLM 描述为针对 KGP 的增强；其成本/幻觉评价归属于作者报告。",
+        "primary_chunk": "chunk_43145c0748762d6b4c650c65721f826f",
+        "supporting_chunks": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_5c9e14854565607ec53c355da481c451",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+        "page_start": 2,
+        "page_end": 3,
+        "source_spans": [
+          {
+            "pdf_page": 2,
+            "start_char": 5377,
+            "end_char": 6545,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1168,
+            "block_bboxes": [
+              [
+                108.0,
+                586.878,
+                505.247,
+                673.291
+              ],
+              [
+                107.671,
+                679.55,
+                504.666,
+                722.414
+              ],
+              [
+                303.509,
+                742.332,
+                308.49,
+                752.295
+              ]
+            ]
+          },
+          {
+            "pdf_page": 3,
+            "start_char": 0,
+            "end_char": 302,
+            "chunk_start_char": 1169,
+            "chunk_end_char": 1471,
+            "block_bboxes": [
+              [
+                168.567,
+                79.054,
+                443.126,
+                89.017
+              ],
+              [
+                115.77,
+                114.927,
+                128.937,
+                121.901
+              ],
+              [
+                249.671,
+                108.103,
+                269.888,
+                112.519
+              ],
+              [
+                254.373,
+                133.834,
+                265.179,
+                138.25
+              ],
+              [
+                253.452,
+                120.655,
+                299.773,
+                127.581
+              ],
+              [
+                276.078,
+                115.32,
+                279.876,
+                119.736
+              ],
+              [
+                275.608,
+                135.402,
+                324.86,
+                141.388
+              ],
+              [
+                307.236,
+                120.968,
+                330.932,
+                125.385
+              ],
+              [
+                309.393,
+                108.103,
+                327.516,
+                112.519
+              ],
+              [
+                240.86,
+                148.186,
+                489.169,
+                163.13
+              ],
+              [
+                115.77,
+                201.212,
+                202.238,
+                208.186
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "17e686ca305ed342a6e4b876ac96da8f37e68e06319f70c04017865cd2c65d1a",
+        "section": "Introduction",
+        "text": "Enhancing Scalability and Efficiency in Graph LLMs. Recent research endeavors have explored\ntranslating graphs into natural language, such as by flattening nodes and edges into a text sequence,\nenabling their processing by LLMs for graph-based tasks [56, 6]. However, this method faces critical\nscalability issues. Converting a graph with thousands of nodes and edges into a text sequence results\nin an excessive number of tokens, surpassing the input capacity of many LLMs. An alternative of\ntruncating the graph text sequence to fit the LLM’s input token limit leads to loss of information and\nresponse quality. G-Retriever overcomes these issues with its RAG component, which allows for\neffective scaling to larger graphs by selectively retrieving only relevant parts of the graph.\nTailoring the RAG Approach to Graphs. Existing RAG methodologies are primarily designed\nfor simpler data types or knowledge graphs, where information is retrieved in a manner isolated\nfrom the graph structure [7, 1, 36, 16]. Hence, we introduce a new retrieval approach for general\ntextual graphs. Notably, we formulate subgraph retrieval as a Prize-Collecting Steiner Tree (PCST)\n2\n\nTable 1: Observation and mitigation of hallucination in graph LLMs.\nUser\nelephants\ngrass\neating\nbushes\nin\nriver\non the side of\nstanding by\nelephant\nWhat kind of animal is in the bushes?\nAnswer the question and list the nodes or edges from the graph that support your answer.\nLLM w/ Graph Prompt Tuning\n"
+      },
+      {
+        "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+        "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+        "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 780,
+            "end_char": 2398,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1618,
+            "block_bboxes": [
+              [
+                70.473,
+                323.184,
+                290.949,
+                496.704
+              ],
+              [
+                70.473,
+                505.386,
+                290.941,
+                773.66
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "70266d38c335a6ca984d5b5b81a31f2c5f7ade5b5871491a9ac2638168c7f6fe",
+        "section": "3. Development of a new dataset to test com-",
+        "text": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n"
+      },
+      {
+        "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 252,
+            "end_char": 1774,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1522,
+            "block_bboxes": [
+              [
+                157.758,
+                221.69,
+                202.243,
+                233.645
+              ],
+              [
+                87.376,
+                245.034,
+                274.616,
+                649.442
+              ],
+              [
+                70.866,
+                661.499,
+                153.68,
+                673.454
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "393207f537cdc33090753f17ca82a444afdecce4c34ccf9f7a8d64e72b8b6e00",
+        "section": "Abstract",
+        "text": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "paper_e2cb804d3936bd9c7f81e9d138aa8738"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "覆盖每个必要事实并逐条引用其来源原文。",
+      "semantics": "核对关系方向、实体角色、训练/测试角色、数据集设置和指标。",
+      "synthesis": "区分论文直接主张与跨来源分析；共享实体不自动构成因果或方法继承。",
+      "uncertainty": "来源没有说明的条件须标为未知，不可补造。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution.",
+      "retrieval_only": true,
+      "negative_policy": "negative questions excluded from retrieval recall aggregates; source diagnostics shown only, no rejection accuracy",
+      "failure_attribution": "post-hoc frozen source-pool ID diagnostics; not independent semantic correctness"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索对照；无模型答案、无答案准确率",
+      "controls": {
+        "arms": [
+          "Dense-only",
+          "Graph-only",
+          "Hybrid"
+        ],
+        "candidate_max": 40,
+        "dense_only_top": 40,
+        "hybrid_fulltext_top": 20,
+        "hybrid_dense_top": 20,
+        "graph_candidate_max": 40,
+        "graph_hops": 2,
+        "graph_paths_max": 40,
+        "graph_seed_entities_max": 40,
+        "graph_per_node": 8,
+        "graph_seed_chunks": 0,
+        "graph_text_fallback": false,
+        "graph_source_rank_hint": false,
+        "evidence_max": 8,
+        "evidence_budget_bytes": 6000,
+        "path_prompt_bytes": 0,
+        "reranker": "same GPU FP16 model; threshold 0.05; max_pair_tokens 1024",
+        "candidate_note": "same total cap, not forced equal returned counts; Hybrid has two channels of 20",
+        "order": "rotate three arms by case index",
+        "generation_requests_max": 0
+      },
+      "models": {
+        "generation": "DeepSeek-V4-Flash (configured provider)",
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)"
+      }
+    },
+    "result_display": {
+      "location": "Dense-only / Graph-only / Hybrid 三组 Experiment",
+      "fields": [
+        "全部候选原文及分数",
+        "最终证据与位置",
+        "实体/路径/截断",
+        "逐事实失败归因",
+        "三组差异",
+        "时延与上下文字节",
+        "零生成与Token未报告说明",
+        "原始Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "assessment": {
+      "axis": "三种资源与缺口控制",
+      "criteria": [
+        {
+          "id": "R21.C01",
+          "requirement": "G-Retriever 通过选择相关子图处理上下文容量问题。",
+          "unit_ids": [
+            "grscale"
+          ],
+          "supporting_chunks_by_unit": {
+            "grscale": [
+              "chunk_5c9e14854565607ec53c355da481c451"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R21.C02",
+          "requirement": "Tree-of-Traversals 使用深度和扩展数搜索边界。",
+          "unit_ids": [
+            "totbound"
+          ],
+          "supporting_chunks_by_unit": {
+            "totbound": [
+              "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R21.C03",
+          "requirement": "CuriousLLM 用追问或特殊 token 处理证据缺口。",
+          "unit_ids": [
+            "curious"
+          ],
+          "supporting_chunks_by_unit": {
+            "curious": [
+              "chunk_43145c0748762d6b4c650c65721f826f"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R21.C04",
+          "requirement": "不同控制对象不能直接推出统一速度或 Token 排名。",
+          "unit_ids": [
+            "grscale",
+            "totbound",
+            "curious"
+          ],
+          "supporting_chunks_by_unit": {
+            "grscale": [
+              "chunk_5c9e14854565607ec53c355da481c451"
+            ],
+            "totbound": [
+              "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+            ],
+            "curious": [
+              "chunk_43145c0748762d6b4c650c65721f826f"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        }
+      ],
+      "max_score": 4,
+      "focus_predicates": [
+        "BOUNDED_BY",
+        "CONNECTS",
+        "ENHANCES",
+        "FORMULATES_AS",
+        "GENERATES",
+        "HAS_STOP_CONDITION",
+        "HAS_TARGET",
+        "RETURNS",
+        "SELECTS",
+        "USES_INPUT"
+      ],
+      "reference_path_scope": "本题各来源单元的预期子图；可能是多条分支或互不相连的跨论文子图。",
+      "critical_error_rule": "触发全局 critical_errors 时本题不判全对，并保留逐项分数与错误说明。",
+      "reviewer_status": "not_reviewed",
+      "model_result_status": "not_run"
+    },
+    "expected_graph_paths": {
+      "grscale": [
+        {
+          "unit_id": "grscale",
+          "path_id": "grscale.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "G-Retriever"
+            },
+            {
+              "type": "Optimization",
+              "name": "Prize-Collecting Steiner Tree"
+            },
+            {
+              "type": "GraphComponent",
+              "name": "relevant subgraph"
+            },
+            {
+              "type": "Component",
+              "name": "bounded LLM context"
+            }
+          ],
+          "claim_ids": [
+            "eb612a86bd22077763f4da3bdf61881bb8292020837a36a502dce73e4cd3ee20",
+            "c72e3f6e63da1bb718f39530de6ea069d2ad24f0574b08adb0c8acc92544cd61",
+            "9c59c8f280da7e204c49f016afa9fa6e970c3a7d9f8848c4e1a5bc265416c2bf"
+          ]
+        }
+      ],
+      "totbound": [
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "StopCondition",
+              "name": "node value exceeds answer threshold"
+            },
+            {
+              "type": "Outcome",
+              "name": "answer found"
+            }
+          ],
+          "claim_ids": [
+            "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+            "5776cc65d611e52235603c31a6e344d51fb734d134a30426bf69ab19ce4664e5"
+          ]
+        },
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "Parameter",
+              "name": "max depth"
+            },
+            {
+              "type": "Outcome",
+              "name": "forced transition to done"
+            }
+          ],
+          "claim_ids": [
+            "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+            "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4"
+          ]
+        },
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "Parameter",
+              "name": "max expansions"
+            },
+            {
+              "type": "Outcome",
+              "name": "Cannot find answer"
+            }
+          ],
+          "claim_ids": [
+            "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+            "ee17bfade2a238131cfcdf686479ace5265a9e6f185f724503181b7eddf5dcaf"
+          ]
+        }
+      ],
+      "curious": [
+        {
+          "unit_id": "curious",
+          "path_id": "curious.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "CuriousLLM"
+            },
+            {
+              "type": "Method",
+              "name": "KGP"
+            }
+          ],
+          "claim_ids": [
+            "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae"
+          ]
+        },
+        {
+          "unit_id": "curious",
+          "path_id": "curious.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "CuriousLLM"
+            },
+            {
+              "type": "EvidenceSignal",
+              "name": "follow-up question"
+            },
+            {
+              "type": "Component",
+              "name": "question and evidence"
+            }
+          ],
+          "claim_ids": [
+            "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+            "58c5de15bb15316dff97a52051193487b9a8269606ee902d123a90d6e5b02f0c"
+          ]
+        },
+        {
+          "unit_id": "curious",
+          "path_id": "curious.P03",
+          "nodes": [
+            {
+              "type": "EvidenceSignal",
+              "name": "follow-up question"
+            },
+            {
+              "type": "Component",
+              "name": "next question"
+            }
+          ],
+          "claim_ids": [
+            "90d8884b3f58f99ab73a0310c76e68c68677de7268a466e48c6ec95c344e80cf"
+          ]
+        },
+        {
+          "unit_id": "curious",
+          "path_id": "curious.P04",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "CuriousLLM"
+            },
+            {
+              "type": "EvidenceSignal",
+              "name": "evidence-sufficient special token"
+            }
+          ],
+          "claim_ids": [
+            "5b6c894f09bc96f8ff29da027764b48c7973f7aa95ba0623326eab1789d6c39c"
+          ]
+        }
+      ]
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    }
+  },
+  "metadata": {
+    "case_id": "R21",
+    "category": "cross",
+    "benchmark": "benchmark-retrieval-v1",
+    "benchmark_sha256": "6c63c43ed90c397abc19e07eef6b8ff64c150e384070ac759d52db7fbdeb625c",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

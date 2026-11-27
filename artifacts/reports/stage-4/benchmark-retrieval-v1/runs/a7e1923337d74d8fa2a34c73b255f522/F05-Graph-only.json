@@ -1,0 +1,883 @@
+{
+  "request_id": "d3e1565d-c368-4af6-af70-f955f9212671",
+  "question": "KGP 的文档图怎样定义节点和边？LLM 图遍历代理负责收集什么？请区分图结构与代理动作。",
+  "status": "evidence_only",
+  "errors": [],
+  "ranked": [
+    {
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.8781053423881531
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.2867681086063385
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 310,
+          "end_char": 1851,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1541,
+          "block_bboxes": [
+            [
+              154.715,
+              218.316,
+              191.786,
+              228.279
+            ],
+            [
+              63.963,
+              235.864,
+              282.537,
+              493.897
+            ],
+            [
+              54.0,
+              509.791,
+              292.505,
+              677.594
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.8781053423881531,
+      "context_bytes": 1896
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.2867681086063385,
+      "context_bytes": 1908
+    }
+  ],
+  "graph_paths": [
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "7a8f6a1dc43aca90db705c4ccd7ea562b3d6616de599862afe9659bb0cb1e775",
+          "name": "LLM graph traversal agent",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_AGENT",
+          "claim_id": "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+          "subject": "KGP",
+          "object": "LLM graph traversal agent"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "USES_AGENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "46a5e58ba1d557b058aff256236403d4d941e23f3603d3dab39a4947d9bf484a",
+          "name": "document knowledge graph",
+          "type": "GraphRepresentation"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_GRAPH_REPRESENTATION",
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "subject": "KGP",
+          "object": "document knowledge graph"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_GRAPH_REPRESENTATION"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ENHANCES",
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "subject": "CuriousLLM",
+          "object": "KGP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "ENHANCES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "7a8f6a1dc43aca90db705c4ccd7ea562b3d6616de599862afe9659bb0cb1e775",
+          "name": "LLM graph traversal agent",
+          "type": "Component"
+        },
+        {
+          "id": "bc1bc1270cf06253cf5721174e903b84bb07616a7a065571e6c7450f13bf292c",
+          "name": "supporting passages",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_AGENT",
+          "claim_id": "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+          "subject": "KGP",
+          "object": "LLM graph traversal agent"
+        },
+        {
+          "predicate": "COLLECTS",
+          "claim_id": "5b83b7227eb362c7813c6c2eaec2395b28c4b2f2057ed4eb12387f55490367fb",
+          "subject": "LLM graph traversal agent",
+          "object": "supporting passages"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "USES_AGENT"
+        },
+        {
+          "claim_id": "5b83b7227eb362c7813c6c2eaec2395b28c4b2f2057ed4eb12387f55490367fb",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "COLLECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "46a5e58ba1d557b058aff256236403d4d941e23f3603d3dab39a4947d9bf484a",
+          "name": "document knowledge graph",
+          "type": "GraphRepresentation"
+        },
+        {
+          "id": "8bce227ab49f2317ed3f05fb3e88aea18abc1b4b8387207297a00ea1c4d31b61",
+          "name": "document structure",
+          "type": "NodeType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_GRAPH_REPRESENTATION",
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "subject": "KGP",
+          "object": "document knowledge graph"
+        },
+        {
+          "predicate": "HAS_NODE_TYPE",
+          "claim_id": "1e3957d6e1180c018346c68fe2539a2672cb9050c21e505f439850d189ce6350",
+          "subject": "document knowledge graph",
+          "object": "document structure"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_GRAPH_REPRESENTATION"
+        },
+        {
+          "claim_id": "1e3957d6e1180c018346c68fe2539a2672cb9050c21e505f439850d189ce6350",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_NODE_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "46a5e58ba1d557b058aff256236403d4d941e23f3603d3dab39a4947d9bf484a",
+          "name": "document knowledge graph",
+          "type": "GraphRepresentation"
+        },
+        {
+          "id": "f52544cf3655b8b79a4bf4164d1abdb5f8496211c993abccd628aeadc7b2507a",
+          "name": "intra-document structure",
+          "type": "EdgeType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_GRAPH_REPRESENTATION",
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "subject": "KGP",
+          "object": "document knowledge graph"
+        },
+        {
+          "predicate": "HAS_EDGE_TYPE",
+          "claim_id": "2b82744a57f83f7c8ec618da410cd5c6666e804df78bcf15249b6cb7196fa356",
+          "subject": "document knowledge graph",
+          "object": "intra-document structure"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_GRAPH_REPRESENTATION"
+        },
+        {
+          "claim_id": "2b82744a57f83f7c8ec618da410cd5c6666e804df78bcf15249b6cb7196fa356",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_EDGE_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "46a5e58ba1d557b058aff256236403d4d941e23f3603d3dab39a4947d9bf484a",
+          "name": "document knowledge graph",
+          "type": "GraphRepresentation"
+        },
+        {
+          "id": "e53e4aa458570223e6756e275867d5988a02912a3f3ffbe8e14e6bddf7075782",
+          "name": "lexical or semantic similarity",
+          "type": "EdgeType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_GRAPH_REPRESENTATION",
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "subject": "KGP",
+          "object": "document knowledge graph"
+        },
+        {
+          "predicate": "HAS_EDGE_TYPE",
+          "claim_id": "6907499f10078dae84bea86a35d8cf49d88827d0e6797631d8c127508e0ed51d",
+          "subject": "document knowledge graph",
+          "object": "lexical or semantic similarity"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_GRAPH_REPRESENTATION"
+        },
+        {
+          "claim_id": "6907499f10078dae84bea86a35d8cf49d88827d0e6797631d8c127508e0ed51d",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_EDGE_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "46a5e58ba1d557b058aff256236403d4d941e23f3603d3dab39a4947d9bf484a",
+          "name": "document knowledge graph",
+          "type": "GraphRepresentation"
+        },
+        {
+          "id": "d7447fd9352e85daae19c67b5993ea7e9a3fc152d4f4cecd04b2d6f349af234a",
+          "name": "passage",
+          "type": "NodeType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_GRAPH_REPRESENTATION",
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "subject": "KGP",
+          "object": "document knowledge graph"
+        },
+        {
+          "predicate": "HAS_NODE_TYPE",
+          "claim_id": "eb5171accf1be44d16790280d8bd57cdd379fa7597d3523f320aac52ad59cb71",
+          "subject": "document knowledge graph",
+          "object": "passage"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_GRAPH_REPRESENTATION"
+        },
+        {
+          "claim_id": "eb5171accf1be44d16790280d8bd57cdd379fa7597d3523f320aac52ad59cb71",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_NODE_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method"
+        },
+        {
+          "id": "cf0685de9fbd033e3f0f0da445c23726226f3796d80713e08e6c53944d0c39f1",
+          "name": "follow-up question",
+          "type": "EvidenceSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ENHANCES",
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "subject": "CuriousLLM",
+          "object": "KGP"
+        },
+        {
+          "predicate": "GENERATES",
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "subject": "CuriousLLM",
+          "object": "follow-up question"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "ENHANCES"
+        },
+        {
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "GENERATES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        },
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method"
+        },
+        {
+          "id": "b342601a4816f4dbf53effb174966e4c0f97821212b18ec1b6330c2f6f3dfba2",
+          "name": "evidence-sufficient special token",
+          "type": "EvidenceSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ENHANCES",
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "subject": "CuriousLLM",
+          "object": "KGP"
+        },
+        {
+          "predicate": "GENERATES",
+          "claim_id": "5b6c894f09bc96f8ff29da027764b48c7973f7aa95ba0623326eab1789d6c39c",
+          "subject": "CuriousLLM",
+          "object": "evidence-sufficient special token"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "ENHANCES"
+        },
+        {
+          "claim_id": "5b6c894f09bc96f8ff29da027764b48c7973f7aa95ba0623326eab1789d6c39c",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "GENERATES"
+        }
+      ]
+    }
+  ],
+  "candidate_channels": {
+    "graph": [
+      {
+        "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+        "score": 1.0
+      },
+      {
+        "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+        "score": 0.5
+      }
+    ]
+  },
+  "retrieval_summary": {
+    "arm": "Graph-only",
+    "candidate_count": 2,
+    "graph_audit": {
+      "backend": "isolated_sqlite",
+      "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "anchors": [
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method",
+          "canonical": "kgp"
+        }
+      ],
+      "seed_count": 1,
+      "max_hops": 2,
+      "max_paths": 40,
+      "per_node": 8,
+      "deadline_seconds": 10,
+      "degree_truncated": [],
+      "reference_tables_access": "denied by SQLite authorizer",
+      "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+      "returned_paths": 10,
+      "expanded_nodes": 4,
+      "elapsed_seconds": 0.009002599999803351
+    },
+    "fulltext_hits": 0,
+    "dense_hits": 0,
+    "graph_hits": 2,
+    "text_seed_count": 0,
+    "graph_fallback": false,
+    "path_prompt_bytes": 0,
+    "candidate_cap": 40,
+    "query_embedding_used": false,
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 5.9052834999997685,
+      "inference_seconds": 0.2753268000001299,
+      "elapsed_seconds": 0.2763217000001532,
+      "peak_cuda_memory_bytes": 1154529792,
+      "request_count": 14
+    },
+    "context_bytes": 3804,
+    "evidence_bytes": 3804,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 3681,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "source_coverage": [],
+    "limitations": []
+  },
+  "case_id": "F05",
+  "category": "fact",
+  "arm": "Graph-only",
+  "order": 1,
+  "started": "2026-11-21T05:04:17.757354+00:00",
+  "finished": "2026-11-21T05:04:22.362778+00:00",
+  "generate_requested": false,
+  "answer": "本轮仅检索，不生成答案。",
+  "citations": [],
+  "generation_paths": [],
+  "usage": null,
+  "usage_status": "generation_not_run; embedding_usage_shared_if_reported; reranker_tokens_not_reported",
+  "provider_calls": [],
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.00029219999987617484
+    },
+    {
+      "name": "candidate_retrieval",
+      "seconds": 0.016365800000130548
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.2769615000001977
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0005602000001090346
+    }
+  ],
+  "model_name": null,
+  "retrieval_compute_seconds": 0.29417970000031346,
+  "request_wall_seconds": 3.0966323000002376,
+  "embedding_source": "none",
+  "execution_config": {
+    "controls": {
+      "arms": [
+        "Dense-only",
+        "Graph-only",
+        "Hybrid"
+      ],
+      "candidate_max": 40,
+      "dense_only_top": 40,
+      "hybrid_fulltext_top": 20,
+      "hybrid_dense_top": 20,
+      "graph_candidate_max": 40,
+      "graph_hops": 2,
+      "graph_paths_max": 40,
+      "graph_seed_entities_max": 40,
+      "graph_per_node": 8,
+      "graph_seed_chunks": 0,
+      "graph_text_fallback": false,
+      "graph_source_rank_hint": false,
+      "evidence_max": 8,
+      "evidence_budget_bytes": 6000,
+      "path_prompt_bytes": 0,
+      "reranker": "same GPU FP16 model; threshold 0.05; max_pair_tokens 1024",
+      "candidate_note": "same total cap, not forced equal returned counts; Hybrid has two channels of 20",
+      "order": "rotate three arms by case index",
+      "generation_requests_max": 0
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    },
+    "code_sha256": {
+      "src/papertech/retrieval_comparison.py": "b38068e047b6de6fcbe0ff6a12cebb23709270c79ae125955d25c86e39734197",
+      "scripts/eval-stage4.py": "fb34f1aae4be58e821d88e5a045ca6ddd5558bf15c40a02fbacad63ed144204a",
+      "src/papertech/graph_store.py": "6ccf136fbdf71cd2efa3addafbf474097545b04d7de8f302e539877716a9f92f",
+      "src/papertech/isolated_graph.py": "039d27009ec94003cfc6f25024ae2015ab7c12b27f9f7cfe5dc21979f1c41586",
+      "src/papertech/workflow.py": "6fe7b530e355f19886c34bd61c98046b6cd10598b74f94220dae63d64130964a",
+      "src/papertech/retrieval.py": "ef2480079acc98095c86394ce6ae5bf894a7034a47d0d394cf584f871e41ae65",
+      "src/papertech/entity_aliases.py": "2725c08d7ca72f46c3bf7adbb3207eb75331f963a1998826bc6397e375699ea6",
+      "src/papertech/evidence_context.py": "b9bfe29885ffe4b82086a78572ffe4d031d3de9c497b0681aa732525a46f89f6",
+      "src/papertech/evaluation.py": "cb3714275490177d79bf755ef156e14f485748dbea590a95b54ab769fde96e31",
+      "src/papertech/evaluation_details.py": "3144dd71ddaeb869f157521a877ac26b27631d81ebee09beb9e3f25138446b4f",
+      "src/papertech/evaluation_datasets.py": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+      "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+      "src/papertech/local_models.py": "62f465e7615a7208a8f4bfda6c9f4b545843e3115ef91768d47f5a7e787edddb",
+      "src/papertech/rerank_service.py": "156293246350d8b4a8c7bd23d45edb26f471d1bfe690480412edcf942617d693",
+      "scripts/rerank-service.py": "562927f8ebd62834e8aca53ae55a436eac4d82f39b66e1ad92b017f1b73facf5"
+    },
+    "models": {
+      "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+      "CLOUD_BGE_PROVIDER": "cloudflare",
+      "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+      "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+      "LOCAL_RERANKER_DEVICE": "cuda",
+      "LOCAL_RERANKER_DTYPE": "float16",
+      "LOCAL_RERANKER_PERSISTENT": "true"
+    },
+    "endpoints": {
+      "CLOUD_BGE_BASE_URL": "73dd98c51038dadb140c44d42e350a9ae3c52013d53336b34e055aa1bf12087d",
+      "NEO4J_URI": "b1d4217b5d8c41b8b641a146d7facd744b01a415fe2ac0d943188a78e5f007f0"
+    },
+    "latency": "retrieval compute excludes shared embedding batch, GPU warmup, audit/trace network; request wall includes tracing",
+    "generation": false,
+    "reference_exclusion": "only question/arm/query-vector passed to retrieval; scoring after evidence selection"
+  },
+  "metrics": {
+    "recall5": 1.0,
+    "recall8": 1.0,
+    "mrr40": 1.0,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "source_metrics": {
+    "required_paper_coverage": 1.0,
+    "all_required_papers": true
+  },
+  "diagnosis": {
+    "facts": [
+      {
+        "unit_id": "kgp",
+        "required_fact": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+        "reason": "covered",
+        "explanation": "支持池来源已进入上下文",
+        "selected_matches": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ],
+        "ranked_matches": [
+          {
+            "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+            "rank": 1,
+            "rerank_score": 0.8781053423881531
+          }
+        ],
+        "known_support_chunks": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ],
+        "graph_global_matches": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ],
+        "graph_two_hop_matches": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ]
+      }
+    ],
+    "reason_counts": {
+      "covered": 1
+    },
+    "outcome": "all_sources_covered",
+    "note": "事后支持池定位，不是答案语义评分；未命中非穷尽支持池不能证明全部有效原文缺失。"
+  },
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "F05.C01",
+      "requirement": "节点可以是段落，也可以是页面、表格等文档结构。",
+      "selected_matches_by_unit": {
+        "kgp": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "F05.C02",
+      "requirement": "边可以表示语义/词法相似，也可以表示文档结构关系。",
+      "selected_matches_by_unit": {
+        "kgp": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "F05.C03",
+      "requirement": "遍历代理导航并收集支持段落。",
+      "selected_matches_by_unit": {
+        "kgp": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "stage_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.30479079999986425,
+      "status": "ok"
+    },
+    {
+      "name": "candidate_retrieval",
+      "seconds": 0.32362200000034136,
+      "status": "ok"
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.5730289000002813,
+      "status": "ok"
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.3025484999998298,
+      "status": "ok"
+    }
+  ],
+  "trace_id": "2a6d9cec-a12f-4ca1-a70a-bd8f2e10e031",
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/2a6d9cec-a12f-4ca1-a70a-bd8f2e10e031?poll=true"
+}

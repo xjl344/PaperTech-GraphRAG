@@ -1,0 +1,3184 @@
+{
+  "request_id": "ea81b4a0-bca4-44d8-99ba-4b698a96ce7b",
+  "answer": "HippoRAG 先用 LLM 将语料转换为无模式知识图谱（KG），作为人工海马索引 [E2:q2]。给定新查询时，它识别查询中的关键概念，并以这些查询概念为种子在 KG 上运行个性化 PageRank（PPR）算法，从而整合跨段落信息以用于检索 [E2:q2]。PPR 使 HippoRAG 能够探索 KG 路径并识别相关子图，本质上是在单次检索步骤中完成多跳推理 [E2:q2]。该设计能让 HippoRAG 单步完成多跳检索，从而在 All-Recall 指标上取得提升 [E4:q1]。不过，PPR 在多篇主题高度相似的段落共存时也可能难以找到合适子图，因为它无法直接利用查询上下文 [E3:q1]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1574,
+          "end_char": 2946,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1372,
+          "block_bboxes": [
+            [
+              108.0,
+              472.448,
+              504.004,
+              547.812
+            ],
+            [
+              107.671,
+              554.313,
+              504.351,
+              640.564
+            ]
+          ]
+        }
+      ],
+      "quote": "process perceptual input by using an LLM to transform a corpus into a schemaless knowledge graph\n(KG) as our artificial hippocampal index. Given a new query, HippoRAG identifies the key concepts\nin the query and runs the Personalized PageRank (PPR) algorithm [30] on the KG, using the query\nconcepts as the seeds, to integrate information across passages for retrieval. PPR enables HippoRAG\nto explore KG paths and identify relevant subgraphs, essentially performing multi-hop reasoning in a\nsingle retrieval step.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 5.911823272705078
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7775850296020508
+        },
+        {
+          "channel": "method_card",
+          "rank": 1,
+          "score": 0.5931,
+          "slot": "retrieval_and_graph_mechanism"
+        }
+      ],
+      "rerank_score": 0.9019206762313843,
+      "context_bytes": 1728,
+      "eid": "E2",
+      "quote_id": "q2"
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 1441,
+          "end_char": 2496,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1055,
+          "block_bboxes": [
+            [
+              107.641,
+              286.379,
+              505.618,
+              361.871
+            ],
+            [
+              107.691,
+              375.331,
+              504.001,
+              407.16
+            ],
+            [
+              212.633,
+              418.683,
+              466.822,
+              427.65
+            ],
+            [
+              199.895,
+              433.733,
+              485.54,
+              442.699
+            ],
+            [
+              126.458,
+              448.694,
+              485.544,
+              467.83
+            ]
+          ]
+        }
+      ],
+      "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step. We demonstrate this by measuring the percentage\nof queries where all the supporting passages are retrieved successfully, a feat that can only be\naccomplished through successful multi-hop reasoning. Table 6 below shows that the gap between\nour method and ColBERTv2, using the top-5 passages, increases even more from 3% to 6% on\nMuSiQue and from 20% to 38% on 2WikiMultiHopQA, suggesting that large improvements come\nfrom obtaining all supporting documents rather than achieving partially retrieval on more questions.\nTable 6: All-Recall metric. We measure the percentage of queries for which all supporting passages\nare successfully retrieved (all-recall, denoted as AR@2 or AR@5) and find even larger performance\nimprovements for HippoRAG.\nMuSiQue\n2Wiki",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8041143417358398
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.845432698726654,
+      "context_bytes": 1434,
+      "eid": "E4",
+      "quote_id": "q1"
+    },
+    {
+      "chunk_id": "chunk_1e1584d4ca9b0e97f6b9cf0a5fc09c19",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 25,
+      "page_end": 26,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 25,
+          "start_char": 2740,
+          "end_char": 3541,
+          "chunk_start_char": 0,
+          "chunk_end_char": 801,
+          "block_bboxes": [
+            [
+              107.532,
+              625.236,
+              505.745,
+              722.407
+            ],
+            [
+              301.019,
+              742.332,
+              310.982,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 26,
+          "start_char": 0,
+          "end_char": 713,
+          "chunk_start_char": 802,
+          "chunk_end_char": 1515,
+          "block_bboxes": [
+            [
+              230.006,
+              71.199,
+              381.995,
+              81.162
+            ],
+            [
+              209.021,
+              92.684,
+              397.002,
+              101.732
+            ],
+            [
+              209.021,
+              107.726,
+              360.537,
+              136.826
+            ],
+            [
+              108.0,
+              161.115,
+              259.78,
+              171.077
+            ],
+            [
+              108.0,
+              181.105,
+              504.002,
+              245.688
+            ]
+          ]
+        }
+      ],
+      "quote": "We define the third error category as cases where both NER and OpenIE are functioning properly but\nthe PPR algorithm is still unable to identify relevant subgraphs, often due to confounding signals.\nFor instance, consider the query “How many refugees emigrated to the European country where\nHuguenots felt a kinship for emigration?”. Despite the term “Huguenots” being accurately extracted\nfrom both the question and the supporting passages, and the PPR algorithm initiating with the nodes\nlabeled “European” and “Huguenots”, the PPR algorithm struggles to find the appropriate subgraphs\naround them that define the most related passage. This occurs when multiple passages exist in the\ncorpus that discuss very similar topics since the PPR algorithm is not able to leverage query context\ndirectly.\n25\n\nTable 11: Error analysis on MuSiQue.\nError Type\nError Percentage (%)\nNER Limitation\n48",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.63815450668335
+        }
+      ],
+      "rerank_score": 0.8873999118804932,
+      "context_bytes": 1910,
+      "eid": "E3",
+      "quote_id": "q1"
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 179,
+          "end_char": 1441,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1262,
+          "block_bboxes": [
+            [
+              108.0,
+              101.594,
+              504.004,
+              177.122
+            ],
+            [
+              107.641,
+              183.38,
+              504.344,
+              248.056
+            ],
+            [
+              108.0,
+              265.266,
+              377.707,
+              275.229
+            ]
+          ]
+        }
+      ],
+      "quote": "PPR Alternatives. As shown in Table 5 (rows 5-6), to examine how much of our results are due to\nthe strength of PPR, we replace the PPR output with the query node probability #»n multiplied by node\nspecificity values (row 5) and a version of this that also distributes a small amount of probability to the\ndirect neighbors of each query node (row 6). First, we find that PPR is a much more effective method\nfor including associations for retrieval on all three datasets compared to both simple baselines. It is\ninteresting to note that adding the neighborhood of Rq nodes without PPR leads to worse performance\nthan only using the query nodes themselves.\nAblations. As seen in Table 5 (rows 7-8), node specificity obtains considerable improvements on\nMuSiQue and HotpotQA and yields almost no change in 2WikiMultiHopQA. This is likely because\n2WikiMultiHopQA relies on named entities with little differences in terms of term weighting. In\ncontrast, synonymy edges have the largest effect on 2WikiMultiHopQA, suggesting that noisy entity\nstandardization is useful when most relevant concepts are named entities, and improvements to\nsynonymy detection could lead to stronger performance in other datasets.\n5.2\nHippoRAG’s Advantage: Single-Step Multi-Hop Retrieval\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 4.369213104248047
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8140969276428223
+        }
+      ],
+      "rerank_score": 0.957912266254425,
+      "context_bytes": 1619
+    },
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1574,
+          "end_char": 2946,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1372,
+          "block_bboxes": [
+            [
+              108.0,
+              472.448,
+              504.004,
+              547.812
+            ],
+            [
+              107.671,
+              554.313,
+              504.351,
+              640.564
+            ]
+          ]
+        }
+      ],
+      "quote": "In contrast, our brains are capable of solving challenging knowledge integration tasks like these with\nrelative ease. The hippocampal memory indexing theory [75], a well-established theory of human\nlong-term memory, offers one plausible explanation for this remarkable ability. Teyler and Discenna\n[75] propose that our powerful context-based, continually updating memory relies on interactions\nbetween the neocortex, which processes and stores actual memory representations, and the C-shaped\nhippocampus, which holds the hippocampal index, a set of interconnected indices which point to\nmemory units on the neocortex and stores associations between them [19, 76].\nIn this work, we propose HippoRAG, a RAG framework that serves as a long-term memory for LLMs\nby mimicking this model of human memory. Our novel design first models the neocortex’s ability to\nprocess perceptual input by using an LLM to transform a corpus into a schemaless knowledge graph\n(KG) as our artificial hippocampal index. Given a new query, HippoRAG identifies the key concepts\nin the query and runs the Personalized PageRank (PPR) algorithm [30] on the KG, using the query\nconcepts as the seeds, to integrate information across passages for retrieval. PPR enables HippoRAG\nto explore KG paths and identify relevant subgraphs, essentially performing multi-hop reasoning in a\nsingle retrieval step.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 5.911823272705078
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7775850296020508
+        },
+        {
+          "channel": "method_card",
+          "rank": 1,
+          "score": 0.5931,
+          "slot": "retrieval_and_graph_mechanism"
+        }
+      ],
+      "rerank_score": 0.9019206762313843,
+      "context_bytes": 1728
+    },
+    {
+      "chunk_id": "chunk_1e1584d4ca9b0e97f6b9cf0a5fc09c19",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 25,
+      "page_end": 26,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 25,
+          "start_char": 2740,
+          "end_char": 3541,
+          "chunk_start_char": 0,
+          "chunk_end_char": 801,
+          "block_bboxes": [
+            [
+              107.532,
+              625.236,
+              505.745,
+              722.407
+            ],
+            [
+              301.019,
+              742.332,
+              310.982,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 26,
+          "start_char": 0,
+          "end_char": 713,
+          "chunk_start_char": 802,
+          "chunk_end_char": 1515,
+          "block_bboxes": [
+            [
+              230.006,
+              71.199,
+              381.995,
+              81.162
+            ],
+            [
+              209.021,
+              92.684,
+              397.002,
+              101.732
+            ],
+            [
+              209.021,
+              107.726,
+              360.537,
+              136.826
+            ],
+            [
+              108.0,
+              161.115,
+              259.78,
+              171.077
+            ],
+            [
+              108.0,
+              181.105,
+              504.002,
+              245.688
+            ]
+          ]
+        }
+      ],
+      "quote": "We define the third error category as cases where both NER and OpenIE are functioning properly but\nthe PPR algorithm is still unable to identify relevant subgraphs, often due to confounding signals.\nFor instance, consider the query “How many refugees emigrated to the European country where\nHuguenots felt a kinship for emigration?”. Despite the term “Huguenots” being accurately extracted\nfrom both the question and the supporting passages, and the PPR algorithm initiating with the nodes\nlabeled “European” and “Huguenots”, the PPR algorithm struggles to find the appropriate subgraphs\naround them that define the most related passage. This occurs when multiple passages exist in the\ncorpus that discuss very similar topics since the PPR algorithm is not able to leverage query context\ndirectly.\n25\n\nTable 11: Error analysis on MuSiQue.\nError Type\nError Percentage (%)\nNER Limitation\n48\nIncorrect/Missing OpenIE\n28\nPPR\n24\nF.2\nConcepts vs. Context Tradeoff\nGiven our method’s entity-centric nature in extraction and indexing, it has a strong bias towards\nconcepts that leaves many contextual signals unused. This design enables single-step multi-hop\nretrieval while also enabling contextual cues to avoid distracting from more salient entities. As seen\nin the first example in Table 12, ColBERTv2 uses the context to retrieve passages that are related to\nfamous Spanish navigators but not “Sergio Villanueva”, who is a boxer. In contrast, HippoRAG is\nable to hone in on “Sergio” and retrieve one relevant passage.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.63815450668335
+        }
+      ],
+      "rerank_score": 0.8873999118804932,
+      "context_bytes": 1910
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 1441,
+          "end_char": 2496,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1055,
+          "block_bboxes": [
+            [
+              107.641,
+              286.379,
+              505.618,
+              361.871
+            ],
+            [
+              107.691,
+              375.331,
+              504.001,
+              407.16
+            ],
+            [
+              212.633,
+              418.683,
+              466.822,
+              427.65
+            ],
+            [
+              199.895,
+              433.733,
+              485.54,
+              442.699
+            ],
+            [
+              126.458,
+              448.694,
+              485.544,
+              467.83
+            ]
+          ]
+        }
+      ],
+      "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step. We demonstrate this by measuring the percentage\nof queries where all the supporting passages are retrieved successfully, a feat that can only be\naccomplished through successful multi-hop reasoning. Table 6 below shows that the gap between\nour method and ColBERTv2, using the top-5 passages, increases even more from 3% to 6% on\nMuSiQue and from 20% to 38% on 2WikiMultiHopQA, suggesting that large improvements come\nfrom obtaining all supporting documents rather than achieving partially retrieval on more questions.\nTable 6: All-Recall metric. We measure the percentage of queries for which all supporting passages\nare successfully retrieved (all-recall, denoted as AR@2 or AR@5) and find even larger performance\nimprovements for HippoRAG.\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nAR@2\nAR@5\nAR@2\nAR@5\nAR@2\nAR@5\nAR@2\nAR@5\nColBERTv2 [70]\n6.8\n16.1\n25.1\n37.1\n33.3\n59.0\n21.7\n37.4\nHippoRAG\n10.2\n22.4\n45.4\n75.7\n33.8\n57.9\n29.8\n52.0\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8041143417358398
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.845432698726654,
+      "context_bytes": 1434
+    },
+    {
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 28,
+      "page_end": 29,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 28,
+          "start_char": 2787,
+          "end_char": 3236,
+          "chunk_start_char": 0,
+          "chunk_end_char": 449,
+          "block_bboxes": [
+            [
+              108.0,
+              671.081,
+              503.998,
+              701.514
+            ],
+            [
+              107.677,
+              701.695,
+              505.572,
+              722.166
+            ],
+            [
+              301.019,
+              742.332,
+              310.982,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 29,
+          "start_char": 0,
+          "end_char": 873,
+          "chunk_start_char": 450,
+          "chunk_end_char": 1323,
+          "block_bboxes": [
+            [
+              108.0,
+              72.787,
+              386.712,
+              84.742
+            ],
+            [
+              107.641,
+              97.445,
+              505.649,
+              194.756
+            ]
+          ]
+        }
+      ],
+      "quote": "6We use a single thread to query the OpenAI API for online retrieval in both IRCoT and HippoRAG. Since\nIRCoT is an iterative process and each of the iterations must be done sequentially, these speed comparisons are\nappropriate.\n7To speed up indexing, we use 10 threads querying gpt-3.5-turbo-1106 through the OpenAI API in parallel.\nAt the time of writing, the cost of the API is $1 for a million input tokens and $2 for a million output tokens.\n28\n\nH\nImplementation Details & Compute Requirements\nApart from the details included in §3.4, we use implementations based on PyTorch [59] and Hug-\ngingFace [86] for both Contriever [35] and ColBERTv2 [70]. We use the python-igraph [13]\nimplementation of the PPR algorithm. For BM25, we employ Elastic Search [24]. For multi-step\nretrieval, we use the same prompt implementation as IRCoT [78] and retrieve the top-10 passages at\neach step. We set the maximum number of reasoning steps to 2 for HotpotQA and 2WikiMultiHopQA\nand 4 for MuSiQue due to their maximum reasoning chain length. We combine IRCoT with different\nretrievers by replacing its base retriever BM25 with each retrieval method, including HippoRAG,\nnoted as “IRCoT + HippoRAG” below.8 For the QA reader, we use top-5 retrieved passages as the\ncontext and 1-shot QA demonstration with CoT prompting strategy [78].\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.1113409996032715
+        }
+      ],
+      "rerank_score": 0.8251674771308899,
+      "context_bytes": 1688
+    },
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3734,
+          "end_char": 3752,
+          "chunk_start_char": 0,
+          "chunk_end_char": 18,
+          "block_bboxes": [
+            [
+              417.507,
+              673.663,
+              479.563,
+              702.636
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 1522,
+          "chunk_start_char": 19,
+          "chunk_end_char": 1541,
+          "block_bboxes": [
+            [
+              108.0,
+              74.317,
+              378.066,
+              84.279
+            ],
+            [
+              107.691,
+              95.377,
+              504.004,
+              149.051
+            ],
+            [
+              107.641,
+              155.401,
+              504.004,
+              274.53
+            ],
+            [
+              108.0,
+              294.015,
+              197.09,
+              305.97
+            ]
+          ]
+        }
+      ],
+      "quote": "3. Lisa Giocomo\n8\n\n5.3\nHippoRAG’s Potential: Path-Finding Multi-Hop Retrieval\nThe second example in Table 7, also present in Figure 1, shows a type of questions that is trivial\nfor informed humans but out of reach for current retrievers without further training. This type of\nquestions, which we call path-finding multi-hop questions, requires identifying one path between a\nset of entities when many paths exist to explore instead of following a specific path, as in standard\nmulti-hop questions.5\nMore specifically, a simple iterative process can retrieve the appropriate passages for the first\nquestion by following the one path set by Alhandra’s one place of birth, as seen by IRCoT’s perfect\nperformance. However, an iterative process would struggle to answer the second question given\nthe many possible paths to explore—either through professors at Stanford University or professors\nworking on the neuroscience of Alzheimer’s. It is only by associating disparate information about\nThomas Südhof that someone who knows about this professor would be able to answer this question\neasily. As seen in Table 7, both ColBERTv2 and IRCoT fail to extract the necessary passages since\nthey cannot access these associations. On the other hand, HippoRAG leverages its web of associations\nin its hippocampal index and graph search algorithm to determine that Professor Thomas is relevant\nto this query and retrieves his passages appropriately. More examples of these path-finding multi-hop\nquestions can be found in our case study in Appendix E.\n6\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7803850173950195
+        },
+        {
+          "channel": "method_card",
+          "rank": 3,
+          "score": 0.586,
+          "slot": "key_hyperparameters_and_limits"
+        }
+      ],
+      "rerank_score": 0.777637779712677,
+      "context_bytes": 1913
+    },
+    {
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 2496,
+          "end_char": 3383,
+          "chunk_start_char": 0,
+          "chunk_end_char": 887,
+          "block_bboxes": [
+            [
+              107.532,
+              486.636,
+              504.004,
+              562.306
+            ],
+            [
+              107.691,
+              575.799,
+              504.002,
+              596.685
+            ],
+            [
+              180.904,
+              608.208,
+              444.402,
+              617.424
+            ],
+            [
+              132.438,
+              633.67,
+              168.949,
+              652.599
+            ],
+            [
+              180.904,
+              623.707,
+              221.907,
+              662.561
+            ]
+          ]
+        }
+      ],
+      "quote": "We further illustrate HippoRAG’s unique single-step multi-hop retrieval ability through the first\nexample in Table 7. In this example, even though Alhandra was not mentioned in Vila de Xira’s\npassage, HippoRAG can directly leverage Vila de Xira’s connection to Alhandra as his place of\nbirth to determine its importance, something that standard RAG methods would be unable to do\ndirectly. Additionally, even though IRCoT can also solve this multi-hop retrieval problem, as shown\nin Appendix G, it is 10-30 times more expensive and 6-13 times slower than ours in terms of online\nretrieval, arguably the most important factor when it comes to serving end users.\nTable 7: Multi-hop question types. We show example results for different approaches on path-finding\nvs. path-following multi-hop questions.\nQuestion\nHippoRAG\nColBERTv2\nIRCoT\nPath-\nFollowing\nIn which\ndistrict was\nAlhandra\nborn?\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7947773933410645
+        }
+      ],
+      "rerank_score": 0.7503699064254761,
+      "context_bytes": 1220
+    },
+    {
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2946,
+          "end_char": 3613,
+          "chunk_start_char": 0,
+          "chunk_end_char": 667,
+          "block_bboxes": [
+            [
+              107.691,
+              646.813,
+              504.356,
+              722.417
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 1012,
+          "chunk_start_char": 668,
+          "chunk_end_char": 1680,
+          "block_bboxes": [
+            [
+              108.0,
+              74.423,
+              503.997,
+              95.279
+            ],
+            [
+              108.0,
+              113.602,
+              183.736,
+              125.557
+            ],
+            [
+              108.0,
+              139.251,
+              503.997,
+              171.024
+            ],
+            [
+              108.0,
+              186.942,
+              319.715,
+              196.904
+            ],
+            [
+              107.691,
+              207.613,
+              505.247,
+              272.12
+            ]
+          ]
+        }
+      ],
+      "quote": "This capacity for single-step multi-hop retrieval yields strong performance improvements of around\n3 and 20 points over current RAG methods [10, 35, 53, 70, 71] on two popular multi-hop QA\nbenchmarks, MuSiQue [77] and 2WikiMultiHopQA [33]. Additionally, HippoRAG’s online retrieval\nprocess is 10 to 30 times cheaper and 6 to 13 times faster than current iterative retrieval methods\nlike IRCoT [78], while still achieving comparable performance. Furthermore, our approach can be\ncombined with IRCoT to provide complementary gains of up to 4% and 20% on the same datasets\nand even obtain improvements on HotpotQA, a less challenging multi-hop QA dataset. Finally, we\n2\n\nprovide a case study illustrating the limitations of current methods as well as our method’s potential\non the previously discussed path-finding multi-hop QA setting.\n2\nHippoRAG\nIn this section, we first give a brief overview of the hippocampal memory indexing theory, followed\nby how HippoRAG’s indexing and retrieval design was inspired by this theory, and finally offer a\nmore detailed account of our methodology.\n2.1\nThe Hippocampal Memory Indexing Theory\nThe hippocampal memory indexing theory [75] is a well-established theory that provides a functional\ndescription of the components and circuitry involved in human long-term memory. In this theory,\nTeyler and Discenna [75] propose that human long-term memory is composed of three components\nthat work together to accomplish two main objectives: pattern separation, which ensures that the\nrepresentations of distinct perceptual experiences are unique, and pattern completion, which enables\nthe retrieval of complete memories from partial stimuli [19, 76].\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.790769100189209
+        }
+      ],
+      "rerank_score": 0.7269104719161987,
+      "context_bytes": 2049
+    },
+    {
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 6,
+      "page_end": 7,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 1981,
+          "end_char": 3377,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1396,
+          "block_bboxes": [
+            [
+              108.0,
+              510.039,
+              163.125,
+              521.994
+            ],
+            [
+              107.532,
+              537.91,
+              505.743,
+              569.616
+            ],
+            [
+              107.532,
+              575.888,
+              505.748,
+              673.291
+            ],
+            [
+              108.0,
+              679.55,
+              505.651,
+              722.407
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 222,
+          "chunk_start_char": 1397,
+          "chunk_end_char": 1619,
+          "block_bboxes": [
+            [
+              107.691,
+              71.294,
+              504.001,
+              92.18
+            ],
+            [
+              266.028,
+              103.703,
+              482.88,
+              112.67
+            ],
+            [
+              120.106,
+              118.953,
+              487.393,
+              127.919
+            ]
+          ]
+        }
+      ],
+      "quote": "Results\nWe present our retrieval and QA experimental results below. Given that our method indirectly affects\nQA performance, we report QA results on our best-performing retrieval backbone ColBERTv2 [70].\nHowever, we report retrieval results for several strong single-step and multi-step retrieval techniques.\nSingle-Step Retrieval Results. As seen in Table 2, HippoRAG outperforms all other methods,\nincluding recent LLM-augmented baselines such as Propositionizer and RAPTOR, on our main\ndatasets, MuSiQue and 2WikiMultiHopQA, while achieving competitive performance on HotpotQA.\nWe notice an impressive improvement of 11 and 20% for R@2 and R@5 on 2WikiMultiHopQA\nand around 3% on MuSiQue. This difference can be partially explained by 2WikiMultiHopQA’s\nentity-centric design, which is particularly well-suited for HippoRAG. Our lower performance on\nHotpotQA is mainly due to its lower knowledge integration requirements, as explained in Appendix\nB, as well as a due to a concept-context tradeoff which we alleviate with an ensembling technique\ndescribed in Appendix F.2.\nMulti-Step Retrieval Results. For multi-step or iterative retrieval, our experiments in Table 3\ndemonstrate that IRCoT [78] and HippoRAG are complementary. Using HippoRAG as the re-\ntriever for IRCoT continues to bring R@5 improvements of around 4% for MuSiQue, 18% for\n2WikiMultiHopQA and an additional 1% on HotpotQA.\n6\n\nTable 4: QA performance. HippoRAG’s QA improvements correlate with its retrieval improvements\non single-step (rows 1-3) and multi-step retrieval (rows 4-5).\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nRetriever\nEM\nF1\nEM\nF1\nEM\nF1\nEM\nF1\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7813563346862793
+        }
+      ],
+      "rerank_score": 0.7250649929046631,
+      "context_bytes": 1996
+    },
+    {
+      "chunk_id": "chunk_18bee03d708874e36549c17129df7d7f",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 251,
+          "end_char": 1243,
+          "chunk_start_char": 0,
+          "chunk_end_char": 992,
+          "block_bboxes": [
+            [
+              136.159,
+              133.714,
+              474.673,
+              212.626
+            ],
+            [
+              136.159,
+              218.622,
+              475.72,
+              237.757
+            ],
+            [
+              107.691,
+              259.593,
+              504.004,
+              280.479
+            ],
+            [
+              264.167,
+              292.002,
+              479.513,
+              300.969
+            ],
+            [
+              257.902,
+              307.053,
+              491.758,
+              316.019
+            ],
+            [
+              117.998,
+              322.013,
+              490.592,
+              351.112
+            ]
+          ]
+        }
+      ],
+      "quote": "BM25 [69]\n32.3\n41.2\n51.8\n61.9\n55.4\n72.2\n46.5\n58.4\nContriever [35]\n34.8\n46.6\n46.6\n57.5\n57.2\n75.5\n46.2\n59.9\nGTR [53]\n37.4\n49.1\n60.2\n67.9\n59.4\n73.3\n52.3\n63.4\nColBERTv2 [70]\n37.9\n49.2\n59.2\n68.2\n64.7\n79.3\n53.9\n65.6\nRAPTOR [71]\n35.7\n45.3\n46.3\n53.8\n58.1\n71.2\n46.7\n56.8\nRAPTOR (ColBERTv2)\n36.9\n46.5\n57.3\n64.7\n63.1\n75.6\n52.4\n62.3\nProposition [10]\n37.6\n49.3\n56.4\n63.1\n58.7\n71.1\n50.9\n61.2\nProposition (ColBERTv2)\n37.8\n50.1\n55.9\n64.9\n63.9\n78.1\n52.5\n64.4\nHippoRAG (Contriever)\n41.0\n52.1\n71.5\n89.5\n59.0\n76.2\n57.2\n72.6\nHippoRAG (ColBERTv2)\n40.9\n51.9\n70.7\n89.1\n60.5\n77.7\n57.4\n72.9\nTable 3: Multi-step retrieval performance. Combining HippoRAG with standard multi-step retrieval\nmethods like IRCoT results in strong complementary improvements on all three datasets.\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nIRCoT + BM25 (Default)\n34.2\n44.7\n61.2\n75.6\n65.6\n79.0\n53.7\n66.4\nIRCoT + Contriever\n39.1\n52.2\n51.6\n63.8\n65.9\n81.6\n52.2\n65.9\nIRCoT + ColBERTv2\n41.7\n53.7\n64.1\n74.4\n67.9\n82.0\n57.9\n70.0\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 3.511451244354248
+        },
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7721366882324219
+        }
+      ],
+      "rerank_score": 0.696784257888794,
+      "context_bytes": 1462
+    }
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 36,
+    "graph_executed": true,
+    "graph_hits": 5,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "query_plan": {
+      "decision": "fast_path_single_paper",
+      "fast_path": true,
+      "english_keywords": [
+        "HippoRAG",
+        "PPR"
+      ],
+      "subqueries": [],
+      "elapsed_seconds": 0.0
+    },
+    "subquery_count": 0,
+    "per_query_hits": {
+      "Q00": {
+        "fulltext": 20,
+        "dense": 20
+      }
+    },
+    "graph_paths": 40,
+    "graph_audit": {
+      "backend": "isolated_sqlite",
+      "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "anchors": [
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method",
+          "canonical": "hipporag"
+        }
+      ],
+      "semantic_seed_claims": [
+        "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+        "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+        "24b67b502d8eb7823f14ed89c035138263de75f39fc8a4ef2d15ad4bfc65965f",
+        "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+        "9bf387efef27a34f74ca55817895b8c1eb55982fae8ecaad58a10b223c754186",
+        "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+        "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+        "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+        "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+        "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+        "6d88023222e2af0ce06ad00bc61cb87f1bf2a52810c603729332597ae5140411",
+        "86f3986085cb0a08097bf0b999d1fc2fb421eeda608526459fc18b1567248eef"
+      ],
+      "query_aware": true,
+      "seed_count": 11,
+      "max_hops": 2,
+      "max_paths": 40,
+      "per_node": 8,
+      "deadline_seconds": 10,
+      "degree_truncated": [
+        "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+        "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec"
+      ],
+      "reference_tables_access": "denied by SQLite authorizer",
+      "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+      "returned_paths": 40,
+      "expanded_nodes": 15,
+      "elapsed_seconds": 0.04554479999933392
+    },
+    "method_card_hits": 11,
+    "method_card_slots": [
+      {
+        "slot_id": "paper_45e21fe95d28e544e8b55c6a986ff63e::retrieval_and_graph_mechanism",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "slot": "retrieval_and_graph_mechanism",
+        "similarity": 0.5931,
+        "chunk_ids": [
+          "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+          "chunk_eaf42f9945053a085ff4b160247ddf6a"
+        ]
+      },
+      {
+        "slot_id": "paper_45e21fe95d28e544e8b55c6a986ff63e::key_hyperparameters_and_limits",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "slot": "key_hyperparameters_and_limits",
+        "similarity": 0.586,
+        "chunk_ids": [
+          "chunk_fe5363c7abef240f62c37ad4ab224530",
+          "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+          "chunk_fbeebb7d77e97866867648455a11895e"
+        ]
+      },
+      {
+        "slot_id": "paper_45e21fe95d28e544e8b55c6a986ff63e::problem_and_task",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "slot": "problem_and_task",
+        "similarity": 0.5771,
+        "chunk_ids": [
+          "chunk_a70a7e6f52482951376452c97256c9ec",
+          "chunk_59677fe889f95e3e84ca00ba132a54fd"
+        ]
+      },
+      {
+        "slot_id": "paper_45e21fe95d28e544e8b55c6a986ff63e::datasets_and_eval_setup",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "slot": "datasets_and_eval_setup",
+        "similarity": 0.5729,
+        "chunk_ids": [
+          "chunk_3fa28005a4df0de5249826585cf9d713",
+          "chunk_8cc831cc45851cce50b9f34648070765",
+          "chunk_fe5363c7abef240f62c37ad4ab224530"
+        ]
+      },
+      {
+        "slot_id": "paper_45e21fe95d28e544e8b55c6a986ff63e::training_and_tuning",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "slot": "training_and_tuning",
+        "similarity": 0.5286,
+        "chunk_ids": [
+          "chunk_fe5363c7abef240f62c37ad4ab224530"
+        ]
+      },
+      {
+        "slot_id": "paper_45e21fe95d28e544e8b55c6a986ff63e::method_name_and_aliases",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "slot": "method_name_and_aliases",
+        "similarity": 0.5174,
+        "chunk_ids": [
+          "chunk_59677fe889f95e3e84ca00ba132a54fd",
+          "chunk_a58244558a2137d85a4b8e53d5c4ebaf"
+        ]
+      },
+      {
+        "slot_id": "paper_45e21fe95d28e544e8b55c6a986ff63e::core_components",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "slot": "core_components",
+        "similarity": 0.507,
+        "chunk_ids": [
+          "chunk_eaf42f9945053a085ff4b160247ddf6a",
+          "chunk_a58244558a2137d85a4b8e53d5c4ebaf"
+        ]
+      },
+      {
+        "slot_id": "paper_1f0f648a6595c842e4881196687e103c::problem_and_task",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "slot": "problem_and_task",
+        "similarity": 0.5365,
+        "chunk_ids": [
+          "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+          "chunk_16f86a00cebdf5e10d83c3a540fbc7f7"
+        ]
+      }
+    ],
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": false,
+      "load_seconds": 9.910337800043635,
+      "inference_seconds": 1.5252881000051275,
+      "elapsed_seconds": 33.81214679998811,
+      "peak_cuda_memory_bytes": 1191973888,
+      "request_count": 1,
+      "batch_size": 4
+    },
+    "evidence_count": 10,
+    "context_bytes": 17481,
+    "evidence_bytes": 17019,
+    "graph_context_bytes": 462,
+    "serialized_content_bytes": 16732,
+    "prompt_graph_paths": [
+      {
+        "nodes": [
+          {
+            "name": "HippoRAG",
+            "type": "Method"
+          },
+          {
+            "name": "multi-hop QA",
+            "type": "Problem"
+          }
+        ],
+        "edges": [
+          {
+            "predicate": "ADDRESSES",
+            "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+            "subject": "HippoRAG",
+            "object": "multi-hop QA"
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+            "quote_ids": [
+              "q1"
+            ],
+            "source_span": [
+              0,
+              139
+            ],
+            "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce"
+          }
+        ]
+      }
+    ],
+    "path_policy": "additional_path_budget",
+    "path_format": "references",
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "source_coverage": [],
+    "limitations": [],
+    "evidence_budget_bytes": 18000,
+    "path_budget_bytes": 1200,
+    "total_budget_bytes": 19200,
+    "score_policy": "relative",
+    "reservation_policy": "subquery_balanced",
+    "context_budget_bytes": 19200,
+    "generation_path_count": 1,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "usage": {
+    "prompt_tokens": 5219,
+    "total_tokens": 5645,
+    "completion_tokens": 426,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 5219
+    },
+    "completion_tokens_details": {
+      "text_tokens": 426
+    }
+  },
+  "estimated_cost": null,
+  "status": "ok",
+  "errors": [],
+  "premise_check": [
+    {
+      "premise": "HippoRAG 使用 PPR 在知识图谱上检索",
+      "supported": true,
+      "evidence_eids": [
+        "E2"
+      ],
+      "note": "原文明确说运行 PPR on the KG"
+    },
+    {
+      "premise": "PPR 以查询概念为种子",
+      "supported": true,
+      "evidence_eids": [
+        "E2"
+      ],
+      "note": "原文说 using query concepts as seeds"
+    },
+    {
+      "premise": "PPR 探索 KG 路径并识别相关子图",
+      "supported": true,
+      "evidence_eids": [
+        "E2"
+      ],
+      "note": "原文明确说 explore KG paths 与 identify relevant subgraphs"
+    },
+    {
+      "premise": "PPR 能在单次检索中完成多跳推理",
+      "supported": true,
+      "evidence_eids": [
+        "E2"
+      ],
+      "note": "原文说 single retrieval step"
+    }
+  ],
+  "graph_paths": [
+    {
+      "nodes": [
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method",
+          "canonical": "hipporag"
+        },
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        }
+      ],
+      "relevance_score": 0.6588
+    },
+    {
+      "nodes": [
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        },
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        },
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        }
+      ],
+      "relevance_score": 0.6524
+    },
+    {
+      "nodes": [
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        }
+      ],
+      "relevance_score": 0.646
+    },
+    {
+      "nodes": [
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        },
+        {
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.646
+    },
+    {
+      "nodes": [
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        },
+        {
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6417
+    },
+    {
+      "nodes": [
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        },
+        {
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6413
+    },
+    {
+      "nodes": [
+        {
+          "id": "84fbd2dc5a79e80c72cf43824339a87b46a43e845c87604d06d162af9349f252",
+          "name": "1000 validation questions per dataset",
+          "type": "Parameter"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_SAMPLE_SETTING",
+          "claim_id": "24b67b502d8eb7823f14ed89c035138263de75f39fc8a4ef2d15ad4bfc65965f",
+          "subject": "HippoRAG retrieval corpus",
+          "object": "1000 validation questions per dataset"
+        },
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "24b67b502d8eb7823f14ed89c035138263de75f39fc8a4ef2d15ad4bfc65965f",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "HAS_SAMPLE_SETTING"
+        },
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        }
+      ],
+      "relevance_score": 0.6399
+    },
+    {
+      "nodes": [
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        },
+        {
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6396
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        }
+      ],
+      "relevance_score": 0.6381
+    },
+    {
+      "nodes": [
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method",
+          "canonical": "hipporag"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "8e151b0de9276e0f75f5955c6a3f8590793c914cf0d8723b1949dd348f66fb0b",
+          "name": "supporting and distractor passages",
+          "type": "KnowledgeBase"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        },
+        {
+          "predicate": "USES_KNOWLEDGE_BASE",
+          "claim_id": "9bf387efef27a34f74ca55817895b8c1eb55982fae8ecaad58a10b223c754186",
+          "subject": "HippoRAG retrieval corpus",
+          "object": "supporting and distractor passages"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        },
+        {
+          "claim_id": "9bf387efef27a34f74ca55817895b8c1eb55982fae8ecaad58a10b223c754186",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_KNOWLEDGE_BASE"
+        }
+      ],
+      "relevance_score": 0.6373
+    },
+    {
+      "nodes": [
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        },
+        {
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6362
+    },
+    {
+      "nodes": [
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        },
+        {
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6353
+    },
+    {
+      "nodes": [
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        },
+        {
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6349
+    },
+    {
+      "nodes": [
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        }
+      ],
+      "relevance_score": 0.6343
+    },
+    {
+      "nodes": [
+        {
+          "id": "84fbd2dc5a79e80c72cf43824339a87b46a43e845c87604d06d162af9349f252",
+          "name": "1000 validation questions per dataset",
+          "type": "Parameter"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_SAMPLE_SETTING",
+          "claim_id": "24b67b502d8eb7823f14ed89c035138263de75f39fc8a4ef2d15ad4bfc65965f",
+          "subject": "HippoRAG retrieval corpus",
+          "object": "1000 validation questions per dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "24b67b502d8eb7823f14ed89c035138263de75f39fc8a4ef2d15ad4bfc65965f",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "HAS_SAMPLE_SETTING"
+        }
+      ],
+      "relevance_score": 0.6338
+    },
+    {
+      "nodes": [
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6332
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        },
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        }
+      ],
+      "relevance_score": 0.6317
+    },
+    {
+      "nodes": [
+        {
+          "id": "84fbd2dc5a79e80c72cf43824339a87b46a43e845c87604d06d162af9349f252",
+          "name": "1000 validation questions per dataset",
+          "type": "Parameter"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "8e151b0de9276e0f75f5955c6a3f8590793c914cf0d8723b1949dd348f66fb0b",
+          "name": "supporting and distractor passages",
+          "type": "KnowledgeBase"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_SAMPLE_SETTING",
+          "claim_id": "24b67b502d8eb7823f14ed89c035138263de75f39fc8a4ef2d15ad4bfc65965f",
+          "subject": "HippoRAG retrieval corpus",
+          "object": "1000 validation questions per dataset"
+        },
+        {
+          "predicate": "USES_KNOWLEDGE_BASE",
+          "claim_id": "9bf387efef27a34f74ca55817895b8c1eb55982fae8ecaad58a10b223c754186",
+          "subject": "HippoRAG retrieval corpus",
+          "object": "supporting and distractor passages"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "24b67b502d8eb7823f14ed89c035138263de75f39fc8a4ef2d15ad4bfc65965f",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "HAS_SAMPLE_SETTING"
+        },
+        {
+          "claim_id": "9bf387efef27a34f74ca55817895b8c1eb55982fae8ecaad58a10b223c754186",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_KNOWLEDGE_BASE"
+        }
+      ],
+      "relevance_score": 0.6312
+    },
+    {
+      "nodes": [
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        },
+        {
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6299
+    },
+    {
+      "nodes": [
+        {
+          "id": "8e151b0de9276e0f75f5955c6a3f8590793c914cf0d8723b1949dd348f66fb0b",
+          "name": "supporting and distractor passages",
+          "type": "KnowledgeBase"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_KNOWLEDGE_BASE",
+          "claim_id": "9bf387efef27a34f74ca55817895b8c1eb55982fae8ecaad58a10b223c754186",
+          "subject": "HippoRAG retrieval corpus",
+          "object": "supporting and distractor passages"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9bf387efef27a34f74ca55817895b8c1eb55982fae8ecaad58a10b223c754186",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_KNOWLEDGE_BASE"
+        }
+      ],
+      "relevance_score": 0.6286
+    },
+    {
+      "nodes": [
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6286
+    },
+    {
+      "nodes": [
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        },
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        }
+      ],
+      "relevance_score": 0.628
+    },
+    {
+      "nodes": [
+        {
+          "id": "ccff276df4f4f2500677df50277c11709c0778a082b010f1a4d04ea75a0c807a",
+          "name": "Graph-Augmented Retrieval",
+          "type": "Problem"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "6d88023222e2af0ce06ad00bc61cb87f1bf2a52810c603729332597ae5140411",
+          "subject": "HippoRAG",
+          "object": "Graph-Augmented Retrieval"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6d88023222e2af0ce06ad00bc61cb87f1bf2a52810c603729332597ae5140411",
+          "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+          "page_start": 10,
+          "page_end": 10,
+          "quote": "Graph-Augmented Retrieval. In this second category, previous work trains a re-ranking module\nwhich can traverse a graph made using Wikipedia hyperlinks [16, 100, 54, 14, 4, 44]. HippoRAG,\nin contrast, builds a KG from scratch using LLMs and performs multi-hop retrieval without any\nsupervision, making it much more adaptable.",
+          "predicate": "ADDRESSES"
+        },
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        }
+      ],
+      "relevance_score": 0.6269
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6253
+    },
+    {
+      "nodes": [
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6247
+    },
+    {
+      "nodes": [
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6243
+    },
+    {
+      "nodes": [
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6239
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6235
+    },
+    {
+      "nodes": [
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6216
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.621
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6206
+    },
+    {
+      "nodes": [
+        {
+          "id": "ccff276df4f4f2500677df50277c11709c0778a082b010f1a4d04ea75a0c807a",
+          "name": "Graph-Augmented Retrieval",
+          "type": "Problem"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "936536943547192875a6eb0de329318309fd319e96736a19cabd834eb5489264",
+          "name": "HippoRAG retrieval corpus",
+          "type": "EvaluationSetting"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "6d88023222e2af0ce06ad00bc61cb87f1bf2a52810c603729332597ae5140411",
+          "subject": "HippoRAG",
+          "object": "Graph-Augmented Retrieval"
+        },
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "subject": "HippoRAG",
+          "object": "HippoRAG retrieval corpus"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6d88023222e2af0ce06ad00bc61cb87f1bf2a52810c603729332597ae5140411",
+          "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+          "page_start": 10,
+          "page_end": 10,
+          "quote": "Graph-Augmented Retrieval. In this second category, previous work trains a re-ranking module\nwhich can traverse a graph made using Wikipedia hyperlinks [16, 100, 54, 14, 4, 44]. HippoRAG,\nin contrast, builds a KG from scratch using LLMs and performs multi-hop retrieval without any\nsupervision, making it much more adaptable.",
+          "predicate": "ADDRESSES"
+        },
+        {
+          "claim_id": "6c73d2ac4e1ff50d27181f544827373bff1ecb7b15cdd73173fed1d500821eff",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        }
+      ],
+      "relevance_score": 0.6206
+    },
+    {
+      "nodes": [
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method",
+          "canonical": "hipporag"
+        },
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "4ed39865d4b70fc3f4f653625ddbcb58c25e44ffed9bb010dc4f2e4349cac795",
+          "name": "MDR",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "3ea6b72a2af77f1a26254bdb4692c6294763900b88e24e6e796d88b004f20699",
+          "subject": "MDR",
+          "object": "HotpotQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "3ea6b72a2af77f1a26254bdb4692c6294763900b88e24e6e796d88b004f20699",
+          "chunk_id": "chunk_493cae01f9aa8bd905c9df0bc48019a8",
+          "page_start": 11,
+          "page_end": 11,
+          "quote": "We limit the search\ndepth to 2 as answering questions in HotpotQA requires\nat most 2-hop reasoning steps (Xiong et al. 2020).",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6198
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6192
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "ac13e23876f70b28da094d07b626d9705b2cc0302dc49bb08f9bb7a86d76d418",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6188
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "41392f01142bc045119f717294e0350bb343dc83249c2649039d7bcdc842f65d",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6174
+    },
+    {
+      "nodes": [
+        {
+          "id": "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec",
+          "name": "HotpotQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+          "subject": "HippoRAG",
+          "object": "HotpotQA"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "343f86df68b018d5440c3b259036c001d0acc753dbeb7ce360c6ccff15f4a8e0",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "8edbbd9e8d534f933054951cafeafe2d75ee393b9efd4ff9417cf37318266f62",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6173
+    },
+    {
+      "nodes": [
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "ea20d21692bff2b48517e3ad7196b36afedf38eee110f4c0e278cb6df03b228e",
+          "name": "multi-hop QA",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "b1c9edf9b62bccb6624cc1d5ca409aed1e14c2a9e095fb95f2b7dcb368823051",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "b1c9edf9b62bccb6624cc1d5ca409aed1e14c2a9e095fb95f2b7dcb368823051",
+          "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "HippoRAG outperforms all baselines on MuSiQue and\n2WikiMultiHopQA and achieves comparable performance on the less challenging HotpotQA dataset.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        }
+      ],
+      "relevance_score": 0.6151
+    },
+    {
+      "nodes": [
+        {
+          "id": "ccff276df4f4f2500677df50277c11709c0778a082b010f1a4d04ea75a0c807a",
+          "name": "Graph-Augmented Retrieval",
+          "type": "Problem"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "id": "608da02f44613bfe43898d0ee157f24e01f84443e6c9e25d82079c1bc77d36de",
+          "name": "2WikiMultiHopQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "6d88023222e2af0ce06ad00bc61cb87f1bf2a52810c603729332597ae5140411",
+          "subject": "HippoRAG",
+          "object": "Graph-Augmented Retrieval"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "subject": "HippoRAG",
+          "object": "2WikiMultiHopQA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6d88023222e2af0ce06ad00bc61cb87f1bf2a52810c603729332597ae5140411",
+          "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+          "page_start": 10,
+          "page_end": 10,
+          "quote": "Graph-Augmented Retrieval. In this second category, previous work trains a re-ranking module\nwhich can traverse a graph made using Wikipedia hyperlinks [16, 100, 54, 14, 4, 44]. HippoRAG,\nin contrast, builds a KG from scratch using LLMs and performs multi-hop retrieval without any\nsupervision, making it much more adaptable.",
+          "predicate": "ADDRESSES"
+        },
+        {
+          "claim_id": "cdc252ae7549ba66f43a113278975737318353b1a6c9ea51c76ee3047de0f000",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6142
+    },
+    {
+      "nodes": [
+        {
+          "id": "7e40e0ad7d6053256efc663ab4c35f307050cc1b46e7b2f05f184224267fd83c",
+          "name": "MuSiQue (answerable)",
+          "type": "Dataset"
+        },
+        {
+          "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "name": "HippoRAG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "subject": "HippoRAG",
+          "object": "MuSiQue (answerable)"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "70cea20e7a0443f6faca64e9fc228cd3fb49d7d04e98bbd76335fd26808427da",
+          "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33].",
+          "predicate": "EVALUATED_ON"
+        }
+      ],
+      "relevance_score": 0.6137
+    }
+  ],
+  "generation_paths": [
+    {
+      "nodes": [
+        {
+          "name": "HippoRAG",
+          "type": "Method"
+        },
+        {
+          "name": "multi-hop QA",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "subject": "HippoRAG",
+          "object": "multi-hop QA"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5fd3b08028e13067687cd5f8e0aba407ca6c029625a05ebb66750db07ca05dce",
+          "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+          "page_start": 8,
+          "page_end": 8,
+          "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    }
+  ],
+  "limitations": [],
+  "trace_url": null,
+  "usage_status": "usage_unknown",
+  "stage_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.017234800034202635,
+      "status": "ok"
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.947044900036417,
+      "status": "ok"
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 0.07866070000454783,
+      "status": "ok"
+    },
+    {
+      "name": "rerank",
+      "seconds": 33.83898380002938,
+      "status": "ok"
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.05222499999217689,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 6.84098959993571,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.022943099960684776,
+      "status": "ok"
+    }
+  ],
+  "known_cost_subtotal": 0,
+  "cost_warning": null,
+  "local_trace_id": "5650bdd5-0668-4ea1-b946-5b8ba1648349",
+  "trace_flush_mode": "async_background"
+}

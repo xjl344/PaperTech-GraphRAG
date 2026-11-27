@@ -1,0 +1,1239 @@
+{
+  "version": "kg-rebuild-pilot-14b-v4",
+  "created_at": "2026-11-25T10:21:09.786901+00:00",
+  "model": "qwen2.5:14b",
+  "base_corpus_id": "a6a19e2e97b11d9c450e",
+  "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+  "graph_namespace": "kg-rebuild-pilot-14b-v4",
+  "legacy_graph_excluded": true,
+  "options": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 4096,
+    "num_predict": 3000
+  },
+  "prompt_template": "你是论文原文关系抽取器。只从给定的单个原文块抽取明确写出的机制关系，不使用外部知识，不把模型推断当作事实，不读取参考文献区。\n只允许以下三种关系：\n- Component --IMPLEMENTS--> Mechanism\n- Method --CONTROLLED_BY--> Parameter\n- Method --HAS_COMPONENT--> Component\n\n约束：\n1. 只输出原文明确表达的关系。没有明确证据就不输出。\n2. 每条 evidence_quote 必须是给定原文中连续的、可定位的原文片段；允许换行或连续空格不同，但不得改写。\n3. claim_kind 必须为 author_assertion；无法确定作者明确陈述时不要输出。system_inference 仅用于记录被拒绝的候选，不应作为有效关系。\n4. subject/object 名称要短且具体，不要把整句放进去；不要创造论文中不存在的组件、机制或参数。\n5. 最多20条；按原文出现顺序输出。关系可以为空。\n6. 三类关系的类型必须严格对应；禁止 Method --IMPLEMENTS--> Mechanism。HAS_COMPONENT 表示方法明确包含的模块或阶段；IMPLEMENTS 表示组件明确实现的操作机制；CONTROLLED_BY 表示调节方法行为的参数，不是报告的性能数字。\n7. 标题仅用于辨认论文，不足以证明某个组件归属该方法。只有本块明确的框架描述或指代才可建立归属；不要把相关工作里的其他方法归到本文方法下。\n论文：{title}\n页码：{start}-{end}\n章节：{section}\n原文块：\n<chunk>\n{text}\n</chunk>",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "relations": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "subject_type": {
+              "type": "string",
+              "enum": [
+                "Method",
+                "Component"
+              ]
+            },
+            "subject": {
+              "type": "string"
+            },
+            "predicate": {
+              "type": "string",
+              "enum": [
+                "CONTROLLED_BY",
+                "HAS_COMPONENT",
+                "IMPLEMENTS"
+              ]
+            },
+            "object_type": {
+              "type": "string",
+              "enum": [
+                "Method",
+                "Component",
+                "Mechanism",
+                "Parameter"
+              ]
+            },
+            "object": {
+              "type": "string"
+            },
+            "evidence_quote": {
+              "type": "string"
+            },
+            "claim_kind": {
+              "type": "string",
+              "enum": [
+                "author_assertion",
+                "system_inference"
+              ]
+            },
+            "confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "subject_type",
+            "subject",
+            "predicate",
+            "object_type",
+            "object",
+            "evidence_quote",
+            "claim_kind",
+            "confidence"
+          ]
+        }
+      }
+    },
+    "required": [
+      "relations"
+    ]
+  },
+  "papers": [
+    {
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "source_sha256": "c88093cd95417a12b8c7166ecc1132c9b52d077a4f73f84e7100e25722902b98"
+    },
+    {
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+      "source_sha256": "8a6c0a67fe20ebefb8a25e504cfb6d42436b25f88793fd1e2e07e2d1cb29653b"
+    },
+    {
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+      "source_sha256": "1db0eb2ae0accfe8b8d5679fa3b4b73bbe62313e9478965f329798aad1e8aa0b"
+    }
+  ],
+  "chunks": [
+    {
+      "chunk_id": "chunk_a001225c0afa46199e503f9e9f8bd803",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "cb1ab99266867c5f72f339e918ed7e83b4d9b1ea13cbbf2ff90757300a3ae18e",
+      "page_start": 1,
+      "page_end": 1,
+      "section": "unidentified",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "b19a2d053faea5a2dddcb08f15db46e39ca91c20626782da7eb4bd762a2963c5",
+      "page_start": 1,
+      "page_end": 1,
+      "section": "Abstract",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_3230a7429a621a89f8fef1361c527b3a",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "15f54620cc5281b23dbb30933a88888a8a2adf561d08c51720e8f5a8dac1424c",
+      "page_start": 1,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_58a54700941a16a03add8585787df2a8",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "71da94f695b45b6b8642240ca29164292a11fde5fd07fa513050d5c56feae52a",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_0c3502e2ebdf2179881b5102545bcd35",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "0c6fc40688de29e72fa9df29f518c94e5d93a5016e454be0c0d24020ca74c26b",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_67201fef435f6ac14b79550309c5d685",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "878dfab9da1f584983c6a8588286f2d607fcbca677d3130da85115644eb0d065",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_99b18cdbb0bd9a36674e8b314d553ad3",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "c0453f83b6adf1f5d26a386b0e6c924b5f1ae30b67e4ce7c7739d3f2428d1ea0",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_5c9e14854565607ec53c355da481c451",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "17e686ca305ed342a6e4b876ac96da8f37e68e06319f70c04017865cd2c65d1a",
+      "page_start": 2,
+      "page_end": 3,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_0e365600a243ad5257f9003b561ff2ea",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "0494d2049c899aa43131ae03e2a6c3fab2ac108f9f7578c4f563326c893b81d6",
+      "page_start": 3,
+      "page_end": 3,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_5716891bb093d42ffa4073facdcc97d3",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "4df5a232363dcf0fab0ed414c9883c2c06b4622b0bc1543551173c56bc023eff",
+      "page_start": 3,
+      "page_end": 3,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_7fad08f1067bacecc294e3e817cc7d59",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "ca7aff4806f1693995701752492c13b1268012eee9f17672e2404a6f85f99f4b",
+      "page_start": 3,
+      "page_end": 4,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_2d2863e6cf527b25ae6c871d76ab83cd",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "d361c63152aa11b80d0fc3c74fe70767668ab912492ec3d138f24398ef258b71",
+      "page_start": 4,
+      "page_end": 4,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_169332db0b56d09ba086374fa84a2040",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "6d5b4ec0849835900acf43ec02513065a247cc629f8cc08092848db235df3694",
+      "page_start": 4,
+      "page_end": 5,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_9523f0c45d52efdd32deb8aeebf8264b",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "acd517621a8d827dd03925aba4db9dc64c0a62c378ef5a1c78c6747ab279968a",
+      "page_start": 5,
+      "page_end": 5,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_2e822aca3c5121569377d101d6b5cd20",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "085b014839ad3490bf196239f0c305a217e94772ac4fe5c6b89e32e3367d6bb9",
+      "page_start": 5,
+      "page_end": 5,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_e3039cc70fdc7caf88ff60d3a386ed29",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "87ab24f7e589b619fe0761068c939f8f7c40530ef645481632f644ab00ad0f42",
+      "page_start": 5,
+      "page_end": 5,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_dbf906122a150b7fb99efaf3217e4263",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "335e3df0406ce32865bfb8a3dfdf62bd5d1f987a84999da0075979cafc125f9c",
+      "page_start": 5,
+      "page_end": 6,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "8fbdca23d54c9ee8f535699e55a0f1e762eed7dc58accd90bfbe033b7c288db8",
+      "page_start": 6,
+      "page_end": 6,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_8c5476c0307c733adb60d1afe861e4d2",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "0a854f9791ee750d3b6fa94c99f277b93d15379c558f57104c1ee0147eec10cc",
+      "page_start": 6,
+      "page_end": 7,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_04c0673f276b70d320674636d537dc80",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "e79defa25ad077beb683a3cd64c26e51086287a51eceddab31c89b7f9ee7723a",
+      "page_start": 7,
+      "page_end": 7,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_5832b6bfb3218fc28548dbb991a42540",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "5296e092b76168dc20a8da94b1042555c734b337134a82b9a13bc184fef87e8f",
+      "page_start": 7,
+      "page_end": 7,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_33c8e2f0ed11ba682036fc475dffc954",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "5987ba383e73379f915884c94a19cc3c9c21dfd011c7e1151010cb4a00a48758",
+      "page_start": 7,
+      "page_end": 8,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_255b9d4a6fbbac0cf6621acf84251f72",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "3863d87854fd8a332cac355474bdac7cfe8ff141f64cd03f6fa08a65d0c1554f",
+      "page_start": 8,
+      "page_end": 8,
+      "section": "Experiments",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_e2737c14a5cd36e6bd408af049fd0aac",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "485a39d0a39c1f77a48ba8391a86257d278314dd1ca1afbe388a5e44c714d8da",
+      "page_start": 8,
+      "page_end": 9,
+      "section": "Method",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_aba70e6f2f67df9b074a9e14ead47b00",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "371caf12e72359561009a060602267d15b89247e14796dfbc8cca4c9d9de73bb",
+      "page_start": 9,
+      "page_end": 9,
+      "section": "Method",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_675c20afd5f26d294c1e46627fdf87c2",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "3714755ac8b668addb92b1cab1fd8d09829a000019a3635a68f283963e91d45d",
+      "page_start": 9,
+      "page_end": 9,
+      "section": "Method",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_f800cd4e8fa59900491c3efa5f890329",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "e771479ef386d2192338b644237321c2ea9e728e973ce41e7a050cc2be098a5d",
+      "page_start": 9,
+      "page_end": 10,
+      "section": "Conclusion",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_684103b0fae5fe9eb99fbf7fc78aad31",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "text_sha256": "4f856f8bb098eea01824cec7340e89b652a9ccf8fee0972dd29078a769b329bc",
+      "page_start": 10,
+      "page_end": 10,
+      "section": "Acknowledgment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_a7df67e7fd088df02cfb3cdf0e560925",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "26ec1828241610c79c590605cb7022a49b2cf0ecdbb540f98899dc0fc510df8c",
+      "page_start": 1,
+      "page_end": 1,
+      "section": "unidentified",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "d441f2b0957e29f2e554a3d82bc1f0ed4d0d070b56fa68274aaa5f9e5d7be9a9",
+      "page_start": 1,
+      "page_end": 1,
+      "section": "Abstract",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_a2951c70c36ae010415c4248bbed8a33",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "49ae01dc305b04e2658936de2654e39f12bbdbade81dbe4d511577aff343e60c",
+      "page_start": 1,
+      "page_end": 1,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_296f2400fee163aad415c87ede01d3fa",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "456cc72bd47d503de20a0dfe18b622d9314e84873a332b14925735167fbb0ac2",
+      "page_start": 1,
+      "page_end": 1,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_9f421de75aed07b68340cb2f2471a79e",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "1d00f1fd821aef5050b25ea900957fbccb71f38b3d7a6a3c15dda20a1c3bd622",
+      "page_start": 1,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_9b4e995f8e1442d2cbb88ade921b87f1",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "03d2e2bb9fb946e8106e723d406d69d45a4c03490af64a018586983fc6355925",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_554414fc3894b4f266281da6de0b5d29",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "3e14e587d5e994d43dfecf7c4d120423cdc884375ce3d038db9f134418745cbb",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_e86107abde0e1c9bd07e9c18aeccb3e4",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "2162938b38200e0bae544f139873722bf21ef022e9df66f269bbcb38339c59f6",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_7362d71477696d08d87c2498f341ea13",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "b6996fb81fa8d91e423af9c580e97fd4a7458e84a3a76a41005bac6b9d3d06b3",
+      "page_start": 3,
+      "page_end": 3,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_3a66017788061f8f662ca365c955591a",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "a7c7f3f0af12e6ea85c419f4dfc640ee10aed7e79f89677b29ef1d01589e55da",
+      "page_start": 3,
+      "page_end": 3,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_02c26b2202e7a91f83446553752c8fb6",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "6262861cb3e992159c6ade15d81143affa4de447312eca7a4125a43d7da3493e",
+      "page_start": 3,
+      "page_end": 3,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_d755b392a1954f2b53e23e4968d18904",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "a587de81e437a0a290a3df7f20667892d4e7970bfb89b31f04bcae627e0c6ec5",
+      "page_start": 3,
+      "page_end": 4,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_c0d2bbf48afc9940787c84d1f1a259b5",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "33f2f8bd57991fa1ac74695d6b733bc2d60ff0f845e7c33dcd2e86fe8bca1c8a",
+      "page_start": 4,
+      "page_end": 4,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_88de9ef01acd16c34fde2c9091445dd8",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "6398567fb9eaae4d63d981067e370a625b691f0706704a0af37e2e2405c7920d",
+      "page_start": 4,
+      "page_end": 4,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_785bb2357da95f231566a7893e116b3f",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "ceea79c62ea9c842c213169a249a890ea529de5eb00de07fc93fdae06cd2899c",
+      "page_start": 4,
+      "page_end": 5,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_5159a5fa625d869d5a21e72e43b4b713",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "9c1926049d18afc7d5a67e678f1a113dc8f9a5648e2e2e0d282cec4065d40cc8",
+      "page_start": 5,
+      "page_end": 5,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_dad0510834e8348ffea381beed9d2c75",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "db7649254326c34357e48d9ecd740b802ad9eee84419d343fe2d3caf973ad19a",
+      "page_start": 5,
+      "page_end": 5,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_55f3e1163ab88d1a50c645afccb9afe1",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "aac63ecd54869d7be7bd79a81cd71115deb4c53bd48bfda155d0cf47f886706e",
+      "page_start": 5,
+      "page_end": 5,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_a1264db566130c104275b807d750904a",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "6b414ca6d9f64e023d57dd210213eea72788a04017e9829e33eacb329882756d",
+      "page_start": 6,
+      "page_end": 6,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_5a1fd5f3826cd78a6219d6bddfaa91da",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "3b3bc1c7333f21c87a4f02d6288ab2af143036abdf4856f95fab0852c594d454",
+      "page_start": 6,
+      "page_end": 6,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_48d9cd08853110685bb8562077cf5228",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "a59fa78bcefbee2db14d6e0cff7d8fe9d3ac4bad19ef7ff6f3dde60c60fc8491",
+      "page_start": 6,
+      "page_end": 6,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_2cdccff3910b914ee3f18d9beda20684",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "6a181a055f8d32fec67644b799c458f80212af244a0b91e7c0490624a7175ee0",
+      "page_start": 6,
+      "page_end": 7,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_d2344015fa6af178ba74731f12fd393c",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "2252f343d243240297dc000b5851a17a054fa5a2018ed380a57d7ed663ed2326",
+      "page_start": 7,
+      "page_end": 7,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_358a932cf9be09a75cae0606806b9318",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "40c07008c06f7504298abe97dcf9a8014d536f52c123f94f76da5325e6b80268",
+      "page_start": 7,
+      "page_end": 7,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_1efd4680d043944e45eb1947af46faa9",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "943afd9c030fe56d113d5f86efcb97a4d1502ea9bb5f29c05240cc18376145c3",
+      "page_start": 7,
+      "page_end": 8,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_c11d51b003e670a9b0426a34b4b70425",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "6fd166e00d44d162186ecacdddfa057b0f44dcfcd39d17fc5940c261dbbc8264",
+      "page_start": 8,
+      "page_end": 8,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_71d97b54ef1d2890107dd19905658ddc",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "f8b41221197e24599a90816fc5cb0fa3f9d95a47f8b2ca638df6986c6e75dd11",
+      "page_start": 8,
+      "page_end": 8,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_b21e952cc42e9ffedbde26c85006586c",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "1eeffaeae5b153ad4afab146035d82775e40a9d58ce68fa40c540ebfe7afaab2",
+      "page_start": 8,
+      "page_end": 9,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_c9e4e94b591dab5929ea0ee5c7f0817b",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "2b176cc017d0fdc43806df2e763b641f86b3fb690525f5053cdb97b287db3033",
+      "page_start": 9,
+      "page_end": 9,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_8d5981baad51236ec56533d7ee1eaf56",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "c183e906aa1ae4fd234133a00ee6b26b36a57eef84511fb57d567b9db50c4f18",
+      "page_start": 9,
+      "page_end": 9,
+      "section": "Experiment",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_bd4734d2765e2147cac924fe8ba38d85",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "912f292ae25cb572c2810c1f89c6a1224a8f9d57fd6c7a03bff243094b2cbae7",
+      "page_start": 9,
+      "page_end": 10,
+      "section": "Conclusion",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_393f6af76087a71bf9db9f2bb64f4662",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "85480d42fcc7357f2c877a454d3326ceb1e13bfde1ad4fbc1aeab2d326d423d3",
+      "page_start": 10,
+      "page_end": 10,
+      "section": "Limitations",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_a50a6e195a0ad65f6376744d407841fd",
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "text_sha256": "3919a1d2ac55f1e70fa63355f65d4f79ae457144ef66520e53bc2d247a0a098c",
+      "page_start": 10,
+      "page_end": 10,
+      "section": "Acknowledgments",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_8de1e06d1827ae3f8e7d83e7e454573b",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "919bc4025a9b02a5fb972a28c2eed19d3c3129e01f1d39437dffcc7d93277e17",
+      "page_start": 1,
+      "page_end": 1,
+      "section": "unidentified",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_6b5383484693f6226010eab8143f80d6",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "58dc870286e7675523c7360293d525079574bf2753c96f8812f876afa69f6fa3",
+      "page_start": 1,
+      "page_end": 1,
+      "section": "Abstract",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_2c06f903c181ffbdb1246026daa909b0",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "6138e089fec563f31c510a490725cf9139e30f912b24cb2c4d6318b56f6d0807",
+      "page_start": 1,
+      "page_end": 2,
+      "section": "Abstract",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_66ad8da2f5e6a86bcc68ea9123cfaaad",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "d63d0794a6cebb0ebf32ab36e8c88088e974959c75d821a304c00b6144917c3b",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Abstract",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_6eeace58b42c6743729b039d5685093b",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "54eb2f6647e4ab3d0c9d0d6bc4e466ab11e6db294b6aaec80f5d86c83d05c4b7",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_e820b5ccf6fdbe423d102b79202b58a6",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "23979cd2bb17f39c0be827265a6fc56e58878b63dd0d38c4aa94a7f471ffb118",
+      "page_start": 2,
+      "page_end": 2,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_d2b23cd8bdf5bc8999476417e6019f5b",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "3864cbd7fc6c673086b751c17bf5bfc837b21f0470d743007e33968aaefffd1b",
+      "page_start": 2,
+      "page_end": 3,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_ce6e94a5f51961056f7e4bb8fd4c9092",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "b5b56248239f99982aa98ef12b0493d26141c30d0f5d5a1c0728596e2cb400db",
+      "page_start": 3,
+      "page_end": 3,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_77331dc18e1518cd0c883724d737af4f",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "d50a15fffb2a6ce4b546e2cfa5c03603d67281df2d016d78706f0ffd636bce66",
+      "page_start": 3,
+      "page_end": 3,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_55f5c53241444144d0171ae7918bf3da",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "90a6d785b24fbd80e129e92a4c770ffd932e6ed2d2875d094530665635c4615f",
+      "page_start": 3,
+      "page_end": 4,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_ff801092852abe64c55baf9fb9177ccc",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "118a80442b9485a4ade4d69b67a2db76a506e4aa51ebb3048567c9bae74a6549",
+      "page_start": 4,
+      "page_end": 4,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_f10698cd511919a68438905eb9971303",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "452b9c109a25c9f4e9c84bc0c9bfe9401816a9c1cbdf0782376bbc0713170ea3",
+      "page_start": 4,
+      "page_end": 4,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_73977e3c45d03873b66abdf8357638dd",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "a0f222edf2aac6bf895fa90fab7bbb0b9325e821073215ca40e4d31d298e2830",
+      "page_start": 4,
+      "page_end": 4,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_2e5c252a20f9d962ff5b880ff6b29e54",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "f3df15f6781022afdb04e3e01dd4160eec031db88f43fd47d290e80c4c163b96",
+      "page_start": 4,
+      "page_end": 4,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_a430196a4fbe542e637ec87530659be3",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "eb4ef5509350e1ebb1bd3f710b58ddceeaf629b9071e0979f04462aad692ed20",
+      "page_start": 4,
+      "page_end": 5,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_b8338106a2a8141a9afa85360439cfc4",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "c56dc441897db19c93973b555f93409edc19faeb3788ac1a654e145a226d0ed7",
+      "page_start": 5,
+      "page_end": 5,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_aa14e2cd58a1f4d4b47738406e4cecde",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "befbda51172cd880123dd51bc195eec82ee38313123d409498efb43593b03bef",
+      "page_start": 5,
+      "page_end": 5,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_96e9fcf05033660e3eaa3b9e533528fe",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "895256ece373f014f697260e47eac9ac53ab1b046199d261f4b2a4cd919388b4",
+      "page_start": 5,
+      "page_end": 6,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_14422ecb69f88241dd100b309916fc19",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "d280ce0f4e3d5275888320be4fe726cdc3aacc758ee5a884adb5dad4479155dd",
+      "page_start": 6,
+      "page_end": 6,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_fae5216c8de50dfefc153da415610ba6",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "8390f339e1704168a21ba8abb22b8b9216ae4792b5c35114edf079a99ce93dca",
+      "page_start": 6,
+      "page_end": 6,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_40c7a8566795976b09d6c0cad5592aec",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "b4a3d9d2802b89ccf89b6b358ec60d76914fd067821dd340e8893853c0e71433",
+      "page_start": 6,
+      "page_end": 7,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_0d073822f79abb22a99653ed90478ed9",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "e7180e4dc76b34f715efd6f7b0f283e2e1dd93ca8f936b9b569be9cd3323dba3",
+      "page_start": 7,
+      "page_end": 7,
+      "section": "Introduction",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_9d9ee136eacc99fb94f97a46f3bb2c7b",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "feac9ec9bcce057ffe422813d063b19de726ca18da67dfc4a786b91e31633835",
+      "page_start": 7,
+      "page_end": 7,
+      "section": "Experiments",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_bb730573725b148aa7913e7f17bb9261",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "e3645042e8fa1db19322302d9398f691f06ddf5d1d132e559caa7e5dbad8ccae",
+      "page_start": 7,
+      "page_end": 7,
+      "section": "Experiments",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_56985246c2b5e3130cfbdaafae0f9366",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "701c234dd78a7c4cf6f39813c449c0394ea4014542162ff6a64f387017f58eaa",
+      "page_start": 7,
+      "page_end": 8,
+      "section": "Experiments",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_0365cffe276d7592e2170b25f169cd95",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "9df932acf73cd35c93325bec996cec46b592b25af989c8e314808692572f2d1f",
+      "page_start": 8,
+      "page_end": 8,
+      "section": "Experiments",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_68269bfac20d6385f48d0521476d3820",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "d686551af0e8bfd1b67b085a3bbda36a69b1b6860066be3e4c3967d4e75f5f3e",
+      "page_start": 8,
+      "page_end": 8,
+      "section": "Experiments",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_7425ece3f15adbe76a360ccd771e494f",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "f48c979cedf3c1f92fa8ad78a6f1e245dd4ea294910a1170bd7addd45fbd3032",
+      "page_start": 8,
+      "page_end": 8,
+      "section": "Method",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_de2dbf0e468f51f7e7ba04c99d9d85db",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "011eac7f06d1ab6bd795389b6497c116bbd26cda87c89a21a47bfb599d4debe6",
+      "page_start": 8,
+      "page_end": 8,
+      "section": "Method",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_a407e76d3edfaf1a9413559721b56299",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "9750a8103b17c10accb4214e2bf53de1d19b5c8b58934afef846716d45e6249c",
+      "page_start": 8,
+      "page_end": 8,
+      "section": "Method",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_5804814c1d568658cfb52af78d4849db",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "66163b86e723795ebd401d5fe2d72a9c244d69b84ac998b6dfe9e207f91be635",
+      "page_start": 8,
+      "page_end": 9,
+      "section": "Method",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_08a5cd319ff231eccd2c5f254340213d",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "d6e4fd6dab704da7059813365d8dd37fd9bd29d0aeca6491ae3b916706bbcf75",
+      "page_start": 9,
+      "page_end": 9,
+      "section": "Method",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_0db666b43cd08db4f0f802be8e8740a5",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "bd30677d1bd94a56cf10f75d764a112cfce7700336833418627c280595f127c1",
+      "page_start": 9,
+      "page_end": 9,
+      "section": "1. Ultrasonic characterization of",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_a8be21889a1afd7a234a4d0521059da8",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "f774520d941e0bceaf357ecf8f60c10ec9a7db021fe3bc96c9bc627faeb3ca4c",
+      "page_start": 9,
+      "page_end": 9,
+      "section": "1. Ultrasonic characterization of",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_a58abbb14497e4834ba62385406a1d89",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "7a7759a48d375d7c5d7241d9fd2a8753a8e3bcc4eb6fff610b74564824337a44",
+      "page_start": 9,
+      "page_end": 9,
+      "section": "1. Ultrasonic characterization of",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_6dd550e53fe21bea25cc6a6fbe58e406",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "e79b6eeb133c2e9bcfed9b7689436aa6e856e3a6478227571545274d83cae33c",
+      "page_start": 10,
+      "page_end": 10,
+      "section": "1. Ultrasonic characterization of",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_5aaf8c492d28eeeb1c3f69591282d64c",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "09981384ada8c8d742cf4d91facb45c47dc3d7a798867120167eb52f2fb718a5",
+      "page_start": 10,
+      "page_end": 10,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_12c7bf0f83434a3659f1e58beafe4b0a",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "4918ff6ea4feb76b4b36e75d7f28038e5db99ceca2f5d978a5c0ba5dae4164bd",
+      "page_start": 10,
+      "page_end": 10,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_d1cc05944fdd1169c721b7f82ce10526",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "d3e8ea7dca23d1b36775d1850a244518dfb0245cec5e9c6fd318e7c4c6b46e1a",
+      "page_start": 10,
+      "page_end": 10,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_e0fb338e0bd10ff3cc732c529d93033c",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "9fd7310837b66233f7a514b4b096fb4bac257cfa7d74cd58b25be2b1c4ece6b0",
+      "page_start": 10,
+      "page_end": 11,
+      "section": "Related Work",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_68e658fc4bda21abe2f53ef03452993d",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "0910db144e9b260b05b71b501c566e2da1d761e9253ad184dad99de12b9f535f",
+      "page_start": 11,
+      "page_end": 11,
+      "section": "Acknowledgement",
+      "content_kind": "body"
+    },
+    {
+      "chunk_id": "chunk_c21aee35b1a9dfd3cb576e5bfb5a4c6c",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "0600c84cf52b866d65865ad7a6b017200527f96fabc21a2b6cbcf1dd872ecdec",
+      "page_start": 16,
+      "page_end": 16,
+      "section": "A.2 STARK-AMAZON",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_10d454ac29067e7d1a22b8d6200af9e5",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "28853625a6219661a565b0baeba448b95b2b8ab0e168354cadd754d96f83afaf",
+      "page_start": 16,
+      "page_end": 17,
+      "section": "A.3 STARK-MAG",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_32b00088ff0d314f29a780a21391a70c",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "9125046cb2384da50b5027d92ff16b13d90a494d61e5b4b2b566edc76f894e70",
+      "page_start": 17,
+      "page_end": 17,
+      "section": "A.4 STARK-PRIME",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_2d02555ebc9e77b34cf8306f68144ddc",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "d2b6e08b5b1a1b49d7ab0a5808186caa00ee045bc700eb86a95cf4c8aa54524d",
+      "page_start": 17,
+      "page_end": 17,
+      "section": "A.4 STARK-PRIME",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_4697197dc0d7c2d40e2183b0bb64a38c",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "b3c5d49465a8ff8b4d10f9bd7e79915644dcc295005fe7bf5bb3732e5e7802c7",
+      "page_start": 18,
+      "page_end": 18,
+      "section": "A.4 STARK-PRIME",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_0d9aa18517b7f13cf82f4944d674daab",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "a13e325a4e51ed6a9f60c08ba76c793561ccf2eec8e32a4931d4df6f88b861be",
+      "page_start": 18,
+      "page_end": 18,
+      "section": "A.4 STARK-PRIME",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_431ea83d709d633f100fd9a28a4fdca7",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "1c841e65ca87df30b7da93aa051adb7e5685da7622ac6ab285057a8b918e602d",
+      "page_start": 18,
+      "page_end": 19,
+      "section": "A.4 STARK-PRIME",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_f6e271d15a4e1ba400fdd2a4606f7e18",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "bd67a0a1b42f0031ed80527546395fa10d53cd5120fc8afa246dfb3172069dbe",
+      "page_start": 19,
+      "page_end": 19,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_a3b2306a532e47e3e944783caa87314d",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "bd16cb0a3101f65f5e0c186c218e804963dd20b0b40813534f952a0ac23075bc",
+      "page_start": 20,
+      "page_end": 20,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_b9be6b92838d9af8c6edf0e6ff557476",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "98848b7309524af8cb7344f3634e2322edd31aaa723cdc654bf36bdcb3b245bc",
+      "page_start": 20,
+      "page_end": 20,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_f559efc327128d44dd34cf0147c3caeb",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "cd47f98623d96aa2b7bd1cbea3737f5ef69b329b1107fbd72f9e63fb35a6c9c8",
+      "page_start": 20,
+      "page_end": 21,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_ae90ae3a0291f9155a23e55d0e3655de",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "ed48a288150e04471325a328d6bbda58b507007968a07e0d3b56f9bf7b88730c",
+      "page_start": 21,
+      "page_end": 21,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_1a5dbe0b56a19fc637e75b21017d082e",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "11c8a41bd3e1d94ac4b6dec73ec3566cd51f93201661ce9306885874c3b8d49a",
+      "page_start": 21,
+      "page_end": 22,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_f0e73391d4cf439a4baf379972fb4b45",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "fc939a1579471483ebf160216d0b887f4df12f8777a71ab71ff280edcae4c26e",
+      "page_start": 22,
+      "page_end": 23,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_4c23ff22bf7b4955aa4d6d9030a83056",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "431a0c82e5df23354923d5575acdb998915add2ae612793f47a57f89904c00b0",
+      "page_start": 23,
+      "page_end": 23,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_1c18caac93113a8b1f31c429dcfdb250",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "5baf3e92bc44772006109b925e93e9e7dbe616ba97702329fe73906679525cb3",
+      "page_start": 23,
+      "page_end": 24,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_df1f0e1d42eec75ed4c6ad96b8c7d4a5",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "1690393ff256ae334460ebc94afaba77f4ef38f4e8de0f70421fdb6db9ea8449",
+      "page_start": 24,
+      "page_end": 24,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    },
+    {
+      "chunk_id": "chunk_f86d846031fcfe4e1644057fb158663b",
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "text_sha256": "d32191f0e3ecc980a65ca41f52984de58d053040f6184359c7542fb28d505259",
+      "page_start": 25,
+      "page_end": 25,
+      "section": "Experiments",
+      "content_kind": "appendix"
+    }
+  ],
+  "relations": [
+    {
+      "subject_type": "Component",
+      "predicate": "IMPLEMENTS",
+      "object_type": "Mechanism"
+    },
+    {
+      "subject_type": "Method",
+      "predicate": "CONTROLLED_BY",
+      "object_type": "Parameter"
+    },
+    {
+      "subject_type": "Method",
+      "predicate": "HAS_COMPONENT",
+      "object_type": "Component"
+    }
+  ],
+  "smoke_samples": [
+    {
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "chunk_id": "chunk_8c5476c0307c733adb60d1afe861e4d2",
+      "ordinal": 18,
+      "selection": "fixed substantive methods/process passage; smoke only"
+    },
+    {
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "chunk_id": "chunk_d755b392a1954f2b53e23e4968d18904",
+      "ordinal": 11,
+      "selection": "fixed substantive methods/process passage; smoke only"
+    },
+    {
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "chunk_id": "chunk_9d9ee136eacc99fb94f97a46f3bb2c7b",
+      "ordinal": 22,
+      "selection": "fixed substantive methods/process passage; smoke only"
+    }
+  ],
+  "controls": {
+    "max_items": 20,
+    "all_eligible_non_reference_chunks": true,
+    "paragraph_second_pass": false,
+    "valid_claim_kind": "author_assertion only",
+    "source_quote_required": true,
+    "production_chain_untouched": true
+  },
+  "hashes": {
+    "corpus_manifest": "a6a19e2e97b11d9c450ef9cbad8f0f7c96dc367f14559c799d64083312262167",
+    "code": "02871964082434bd388b70aa55a7408f195ba27935bd448fb925fc1108ade0cd"
+  },
+  "sha256": "7a101352263f18a7388d484b293775d452f981f8183d2eab2e83fe93b2a82a2d"
+}

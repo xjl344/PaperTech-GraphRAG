@@ -1,0 +1,422 @@
+{
+  "id": "9d38c9d4-2d00-5071-a8ae-14d6bf5d28b5",
+  "inputs": {
+    "question": "比较 StructGPT 与 LPKG：一个方法在回答时如何获得证据，另一个方法在训练时如何获得规划数据？说明 KG/结构化数据在两者中的不同角色。"
+  },
+  "outputs": {
+    "expected_answer": "StructGPT 在推理时经接口迭代读取结构化证据；LPKG 从 KG 派生规划数据并微调模型。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "struct",
+        "answer_point": "StructGPT 通过专门接口迭代读取结构化证据，再让 LLM 根据已取得信息推理。",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+        "primary_chunk": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "chunk_bd4734d2765e2147cac924fe8ba38d85"
+        ]
+      },
+      {
+        "unit_id": "lpdata",
+        "answer_point": "LPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "primary_chunk": "chunk_e07b345ba2a42d01f295e47f196061d5",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ]
+      }
+    ],
+    "relation_outline": "结构化数据 → 接口读取 → 推理；KG → 规划训练数据 → 微调规划能力",
+    "must_not_claim": "不能把推理时读取接口等同训练数据构建，也不能认为两者共享训练协议。",
+    "case_id": "R04",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "struct",
+        "required_fact": "StructGPT 通过专门接口迭代读取结构化证据，再让 LLM 根据已取得信息推理。",
+        "primary_chunk": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+        "supporting_chunks": [
+          "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+          "chunk_bd4734d2765e2147cac924fe8ba38d85"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "lpdata",
+        "required_fact": "LPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。",
+        "primary_chunk": "chunk_e07b345ba2a42d01f295e47f196061d5",
+        "supporting_chunks": [
+          "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "parse_id": "parse_0f17805b3b51899f139913f99df23591",
+        "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+        "source_relative_path": "Methods/229_StructGPT A General Framework for Large Language Model to Reason over Structured Data.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 480,
+            "end_char": 1582,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1102,
+            "block_bboxes": [
+              [
+                157.758,
+                214.382,
+                202.243,
+                226.337
+              ],
+              [
+                87.565,
+                238.04,
+                273.783,
+                523.046
+              ],
+              [
+                70.866,
+                535.569,
+                153.68,
+                547.524
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "d441f2b0957e29f2e554a3d82bc1f0ed4d0d070b56fa68274aaa5f9e5d7be9a9",
+        "section": "Abstract",
+        "text": "Abstract\nIn this paper, we aim to improve the reason-\ning ability of large language models (LLMs)\nover structured data in a unified way.\nIn-\nspired by the studies on tool augmentation for\nLLMs, we develop an Iterative Reading-then-\nReasoning (IRR) framework to solve question\nanswering tasks based on structured data, called\nStructGPT. In this framework, we construct\nthe specialized interfaces to collect relevant ev-\nidence from structured data (i.e., reading), and\nlet LLMs concentrate on the reasoning task\nbased on the collected information (i.e., rea-\nsoning). Specially, we propose an invoking-\nlinearization-generation procedure to support\nLLMs in reasoning on the structured data with\nthe help of the interfaces. By iterating this\nprocedure with provided interfaces, our ap-\nproach can gradually approach the target an-\nswers to a given query. Experiments conducted\non three types of structured data show that\nStructGPT greatly improves the performance\nof LLMs, under the few-shot and zero-shot set-\ntings. Our codes and data are publicly available\nat https://github.com/RUCAIBox/StructGPT.\n1\n"
+      },
+      {
+        "chunk_id": "chunk_bd4734d2765e2147cac924fe8ba38d85",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "parse_id": "parse_0f17805b3b51899f139913f99df23591",
+        "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+        "source_relative_path": "Methods/229_StructGPT A General Framework for Large Language Model to Reason over Structured Data.pdf",
+        "page_start": 9,
+        "page_end": 10,
+        "source_spans": [
+          {
+            "pdf_page": 9,
+            "start_char": 2518,
+            "end_char": 3569,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1051,
+            "block_bboxes": [
+              [
+                306.142,
+                459.593,
+                381.209,
+                471.548
+              ],
+              [
+                306.142,
+                491.833,
+                526.225,
+                773.66
+              ]
+            ]
+          },
+          {
+            "pdf_page": 10,
+            "start_char": 0,
+            "end_char": 2,
+            "chunk_start_char": 1052,
+            "chunk_end_char": 1054,
+            "block_bboxes": [
+              [
+                70.866,
+                72.649,
+                147.917,
+                84.604
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "912f292ae25cb572c2810c1f89c6a1224a8f9d57fd6c7a03bff243094b2cbae7",
+        "section": "Conclusion",
+        "text": "Conclusion\nIn this work, we proposed a general framework for\nimproving the zero-shot reasoning ability of LLMs\nover structured data, namely StructGPT. In our ap-\nproach, we first constructed the specialized inter-\nfaces that support accurate and efficient data ac-\ncess, and then proposed an invoking-linearization-\ngeneration procedure that leverages LLMs to read\nand perform reasoning based on the interface. By\niterating the above procedure using the interfaces\nsequentially, LLMs can progressively capture more\nuseful and detailed evidence and finally generate\nthe answer.\nTo verify the effectiveness of our\napproach, we implemented our approach on KG\nbased QA, table based QA and DB based semantic\nparsing tasks. Experimental results on 8 datasets\nshow that our approach can boost the zero-shot per-\nformance of LLMs by a large margin, and achieve\ncomparable performance as full-data supervised-\ntuning methods. We also provide detailed error\nanalysis to point out the weakness of our approach,\nfor enlighting other researchers in related areas.\n\n7\n"
+      },
+      {
+        "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 576,
+            "end_char": 1608,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1032,
+            "block_bboxes": [
+              [
+                157.758,
+                205.751,
+                384.313,
+                233.647
+              ],
+              [
+                87.516,
+                247.152,
+                273.866,
+                520.203
+              ],
+              [
+                70.866,
+                534.529,
+                153.68,
+                546.484
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "6d4e138ad0ce1b7769f1e9faca7d7d7d023628d64730439d12ce6949fa7eaaed",
+        "section": "Abstract",
+        "text": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n"
+      },
+      {
+        "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+        "page_start": 8,
+        "page_end": 9,
+        "source_spans": [
+          {
+            "pdf_page": 8,
+            "start_char": 3661,
+            "end_char": 4405,
+            "chunk_start_char": 0,
+            "chunk_end_char": 744,
+            "block_bboxes": [
+              [
+                306.142,
+                552.544,
+                381.209,
+                564.499
+              ],
+              [
+                305.804,
+                574.956,
+                526.318,
+                775.47
+              ]
+            ]
+          },
+          {
+            "pdf_page": 9,
+            "start_char": 0,
+            "end_char": 754,
+            "chunk_start_char": 745,
+            "chunk_end_char": 1499,
+            "block_bboxes": [
+              [
+                180.817,
+                292.104,
+                414.46,
+                302.067
+              ],
+              [
+                70.866,
+                324.955,
+                125.334,
+                336.91
+              ],
+              [
+                70.866,
+                346.852,
+                290.946,
+                371.348
+              ],
+              [
+                70.593,
+                373.953,
+                290.947,
+                452.691
+              ],
+              [
+                70.473,
+                455.399,
+                289.317,
+                547.583
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "f73754b3c9783112b1271eaa8cf1148cce8968074fe88a8dd55636c12432ae2f",
+        "section": "Conclusion",
+        "text": "Conclusion\nIn this paper, we try to enhance the planning ability\nin retrieval-augmented LLMs using KGs. Specifi-\ncally, we design a framework for Learning to Plan\nfrom KG (LPKG). The proposed LPKG framework\nfirst utilizes the rich patterns in the KGs to con-\nstruct planning data, then fine-tune planning LLMs\nbased on such data to enable them to conduct plan-\nning on downstream datasets, and ultimately get\nthe final answer through parsing and execution.\nThe experimental results reveal the excellent per-\nformance of the LPKG framework and also demon-\nstrate the effectiveness of using KG-sourced data to\nenhance LLMs’ planning ability. Finally, we con-\nstruct CLQA-Wiki, providing a more challenging\ncomplex QA benchmark for the community.\n\nFigure 4: Fine-grained evaluation based on question types.\nLimitation\nIn our view, the limitations of our work at the cur-\nrent stage mainly stem from two aspects:\n(1) During the fine-tuning phase of planning\nLLMs, we simply mixed various types of ques-\ntions together uniformly for training. We have not\nyet explored the impact of question type distribu-\ntion on the experimental results, which could be\nthe focus of future work.\n(2) At present, the datasets we test have explicit\ntypes of questions (multi-hop, comparison, and\nunion/intersection), but in reality, some question\ntypes may be implicit or even not be included in\nthe types we define. The future direction of our\nwork can be to study planning methods for these\ntypes of unclear questions.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_900c57868044724d396de2c95dd00435",
+      "paper_cedbfddc8030ded4258640a1e0a0a733"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "必须覆盖全部必要事实并引用每篇所需原文",
+      "semantics": "逐项检查关系方向、实体角色、任务/实验条件",
+      "synthesis": "区分原文直接关系与跨来源分析，不将分析链冒充已入图事实",
+      "uncertainty": "缺任何必要环节须部分回答/说明缺口，不补写关系"
+    },
+    "scoring_rules": {
+      "primary": "All required source papers retained; measured using inherited references only after assembly.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40: reciprocal first rank containing any known supporting unit",
+        "selected evidence unit coverage",
+        "all-units coverage"
+      ],
+      "denominator": "16 failure-selected cross-text cases; before/after paired evidence replay. Not comparable to full v2 averages.",
+      "relevance": "仅原文核查后的有限支持池；没有穷举所有等价来源，池外不等于不相关。",
+      "latency": "Evidence assembly only, excluding retrieval, reranking and generation. Historical timings are separate.",
+      "p95": "按各类别及全部可回答题分别计算，单次小样本不表示 SLA。",
+      "answer_review": "No new answers generated. No answer accuracy or citation success change is claimed.",
+      "relation_gold": "reasoning_chain 为人工可审阅的分析提纲，不是生产图路径金标；共享基准、分析比较不自动对应图谱 Schema 边。",
+      "interpretation": "分别报告基础、跨文本、反例表现；新旧题集分布不同，不能由总分变化推导系统改善或 Graph 胜出。"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "固定旧候选的证据选择回放；不生成新回答。",
+      "controls": {
+        "fulltext_top": 20,
+        "dense_top": 20,
+        "candidates": 40,
+        "evidence_max": 8,
+        "context_bytes": 6000,
+        "hops": 2,
+        "degree": 8,
+        "graph_paths": 40,
+        "rerank_threshold": 0.05,
+        "max_pair_tokens": 1024,
+        "rrf_k": 60,
+        "query_vectors": "one batched cloud call, reused unchanged across paired arms",
+        "order": "odd numbered case Hybrid first, even Graph first; one warmup; no response retries",
+        "generation_subset": [
+          "R01",
+          "R02",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R08",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R14",
+          "R15",
+          "R16",
+          "R17",
+          "R18",
+          "R19",
+          "R20",
+          "R21",
+          "R22",
+          "R23",
+          "R24",
+          "N01",
+          "N02",
+          "N03",
+          "N04",
+          "N05",
+          "N06",
+          "N07",
+          "N08"
+        ],
+        "generation_policy": "基础 8 题仅检索；24 道关系题与 8 道反例按证据门控生成，最多 64 次配对生成调用。"
+      },
+      "models": {
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16"
+      },
+      "parent_generate": true,
+      "comparison": {
+        "arms": [
+          "Graph-before",
+          "Graph-after"
+        ],
+        "mode": "frozen_candidate_evidence_replay",
+        "changed": "question-driven source recognition and evidence reservation",
+        "fixed": [
+          "question",
+          "reference facts",
+          "ranked candidates and scores",
+          "retrieved graph paths",
+          "6000-byte budget",
+          "rerank threshold",
+          "path assembly policy"
+        ],
+        "generation": "No generation replayed; parent answers remain historical context only."
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Graph-before / Graph-after Experiment runs",
+      "fields": [
+        "全部冻结候选与分数",
+        "入选原文与位置",
+        "来源保留与缺口",
+        "逐事实覆盖",
+        "图路径",
+        "证据组装耗时",
+        "历史回答、引用、Token 与 Trace（明确为父运行）"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "R04",
+    "category": "cross",
+    "benchmark": "benchmark-source-coverage-v1",
+    "benchmark_sha256": "fcbffc2cd3012d7e49daa8361e202f2b6211095974236c48dc8bfe057f7fb7f6",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。",
+    "selection_reason": {
+      "required_papers": [
+        "paper_900c57868044724d396de2c95dd00435",
+        "paper_cedbfddc8030ded4258640a1e0a0a733"
+      ],
+      "baseline_selected_papers": [
+        "paper_900c57868044724d396de2c95dd00435"
+      ],
+      "missing_papers": [
+        "paper_cedbfddc8030ded4258640a1e0a0a733"
+      ]
+    }
+  },
+  "split": [
+    "cross"
+  ]
+}

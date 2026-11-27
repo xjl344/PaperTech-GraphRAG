@@ -1,0 +1,1742 @@
+{
+  "case_id": "R21",
+  "question": "围绕“有限上下文或有限搜索预算下如何保留必要证据”，比较 G-Retriever、Tree-of-Traversals 与 CuriousLLM 的机制。哪些是子图选择，哪些是搜索边界，哪些是证据缺口信号？",
+  "category": "cross",
+  "arm": "Path-0",
+  "path_budget": 0,
+  "status": "partial",
+  "answer": "G-Retriever 明确把“子图构造”作为流程的一步：检索到语义相关节点和边后，构造一个连通子图，覆盖尽可能多相关节点和边，同时保持图规模可控 [chunk_2da94a87e97c2e0f30e8eec5659e202d]。其子图选择被表述为 PCST 优化问题，并称可借此扩展到超过 LLM 上下文窗口的图 [chunk_2da94a87e97c2e0f30e8eec5659e202d]。\n\nTree-of-Traversals 维护一个局部 KG 子图并反复扩展，直到包含 LLM 回答查询所需全部信息；算法在 LLM 能利用该局部子图回答原查询时停止 [chunk_0cb3c2dcbacf18237a13b232366d2be8]。它由 KG 接口、定义可行动作/状态/提示模板的动作状态机，以及定义搜索轨迹（如最佳优先搜索、犯错回溯和找到答案时的终止条件）的树搜索算法组成 [chunk_0cb3c2dcbacf18237a13b232366d2be8]。因此这里同时存在“子图扩展”机制和由树搜索终止条件体现的搜索边界，但证据未给出固定预算数值。\n\nCuriousLLM 的遍历算法设有“预设段落预算 K”并初始化检索段落计数，循环在队列耗尽或代理返回空集时终止 [chunk_1c31546f7f4375c1f684f59dc4fa0521]。其代理可生成终止信号“NA”以提前结束遍历，作者称该机制在证据充分时停止搜索，从而减少遍历时间和计算/延迟，并称保持有竞争力的准确率 [chunk_1c31546f7f4375c1f684f59dc4fa0521]。这可视为“证据充分”的终止/缺口信号机制，但证据未说明其如何判定证据不充分或报告缺口。\n\n按所给原文，明确可归为子图选择的是 G-Retriever 的连通子图提取/PCST 子图检索 [chunk_2da94a87e97c2e0f30e8eec5659e202d]；Tree-of-Traversals 是局部子图反复扩展并以树搜索控制轨迹 [chunk_0cb3c2dcbacf18237a13b232366d2be8]；CuriousLLM 是带段落预算和“NA”提前终止的 KG 遍历 [chunk_1c31546f7f4375c1f684f59dc4fa0521]。搜索边界方面，CuriousLLM 有预设段落预算 K 和空返回终止 [chunk_1c31546f7f4375c1f684f59dc4fa0521]，Tree-of-Traversals 有树搜索终止条件 [chunk_0cb3c2dcbacf18237a13b232366d2be8]；G-Retriever 的证据只给出“保持图规模可控”，未给具体预算或停止规则，流程细节证据不足 [chunk_2da94a87e97c2e0f30e8eec5659e202d]。证据缺口信号方面，只有 CuriousLLM 明确以“NA”表示已收集足够证据并终止 [chunk_1c31546f7f4375c1f684f59dc4fa0521]；其余两者的原文未明确给出“证据缺口”信号。",
+  "ranked": [
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8121352195739746
+        }
+      ],
+      "rerank_score": 0.8374870419502258
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7899789810180664
+        }
+      ],
+      "rerank_score": 0.5947277545928955
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 0.031009615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.538365840911865
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8101711273193359
+        }
+      ],
+      "rerank_score": 0.41182032227516174
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7969875335693359
+        }
+      ],
+      "rerank_score": 0.3380771279335022
+    },
+    {
+      "chunk_id": "chunk_ac2dd6acd17189360638268b42945e7b",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.265714168548584
+        }
+      ],
+      "rerank_score": 0.3332861661911011
+    },
+    {
+      "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7893319129943848
+        }
+      ],
+      "rerank_score": 0.297980397939682
+    },
+    {
+      "chunk_id": "chunk_e2737c14a5cd36e6bd408af049fd0aac",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.688525199890137
+        }
+      ],
+      "rerank_score": 0.27835485339164734
+    },
+    {
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "score": 0.028125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 7.7314133644104
+        },
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.787837028503418
+        }
+      ],
+      "rerank_score": 0.2649284899234772
+    },
+    {
+      "chunk_id": "chunk_54195d498800a946748950b0238fda0f",
+      "score": 0.029236022193768675,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.151087284088135
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7980847358703613
+        }
+      ],
+      "rerank_score": 0.2366926223039627
+    },
+    {
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7898497581481934
+        }
+      ],
+      "rerank_score": 0.2349328249692917
+    },
+    {
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 0.030330882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.312259674072266
+        },
+        {
+          "channel": "graph",
+          "rank": 4,
+          "score": 0.25
+        }
+      ],
+      "rerank_score": 0.21060390770435333
+    },
+    {
+      "chunk_id": "chunk_493b0a4135b6944dbb0486997cf4933d",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7930436134338379
+        }
+      ],
+      "rerank_score": 0.18198898434638977
+    },
+    {
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 0.029051670471052088,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.627045154571533
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8347406387329102
+        }
+      ],
+      "rerank_score": 0.15623357892036438
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8149781227111816
+        }
+      ],
+      "rerank_score": 0.14694204926490784
+    },
+    {
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 0.031054405392392875,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.312259674072266
+        },
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.13206614553928375
+    },
+    {
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "score": 0.03125763125763126,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 7.772240161895752
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.800473690032959
+        }
+      ],
+      "rerank_score": 0.11576064676046371
+    },
+    {
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.230220317840576
+        }
+      ],
+      "rerank_score": 0.10502681136131287
+    },
+    {
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "score": 0.025657894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.454320907592773
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7899179458618164
+        }
+      ],
+      "rerank_score": 0.09739039838314056
+    },
+    {
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 0.03278688524590164,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.9458441734313965
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.09268777817487717
+    },
+    {
+      "chunk_id": "chunk_e1a638ad66c9677e3b21b218e22f0aed",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 6.918736934661865
+        }
+      ],
+      "rerank_score": 0.09252364933490753
+    },
+    {
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.408199787139893
+        }
+      ],
+      "rerank_score": 0.09025323390960693
+    },
+    {
+      "chunk_id": "chunk_000fb51c29790f99fdf023d7b338666c",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7938132286071777
+        }
+      ],
+      "rerank_score": 0.08772001415491104
+    },
+    {
+      "chunk_id": "chunk_7c3a7be987627b104ec877903108110f",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.719615936279297
+        }
+      ],
+      "rerank_score": 0.07369627058506012
+    },
+    {
+      "chunk_id": "chunk_c9487cbd571de7247dab7359aeb33936",
+      "score": 0.028594771241830064,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.081750392913818
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7958593368530273
+        }
+      ],
+      "rerank_score": 0.06891249865293503
+    },
+    {
+      "chunk_id": "chunk_f800cd4e8fa59900491c3efa5f890329",
+      "score": 0.02684684684684685,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 6.745891571044922
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7900943756103516
+        }
+      ],
+      "rerank_score": 0.060863446444272995
+    },
+    {
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 0.03200204813108039,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 7.831502437591553
+        },
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.047074172645807266
+    },
+    {
+      "chunk_id": "chunk_5c9e14854565607ec53c355da481c451",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7896895408630371
+        }
+      ],
+      "rerank_score": 0.04232459142804146
+    },
+    {
+      "chunk_id": "chunk_f4962498025654850621ee329d0af7d6",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 6.719615936279297
+        }
+      ],
+      "rerank_score": 0.03173859417438507
+    },
+    {
+      "chunk_id": "chunk_85cf026687ef7fad0688db2c4af1d3a9",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7925009727478027
+        }
+      ],
+      "rerank_score": 0.027954399585723877
+    },
+    {
+      "chunk_id": "chunk_20ad4ca6811d52ca011e181dadb57ba4",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.074681282043457
+        }
+      ],
+      "rerank_score": 0.01737566478550434
+    },
+    {
+      "chunk_id": "chunk_bbdc0fb732ecf567254a5f45a98b7172",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7929511070251465
+        }
+      ],
+      "rerank_score": 0.010735162533819675
+    },
+    {
+      "chunk_id": "chunk_8d39fae61676598bb26a04a776069efe",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7935094833374023
+        }
+      ],
+      "rerank_score": 0.008061991073191166
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 10,
+      "page_end": 11,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 10,
+          "start_char": 3851,
+          "end_char": 4613,
+          "chunk_start_char": 0,
+          "chunk_end_char": 762,
+          "block_bboxes": [
+            [
+              305.782,
+              560.938,
+              526.225,
+              720.848
+            ],
+            [
+              305.629,
+              723.963,
+              526.317,
+              775.496
+            ],
+            [
+              292.183,
+              794.449,
+              303.092,
+              805.358
+            ]
+          ]
+        },
+        {
+          "pdf_page": 11,
+          "start_char": 0,
+          "end_char": 734,
+          "chunk_start_char": 763,
+          "chunk_end_char": 1497,
+          "block_bboxes": [
+            [
+              70.473,
+              118.171,
+              524.409,
+              142.646
+            ],
+            [
+              70.866,
+              148.452,
+              524.414,
+              159.755
+            ],
+            [
+              89.412,
+              162.142,
+              524.591,
+              186.6
+            ],
+            [
+              76.981,
+              185.281,
+              271.347,
+              200.302
+            ],
+            [
+              76.981,
+              201.127,
+              356.139,
+              215.194
+            ],
+            [
+              76.981,
+              214.677,
+              356.379,
+              228.743
+            ],
+            [
+              76.981,
+              229.55,
+              343.856,
+              248.641
+            ],
+            [
+              76.981,
+              243.296,
+              297.727,
+              254.499
+            ],
+            [
+              76.981,
+              256.845,
+              276.76,
+              269.39
+            ],
+            [
+              76.981,
+              268.77,
+              110.199,
+              281.303
+            ],
+            [
+              107.006,
+              270.535,
+              245.108,
+              284.5
+            ],
+            [
+              76.981,
+              282.32,
+              119.591,
+              295.146
+            ],
+            [
+              116.398,
+              283.943,
+              163.424,
+              298.049
+            ],
+            [
+              76.981,
+              297.787,
+              199.31,
+              308.696
+            ],
+            [
+              72.498,
+              311.336,
+              126.688,
+              322.245
+            ],
+            [
+              72.498,
+              322.967,
+              169.531,
+              335.794
+            ],
+            [
+              166.338,
+              324.885,
+              184.277,
+              338.85
+            ]
+          ]
+        }
+      ],
+      "quote": "Our evaluation of early traversal termination using\nthe CuriousLLM agent demonstrates substantial\nimprovements in efficiency while maintaining com-\npetitive accuracy in MD-QA tasks. Our mistral\nmodel, fine-tuned to generate a termination signal\n(\"NA\") when it has gathered sufficient evidence,\nsignificantly reduces traversal time without com-\npromising the quality of the final answer. This\nearly termination feature allows the agent to stop\nthe search process as soon as necessary information\nis identified, thus minimizing unnecessary compu-\ntation and latency.\nWe compare three different agents: Mistral with\nearly termination (Mistral-ET), the standard Mis-\ntral without early termination, and the T5 model.\nWe collect questions that are closed early by\n10\n\nAlgorithm 1 LLM-based KG Traversal Algorithm for Retrieving Relevant Context Given a Content-based\nUser Query\nRequire: An initial query q over a set of documents D, the constructed KG G = {V, E, X} over D, the\nLLM graph traversal agent Fagent, the preset passage budget K, the TF-IDF seeding passage retriever\ng\n1: Initialize seed passages Vs = g(V, X, q)\n2: Initialize the retrieved passage queue P = {[vi] | vi ∈Vs}\n3: Initialize the candidate neighbor queue C = [Ni | vi ∈Vs]\n4: Initialize the retrieved passage counter k = P\nPi∈P |Pi|\n5: while queue P and queue C are not empty do\n6:\nPi ←P.dequeue(), Ci ←C.dequeue()\n7:\nV′\ni = Traversal Agent(q, Pi, Ci)\n8:\nif V′\ni = ∅then\n9:\nTerminate the loop\n10:\nend if\n11:\nfor each v ∈V′\ni do\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8121352195739746
+        }
+      ],
+      "rerank_score": 0.8374870419502258,
+      "context_bytes": 1913
+    },
+    {
+      "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 909,
+          "end_char": 2444,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1535,
+          "block_bboxes": [
+            [
+              108.0,
+              216.502,
+              504.353,
+              270.219
+            ],
+            [
+              108.0,
+              292.552,
+              503.997,
+              313.499
+            ],
+            [
+              108.0,
+              330.132,
+              187.371,
+              342.087
+            ],
+            [
+              107.641,
+              354.551,
+              505.247,
+              430.106
+            ],
+            [
+              107.641,
+              436.402,
+              505.74,
+              457.379
+            ],
+            [
+              108.0,
+              471.631,
+              168.064,
+              481.593
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 3: Overview of the proposed G-Retriever: 1) Indexing: Graphs are indexed for efficient query\nprocessing; 2) Retrieval: The most semantically relevant nodes and edges are retrieved, conditioned\non the query; 3) Subgraph Construction: A connected subgraph is extracted, covering as many\nrelevant nodes and edges as possible while maintaining a manageable graph size; 4) Generation: An\nanswer is generated using a ‘graph prompt’, a textualized graph, and the query.\nrequire multi-hop reasoning. Given the possibility of multiple answers for the same question, the\nhit@1 metric is used to assess the precision of the top returned answer.\n5\nG-Retriever\nIn this section, we introduce G-Retriever, a new architecture tailored for GraphQA, which integrates\nthe strengths of GNNs, LLMs, and RAG. To allow efficient fine-tuning while preserving the LLM’s\npretrained language capabilities, we freeze the LLM and use a soft prompting approach on the output\nof the GNN. Our RAG-based design mitigates hallucinations through direct retrieval of the graph,\nwhile allowing our approach to scale to graphs exceeding the LLM’s context window size. To adapt\nRAG to graphs, we formulate subgraph retrieval as a PCST optimization problem. This approach\nalso allows us to enhance explainability by returning the retrieved subgraph.\nG-Retriever comprises four main steps: indexing, retrieval, subgraph construction and generation, as\ndepicted in Figure 3. The implementation details of each step are elaborated in the following sections.\n5.1\nIndexing\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7893319129943848
+        }
+      ],
+      "rerank_score": 0.297980397939682,
+      "context_bytes": 1921
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2406,
+          "end_char": 3845,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1439,
+          "block_bboxes": [
+            [
+              79.521,
+              559.21,
+              290.95,
+              610.85
+            ],
+            [
+              70.866,
+              622.754,
+              290.95,
+              660.774
+            ],
+            [
+              70.866,
+              672.997,
+              182.671,
+              684.952
+            ],
+            [
+              70.528,
+              695.075,
+              289.139,
+              773.686
+            ],
+            [
+              305.749,
+              396.054,
+              526.224,
+              623.667
+            ],
+            [
+              306.142,
+              636.148,
+              461.477,
+              647.057
+            ]
+          ]
+        }
+      ],
+      "quote": "3. Development of a new dataset to test com-\nbined reasoning over a general and a domain-\nspecific KG, and evaluation of Tree-of-\nTraversals on this dataset.\nWe conduct detailed experiments on three mod-\nels of varied sizes hosted on Amazon Bedrock and\npresent detailed ablation studies.\n2\nTree-of-Traversals\nThe Tree-of-Traversals algorithm maintains a local\nKG subgraph that is repeatedly expanded until it\ncontains all the information required by an LLM\nto answer the given query. At the start, a local\nKG subgraph is initialized to contain the entities\npresent in the original query. It is then expanded\nusing a tree search algorithm to choose actions and\nthoughts generated by an LLM in order to obtain\nrelevant knowledge from the KG using a KG inter-\nface. The algorithm halts when the LLM is able\nto answer the original query using the local KG\nsubgraph as context. Tree-of-Traversals consists of\nthree major components. (1) A knowledge graph\ninterface implemented to interact with one or more\nrequired KGs. (2) An action state machine (ASM)\nwhich is a finite state machine that defines the fea-\nsible space of actions, states, and prompt templates\nwhen the LLM interacts with a KG to expand the\nlocal KG subgraph. (3) A tree search algorithm\nwhich defines the overall LLM search trajectory\nsuch as best first search, backtrack upon making a\nmistake, and termination condition when an answer\nis found.\n2.1\nKnowledge Graph Interface\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.538365840911865
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8101711273193359
+        }
+      ],
+      "rerank_score": 0.41182032227516174,
+      "context_bytes": 1848
+    }
+  ],
+  "graph_paths": [
+    {
+      "nodes": [
+        {
+          "id": "4c499e4903a2f3ee2a4ba797a572525d222a29b206e3ad8e2b6a258407cb4000",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "87cffd20676db7f5c003d7ecd2cc26dfd0088e5497ef92ad1d5d30b4282b6d16",
+          "name": "2WikiMultiHop",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "Tree-of-Traversals",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "36b9a422e34cc1bc63ae53dfb8f2c9f94812e58ead8b2ab902d0b77c1d56ad19",
+          "object": "2WikiMultiHop"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "Table 1 presents the results of our experiments on\n2WikiMultiHop and QALD-10.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "36b9a422e34cc1bc63ae53dfb8f2c9f94812e58ead8b2ab902d0b77c1d56ad19",
+          "chunk_id": "chunk_406249e1d98db3baa838606c7a974998"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "4c499e4903a2f3ee2a4ba797a572525d222a29b206e3ad8e2b6a258407cb4000",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "8eaa2a4e880d1e64e74673931b61a8c0aa4610f9233b8025695064b06800a776",
+          "name": "exploration of the action space",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "Tree-of-Traversals",
+          "predicate": "ADDRESSES",
+          "claim_id": "5f8789d2b0e15721864505edf8a0361c133c573e0bae6723bd2db139c1e087e3",
+          "object": "exploration of the action space"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 4,
+          "page_end": 5,
+          "quote": "These\nvalues are then used to guide the exploration of\nthe action space.",
+          "predicate": "ADDRESSES",
+          "claim_id": "5f8789d2b0e15721864505edf8a0361c133c573e0bae6723bd2db139c1e087e3",
+          "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "4c499e4903a2f3ee2a4ba797a572525d222a29b206e3ad8e2b6a258407cb4000",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "210539523657274c8501cfb6fcac1888f7039413faf508d3e555ffaa0009f8e5",
+          "name": "QALD-10",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "Tree-of-Traversals",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "788d66c10fad008c6545146f7428c2aab521b12234210fb9263b80cbc73dc767",
+          "object": "QALD-10"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "Table 1 presents the results of our experiments on\n2WikiMultiHop and QALD-10.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "788d66c10fad008c6545146f7428c2aab521b12234210fb9263b80cbc73dc767",
+          "chunk_id": "chunk_406249e1d98db3baa838606c7a974998"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "4c499e4903a2f3ee2a4ba797a572525d222a29b206e3ad8e2b6a258407cb4000",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "ecd10d93506f19494d5230fab30e32202fc1130ef09ceba2ece0eaaa69c47f99",
+          "name": "MusicBrainz-x-Wikidata",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "Tree-of-Traversals",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "96268ce7b862a738daf2368f014a8e239980397d1f5522e4980cdbb1269808d3",
+          "object": "MusicBrainz-x-Wikidata"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 8,
+          "quote": "Table 2: EM-in on MusicBrainz-x-Wikidata dataset.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "96268ce7b862a738daf2368f014a8e239980397d1f5522e4980cdbb1269808d3",
+          "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "4c499e4903a2f3ee2a4ba797a572525d222a29b206e3ad8e2b6a258407cb4000",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "0b29b2330e95f820bdb6f6556a99cb0fd211b17611bd7af186188a317daae7f4",
+          "name": "2WikiMultiHop Dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "Tree-of-Traversals",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "b8f9e5e0a66c0a1293cd19b445c02e8374f7151e439e193604e9181705fd0857",
+          "object": "2WikiMultiHop Dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "We first evaluate the Tree-of-Traversals algorithm\non two common tasks used for evaluating an LLM’s\nknowledge: 2WikiMultiHop and QALD-10.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "b8f9e5e0a66c0a1293cd19b445c02e8374f7151e439e193604e9181705fd0857",
+          "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "4c499e4903a2f3ee2a4ba797a572525d222a29b206e3ad8e2b6a258407cb4000",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "ecd10d93506f19494d5230fab30e32202fc1130ef09ceba2ece0eaaa69c47f99",
+          "name": "MusicBrainz-x-Wikidata",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "Tree-of-Traversals",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "e0744ecc275d215295fee2282a159c3d87a1646f87565c399487a794878d319e",
+          "object": "MusicBrainz-x-Wikidata"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "On MusicBrainz-x-Wikidata (Table 2), which\ncontains challenging reasoning questions requiring\naccess to two KGs, there is an average of 37.4%\nrelative improvement from Tree-of-Traversals over\nChain-of-Traversals as shown in Table 2.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "e0744ecc275d215295fee2282a159c3d87a1646f87565c399487a794878d319e",
+          "chunk_id": "chunk_406249e1d98db3baa838606c7a974998"
+        }
+      ]
+    }
+  ],
+  "generation_paths": [],
+  "retrieval_summary": {
+    "context_bytes": 5682,
+    "evidence_bytes": 5682,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5481,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ]
+      },
+      {
+        "name": "G-Retriever",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "requested_names": [
+          "G-Retriever"
+        ]
+      },
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ],
+        "eligible_candidate_count": 3,
+        "selected_chunk_ids": [
+          "chunk_1c31546f7f4375c1f684f59dc4fa0521"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "G-Retriever",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "requested_names": [
+          "G-Retriever"
+        ],
+        "eligible_candidate_count": 4,
+        "selected_chunk_ids": [
+          "chunk_2da94a87e97c2e0f30e8eec5659e202d"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ],
+        "eligible_candidate_count": 17,
+        "selected_chunk_ids": [
+          "chunk_0cb3c2dcbacf18237a13b232366d2be8"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ]
+  },
+  "path_diagnostics": [
+    {
+      "index": 0,
+      "reason": "supporting_source_not_selected",
+      "support_chunks": [
+        "chunk_406249e1d98db3baa838606c7a974998"
+      ],
+      "individual_prompt_bytes": null
+    },
+    {
+      "index": 1,
+      "reason": "supporting_source_not_selected",
+      "support_chunks": [
+        "chunk_226ee68d6f0960540c826792e6f5b531"
+      ],
+      "individual_prompt_bytes": null
+    },
+    {
+      "index": 2,
+      "reason": "supporting_source_not_selected",
+      "support_chunks": [
+        "chunk_406249e1d98db3baa838606c7a974998"
+      ],
+      "individual_prompt_bytes": null
+    },
+    {
+      "index": 3,
+      "reason": "supporting_source_not_selected",
+      "support_chunks": [
+        "chunk_f381347013975ddbbd59d9d2e9198e70"
+      ],
+      "individual_prompt_bytes": null
+    },
+    {
+      "index": 4,
+      "reason": "supporting_source_not_selected",
+      "support_chunks": [
+        "chunk_a8ce6be635ba6abbbc71daeb86e809e9"
+      ],
+      "individual_prompt_bytes": null
+    },
+    {
+      "index": 5,
+      "reason": "supporting_source_not_selected",
+      "support_chunks": [
+        "chunk_406249e1d98db3baa838606c7a974998"
+      ],
+      "individual_prompt_bytes": null
+    }
+  ],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。",
+    "图路径仅用于定位和理解关联；引用必须来自 evidence 中可核对的原文，不能将图边本身当作论断证据。"
+  ],
+  "citations": [
+    {
+      "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 909,
+          "end_char": 2444,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1535,
+          "block_bboxes": [
+            [
+              108.0,
+              216.502,
+              504.353,
+              270.219
+            ],
+            [
+              108.0,
+              292.552,
+              503.997,
+              313.499
+            ],
+            [
+              108.0,
+              330.132,
+              187.371,
+              342.087
+            ],
+            [
+              107.641,
+              354.551,
+              505.247,
+              430.106
+            ],
+            [
+              107.641,
+              436.402,
+              505.74,
+              457.379
+            ],
+            [
+              108.0,
+              471.631,
+              168.064,
+              481.593
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 3: Overview of the proposed G-Retriever: 1) Indexing: Graphs are indexed for efficient query\nprocessing; 2) Retrieval: The most semantically relevant nodes and edges are retrieved, conditioned\non the query; 3) Subgraph Construction: A connected subgraph is extracted, covering as many\nrelevant nodes and edges as possible while maintaining a manageable graph size; 4) Generation: An\nanswer is generated using a ‘graph prompt’, a textualized graph, and the query.\nrequire multi-hop reasoning. Given the possibility of multiple answers for the same question, the\nhit@1 metric is used to assess the precision of the top returned answer.\n5\nG-Retriever\nIn this section, we introduce G-Retriever, a new architecture tailored for GraphQA, which integrates\nthe strengths of GNNs, LLMs, and RAG. To allow efficient fine-tuning while preserving the LLM’s",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7893319129943848
+        }
+      ],
+      "rerank_score": 0.297980397939682,
+      "context_bytes": 1921
+    },
+    {
+      "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 909,
+          "end_char": 2444,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1535,
+          "block_bboxes": [
+            [
+              108.0,
+              216.502,
+              504.353,
+              270.219
+            ],
+            [
+              108.0,
+              292.552,
+              503.997,
+              313.499
+            ],
+            [
+              108.0,
+              330.132,
+              187.371,
+              342.087
+            ],
+            [
+              107.641,
+              354.551,
+              505.247,
+              430.106
+            ],
+            [
+              107.641,
+              436.402,
+              505.74,
+              457.379
+            ],
+            [
+              108.0,
+              471.631,
+              168.064,
+              481.593
+            ]
+          ]
+        }
+      ],
+      "quote": "pretrained language capabilities, we freeze the LLM and use a soft prompting approach on the output\nof the GNN. Our RAG-based design mitigates hallucinations through direct retrieval of the graph,\nwhile allowing our approach to scale to graphs exceeding the LLM’s context window size. To adapt\nRAG to graphs, we formulate subgraph retrieval as a PCST optimization problem. This approach\nalso allows us to enhance explainability by returning the retrieved subgraph.\nG-Retriever comprises four main steps: indexing, retrieval, subgraph construction and generation, as\ndepicted in Figure 3. The implementation details of each step are elaborated in the following sections.\n5.1\nIndexing",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7893319129943848
+        }
+      ],
+      "rerank_score": 0.297980397939682,
+      "context_bytes": 1921
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2406,
+          "end_char": 3845,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1439,
+          "block_bboxes": [
+            [
+              79.521,
+              559.21,
+              290.95,
+              610.85
+            ],
+            [
+              70.866,
+              622.754,
+              290.95,
+              660.774
+            ],
+            [
+              70.866,
+              672.997,
+              182.671,
+              684.952
+            ],
+            [
+              70.528,
+              695.075,
+              289.139,
+              773.686
+            ],
+            [
+              305.749,
+              396.054,
+              526.224,
+              623.667
+            ],
+            [
+              306.142,
+              636.148,
+              461.477,
+              647.057
+            ]
+          ]
+        }
+      ],
+      "quote": "3. Development of a new dataset to test com-\nbined reasoning over a general and a domain-\nspecific KG, and evaluation of Tree-of-\nTraversals on this dataset.\nWe conduct detailed experiments on three mod-\nels of varied sizes hosted on Amazon Bedrock and\npresent detailed ablation studies.\n2\nTree-of-Traversals\nThe Tree-of-Traversals algorithm maintains a local\nKG subgraph that is repeatedly expanded until it\ncontains all the information required by an LLM\nto answer the given query. At the start, a local\nKG subgraph is initialized to contain the entities\npresent in the original query. It is then expanded\nusing a tree search algorithm to choose actions and\nthoughts generated by an LLM in order to obtain\nrelevant knowledge from the KG using a KG inter-\nface. The algorithm halts when the LLM is able\nto answer the original query using the local KG\nsubgraph as context.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.538365840911865
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8101711273193359
+        }
+      ],
+      "rerank_score": 0.41182032227516174,
+      "context_bytes": 1848
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2406,
+          "end_char": 3845,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1439,
+          "block_bboxes": [
+            [
+              79.521,
+              559.21,
+              290.95,
+              610.85
+            ],
+            [
+              70.866,
+              622.754,
+              290.95,
+              660.774
+            ],
+            [
+              70.866,
+              672.997,
+              182.671,
+              684.952
+            ],
+            [
+              70.528,
+              695.075,
+              289.139,
+              773.686
+            ],
+            [
+              305.749,
+              396.054,
+              526.224,
+              623.667
+            ],
+            [
+              306.142,
+              636.148,
+              461.477,
+              647.057
+            ]
+          ]
+        }
+      ],
+      "quote": "Tree-of-Traversals consists of\nthree major components. (1) A knowledge graph\ninterface implemented to interact with one or more\nrequired KGs. (2) An action state machine (ASM)\nwhich is a finite state machine that defines the fea-\nsible space of actions, states, and prompt templates\nwhen the LLM interacts with a KG to expand the\nlocal KG subgraph. (3) A tree search algorithm\nwhich defines the overall LLM search trajectory\nsuch as best first search, backtrack upon making a\nmistake, and termination condition when an answer\nis found.\n2.1\nKnowledge Graph Interface",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.538365840911865
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8101711273193359
+        }
+      ],
+      "rerank_score": 0.41182032227516174,
+      "context_bytes": 1848
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 10,
+      "page_end": 11,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 10,
+          "start_char": 3851,
+          "end_char": 4613,
+          "chunk_start_char": 0,
+          "chunk_end_char": 762,
+          "block_bboxes": [
+            [
+              305.782,
+              560.938,
+              526.225,
+              720.848
+            ],
+            [
+              305.629,
+              723.963,
+              526.317,
+              775.496
+            ],
+            [
+              292.183,
+              794.449,
+              303.092,
+              805.358
+            ]
+          ]
+        },
+        {
+          "pdf_page": 11,
+          "start_char": 0,
+          "end_char": 734,
+          "chunk_start_char": 763,
+          "chunk_end_char": 1497,
+          "block_bboxes": [
+            [
+              70.473,
+              118.171,
+              524.409,
+              142.646
+            ],
+            [
+              70.866,
+              148.452,
+              524.414,
+              159.755
+            ],
+            [
+              89.412,
+              162.142,
+              524.591,
+              186.6
+            ],
+            [
+              76.981,
+              185.281,
+              271.347,
+              200.302
+            ],
+            [
+              76.981,
+              201.127,
+              356.139,
+              215.194
+            ],
+            [
+              76.981,
+              214.677,
+              356.379,
+              228.743
+            ],
+            [
+              76.981,
+              229.55,
+              343.856,
+              248.641
+            ],
+            [
+              76.981,
+              243.296,
+              297.727,
+              254.499
+            ],
+            [
+              76.981,
+              256.845,
+              276.76,
+              269.39
+            ],
+            [
+              76.981,
+              268.77,
+              110.199,
+              281.303
+            ],
+            [
+              107.006,
+              270.535,
+              245.108,
+              284.5
+            ],
+            [
+              76.981,
+              282.32,
+              119.591,
+              295.146
+            ],
+            [
+              116.398,
+              283.943,
+              163.424,
+              298.049
+            ],
+            [
+              76.981,
+              297.787,
+              199.31,
+              308.696
+            ],
+            [
+              72.498,
+              311.336,
+              126.688,
+              322.245
+            ],
+            [
+              72.498,
+              322.967,
+              169.531,
+              335.794
+            ],
+            [
+              166.338,
+              324.885,
+              184.277,
+              338.85
+            ]
+          ]
+        }
+      ],
+      "quote": "Our evaluation of early traversal termination using\nthe CuriousLLM agent demonstrates substantial\nimprovements in efficiency while maintaining com-\npetitive accuracy in MD-QA tasks. Our mistral\nmodel, fine-tuned to generate a termination signal\n(\"NA\") when it has gathered sufficient evidence,\nsignificantly reduces traversal time without com-\npromising the quality of the final answer. This\nearly termination feature allows the agent to stop\nthe search process as soon as necessary information\nis identified, thus minimizing unnecessary compu-\ntation and latency.\nWe compare three different agents: Mistral with\nearly termination (Mistral-ET), the standard Mis-\ntral without early termination, and the T5 model.\nWe collect questions that are closed early by\n10\n\nAlgorithm 1 LLM-based KG Traversal Algorithm for Retrieving Relevant Context Given a Content-based\nUser Query",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8121352195739746
+        }
+      ],
+      "rerank_score": 0.8374870419502258,
+      "context_bytes": 1913
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 10,
+      "page_end": 11,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 10,
+          "start_char": 3851,
+          "end_char": 4613,
+          "chunk_start_char": 0,
+          "chunk_end_char": 762,
+          "block_bboxes": [
+            [
+              305.782,
+              560.938,
+              526.225,
+              720.848
+            ],
+            [
+              305.629,
+              723.963,
+              526.317,
+              775.496
+            ],
+            [
+              292.183,
+              794.449,
+              303.092,
+              805.358
+            ]
+          ]
+        },
+        {
+          "pdf_page": 11,
+          "start_char": 0,
+          "end_char": 734,
+          "chunk_start_char": 763,
+          "chunk_end_char": 1497,
+          "block_bboxes": [
+            [
+              70.473,
+              118.171,
+              524.409,
+              142.646
+            ],
+            [
+              70.866,
+              148.452,
+              524.414,
+              159.755
+            ],
+            [
+              89.412,
+              162.142,
+              524.591,
+              186.6
+            ],
+            [
+              76.981,
+              185.281,
+              271.347,
+              200.302
+            ],
+            [
+              76.981,
+              201.127,
+              356.139,
+              215.194
+            ],
+            [
+              76.981,
+              214.677,
+              356.379,
+              228.743
+            ],
+            [
+              76.981,
+              229.55,
+              343.856,
+              248.641
+            ],
+            [
+              76.981,
+              243.296,
+              297.727,
+              254.499
+            ],
+            [
+              76.981,
+              256.845,
+              276.76,
+              269.39
+            ],
+            [
+              76.981,
+              268.77,
+              110.199,
+              281.303
+            ],
+            [
+              107.006,
+              270.535,
+              245.108,
+              284.5
+            ],
+            [
+              76.981,
+              282.32,
+              119.591,
+              295.146
+            ],
+            [
+              116.398,
+              283.943,
+              163.424,
+              298.049
+            ],
+            [
+              76.981,
+              297.787,
+              199.31,
+              308.696
+            ],
+            [
+              72.498,
+              311.336,
+              126.688,
+              322.245
+            ],
+            [
+              72.498,
+              322.967,
+              169.531,
+              335.794
+            ],
+            [
+              166.338,
+              324.885,
+              184.277,
+              338.85
+            ]
+          ]
+        }
+      ],
+      "quote": "Require: An initial query q over a set of documents D, the constructed KG G = {V, E, X} over D, the\nLLM graph traversal agent Fagent, the preset passage budget K, the TF-IDF seeding passage retriever\ng\n1: Initialize seed passages Vs = g(V, X, q)\n2: Initialize the retrieved passage queue P = {[vi] | vi ∈Vs}\n3: Initialize the candidate neighbor queue C = [Ni | vi ∈Vs]\n4: Initialize the retrieved passage counter k = P\nPi∈P |Pi|\n5: while queue P and queue C are not empty do\n6:\nPi ←P.dequeue(), Ci ←C.dequeue()\n7:\nV′\ni = Traversal Agent(q, Pi, Ci)\n8:\nif V′\ni = ∅then\n9:\nTerminate the loop\n10:\nend if\n11:\nfor each v ∈V′\ni do",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8121352195739746
+        }
+      ],
+      "rerank_score": 0.8374870419502258,
+      "context_bytes": 1913
+    }
+  ],
+  "errors": [],
+  "provider_calls": [
+    {
+      "id": "bc999150-fff2-4cb4-805b-625102e3318e",
+      "request_id": "70465e70-f9aa-42e2-9a0a-6ffd22358bc6",
+      "provider": "deepseek",
+      "attempt": 1,
+      "started": "2026-11-16T13:29:32.730984+00:00",
+      "finished": "2026-11-16T13:29:39.257472+00:00",
+      "seconds": 6.52650139999605,
+      "status": "ok",
+      "http_status": 200,
+      "usage": "{\"prompt_tokens\": 1798, \"total_tokens\": 2810, \"completion_tokens\": 1012}",
+      "cost": null
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1798,
+    "total_tokens": 2810,
+    "completion_tokens": 1012,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 1798
+    },
+    "completion_tokens_details": {
+      "text_tokens": 1012
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "assembly_seconds": 0.0014649000004283153,
+  "metrics": {
+    "recall5": 0.3333333333333333,
+    "recall8": 0.3333333333333333,
+    "mrr40": 0.25,
+    "evidence_coverage": 0.0,
+    "all_units": false
+  },
+  "source_metrics": {
+    "all_required_papers": true,
+    "required_paper_coverage": 1.0,
+    "missing_paper_ids": []
+  },
+  "retrieval_trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/25326cbd-9157-4d17-97ef-656a59379f2d?poll=true",
+  "retrieval_request_id": "30e41170-e9df-4c21-95a4-4a994ccf026c",
+  "candidate_snapshot": "R21-candidates.json",
+  "generate_requested": true,
+  "stage_timings": [
+    {
+      "name": "generate",
+      "seconds": 7.238082100004249,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.33691299999918556,
+      "status": "ok"
+    }
+  ],
+  "semantic_review": "pending_independent_review",
+  "request_id": "70465e70-f9aa-42e2-9a0a-6ffd22358bc6",
+  "start_time": "2026-11-16T13:29:32.385711+00:00",
+  "generation_seconds": 8.32717259999481,
+  "measured_request_seconds": 8.328637499995239,
+  "end_time": "2026-11-16T13:29:40.715959+00:00",
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/9c1a3b74-8b61-46e0-bf7b-18568e90e14a?poll=true"
+}

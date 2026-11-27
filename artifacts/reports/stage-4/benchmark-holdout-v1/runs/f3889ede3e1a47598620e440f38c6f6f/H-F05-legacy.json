@@ -1,0 +1,1657 @@
+{
+  "request_id": "69356aa1-5883-41aa-b123-e44067fe8d5d",
+  "status": "partial",
+  "answer": "RoG 消融实验包含 w/o planning 和 w/o reasoning 两个变体：w/o planning 移除 planning 模块并在没有检索推理路径的情况下推理，作者称此时方法退化为仅以问题为输入的常规 LLM，受知识不足问题影响 [chunk_337b776419fe0d299cd973609da26513][chunk_41f164dcc97380b68b515cce682cba4b]；w/o reasoning 移除 reasoning 模块并使用检索推理路径的全部答案，作者称因答案数量增加而召回率高，但检索路径中的噪声使精度显著下降 [chunk_337b776419fe0d299cd973609da26513][chunk_41f164dcc97380b68b515cce682cba4b]。关于最终只用 beam-search 生成 top-3 关系路径的原因：所提供的证据中，planning 模块的提示要求生成一条有效关系路径，推理模块接收一组检索到的推理路径 [chunk_9bb606d348e1af81f00b3677453a84ca]，但未找到说明为何最终只用 beam-search 生成 top-3 关系路径的方法描述，因此该流程证据不足。",
+  "citations": [
+    {
+      "chunk_id": "chunk_337b776419fe0d299cd973609da26513",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2937,
+          "end_char": 4100,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1163,
+          "block_bboxes": [
+            [
+              108.0,
+              584.821,
+              504.003,
+              682.456
+            ],
+            [
+              108.0,
+              689.253,
+              504.004,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 352,
+          "chunk_start_char": 1164,
+          "chunk_end_char": 1516,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              197.122,
+              189.969,
+              275.36,
+              203.572
+            ],
+            [
+              184.445,
+              182.938,
+              187.628,
+              188.768
+            ],
+            [
+              181.262,
+              167.835,
+              187.627,
+              173.665
+            ],
+            [
+              181.262,
+              152.732,
+              187.627,
+              158.562
+            ],
+            [
+              181.262,
+              137.629,
+              187.627,
+              143.46
+            ],
+            [
+              181.262,
+              122.527,
+              187.627,
+              128.357
+            ],
+            [
+              171.277,
+              116.764,
+              178.413,
+              190.932
+            ],
+            [
+              336.664,
+              189.969,
+              414.902,
+              203.572
+            ],
+            [
+              323.987,
+              182.938,
+              327.17,
+              188.768
+            ],
+            [
+              320.803,
+              170.237,
+              327.169,
+              176.067
+            ],
+            [
+              320.803,
+              157.537,
+              327.169,
+              163.367
+            ],
+            [
+              320.803,
+              144.836,
+              327.169,
+              150.666
+            ],
+            [
+              317.62,
+              132.136,
+              327.168,
+              137.966
+            ],
+            [
+              317.62,
+              119.435,
+              327.168,
+              125.265
+            ],
+            [
+              307.636,
+              116.764,
+              314.771,
+              190.932
+            ],
+            [
+              284.851,
+              182.772,
+              291.217,
+              188.602
+            ],
+            [
+              284.851,
+              171.855,
+              291.217,
+              177.685
+            ],
+            [
+              284.851,
+              160.937,
+              291.217,
+              166.767
+            ],
+            [
+              284.851,
+              150.02,
+              291.217,
+              155.85
+            ],
+            [
+              284.851,
+              139.102,
+              291.217,
+              144.932
+            ],
+            [
+              284.851,
+              128.185,
+              291.217,
+              134.015
+            ],
+            [
+              292.807,
+              125.092,
+              299.943,
+              182.621
+            ],
+            [
+              224.533,
+              111.974,
+              247.968,
+              119.109
+            ],
+            [
+              424.393,
+              173.999,
+              430.759,
+              179.829
+            ],
+            [
+              424.393,
+              154.216,
+              430.759,
+              160.046
+            ],
+            [
+              424.393,
+              134.433,
+              430.759,
+              140.263
+            ],
+            [
+              432.349,
+              125.092,
+              439.485,
+              182.621
+            ],
+            [
+              368.275,
+              111.974,
+              383.286,
+              119.109
+            ],
+            [
+              241.4,
+              88.347,
+              315.568,
+              104.589
+            ],
+            [
+              346.458,
+              88.347,
+              388.628,
+              104.578
+            ]
+          ]
+        }
+      ],
+      "quote": "and reasoning module in our method (RoG). We compare four variants: 1) w/o planning, where\nwe remove the planning module and perform reasoning without retrieved reasoning paths; 2) w/o\nreasoning, where we remove the reasoning module and use all answers from retrieved reasoning\n7\n\nPublished as a conference paper at ICLR 2024\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n10\n20\n30\n40\n# Retrieved Reasoning Paths\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n25\n50\n75\n100\n125\n# Retrieved Reasoning Paths\n30\n40\n50\n60\n70\n80\nAnswer Coverage (%)\nWebQSP\n20\n40\n60\nAnswer Coverage (%)\nCWQ\n# Retrieved Reasoning Paths\nRetrieval-Precision\nRetrieval-Recall\nReasoning-F1",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 14.362677574157715
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.795875072479248
+        }
+      ],
+      "rerank_score": 0.9597620368003845,
+      "context_bytes": 1912,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_41f164dcc97380b68b515cce682cba4b",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 959,
+          "end_char": 2416,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1457,
+          "block_bboxes": [
+            [
+              266.398,
+              297.326,
+              471.371,
+              308.329
+            ],
+            [
+              340.076,
+              308.556,
+              499.763,
+              315.654
+            ],
+            [
+              266.398,
+              319.565,
+              504.001,
+              327.026
+            ],
+            [
+              266.398,
+              330.937,
+              504.001,
+              346.206
+            ],
+            [
+              266.398,
+              350.117,
+              504.001,
+              365.386
+            ],
+            [
+              108.0,
+              283.211,
+              504.003,
+              435.639
+            ],
+            [
+              108.249,
+              451.006,
+              341.651,
+              461.479
+            ],
+            [
+              306.0,
+              474.383,
+              503.996,
+              495.305
+            ],
+            [
+              306.001,
+              500.056,
+              485.788,
+              510.117
+            ],
+            [
+              405.755,
+              510.325,
+              502.375,
+              516.815
+            ],
+            [
+              306.001,
+              520.723,
+              501.382,
+              534.354
+            ],
+            [
+              306.001,
+              538.262,
+              501.382,
+              551.892
+            ]
+          ]
+        }
+      ],
+      "quote": "Method\nWebQSP\nCWQ\nPrecision\nRecall\nF1\nPrecision\nRecall\nF1\nRoG\n74.77\n75.84\n70.81\n57.69\n58.19\n56.17\nRoG w/o planning\n57.26\n50.16\n49.69\n35.35\n34.77\n33.76\nRoG w/o reasoning\n46.90\n79.85\n49.56\n18.88\n67.89\n22.26\nRoG w/ random plans\n38.66\n38.31\n35.24\n38.99\n39.29\n37.64\nRoG w/ vote reasoning\n54.80\n60.44\n47.96\n22.92\n47.98\n26.52\nFrom the results, it is evident that\nwithout a planning module,\nour\nmethod degenerates to conventional\nLLMs that solely rely on questions\nas input, suffering from the lack of\nknowledge issue. Although removing\nthe reasoning module leads to high\nrecall due to an increased number of\nanswers, precision drops significantly because of noise in retrieved paths. This demonstrates the ef-\nfectiveness of the reasoning module in identifying important reasoning paths and filtering out noise.\nFurthermore, using random plans achieves worse performance than removing the planning module,",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 17.643390655517578
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8152046203613281
+        }
+      ],
+      "rerank_score": 0.9227612018585205,
+      "context_bytes": 1885,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_9bb606d348e1af81f00b3677453a84ca",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 22,
+      "page_end": 23,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 22,
+          "start_char": 1108,
+          "end_char": 2007,
+          "chunk_start_char": 0,
+          "chunk_end_char": 899,
+          "block_bboxes": [
+            [
+              108.249,
+              407.11,
+              179.92,
+              417.073
+            ],
+            [
+              108.0,
+              428.232,
+              504.003,
+              449.154
+            ],
+            [
+              123.59,
+              459.368,
+              230.269,
+              469.331
+            ],
+            [
+              123.59,
+              481.151,
+              484.452,
+              499.621
+            ],
+            [
+              108.0,
+              517.111,
+              285.923,
+              527.584
+            ],
+            [
+              108.0,
+              534.199,
+              504.0,
+              555.48
+            ],
+            [
+              123.59,
+              565.694,
+              236.905,
+              575.657
+            ],
+            [
+              123.59,
+              587.477,
+              484.452,
+              606.406
+            ],
+            [
+              123.59,
+              617.365,
+              215.047,
+              635.835
+            ],
+            [
+              123.59,
+              647.253,
+              177.388,
+              665.723
+            ],
+            [
+              108.0,
+              680.89,
+              503.997,
+              702.322
+            ],
+            [
+              238.251,
+              703.516,
+              369.251,
+              714.972
+            ],
+            [
+              237.006,
+              714.604,
+              371.037,
+              736.89
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 23,
+          "start_char": 0,
+          "end_char": 654,
+          "chunk_start_char": 900,
+          "chunk_end_char": 1554,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              83.758,
+              504.004,
+              105.19
+            ],
+            [
+              123.59,
+              115.404,
+              242.992,
+              125.367
+            ],
+            [
+              123.59,
+              137.188,
+              413.33,
+              146.154
+            ],
+            [
+              123.59,
+              157.113,
+              213.837,
+              175.583
+            ],
+            [
+              123.59,
+              187.001,
+              215.047,
+              205.471
+            ],
+            [
+              123.59,
+              216.889,
+              177.388,
+              235.359
+            ],
+            [
+              108.0,
+              250.512,
+              503.995,
+              271.944
+            ],
+            [
+              203.451,
+              283.765,
+              408.551,
+              293.728
+            ],
+            [
+              113.939,
+              306.835,
+              282.803,
+              312.929
+            ],
+            [
+              113.939,
+              323.483,
+              197.87,
+              329.576
+            ]
+          ]
+        }
+      ],
+      "quote": "A.10\nPROMPTS\nPlanning module aims to generate faithful relation paths as plans for answering the question. The\ninstruction template is presented as follows:\nPlanning Prompt Template\nPlease generate a valid relation path that can be helpful for answering the following question:\n<Question>\nwhere <Question> indicates the question.\nThe reasoning module takes the question q and a set of reasoning paths Wz to generate answers a.\nThe instruction template is presented as follows:\nReasoning Prompt Template\nBased on the reasoning paths, please answer the given question. Please keep the answer as simple as\npossible and return all the possible answers as a list.\nReasoning Paths:\n<Reasoning Paths>\nQuestion:\n<Question>\nwhere <Reasoning Paths> denotes the retrieved reasoning paths Wz which are formatted as a\nseries of structural sentences:\ne0 →r1 →e1 →· · · →rl →el\n. . .\ne0 →r1 →e1 →· · · →rl →el.\n22",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.38332462310791
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7769937515258789
+        }
+      ],
+      "rerank_score": 0.8688268065452576,
+      "context_bytes": 1959,
+      "eid": "E3"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_337b776419fe0d299cd973609da26513",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2937,
+          "end_char": 4100,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1163,
+          "block_bboxes": [
+            [
+              108.0,
+              584.821,
+              504.003,
+              682.456
+            ],
+            [
+              108.0,
+              689.253,
+              504.004,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 352,
+          "chunk_start_char": 1164,
+          "chunk_end_char": 1516,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              197.122,
+              189.969,
+              275.36,
+              203.572
+            ],
+            [
+              184.445,
+              182.938,
+              187.628,
+              188.768
+            ],
+            [
+              181.262,
+              167.835,
+              187.627,
+              173.665
+            ],
+            [
+              181.262,
+              152.732,
+              187.627,
+              158.562
+            ],
+            [
+              181.262,
+              137.629,
+              187.627,
+              143.46
+            ],
+            [
+              181.262,
+              122.527,
+              187.627,
+              128.357
+            ],
+            [
+              171.277,
+              116.764,
+              178.413,
+              190.932
+            ],
+            [
+              336.664,
+              189.969,
+              414.902,
+              203.572
+            ],
+            [
+              323.987,
+              182.938,
+              327.17,
+              188.768
+            ],
+            [
+              320.803,
+              170.237,
+              327.169,
+              176.067
+            ],
+            [
+              320.803,
+              157.537,
+              327.169,
+              163.367
+            ],
+            [
+              320.803,
+              144.836,
+              327.169,
+              150.666
+            ],
+            [
+              317.62,
+              132.136,
+              327.168,
+              137.966
+            ],
+            [
+              317.62,
+              119.435,
+              327.168,
+              125.265
+            ],
+            [
+              307.636,
+              116.764,
+              314.771,
+              190.932
+            ],
+            [
+              284.851,
+              182.772,
+              291.217,
+              188.602
+            ],
+            [
+              284.851,
+              171.855,
+              291.217,
+              177.685
+            ],
+            [
+              284.851,
+              160.937,
+              291.217,
+              166.767
+            ],
+            [
+              284.851,
+              150.02,
+              291.217,
+              155.85
+            ],
+            [
+              284.851,
+              139.102,
+              291.217,
+              144.932
+            ],
+            [
+              284.851,
+              128.185,
+              291.217,
+              134.015
+            ],
+            [
+              292.807,
+              125.092,
+              299.943,
+              182.621
+            ],
+            [
+              224.533,
+              111.974,
+              247.968,
+              119.109
+            ],
+            [
+              424.393,
+              173.999,
+              430.759,
+              179.829
+            ],
+            [
+              424.393,
+              154.216,
+              430.759,
+              160.046
+            ],
+            [
+              424.393,
+              134.433,
+              430.759,
+              140.263
+            ],
+            [
+              432.349,
+              125.092,
+              439.485,
+              182.621
+            ],
+            [
+              368.275,
+              111.974,
+              383.286,
+              119.109
+            ],
+            [
+              241.4,
+              88.347,
+              315.568,
+              104.589
+            ],
+            [
+              346.458,
+              88.347,
+              388.628,
+              104.578
+            ]
+          ]
+        }
+      ],
+      "quote": "Among other methods, retrieval-augmented approaches outperform conventional embedding-based\nmethods by retrieving relevant subgraphs from KGs, which reduces reasoning complexity. Fur-\nthermore, SR+NSM and SR+NSM+E2E adopt relation paths-based retrieval which achieves better\nperformance, highlighting the importance of relation paths. Semantic parsing methods perform bet-\nter than retrieval methods on WebQSP but worse on CWQ due to the complexity of generating\nlogical queries for complex questions in CWQ. Although LLMs-based methods achieve comparable\nperformance, they are limited by hallucinations and lack of knowledge as shown in Section 5.4. The\nLLMs+KGs methods achieve the second-best performance, which demonstrates the effectiveness of\nunifying KGs and LLMs for reasoning.\nAblation Study. We conduct an ablation study to analyze the effectiveness of the planning module\nand reasoning module in our method (RoG). We compare four variants: 1) w/o planning, where\nwe remove the planning module and perform reasoning without retrieved reasoning paths; 2) w/o\nreasoning, where we remove the reasoning module and use all answers from retrieved reasoning\n7\n\nPublished as a conference paper at ICLR 2024\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n10\n20\n30\n40\n# Retrieved Reasoning Paths\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n25\n50\n75\n100\n125\n# Retrieved Reasoning Paths\n30\n40\n50\n60\n70\n80\nAnswer Coverage (%)\nWebQSP\n20\n40\n60\nAnswer Coverage (%)\nCWQ\n# Retrieved Reasoning Paths\nRetrieval-Precision\nRetrieval-Recall\nReasoning-F1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 14.362677574157715
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.795875072479248
+        }
+      ],
+      "rerank_score": 0.9597620368003845,
+      "context_bytes": 1912
+    },
+    {
+      "chunk_id": "chunk_41f164dcc97380b68b515cce682cba4b",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 959,
+          "end_char": 2416,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1457,
+          "block_bboxes": [
+            [
+              266.398,
+              297.326,
+              471.371,
+              308.329
+            ],
+            [
+              340.076,
+              308.556,
+              499.763,
+              315.654
+            ],
+            [
+              266.398,
+              319.565,
+              504.001,
+              327.026
+            ],
+            [
+              266.398,
+              330.937,
+              504.001,
+              346.206
+            ],
+            [
+              266.398,
+              350.117,
+              504.001,
+              365.386
+            ],
+            [
+              108.0,
+              283.211,
+              504.003,
+              435.639
+            ],
+            [
+              108.249,
+              451.006,
+              341.651,
+              461.479
+            ],
+            [
+              306.0,
+              474.383,
+              503.996,
+              495.305
+            ],
+            [
+              306.001,
+              500.056,
+              485.788,
+              510.117
+            ],
+            [
+              405.755,
+              510.325,
+              502.375,
+              516.815
+            ],
+            [
+              306.001,
+              520.723,
+              501.382,
+              534.354
+            ],
+            [
+              306.001,
+              538.262,
+              501.382,
+              551.892
+            ]
+          ]
+        }
+      ],
+      "quote": "Method\nWebQSP\nCWQ\nPrecision\nRecall\nF1\nPrecision\nRecall\nF1\nRoG\n74.77\n75.84\n70.81\n57.69\n58.19\n56.17\nRoG w/o planning\n57.26\n50.16\n49.69\n35.35\n34.77\n33.76\nRoG w/o reasoning\n46.90\n79.85\n49.56\n18.88\n67.89\n22.26\nRoG w/ random plans\n38.66\n38.31\n35.24\n38.99\n39.29\n37.64\nRoG w/ vote reasoning\n54.80\n60.44\n47.96\n22.92\n47.98\n26.52\nFrom the results, it is evident that\nwithout a planning module,\nour\nmethod degenerates to conventional\nLLMs that solely rely on questions\nas input, suffering from the lack of\nknowledge issue. Although removing\nthe reasoning module leads to high\nrecall due to an increased number of\nanswers, precision drops significantly because of noise in retrieved paths. This demonstrates the ef-\nfectiveness of the reasoning module in identifying important reasoning paths and filtering out noise.\nFurthermore, using random plans achieves worse performance than removing the planning module,\nhighlighting the importance of a planning module who generates faithful reasoning plans. Using\na simple majority vote reasoning can improve the results which also demonstrate the necessity of\nreasoning module.\n5.3\nRQ2: PLUG-AND-PLAY ROG PLANNING MODULE\nTable 3: Effects of integrating the planning mod-\nule of RoG with different LLMs for reasoning.\nMethods\nWebQSP\nCWQ\nHits@1\nRecall\nHits@1\nRecall\nChatGPT\n66.77\n49.27\n39.90\n35.07\nChatGPT + RoG Planning\n81.51\n71.60\n52.68\n48.51\nAlpaca-7B\n51.78\n33.65\n27.44\n23.62\nAlpaca-7B + RoG Planning\n56.16\n74.20\n44.04\n38.46\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 17.643390655517578
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8152046203613281
+        }
+      ],
+      "rerank_score": 0.9227612018585205,
+      "context_bytes": 1885
+    },
+    {
+      "chunk_id": "chunk_9bb606d348e1af81f00b3677453a84ca",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 22,
+      "page_end": 23,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 22,
+          "start_char": 1108,
+          "end_char": 2007,
+          "chunk_start_char": 0,
+          "chunk_end_char": 899,
+          "block_bboxes": [
+            [
+              108.249,
+              407.11,
+              179.92,
+              417.073
+            ],
+            [
+              108.0,
+              428.232,
+              504.003,
+              449.154
+            ],
+            [
+              123.59,
+              459.368,
+              230.269,
+              469.331
+            ],
+            [
+              123.59,
+              481.151,
+              484.452,
+              499.621
+            ],
+            [
+              108.0,
+              517.111,
+              285.923,
+              527.584
+            ],
+            [
+              108.0,
+              534.199,
+              504.0,
+              555.48
+            ],
+            [
+              123.59,
+              565.694,
+              236.905,
+              575.657
+            ],
+            [
+              123.59,
+              587.477,
+              484.452,
+              606.406
+            ],
+            [
+              123.59,
+              617.365,
+              215.047,
+              635.835
+            ],
+            [
+              123.59,
+              647.253,
+              177.388,
+              665.723
+            ],
+            [
+              108.0,
+              680.89,
+              503.997,
+              702.322
+            ],
+            [
+              238.251,
+              703.516,
+              369.251,
+              714.972
+            ],
+            [
+              237.006,
+              714.604,
+              371.037,
+              736.89
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 23,
+          "start_char": 0,
+          "end_char": 654,
+          "chunk_start_char": 900,
+          "chunk_end_char": 1554,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              83.758,
+              504.004,
+              105.19
+            ],
+            [
+              123.59,
+              115.404,
+              242.992,
+              125.367
+            ],
+            [
+              123.59,
+              137.188,
+              413.33,
+              146.154
+            ],
+            [
+              123.59,
+              157.113,
+              213.837,
+              175.583
+            ],
+            [
+              123.59,
+              187.001,
+              215.047,
+              205.471
+            ],
+            [
+              123.59,
+              216.889,
+              177.388,
+              235.359
+            ],
+            [
+              108.0,
+              250.512,
+              503.995,
+              271.944
+            ],
+            [
+              203.451,
+              283.765,
+              408.551,
+              293.728
+            ],
+            [
+              113.939,
+              306.835,
+              282.803,
+              312.929
+            ],
+            [
+              113.939,
+              323.483,
+              197.87,
+              329.576
+            ]
+          ]
+        }
+      ],
+      "quote": "A.10\nPROMPTS\nPlanning module aims to generate faithful relation paths as plans for answering the question. The\ninstruction template is presented as follows:\nPlanning Prompt Template\nPlease generate a valid relation path that can be helpful for answering the following question:\n<Question>\nwhere <Question> indicates the question.\nThe reasoning module takes the question q and a set of reasoning paths Wz to generate answers a.\nThe instruction template is presented as follows:\nReasoning Prompt Template\nBased on the reasoning paths, please answer the given question. Please keep the answer as simple as\npossible and return all the possible answers as a list.\nReasoning Paths:\n<Reasoning Paths>\nQuestion:\n<Question>\nwhere <Reasoning Paths> denotes the retrieved reasoning paths Wz which are formatted as a\nseries of structural sentences:\ne0 →r1 →e1 →· · · →rl →el\n. . .\ne0 →r1 →e1 →· · · →rl →el.\n22\n\nPublished as a conference paper at ICLR 2024\nTo exploit the explanation ability of RoG, we design a new instruction template for the reasoning\nmodule to generate interpretable results. The instruction template is presented as follows:\nExplanation Prompt Template\nBased on the reasoning paths, please answer the given question and explain why.\nHere are some examples:\n<Examples>\nReasoning Paths:\n<Reasoning Paths>\nQuestion:\n<Question>\nwhere the Examples denotes a few-shot human-annotated examples to demonstrate the explana-\ntion process.\nTable 19: Examples of the generated relation paths.\nQuestion\nTop-3 Relation Paths\nwhat does jamaican people speak?\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.38332462310791
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7769937515258789
+        }
+      ],
+      "rerank_score": 0.8688268065452576,
+      "context_bytes": 1959
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 30,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "text_only",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 6.278377900016494,
+      "inference_seconds": 0.607063899980858,
+      "elapsed_seconds": 0.6105058999964967,
+      "peak_cuda_memory_bytes": 1190478848,
+      "request_count": 22,
+      "batch_size": 4
+    },
+    "evidence_count": 3,
+    "context_bytes": 5756,
+    "evidence_bytes": 5756,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5555,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "source_coverage": [],
+    "limitations": [],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 1844,
+    "total_tokens": 2214,
+    "completion_tokens": 370,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 1844
+    },
+    "completion_tokens_details": {
+      "text_tokens": 370
+    }
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "errors": [],
+  "raw": "{\"answer\":\"RoG 消融实验包含 w/o planning 和 w/o reasoning 两个变体：w/o planning 移除 planning 模块并在没有检索推理路径的情况下推理，作者称此时方法退化为仅以问题为输入的常规 LLM，受知识不足问题影响 [chunk_337b776419fe0d299cd973609da26513][chunk_41f164dcc97380b68b515cce682cba4b]；w/o reasoning 移除 reasoning 模块并使用检索推理路径的全部答案，作者称因答案数量增加而召回率高，但检索路径中的噪声使精度显著下降 [chunk_337b776419fe0d299cd973609da26513][chunk_41f164dcc97380b68b515cce682cba4b]。关于最终只用 beam-search 生成 top-3 关系路径的原因：所提供的证据中，planning 模块的提示要求生成一条有效关系路径，推理模块接收一组检索到的推理路径 [chunk_9bb606d348e1af81f00b3677453a84ca]，但未找到说明为何最终只用 beam-search 生成 top-3 关系路径的方法描述，因此该流程证据不足。\",\"citations\":[{\"chunk_id\":\"chunk_337b776419fe0d299cd973609da26513\",\"quote_id\":\"q2\"},{\"chunk_id\":\"chunk_41f164dcc97380b68b515cce682cba4b\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_9bb606d348e1af81f00b3677453a84ca\",\"quote_id\":\"q1\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_337b776419fe0d299cd973609da26513",
+      "score": 0.030776515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 14.362677574157715
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.795875072479248
+        }
+      ],
+      "rerank_score": 0.9597620368003845
+    },
+    {
+      "chunk_id": "chunk_41f164dcc97380b68b515cce682cba4b",
+      "score": 0.03252247488101534,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 17.643390655517578
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8152046203613281
+        }
+      ],
+      "rerank_score": 0.9227612018585205
+    },
+    {
+      "chunk_id": "chunk_9bb606d348e1af81f00b3677453a84ca",
+      "score": 0.027650648360030512,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.38332462310791
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7769937515258789
+        }
+      ],
+      "rerank_score": 0.8688268065452576
+    },
+    {
+      "chunk_id": "chunk_8ff52490cf78a4324c98eaf422d29221",
+      "score": 0.031099324975891997,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 18.06037712097168
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7882905006408691
+        }
+      ],
+      "rerank_score": 0.791176438331604
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "score": 0.0304147465437788,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.835541725158691
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8057103157043457
+        }
+      ],
+      "rerank_score": 0.7304821610450745
+    },
+    {
+      "chunk_id": "chunk_0f20a533abc64e441acfeb96ebf313e2",
+      "score": 0.03055037313432836,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 9.898155212402344
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7961301803588867
+        }
+      ],
+      "rerank_score": 0.7218412160873413
+    },
+    {
+      "chunk_id": "chunk_2a54af5657f5157d4c806c5daace0980",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.846965789794922
+        }
+      ],
+      "rerank_score": 0.6964746713638306
+    },
+    {
+      "chunk_id": "chunk_13fff028f79bff64399cfcf345628f0e",
+      "score": 0.027777777777777776,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.260491371154785
+        },
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7822966575622559
+        }
+      ],
+      "rerank_score": 0.6736212372779846
+    },
+    {
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7877359390258789
+        }
+      ],
+      "rerank_score": 0.6736212372779846
+    },
+    {
+      "chunk_id": "chunk_f1d7104112d7a03c0f65e063819b90cd",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.250616073608398
+        }
+      ],
+      "rerank_score": 0.6516874432563782
+    },
+    {
+      "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+      "score": 0.029571646010002173,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 15.744709968566895
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7818422317504883
+        }
+      ],
+      "rerank_score": 0.576482355594635
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.092768669128418
+        }
+      ],
+      "rerank_score": 0.5243642330169678
+    },
+    {
+      "chunk_id": "chunk_7d9e24b10c382d84f416c7e5d421edb4",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8045778274536133
+        }
+      ],
+      "rerank_score": 0.5219889879226685
+    },
+    {
+      "chunk_id": "chunk_389c397de3b4a649c47ddb2ca57e81ac",
+      "score": 0.028258706467661692,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 8.041348457336426
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7953877449035645
+        }
+      ],
+      "rerank_score": 0.4750877916812897
+    },
+    {
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "score": 0.029236022193768675,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 10.034210205078125
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7851681709289551
+        }
+      ],
+      "rerank_score": 0.45592519640922546
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7700238227844238
+        }
+      ],
+      "rerank_score": 0.42286208271980286
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.80542278289795
+        }
+      ],
+      "rerank_score": 0.24762336909770966
+    },
+    {
+      "chunk_id": "chunk_7436e453884a1d9b7acd9aef4a28b0b4",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7880887985229492
+        }
+      ],
+      "rerank_score": 0.2351083904504776
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7961015701293945
+        }
+      ],
+      "rerank_score": 0.16599829494953156
+    },
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.779541015625
+        }
+      ],
+      "rerank_score": 0.13466207683086395
+    },
+    {
+      "chunk_id": "chunk_bd7df026246fc403bdd19f91c797fc2a",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.9626688957214355
+        }
+      ],
+      "rerank_score": 0.12431928515434265
+    },
+    {
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.680312156677246
+        }
+      ],
+      "rerank_score": 0.12210386991500854
+    },
+    {
+      "chunk_id": "chunk_2a773898d4837d44bc3ec29b329f1825",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 7.419564247131348
+        }
+      ],
+      "rerank_score": 0.039268750697374344
+    },
+    {
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7744526863098145
+        }
+      ],
+      "rerank_score": 0.02382536791265011
+    },
+    {
+      "chunk_id": "chunk_7ac089f731dde3a5b09b48a00fc48587",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7786641120910645
+        }
+      ],
+      "rerank_score": 0.014281935058534145
+    },
+    {
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.772923469543457
+        }
+      ],
+      "rerank_score": 0.010169658809900284
+    },
+    {
+      "chunk_id": "chunk_22761de9415eaae3dc9344ec763b2014",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.36886978149414
+        }
+      ],
+      "rerank_score": 0.008610767312347889
+    },
+    {
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.773369312286377
+        }
+      ],
+      "rerank_score": 0.0034429810475558043
+    },
+    {
+      "chunk_id": "chunk_aba70e6f2f67df9b074a9e14ead47b00",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.010032653808594
+        }
+      ],
+      "rerank_score": 0.0009697519708424807
+    },
+    {
+      "chunk_id": "chunk_7403f00b6aa555cbc8c4bd1792d7b9be",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.436229705810547
+        }
+      ],
+      "rerank_score": 0.0005976693937554955
+    }
+  ],
+  "case_id": "H-F05",
+  "question": "RoG 消融实验去掉 planning 模块（w/o planning）或去掉 reasoning 模块（w/o reasoning）分别会导致什么现象？论文为什么最终只用 beam-search 生成 top-3 关系路径？",
+  "category": "fact",
+  "arm": "Legacy-Hybrid",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0014703000197187066
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.04596380004659295
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 7.800059393048286e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.6112310999305919
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0009591999696567655
+    }
+  ],
+  "retrieval_compute_seconds": 0.6596322000259534,
+  "request_wall_seconds": 8.27124230004847,
+  "embedding_source": "shared Q00 cloud vectors across arms; live planned subquery vectors for Production-Final",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.0935177999781445,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 4.80321190005634,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.5004463999066502,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 3.8364831999642774,
+      "usage": "{\"prompt_tokens\": 1844, \"total_tokens\": 2214, \"completion_tokens\": 370}"
+    }
+  ],
+  "criterion_source_coverage": [],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 1.0,
+    "mrr40": 0.5,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/8ecf60e0-3d7a-4258-80f5-74487cfa202e?poll=true"
+}

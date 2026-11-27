@@ -1,0 +1,616 @@
+{
+  "id": "d5b06d73-c2ee-507f-af7e-27eea6497467",
+  "inputs": {
+    "question": "看到 KG-GPT 与 RoG 都涉及 MetaQA，有人把 Freebase 写成它们共同的 MetaQA 测试 KG。这个结论对吗？请核对 Wiki-Movies、Freebase 和训练样本的角色。"
+  },
+  "outputs": {
+    "expected_answer": "给定来源不支持该共同测试 KG 结论。KG-GPT 表列 MetaQA 1/2/3-hop；RoG 的 MetaQA-3hop 基于 Wiki-Movies，Freebase 是迁移前训练来源，1000 个样本来自训练划分。不能把训练来源当成共同测试 KG。",
+    "answerable": false,
+    "negative_kind": "training_test_role_conflation",
+    "source_references": [
+      {
+        "unit_id": "kggptds",
+        "answer_point": "KG-GPT 表中包含 FACTKG 与 MetaQA(Hits@1)。",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "primary_chunk": "chunk_3f7eb65828761447433c66c28ad111a4",
+        "pages": [
+          4,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_3f7eb65828761447433c66c28ad111a4"
+        ]
+      },
+      {
+        "unit_id": "rogmeta",
+        "answer_point": "RoG 的迁移/扩展实验选 MetaQA-3hop，基于 Wiki-Movies，并取 1000 个训练样本。Freebase 是迁移训练来源，不是该 MetaQA-3hop 的测试知识图谱。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_f5c88d605f651f26c093f30b836a98aa",
+        "pages": [
+          20,
+          20
+        ],
+        "known_support_chunks": [
+          "chunk_f5c88d605f651f26c093f30b836a98aa"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": "不确认题干中无来源的关系或数值；说明证据边界。",
+    "case_id": "N04",
+    "category": "negative",
+    "required_facts": [
+      {
+        "unit_id": "kggptds",
+        "required_fact": "KG-GPT 表中包含 FACTKG 与 MetaQA(Hits@1)。",
+        "primary_chunk": "chunk_3f7eb65828761447433c66c28ad111a4",
+        "supporting_chunks": [
+          "chunk_3f7eb65828761447433c66c28ad111a4"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "rogmeta",
+        "required_fact": "RoG 的迁移/扩展实验选 MetaQA-3hop，基于 Wiki-Movies，并取 1000 个训练样本。Freebase 是迁移训练来源，不是该 MetaQA-3hop 的测试知识图谱。",
+        "primary_chunk": "chunk_f5c88d605f651f26c093f30b836a98aa",
+        "supporting_chunks": [
+          "chunk_f5c88d605f651f26c093f30b836a98aa"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_3f7eb65828761447433c66c28ad111a4",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 57,
+            "end_char": 1493,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1436,
+            "block_bboxes": [
+              [
+                143.353,
+                97.415,
+                274.997,
+                143.495
+              ],
+              [
+                76.209,
+                164.205,
+                132.263,
+                173.955
+              ],
+              [
+                146.652,
+                146.04,
+                274.997,
+                180.181
+              ],
+              [
+                149.091,
+                158.232,
+                274.997,
+                192.29
+              ],
+              [
+                70.557,
+                205.158,
+                290.877,
+                239.106
+              ],
+              [
+                75.442,
+                254.684,
+                284.569,
+                273.404
+              ],
+              [
+                85.336,
+                296.402,
+                96.475,
+                304.752
+              ],
+              [
+                78.31,
+                275.807,
+                276.34,
+                367.731
+              ],
+              [
+                70.119,
+                390.658,
+                289.494,
+                424.606
+              ],
+              [
+                70.866,
+                449.144,
+                289.139,
+                487.235
+              ],
+              [
+                70.593,
+                490.24,
+                290.949,
+                650.24
+              ],
+              [
+                70.866,
+                663.055,
+                136.004,
+                673.964
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "e8698fa921af438d139fa153a7cb87cde7c2c2088e869d1fedaa0bf37fd5e223",
+        "section": "Experiments",
+        "text": "full\nBERT\n65.20\nBlueBERT\n59.93\nzero-shot\nFlan-T5\n62.70\n12-shot\nChatGPT\n68.48\nWith Evidence\nfull\nGEAR\n77.65\n12-shot\nKG-GPT\n72.68\n8-shot\n67.68\n4-shot\n59.53\nTable 1: The performance of the models on FACTKG.\nExcept for ChatGPT and KG-GPT, all performances are\nobtained from Kim et al. (2023).\nTraining\nMethods\nMetaQA\nMetaQA\nMetaQA\nStrategy\n1-hop\n2-hop\n3-hop\nfull\nKV-Mem\n96.2\n82.7\n48.9\nGraftNet\n97.0\n94.8\n77.7\nEmbedKGQA\n97.5\n98.8\n94.8\nNSM\n97.1\n99.9\n98.9\nUniKGQA\n97.5\n99.0\n99.1\n12-shot\nChatGPT\n60.0\n23.0\n38.7\n12-shot\n96.3\n94.4\n94.0\n8-shot\nKG-GPT\n95.8\n93.8\n68.8\n4-shot\n94.7\n92.8\n46.6\nTable 2: The performance of the models on MetaQA\n(Hits@1). The best results for each task and those of\n12-shot KG-GPT are in bold.\nof the sentence segmentation and graph retrieval\nstages. The qualitative results including the graphs\nretrieved by KG-GPT are in Appendix E.1.\nNonetheless, when compared to GEAR, a fully\nsupervised model built upon KGs, KG-GPT ex-\nhibits certain limitations. KG-GPT achieves an ac-\ncuracy score of 72.68%, which is behind GEAR’s\n77.65%. This performance gap illustrates the ob-\nstacles encountered by KG-GPT in a few-shot sce-\nnario, namely the difficulty in amassing a suffi-\ncient volume of information from the restricted\ndata available. Hence, despite the notable progress\nachieved with KG-GPT, there is clear room for im-\nprovement to equal or surpass the performance of\nKG-specific supervised models like GEAR.\n4.2\nMetaQA\n"
+      },
+      {
+        "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 20,
+        "page_end": 20,
+        "source_spans": [
+          {
+            "pdf_page": 20,
+            "start_char": 348,
+            "end_char": 1306,
+            "chunk_start_char": 0,
+            "chunk_end_char": 958,
+            "block_bboxes": [
+              [
+                108.249,
+                283.751,
+                292.912,
+                293.714
+              ],
+              [
+                108.0,
+                304.529,
+                504.003,
+                380.755
+              ],
+              [
+                108.0,
+                387.729,
+                504.003,
+                419.609
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "6e20643b4eef5a0e34f68b485af5c4e881e914ea23d7d2544a3aaed0adc6a0c6",
+        "section": "A.7.1 TRANSFERABILITY TO OTHER KGS",
+        "text": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_251b66908d758ab4453ca76d45b64fca",
+      "paper_b2e26390ad4eb43ff4d03b5eb4e49037"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution.",
+      "retrieval_only": true,
+      "negative_policy": "negative questions excluded from retrieval recall aggregates; source diagnostics shown only, no rejection accuracy",
+      "failure_attribution": "post-hoc frozen source-pool ID diagnostics; not independent semantic correctness"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索对照；无模型答案、无答案准确率",
+      "controls": {
+        "arms": [
+          "Dense-only",
+          "Graph-only",
+          "Hybrid"
+        ],
+        "candidate_max": 40,
+        "dense_only_top": 40,
+        "hybrid_fulltext_top": 20,
+        "hybrid_dense_top": 20,
+        "graph_candidate_max": 40,
+        "graph_hops": 2,
+        "graph_paths_max": 40,
+        "graph_seed_entities_max": 40,
+        "graph_per_node": 8,
+        "graph_seed_chunks": 0,
+        "graph_text_fallback": false,
+        "graph_source_rank_hint": false,
+        "evidence_max": 8,
+        "evidence_budget_bytes": 6000,
+        "path_prompt_bytes": 0,
+        "reranker": "same GPU FP16 model; threshold 0.05; max_pair_tokens 1024",
+        "candidate_note": "same total cap, not forced equal returned counts; Hybrid has two channels of 20",
+        "order": "rotate three arms by case index",
+        "generation_requests_max": 0
+      },
+      "models": {
+        "generation": "DeepSeek-V4-Flash (configured provider)",
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)"
+      }
+    },
+    "result_display": {
+      "location": "Dense-only / Graph-only / Hybrid 三组 Experiment",
+      "fields": [
+        "全部候选原文及分数",
+        "最终证据与位置",
+        "实体/路径/截断",
+        "逐事实失败归因",
+        "三组差异",
+        "时延与上下文字节",
+        "零生成与Token未报告说明",
+        "原始Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "assessment": {
+      "axis": "训练测试角色颠倒",
+      "criteria": [
+        {
+          "id": "N04.C01",
+          "requirement": "KG-GPT 来源列出 MetaQA 1/2/3-hop，未据此补造共同 Freebase 测试设置。",
+          "unit_ids": [
+            "kggptds"
+          ],
+          "supporting_chunks_by_unit": {
+            "kggptds": [
+              "chunk_3f7eb65828761447433c66c28ad111a4"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "N04.C02",
+          "requirement": "MetaQA-3hop 基于 Wiki-Movies。",
+          "unit_ids": [
+            "rogmeta"
+          ],
+          "supporting_chunks_by_unit": {
+            "rogmeta": [
+              "chunk_f5c88d605f651f26c093f30b836a98aa"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "N04.C03",
+          "requirement": "Freebase 是迁移前训练来源，1000 个样本来自训练划分。",
+          "unit_ids": [
+            "rogmeta"
+          ],
+          "supporting_chunks_by_unit": {
+            "rogmeta": [
+              "chunk_f5c88d605f651f26c093f30b836a98aa"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "N04.C04",
+          "requirement": "拒绝共同 Freebase 测试 KG 的推断。",
+          "unit_ids": [
+            "kggptds",
+            "rogmeta"
+          ],
+          "supporting_chunks_by_unit": {
+            "kggptds": [
+              "chunk_3f7eb65828761447433c66c28ad111a4"
+            ],
+            "rogmeta": [
+              "chunk_f5c88d605f651f26c093f30b836a98aa"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        }
+      ],
+      "max_score": 4,
+      "focus_predicates": [
+        "DERIVES_TRAINING_DATA_FROM",
+        "EVALUATED_ON",
+        "REPORTS_METRIC",
+        "USES_DATASET",
+        "USES_EVALUATION_SETTING",
+        "USES_KNOWLEDGE_BASE",
+        "USES_TRAINING_SIGNAL"
+      ],
+      "reference_path_scope": "本题各来源单元的预期子图；可能是多条分支或互不相连的跨论文子图。",
+      "critical_error_rule": "触发全局 critical_errors 时本题不判全对，并保留逐项分数与错误说明。",
+      "reviewer_status": "not_reviewed",
+      "model_result_status": "not_run"
+    },
+    "expected_graph_paths": {
+      "kggptds": [
+        {
+          "unit_id": "kggptds",
+          "path_id": "kggptds.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KG-GPT"
+            },
+            {
+              "type": "Dataset",
+              "name": "FACTKG"
+            }
+          ],
+          "claim_ids": [
+            "dd1773652a5841ae5e421909eab2781f151a83808035c658e4ae91ede22e6c12"
+          ]
+        },
+        {
+          "unit_id": "kggptds",
+          "path_id": "kggptds.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KG-GPT"
+            },
+            {
+              "type": "Dataset",
+              "name": "MetaQA"
+            }
+          ],
+          "claim_ids": [
+            "0cfb49634e3760a2483157deb1063b7caa70af5149f73f3cc292e2e9d5ae0470"
+          ]
+        },
+        {
+          "unit_id": "kggptds",
+          "path_id": "kggptds.P03",
+          "nodes": [
+            {
+              "type": "EvaluationSetting",
+              "name": "KG-GPT MetaQA evaluation"
+            },
+            {
+              "type": "Dataset",
+              "name": "MetaQA 1-hop"
+            }
+          ],
+          "claim_ids": [
+            "e04810c5e8921a9c5312946199b38282bcde4d1fd930cf7bb3ddc786699cefde"
+          ]
+        },
+        {
+          "unit_id": "kggptds",
+          "path_id": "kggptds.P04",
+          "nodes": [
+            {
+              "type": "EvaluationSetting",
+              "name": "KG-GPT MetaQA evaluation"
+            },
+            {
+              "type": "Dataset",
+              "name": "MetaQA 2-hop"
+            }
+          ],
+          "claim_ids": [
+            "c84064a41d48d2fd9201dd60b69984ffd3d096720040477d7bf228301b7aec1d"
+          ]
+        },
+        {
+          "unit_id": "kggptds",
+          "path_id": "kggptds.P05",
+          "nodes": [
+            {
+              "type": "EvaluationSetting",
+              "name": "KG-GPT MetaQA evaluation"
+            },
+            {
+              "type": "Dataset",
+              "name": "MetaQA 3-hop"
+            }
+          ],
+          "claim_ids": [
+            "fd09375ff7ee16f9f44ea570258587e3049aef2ef34497409b21c89c7ab953a8"
+          ]
+        },
+        {
+          "unit_id": "kggptds",
+          "path_id": "kggptds.P06",
+          "nodes": [
+            {
+              "type": "EvaluationSetting",
+              "name": "KG-GPT MetaQA evaluation"
+            },
+            {
+              "type": "Metric",
+              "name": "Hits@1"
+            }
+          ],
+          "claim_ids": [
+            "90a44f67903660c3409b470c1cec1f1fea1158772724da6ea78c475d5c9fa007"
+          ]
+        },
+        {
+          "unit_id": "kggptds",
+          "path_id": "kggptds.P07",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KG-GPT"
+            },
+            {
+              "type": "EvaluationSetting",
+              "name": "KG-GPT MetaQA evaluation"
+            }
+          ],
+          "claim_ids": [
+            "5b45269e1934e0fff124ac5cbb5709ddc0349d469dcd20711d7b93affb14d7b2"
+          ]
+        }
+      ],
+      "rogmeta": [
+        {
+          "unit_id": "rogmeta",
+          "path_id": "rogmeta.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Dataset",
+              "name": "MetaQA-3hop"
+            },
+            {
+              "type": "KnowledgeBase",
+              "name": "Wiki-Movies"
+            }
+          ],
+          "claim_ids": [
+            "b1c138b999ae92f5053a5da572e4283b9464881e435936ac0993e8283fef5df8",
+            "78d906b36f9dbdab56bebfa4997c9fdafe8756c82efe3f4704fc0486e160a477"
+          ]
+        },
+        {
+          "unit_id": "rogmeta",
+          "path_id": "rogmeta.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "KnowledgeBase",
+              "name": "Freebase"
+            }
+          ],
+          "claim_ids": [
+            "98039030b934fa4921d02be4929960c3041ade8f0376fd7c642dffdeb169bddb"
+          ]
+        },
+        {
+          "unit_id": "rogmeta",
+          "path_id": "rogmeta.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "TrainingSignal",
+              "name": "1000 MetaQA-3hop training samples"
+            }
+          ],
+          "claim_ids": [
+            "ecdf91c055e1b59ba4da98f60d2084f20b759663a139b1e29a98c4efcbca1c4e"
+          ]
+        },
+        {
+          "unit_id": "rogmeta",
+          "path_id": "rogmeta.P04",
+          "nodes": [
+            {
+              "type": "EvaluationSetting",
+              "name": "RoG transfer experiment"
+            },
+            {
+              "type": "KnowledgeBase",
+              "name": "Freebase to Wiki-Movies transfer"
+            }
+          ],
+          "claim_ids": [
+            "90cf67d18bf478de9927c1478589a235e0a116b47f8c6c0ab0cb7d04b5b8fd71"
+          ]
+        },
+        {
+          "unit_id": "rogmeta",
+          "path_id": "rogmeta.P05",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "EvaluationSetting",
+              "name": "RoG transfer experiment"
+            }
+          ],
+          "claim_ids": [
+            "2c7227e0cbf89354df1f731ee1e2cfea2e89c7584399ff3672905bb7a4602bba"
+          ]
+        }
+      ]
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    }
+  },
+  "metadata": {
+    "case_id": "N04",
+    "category": "negative",
+    "benchmark": "benchmark-retrieval-v1",
+    "benchmark_sha256": "6c63c43ed90c397abc19e07eef6b8ff64c150e384070ac759d52db7fbdeb625c",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "negative"
+  ]
+}

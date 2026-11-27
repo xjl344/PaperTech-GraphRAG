@@ -1,0 +1,1199 @@
+{
+  "request_id": "e28acdd9-3f37-4d2f-b75f-8f0d3797e90d",
+  "status": "partial",
+  "answer": "关于 HippoRAG 的检索器与评测集构造：原文只说明其对比基线包括 BM25、Contriever、GTR、ColBERTv2、Propositionizer、RAPTOR 和多步方法 IRCoT，并在 MuSiQue、2Wiki、HotpotQA 上报告 recall@2/recall@5 与 EM/F1，未描述自身检索器实现或如何从这三个数据集构造评测子集，故其评测集构造流程证据不足 [chunk_8cc831cc45851cce50b9f34648070765]。HippoRAG 的超参数调节：所给证据未出现具体两个超参数的名称或设置说明，无法回答调了哪两个 [chunk_8cc831cc45851cce50b9f34648070765]。LPKG 方面：原文提到分别从 HotPotQA、2WikiMQA、MuSiQue 训练集各抽取 3000 题（共 9000 题）构造蒸馏规划数据，并用其微调 CodeQwen1.5-7B-Chat 得到 DLPKG(CodeQwen)，测试在未见数据集 Bamboogle 上进行 [chunk_80af5b3aa25d71d17409ebe2b757ab19]。LPKG 在 HotPotQA、2WikiMQA、Bamboogle、MuSiQue 上做精确匹配评测 [chunk_0bd33867fd3e8c1883e6ad37bcb38ec6]。LPKG 额外对比 DLPKG 的原因：原文表述为验证“使用 KG 构造规划数据”的有效性，与普通蒸馏方法对比，并强调在相同训练数据量、不使用域内问题的条件下比较 [chunk_80af5b3aa25d71d17409ebe2b757ab19]；此外 LPKG 还将微调后的规划器替换为 GPT-3.5（ICLPKG(GPT-3.5)）以比较规划能力 [chunk_bca043f33502bdedb273cd4b0ffe1769]。LPKG 具体使用何种检索器，所给证据未明确说明，流程证据不足。",
+  "citations": [
+    {
+      "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 3400,
+          "end_char": 4069,
+          "chunk_start_char": 0,
+          "chunk_end_char": 669,
+          "block_bboxes": [
+            [
+              107.532,
+              612.786,
+              505.246,
+              666.445
+            ],
+            [
+              108.0,
+              681.293,
+              163.053,
+              691.255
+            ],
+            [
+              107.532,
+              701.502,
+              504.003,
+              722.407
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 251,
+          "chunk_start_char": 670,
+          "chunk_end_char": 921,
+          "block_bboxes": [
+            [
+              107.691,
+              71.271,
+              505.745,
+              92.161
+            ],
+            [
+              248.247,
+              103.703,
+              463.593,
+              112.67
+            ],
+            [
+              241.983,
+              118.754,
+              475.838,
+              127.72
+            ]
+          ]
+        }
+      ],
+      "quote": "We compare against several strong and widely used retrieval methods: BM25 [69], Contriever [35],\nGTR [53] and ColBERTv2 [70]. Additionally, we compare against two recent LLM-augmented\nbaselines: Propositionizer [10], which rewrites passages into propositions, and RAPTOR [71],\nwhich constructs summary nodes to ease retrieval from long documents. In addition to the single-step\nretrieval methods above, we also include the multi-step retrieval method IRCoT [78] as a baseline.\n3.3\nMetrics\nWe report retrieval and QA performance on the datasets above using recall@2 and recall@5 (R@2\nand R@5 below) for retrieval and exact match (EM) and F1 scores for QA performance.\n5\n\nTable 2: Single-step retrieval performance. HippoRAG outperforms all baselines on MuSiQue and\n2WikiMultiHopQA and achieves comparable performance on the less challenging HotpotQA dataset.\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 13.172886848449707
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8422822952270508
+        }
+      ],
+      "rerank_score": 0.9504110217094421,
+      "context_bytes": 1285,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2413,
+          "end_char": 3237,
+          "chunk_start_char": 0,
+          "chunk_end_char": 824,
+          "block_bboxes": [
+            [
+              305.782,
+              532.489,
+              526.225,
+              706.071
+            ],
+            [
+              306.142,
+              710.448,
+              526.219,
+              775.496
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 400,
+          "chunk_start_char": 825,
+          "chunk_end_char": 1225,
+          "block_bboxes": [
+            [
+              78.813,
+              75.682,
+              281.2,
+              98.374
+            ],
+            [
+              95.004,
+              113.043,
+              264.687,
+              123.006
+            ],
+            [
+              158.943,
+              141.49,
+              253.198,
+              165.502
+            ],
+            [
+              79.412,
+              168.485,
+              280.598,
+              179.195
+            ],
+            [
+              79.412,
+              182.179,
+              277.663,
+              192.889
+            ],
+            [
+              79.412,
+              195.871,
+              280.598,
+              206.581
+            ],
+            [
+              79.412,
+              209.565,
+              280.598,
+              220.275
+            ],
+            [
+              79.412,
+              223.258,
+              277.663,
+              233.968
+            ],
+            [
+              79.412,
+              236.853,
+              255.287,
+              247.563
+            ],
+            [
+              75.274,
+              262.624,
+              284.419,
+              272.587
+            ]
+          ]
+        }
+      ],
+      "quote": "Compare to Normal Distillation (RQ3)\nTo fur-\nther validate the effectiveness of using planning\ndata constructed from KG, we compare it with\nthe normal distillation method. Specifically, we\nextracted 3000 questions each from the training\nsets of HotPotQA, 2WikiMQA, and MuSiQue\n(9000 questions in total).\nUsing the same in-\nput prompt with Equation (6), we obtain the\nplanning process of these questions by invoking\nGPT-3.5. These planning data are then used to\nfine-tune CodeQwen1.5-7B-Chat which has rela-\ntively weaker planning capabilities, resulting in\nDLPKG(CodeQwen).\nTo ensure the fairness of the comparison, we con-\nduct testing on the unseen dataset Bamboogle, and\nthe experimental results are shown in Table 4. The\nresults demonstrate that, under the same amount of\ntraining data and without using in-domain ques-\n\nPlanning Error\nRetrieval Error\nQA LLM Error\n13\n17\n10",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 11.230303764343262
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.825190544128418
+        }
+      ],
+      "rerank_score": 0.982624351978302,
+      "context_bytes": 1619,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 354,
+          "end_char": 1144,
+          "chunk_start_char": 0,
+          "chunk_end_char": 790,
+          "block_bboxes": [
+            [
+              70.557,
+              223.007,
+              526.066,
+              268.911
+            ],
+            [
+              129.221,
+              287.321,
+              466.055,
+              353.223
+            ],
+            [
+              70.557,
+              368.261,
+              524.408,
+              390.182
+            ],
+            [
+              70.866,
+              413.973,
+              160.233,
+              424.882
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Exact match results on conventional complex QA datasets. The best results are in bold, and the second\nbest is underlined. All baseline methods are conducted on GPT-3.5. LPKG(CodeQwen), and LPKG(Llama3)\nrespectively represent using our framework with fine-tuned CodeQwen1.5-7B-Chat and fine-tuned Llama3-8B-\nInstruct (fine-tuning is conducted on KG-sourced planning data).\nHotPotQA\n2WikiMQA\nBamboogle\nMuSiQue\nLPKG(CodeQwen)\n0.338\n0.356\n0.280\n0.266\nICLPKG(CodeQwen)\n0.110\n0.286\n0.192\n0.176\nLPKG(Llama3)\n0.376\n0.372\n0.304\n0.296\nICLPKG(Llama3)\n0.369\n0.353\n0.280\n0.290\nTable 3: Ablation study on the KG-sourced planning data. ICLPKG(CodeQwen) and ICLPKG(Llama3) represent\nusing the raw CodeQwen1.5-7B-Chat and Llama3-8B-Instruct to conduct planning, respectively.\nthe overall accuracy.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 9.754959106445312
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8243064880371094
+        }
+      ],
+      "rerank_score": 0.936168372631073,
+      "context_bytes": 1134,
+      "eid": "E3"
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 1144,
+          "end_char": 2413,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1269,
+          "block_bboxes": [
+            [
+              70.473,
+              452.738,
+              290.949,
+              775.361
+            ],
+            [
+              336.079,
+              416.562,
+              494.473,
+              468.517
+            ],
+            [
+              305.833,
+              483.527,
+              526.151,
+              505.475
+            ]
+          ]
+        }
+      ],
+      "quote": "At the same time, we also attempt to replace\nthe fine-tuned Mp with GPT-3.5 while keeping\nother parts unchanged, denoted as “ICLPKG(GPT-\n3.5)” in Table 2. Results show that even though\nfine-tuned Mp CodeQwen (7B) and Llama3 (8B)\nhave significantly fewer parameters than GPT-3.5\n(more than 175B), they can maintain or even sur-\npass GPT-3.5 in terms of planning ability. Next,\nwe replace the Mp fine-tuned on KG-sourced data\nwith their raw models, and the experimental re-\nsults are shown in Table 3. It can be observed that\nafter fine-tuning with planning data derived from\nthe KG, both CodeQwen1.5-7B-Chat and Llama3-\n8B-Instruct show significant improvements in plan-\nning ability. In particular, CodeQwen1.5-7B-Chat,\nwhich is significantly inferior to GPT-3.5 across\nall datasets in planning ability before fine-tuning,\nexhibits a notable enhancement after fine-tuning",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 7.506199836730957
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.8037281036376953
+        }
+      ],
+      "rerank_score": 0.9139840602874756,
+      "context_bytes": 1650,
+      "eid": "E4"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 3400,
+          "end_char": 4069,
+          "chunk_start_char": 0,
+          "chunk_end_char": 669,
+          "block_bboxes": [
+            [
+              107.532,
+              612.786,
+              505.246,
+              666.445
+            ],
+            [
+              108.0,
+              681.293,
+              163.053,
+              691.255
+            ],
+            [
+              107.532,
+              701.502,
+              504.003,
+              722.407
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 251,
+          "chunk_start_char": 670,
+          "chunk_end_char": 921,
+          "block_bboxes": [
+            [
+              107.691,
+              71.271,
+              505.745,
+              92.161
+            ],
+            [
+              248.247,
+              103.703,
+              463.593,
+              112.67
+            ],
+            [
+              241.983,
+              118.754,
+              475.838,
+              127.72
+            ]
+          ]
+        }
+      ],
+      "quote": "We compare against several strong and widely used retrieval methods: BM25 [69], Contriever [35],\nGTR [53] and ColBERTv2 [70]. Additionally, we compare against two recent LLM-augmented\nbaselines: Propositionizer [10], which rewrites passages into propositions, and RAPTOR [71],\nwhich constructs summary nodes to ease retrieval from long documents. In addition to the single-step\nretrieval methods above, we also include the multi-step retrieval method IRCoT [78] as a baseline.\n3.3\nMetrics\nWe report retrieval and QA performance on the datasets above using recall@2 and recall@5 (R@2\nand R@5 below) for retrieval and exact match (EM) and F1 scores for QA performance.\n5\n\nTable 2: Single-step retrieval performance. HippoRAG outperforms all baselines on MuSiQue and\n2WikiMultiHopQA and achieves comparable performance on the less challenging HotpotQA dataset.\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 13.172886848449707
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8422822952270508
+        }
+      ],
+      "rerank_score": 0.9504110217094421,
+      "context_bytes": 1285
+    },
+    {
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2413,
+          "end_char": 3237,
+          "chunk_start_char": 0,
+          "chunk_end_char": 824,
+          "block_bboxes": [
+            [
+              305.782,
+              532.489,
+              526.225,
+              706.071
+            ],
+            [
+              306.142,
+              710.448,
+              526.219,
+              775.496
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 400,
+          "chunk_start_char": 825,
+          "chunk_end_char": 1225,
+          "block_bboxes": [
+            [
+              78.813,
+              75.682,
+              281.2,
+              98.374
+            ],
+            [
+              95.004,
+              113.043,
+              264.687,
+              123.006
+            ],
+            [
+              158.943,
+              141.49,
+              253.198,
+              165.502
+            ],
+            [
+              79.412,
+              168.485,
+              280.598,
+              179.195
+            ],
+            [
+              79.412,
+              182.179,
+              277.663,
+              192.889
+            ],
+            [
+              79.412,
+              195.871,
+              280.598,
+              206.581
+            ],
+            [
+              79.412,
+              209.565,
+              280.598,
+              220.275
+            ],
+            [
+              79.412,
+              223.258,
+              277.663,
+              233.968
+            ],
+            [
+              79.412,
+              236.853,
+              255.287,
+              247.563
+            ],
+            [
+              75.274,
+              262.624,
+              284.419,
+              272.587
+            ]
+          ]
+        }
+      ],
+      "quote": "Compare to Normal Distillation (RQ3)\nTo fur-\nther validate the effectiveness of using planning\ndata constructed from KG, we compare it with\nthe normal distillation method. Specifically, we\nextracted 3000 questions each from the training\nsets of HotPotQA, 2WikiMQA, and MuSiQue\n(9000 questions in total).\nUsing the same in-\nput prompt with Equation (6), we obtain the\nplanning process of these questions by invoking\nGPT-3.5. These planning data are then used to\nfine-tune CodeQwen1.5-7B-Chat which has rela-\ntively weaker planning capabilities, resulting in\nDLPKG(CodeQwen).\nTo ensure the fairness of the comparison, we con-\nduct testing on the unseen dataset Bamboogle, and\nthe experimental results are shown in Table 4. The\nresults demonstrate that, under the same amount of\ntraining data and without using in-domain ques-\n\nPlanning Error\nRetrieval Error\nQA LLM Error\n13\n17\n10\nTable 5: Error analysis of LPKG(Llama3).\nCLQA-Wiki\nPrecision\nRecall\nCoT\n0.0605(+80.6%)\n0.0641(+103.4%)\nDirect RAG\n0.0814(+34.2%)\n0.0789(+65.3%)\nReAct\n0.0264(+314.0%)\n0.0270(+382.9%)\nSelf-Ask\n0.0385(+183.8%)\n0.0423(+208.2%)\nICLPKG(GPT-3.5)\n0.0907(+20.5%)\n0.1014(+28.6%)\nLPKG(Llama3)\n0.1112\n0.1344\nTable 6: Precision and Recall result on CLQA-Wiki.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 11.230303764343262
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.825190544128418
+        }
+      ],
+      "rerank_score": 0.982624351978302,
+      "context_bytes": 1619
+    },
+    {
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 354,
+          "end_char": 1144,
+          "chunk_start_char": 0,
+          "chunk_end_char": 790,
+          "block_bboxes": [
+            [
+              70.557,
+              223.007,
+              526.066,
+              268.911
+            ],
+            [
+              129.221,
+              287.321,
+              466.055,
+              353.223
+            ],
+            [
+              70.557,
+              368.261,
+              524.408,
+              390.182
+            ],
+            [
+              70.866,
+              413.973,
+              160.233,
+              424.882
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Exact match results on conventional complex QA datasets. The best results are in bold, and the second\nbest is underlined. All baseline methods are conducted on GPT-3.5. LPKG(CodeQwen), and LPKG(Llama3)\nrespectively represent using our framework with fine-tuned CodeQwen1.5-7B-Chat and fine-tuned Llama3-8B-\nInstruct (fine-tuning is conducted on KG-sourced planning data).\nHotPotQA\n2WikiMQA\nBamboogle\nMuSiQue\nLPKG(CodeQwen)\n0.338\n0.356\n0.280\n0.266\nICLPKG(CodeQwen)\n0.110\n0.286\n0.192\n0.176\nLPKG(Llama3)\n0.376\n0.372\n0.304\n0.296\nICLPKG(Llama3)\n0.369\n0.353\n0.280\n0.290\nTable 3: Ablation study on the KG-sourced planning data. ICLPKG(CodeQwen) and ICLPKG(Llama3) represent\nusing the raw CodeQwen1.5-7B-Chat and Llama3-8B-Instruct to conduct planning, respectively.\nthe overall accuracy.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 9.754959106445312
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8243064880371094
+        }
+      ],
+      "rerank_score": 0.936168372631073,
+      "context_bytes": 1134
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 1144,
+          "end_char": 2413,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1269,
+          "block_bboxes": [
+            [
+              70.473,
+              452.738,
+              290.949,
+              775.361
+            ],
+            [
+              336.079,
+              416.562,
+              494.473,
+              468.517
+            ],
+            [
+              305.833,
+              483.527,
+              526.151,
+              505.475
+            ]
+          ]
+        }
+      ],
+      "quote": "At the same time, we also attempt to replace\nthe fine-tuned Mp with GPT-3.5 while keeping\nother parts unchanged, denoted as “ICLPKG(GPT-\n3.5)” in Table 2. Results show that even though\nfine-tuned Mp CodeQwen (7B) and Llama3 (8B)\nhave significantly fewer parameters than GPT-3.5\n(more than 175B), they can maintain or even sur-\npass GPT-3.5 in terms of planning ability. Next,\nwe replace the Mp fine-tuned on KG-sourced data\nwith their raw models, and the experimental re-\nsults are shown in Table 3. It can be observed that\nafter fine-tuning with planning data derived from\nthe KG, both CodeQwen1.5-7B-Chat and Llama3-\n8B-Instruct show significant improvements in plan-\nning ability. In particular, CodeQwen1.5-7B-Chat,\nwhich is significantly inferior to GPT-3.5 across\nall datasets in planning ability before fine-tuning,\nexhibits a notable enhancement after fine-tuning\non KG-based planning data, especially achieving\nbetter results than GPT-3.5 on 2WikiMQA and\nMuSiQue. All these experimental phenomena fully\ndemonstrate the efficacy of using KG-sourced plan-\nning data in improving the planning ability of the\nLLMs.\nBamboogle\nLPKG(CodeQwen)\n0.280\nDLPKG(CodeQwen)\n0.216\nICLPKG(CodeQwen)\n0.192\nTable 4: Comparison with normal distillation methods.\nQA LLM is GPT-3.5.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 7.506199836730957
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.8037281036376953
+        }
+      ],
+      "rerank_score": 0.9139840602874756,
+      "context_bytes": 1650
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 25,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "text_only",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 6.278377900016494,
+      "inference_seconds": 0.8069651999976486,
+      "elapsed_seconds": 0.8097247000550851,
+      "peak_cuda_memory_bytes": 1196125184,
+      "request_count": 62,
+      "batch_size": 4
+    },
+    "evidence_count": 4,
+    "context_bytes": 5688,
+    "evidence_bytes": 5688,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5409,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ]
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ],
+        "eligible_candidate_count": 19,
+        "selected_chunk_ids": [
+          "chunk_8cc831cc45851cce50b9f34648070765"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ],
+        "eligible_candidate_count": 6,
+        "selected_chunk_ids": [
+          "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+          "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+          "chunk_bca043f33502bdedb273cd4b0ffe1769"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 2119,
+    "total_tokens": 2732,
+    "completion_tokens": 613,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 2119
+    },
+    "completion_tokens_details": {
+      "text_tokens": 613
+    }
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "errors": [],
+  "raw": "{\"answer\":\"关于 HippoRAG 的检索器与评测集构造：原文只说明其对比基线包括 BM25、Contriever、GTR、ColBERTv2、Propositionizer、RAPTOR 和多步方法 IRCoT，并在 MuSiQue、2Wiki、HotpotQA 上报告 recall@2/recall@5 与 EM/F1，未描述自身检索器实现或如何从这三个数据集构造评测子集，故其评测集构造流程证据不足 [chunk_8cc831cc45851cce50b9f34648070765]。HippoRAG 的超参数调节：所给证据未出现具体两个超参数的名称或设置说明，无法回答调了哪两个 [chunk_8cc831cc45851cce50b9f34648070765]。LPKG 方面：原文提到分别从 HotPotQA、2WikiMQA、MuSiQue 训练集各抽取 3000 题（共 9000 题）构造蒸馏规划数据，并用其微调 CodeQwen1.5-7B-Chat 得到 DLPKG(CodeQwen)，测试在未见数据集 Bamboogle 上进行 [chunk_80af5b3aa25d71d17409ebe2b757ab19]。LPKG 在 HotPotQA、2WikiMQA、Bamboogle、MuSiQue 上做精确匹配评测 [chunk_0bd33867fd3e8c1883e6ad37bcb38ec6]。LPKG 额外对比 DLPKG 的原因：原文表述为验证“使用 KG 构造规划数据”的有效性，与普通蒸馏方法对比，并强调在相同训练数据量、不使用域内问题的条件下比较 [chunk_80af5b3aa25d71d17409ebe2b757ab19]；此外 LPKG 还将微调后的规划器替换为 GPT-3.5（ICLPKG(GPT-3.5)）以比较规划能力 [chunk_bca043f33502bdedb273cd4b0ffe1769]。LPKG 具体使用何种检索器，所给证据未明确说明，流程证据不足。\",\"citations\":[{\"chunk_id\":\"chunk_8cc831cc45851cce50b9f34648070765\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_80af5b3aa25d71d17409ebe2b757ab19\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_0bd33867fd3e8c1883e6ad37bcb38ec6\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_bca043f33502bdedb273cd4b0ffe1769\",\"quote_id\":\"q1\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "score": 0.02877846790890269,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 11.230303764343262
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.825190544128418
+        }
+      ],
+      "rerank_score": 0.982624351978302
+    },
+    {
+      "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+      "score": 0.031024531024531024,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 13.172886848449707
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8422822952270508
+        }
+      ],
+      "rerank_score": 0.9504110217094421
+    },
+    {
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 0.027783137179239824,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 9.754959106445312
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8243064880371094
+        }
+      ],
+      "rerank_score": 0.936168372631073
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "score": 0.025657894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 7.506199836730957
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.8037281036376953
+        }
+      ],
+      "rerank_score": 0.9139840602874756
+    },
+    {
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.801267147064209
+        }
+      ],
+      "rerank_score": 0.9119669198989868
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 0.028404512489927477,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 11.255634307861328
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8202333450317383
+        }
+      ],
+      "rerank_score": 0.9114953279495239
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.031009615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 13.868048667907715
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8289709091186523
+        }
+      ],
+      "rerank_score": 0.9044819474220276
+    },
+    {
+      "chunk_id": "chunk_94f3984fea87c32c884454a6a284044d",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 13.510530471801758
+        }
+      ],
+      "rerank_score": 0.8955226540565491
+    },
+    {
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8275084495544434
+        }
+      ],
+      "rerank_score": 0.8946054577827454
+    },
+    {
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 0.03278688524590164,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 15.38496208190918
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8480820655822754
+        }
+      ],
+      "rerank_score": 0.8934953808784485
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.8096785545349121
+        }
+      ],
+      "rerank_score": 0.8828325867652893
+    },
+    {
+      "chunk_id": "chunk_ae9f5c6eeafcaff8f5a4d2a4a849b4f3",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.6902875900268555
+        }
+      ],
+      "rerank_score": 0.8134608268737793
+    },
+    {
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "score": 0.029709507042253523,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 10.669084548950195
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8358602523803711
+        }
+      ],
+      "rerank_score": 0.7959754467010498
+    },
+    {
+      "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+      "score": 0.028258706467661692,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 9.098601341247559
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8275108337402344
+        }
+      ],
+      "rerank_score": 0.769253671169281
+    },
+    {
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8242011070251465
+        }
+      ],
+      "rerank_score": 0.7525585293769836
+    },
+    {
+      "chunk_id": "chunk_18bee03d708874e36549c17129df7d7f",
+      "score": 0.027799227799227798,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 11.182066917419434
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.8130941390991211
+        }
+      ],
+      "rerank_score": 0.7426084280014038
+    },
+    {
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "score": 0.027912386121341344,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 11.874229431152344
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8034558296203613
+        }
+      ],
+      "rerank_score": 0.7052778005599976
+    },
+    {
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 0.03200204813108039,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 13.883942604064941
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8447723388671875
+        }
+      ],
+      "rerank_score": 0.7030400037765503
+    },
+    {
+      "chunk_id": "chunk_d9f1cb9af7ebdb35209d9b574447922e",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 9.876862525939941
+        }
+      ],
+      "rerank_score": 0.6981236934661865
+    },
+    {
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "score": 0.03128054740957967,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 14.457971572875977
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8286318778991699
+        }
+      ],
+      "rerank_score": 0.6040486097335815
+    },
+    {
+      "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.794805526733398
+        }
+      ],
+      "rerank_score": 0.5669777989387512
+    },
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "score": 0.026334026334026334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 9.217607498168945
+        },
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.802243709564209
+        }
+      ],
+      "rerank_score": 0.5253688097000122
+    },
+    {
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.027650648360030512,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.957620620727539
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8267064094543457
+        }
+      ],
+      "rerank_score": 0.32380759716033936
+    },
+    {
+      "chunk_id": "chunk_b43fb9517328e73774236c9ce6048e91",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.626297950744629
+        }
+      ],
+      "rerank_score": 0.3227393925189972
+    },
+    {
+      "chunk_id": "chunk_fbeebb7d77e97866867648455a11895e",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.8019356727600098
+        }
+      ],
+      "rerank_score": 0.26549941301345825
+    }
+  ],
+  "case_id": "H-R06",
+  "question": "比较 HippoRAG 与 LPKG 在检索器、评测子集与训练方式上的差异：二者各使用什么检索器，各自如何从 MuSiQue / 2WikiMultiHopQA / HotpotQA 构造评测集？为什么 LPKG 额外与 GPT-3.5 蒸馏规划数据（DLPKG）做了对比，而 HippoRAG 只调了哪两个超参数？",
+  "category": "cross",
+  "arm": "Legacy-Hybrid",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0006039999425411224
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.030496700084768236
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 1.0100076906383038e-05
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.8106672000139952
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0025872000260278583
+    }
+  ],
+  "retrieval_compute_seconds": 0.8443652001442388,
+  "request_wall_seconds": 10.065815799986012,
+  "embedding_source": "shared Q00 cloud vectors across arms; live planned subquery vectors for Production-Final",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.2757666999241337,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 6.51966099999845,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.42932899994775653,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 5.539250400033779,
+      "usage": "{\"prompt_tokens\": 2119, \"total_tokens\": 2732, \"completion_tokens\": 613}"
+    }
+  ],
+  "criterion_source_coverage": [],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 1.0,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/532428a2-1ffd-440b-8369-ecbc4e30f2b6?poll=true"
+}

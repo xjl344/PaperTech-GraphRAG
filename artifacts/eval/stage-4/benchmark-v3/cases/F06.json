@@ -1,0 +1,172 @@
+{
+  "id": "cbcd83bf6a93fe7404a3b5488139249cfa38ae3b641e921697ac747669e467b2",
+  "inputs": {
+    "question": "Tree-of-Traversals 的阈值、最大深度、最大扩展数分别会怎样结束搜索？"
+  },
+  "outputs": {
+    "expected_answer": "超过答案阈值可找到答案并停止；max depth 强制转入 done；max expansions 停止探索并返回 Cannot find answer。",
+    "answerable": true,
+    "negative_kind": null,
+    "required_facts": [
+      "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。"
+    ],
+    "source_references": [
+      {
+        "unit_id": "totbound",
+        "answer_point": "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+        "primary_chunk": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+        "pages": [
+          4,
+          4
+        ]
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+        "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+        "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 780,
+            "end_char": 2398,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1618,
+            "block_bboxes": [
+              [
+                70.473,
+                323.184,
+                290.949,
+                496.704
+              ],
+              [
+                70.473,
+                505.386,
+                290.941,
+                773.66
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "70266d38c335a6ca984d5b5b81a31f2c5f7ade5b5871491a9ac2638168c7f6fe",
+        "section": "3. Development of a new dataset to test com-",
+        "text": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n"
+      }
+    ],
+    "relation_outline": "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。",
+    "relation_review": null,
+    "must_not_claim": null,
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "All required facts and citations; direction, entity roles, train/test role, evaluation setup and unsupported claims reviewed separately.",
+      "graph_coverage": "Each answerable relation case must expose a source-backed path for every required unit; negative cases must not contain their prohibited edge.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins."
+    },
+    "expected_graph_paths": [
+      [
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "StopCondition",
+              "name": "node value exceeds answer threshold"
+            },
+            {
+              "type": "Outcome",
+              "name": "answer found"
+            }
+          ],
+          "claim_ids": [
+            "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+            "5776cc65d611e52235603c31a6e344d51fb734d134a30426bf69ab19ce4664e5"
+          ]
+        },
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "Parameter",
+              "name": "max depth"
+            },
+            {
+              "type": "Outcome",
+              "name": "forced transition to done"
+            }
+          ],
+          "claim_ids": [
+            "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+            "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4"
+          ]
+        },
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "Parameter",
+              "name": "max expansions"
+            },
+            {
+              "type": "Outcome",
+              "name": "Cannot find answer"
+            }
+          ],
+          "claim_ids": [
+            "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+            "ee17bfade2a238131cfcdf686479ace5265a9e6f185f724503181b7eddf5dcaf"
+          ]
+        }
+      ]
+    ],
+    "result_fields": [
+      "full answer",
+      "ranked candidates and scores",
+      "evidence and citation locations",
+      "graph paths",
+      "per-fact coverage and gaps",
+      "stage timings",
+      "tokens",
+      "paired differences",
+      "trace URLs"
+    ]
+  },
+  "metadata": {
+    "case_id": "F06",
+    "category": "fact",
+    "benchmark": "benchmark-v3",
+    "benchmark_sha256": "3ffb13a824016b58fd2cb5585bab2f3dbbf9767bd38b714ce148097122f6ac87",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "curated source review; not independent human gold"
+  },
+  "split": [
+    "fact"
+  ]
+}

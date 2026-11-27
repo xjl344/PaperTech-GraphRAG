@@ -1,0 +1,322 @@
+{
+  "id": "6f44428f2f127c14f2b926e0a91ed10e332339a0bace7fbef540d8f20c154061",
+  "inputs": {
+    "question": "HippoRAG 与 KGP 的图节点/边从什么材料构成，检索如何回到证据？"
+  },
+  "outputs": {
+    "expected_answer": "HippoRAG 将语料转为无模式 KG，以查询概念启动 PPR；KGP 用段落/文档结构作为节点，以相似或结构关系连边，再由代理收集支持段落。",
+    "answerable": true,
+    "negative_kind": null,
+    "required_facts": [
+      "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。",
+      "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。"
+    ],
+    "source_references": [
+      {
+        "unit_id": "hippo",
+        "answer_point": "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+        "pages": [
+          2,
+          2
+        ]
+      },
+      {
+        "unit_id": "kgp",
+        "answer_point": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_b959214e888053dae53b16a5259d7ea9",
+        "pages": [
+          1,
+          1
+        ]
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 2,
+        "page_end": 2,
+        "source_spans": [
+          {
+            "pdf_page": 2,
+            "start_char": 1574,
+            "end_char": 2946,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1372,
+            "block_bboxes": [
+              [
+                108.0,
+                472.448,
+                504.004,
+                547.812
+              ],
+              [
+                107.671,
+                554.313,
+                504.351,
+                640.564
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "893cea3139210935608a61ade8a99624fb8d10cc794acde9112226e4804d1ec2",
+        "section": "Introduction",
+        "text": "In contrast, our brains are capable of solving challenging knowledge integration tasks like these with\nrelative ease. The hippocampal memory indexing theory [75], a well-established theory of human\nlong-term memory, offers one plausible explanation for this remarkable ability. Teyler and Discenna\n[75] propose that our powerful context-based, continually updating memory relies on interactions\nbetween the neocortex, which processes and stores actual memory representations, and the C-shaped\nhippocampus, which holds the hippocampal index, a set of interconnected indices which point to\nmemory units on the neocortex and stores associations between them [19, 76].\nIn this work, we propose HippoRAG, a RAG framework that serves as a long-term memory for LLMs\nby mimicking this model of human memory. Our novel design first models the neocortex’s ability to\nprocess perceptual input by using an LLM to transform a corpus into a schemaless knowledge graph\n(KG) as our artificial hippocampal index. Given a new query, HippoRAG identifies the key concepts\nin the query and runs the Personalized PageRank (PPR) algorithm [30] on the KG, using the query\nconcepts as the seeds, to integrate information across passages for retrieval. PPR enables HippoRAG\nto explore KG paths and identify relevant subgraphs, essentially performing multi-hop reasoning in a\nsingle retrieval step.\n"
+      },
+      {
+        "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 310,
+            "end_char": 1851,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1541,
+            "block_bboxes": [
+              [
+                154.715,
+                218.316,
+                191.786,
+                228.279
+              ],
+              [
+                63.963,
+                235.864,
+                282.537,
+                493.897
+              ],
+              [
+                54.0,
+                509.791,
+                292.505,
+                677.594
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "0e322000b7328f184512788b9a3673e33daf048e076992ed152feb0614cda55f",
+        "section": "Abstract",
+        "text": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n"
+      }
+    ],
+    "relation_outline": "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。；KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+    "relation_review": {
+      "evidence": "覆盖每个必要事实并逐条引用其来源原文。",
+      "semantics": "核对关系方向、实体角色、训练/测试角色、数据集设置和指标。",
+      "synthesis": "区分论文直接主张与跨来源分析；共享实体不自动构成因果或方法继承。",
+      "uncertainty": "来源没有说明的条件须标为未知，不可补造。"
+    },
+    "must_not_claim": "不能把 KGP 的节点定义直接套到 HippoRAG。",
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "All required facts and citations; direction, entity roles, train/test role, evaluation setup and unsupported claims reviewed separately.",
+      "graph_coverage": "Each answerable relation case must expose a source-backed path for every required unit; negative cases must not contain their prohibited edge.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins."
+    },
+    "expected_graph_paths": [
+      [
+        {
+          "unit_id": "hippo",
+          "path_id": "hippo.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "HippoRAG"
+            },
+            {
+              "type": "Component",
+              "name": "LLM corpus transformation"
+            },
+            {
+              "type": "Component",
+              "name": "schemaless knowledge graph"
+            }
+          ],
+          "claim_ids": [
+            "92d56b5a6986adce4d849ff85ab121c8c11488e14ad1ae690416c4d1f5be8152",
+            "5da463f024983d5cb62401550ffbf440d99899507d08ed9f6d7511490478fc65"
+          ]
+        },
+        {
+          "unit_id": "hippo",
+          "path_id": "hippo.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "HippoRAG"
+            },
+            {
+              "type": "Algorithm",
+              "name": "Personalized PageRank"
+            },
+            {
+              "type": "Component",
+              "name": "query concepts as seeds"
+            }
+          ],
+          "claim_ids": [
+            "9c76166656f943f5baa9e8d26a2730e3edc3e2a5de0ebf4376e8b941d6811176",
+            "b87dcca2d5437fff56df5fa52d159a3c7bfb1b79e3a3193d77da10ff9080f532"
+          ]
+        },
+        {
+          "unit_id": "hippo",
+          "path_id": "hippo.P03",
+          "nodes": [
+            {
+              "type": "Algorithm",
+              "name": "Personalized PageRank"
+            },
+            {
+              "type": "Component",
+              "name": "cross-passage evidence"
+            }
+          ],
+          "claim_ids": [
+            "86f3986085cb0a08097bf0b999d1fc2fb421eeda608526459fc18b1567248eef"
+          ]
+        }
+      ],
+      [
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KGP"
+            },
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "NodeType",
+              "name": "passage"
+            }
+          ],
+          "claim_ids": [
+            "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+            "eb5171accf1be44d16790280d8bd57cdd379fa7597d3523f320aac52ad59cb71"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P02",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "NodeType",
+              "name": "document structure"
+            }
+          ],
+          "claim_ids": [
+            "1e3957d6e1180c018346c68fe2539a2672cb9050c21e505f439850d189ce6350"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P03",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "EdgeType",
+              "name": "lexical or semantic similarity"
+            }
+          ],
+          "claim_ids": [
+            "6907499f10078dae84bea86a35d8cf49d88827d0e6797631d8c127508e0ed51d"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P04",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "EdgeType",
+              "name": "intra-document structure"
+            }
+          ],
+          "claim_ids": [
+            "2b82744a57f83f7c8ec618da410cd5c6666e804df78bcf15249b6cb7196fa356"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P05",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KGP"
+            },
+            {
+              "type": "Component",
+              "name": "LLM graph traversal agent"
+            },
+            {
+              "type": "Component",
+              "name": "supporting passages"
+            }
+          ],
+          "claim_ids": [
+            "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+            "5b83b7227eb362c7813c6c2eaec2395b28c4b2f2057ed4eb12387f55490367fb"
+          ]
+        }
+      ]
+    ],
+    "result_fields": [
+      "full answer",
+      "ranked candidates and scores",
+      "evidence and citation locations",
+      "graph paths",
+      "per-fact coverage and gaps",
+      "stage timings",
+      "tokens",
+      "paired differences",
+      "trace URLs"
+    ]
+  },
+  "metadata": {
+    "case_id": "R07",
+    "category": "cross",
+    "benchmark": "benchmark-v3",
+    "benchmark_sha256": "3ffb13a824016b58fd2cb5585bab2f3dbbf9767bd38b714ce148097122f6ac87",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "curated source review; not independent human gold"
+  },
+  "split": [
+    "cross"
+  ]
+}

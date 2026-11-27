@@ -1,0 +1,295 @@
+{
+  "id": "bd27bc9a-bcc2-5d3a-a205-0b9a7c061e04",
+  "inputs": {
+    "question": "ToG 和 RoG 都利用 KG 推理，为什么不能据此把两者都归为免训练方法？分别追踪 KG 在在线搜索和训练中的作用。"
+  },
+  "outputs": {
+    "expected_answer": "ToG 声明无需额外训练；RoG 明确包括从 KG 蒸馏知识的训练，同时支持推理时接入其他 LLM。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "tog_training",
+        "answer_point": "ToG 将自身描述为 training-free，支持即插即用且无需额外训练。",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "primary_chunk": "chunk_e09b5a88c34014513aad6c0d6121f790",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_e09b5a88c34014513aad6c0d6121f790"
+        ]
+      },
+      {
+        "unit_id": "rog",
+        "answer_point": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      }
+    ],
+    "relation_outline": "ToG → 免额外训练的在线搜索；RoG → KG 蒸馏训练 + 路径检索",
+    "must_not_claim": "推理模块可接入任意 LLM 不等于整套方法没有训练。",
+    "case_id": "R05",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "tog_training",
+        "required_fact": "ToG 将自身描述为 training-free，支持即插即用且无需额外训练。",
+        "primary_chunk": "chunk_e09b5a88c34014513aad6c0d6121f790",
+        "supporting_chunks": [
+          "chunk_e09b5a88c34014513aad6c0d6121f790"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "rog",
+        "required_fact": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+        "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "supporting_chunks": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+        "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 517,
+            "end_char": 2163,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1646,
+            "block_bboxes": [
+              [
+                278.288,
+                276.647,
+                333.722,
+                288.602
+              ],
+              [
+                143.507,
+                303.075,
+                469.793,
+                532.166
+              ],
+              [
+                108.299,
+                556.334,
+                205.989,
+                568.289
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "471268c1247abd77693efcd2912c4075e068edafc6a25f42da84dc694da139df",
+        "section": "ABSTRACT",
+        "text": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following\nadvantages of ToG: 1) compared with LLMs, ToG has better deep reasoning power;\n2) ToG has the ability of knowledge traceability and knowledge correctability by\nleveraging LLMs reasoning and expert feedback; 3) ToG provides a flexible plug-\nand-play framework for different LLMs, KGs and prompting strategies without\nany additional training cost; 4) the performance of ToG with small LLM models\ncould exceed large LLM such as GPT-4 in certain scenarios and this reduces the\ncost of LLM deployment and application. As a training-free method with lower\ncomputational cost and better generality, ToG achieves overall SOTA in 6 out of\n9 datasets where most previous SOTAs rely on additional training. Our code is\npublicly available at https://github.com/IDEA-FinAI/ToG.\n1\n"
+      },
+      {
+        "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 318,
+            "end_char": 1721,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1403,
+            "block_bboxes": [
+              [
+                278.288,
+                270.703,
+                333.722,
+                282.658
+              ],
+              [
+                143.866,
+                296.104,
+                468.139,
+                492.369
+              ],
+              [
+                108.299,
+                514.402,
+                205.989,
+                526.357
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "555a358e21b7a12a69fa408f252697827520cea4a7201afcf3083a96a8ef2459",
+        "section": "ABSTRACT",
+        "text": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "paper_b2e26390ad4eb43ff4d03b5eb4e49037"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "必须覆盖全部必要事实并引用每篇所需原文",
+      "semantics": "逐项检查关系方向、实体角色、任务/实验条件",
+      "synthesis": "区分原文直接关系与跨来源分析，不将分析链冒充已入图事实",
+      "uncertainty": "缺任何必要环节须部分回答/说明缺口，不补写关系"
+    },
+    "scoring_rules": {
+      "primary": "All required source papers retained; measured using inherited references only after assembly.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40: reciprocal first rank containing any known supporting unit",
+        "selected evidence unit coverage",
+        "all-units coverage"
+      ],
+      "denominator": "16 failure-selected cross-text cases; before/after paired evidence replay. Not comparable to full v2 averages.",
+      "relevance": "仅原文核查后的有限支持池；没有穷举所有等价来源，池外不等于不相关。",
+      "latency": "Evidence assembly only, excluding retrieval, reranking and generation. Historical timings are separate.",
+      "p95": "按各类别及全部可回答题分别计算，单次小样本不表示 SLA。",
+      "answer_review": "No new answers generated. No answer accuracy or citation success change is claimed.",
+      "relation_gold": "reasoning_chain 为人工可审阅的分析提纲，不是生产图路径金标；共享基准、分析比较不自动对应图谱 Schema 边。",
+      "interpretation": "分别报告基础、跨文本、反例表现；新旧题集分布不同，不能由总分变化推导系统改善或 Graph 胜出。"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "固定旧候选的证据选择回放；不生成新回答。",
+      "controls": {
+        "fulltext_top": 20,
+        "dense_top": 20,
+        "candidates": 40,
+        "evidence_max": 8,
+        "context_bytes": 6000,
+        "hops": 2,
+        "degree": 8,
+        "graph_paths": 40,
+        "rerank_threshold": 0.05,
+        "max_pair_tokens": 1024,
+        "rrf_k": 60,
+        "query_vectors": "one batched cloud call, reused unchanged across paired arms",
+        "order": "odd numbered case Hybrid first, even Graph first; one warmup; no response retries",
+        "generation_subset": [
+          "R01",
+          "R02",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R08",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R14",
+          "R15",
+          "R16",
+          "R17",
+          "R18",
+          "R19",
+          "R20",
+          "R21",
+          "R22",
+          "R23",
+          "R24",
+          "N01",
+          "N02",
+          "N03",
+          "N04",
+          "N05",
+          "N06",
+          "N07",
+          "N08"
+        ],
+        "generation_policy": "基础 8 题仅检索；24 道关系题与 8 道反例按证据门控生成，最多 64 次配对生成调用。"
+      },
+      "models": {
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16"
+      },
+      "parent_generate": true,
+      "comparison": {
+        "arms": [
+          "Graph-before",
+          "Graph-after"
+        ],
+        "mode": "frozen_candidate_evidence_replay",
+        "changed": "question-driven source recognition and evidence reservation",
+        "fixed": [
+          "question",
+          "reference facts",
+          "ranked candidates and scores",
+          "retrieved graph paths",
+          "6000-byte budget",
+          "rerank threshold",
+          "path assembly policy"
+        ],
+        "generation": "No generation replayed; parent answers remain historical context only."
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Graph-before / Graph-after Experiment runs",
+      "fields": [
+        "全部冻结候选与分数",
+        "入选原文与位置",
+        "来源保留与缺口",
+        "逐事实覆盖",
+        "图路径",
+        "证据组装耗时",
+        "历史回答、引用、Token 与 Trace（明确为父运行）"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "R05",
+    "category": "cross",
+    "benchmark": "benchmark-source-coverage-v1",
+    "benchmark_sha256": "fcbffc2cd3012d7e49daa8361e202f2b6211095974236c48dc8bfe057f7fb7f6",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。",
+    "selection_reason": {
+      "required_papers": [
+        "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "paper_b2e26390ad4eb43ff4d03b5eb4e49037"
+      ],
+      "baseline_selected_papers": [
+        "paper_1f0f648a6595c842e4881196687e103c",
+        "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed"
+      ],
+      "missing_papers": [
+        "paper_b2e26390ad4eb43ff4d03b5eb4e49037"
+      ]
+    }
+  },
+  "split": [
+    "cross"
+  ]
+}

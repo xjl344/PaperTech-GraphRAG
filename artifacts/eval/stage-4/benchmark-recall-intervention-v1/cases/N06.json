@@ -1,0 +1,199 @@
+{
+  "id": "73984b13-5449-50c9-99c0-9c1c291e698e",
+  "inputs": {
+    "question": "KGP 中模型预测的下一段证据能直接当作已核查原文引用吗？请用论文关于出生日期的例子检查。"
+  },
+  "outputs": {
+    "expected_answer": "不能：示例生成的日期4月16日不正确，实际文档为3月28日；需要匹配真实邻居原文，预测文本不能当引用。",
+    "answerable": false,
+    "negative_kind": "false_or_overgeneralized_premise",
+    "source_references": [
+      {
+        "unit_id": "N06.S01",
+        "answer_point": "不能：示例生成的日期4月16日不正确，实际文档为3月28日；需要匹配真实邻居原文，预测文本不能当引用。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "pages": [
+          5,
+          5
+        ],
+        "known_support_chunks": [
+          "chunk_adcc17b94d9058357729c73998e78ba9"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": "不得接受题干错误前提。",
+    "case_id": "N06",
+    "category": "negative",
+    "required_facts": [
+      {
+        "unit_id": "N06.S01",
+        "required_fact": "不能：示例生成的日期4月16日不正确，实际文档为3月28日；需要匹配真实邻居原文，预测文本不能当引用。",
+        "primary_chunk": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "supporting_chunks": [
+          "chunk_adcc17b94d9058357729c73998e78ba9"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 5,
+        "page_end": 5,
+        "source_spans": [
+          {
+            "pdf_page": 5,
+            "start_char": 1622,
+            "end_char": 3271,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1649,
+            "block_bboxes": [
+              [
+                54.0,
+                387.595,
+                292.505,
+                638.654
+              ],
+              [
+                54.0,
+                639.649,
+                292.505,
+                704.406
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "e46970d6da9bd03b8cfb2aa52e235fd83ac47f4e2d72da93feb53ed6044efd26",
+        "section": "Introduction",
+        "text": "Figure 4 presents the content-based question asking ‘In\nwhat year was the creator of the current arrangement of\nSimpson’s Theme born?’. We use TF-IDF search to initial-\nize the seeding passage Node 1, which reads: ‘Alf Heiberg\nClausen (born March 28, 1941) is an American film com-\nposer’. Subsequently, we prefix the currently retrieved-\ncontext (Node 1) with the question and prompt the LLM to\ngenerate the next evidence required to approach the question\none step closer. Because we augment the reasoning capabil-\nity of the LLM by instruction fine-tuning, it is expected to\nrecognize the logical association between the question and\nthe currently retrieved context. Consequently, it can predict\nthe subsequent passage that maintains logical coherence, al-\nbeit may contain factual mistakes, i.e., ‘Alf Clausen (born\nApril 16, 1941) is an American composer of film and tele-\nvision scores.’ To rectify this potential factual mistake, we\nselect nodes from the candidate neighbors that match the\nmost with the LLM-generated passage, in this case, Node\n4 ‘Alf Heiberg Clausen (born March 28, 1941) is an Ameri-\ncan film composer’. Since this passage sources directly from\ndocuments, it inherently ensures the validity of the informa-\ntion. Then we prompt LLMs along with the retrieved context\nNode 1 and 4 for the answer.\nAdditionally, for questions asking about document struc-\ntures, we extract the document structure names and locate\ntheir corresponding structural nodes in the KG. For the table\nnode, we retrieve its markdown formatted content while for\nthe page node, we traverse its one-hop neighbor and obtain\npassages belonging to that page.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_57e4088ab0410527356a07d8b6f88f3b"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "cross final necessary-source macro coverage",
+      "negative_policy": "8道反例来源诊断单列，不计主召回，不评拒答正确率",
+      "semantic_review": "not assessed; no generation",
+      "source_pools": "unchanged, non-exhaustive, pre-frozen",
+      "pairing": "case-level win/tie/loss vs declared control; individual source-stage transitions also shown",
+      "causal_limit": "development set only; source-paper inclusion is not necessary-fact support"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索与证据评估（原冻结方案）",
+      "controls": {
+        "stage": "recall_width_intervention",
+        "fulltext_top": 20,
+        "rrf_k": 60,
+        "generation": false,
+        "embedding_calls": 0,
+        "named_policy": "existing named-paper reservation, not necessary-source reservation",
+        "no_gold_in_inputs": true,
+        "model_config": {
+          "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+          "CLOUD_BGE_PROVIDER": "cloudflare",
+          "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+          "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+          "LOCAL_RERANKER_DEVICE": "cuda",
+          "LOCAL_RERANKER_DTYPE": "float16",
+          "LOCAL_RERANKER_PERSISTENT": "true"
+        },
+        "dense_values": [
+          20,
+          40
+        ],
+        "candidate_cap": 60,
+        "selection": {
+          "budget": 8000,
+          "evidence_max": 12,
+          "source_policy": "named_first"
+        },
+        "score_policy": "reuse identical original-query scores for saved candidates; score only newly admitted chunks with original question",
+        "gate": "smallest k recovering any missing cross source; fixed before new reranker calls",
+        "target_adoption": "cross regression count must not exceed improvement count; not automatic production adoption"
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Dense20 / Dense40 Experiments",
+      "fields": [
+        "候选通道完整排名与分数",
+        "全部候选原文及位置",
+        "必要来源上游/重排/预算缺口",
+        "逐题配对差异",
+        "时延/调用量与Token状态",
+        "证据原文/图路径",
+        "原始及本轮Experiment Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "N06.A01",
+        "requirement": "不能：示例生成的日期4月16日不正确，实际文档为3月28日",
+        "unit_ids": [
+          "N06.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "N06.S01": [
+            "chunk_adcc17b94d9058357729c73998e78ba9"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "N06.A02",
+        "requirement": "需要匹配真实邻居原文，预测文本不能当引用",
+        "unit_ids": [
+          "N06.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "N06.S01": [
+            "chunk_adcc17b94d9058357729c73998e78ba9"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "selection_bias": "这40题与来源已参与前轮诊断和本轮方案讨论；仅开发回归，不是新题泛化测试。"
+  },
+  "metadata": {
+    "case_id": "N06",
+    "category": "negative",
+    "benchmark": "benchmark-recall-intervention-v1",
+    "benchmark_sha256": "82781672b113c90648d9f1d82838d411db7a6993016df74a41855fe888ad8e4e",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; exposed development set",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "negative"
+  ]
+}

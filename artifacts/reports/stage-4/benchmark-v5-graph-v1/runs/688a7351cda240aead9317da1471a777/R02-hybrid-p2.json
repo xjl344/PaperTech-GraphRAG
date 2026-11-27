@@ -1,0 +1,4783 @@
+{
+  "request_id": "3e39a44f-e069-4137-aa00-6cee4b91e2b5",
+  "status": "ok",
+  "answer": "HippoRAG 的入口是查询种子：给定新查询，它先识别查询中的关键概念，并以这些查询概念作为种子在 KG 上运行 Personalized PageRank [E1]；在线检索时，LLM 从查询中抽取命名实体，再由检索编码器链接到人工海马索引（KG）[E11]。随后 PPR 在 KG 上扩散，使 HippoRAG 探索 KG 路径、识别相关子图，原文称这相当于在单次检索步骤中完成多跳推理 [E1]；最后把 PPR 的节点概率聚合到已索引的段落上用于排序检索 [E11]。RoG 则先规划关系路径：它把关系路径当作计划，要求这些计划由 KG 接地，并以生成关系路径 z 的概率 Pθ(z|q) 表示规划模块 [E4]；具体做法是用指令模板提示 LLM“生成一条有助于回答该问题的有效关系路径” [E7]。这些由 KG 接地的关系路径计划随后被用于从 KG 中检索有效推理路径，再交给 LLM 进行忠实推理 [E5]；案例研究也描述 RoG 生成忠实关系路径并从 KG 检索有效推理路径用于推理 [E6]。因此，按原文流程，HippoRAG 的关键机制是“查询概念种子 + PPR 单步扩散检索”，RoG 的关键机制是“LLM 生成关系路径计划 + 按计划从 KG 检索有效推理路径” [E1, E5]。原文未提供两者在同一实验条件下的直接比较，不能据此推断胜负或公平性。",
+  "citations": [
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1574,
+          "end_char": 2946,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1372,
+          "block_bboxes": [
+            [
+              108.0,
+              472.448,
+              504.004,
+              547.812
+            ],
+            [
+              107.671,
+              554.313,
+              504.351,
+              640.564
+            ]
+          ]
+        }
+      ],
+      "quote": "process perceptual input by using an LLM to transform a corpus into a schemaless knowledge graph\n(KG) as our artificial hippocampal index. Given a new query, HippoRAG identifies the key concepts\nin the query and runs the Personalized PageRank (PPR) algorithm [30] on the KG, using the query\nconcepts as the seeds, to integrate information across passages for retrieval. PPR enables HippoRAG\nto explore KG paths and identify relevant subgraphs, essentially performing multi-hop reasoning in a\nsingle retrieval step.",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.88951873779297
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7901248931884766
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.25296974182129
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7892417907714844
+        }
+      ],
+      "rerank_score": 0.6526842713356018,
+      "context_bytes": 1728,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 315,
+          "end_char": 1381,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1066,
+          "block_bboxes": [
+            [
+              107.641,
+              275.692,
+              505.245,
+              362.078
+            ],
+            [
+              108.0,
+              374.922,
+              504.002,
+              408.051
+            ],
+            [
+              108.0,
+              424.788,
+              224.224,
+              434.75
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 2: Detailed HippoRAG Methodology. We model the three components of human long-term\nmemory to mimic its pattern separation and completion functions. For offline indexing (Middle),\nwe use an LLM to process passages into open KG triples, which are then added to our artificial\nhippocampal index, while our synthetic parahippocampal regions (PHR) detect synonymy. In the\nexample above, triples involving Professor Thomas are extracted and integrated into the KG. For\nonline retrieval (Bottom), our LLM neocortex extracts named entities from a query while our\nparahippocampal retrieval encoders link them to our hippocampal index. We then leverage the\nPersonalized PageRank algorithm to enable context-based retrieval and extract Professor Thomas.4\nset of query nodes, just as the hippocampus extracts associated signals from specific partial cues.2",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 10.505467414855957
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7907962799072266
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.532289505004883
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7823495864868164
+        }
+      ],
+      "rerank_score": 0.3842187523841858,
+      "context_bytes": 1418,
+      "eid": "E11"
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 315,
+          "end_char": 1381,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1066,
+          "block_bboxes": [
+            [
+              107.641,
+              275.692,
+              505.245,
+              362.078
+            ],
+            [
+              108.0,
+              374.922,
+              504.002,
+              408.051
+            ],
+            [
+              108.0,
+              424.788,
+              224.224,
+              434.75
+            ]
+          ]
+        }
+      ],
+      "quote": "Finally, as is done when the hippocampal signal is sent upstream, we aggregate the output PPR node\nprobability over the previously indexed passages and use that to rank them for retrieval.\n2.3\nDetailed Methodology",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 10.505467414855957
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7907962799072266
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.532289505004883
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7823495864868164
+        }
+      ],
+      "rerank_score": 0.3842187523841858,
+      "context_bytes": 1418,
+      "eid": "E11"
+    },
+    {
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1875,
+          "end_char": 3423,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1548,
+          "block_bboxes": [
+            [
+              108.0,
+              346.72,
+              504.003,
+              389.559
+            ],
+            [
+              226.429,
+              393.848,
+              279.387,
+              404.781
+            ],
+            [
+              282.835,
+              391.675,
+              297.231,
+              401.638
+            ],
+            [
+              282.148,
+              408.127,
+              297.35,
+              415.192
+            ],
+            [
+              299.573,
+              393.848,
+              504.0,
+              404.781
+            ],
+            [
+              108.0,
+              416.317,
+              504.002,
+              470.346
+            ],
+            [
+              108.249,
+              484.743,
+              255.003,
+              494.706
+            ],
+            [
+              108.0,
+              505.266,
+              504.003,
+              580.983
+            ]
+          ]
+        }
+      ],
+      "quote": "By treating relation paths as plans, we can make sure the plans are grounded by KGs, which enables\nLLMs to conduct faithful and interpretable reasoning on graphs. In a nutshell, we formulate our\nRoG as an optimization problem that aims to maximize the probability of reasoning the answer from\na knowledge graph G w.r.t the question q by generating relation paths z as the plan:\nPθ(a|q, G) =\nX\nz∈Z\nPθ(a|q, z, G)Pθ(z|q),\n(1)\nwhere θ denotes the parameters of LLMs, z denotes the relation paths (plans) generated by LLMs,\nand Z denotes the set of possible relation paths. The latter term Pθ(z|q) is the probability of gen-\nerating a faithful relation path z grounded by KG, given the question q, which is realized by the\nplanning module. The former term Pθ(a|q, z, G) is the probability of reasoning an answer a given",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.791396141052246
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.511582374572754
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8279023170471191
+        }
+      ],
+      "rerank_score": 0.7709825038909912,
+      "context_bytes": 1917,
+      "eid": "E4"
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1698,
+          "end_char": 3073,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1375,
+          "block_bboxes": [
+            [
+              108.0,
+              407.911,
+              504.003,
+              428.833
+            ],
+            [
+              108.0,
+              435.296,
+              504.001,
+              456.728
+            ],
+            [
+              205.424,
+              461.976,
+              284.243,
+              474.649
+            ],
+            [
+              240.108,
+              463.716,
+              301.873,
+              489.396
+            ],
+            [
+              303.533,
+              457.105,
+              332.267,
+              480.512
+            ],
+            [
+              337.696,
+              461.543,
+              352.092,
+              471.506
+            ],
+            [
+              335.12,
+              477.586,
+              354.164,
+              485.06
+            ],
+            [
+              356.323,
+              463.716,
+              402.149,
+              474.649
+            ],
+            [
+              312.942,
+              488.621,
+              402.148,
+              500.335
+            ],
+            [
+              403.808,
+              463.845,
+              504.0,
+              474.038
+            ],
+            [
+              108.0,
+              502.387,
+              504.003,
+              534.267
+            ],
+            [
+              108.249,
+              558.195,
+              218.753,
+              568.158
+            ],
+            [
+              108.0,
+              582.271,
+              504.003,
+              614.152
+            ],
+            [
+              123.59,
+              630.112,
+              484.452,
+              648.581
+            ],
+            [
+              108.0,
+              666.072,
+              504.001,
+              687.504
+            ],
+            [
+              108.0,
+              711.557,
+              504.003,
+              732.23
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 1376,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "template that prompts LLMs to generate relation paths:\nPlease generate a valid relation path that can be helpful for answering the following question:\n<Question>\nwhere <Question> indicates the question q. The question together with the instruction template\nis fed into LLMs to generate the relation paths, which are structurally formatted as a sentence:\n2The FiD framework assumes each z ∈Z contributes independently, where the probability Pθ(a|q, Z, G)\ncan be approximated as the product of each Pθ(a|q, z, G).\n5\n\nPublished as a conference paper at ICLR 2024",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.797100067138672
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7851896286010742
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 11.672405242919922
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8349161148071289
+        }
+      ],
+      "rerank_score": 0.7140302062034607,
+      "context_bytes": 1812,
+      "eid": "E7"
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 318,
+          "end_char": 1721,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1403,
+          "block_bboxes": [
+            [
+              278.288,
+              270.703,
+              333.722,
+              282.658
+            ],
+            [
+              143.866,
+              296.104,
+              468.139,
+              492.369
+            ],
+            [
+              108.299,
+              514.402,
+              205.989,
+              526.357
+            ]
+          ]
+        }
+      ],
+      "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans.",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.022204399108887
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8183903694152832
+        }
+      ],
+      "rerank_score": 0.7577943801879883,
+      "context_bytes": 1762,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 318,
+          "end_char": 1721,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1403,
+          "block_bboxes": [
+            [
+              278.288,
+              270.703,
+              333.722,
+              282.658
+            ],
+            [
+              143.866,
+              296.104,
+              468.139,
+              492.369
+            ],
+            [
+              108.299,
+              514.402,
+              205.989,
+              526.357
+            ]
+          ]
+        }
+      ],
+      "quote": "These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.022204399108887
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8183903694152832
+        }
+      ],
+      "rerank_score": 0.7577943801879883,
+      "context_bytes": 1762,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_7d9e24b10c382d84f416c7e5d421edb4",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 9,
+      "page_end": 9,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 3136,
+          "end_char": 3961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 825,
+          "block_bboxes": [
+            [
+              108.0,
+              501.959,
+              504.003,
+              599.683
+            ],
+            [
+              108.299,
+              617.101,
+              195.378,
+              629.057
+            ]
+          ]
+        }
+      ],
+      "quote": "Case studies. We also illustrate two case studies in Table 4 and Table 5. In Table 4, we can\nfind that ChatGPT+CoT suffers from the lack of knowledge issue and cannot answer the question.\nOn the contrary, RoG can generate faithful relation paths and retrieve valid reasoning paths from\nKGs for reasoning. Besides, RoG can provide interpretable explanations based on the reasoning\npaths. In Table 5, we can see that ChatGPT+CoT suffers from hallucinations and generates incorrect\nanswers. In contrast, although the retrieved reasoning paths contain noises, the reasoning module\ncan identify the correct reasoning paths and conduct faithful reasoning. These results demonstrate\nthe effectiveness of RoG in conducting faithful reasoning and generating interpretable results. More\ncases can be found in Appendices A.8 and A.9.\n6",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.320399761199951
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8305573463439941
+        }
+      ],
+      "rerank_score": 0.75743567943573,
+      "context_bytes": 1142,
+      "eid": "E6"
+    }
+  ],
+  "premise_check": [
+    {
+      "premise": "HippoRAG 以问题中的关键概念（命名实体）作为查询种子",
+      "supported": true,
+      "evidence_eids": [
+        "E1",
+        "E11",
+        "E3"
+      ],
+      "note": "E1 明确用查询概念作种子运行 PPR；E11 描述查询实体抽取与链接；E3 展示查询 NER。"
+    },
+    {
+      "premise": "HippoRAG 在知识图谱上运行 Personalized PageRank 完成多跳信息整合",
+      "supported": true,
+      "evidence_eids": [
+        "E1",
+        "E11"
+      ],
+      "note": "E1 称 PPR 使 HippoRAG 探索 KG 路径并识别相关子图，在单次检索中完成多跳推理；E11 描述 PPR 输出概率聚合到段落排序。"
+    },
+    {
+      "premise": "RoG 先生成由 KG 关系构成的关系路径计划，再据此检索有效推理路径",
+      "supported": true,
+      "evidence_eids": [
+        "E5",
+        "E4",
+        "E7"
+      ],
+      "note": "E5 给出 planning-retrieval-reasoning 框架；E4 将关系路径作为计划并定义规划项与检索推理项；E7 描述规划模块的指令模板。"
+    },
+    {
+      "premise": "RoG 的有效推理路径是从 KG 中按生成的关系路径检索得到，而非任意图游走",
+      "supported": true,
+      "evidence_eids": [
+        "E5",
+        "E6"
+      ],
+      "note": "E5 称计划用于从 KG 检索有效推理路径；E6 案例称 RoG 生成忠实关系路径并检索有效推理路径。"
+    },
+    {
+      "premise": "两者面对多跳问题的流程可直接对照（HippoRAG 单步 PPR 检索 vs RoG 规划后检索）",
+      "supported": true,
+      "evidence_eids": [
+        "E1",
+        "E5"
+      ],
+      "note": "E1 明示 HippoRAG 在单次检索步骤中做多跳推理；E5 明示 RoG 的规划—检索—推理框架，可作为流程对照，但不涉及性能比较。"
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1574,
+          "end_char": 2946,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1372,
+          "block_bboxes": [
+            [
+              108.0,
+              472.448,
+              504.004,
+              547.812
+            ],
+            [
+              107.671,
+              554.313,
+              504.351,
+              640.564
+            ]
+          ]
+        }
+      ],
+      "quote": "In contrast, our brains are capable of solving challenging knowledge integration tasks like these with\nrelative ease. The hippocampal memory indexing theory [75], a well-established theory of human\nlong-term memory, offers one plausible explanation for this remarkable ability. Teyler and Discenna\n[75] propose that our powerful context-based, continually updating memory relies on interactions\nbetween the neocortex, which processes and stores actual memory representations, and the C-shaped\nhippocampus, which holds the hippocampal index, a set of interconnected indices which point to\nmemory units on the neocortex and stores associations between them [19, 76].\nIn this work, we propose HippoRAG, a RAG framework that serves as a long-term memory for LLMs\nby mimicking this model of human memory. Our novel design first models the neocortex’s ability to\nprocess perceptual input by using an LLM to transform a corpus into a schemaless knowledge graph\n(KG) as our artificial hippocampal index. Given a new query, HippoRAG identifies the key concepts\nin the query and runs the Personalized PageRank (PPR) algorithm [30] on the KG, using the query\nconcepts as the seeds, to integrate information across passages for retrieval. PPR enables HippoRAG\nto explore KG paths and identify relevant subgraphs, essentially performing multi-hop reasoning in a\nsingle retrieval step.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.88951873779297
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7901248931884766
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.25296974182129
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7892417907714844
+        }
+      ],
+      "rerank_score": 0.6526842713356018,
+      "context_bytes": 1728
+    },
+    {
+      "chunk_id": "chunk_0f20a533abc64e441acfeb96ebf313e2",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 2416,
+          "end_char": 3950,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1534,
+          "block_bboxes": [
+            [
+              306.001,
+              555.8,
+              501.382,
+              569.431
+            ],
+            [
+              306.001,
+              573.338,
+              501.382,
+              586.969
+            ],
+            [
+              108.0,
+              472.372,
+              296.037,
+              591.924
+            ],
+            [
+              108.0,
+              598.898,
+              504.005,
+              652.696
+            ],
+            [
+              108.249,
+              668.573,
+              387.077,
+              678.536
+            ],
+            [
+              108.0,
+              689.338,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 1535,
+          "chunk_end_char": 1580,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "LLaMA2-Chat-7B\n64.37\n44.61\n34.60\n29.91\nLLaMA2-Chat-7B + RoG Planning\n74.20\n56.16\n56.41\n51.99\nFlan-T5-xl\n30.95\n17.08\n14.69\n12.25\nFlan-T5-xl + RoG Planning\n67.87\n44.93\n37.81\n32.57\nIn this section, we evaluate the effectiveness of\nintegrating the planning module of RoG with\ndifferent LLMs during inference to improve\ntheir performance. Specifically, we first adopt\nthe planning module of RoG to generate re-\nlation paths and feed the retrieved reasoning\npaths as context into different LLMs for rea-\nsoning. The results are presented in Table 3. To\naccount for the fact that it is difficult to extract\nthe number of answers from LLM’s output. We\nonly report the Hits@1 and Recall metrics.\nFrom the results, we can notice that the performance of all LLMs is substantially improved by\nintegrating the planning module of RoG. Specifically, the Hits@1 of ChatGPT, Alpaca, LLaMA2,\nand Flan-T5 are improved by 8.5%, 15.3%, and 119.3%, respectively. This demonstrates that the\nplanning module of RoG can be seamlessly integrated with other LLMs to improve their performance\nwithout retraining.\n5.4\nRQ3: FAITHFUL REASONING AND INTERPRETABLE RESULTS\nQuantitative Results. To evaluate the faithfulness of the relation paths, we illustrate the quantita-\ntive results in Figure 3. In experiments, we sweep the number of top-K relation paths generated\nby RoG. From results, we can see that the number of retrieved reasoning paths increases with K,\nwhich also leads to more answers to be covered (recall). This demonstrates the faithfulness of the\n8\n\nPublished as a conference paper at ICLR 2024\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 9.058432579040527
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 9.058432579040527
+        }
+      ],
+      "rerank_score": 0.8464508652687073,
+      "context_bytes": 1965
+    },
+    {
+      "chunk_id": "chunk_b43fb9517328e73774236c9ce6048e91",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 20,
+      "page_end": 21,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 20,
+          "start_char": 1937,
+          "end_char": 2599,
+          "chunk_start_char": 0,
+          "chunk_end_char": 662,
+          "block_bboxes": [
+            [
+              107.691,
+              546.111,
+              504.003,
+              621.693
+            ],
+            [
+              301.019,
+              742.332,
+              310.982,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 21,
+          "start_char": 0,
+          "end_char": 817,
+          "chunk_start_char": 663,
+          "chunk_end_char": 1480,
+          "block_bboxes": [
+            [
+              243.358,
+              532.963,
+              369.733,
+              549.589
+            ],
+            [
+              339.144,
+              541.168,
+              361.371,
+              549.407
+            ],
+            [
+              435.752,
+              505.612,
+              480.432,
+              513.852
+            ],
+            [
+              409.273,
+              522.061,
+              457.614,
+              528.952
+            ],
+            [
+              445.047,
+              472.046,
+              471.111,
+              480.285
+            ],
+            [
+              392.688,
+              483.397,
+              417.321,
+              490.288
+            ],
+            [
+              389.231,
+              537.065,
+              476.346,
+              549.216
+            ],
+            [
+              326.251,
+              499.559,
+              375.69,
+              506.45
+            ],
+            [
+              327.105,
+              506.396,
+              373.398,
+              520.001
+            ],
+            [
+              435.286,
+              568.518,
+              480.585,
+              576.757
+            ],
+            [
+              441.771,
+              599.923,
+              474.412,
+              608.21
+            ],
+            [
+              138.043,
+              534.368,
+              210.771,
+              545.677
+            ],
+            [
+              142.281,
+              505.737,
+              278.293,
+              514.225
+            ],
+            [
+              135.444,
+              568.891,
+              169.705,
+              577.13
+            ],
+            [
+              240.753,
+              561.757,
+              275.784,
+              569.247
+            ],
+            [
+              244.064,
+              569.216,
+              270.892,
+              576.707
+            ],
+            [
+              245.845,
+              576.8,
+              269.073,
+              584.29
+            ],
+            [
+              328.921,
+              561.384,
+              373.145,
+              568.874
+            ],
+            [
+              330.241,
+              568.843,
+              371.833,
+              576.334
+            ],
+            [
+              344.414,
+              576.427,
+              356.069,
+              583.917
+            ],
+            [
+              204.516,
+              553.265,
+              380.75,
+              564.259
+            ],
+            [
+              199.406,
+              514.104,
+              217.695,
+              520.995
+            ],
+            [
+              354.617,
+              522.185,
+              358.68,
+              529.076
+            ],
+            [
+              381.014,
+              563.708,
+              426.44,
+              570.599
+            ],
+            [
+              381.014,
+              591.929,
+              409.282,
+              598.82
+            ],
+            [
+              261.727,
+              522.558,
+              281.509,
+              529.449
+            ],
+            [
+              314.3,
+              487.127,
+              340.879,
+              494.018
+            ],
+            [
+              344.627,
+              472.046,
+              355.878,
+              480.285
+            ],
+            [
+              121.191,
+              155.24,
+              484.773,
+              193.546
+            ],
+            [
+              121.191,
+              203.104,
+              357.101,
+              270.127
+            ]
+          ]
+        }
+      ],
+      "quote": "To better demonstrate how our HippoRAG pipeline works, we use the path-following example from\nthe MuSiQue dataset shown in Table 7. We use HippoRAG’s indexing and retrieval processes to\nfollow this question and a subset of the associated corpus. The question, its answer, and its supporting\nand distractor passages are as shown in Figure 3. The indexing stage is shown in Figure 4, showing\nboth the OpenIE procedure as well as the relevant subgraph of our KG. Finally, we illustrate the\nretrieval stage in Figure 5, including query NER, query node retrieval, how the PPR algorithm\nchanges node probabilities, and how the top retrieval results are calculated.\n20\n\nborn in\nAlhandra\nVila Franca \nde Xira\nLisbon District\nis a municipality in\nPortugal\nlocated in\nTagus River\nsituated on\nfounded by French \nfollowers of \nAfonso Henriques\n136,886 in 2011\n318.19 km2\nfootballer\nis a\nLisbon\n5 March 1979\nPortuguese\nLuís Miguel \nAssunção\nJoaquim\nmunicipality of \nVila Franca de \nXira\nequivalent\nis also known as\nis\nborn in\nis\nhad population of\nhad area of\nborn on\nequivalent\nvila\n1. Alhandra (footballer)\nNER: \n[\"5 March 1979\", \"Alhandra\", \"Lisbon\", \"Luís Miguel Assunção Joaquim\", \"Portuguese\", \"Vila Franca de \nXira\"]\nOpenIE: \n[(\"Alhandra\", \"is a\", \"footballer\"),\n(\"Alhandra\", \"born in\", \"Vila Franca de Xira\"),\n(\"Alhandra\", \"born in\", \"Lisbon\"),\n(\"Alhandra\", \"born on\", \"5 March 1979\"),\n(\"Alhandra\", \"is\", \"Portuguese\"),\n(\"Luís Miguel Assunção Joaquim\", \"is also known as\", \"Alhandra\")]\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 6.812989234924316
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7799186706542969
+        }
+      ],
+      "rerank_score": 0.6015350222587585,
+      "context_bytes": 1936
+    },
+    {
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1875,
+          "end_char": 3423,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1548,
+          "block_bboxes": [
+            [
+              108.0,
+              346.72,
+              504.003,
+              389.559
+            ],
+            [
+              226.429,
+              393.848,
+              279.387,
+              404.781
+            ],
+            [
+              282.835,
+              391.675,
+              297.231,
+              401.638
+            ],
+            [
+              282.148,
+              408.127,
+              297.35,
+              415.192
+            ],
+            [
+              299.573,
+              393.848,
+              504.0,
+              404.781
+            ],
+            [
+              108.0,
+              416.317,
+              504.002,
+              470.346
+            ],
+            [
+              108.249,
+              484.743,
+              255.003,
+              494.706
+            ],
+            [
+              108.0,
+              505.266,
+              504.003,
+              580.983
+            ]
+          ]
+        }
+      ],
+      "quote": "By treating relation paths as plans, we can make sure the plans are grounded by KGs, which enables\nLLMs to conduct faithful and interpretable reasoning on graphs. In a nutshell, we formulate our\nRoG as an optimization problem that aims to maximize the probability of reasoning the answer from\na knowledge graph G w.r.t the question q by generating relation paths z as the plan:\nPθ(a|q, G) =\nX\nz∈Z\nPθ(a|q, z, G)Pθ(z|q),\n(1)\nwhere θ denotes the parameters of LLMs, z denotes the relation paths (plans) generated by LLMs,\nand Z denotes the set of possible relation paths. The latter term Pθ(z|q) is the probability of gen-\nerating a faithful relation path z grounded by KG, given the question q, which is realized by the\nplanning module. The former term Pθ(a|q, z, G) is the probability of reasoning an answer a given\nthe question q, relation path z, and KG G, which is computed by the retrieval-reasoning module.\n4.2\nOPTIMIZATION FRAMEWORK\nDespite the advantage of generating relation paths as plans, the LLMs have zero knowledge of the\nrelations contained in KGs. Therefore, LLMs cannot directly generate relation paths grounded by\nKGs as faithful plans. Moreover, LLMs might not understand the reasoning paths correctly and\nconduct reasoning based on them. To address these issues, we design two instruction tuning tasks:\n1) planning optimization, which distills the knowledge from KGs into LLMs to generate faithful\nrelation paths as plans; 2) retrieval-reasoning optimization, which enables LLMs to reason based on\nthe retrieved reasoning paths.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.791396141052246
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.511582374572754
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8279023170471191
+        }
+      ],
+      "rerank_score": 0.7709825038909912,
+      "context_bytes": 1917
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 318,
+          "end_char": 1721,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1403,
+          "block_bboxes": [
+            [
+              278.288,
+              270.703,
+              333.722,
+              282.658
+            ],
+            [
+              143.866,
+              296.104,
+              468.139,
+              492.369
+            ],
+            [
+              108.299,
+              514.402,
+              205.989,
+              526.357
+            ]
+          ]
+        }
+      ],
+      "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.022204399108887
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8183903694152832
+        }
+      ],
+      "rerank_score": 0.7577943801879883,
+      "context_bytes": 1762
+    },
+    {
+      "chunk_id": "chunk_7d9e24b10c382d84f416c7e5d421edb4",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 9,
+      "page_end": 9,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 3136,
+          "end_char": 3961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 825,
+          "block_bboxes": [
+            [
+              108.0,
+              501.959,
+              504.003,
+              599.683
+            ],
+            [
+              108.299,
+              617.101,
+              195.378,
+              629.057
+            ]
+          ]
+        }
+      ],
+      "quote": "Case studies. We also illustrate two case studies in Table 4 and Table 5. In Table 4, we can\nfind that ChatGPT+CoT suffers from the lack of knowledge issue and cannot answer the question.\nOn the contrary, RoG can generate faithful relation paths and retrieve valid reasoning paths from\nKGs for reasoning. Besides, RoG can provide interpretable explanations based on the reasoning\npaths. In Table 5, we can see that ChatGPT+CoT suffers from hallucinations and generates incorrect\nanswers. In contrast, although the retrieved reasoning paths contain noises, the reasoning module\ncan identify the correct reasoning paths and conduct faithful reasoning. These results demonstrate\nthe effectiveness of RoG in conducting faithful reasoning and generating interpretable results. More\ncases can be found in Appendices A.8 and A.9.\n6\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.320399761199951
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8305573463439941
+        }
+      ],
+      "rerank_score": 0.75743567943573,
+      "context_bytes": 1142
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1698,
+          "end_char": 3073,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1375,
+          "block_bboxes": [
+            [
+              108.0,
+              407.911,
+              504.003,
+              428.833
+            ],
+            [
+              108.0,
+              435.296,
+              504.001,
+              456.728
+            ],
+            [
+              205.424,
+              461.976,
+              284.243,
+              474.649
+            ],
+            [
+              240.108,
+              463.716,
+              301.873,
+              489.396
+            ],
+            [
+              303.533,
+              457.105,
+              332.267,
+              480.512
+            ],
+            [
+              337.696,
+              461.543,
+              352.092,
+              471.506
+            ],
+            [
+              335.12,
+              477.586,
+              354.164,
+              485.06
+            ],
+            [
+              356.323,
+              463.716,
+              402.149,
+              474.649
+            ],
+            [
+              312.942,
+              488.621,
+              402.148,
+              500.335
+            ],
+            [
+              403.808,
+              463.845,
+              504.0,
+              474.038
+            ],
+            [
+              108.0,
+              502.387,
+              504.003,
+              534.267
+            ],
+            [
+              108.249,
+              558.195,
+              218.753,
+              568.158
+            ],
+            [
+              108.0,
+              582.271,
+              504.003,
+              614.152
+            ],
+            [
+              123.59,
+              630.112,
+              484.452,
+              648.581
+            ],
+            [
+              108.0,
+              666.072,
+              504.001,
+              687.504
+            ],
+            [
+              108.0,
+              711.557,
+              504.003,
+              732.23
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 1376,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "This maximizes the probability of LLMs generating correct answers based on the retrieved reasoning\npaths.\nThe final objective function of RoG is the combination of the planning optimization and retrieval-\nreasoning optimization, which can be formulated as\nL = log Pθ(a|q, Z∗\nK, G)\n|\n{z\n}\nRetrieval-reasoning\n+\n1\n|Z∗|\nX\nz∈Z∗\nlog Pθ(z|q)\n|\n{z\n}\nPlanning\n.\n(7)\nFrom equation 7, we can see that we adopt the same LLM for both planning and reasoning, which\nare jointly trained on two instruction-tuning tasks, i.e., (planning and retrieval-reasoning). We will\ndiscuss the implementation details of these two tasks in the following subsections.\n4.3\nPLANNING MODULE\nThe planning module aims to generate faithful relation paths as plans for answering the question. To\nutilize the instruction-following ability of LLMs (Wei et al., 2021), we design a simple instruction\ntemplate that prompts LLMs to generate relation paths:\nPlease generate a valid relation path that can be helpful for answering the following question:\n<Question>\nwhere <Question> indicates the question q. The question together with the instruction template\nis fed into LLMs to generate the relation paths, which are structurally formatted as a sentence:\n2The FiD framework assumes each z ∈Z contributes independently, where the probability Pθ(a|q, Z, G)\ncan be approximated as the product of each Pθ(a|q, z, G).\n5\n\nPublished as a conference paper at ICLR 2024\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.797100067138672
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7851896286010742
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 11.672405242919922
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8349161148071289
+        }
+      ],
+      "rerank_score": 0.7140302062034607,
+      "context_bytes": 1812
+    },
+    {
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 21,
+      "page_end": 21,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 21,
+          "start_char": 802,
+          "end_char": 1210,
+          "chunk_start_char": 0,
+          "chunk_end_char": 408,
+          "block_bboxes": [
+            [
+              108.249,
+              380.482,
+              296.945,
+              390.445
+            ],
+            [
+              108.0,
+              400.407,
+              504.003,
+              443.756
+            ]
+          ]
+        }
+      ],
+      "quote": "A.7.5\nPERFORMANCE ON DIFFERENT HOPS\nWe present the performance of RoG and its variants on different hops of questions in Table 17.\nFrom results, we can see that RoG achieves better performance than its variants on different hops of\nquestions, especially questions with more than 3 hops. This demonstrates the importance of relation\npaths for improving the reasoning performance of LLMs on complex questions.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.820225715637207
+        }
+      ],
+      "rerank_score": 0.6547843813896179,
+      "context_bytes": 723
+    },
+    {
+      "chunk_id": "chunk_e595dc20307a9f6a2c07d16595f5ca21",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 24,
+      "page_end": 24,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 24,
+          "start_char": 856,
+          "end_char": 2071,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1215,
+          "block_bboxes": [
+            [
+              313.013,
+              194.31,
+              440.13,
+              203.277
+            ],
+            [
+              168.661,
+              209.352,
+              443.341,
+              248.414
+            ],
+            [
+              108.0,
+              277.888,
+              350.009,
+              289.843
+            ],
+            [
+              107.641,
+              303.382,
+              504.002,
+              346.113
+            ],
+            [
+              108.0,
+              361.854,
+              369.807,
+              371.816
+            ],
+            [
+              107.532,
+              382.379,
+              505.741,
+              446.962
+            ]
+          ]
+        }
+      ],
+      "quote": "AUC\nPrecision\nRecall\nF1\nGPT-3.5 Turbo (1106) [55] (Default)\n46.5\n68.4\n55.2\n61.1\nLlama-3.1-8B-Instruct [1]\n40.0\n66.4\n48.1\n55.8\nLlama-3.1-70B-Instruct [1]\n42.3\n66.3\n50.9\n57.6\nREBEL [34]\n1.0\n8.0\n1.8\n2.9\nE\nCase Study on Path-Finding Multi-Hop QA\nAs discussed above, path-finding multi-hop questions across passages are exceedingly challenging\nfor single-step and multi-step RAG methods such as ColBERTv2 and IRCoT. These questions require\nintegrating information across multiple passages to find relevant entities among many possible\ncandidates, such as finding all Stanford professors who work on the neuroscience of Alzheimer’s.\nE.1\nPath-Finding Multi-Hop Question Construction Process\nThese questions and the curated corpora around them were built through the following procedure.\nThe first two questions follow a slightly separate process as the third one as well as the motivating\nexample in the main paper. For the first two, we first identify a book or movie and then found the\nbook’s author or the movie’s director. We would then find 1) a trait for either the book/movie and 2)\nanother trait for the author/director. These two traits would then be used to extract distractors from\nWikipedia for each question.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8036727905273438
+        }
+      ],
+      "rerank_score": 0.45289885997772217,
+      "context_bytes": 1600
+    },
+    {
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 9,
+      "page_end": 10,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 2898,
+          "end_char": 4288,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1390,
+          "block_bboxes": [
+            [
+              108.0,
+              515.953,
+              505.746,
+              569.574
+            ],
+            [
+              108.0,
+              576.004,
+              505.241,
+              629.618
+            ],
+            [
+              108.0,
+              646.698,
+              238.63,
+              656.66
+            ],
+            [
+              108.0,
+              667.757,
+              503.998,
+              688.729
+            ],
+            [
+              108.0,
+              701.695,
+              504.0,
+              722.166
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 10,
+          "start_char": 0,
+          "end_char": 196,
+          "chunk_start_char": 1391,
+          "chunk_end_char": 1587,
+          "block_bboxes": [
+            [
+              108.0,
+              74.453,
+              504.665,
+              95.279
+            ]
+          ]
+        }
+      ],
+      "quote": "Some other methods, such as RAPTOR [71], MemWalker [9] and GraphRAG [18], integrate infor-\nmation during the offline indexing phase similarly to HippoRAG and might be able to handle these\nmore complex tasks. However, these methods integrate information by summarizing knowledge\nelements, which means that the summarization process must be repeated any time new data is added.\nIn contrast, HippoRAG can continuously integrate new knowledge by simply adding edges to its KG.\nLong Context as Long-Term Memory. Context lengths for both open and closed source LLMs have\nincreased dramatically in the past year [11, 17, 22, 61, 68]. This scaling trend seems to indicate that\nfuture LLMs could perform long-term memory storage within massive context windows. However,\nthe viability of this future remains largely uncertain given the many engineering hurdles involved and\nthe apparent limitations of long-context LLMs, even within current context lengths [41, 45, 96, 21].\n6.2\nMulti-Hop QA & Graphs\nMany previous works have also tackled multi-hop QA using graph structures. These efforts can\nbe broadly divided in two major categories: 1) graph-augmented reading comprehension, where a\n5Path-finding questions require knowledge integration when search entities like Stanford and Alzheimer’s do\nnot happen to appear together in a passage, a condition which is often satisfied for new information.\n9\n\ngraph is extracted from retrieved documents and used to improve a model’s reasoning process and 2)\ngraph-augmented retrieval, where models find relevant documents by traversing a graph structure.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7832741737365723
+        }
+      ],
+      "rerank_score": 0.41727152466773987,
+      "context_bytes": 1951
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 315,
+          "end_char": 1381,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1066,
+          "block_bboxes": [
+            [
+              107.641,
+              275.692,
+              505.245,
+              362.078
+            ],
+            [
+              108.0,
+              374.922,
+              504.002,
+              408.051
+            ],
+            [
+              108.0,
+              424.788,
+              224.224,
+              434.75
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 2: Detailed HippoRAG Methodology. We model the three components of human long-term\nmemory to mimic its pattern separation and completion functions. For offline indexing (Middle),\nwe use an LLM to process passages into open KG triples, which are then added to our artificial\nhippocampal index, while our synthetic parahippocampal regions (PHR) detect synonymy. In the\nexample above, triples involving Professor Thomas are extracted and integrated into the KG. For\nonline retrieval (Bottom), our LLM neocortex extracts named entities from a query while our\nparahippocampal retrieval encoders link them to our hippocampal index. We then leverage the\nPersonalized PageRank algorithm to enable context-based retrieval and extract Professor Thomas.4\nset of query nodes, just as the hippocampus extracts associated signals from specific partial cues.2\nFinally, as is done when the hippocampal signal is sent upstream, we aggregate the output PPR node\nprobability over the previously indexed passages and use that to rank them for retrieval.\n2.3\nDetailed Methodology\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 10.505467414855957
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7907962799072266
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.532289505004883
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7823495864868164
+        }
+      ],
+      "rerank_score": 0.3842187523841858,
+      "context_bytes": 1418
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 64,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "multi_query_quota_union cap=64",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "query_plan": {
+      "planner_version": "cloud-query-planner-v1",
+      "decision": "split",
+      "reason": "题面要求分别查证 HippoRAG 与 RoG 两种方法如何从问题走到证据，并区分查询种子、PPR、关系路径计划和有效推理路径等不同机制维度，属于多论文方法比较与多机制核对，可拆为两条独立检索目标。",
+      "english_keywords": [
+        "HippoRAG",
+        "RoG",
+        "multi-hop question answering",
+        "query seeds",
+        "personalized PageRank",
+        "relation path planning",
+        "reasoning paths"
+      ],
+      "subqueries": [
+        {
+          "id": "SQ01",
+          "text": "HippoRAG 如何从问题出发，经查询种子与 PPR 走到证据",
+          "english_keywords": [
+            "HippoRAG",
+            "query seeds",
+            "personalized PageRank",
+            "PPR",
+            "evidence retrieval",
+            "multi-hop question answering"
+          ]
+        },
+        {
+          "id": "SQ02",
+          "text": "RoG 如何从问题出发，经关系路径计划与有效推理路径走到证据",
+          "english_keywords": [
+            "RoG",
+            "relation path planning",
+            "reasoning paths",
+            "evidence retrieval",
+            "multi-hop question answering"
+          ]
+        }
+      ],
+      "quote_spans": [
+        {
+          "text": "HippoRAG 与 RoG 怎样分别从问题走到证据",
+          "start": 7,
+          "end": 33,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "HippoRAG 与 RoG 怎样分别从问题走到证据"
+        },
+        {
+          "text": "请区分查询种子、PPR、关系路径计划和有效推理路径",
+          "start": 34,
+          "end": 59,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "请区分查询种子、PPR、关系路径计划和有效推理路径"
+        }
+      ],
+      "fallback": false,
+      "elapsed_seconds": 0.0006220000213943422,
+      "usage": {
+        "prompt_tokens": 431,
+        "total_tokens": 689,
+        "completion_tokens": 258,
+        "prompt_tokens_details": {
+          "cached_tokens": 384,
+          "image_tokens": 0,
+          "text_tokens": 431
+        },
+        "completion_tokens_details": {
+          "text_tokens": 258
+        }
+      }
+    },
+    "subquery_count": 2,
+    "per_query_hits": {
+      "Q00": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ01": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ02": {
+        "fulltext": 20,
+        "dense": 20
+      }
+    },
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "rerank_mode": "owner_subquery",
+      "rerank_batches": 3,
+      "total_inference_seconds": 1.4393900000141002,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 5.997016799985431,
+      "peak_cuda_memory_bytes": 1192493568,
+      "request_count": 37,
+      "batch_size": 4
+    },
+    "evidence_count": 11,
+    "context_bytes": 17954,
+    "evidence_bytes": 17954,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 17129,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ]
+      },
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ],
+        "eligible_candidate_count": 29,
+        "selected_chunk_ids": [
+          "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+          "chunk_b43fb9517328e73774236c9ce6048e91",
+          "chunk_e595dc20307a9f6a2c07d16595f5ca21",
+          "chunk_ef3f0ce297896adba9485311ea4d7f69",
+          "chunk_2b91faafba587efd8a416d2355639ee0"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ],
+        "eligible_candidate_count": 22,
+        "selected_chunk_ids": [
+          "chunk_0f20a533abc64e441acfeb96ebf313e2",
+          "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "chunk_7d9e24b10c382d84f416c7e5d421edb4",
+          "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+          "chunk_853c2cdb088533bc71f93f42690919ae"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4773,
+    "total_tokens": 5676,
+    "completion_tokens": 903,
+    "prompt_tokens_details": {
+      "cached_tokens": 512,
+      "image_tokens": 0,
+      "text_tokens": 4773
+    },
+    "completion_tokens_details": {
+      "text_tokens": 903
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"premise_check\":[{\"premise\":\"HippoRAG 以问题中的关键概念（命名实体）作为查询种子\",\"supported\":true,\"evidence_eids\":[\"E1\",\"E11\",\"E3\"],\"note\":\"E1 明确用查询概念作种子运行 PPR；E11 描述查询实体抽取与链接；E3 展示查询 NER。\"},{\"premise\":\"HippoRAG 在知识图谱上运行 Personalized PageRank 完成多跳信息整合\",\"supported\":true,\"evidence_eids\":[\"E1\",\"E11\"],\"note\":\"E1 称 PPR 使 HippoRAG 探索 KG 路径并识别相关子图，在单次检索中完成多跳推理；E11 描述 PPR 输出概率聚合到段落排序。\"},{\"premise\":\"RoG 先生成由 KG 关系构成的关系路径计划，再据此检索有效推理路径\",\"supported\":true,\"evidence_eids\":[\"E5\",\"E4\",\"E7\"],\"note\":\"E5 给出 planning-retrieval-reasoning 框架；E4 将关系路径作为计划并定义规划项与检索推理项；E7 描述规划模块的指令模板。\"},{\"premise\":\"RoG 的有效推理路径是从 KG 中按生成的关系路径检索得到，而非任意图游走\",\"supported\":true,\"evidence_eids\":[\"E5\",\"E6\"],\"note\":\"E5 称计划用于从 KG 检索有效推理路径；E6 案例称 RoG 生成忠实关系路径并检索有效推理路径。\"},{\"premise\":\"两者面对多跳问题的流程可直接对照（HippoRAG 单步 PPR 检索 vs RoG 规划后检索）\",\"supported\":true,\"evidence_eids\":[\"E1\",\"E5\"],\"note\":\"E1 明示 HippoRAG 在单次检索步骤中做多跳推理；E5 明示 RoG 的规划—检索—推理框架，可作为流程对照，但不涉及性能比较。\"}],\"answer\":\"HippoRAG 的入口是查询种子：给定新查询，它先识别查询中的关键概念，并以这些查询概念作为种子在 KG 上运行 Personalized PageRank [E1]；在线检索时，LLM 从查询中抽取命名实体，再由检索编码器链接到人工海马索引（KG）[E11]。随后 PPR 在 KG 上扩散，使 HippoRAG 探索 KG 路径、识别相关子图，原文称这相当于在单次检索步骤中完成多跳推理 [E1]；最后把 PPR 的节点概率聚合到已索引的段落上用于排序检索 [E11]。RoG 则先规划关系路径：它把关系路径当作计划，要求这些计划由 KG 接地，并以生成关系路径 z 的概率 Pθ(z|q) 表示规划模块 [E4]；具体做法是用指令模板提示 LLM“生成一条有助于回答该问题的有效关系路径” [E7]。这些由 KG 接地的关系路径计划随后被用于从 KG 中检索有效推理路径，再交给 LLM 进行忠实推理 [E5]；案例研究也描述 RoG 生成忠实关系路径并从 KG 检索有效推理路径用于推理 [E6]。因此，按原文流程，HippoRAG 的关键机制是“查询概念种子 + PPR 单步扩散检索”，RoG 的关键机制是“LLM 生成关系路径计划 + 按计划从 KG 检索有效推理路径” [E1, E5]。原文未提供两者在同一实验条件下的直接比较，不能据此推断胜负或公平性。\" ,\"citations\":[{\"eid\":\"E1\",\"quote_id\":\"q2\"},{\"eid\":\"E11\",\"quote_id\":\"q1\"},{\"eid\":\"E11\",\"quote_id\":\"q2\"},{\"eid\":\"E4\",\"quote_id\":\"q1\"},{\"eid\":\"E7\",\"quote_id\":\"q2\"},{\"eid\":\"E5\",\"quote_id\":\"q1\"},{\"eid\":\"E5\",\"quote_id\":\"q2\"},{\"eid\":\"E6\",\"quote_id\":\"q1\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_0f20a533abc64e441acfeb96ebf313e2",
+      "first_discovery": 12,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 9.058432579040527
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 9.058432579040527
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 9.058432579040527
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 9.058432579040527
+        }
+      ],
+      "score": 0.02817460317460317,
+      "rerank_score": 0.8464508652687073,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.8464508652687073
+      }
+    },
+    {
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "first_discovery": 8,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.791396141052246
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.511582374572754
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8279023170471191
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.791396141052246
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.511582374572754
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8279023170471191
+        }
+      ],
+      "score": 0.045715497737556565,
+      "rerank_score": 0.7709825038909912,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.7709825038909912
+      }
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "first_discovery": 50,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.022204399108887
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8183903694152832
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.022204399108887
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8183903694152832
+        }
+      ],
+      "score": 0.02854251012145749,
+      "rerank_score": 0.7577943801879883,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.7577943801879883
+      }
+    },
+    {
+      "chunk_id": "chunk_7d9e24b10c382d84f416c7e5d421edb4",
+      "first_discovery": 52,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.320399761199951
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8305573463439941
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.320399761199951
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8305573463439941
+        }
+      ],
+      "score": 0.028949545078577336,
+      "rerank_score": 0.75743567943573,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.75743567943573
+      }
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "first_discovery": 4,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.797100067138672
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7851896286010742
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 11.672405242919922
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8349161148071289
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.797100067138672
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7851896286010742
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 11.672405242919922
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8349161148071289
+        }
+      ],
+      "score": 0.06156977998274375,
+      "rerank_score": 0.7140302062034607,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.7140302062034607
+      }
+    },
+    {
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "first_discovery": 22,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.820225715637207
+        }
+      ],
+      "found_by": [
+        "Q00"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.820225715637207
+        }
+      ],
+      "score": 0.016129032258064516,
+      "rerank_score": 0.6547843813896179,
+      "best_query_id": "Q00",
+      "owner_scores": {
+        "Q00": 0.6547843813896179
+      }
+    },
+    {
+      "chunk_id": "chunk_9bb606d348e1af81f00b3677453a84ca",
+      "first_discovery": 5,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.698273658752441
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.698273658752441
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7970333099365234
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.698273658752441
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.698273658752441
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7970333099365234
+        }
+      ],
+      "score": 0.04434294871794872,
+      "rerank_score": 0.6536798477172852,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.6536798477172852
+      }
+    },
+    {
+      "chunk_id": "chunk_337b776419fe0d299cd973609da26513",
+      "first_discovery": 47,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.088388442993164
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.088388442993164
+        }
+      ],
+      "score": 0.014492753623188406,
+      "rerank_score": 0.6531268954277039,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.6531268954277039
+      }
+    },
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "first_discovery": 1,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.88951873779297
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7901248931884766
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.25296974182129
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7892417907714844
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.88951873779297
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7901248931884766
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.25296974182129
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7892417907714844
+        }
+      ],
+      "score": 0.06217341463243103,
+      "rerank_score": 0.6526842713356018,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.6526842713356018
+      }
+    },
+    {
+      "chunk_id": "chunk_13fff028f79bff64399cfcf345628f0e",
+      "first_discovery": 18,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 8.434648513793945
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.434648513793945
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 8.434648513793945
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.434648513793945
+        }
+      ],
+      "score": 0.026709401709401708,
+      "rerank_score": 0.6366919875144958,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.6366919875144958
+      }
+    },
+    {
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "first_discovery": 11,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 9.136893272399902
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 10.044355392456055
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8285608291625977
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 9.136893272399902
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 10.044355392456055
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8285608291625977
+        }
+      ],
+      "score": 0.04510903806678455,
+      "rerank_score": 0.6325027346611023,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.6325027346611023
+      }
+    },
+    {
+      "chunk_id": "chunk_b43fb9517328e73774236c9ce6048e91",
+      "first_discovery": 36,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 6.812989234924316
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7799186706542969
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 6.812989234924316
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7799186706542969
+        }
+      ],
+      "score": 0.027984344422700584,
+      "rerank_score": 0.6015350222587585,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.6015350222587585
+      }
+    },
+    {
+      "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+      "first_discovery": 13,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.851715087890625
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8085660934448242
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 9.790709495544434
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.851715087890625
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8085660934448242
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 9.790709495544434
+        }
+      ],
+      "score": 0.04424900327131466,
+      "rerank_score": 0.46942904591560364,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.46942904591560364
+      }
+    },
+    {
+      "chunk_id": "chunk_e595dc20307a9f6a2c07d16595f5ca21",
+      "first_discovery": 25,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8036727905273438
+        }
+      ],
+      "found_by": [
+        "Q00"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8036727905273438
+        }
+      ],
+      "score": 0.014705882352941176,
+      "rerank_score": 0.45289885997772217,
+      "best_query_id": "Q00",
+      "owner_scores": {
+        "Q00": 0.45289885997772217
+      }
+    },
+    {
+      "chunk_id": "chunk_f1d7104112d7a03c0f65e063819b90cd",
+      "first_discovery": 3,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 10.837349891662598
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 11.590473175048828
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 10.837349891662598
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 11.590473175048828
+        }
+      ],
+      "score": 0.03200204813108039,
+      "rerank_score": 0.4508126378059387,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.4508126378059387
+      }
+    },
+    {
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "first_discovery": 30,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7832741737365723
+        }
+      ],
+      "found_by": [
+        "Q00"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7832741737365723
+        }
+      ],
+      "score": 0.01282051282051282,
+      "rerank_score": 0.41727152466773987,
+      "best_query_id": "Q00",
+      "owner_scores": {
+        "Q00": 0.41727152466773987
+      }
+    },
+    {
+      "chunk_id": "chunk_f045808d791542465c32f3e2a25c26c5",
+      "first_discovery": 10,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 9.183238983154297
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.00357437133789
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 9.183238983154297
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.00357437133789
+        }
+      ],
+      "score": 0.030158730158730156,
+      "rerank_score": 0.4127076268196106,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.4127076268196106
+      }
+    },
+    {
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "first_discovery": 31,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7809896469116211
+        }
+      ],
+      "found_by": [
+        "Q00"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7809896469116211
+        }
+      ],
+      "score": 0.012658227848101266,
+      "rerank_score": 0.38439205288887024,
+      "best_query_id": "Q00",
+      "owner_scores": {
+        "Q00": 0.38439205288887024
+      }
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "first_discovery": 7,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 10.505467414855957
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7907962799072266
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.532289505004883
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7823495864868164
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 10.505467414855957
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7907962799072266
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.532289505004883
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7823495864868164
+        }
+      ],
+      "score": 0.05918003151942153,
+      "rerank_score": 0.3842187523841858,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.3842187523841858
+      }
+    },
+    {
+      "chunk_id": "chunk_2d205d86b7b38e9dd501796f8bb2fc89",
+      "first_discovery": 33,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.525737762451172
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7703557014465332
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.525737762451172
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7703557014465332
+        }
+      ],
+      "score": 0.028258706467661692,
+      "rerank_score": 0.37125059962272644,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.37125059962272644
+      }
+    },
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "first_discovery": 27,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7973928451538086
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.973874092102051
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7795915603637695
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7973928451538086
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.973874092102051
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7795915603637695
+        }
+      ],
+      "score": 0.043076103680908986,
+      "rerank_score": 0.36851930618286133,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.36851930618286133
+      }
+    },
+    {
+      "chunk_id": "chunk_41f164dcc97380b68b515cce682cba4b",
+      "first_discovery": 20,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 8.14730167388916
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.14730167388916
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 8.14730167388916
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.14730167388916
+        }
+      ],
+      "score": 0.026013513513513515,
+      "rerank_score": 0.32316645979881287,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.32316645979881287
+      }
+    },
+    {
+      "chunk_id": "chunk_86959f79e1a40b75eddbd877a0b3bca5",
+      "first_discovery": 51,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.682493209838867
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.682493209838867
+        }
+      ],
+      "score": 0.012987012987012988,
+      "rerank_score": 0.2828890383243561,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.2828890383243561
+      }
+    },
+    {
+      "chunk_id": "chunk_2e0d9404fef0ddcc9ddac0f26fb72e06",
+      "first_discovery": 40,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.326691627502441
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.326691627502441
+        }
+      ],
+      "score": 0.012658227848101266,
+      "rerank_score": 0.2620856761932373,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.2620856761932373
+      }
+    },
+    {
+      "chunk_id": "chunk_eaf42f9945053a085ff4b160247ddf6a",
+      "first_discovery": 2,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 11.435222625732422
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 12.514260292053223
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 11.435222625732422
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 12.514260292053223
+        }
+      ],
+      "score": 0.03225806451612903,
+      "rerank_score": 0.2613309323787689,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.2613309323787689
+      }
+    },
+    {
+      "chunk_id": "chunk_bd7df026246fc403bdd19f91c797fc2a",
+      "first_discovery": 15,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 8.515593528747559
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.215683937072754
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 8.515593528747559
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.215683937072754
+        }
+      ],
+      "score": 0.02803921568627451,
+      "rerank_score": 0.24689629673957825,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.24689629673957825
+      }
+    },
+    {
+      "chunk_id": "chunk_5165b9cf6ecfd6eecbf447ff18649999",
+      "first_discovery": 42,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.791327953338623
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.791327953338623
+        }
+      ],
+      "score": 0.016129032258064516,
+      "rerank_score": 0.2267836332321167,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.2267836332321167
+      }
+    },
+    {
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "first_discovery": 37,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 6.768773555755615
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7730636596679688
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 6.768773555755615
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7730636596679688
+        }
+      ],
+      "score": 0.02667140825035562,
+      "rerank_score": 0.22661244869232178,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.22661244869232178
+      }
+    },
+    {
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "first_discovery": 43,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7847857475280762
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7847857475280762
+        }
+      ],
+      "score": 0.015151515151515152,
+      "rerank_score": 0.22286923229694366,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.22286923229694366
+      }
+    },
+    {
+      "chunk_id": "chunk_1e1584d4ca9b0e97f6b9cf0a5fc09c19",
+      "first_discovery": 17,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 8.502151489257812
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 9.032983779907227
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 8.502151489257812
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 9.032983779907227
+        }
+      ],
+      "score": 0.02813852813852814,
+      "rerank_score": 0.20561504364013672,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.20561504364013672
+      }
+    },
+    {
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "first_discovery": 34,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.180835723876953
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.180835723876953
+        }
+      ],
+      "score": 0.014285714285714285,
+      "rerank_score": 0.20260091125965118,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.20260091125965118
+      }
+    },
+    {
+      "chunk_id": "chunk_d9f1cb9af7ebdb35209d9b574447922e",
+      "first_discovery": 16,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.51036548614502
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7888975143432617
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 9.355714797973633
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7877712249755859
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 8.51036548614502
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7888975143432617
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 9.355714797973633
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7877712249755859
+        }
+      ],
+      "score": 0.05726045883940621,
+      "rerank_score": 0.1994638890028,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.1994638890028
+      }
+    },
+    {
+      "chunk_id": "chunk_1a304dbb449afc8300e4e658f4306fd5",
+      "first_discovery": 19,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 8.326703071594238
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.857534408569336
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7999749183654785
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 8.326703071594238
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.857534408569336
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7999749183654785
+        }
+      ],
+      "score": 0.04044136502734109,
+      "rerank_score": 0.1678997427225113,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.1678997427225113
+      }
+    },
+    {
+      "chunk_id": "chunk_d3f807335721c7a0d68e16aa03976b5f",
+      "first_discovery": 23,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8075156211853027
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7883782386779785
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8075156211853027
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7883782386779785
+        }
+      ],
+      "score": 0.031009615384615385,
+      "rerank_score": 0.16640430688858032,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.16640430688858032
+      }
+    },
+    {
+      "chunk_id": "chunk_389c397de3b4a649c47ddb2ca57e81ac",
+      "first_discovery": 56,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8142776489257812
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8142776489257812
+        }
+      ],
+      "score": 0.014925373134328358,
+      "rerank_score": 0.13834533095359802,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.13834533095359802
+      }
+    },
+    {
+      "chunk_id": "chunk_4d5b9bb85c58b033807f97c51fb55e39",
+      "first_discovery": 38,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.672024726867676
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.672024726867676
+        }
+      ],
+      "score": 0.012987012987012988,
+      "rerank_score": 0.13240233063697815,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.13240233063697815
+      }
+    },
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "first_discovery": 9,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.59819507598877
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8173947334289551
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 6.808269023895264
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7829680442810059
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.59819507598877
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8173947334289551
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 6.808269023895264
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7829680442810059
+        }
+      ],
+      "score": 0.058804656144046154,
+      "rerank_score": 0.12304913252592087,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.12304913252592087
+      }
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "first_discovery": 32,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7808914184570312
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7952442169189453
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7808914184570312
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7952442169189453
+        }
+      ],
+      "score": 0.02548701298701299,
+      "rerank_score": 0.11027936637401581,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.11027936637401581
+      }
+    },
+    {
+      "chunk_id": "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+      "first_discovery": 21,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8227663040161133
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.7969493865966797
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8227663040161133
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.7969493865966797
+        }
+      ],
+      "score": 0.03278688524590164,
+      "rerank_score": 0.10875558853149414,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.10875558853149414
+      }
+    },
+    {
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "first_discovery": 55,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8161654472351074
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8161654472351074
+        }
+      ],
+      "score": 0.015151515151515152,
+      "rerank_score": 0.06828854233026505,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.06828854233026505
+      }
+    },
+    {
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "first_discovery": 45,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7687325477600098
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7687325477600098
+        }
+      ],
+      "score": 0.012658227848101266,
+      "rerank_score": 0.056756895035505295,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.056756895035505295
+      }
+    },
+    {
+      "chunk_id": "chunk_ed96084e5a438cd1bfe7fc7bb840b4ab",
+      "first_discovery": 49,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 8.04612922668457
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 8.04612922668457
+        }
+      ],
+      "score": 0.013333333333333334,
+      "rerank_score": 0.05439931899309158,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.05439931899309158
+      }
+    },
+    {
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "first_discovery": 24,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8056302070617676
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7700324058532715
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8056302070617676
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7700324058532715
+        }
+      ],
+      "score": 0.027745885954841176,
+      "rerank_score": 0.05399883911013603,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.05399883911013603
+      }
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "first_discovery": 6,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 10.51294231414795
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.790738582611084
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 11.493888854980469
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7759861946105957
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 10.51294231414795
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.790738582611084
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 11.493888854980469
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7759861946105957
+        }
+      ],
+      "score": 0.05836403417739034,
+      "rerank_score": 0.052814021706581116,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.052814021706581116
+      }
+    },
+    {
+      "chunk_id": "chunk_3e71dc58ca336959686a576311cb5e3a",
+      "first_discovery": 48,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.286160469055176
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.286160469055176
+        }
+      ],
+      "score": 0.0136986301369863,
+      "rerank_score": 0.048136770725250244,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.048136770725250244
+      }
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "first_discovery": 28,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7959427833557129
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 6.909880638122559
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7702794075012207
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7959427833557129
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 6.909880638122559
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7702794075012207
+        }
+      ],
+      "score": 0.041131290667984516,
+      "rerank_score": 0.04560694098472595,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.04560694098472595
+      }
+    },
+    {
+      "chunk_id": "chunk_6704f9c5025626d6b4e7f5e259956215",
+      "first_discovery": 39,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.468705654144287
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.468705654144287
+        }
+      ],
+      "score": 0.01282051282051282,
+      "rerank_score": 0.04001227021217346,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.04001227021217346
+      }
+    },
+    {
+      "chunk_id": "chunk_7ac089f731dde3a5b09b48a00fc48587",
+      "first_discovery": 57,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8124918937683105
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8124918937683105
+        }
+      ],
+      "score": 0.014705882352941176,
+      "rerank_score": 0.0389750711619854,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.0389750711619854
+      }
+    },
+    {
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "first_discovery": 26,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7990164756774902
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 6.771481037139893
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7990164756774902
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 6.771481037139893
+        }
+      ],
+      "score": 0.02782608695652174,
+      "rerank_score": 0.03132111579179764,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.03132111579179764
+      }
+    },
+    {
+      "chunk_id": "chunk_fbeebb7d77e97866867648455a11895e",
+      "first_discovery": 46,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7662677764892578
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7662677764892578
+        }
+      ],
+      "score": 0.0125,
+      "rerank_score": 0.027742892503738403,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.027742892503738403
+      }
+    },
+    {
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "first_discovery": 14,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.610260963439941
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8062410354614258
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.68982458114624
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7826194763183594
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.610260963439941
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8062410354614258
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.68982458114624
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7826194763183594
+        }
+      ],
+      "score": 0.05786366464115825,
+      "rerank_score": 0.026963500306010246,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.026963500306010246
+      }
+    },
+    {
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "first_discovery": 35,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.115979194641113
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.115979194641113
+        }
+      ],
+      "score": 0.014084507042253521,
+      "rerank_score": 0.017712298780679703,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.017712298780679703
+      }
+    },
+    {
+      "chunk_id": "chunk_a3b85553102f706bfa4b5e317e0b7a05",
+      "first_discovery": 63,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7963852882385254
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7963852882385254
+        }
+      ],
+      "score": 0.013157894736842105,
+      "rerank_score": 0.01652955636382103,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.01652955636382103
+      }
+    },
+    {
+      "chunk_id": "chunk_f4b9be762611b5d5e75f85d890cb6d27",
+      "first_discovery": 62,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7983379364013672
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7983379364013672
+        }
+      ],
+      "score": 0.013513513513513514,
+      "rerank_score": 0.009708477184176445,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.009708477184176445
+      }
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "first_discovery": 59,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8073501586914062
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8073501586914062
+        }
+      ],
+      "score": 0.014285714285714285,
+      "rerank_score": 0.007695646956562996,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.007695646956562996
+      }
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "first_discovery": 61,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8032851219177246
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8032851219177246
+        }
+      ],
+      "score": 0.013888888888888888,
+      "rerank_score": 0.007636216934770346,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.007636216934770346
+      }
+    },
+    {
+      "chunk_id": "chunk_b25672a33d925ab72a8d6867b9e9c822",
+      "first_discovery": 65,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7920536994934082
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7920536994934082
+        }
+      ],
+      "score": 0.012658227848101266,
+      "rerank_score": 0.005842605605721474,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.005842605605721474
+      }
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "first_discovery": 58,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8105154037475586
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8105154037475586
+        }
+      ],
+      "score": 0.014492753623188406,
+      "rerank_score": 0.005220125429332256,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.005220125429332256
+      }
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "first_discovery": 60,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8071389198303223
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8071389198303223
+        }
+      ],
+      "score": 0.014084507042253521,
+      "rerank_score": 0.004718369338661432,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.004718369338661432
+      }
+    },
+    {
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "first_discovery": 64,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7947325706481934
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7947325706481934
+        }
+      ],
+      "score": 0.01282051282051282,
+      "rerank_score": 0.0017007222631946206,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.0017007222631946206
+      }
+    },
+    {
+      "chunk_id": "chunk_1d7581035fb8824818f57a8c5b81ab75",
+      "first_discovery": 44,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7740898132324219
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7740898132324219
+        }
+      ],
+      "score": 0.0136986301369863,
+      "rerank_score": 0.0015792594058439136,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0015792594058439136
+      }
+    },
+    {
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "first_discovery": 29,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7842917442321777
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7701449394226074
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7842917442321777
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7701449394226074
+        }
+      ],
+      "score": 0.025974025974025976,
+      "rerank_score": 0.0015307451831176877,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0015307451831176877
+      }
+    },
+    {
+      "chunk_id": "chunk_8225b725259260d8671e3bf5c6a58838",
+      "first_discovery": 53,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.299428462982178
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.299428462982178
+        }
+      ],
+      "score": 0.012658227848101266,
+      "rerank_score": 0.0003583672805689275,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.0003583672805689275
+      }
+    },
+    {
+      "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+      "first_discovery": 41,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.305032730102539
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.305032730102539
+        }
+      ],
+      "score": 0.0125,
+      "rerank_score": 0.0003366621967870742,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0003366621967870742
+      }
+    }
+  ],
+  "case_id": "R02",
+  "question": "面对多跳问题，HippoRAG 与 RoG 怎样分别从问题走到证据？请区分查询种子、PPR、关系路径计划和有效推理路径。",
+  "category": "cross",
+  "arm": "Strong-Hybrid-P2",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0003760000108741224
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.04752659995574504
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 9.100011084228754e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 1.450883999990765
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0029007000266574323
+    }
+  ],
+  "retrieval_compute_seconds": 1.5016963999951258,
+  "request_wall_seconds": 13.087746900040656,
+  "embedding_source": "shared Q00 + shared planned subquery vectors across arms",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.8899098999681883,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 8.863890899985563,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4707621999550611,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 7.650757299968973,
+      "usage": "{\"prompt_tokens\": 4773, \"total_tokens\": 5676, \"completion_tokens\": 903}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+      "score": 0.8227663040161133
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "score": 0.820225715637207
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 0.8173947334289551
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+      "score": 0.8085660934448242
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_d3f807335721c7a0d68e16aa03976b5f",
+      "score": 0.8075156211853027
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 0.8062410354614258
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.8056302070617676
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_e595dc20307a9f6a2c07d16595f5ca21",
+      "score": 0.8036727905273438
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "score": 0.7990164756774902
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "score": 0.7973928451538086
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.7959427833557129
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "score": 0.7907962799072266
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 0.790738582611084
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 0.7901248931884766
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_d9f1cb9af7ebdb35209d9b574447922e",
+      "score": 0.7888975143432617
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "score": 0.7851896286010742
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "score": 0.7842917442321777
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "score": 0.7832741737365723
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 0.7809896469116211
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.7808914184570312
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 16.88951873779297
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_eaf42f9945053a085ff4b160247ddf6a",
+      "score": 11.435222625732422
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_f1d7104112d7a03c0f65e063819b90cd",
+      "score": 10.837349891662598
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "score": 10.797100067138672
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_9bb606d348e1af81f00b3677453a84ca",
+      "score": 10.698273658752441
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 10.51294231414795
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "score": 10.505467414855957
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_dd9bf9b6acf3a35b18bcdd4eef080837",
+      "score": 9.791396141052246
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 9.59819507598877
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_f045808d791542465c32f3e2a25c26c5",
+      "score": 9.183238983154297
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "score": 9.136893272399902
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_0f20a533abc64e441acfeb96ebf313e2",
+      "score": 9.058432579040527
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+      "score": 8.851715087890625
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 8.610260963439941
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_bd7df026246fc403bdd19f91c797fc2a",
+      "score": 8.515593528747559
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_d9f1cb9af7ebdb35209d9b574447922e",
+      "score": 8.51036548614502
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_1e1584d4ca9b0e97f6b9cf0a5fc09c19",
+      "score": 8.502151489257812
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_13fff028f79bff64399cfcf345628f0e",
+      "score": 8.434648513793945
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_1a304dbb449afc8300e4e658f4306fd5",
+      "score": 8.326703071594238
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_41f164dcc97380b68b515cce682cba4b",
+      "score": 8.14730167388916
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R02.C01",
+      "requirement": "HippoRAG 以查询概念启动 PPR 并整合跨段落信息。",
+      "selected_matches_by_unit": {
+        "hippo": [
+          "chunk_a58244558a2137d85a4b8e53d5c4ebaf"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R02.C02",
+      "requirement": "RoG 先生成 KG 约束的关系路径计划。",
+      "selected_matches_by_unit": {
+        "rog": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R02.C03",
+      "requirement": "RoG 根据计划检索有效推理路径，再供 LLM 推理。",
+      "selected_matches_by_unit": {
+        "rog": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 0.3333333333333333,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/96013b5c-896d-4ccd-9599-7e3c32ad1780?poll=true"
+}

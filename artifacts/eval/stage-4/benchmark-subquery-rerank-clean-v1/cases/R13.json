@@ -1,0 +1,230 @@
+{
+  "id": "95a3c2c3-d7a9-52ef-8ed2-3c9e64cb5f4e",
+  "inputs": {
+    "question": "CuriousLLM 复用的 MDR 段落编码器与 HippoRAG 的同义边编码器，分别学习或比较什么？请区分“下一段支持证据”和“概念名称相似”。"
+  },
+  "outputs": {
+    "expected_answer": "CuriousLLM 延用MDR训练，使用HotpotQA学习支持段落对接近、无关段落远离以建图。\nHippoRAG 对抽取的概念表示计算余弦相似度，用阈值增加同义边。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R13.S01",
+        "answer_point": "CuriousLLM 延用MDR训练，使用HotpotQA学习支持段落对接近、无关段落远离以建图。",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "primary_chunk": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "pages": [
+          3,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_69407b618c1969f701e74bd3cf523c95"
+        ]
+      },
+      {
+        "unit_id": "R13.S02",
+        "answer_point": "HippoRAG 对抽取的概念表示计算余弦相似度，用阈值增加同义边。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_008861356c216ab780f62dad7796e2d4",
+        "pages": [
+          4,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_008861356c216ab780f62dad7796e2d4"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R13",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R13.S01",
+        "required_fact": "CuriousLLM 延用MDR训练，使用HotpotQA学习支持段落对接近、无关段落远离以建图。",
+        "primary_chunk": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "supporting_chunks": [
+          "chunk_69407b618c1969f701e74bd3cf523c95"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R13.S02",
+        "required_fact": "HippoRAG 对抽取的概念表示计算余弦相似度，用阈值增加同义边。",
+        "primary_chunk": "chunk_008861356c216ab780f62dad7796e2d4",
+        "supporting_chunks": [
+          "chunk_008861356c216ab780f62dad7796e2d4"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+        "page_start": 3,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 3,
+            "start_char": 2170,
+            "end_char": 3088,
+            "chunk_start_char": 0,
+            "chunk_end_char": 918,
+            "block_bboxes": [
+              [
+                305.782,
+                520.593,
+                526.225,
+                775.496
+              ],
+              [
+                294.911,
+                794.449,
+                300.366,
+                805.358
+              ]
+            ]
+          },
+          {
+            "pdf_page": 4,
+            "start_char": 0,
+            "end_char": 706,
+            "chunk_start_char": 919,
+            "chunk_end_char": 1625,
+            "block_bboxes": [
+              [
+                101.172,
+                72.192,
+                374.599,
+                117.873
+              ],
+              [
+                100.934,
+                96.461,
+                494.102,
+                189.564
+              ],
+              [
+                303.058,
+                144.327,
+                494.104,
+                177.674
+              ],
+              [
+                101.172,
+                192.143,
+                453.704,
+                213.694
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "9a63eb00322c9aa8cfdce79dd0439adaddd74d092e5a143a308220b4e1e3577b",
+        "section": "Methodology",
+        "text": "In the original KGP experiments, construct-\ning KG by multi-hop dense retriever (MDR-KG)\n(Wang et al., 2023) outperforms other KG con-\nstruction approaches, such as k-nearest neigh-\nbors (KNN) (Cunningham and Delany, 2021) and\nTF-IDF. Following the methodology for building\nMDR-KG , we employ the MDR training technique\n(Xiong et al., 2021) to develop a BERT-based pas-\nsage encoder using the HotpotQA dataset. This\nencoder is trained to predict subsequent supporting\npassages given an initial retrieved passage. The\ngoal is to minimize the distances between passage\npairs that are used together to answer questions\nin HotpotQA while simultaneously increasing the\ndistances between unrelated passages through neg-\native sampling. This training technique equips the\nencoder with reasoning capabilities, enabling it to\nunderstand the logical associations between differ-\nent passages. Finally, we construct our KGs by\n3\n\nExample 1\nExample 2\n(Input) Question:\n(Input) Question:\nIn what city is the university, for which Kim En-\nglish played college basketball, located?\nTina Charles and Maya Moore were teammates on\nthe UConn women’s team that won championships\nin what years?\n(Input) Given:\n(Input) Given:\nKim English played college basketball for the Uni-\nversity of Missouri before being selected by the\nDetroit Pistons with the 44th overall pick in the\n2012 NBA draft.\nIn 2009 and 2010, Tina Charles and her teammate\nMaya Moore led the Connecticut Huskies to two\nundefeated national championships.\n(Ground Truth) Follow-up Question:\n(Ground Truth) Follow-up Question:\nIn which city is the University of Missouri located?\nNA\n"
+      },
+      {
+        "chunk_id": "chunk_008861356c216ab780f62dad7796e2d4",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 1381,
+            "end_char": 2535,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1154,
+            "block_bboxes": [
+              [
+                107.253,
+                445.556,
+                505.658,
+                575.749
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "513e8af1dd62ac1274c657d1b38ffba433a47012da68b86cb6ee54a868be9741",
+        "section": "Introduction",
+        "text": "Offline Indexing. Our indexing process involves processing a set of passages P using an instruction-\ntuned LLM L and a retrieval encoder M. As seen in Figure 2 we first use L to extract a set of noun\nphrase nodes N and relation edges E from each passage in P via OpenIE. This process is done via\n1-shot prompting of the LLM with the prompts shown in Appendix I. Specifically, we first extract a\nset of named entities from each passage. We then add the named entities to the OpenIE prompt to\nextract the final triples, which also contain concepts (noun phrases) beyond named entities. We find\nthat this two-step prompt configuration leads to an appropriate balance between generality and bias\ntowards named entities. Finally, we use M to add the extra set of synonymy relations E′ discussed\nabove when the cosine similarity between two entity representations in N is above a threshold τ. As\nstated above, this introduces more edges to our hippocampal index and allows for more effective\npattern completion. This indexing process defines a |N| × |P| matrix P, which contains the number\nof times each noun phrase in the KG appears in each original passage.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "paper_45e21fe95d28e544e8b55c6a986ff63e"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "necessary source coverage after Top40 rerank and after 6000-byte/8-block evidence selection",
+      "source": "any known_support_chunks match",
+      "semantic": "not assessed; no answer generation",
+      "pairing": "Original-Reused control; report wins/ties/losses and source substitutions",
+      "costs": "only cleaned owner rerank pairs are new; original scores are reused; evidence selection is deterministic"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "清洗子查询重排与6000字节/8块证据选择；不生成答案",
+      "controls": {
+        "candidate_source": "frozen expanded full union from prior policy run; no retrieval or embedding",
+        "cleanup": "remove only shared scaffolding tokens: 分别, 各, 各自, 各会; keep method names, technical terms and substantive interrogatives",
+        "owner": "score each chunk against every cleaned subquery that discovered it; max owner score selects owner-only",
+        "original": "reuse previous original-question score on the identical candidate and model",
+        "max_fusion": "max(original reused score, cleaned owner score)",
+        "fallback": "chunks discovered by no subquery use original score for owner and max",
+        "candidate_cap": 40,
+        "reranker_max_pair_tokens": 1024,
+        "reranker_batch_size": 1,
+        "evidence_budget_bytes": 6000,
+        "evidence_max": 8,
+        "evidence_policy": "existing assemble named_first; no graph paths",
+        "generation": false
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Owner-Clean / Original-Reused / Max-Original-Owner Experiments",
+      "fields": [
+        "清洗前后子查询",
+        "三种分数及排名",
+        "Top40必要来源覆盖",
+        "6000字节/8块证据选择",
+        "R08.S02原文语义审计",
+        "成本与Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "R13",
+    "category": "cross",
+    "benchmark": "benchmark-subquery-rerank-clean-v1",
+    "benchmark_sha256": "ee787ceacfd9695b15f0276d4aa61d7e3ae67cf98d5bd67aa73556472935c1f1",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

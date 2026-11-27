@@ -1,0 +1,260 @@
+{
+  "id": "2991a779197bef6e6c6dabb6beb25f660c0cfed926628a7636cb4658fae7b311",
+  "inputs": {
+    "question": "KG-GPT 与 RoG 的处理流程分别如何排序？句子分割、关系规划、图/路径检索和推理属于哪一方？"
+  },
+  "outputs": {
+    "expected_answer": "KG-GPT 是 Sentence Segmentation → Graph Retrieval → Inference；RoG 是 planning → retrieval → reasoning，且先规划关系路径。",
+    "answerable": true,
+    "negative_kind": null,
+    "required_facts": [
+      "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+      "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。"
+    ],
+    "source_references": [
+      {
+        "unit_id": "kggpt",
+        "answer_point": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "primary_chunk": "chunk_61e96cb10e247f7d002b4163920cc737",
+        "pages": [
+          1,
+          1
+        ]
+      },
+      {
+        "unit_id": "rog",
+        "answer_point": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "pages": [
+          1,
+          1
+        ]
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 237,
+            "end_char": 1173,
+            "chunk_start_char": 0,
+            "chunk_end_char": 936,
+            "block_bboxes": [
+              [
+                157.758,
+                214.382,
+                202.243,
+                226.337
+              ],
+              [
+                87.516,
+                240.528,
+                273.87,
+                489.67
+              ],
+              [
+                70.866,
+                504.681,
+                153.68,
+                516.636
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "ffadad8a24b98afff5373c3d1a13f932f8b1ebfa0fc1da41a2a7f203f2283e40",
+        "section": "Abstract",
+        "text": "Abstract\nWhile large language models (LLMs) have\nmade considerable advancements in under-\nstanding and generating unstructured text, their\napplication in structured data remains underex-\nplored. Particularly, using LLMs for complex\nreasoning tasks on knowledge graphs (KGs)\nremains largely untouched. To address this,\nwe propose KG-GPT, a multi-purpose frame-\nwork leveraging LLMs for tasks employing\nKGs. KG-GPT comprises three steps: Sentence\nSegmentation, Graph Retrieval, and Inference,\neach aimed at partitioning sentences, retriev-\ning relevant graph components, and deriving\nlogical conclusions, respectively. We evalu-\nate KG-GPT using KG-based fact verification\nand KGQA benchmarks, with the model show-\ning competitive and robust performance, even\noutperforming several fully-supervised models.\nOur work, therefore, marks a significant step\nin unifying structured and unstructured data\nprocessing within the realm of LLMs.1\n1\n"
+      },
+      {
+        "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 318,
+            "end_char": 1721,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1403,
+            "block_bboxes": [
+              [
+                278.288,
+                270.703,
+                333.722,
+                282.658
+              ],
+              [
+                143.866,
+                296.104,
+                468.139,
+                492.369
+              ],
+              [
+                108.299,
+                514.402,
+                205.989,
+                526.357
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "555a358e21b7a12a69fa408f252697827520cea4a7201afcf3083a96a8ef2459",
+        "section": "ABSTRACT",
+        "text": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n"
+      }
+    ],
+    "relation_outline": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。；RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+    "relation_review": {
+      "evidence": "覆盖每个必要事实并逐条引用其来源原文。",
+      "semantics": "核对关系方向、实体角色、训练/测试角色、数据集设置和指标。",
+      "synthesis": "区分论文直接主张与跨来源分析；共享实体不自动构成因果或方法继承。",
+      "uncertainty": "来源没有说明的条件须标为未知，不可补造。"
+    },
+    "must_not_claim": "共有“检索/推理”步骤不代表流程相同或存在继承。",
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "All required facts and citations; direction, entity roles, train/test role, evaluation setup and unsupported claims reviewed separately.",
+      "graph_coverage": "Each answerable relation case must expose a source-backed path for every required unit; negative cases must not contain their prohibited edge.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins."
+    },
+    "expected_graph_paths": [
+      [
+        {
+          "unit_id": "kggpt",
+          "path_id": "kggpt.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KG-GPT"
+            },
+            {
+              "type": "Stage",
+              "name": "Sentence Segmentation"
+            },
+            {
+              "type": "Stage",
+              "name": "Graph Retrieval"
+            },
+            {
+              "type": "Stage",
+              "name": "Inference"
+            }
+          ],
+          "claim_ids": [
+            "00c9daa7ef8ecce3638e2dfd66df2fb08c7d79fded451fc354a1b486e52b09bd",
+            "b2aebe7fe5bd0b94dd11868f23c216fc9fff8dc34d847b09ab3468359c5bf5a5",
+            "f225ee2831703881de29306bd51dc744ed9156379a9b0f1eb2e1bf74f824ab1a"
+          ]
+        }
+      ],
+      [
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Stage",
+              "name": "planning"
+            },
+            {
+              "type": "Component",
+              "name": "KG-constrained relation path plan"
+            }
+          ],
+          "claim_ids": [
+            "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+            "ba37ea4f3a5d65124244548e425678c1e3612a8c808e09561c8c9864a161a567"
+          ]
+        },
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Stage",
+              "name": "retrieval"
+            },
+            {
+              "type": "Component",
+              "name": "valid reasoning paths"
+            }
+          ],
+          "claim_ids": [
+            "acb6f31d72d610e337bc5df70f4727915505dd0df12b05675a6e90bd6210e743",
+            "125f506f5a6592d212ab477119720e947a21ec29ab1e1bc1de63fd2e2c7926be"
+          ]
+        },
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "TrainingSignal",
+              "name": "KG knowledge distillation"
+            }
+          ],
+          "claim_ids": [
+            "aa112d0b5699cf739594b7e46893dc6141a6d99cd1c8a4e0e5427e7504de1a46"
+          ]
+        }
+      ]
+    ],
+    "result_fields": [
+      "full answer",
+      "ranked candidates and scores",
+      "evidence and citation locations",
+      "graph paths",
+      "per-fact coverage and gaps",
+      "stage timings",
+      "tokens",
+      "paired differences",
+      "trace URLs"
+    ]
+  },
+  "metadata": {
+    "case_id": "R18",
+    "category": "cross",
+    "benchmark": "benchmark-v3",
+    "benchmark_sha256": "3ffb13a824016b58fd2cb5585bab2f3dbbf9767bd38b714ce148097122f6ac87",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "curated source review; not independent human gold"
+  },
+  "split": [
+    "cross"
+  ]
+}

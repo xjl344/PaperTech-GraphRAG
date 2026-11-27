@@ -1,0 +1,902 @@
+{
+  "request_id": "0973b410-5ffe-4740-a82a-ee019a03924e",
+  "status": "ok",
+  "answer": "不符合。原文的实现细节写明：默认使用 GPT-3.5-turbo-1106（温度0）作为 LLM，并使用 Contriever 或 ColBERTv2 作为检索器；MuSiQue 训练数据中的 100 条样本被用于调节 HippoRAG 的两个超参数——同义阈值 τ=0.8 和 PPR 阻尼因子=0.5 [chunk_fe5363c7abef240f62c37ad4ab224530]。原文未说用 LoRA 对 GPT-3.5 或 Contriever 做微调，因此“用 LoRA 微调 GPT-3.5 和 Contriever”的表述缺乏原文支持 [chunk_fe5363c7abef240f62c37ad4ab224530]。关于与 IRCoT 的比较，原文称单步检索的 HippoRAG 性能与 IRCoT 相当或更好，同时成本低10-20倍、速度快6-13倍，且将 HippoRAG 集成进 IRCoT 会带来进一步提升 [chunk_59677fe889f95e3e84ca00ba132a54fd]；这是对比较结果的概括，并非“因微调而超越”的机制说明 [chunk_59677fe889f95e3e84ca00ba132a54fd]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 1243,
+          "end_char": 1981,
+          "chunk_start_char": 0,
+          "chunk_end_char": 738,
+          "block_bboxes": [
+            [
+              117.998,
+              357.106,
+              491.64,
+              376.243
+            ],
+            [
+              108.0,
+              401.475,
+              230.311,
+              411.437
+            ],
+            [
+              108.0,
+              423.361,
+              504.345,
+              488.1
+            ],
+            [
+              108.0,
+              510.039,
+              163.125,
+              521.994
+            ]
+          ]
+        }
+      ],
+      "quote": "IRCoT + HippoRAG (Contriever)\n43.9\n56.6\n75.3\n93.4\n65.8\n82.3\n61.7\n77.4\nIRCoT + HippoRAG (ColBERTv2)\n45.3\n57.6\n75.8\n93.9\n67.0\n83.0\n62.7\n78.2\n3.4\nImplementation Details\nBy default, we use GPT-3.5-turbo-1106 [55] with temperature of 0 as our LLM L and Contriever\n[35] or ColBERTv2 [70] as our retriever M. We use 100 examples from MuSiQue’s training data\nto tune HippoRAG’s two hyperparameters: the synonymy threshold τ at 0.8 and the PPR damping\nfactor at 0.5, which determines the probability that PPR will restart a random walk from the query\nnodes instead of continuing to explore the graph. Generally, we find that HippoRAG’s performance\nis rather robust to its hyperparameters. More implementation details can be found in Appendix H.\n4",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.96971607208252
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8293614387512207
+        }
+      ],
+      "rerank_score": 0.9392480850219727,
+      "context_bytes": 1080,
+      "eid": "E3"
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 271,
+          "end_char": 1659,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1388,
+          "block_bboxes": [
+            [
+              283.758,
+              270.736,
+              328.243,
+              282.691
+            ],
+            [
+              143.507,
+              295.936,
+              469.879,
+              491.395
+            ],
+            [
+              108.0,
+              517.694,
+              190.814,
+              529.649
+            ]
+          ]
+        }
+      ],
+      "quote": "with existing RAG methods on multi-hop question answering (QA) and show that\nour method outperforms the state-of-the-art methods remarkably, by up to 20%.\nSingle-step retrieval with HippoRAG achieves comparable or better performance\nthan iterative retrieval like IRCoT while being 10-20 times cheaper and 6-13 times\nfaster, and integrating HippoRAG into IRCoT brings further substantial gains.\nFinally, we show that our method can tackle new types of scenarios that are out of\nreach of existing methods.1\n1",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.612114906311035
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8057217597961426
+        }
+      ],
+      "rerank_score": 0.9464978575706482,
+      "context_bytes": 1747,
+      "eid": "E2"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 28,
+      "page_end": 28,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 28,
+          "start_char": 333,
+          "end_char": 1366,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1033,
+          "block_bboxes": [
+            [
+              107.691,
+              196.484,
+              504.17,
+              293.794
+            ],
+            [
+              107.502,
+              305.266,
+              504.003,
+              326.213
+            ],
+            [
+              269.272,
+              337.736,
+              409.91,
+              346.703
+            ],
+            [
+              202.094,
+              352.778,
+              394.119,
+              371.914
+            ]
+          ]
+        }
+      ],
+      "quote": "One of HippoRAG’s main advantages against iterative retrieval methods is the dramatic online\nretrieval efficiency gains brought on by its single-step multi-hop retrieval ability in terms of both\ncost and time. Specifically, as seen in Table 17, retrieval costs for IRCoT are 10 to 30 times higher\nthan HippoRAG since it only requires extracting relevant named entities from the query instead of\nprocessing all of the retrieved documents. In systems with extremely high usage, a cost difference of\nan order of magnitude such as this one could be extremely important. The difference with IRCoT in\nterms of latency is also substantial, although more challenging to measure exactly. Also as seen in\nTable 17, HippoRAG can be 6 to 13 times faster than IRCoT, depending on the number of retrieval\nrounds that need to be executed (2-4 in our experiments).6\nTable 17: Average cost and efficiency measurements for online retrieval using GPT-3.5 Turbo on\n1,000 queries.\nColBERTv2\nIRCoT\nHippoRAG\nAPI Cost ($)\n0\n1-3\n0.1\nTime (minutes)\n1\n20-40\n3\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.15478515625
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8148889541625977
+        }
+      ],
+      "rerank_score": 0.9483462572097778,
+      "context_bytes": 1398
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 271,
+          "end_char": 1659,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1388,
+          "block_bboxes": [
+            [
+              283.758,
+              270.736,
+              328.243,
+              282.691
+            ],
+            [
+              143.507,
+              295.936,
+              469.879,
+              491.395
+            ],
+            [
+              108.0,
+              517.694,
+              190.814,
+              529.649
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nIn order to thrive in hostile and ever-changing natural environments, mammalian\nbrains evolved to store large amounts of knowledge about the world and continually\nintegrate new information while avoiding catastrophic forgetting. Despite their\nimpressive accomplishments, large language models (LLMs), even with retrieval-\naugmented generation (RAG), still struggle to efficiently and effectively integrate\na large amount of new experiences after pre-training. In this work, we introduce\nHippoRAG, a novel retrieval framework inspired by the hippocampal indexing\ntheory of human long-term memory to enable deeper and more efficient knowledge\nintegration over new experiences. HippoRAG synergistically orchestrates LLMs,\nknowledge graphs, and the Personalized PageRank algorithm to mimic the different\nroles of neocortex and hippocampus in human memory. We compare HippoRAG\nwith existing RAG methods on multi-hop question answering (QA) and show that\nour method outperforms the state-of-the-art methods remarkably, by up to 20%.\nSingle-step retrieval with HippoRAG achieves comparable or better performance\nthan iterative retrieval like IRCoT while being 10-20 times cheaper and 6-13 times\nfaster, and integrating HippoRAG into IRCoT brings further substantial gains.\nFinally, we show that our method can tackle new types of scenarios that are out of\nreach of existing methods.1\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.612114906311035
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8057217597961426
+        }
+      ],
+      "rerank_score": 0.9464978575706482,
+      "context_bytes": 1747
+    },
+    {
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 1243,
+          "end_char": 1981,
+          "chunk_start_char": 0,
+          "chunk_end_char": 738,
+          "block_bboxes": [
+            [
+              117.998,
+              357.106,
+              491.64,
+              376.243
+            ],
+            [
+              108.0,
+              401.475,
+              230.311,
+              411.437
+            ],
+            [
+              108.0,
+              423.361,
+              504.345,
+              488.1
+            ],
+            [
+              108.0,
+              510.039,
+              163.125,
+              521.994
+            ]
+          ]
+        }
+      ],
+      "quote": "IRCoT + HippoRAG (Contriever)\n43.9\n56.6\n75.3\n93.4\n65.8\n82.3\n61.7\n77.4\nIRCoT + HippoRAG (ColBERTv2)\n45.3\n57.6\n75.8\n93.9\n67.0\n83.0\n62.7\n78.2\n3.4\nImplementation Details\nBy default, we use GPT-3.5-turbo-1106 [55] with temperature of 0 as our LLM L and Contriever\n[35] or ColBERTv2 [70] as our retriever M. We use 100 examples from MuSiQue’s training data\nto tune HippoRAG’s two hyperparameters: the synonymy threshold τ at 0.8 and the PPR damping\nfactor at 0.5, which determines the probability that PPR will restart a random walk from the query\nnodes instead of continuing to explore the graph. Generally, we find that HippoRAG’s performance\nis rather robust to its hyperparameters. More implementation details can be found in Appendix H.\n4\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.96971607208252
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8293614387512207
+        }
+      ],
+      "rerank_score": 0.9392480850219727,
+      "context_bytes": 1080
+    },
+    {
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 27,
+      "page_end": 27,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 27,
+          "start_char": 165,
+          "end_char": 1355,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1190,
+          "block_bboxes": [
+            [
+              107.532,
+              101.451,
+              505.241,
+              166.213
+            ],
+            [
+              107.691,
+              182.901,
+              503.995,
+              203.941
+            ],
+            [
+              111.644,
+              215.463,
+              488.107,
+              224.429
+            ],
+            [
+              266.498,
+              230.514,
+              500.354,
+              239.48
+            ],
+            [
+              111.644,
+              245.474,
+              499.188,
+              264.611
+            ],
+            [
+              111.644,
+              270.605,
+              499.188,
+              289.742
+            ],
+            [
+              111.644,
+              295.944,
+              198.286,
+              314.872
+            ],
+            [
+              210.24,
+              295.736,
+              500.236,
+              314.872
+            ],
+            [
+              108.0,
+              351.832,
+              215.955,
+              361.794
+            ]
+          ]
+        }
+      ],
+      "quote": "When HippoRAG is ensembled with M under “Uncertainty Ensemble”, it further improves on\nMuSiQue and outperforms our baselines in R@5 for HotpotQA, as shown in Table 13. When used in\ncombination with IRCoT, as shown in Table 14, the ColBERTv2 ensemble outperforms all previous\nbaselines in both R@2 and R@5 on HotpotQA. Although the simplicity of this approach is promising,\nmore work needs to be done to solve this context-context tradeoff since simple ensembling does\nlower performance in some cases, especially for the 2WikiMultiHopQA dataset.\nTable 14: Multi-step retrieval performance. Combining HippoRAG with standard multi-step\nretrieval methods like IRCoT results in substantial improvements on all three datasets.\nModel\nRetriever\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nIRCoT\nContriever\n39.1\n52.2\n51.6\n63.8\n65.9\n81.6\n52.2\n65.9\nColBERTv2\n41.7\n53.7\n64.1\n74.4\n67.9\n82.0\n57.9\n70.0\nIRCoT + HippoRAG\nContriever\n43.9\n56.6\n75.3\n93.4\n65.8\n82.3\n61.7\n77.4\nColBERTv2\n45.3\n57.6\n75.8\n93.9\n67.0\n83.0\n62.7\n78.2\nIRCoT + HippoRAG w/\nUncertainty Ensemble\nContriever\n44.4\n58.5\n75.3\n91.5\n66.9\n85.0\n62.2\n78.3\nColBERTv2\n40.2\n53.4\n74.5\n91.2\n68.2\n85.3\n61.0\n76.6\nF.3\nOpenIE Limitations\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.9945068359375
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8368759155273438
+        }
+      ],
+      "rerank_score": 0.9336731433868408,
+      "context_bytes": 1617
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 26,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "text_only",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 6.278377900016494,
+      "inference_seconds": 0.776963600073941,
+      "elapsed_seconds": 0.7799003000836819,
+      "peak_cuda_memory_bytes": 1192674304,
+      "request_count": 73,
+      "batch_size": 4
+    },
+    "evidence_count": 4,
+    "context_bytes": 5842,
+    "evidence_bytes": 5842,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5563,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "source_coverage": [],
+    "limitations": [],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 2018,
+    "total_tokens": 2390,
+    "completion_tokens": 372,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 2018
+    },
+    "completion_tokens_details": {
+      "text_tokens": 372
+    }
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "errors": [],
+  "raw": "{\"answer\":\"不符合。原文的实现细节写明：默认使用 GPT-3.5-turbo-1106（温度0）作为 LLM，并使用 Contriever 或 ColBERTv2 作为检索器；MuSiQue 训练数据中的 100 条样本被用于调节 HippoRAG 的两个超参数——同义阈值 τ=0.8 和 PPR 阻尼因子=0.5 [chunk_fe5363c7abef240f62c37ad4ab224530]。原文未说用 LoRA 对 GPT-3.5 或 Contriever 做微调，因此“用 LoRA 微调 GPT-3.5 和 Contriever”的表述缺乏原文支持 [chunk_fe5363c7abef240f62c37ad4ab224530]。关于与 IRCoT 的比较，原文称单步检索的 HippoRAG 性能与 IRCoT 相当或更好，同时成本低10-20倍、速度快6-13倍，且将 HippoRAG 集成进 IRCoT 会带来进一步提升 [chunk_59677fe889f95e3e84ca00ba132a54fd]；这是对比较结果的概括，并非“因微调而超越”的机制说明 [chunk_59677fe889f95e3e84ca00ba132a54fd]。\",\"citations\":[{\"chunk_id\":\"chunk_fe5363c7abef240f62c37ad4ab224530\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_59677fe889f95e3e84ca00ba132a54fd\",\"quote_id\":\"q2\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "score": 0.027212143650499815,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.15478515625
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8148889541625977
+        }
+      ],
+      "rerank_score": 0.9483462572097778
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 0.02632034632034632,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.612114906311035
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8057217597961426
+        }
+      ],
+      "rerank_score": 0.9464978575706482
+    },
+    {
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "score": 0.030330882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.96971607208252
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8293614387512207
+        }
+      ],
+      "rerank_score": 0.9392480850219727
+    },
+    {
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "score": 0.032018442622950824,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.9945068359375
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8368759155273438
+        }
+      ],
+      "rerank_score": 0.9336731433868408
+    },
+    {
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 0.030834914611005692,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 10.23282527923584
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8472084999084473
+        }
+      ],
+      "rerank_score": 0.9152045845985413
+    },
+    {
+      "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+      "score": 0.031024531024531024,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.203990936279297
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8324184417724609
+        }
+      ],
+      "rerank_score": 0.9094254970550537
+    },
+    {
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 0.030309988518943745,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 10.31992244720459
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8351917266845703
+        }
+      ],
+      "rerank_score": 0.907312273979187
+    },
+    {
+      "chunk_id": "chunk_18bee03d708874e36549c17129df7d7f",
+      "score": 0.03200204813108039,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 13.495186805725098
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8401765823364258
+        }
+      ],
+      "rerank_score": 0.9059898257255554
+    },
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 0.02667140825035562,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.185173511505127
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.8101835250854492
+        }
+      ],
+      "rerank_score": 0.8879840970039368
+    },
+    {
+      "chunk_id": "chunk_ae9f5c6eeafcaff8f5a4d2a4a849b4f3",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.722612380981445
+        }
+      ],
+      "rerank_score": 0.8719117641448975
+    },
+    {
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8285379409790039
+        }
+      ],
+      "rerank_score": 0.8438951373100281
+    },
+    {
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "score": 0.02946912242686891,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.955272674560547
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.822718620300293
+        }
+      ],
+      "rerank_score": 0.822474479675293
+    },
+    {
+      "chunk_id": "chunk_94f3984fea87c32c884454a6a284044d",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.499244689941406
+        }
+      ],
+      "rerank_score": 0.7613611221313477
+    },
+    {
+      "chunk_id": "chunk_46cc64f1ac63912eb3830654d752efc3",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.67949104309082
+        }
+      ],
+      "rerank_score": 0.7527403235435486
+    },
+    {
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 0.02797339593114241,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.66945743560791
+        },
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.818458080291748
+        }
+      ],
+      "rerank_score": 0.7427950501441956
+    },
+    {
+      "chunk_id": "chunk_e595dc20307a9f6a2c07d16595f5ca21",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.8077130317687988
+        }
+      ],
+      "rerank_score": 0.7411122918128967
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.030886196246139225,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.523261070251465
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8527069091796875
+        }
+      ],
+      "rerank_score": 0.6960616111755371
+    },
+    {
+      "chunk_id": "chunk_493cae01f9aa8bd905c9df0bc48019a8",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.8071331977844238
+        }
+      ],
+      "rerank_score": 0.6941990256309509
+    },
+    {
+      "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+      "score": 0.029211087420042643,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.752504348754883
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8297386169433594
+        }
+      ],
+      "rerank_score": 0.6644314527511597
+    },
+    {
+      "chunk_id": "chunk_cbf3ad02f6fb8ce2f29163fd12dceb89",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.8014388084411621
+        }
+      ],
+      "rerank_score": 0.25091278553009033
+    },
+    {
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.027984344422700584,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.393458366394043
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.827181339263916
+        }
+      ],
+      "rerank_score": 0.2221934050321579
+    },
+    {
+      "chunk_id": "chunk_5463211e0f0b5a2231540050ade349e9",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.632501125335693
+        }
+      ],
+      "rerank_score": 0.12819735705852509
+    },
+    {
+      "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.005283832550049
+        }
+      ],
+      "rerank_score": 0.10576342046260834
+    },
+    {
+      "chunk_id": "chunk_7f201c0af70e9351cc7afebf4618e0ad",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.8021340370178223
+        }
+      ],
+      "rerank_score": 0.10284407436847687
+    },
+    {
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.8052988052368164
+        }
+      ],
+      "rerank_score": 0.00821969285607338
+    },
+    {
+      "chunk_id": "chunk_6312cd468a11fe34506dc29b38949d6c",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 10.483807563781738
+        }
+      ],
+      "rerank_score": 0.0018748616566881537
+    }
+  ],
+  "case_id": "H-N01",
+  "question": "有人总结说：HippoRAG 在 MuSiQue 的 100 条训练样本上用 LoRA 微调了 GPT-3.5 和 Contriever，所以才能在多跳问答上超越 IRCoT。这种说法符合原文吗？请指出原文实际做法。",
+  "category": "negative",
+  "arm": "Legacy-Hybrid",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0011340000201016665
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.02766620006877929
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 1.68998958542943e-05
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.7813927000388503
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.001770299975760281
+    }
+  ],
+  "retrieval_compute_seconds": 0.8119800999993458,
+  "request_wall_seconds": 8.59152020001784,
+  "embedding_source": "shared Q00 cloud vectors across arms; live planned subquery vectors for Production-Final",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.2720291999867186,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 4.7620470999972895,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.5257875999668613,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 3.840584499994293,
+      "usage": "{\"prompt_tokens\": 2018, \"total_tokens\": 2390, \"completion_tokens\": 372}"
+    }
+  ],
+  "criterion_source_coverage": [],
+  "metrics": {
+    "recall5": 1.0,
+    "recall8": 1.0,
+    "mrr40": 0.3333333333333333,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/bc640782-796f-4e04-83b6-867830c2cbcf?poll=true"
+}

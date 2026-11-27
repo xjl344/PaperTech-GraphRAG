@@ -1,0 +1,277 @@
+{
+  "id": "e1852ca8-930c-5676-9f77-46c280a8abeb",
+  "inputs": {
+    "question": "G-Retriever 冻结 LLM 的软提示训练与 ToG-2 的 training-free 分别意味着什么？比较是否训练其他组件，避免仅凭底座参数不变就判定整套系统免训练。"
+  },
+  "outputs": {
+    "expected_answer": "G-Retriever 冻结LLM但以GNN输出的软提示做高效微调。\nToG-2 将自身描述为training-free且可即插即用不同LLM。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R19.S01",
+        "answer_point": "G-Retriever 冻结LLM但以GNN输出的软提示做高效微调。",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "primary_chunk": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+        "pages": [
+          6,
+          6
+        ],
+        "known_support_chunks": [
+          "chunk_2da94a87e97c2e0f30e8eec5659e202d"
+        ]
+      },
+      {
+        "unit_id": "R19.S02",
+        "answer_point": "ToG-2 将自身描述为training-free且可即插即用不同LLM。",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "primary_chunk": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_9b63637ef18ed2d67ff105ef55092df3"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R19",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R19.S01",
+        "required_fact": "G-Retriever 冻结LLM但以GNN输出的软提示做高效微调。",
+        "primary_chunk": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+        "supporting_chunks": [
+          "chunk_2da94a87e97c2e0f30e8eec5659e202d"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R19.S02",
+        "required_fact": "ToG-2 将自身描述为training-free且可即插即用不同LLM。",
+        "primary_chunk": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+        "supporting_chunks": [
+          "chunk_9b63637ef18ed2d67ff105ef55092df3"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+        "page_start": 6,
+        "page_end": 6,
+        "source_spans": [
+          {
+            "pdf_page": 6,
+            "start_char": 909,
+            "end_char": 2444,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1535,
+            "block_bboxes": [
+              [
+                108.0,
+                216.502,
+                504.353,
+                270.219
+              ],
+              [
+                108.0,
+                292.552,
+                503.997,
+                313.499
+              ],
+              [
+                108.0,
+                330.132,
+                187.371,
+                342.087
+              ],
+              [
+                107.641,
+                354.551,
+                505.247,
+                430.106
+              ],
+              [
+                107.641,
+                436.402,
+                505.74,
+                457.379
+              ],
+              [
+                108.0,
+                471.631,
+                168.064,
+                481.593
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "8fbdca23d54c9ee8f535699e55a0f1e762eed7dc58accd90bfbe033b7c288db8",
+        "section": "Related Work",
+        "text": "Figure 3: Overview of the proposed G-Retriever: 1) Indexing: Graphs are indexed for efficient query\nprocessing; 2) Retrieval: The most semantically relevant nodes and edges are retrieved, conditioned\non the query; 3) Subgraph Construction: A connected subgraph is extracted, covering as many\nrelevant nodes and edges as possible while maintaining a manageable graph size; 4) Generation: An\nanswer is generated using a ‘graph prompt’, a textualized graph, and the query.\nrequire multi-hop reasoning. Given the possibility of multiple answers for the same question, the\nhit@1 metric is used to assess the precision of the top returned answer.\n5\nG-Retriever\nIn this section, we introduce G-Retriever, a new architecture tailored for GraphQA, which integrates\nthe strengths of GNNs, LLMs, and RAG. To allow efficient fine-tuning while preserving the LLM’s\npretrained language capabilities, we freeze the LLM and use a soft prompting approach on the output\nof the GNN. Our RAG-based design mitigates hallucinations through direct retrieval of the graph,\nwhile allowing our approach to scale to graphs exceeding the LLM’s context window size. To adapt\nRAG to graphs, we formulate subgraph retrieval as a PCST optimization problem. This approach\nalso allows us to enhance explainability by returning the retrieved subgraph.\nG-Retriever comprises four main steps: indexing, retrieval, subgraph construction and generation, as\ndepicted in Figure 3. The implementation details of each step are elaborated in the following sections.\n5.1\nIndexing\n"
+      },
+      {
+        "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 621,
+            "end_char": 2250,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1629,
+            "block_bboxes": [
+              [
+                143.866,
+                279.608,
+                468.139,
+                530.667
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "0dceb4872331a3782598f7d0abcd6b29f375efcf602324a1a55595d0b55c8ed4",
+        "section": "ABSTRACT",
+        "text": "Retrieval-augmented generation (RAG) has improved large language models\n(LLMs) by using knowledge retrieval to overcome knowledge deficiencies. How-\never, current RAG methods often fall short of ensuring the depth and complete-\nness of retrieved information, which is necessary for complex reasoning tasks.\nIn this work, we introduce Think-on-Graph 2.0 (ToG-2), a hybrid RAG frame-\nwork that iteratively retrieves information from both unstructured and structured\nknowledge sources in a tight-coupling manner.\nSpecifically, ToG-2 leverages\nknowledge graphs (KGs) to link documents via entities, facilitating deep and\nknowledge-guided context retrieval. Simultaneously, it utilizes documents as en-\ntity contexts to achieve precise and efficient graph retrieval. ToG-2 alternates\nbetween graph retrieval and context retrieval to search for in-depth clues rele-\nvant to the question, enabling LLMs to generate answers. We conduct a series\nof well-designed experiments to highlight the following advantages of ToG-2:\n1) ToG-2 tightly couples the processes of context retrieval and graph retrieval,\ndeepening context retrieval via the KG while enabling reliable graph retrieval\nbased on contexts; 2) it achieves deep and faithful reasoning in LLMs through\nan iterative knowledge retrieval process of collaboration between contexts and\nthe KG; and 3) ToG-2 is training-free and plug-and-play compatible with vari-\nous LLMs. Extensive experiments demonstrate that ToG-2 achieves overall state-\nof-the-art (SOTA) performance on 6 out of 7 knowledge-intensive datasets with\nGPT-3.5, and can elevate the performance of smaller models (e.g"
+      }
+    ],
+    "required_source_papers": [
+      "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "paper_1f0f648a6595c842e4881196687e103c"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "逐题审阅目标独立性、分流合理性、拆分是否增添事实或丢任务",
+      "automatic": "路由数、校验通过、子查询数、调用数、Token与耗时；不是语义准确率",
+      "semantic": "Codex题面审阅，非独立人工；不使用答案来赋予方法技术关系",
+      "limit": "此24题均为跨论文设计，不能评估简单题误拆率；模型分流本身每题一次调用",
+      "latency": "wall time includes loading, route and decomposition in one request",
+      "negative_policy": "not applicable"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "题面子查询拆分；不运行检索或答案生成",
+      "controls": {
+        "prompt": "你是通用检索问题分流器，只看题面，不回答问题，不用外部知识补论文内容。\n判断是否存在多个可独立查证的证据目标，而非按长度、方法名数量判断复杂度。\ndecision 四选一：no_split=一个整体检索目标；rule=输入提供的确定性规则候选足以表示各自检索目标；llm=有多个目标且需理解指代、跨句归属或隐式描述才能拆；unclear=题面不足以确定安全拆分。\n比较题常需分别查证各对象；无方法名但明确要求找两类不同材料时也可以拆成描述性子查询，不猜测论文名。\n如 rule_candidate 为空不得选择 rule；非空也须检查是否漏重要目标。rule 时 queries 留空，程序采用规则候选。\nllm 时输出2至4个能独立检索的简短子查询，每个只包含题面已给的信息，可自然改写和消解明确指代。没有明确归属时不把列举的技术词按论文知识强行配对，可保留共同问题并把未归属文字放 unresolved。\nno_split或unclear时queries为空，保留原题。quotes是支撑判断或拆分的1至4条连续题面原文，必须逐字存在；reason简短解释目标结构，不能说明论文答案。unresolved记录尚未解决的题面歧义，可为空。所有子查询仅用于补充检索，原题始终保留。只输出JSON。",
+        "schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "decision": {
+              "type": "string",
+              "enum": [
+                "no_split",
+                "rule",
+                "llm",
+                "unclear"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            },
+            "queries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "quotes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unresolved": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "decision",
+            "reason",
+            "queries",
+            "quotes",
+            "unresolved"
+          ]
+        },
+        "options": {
+          "temperature": 0,
+          "seed": 42,
+          "num_ctx": 8192,
+          "num_predict": 1400
+        },
+        "rule": "explicit_possessive_parallel_v1",
+        "runtime_input": "question + generic rule candidates only; no catalog, references or case id",
+        "baseline": "Rule label = original question retained without splitting",
+        "treatment": "Local-LLM label = generic router: no_split / rule / llm / unclear; validation failure keeps original",
+        "original_question": "always retained; subqueries auxiliary",
+        "no_anchor": "not a gate; descriptive search targets allowed",
+        "generation": false,
+        "retrieval": false,
+        "embedding": false,
+        "reranking": false
+      },
+      "models": {
+        "local_router": "qwen2.5:14b",
+        "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6"
+      }
+    },
+    "result_display": {
+      "location": "Rule=保持原题 / Local-LLM=通用分流",
+      "fields": [
+        "分流决策与理由",
+        "规则候选",
+        "补充子查询",
+        "未解析内容",
+        "机械校验",
+        "逐题审阅",
+        "Token时延Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "decomposition_rubric": {
+      "primary": "逐题审阅目标独立性、分流合理性、拆分是否增添事实或丢任务",
+      "automatic": "路由数、校验通过、子查询数、调用数、Token与耗时；不是语义准确率",
+      "semantic": "Codex题面审阅，非独立人工；不使用答案来赋予方法技术关系",
+      "limit": "此24题均为跨论文设计，不能评估简单题误拆率；模型分流本身每题一次调用",
+      "latency": "wall time includes loading, route and decomposition in one request",
+      "negative_policy": "not applicable"
+    }
+  },
+  "metadata": {
+    "case_id": "R19",
+    "category": "cross",
+    "benchmark": "benchmark-query-router-v1",
+    "benchmark_sha256": "34d3724fe4a60c135383606c64caab5880aa2fa2746ab07774168f8e5d8d9595",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

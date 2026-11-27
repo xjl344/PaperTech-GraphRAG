@@ -1,0 +1,914 @@
+{
+  "request_id": "0b53fbea-1595-42d8-8270-4d61e7b06589",
+  "status": "ok",
+  "answer": "KGP 的敏感性分析说明：branching factor 增大时性能先升，是因为从候选邻居中选出的段落节点更多，能形成更多到达最终答案的推理路径；而在固定上下文预算（每题可检索段落总数在各基线间相同）下，继续增大 branching factor 会使初始种子节点数量减少，导致对 KG 的覆盖下降，性能随之下降 [chunk_e1a39884458dd5c4e4ae63ae1126a5d5]。关于 CuriousLLM 的 KGP_Mistral_ET 与完整版 KGP_Mistral 在四个 MD-QA 数据集上的对比：表 3 的准确率/EM 数值显示 KGP_Mistral 在 HotpotQA、2WikiMQA、IIRC、MuSiQue 上准确率分别为 73.80/52.42、49.40/50.29、36.69/32.07、36.50/45.95，KGP_Mistral_ET 分别为 72.20/51.27、46.00/48.25、34.80/31.67、34.80/45.85；即提前终止变体在四个数据集上的准确率与 EM 均低于完整版 [chunk_9c4ed8fb017cd0f15b601822cb9b8718]。原文未在所提供的证据中描述 KGP_Mistral_ET 提前终止的具体实现流程，因此其机制证据不足。",
+  "citations": [
+    {
+      "chunk_id": "chunk_e1a39884458dd5c4e4ae63ae1126a5d5",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 1222,
+          "end_char": 2256,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1034,
+          "block_bboxes": [
+            [
+              54.0,
+              400.726,
+              292.505,
+              601.119
+            ],
+            [
+              54.0,
+              612.8,
+              292.505,
+              704.407
+            ]
+          ]
+        }
+      ],
+      "quote": "5.4\nSensitivity Analysis\nHere we perform the sensitivity analysis of the branching\nfactor (the number of nodes selected from candidate neigh-\nbors to visit next). In Figure 7(a)-(b), the performance first\nincreases as the branching factor increases because more\npassage nodes selected from the candidate neighbors lead to\nmore reasoning paths to reach the final answer. However, as\nwe fix the context budget to ensure fair comparison (i.e., the\ntotal number of passages we are allowed to retrieve for each\nquestion is the same across all baselines), the performance\ndeclines as the branching factor increases because the num-\nber of initial seeding nodes diminishes, leading to reduced\ncoverage of the KG. Furthermore, we compare the efficiency\nof KGP when the constructed KG includes different num-\nbers of documents in Figure 7(c). KGP consistently achieves",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 17.18767738342285
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8166680335998535
+        }
+      ],
+      "rerank_score": 0.9774138927459717,
+      "context_bytes": 1377,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 1200,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1200,
+          "block_bboxes": [
+            [
+              80.497,
+              72.476,
+              514.779,
+              206.922
+            ],
+            [
+              70.557,
+              219.294,
+              526.151,
+              265.353
+            ],
+            [
+              70.866,
+              289.144,
+              180.568,
+              300.053
+            ],
+            [
+              70.866,
+              303.231,
+              290.949,
+              354.871
+            ],
+            [
+              70.866,
+              368.976,
+              220.892,
+              380.931
+            ],
+            [
+              70.866,
+              392.231,
+              226.463,
+              403.14
+            ],
+            [
+              70.353,
+              411.123,
+              289.132,
+              421.922
+            ]
+          ]
+        }
+      ],
+      "quote": "Method\nHotpotQA\n2WikiMQA\nIIRC\nMuSiQue\nAcc\nEM\nAcc\nEM\nAcc\nEM\nAcc\nEM\nNone\n38.20\n-\n30.20\n-\n21.94\n-\n22.80\n-\nTF-IDF\n67.40\n45.60\n42.80\n47.66\n28.09\n28.27\n28.60\n46.77\nBM25\n64.80\n42.60\n42.20\n46.84\n28.72\n28.27\n28.60\n44.51\nMDR\n70.60\n50.12\n44.20\n45.38\n31.45\n30.96\n32.80\n47.59\nKGP_T5\n71.60\n51.77\n46.80\n49.55\n33.30\n31.57\n34.00\n45.85\nKGP_Mistral_ET (Ours)\n72.20\n51.27\n46.00\n48.25\n34.80\n31.67\n34.80\n45.85\nKGP_Mistral (Ours)\n73.80\n52.42\n49.40\n50.29\n36.69\n32.07\n36.50\n45.95\nGolden\n81.40\n100.00\n69.80\n100.00\n64.57\n100.00\n53.80\n100.00\nTable 3: Performance (%) on 4 multi-document question answering (MD-QA) benchmark datasets. KGP_Mistral is\nour method. KGP_Mistral_ET is the version of our method with early termination. KGP_T5 is a strong baseline.\nNone: no passages but only the question is provided. Golden: supporting facts are provided along with the question.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 17.2262020111084
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7979521751403809
+        }
+      ],
+      "rerank_score": 0.9833430051803589,
+      "context_bytes": 1647,
+      "eid": "E2"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_e1a39884458dd5c4e4ae63ae1126a5d5",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 1222,
+          "end_char": 2256,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1034,
+          "block_bboxes": [
+            [
+              54.0,
+              400.726,
+              292.505,
+              601.119
+            ],
+            [
+              54.0,
+              612.8,
+              292.505,
+              704.407
+            ]
+          ]
+        }
+      ],
+      "quote": "5.4\nSensitivity Analysis\nHere we perform the sensitivity analysis of the branching\nfactor (the number of nodes selected from candidate neigh-\nbors to visit next). In Figure 7(a)-(b), the performance first\nincreases as the branching factor increases because more\npassage nodes selected from the candidate neighbors lead to\nmore reasoning paths to reach the final answer. However, as\nwe fix the context budget to ensure fair comparison (i.e., the\ntotal number of passages we are allowed to retrieve for each\nquestion is the same across all baselines), the performance\ndeclines as the branching factor increases because the num-\nber of initial seeding nodes diminishes, leading to reduced\ncoverage of the KG. Furthermore, we compare the efficiency\nof KGP when the constructed KG includes different num-\nbers of documents in Figure 7(c). KGP consistently achieves\nhigher performance than other baselines and higher effi-\nciency than embedding-based DPR. TF-IDF is slightly faster\nthan KGP because it is a purely heuristic-based method.\n6\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 17.18767738342285
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8166680335998535
+        }
+      ],
+      "rerank_score": 0.9774138927459717,
+      "context_bytes": 1377
+    },
+    {
+      "chunk_id": "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 1200,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1200,
+          "block_bboxes": [
+            [
+              80.497,
+              72.476,
+              514.779,
+              206.922
+            ],
+            [
+              70.557,
+              219.294,
+              526.151,
+              265.353
+            ],
+            [
+              70.866,
+              289.144,
+              180.568,
+              300.053
+            ],
+            [
+              70.866,
+              303.231,
+              290.949,
+              354.871
+            ],
+            [
+              70.866,
+              368.976,
+              220.892,
+              380.931
+            ],
+            [
+              70.866,
+              392.231,
+              226.463,
+              403.14
+            ],
+            [
+              70.353,
+              411.123,
+              289.132,
+              421.922
+            ]
+          ]
+        }
+      ],
+      "quote": "Method\nHotpotQA\n2WikiMQA\nIIRC\nMuSiQue\nAcc\nEM\nAcc\nEM\nAcc\nEM\nAcc\nEM\nNone\n38.20\n-\n30.20\n-\n21.94\n-\n22.80\n-\nTF-IDF\n67.40\n45.60\n42.80\n47.66\n28.09\n28.27\n28.60\n46.77\nBM25\n64.80\n42.60\n42.20\n46.84\n28.72\n28.27\n28.60\n44.51\nMDR\n70.60\n50.12\n44.20\n45.38\n31.45\n30.96\n32.80\n47.59\nKGP_T5\n71.60\n51.77\n46.80\n49.55\n33.30\n31.57\n34.00\n45.85\nKGP_Mistral_ET (Ours)\n72.20\n51.27\n46.00\n48.25\n34.80\n31.67\n34.80\n45.85\nKGP_Mistral (Ours)\n73.80\n52.42\n49.40\n50.29\n36.69\n32.07\n36.50\n45.95\nGolden\n81.40\n100.00\n69.80\n100.00\n64.57\n100.00\n53.80\n100.00\nTable 3: Performance (%) on 4 multi-document question answering (MD-QA) benchmark datasets. KGP_Mistral is\nour method. KGP_Mistral_ET is the version of our method with early termination. KGP_T5 is a strong baseline.\nNone: no passages but only the question is provided. Golden: supporting facts are provided along with the question.\nThe best and run-up scores are in bold and underlined.\ntermination in Section C.\nIn summary, our KGP-Mistral outperforms all\nother methods in accuracy and efficiency, establish-\ning itself as a robust solution for multi-document\nquestion answering.\n4\nFollow-upQA Benchmark\n4.1\nEvaluation on Follow-upQA\nWe evaluate the fine-tuned Mistral-7B model on the\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 17.2262020111084
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7979521751403809
+        }
+      ],
+      "rerank_score": 0.9833430051803589,
+      "context_bytes": 1647
+    },
+    {
+      "chunk_id": "chunk_0498eae1a386ebf0d6d488dedfd6381d",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 1222,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1222,
+          "block_bboxes": [
+            [
+              54.0,
+              170.843,
+              558.004,
+              202.814
+            ],
+            [
+              54.0,
+              216.243,
+              292.505,
+              394.718
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 7: (a)-(b): Performance first increases and then decreases as the branching factor increases. The results are averaged\nacross 100 sampled questions on 2WikiMQA and MuSiQue. (c): Performance/Efficiency increases/decreases as the number of\ndocuments increases on MuSiQue. KGP-T5 achieves higher performance/efficiency than DPR.\n5.3\nImpact of Graph Traversal Agent\nHere we study the influence of using different LLM agents to\ntraverse over TAGME-constructed KG on MD-QA. Specif-\nically, we compare agents that select the next neighbor to\nvisit randomly or intelligently via guidance from ChatGPT,\nLLaMA, T5, and MDR in Table 2. Because the random\nagent only blindly traverses the KG without any guidance\nfrom LLM, it unavoidably collects irrelevant passages and\nhence achieves the worst performance than others under\nLLMs’ guidance. This aligns with our previous observation\non the low precision in Figure 5 and further demonstrates the\nnecessity of using LLMs to guide the graph traversal. Inter-\nestingly, we find that KGP-T5 performs better than LLaMA\neven though the parameters of LLaMA-7B are more than the\nones with T5-0.7B. We hypothesize this is because LLaMA-\n7B requires more data to fine-tune than T5-0.7B.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 15.256365776062012
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8139190673828125
+        }
+      ],
+      "rerank_score": 0.9630224108695984,
+      "context_bytes": 1567
+    },
+    {
+      "chunk_id": "chunk_f46ac2b9c96b3169b250df92b61e528f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 2836,
+          "end_char": 3596,
+          "chunk_start_char": 0,
+          "chunk_end_char": 760,
+          "block_bboxes": [
+            [
+              305.804,
+              276.585,
+              526.225,
+              490.815
+            ]
+          ]
+        }
+      ],
+      "quote": "LLM agent (KGP-Mistral) employing several re-\ntrieval techniques as traversal agents for compari-\nson, including the classic keyword-based methods\nTF-IDF and BM25, the encoder-based MDR, and\na strong baseline, KGP-T5. Additionally, we in-\nclude the \"Golden\" method, where the response\ngeneration LLM is provided with golden support-\ning passages, and the \"None\" method, where only\nthe questions are given. As shown in Table 3, KGP-\nMistral consistently achieves the highest perfor-\nmance across all benchmark datasets, with accu-\nracy improvements of up to 9% compared to BM25\non HotpotQA. Furthermore, compared to the origi-\nnal KGP framework (KGP-T5), KGP-Mistral de-\nlivers consistent accuracy gains across all datasets,\naveraging a 3% improvement overall.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 22.230194091796875
+        }
+      ],
+      "rerank_score": 0.9581479430198669,
+      "context_bytes": 1097
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 27,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "text_only",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 6.278377900016494,
+      "inference_seconds": 0.7408926000352949,
+      "elapsed_seconds": 0.7434370999690145,
+      "peak_cuda_memory_bytes": 1193305088,
+      "request_count": 42,
+      "batch_size": 4
+    },
+    "evidence_count": 4,
+    "context_bytes": 5688,
+    "evidence_bytes": 5688,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5409,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "KGP",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "requested_names": [
+          "KGP"
+        ]
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "KGP",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "requested_names": [
+          "KGP"
+        ],
+        "eligible_candidate_count": 5,
+        "selected_chunk_ids": [
+          "chunk_e1a39884458dd5c4e4ae63ae1126a5d5",
+          "chunk_0498eae1a386ebf0d6d488dedfd6381d"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ],
+        "eligible_candidate_count": 17,
+        "selected_chunk_ids": [
+          "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+          "chunk_f46ac2b9c96b3169b250df92b61e528f"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 1994,
+    "total_tokens": 2397,
+    "completion_tokens": 403,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 1994
+    },
+    "completion_tokens_details": {
+      "text_tokens": 403
+    }
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "errors": [],
+  "raw": "{\"answer\":\"KGP 的敏感性分析说明：branching factor 增大时性能先升，是因为从候选邻居中选出的段落节点更多，能形成更多到达最终答案的推理路径；而在固定上下文预算（每题可检索段落总数在各基线间相同）下，继续增大 branching factor 会使初始种子节点数量减少，导致对 KG 的覆盖下降，性能随之下降 [chunk_e1a39884458dd5c4e4ae63ae1126a5d5]。关于 CuriousLLM 的 KGP_Mistral_ET 与完整版 KGP_Mistral 在四个 MD-QA 数据集上的对比：表 3 的准确率/EM 数值显示 KGP_Mistral 在 HotpotQA、2WikiMQA、IIRC、MuSiQue 上准确率分别为 73.80/52.42、49.40/50.29、36.69/32.07、36.50/45.95，KGP_Mistral_ET 分别为 72.20/51.27、46.00/48.25、34.80/31.67、34.80/45.85；即提前终止变体在四个数据集上的准确率与 EM 均低于完整版 [chunk_9c4ed8fb017cd0f15b601822cb9b8718]。原文未在所提供的证据中描述 KGP_Mistral_ET 提前终止的具体实现流程，因此其机制证据不足。\",\"citations\":[{\"chunk_id\":\"chunk_e1a39884458dd5c4e4ae63ae1126a5d5\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_9c4ed8fb017cd0f15b601822cb9b8718\",\"quote_id\":\"q1\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+      "score": 0.02900988017658188,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 17.2262020111084
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7979521751403809
+        }
+      ],
+      "rerank_score": 0.9833430051803589
+    },
+    {
+      "chunk_id": "chunk_e1a39884458dd5c4e4ae63ae1126a5d5",
+      "score": 0.029411764705882353,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 17.18767738342285
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8166680335998535
+        }
+      ],
+      "rerank_score": 0.9774138927459717
+    },
+    {
+      "chunk_id": "chunk_0498eae1a386ebf0d6d488dedfd6381d",
+      "score": 0.02877846790890269,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 15.256365776062012
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8139190673828125
+        }
+      ],
+      "rerank_score": 0.9630224108695984
+    },
+    {
+      "chunk_id": "chunk_f46ac2b9c96b3169b250df92b61e528f",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 22.230194091796875
+        }
+      ],
+      "rerank_score": 0.9581479430198669
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.03252247488101534,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 26.085159301757812
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8677000999450684
+        }
+      ],
+      "rerank_score": 0.9563905000686646
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.02900988017658188,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 14.977169036865234
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8180742263793945
+        }
+      ],
+      "rerank_score": 0.9345147609710693
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.03036576949620428,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 16.06214141845703
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8485474586486816
+        }
+      ],
+      "rerank_score": 0.9320833086967468
+    },
+    {
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 0.03177805800756621,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 26.237438201904297
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8315682411193848
+        }
+      ],
+      "rerank_score": 0.9264369606971741
+    },
+    {
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 0.02904040404040404,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 17.683326721191406
+        },
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7979397773742676
+        }
+      ],
+      "rerank_score": 0.9024378061294556
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.031754032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 21.880569458007812
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8508467674255371
+        }
+      ],
+      "rerank_score": 0.8991213440895081
+    },
+    {
+      "chunk_id": "chunk_b926195b594b5226494ac67d3237e329",
+      "score": 0.027984344422700584,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 13.989592552185059
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8074936866760254
+        }
+      ],
+      "rerank_score": 0.8689380288124084
+    },
+    {
+      "chunk_id": "chunk_8dc20d2b80845d70ef9fbaa6302c83d9",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.793879508972168
+        }
+      ],
+      "rerank_score": 0.8244618773460388
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.031009615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 18.936294555664062
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.83734130859375
+        }
+      ],
+      "rerank_score": 0.808672308921814
+    },
+    {
+      "chunk_id": "chunk_ba08d3e55b962d6032077a51bafe9eca",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 13.003180503845215
+        }
+      ],
+      "rerank_score": 0.7854732275009155
+    },
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 14.449650764465332
+        }
+      ],
+      "rerank_score": 0.6540113687515259
+    },
+    {
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "score": 0.028665028665028666,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 13.7440185546875
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8186635971069336
+        }
+      ],
+      "rerank_score": 0.6389479041099548
+    },
+    {
+      "chunk_id": "chunk_00e67cd199d4e3b3ffb299633cfbac2e",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 12.869199752807617
+        }
+      ],
+      "rerank_score": 0.6330700516700745
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.02684684684684685,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 13.128177642822266
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7930030822753906
+        }
+      ],
+      "rerank_score": 0.41649994254112244
+    },
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7925362586975098
+        }
+      ],
+      "rerank_score": 0.40603742003440857
+    },
+    {
+      "chunk_id": "chunk_e04d1a4e0d4fde7d30811f1a4da263f1",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7923812866210938
+        }
+      ],
+      "rerank_score": 0.3911733627319336
+    },
+    {
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 12.425637245178223
+        }
+      ],
+      "rerank_score": 0.3875744044780731
+    },
+    {
+      "chunk_id": "chunk_f58319afb1c636475f807715f48a7a93",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 12.71473217010498
+        }
+      ],
+      "rerank_score": 0.26076579093933105
+    },
+    {
+      "chunk_id": "chunk_cf1025bc386d03c252ff05ffdc6c9ceb",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 12.734328269958496
+        }
+      ],
+      "rerank_score": 0.20689405500888824
+    },
+    {
+      "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7922372817993164
+        }
+      ],
+      "rerank_score": 0.13546064496040344
+    },
+    {
+      "chunk_id": "chunk_91ab4f17396428b71094655d96c29bb6",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7921323776245117
+        }
+      ],
+      "rerank_score": 0.12158141285181046
+    },
+    {
+      "chunk_id": "chunk_d9eb528a051dc54a057f53f0af7fe0e6",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7924432754516602
+        }
+      ],
+      "rerank_score": 0.04611974582076073
+    },
+    {
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7920374870300293
+        }
+      ],
+      "rerank_score": 0.0031480707693845034
+    }
+  ],
+  "case_id": "H-R03",
+  "question": "对比 KGP 与 CuriousLLM 在遍历开销控制上的发现：KGP 固定上下文预算时增大 branching factor 为何性能先升后降？CuriousLLM 引入提前终止变体（KGP_Mistral_ET）后，在四个 MD-QA 数据集上的表现相对完整版 KGP_Mistral 有何变化？",
+  "category": "cross",
+  "arm": "Legacy-Hybrid",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0006114999996498227
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.026527000009082258
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 6.500049494206905e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.744143099989742
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0016076000174507499
+    }
+  ],
+  "retrieval_compute_seconds": 0.7728957000654191,
+  "request_wall_seconds": 9.227752900100313,
+  "embedding_source": "shared Q00 cloud vectors across arms; live planned subquery vectors for Production-Final",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.235884099965915,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 5.279557400033809,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4905603000661358,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 4.195725500001572,
+      "usage": "{\"prompt_tokens\": 1994, \"total_tokens\": 2397, \"completion_tokens\": 403}"
+    }
+  ],
+  "criterion_source_coverage": [],
+  "metrics": {
+    "recall5": 1.0,
+    "recall8": 1.0,
+    "mrr40": 1.0,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/4d252109-1766-4f84-b35f-24ffaa077f80?poll=true"
+}

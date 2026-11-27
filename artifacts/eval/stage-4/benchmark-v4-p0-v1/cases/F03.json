@@ -1,0 +1,404 @@
+{
+  "id": "32437f4c-22d8-52cf-a067-fb1201ef908d",
+  "inputs": {
+    "question": "ToG-R 是谁的变体，替换了哪种实体剪枝？在相同 N、D 下，论文给出的两种 LLM 调用公式相差多少？"
+  },
+  "outputs": {
+    "expected_answer": "ToG-R 是 ToG 的变体，以随机实体剪枝替代 LLM 实体剪枝。ToG 为 2ND+D+1，ToG-R 为 ND+D+1，相差 ND 次调用；这是公式差值，不是本项目测得的时延。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "togr",
+        "answer_point": "ToG-R 用随机实体剪枝替代 LLM 实体剪枝；ToG 调用数 2ND+D+1，ToG-R 为 ND+D+1。",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "primary_chunk": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+        "pages": [
+          22,
+          22
+        ],
+        "known_support_chunks": [
+          "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        ]
+      }
+    ],
+    "relation_outline": "ToG-R 用随机实体剪枝替代 LLM 实体剪枝；ToG 调用数 2ND+D+1，ToG-R 为 ND+D+1。",
+    "must_not_claim": null,
+    "case_id": "F03",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "togr",
+        "required_fact": "ToG-R 用随机实体剪枝替代 LLM 实体剪枝；ToG 调用数 2ND+D+1，ToG-R 为 ND+D+1。",
+        "primary_chunk": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+        "supporting_chunks": [
+          "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+        "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+        "page_start": 22,
+        "page_end": 22,
+        "source_spans": [
+          {
+            "pdf_page": 22,
+            "start_char": 662,
+            "end_char": 2113,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1451,
+            "block_bboxes": [
+              [
+                107.641,
+                238.664,
+                505.247,
+                402.282
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "526905e028c6e86fea19654bfb0716b92f78b3b501a78938075b2cfc1eafb7c4",
+        "section": "B.2.1 EFFICIENCY OF TOG",
+        "text": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": true,
+      "planned_output": "完整模型回答与引用",
+      "controls": {
+        "arms": [
+          "Baseline-Legacy",
+          "P0-Optimized"
+        ],
+        "arm_configs": {
+          "Baseline-Legacy": {
+            "graph_enabled": false,
+            "rerank_contextual": false,
+            "evidence_budget": 6000,
+            "evidence_max": 8,
+            "source_policy": "named_first",
+            "score_policy": "fixed",
+            "reservation_policy": "legacy",
+            "citation_protocol": "source-choice-v1"
+          },
+          "P0-Optimized": {
+            "graph_enabled": false,
+            "rerank_contextual": true,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "round_robin",
+            "citation_protocol": "source-choice-v2"
+          }
+        },
+        "backend": "neo4j",
+        "graph_enabled": false,
+        "fulltext_top": 20,
+        "dense_top": 20,
+        "fusion_max": 40,
+        "reranker_batch_size": 4,
+        "generation_max_tokens": 2048,
+        "thinking": "disabled",
+        "generation_requests_max": 80,
+        "execution_order": "alternate arm order by case index",
+        "query_vector": "one shared Cloudflare BGE-M3 batch across both arms",
+        "gold_exclusion": "question text only; reference facts and source pools never passed to retrieval or generation"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Baseline-Legacy / P0-Optimized Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "assessment": {
+      "axis": "变体方向与调用上界",
+      "criteria": [
+        {
+          "id": "F03.C01",
+          "requirement": "变体方向为 ToG-R 指向 ToG。",
+          "unit_ids": [
+            "togr"
+          ],
+          "supporting_chunks_by_unit": {
+            "togr": [
+              "chunk_91a4a2e6943ad6a8074492d3f7229692"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "F03.C02",
+          "requirement": "随机实体剪枝替代 LLM 实体剪枝。",
+          "unit_ids": [
+            "togr"
+          ],
+          "supporting_chunks_by_unit": {
+            "togr": [
+              "chunk_91a4a2e6943ad6a8074492d3f7229692"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "F03.C03",
+          "requirement": "ToG 和 ToG-R 的公式依次为 2ND+D+1 和 ND+D+1。",
+          "unit_ids": [
+            "togr"
+          ],
+          "supporting_chunks_by_unit": {
+            "togr": [
+              "chunk_91a4a2e6943ad6a8074492d3f7229692"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "F03.C04",
+          "requirement": "相同 N、D 下公式差为 ND，不能把它当成墙钟时延差。",
+          "unit_ids": [
+            "togr"
+          ],
+          "supporting_chunks_by_unit": {
+            "togr": [
+              "chunk_91a4a2e6943ad6a8074492d3f7229692"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        }
+      ],
+      "max_score": 4,
+      "focus_predicates": [
+        "CLAIMS_BENEFIT",
+        "HAS_CALL_BOUND",
+        "USES_COMPONENT",
+        "VARIANT_OF"
+      ],
+      "reference_path_scope": "本题各来源单元的预期子图；可能是多条分支或互不相连的跨论文子图。",
+      "critical_error_rule": "触发全局 critical_errors 时本题不判全对，并保留逐项分数与错误说明。",
+      "reviewer_status": "not_reviewed",
+      "model_result_status": "not_run"
+    },
+    "expected_graph_paths": {
+      "togr": [
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Method",
+              "name": "ToG"
+            }
+          ],
+          "claim_ids": [
+            "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Component",
+              "name": "random entity pruning"
+            }
+          ],
+          "claim_ids": [
+            "9e5fb4131bd7d344d6a550f2503f5648d59e57aedff63b70be98d69330bd1915"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Benefit",
+              "name": "lower LLM-call cost and reasoning time"
+            }
+          ],
+          "claim_ids": [
+            "f3ab4e60b750841f890f3b19b01d437195e87c3e9eb18d27ed53c88a0c61da2f"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P04",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Benefit",
+              "name": "reduced risk with unfamiliar intermediate entities"
+            }
+          ],
+          "claim_ids": [
+            "b4bcd8105b5a3b01cf1a7dde8033862bbe057c0f21354fec3cd2530927c41b4e"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P05",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG"
+            },
+            {
+              "type": "Component",
+              "name": "LLM-based entity pruning"
+            }
+          ],
+          "claim_ids": [
+            "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P06",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG"
+            },
+            {
+              "type": "Formula",
+              "name": "2ND + D + 1 LLM calls"
+            }
+          ],
+          "claim_ids": [
+            "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P07",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Formula",
+              "name": "ND + D + 1 LLM calls"
+            }
+          ],
+          "claim_ids": [
+            "ad58dff47dc5390fa52aeea64422049635c0b90a49e843835cef72480ab21e46"
+          ]
+        }
+      ]
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    }
+  },
+  "metadata": {
+    "case_id": "F03",
+    "category": "fact",
+    "benchmark": "benchmark-v4-p0-v1",
+    "benchmark_sha256": "e242b473517019a587727d65ee21edfaca8a71ac7cdd51f8b1ed09435cb4ee4b",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

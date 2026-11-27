@@ -1,0 +1,339 @@
+{
+  "id": "f70e53dc0cca76e7da3afd4ced5afe3613c53770d466e573600620b189dc703e",
+  "inputs": {
+    "question": "比较 ToG/ToG-R 调用公式与 Tree-of-Traversals 搜索预算，为什么不能直接给统一运行时排名？"
+  },
+  "outputs": {
+    "expected_answer": "ToG 与 ToG-R 的公式是 LLM 调用上界；Tree-of-Traversals 的 max depth/expansions 是搜索边界。两者不是同一量，也不等于墙钟时延。",
+    "answerable": true,
+    "negative_kind": null,
+    "required_facts": [
+      "ToG-R 用随机实体剪枝替代 LLM 实体剪枝；ToG 调用数 2ND+D+1，ToG-R 为 ND+D+1。",
+      "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。"
+    ],
+    "source_references": [
+      {
+        "unit_id": "togr",
+        "answer_point": "ToG-R 用随机实体剪枝替代 LLM 实体剪枝；ToG 调用数 2ND+D+1，ToG-R 为 ND+D+1。",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "primary_chunk": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+        "pages": [
+          22,
+          22
+        ]
+      },
+      {
+        "unit_id": "totbound",
+        "answer_point": "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+        "primary_chunk": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+        "pages": [
+          4,
+          4
+        ]
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+        "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+        "page_start": 22,
+        "page_end": 22,
+        "source_spans": [
+          {
+            "pdf_page": 22,
+            "start_char": 662,
+            "end_char": 2113,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1451,
+            "block_bboxes": [
+              [
+                107.641,
+                238.664,
+                505.247,
+                402.282
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "526905e028c6e86fea19654bfb0716b92f78b3b501a78938075b2cfc1eafb7c4",
+        "section": "B.2.1 EFFICIENCY OF TOG",
+        "text": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n"
+      },
+      {
+        "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+        "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+        "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 780,
+            "end_char": 2398,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1618,
+            "block_bboxes": [
+              [
+                70.473,
+                323.184,
+                290.949,
+                496.704
+              ],
+              [
+                70.473,
+                505.386,
+                290.941,
+                773.66
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "70266d38c335a6ca984d5b5b81a31f2c5f7ade5b5871491a9ac2638168c7f6fe",
+        "section": "3. Development of a new dataset to test com-",
+        "text": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n"
+      }
+    ],
+    "relation_outline": "ToG-R 用随机实体剪枝替代 LLM 实体剪枝；ToG 调用数 2ND+D+1，ToG-R 为 ND+D+1。；Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。找到超过阈值的答案可停止；max depth 强制进入 done，与 max expansions 的失败终止不同。",
+    "relation_review": {
+      "evidence": "覆盖每个必要事实并逐条引用其来源原文。",
+      "semantics": "核对关系方向、实体角色、训练/测试角色、数据集设置和指标。",
+      "synthesis": "区分论文直接主张与跨来源分析；共享实体不自动构成因果或方法继承。",
+      "uncertainty": "来源没有说明的条件须标为未知，不可补造。"
+    },
+    "must_not_claim": "不能反转变体方向，也不能将调用上界当作跨方法实测时延。",
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "All required facts and citations; direction, entity roles, train/test role, evaluation setup and unsupported claims reviewed separately.",
+      "graph_coverage": "Each answerable relation case must expose a source-backed path for every required unit; negative cases must not contain their prohibited edge.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins."
+    },
+    "expected_graph_paths": [
+      [
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Method",
+              "name": "ToG"
+            }
+          ],
+          "claim_ids": [
+            "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Component",
+              "name": "random entity pruning"
+            }
+          ],
+          "claim_ids": [
+            "9e5fb4131bd7d344d6a550f2503f5648d59e57aedff63b70be98d69330bd1915"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Benefit",
+              "name": "lower LLM-call cost and reasoning time"
+            }
+          ],
+          "claim_ids": [
+            "f3ab4e60b750841f890f3b19b01d437195e87c3e9eb18d27ed53c88a0c61da2f"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P04",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Benefit",
+              "name": "reduced risk with unfamiliar intermediate entities"
+            }
+          ],
+          "claim_ids": [
+            "b4bcd8105b5a3b01cf1a7dde8033862bbe057c0f21354fec3cd2530927c41b4e"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P05",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG"
+            },
+            {
+              "type": "Component",
+              "name": "LLM-based entity pruning"
+            }
+          ],
+          "claim_ids": [
+            "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P06",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG"
+            },
+            {
+              "type": "Formula",
+              "name": "2ND + D + 1 LLM calls"
+            }
+          ],
+          "claim_ids": [
+            "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3"
+          ]
+        },
+        {
+          "unit_id": "togr",
+          "path_id": "togr.P07",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-R"
+            },
+            {
+              "type": "Formula",
+              "name": "ND + D + 1 LLM calls"
+            }
+          ],
+          "claim_ids": [
+            "ad58dff47dc5390fa52aeea64422049635c0b90a49e843835cef72480ab21e46"
+          ]
+        }
+      ],
+      [
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "StopCondition",
+              "name": "node value exceeds answer threshold"
+            },
+            {
+              "type": "Outcome",
+              "name": "answer found"
+            }
+          ],
+          "claim_ids": [
+            "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+            "5776cc65d611e52235603c31a6e344d51fb734d134a30426bf69ab19ce4664e5"
+          ]
+        },
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "Parameter",
+              "name": "max depth"
+            },
+            {
+              "type": "Outcome",
+              "name": "forced transition to done"
+            }
+          ],
+          "claim_ids": [
+            "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+            "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4"
+          ]
+        },
+        {
+          "unit_id": "totbound",
+          "path_id": "totbound.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "Tree-of-Traversals"
+            },
+            {
+              "type": "Parameter",
+              "name": "max expansions"
+            },
+            {
+              "type": "Outcome",
+              "name": "Cannot find answer"
+            }
+          ],
+          "claim_ids": [
+            "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+            "ee17bfade2a238131cfcdf686479ace5265a9e6f185f724503181b7eddf5dcaf"
+          ]
+        }
+      ]
+    ],
+    "result_fields": [
+      "full answer",
+      "ranked candidates and scores",
+      "evidence and citation locations",
+      "graph paths",
+      "per-fact coverage and gaps",
+      "stage timings",
+      "tokens",
+      "paired differences",
+      "trace URLs"
+    ]
+  },
+  "metadata": {
+    "case_id": "R23",
+    "category": "cross",
+    "benchmark": "benchmark-v3",
+    "benchmark_sha256": "3ffb13a824016b58fd2cb5585bab2f3dbbf9767bd38b714ce148097122f6ac87",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "curated source review; not independent human gold"
+  },
+  "split": [
+    "cross"
+  ]
+}

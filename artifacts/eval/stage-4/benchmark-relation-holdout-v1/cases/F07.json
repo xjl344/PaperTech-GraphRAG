@@ -1,0 +1,236 @@
+{
+  "id": "bca353fa-2cb1-5eb3-8d32-03f7b18d1763",
+  "inputs": {
+    "question": "KG-GPT 增大 top-k 关系数时，FACTKG 与 MetaQA 的效果是否相同？请区分检索三元组数量和任务准确率。"
+  },
+  "outputs": {
+    "expected_answer": "FACTKG 随k增加检索三元组增多但准确率变化不大；MetaQA 中更大的k检索到更多重要三元组，性能改善。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "F07.S01",
+        "answer_point": "FACTKG 随k增加检索三元组增多但准确率变化不大；MetaQA 中更大的k检索到更多重要三元组，性能改善。",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "primary_chunk": "chunk_fbbb8f38df6e66a40727407ca912ae1a",
+        "pages": [
+          5,
+          5
+        ],
+        "known_support_chunks": [
+          "chunk_fbbb8f38df6e66a40727407ca912ae1a"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "F07",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "F07.S01",
+        "required_fact": "FACTKG 随k增加检索三元组增多但准确率变化不大；MetaQA 中更大的k检索到更多重要三元组，性能改善。",
+        "primary_chunk": "chunk_fbbb8f38df6e66a40727407ca912ae1a",
+        "supporting_chunks": [
+          "chunk_fbbb8f38df6e66a40727407ca912ae1a"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_fbbb8f38df6e66a40727407ca912ae1a",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+        "page_start": 5,
+        "page_end": 5,
+        "source_spans": [
+          {
+            "pdf_page": 5,
+            "start_char": 0,
+            "end_char": 1290,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1290,
+            "block_bboxes": [
+              [
+                70.866,
+                73.498,
+                290.946,
+                219.953
+              ],
+              [
+                70.866,
+                231.257,
+                221.095,
+                242.166
+              ],
+              [
+                70.528,
+                248.08,
+                290.949,
+                367.465
+              ],
+              [
+                70.528,
+                370.426,
+                289.139,
+                408.543
+              ],
+              [
+                70.866,
+                410.882,
+                289.132,
+                449.164
+              ],
+              [
+                70.866,
+                462.518,
+                145.933,
+                474.473
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "214e6827099d011c12ae3729e3f4c3f75eec90a1571d3600a54f3cf6addde8b9",
+        "section": "Experiments",
+        "text": "ceeding 90%, in both the 1-hop and 2-hop scenar-\nios, even with a minimal set of four examples. In\ncontrast, in both the FACTKG and MetaQA 3-hop\nscenarios, the performance of the 4-shot learning\nscenario was similar to that of the baselines which\ndid not utilize graph evidence. This similarity sug-\ngests that LLMs may struggle to interpret com-\nplex data features when equipped with only four\nshots. Thus, the findings highlight the importance\nof formulating in-context examples according to\nthe complexity of the task.\n4.4.2\nTop-K Relation Retrieval\nTable 11 shows the performance according to the\nvalue of k in FACTKG. As a result, performance\ndid not significantly vary depending on the value of\nk. Table 12 illustrates the average number of triples\nretrieved for both supported and refuted claims, de-\npending on k. Despite the increase in the number\nof triples as the value of k grows, it does not im-\npact the accuracy. This suggests that the additional\ntriples are not significantly influential.\nIn MetaQA, the performance and the average\nnumber of retrieved triples are also depicted in\nTable 13 and Table 14, respectively. Unlike the\nFACTKG experiment, as the value of k rises in\nMetaQA, it appears that more significant triples are\nretrieved, leading to improved performance.\n5\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_251b66908d758ab4453ca76d45b64fca"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "24道cross题最终必要来源覆盖率的逐题宏平均；Graph-only minus Hybrid配对差。",
+      "unit": "每项参考来源要求一个单元；同单元已核查等价块OR，必要来源单元AND；不是逐字事实正确率。",
+      "secondary": [
+        "candidate pool coverage@40",
+        "Recall@5",
+        "Recall@8",
+        "MRR@40",
+        "all source units covered",
+        "required paper coverage"
+      ],
+      "denominator": "32道正例；24道cross单列；8道negative只展示纠错来源诊断，不计主召回与拒答准确率。",
+      "retrieval_only": true,
+      "semantic_review": "not applicable: no answer generation",
+      "bootstrap": {
+        "seed": 20261122,
+        "paired_resamples": 10000,
+        "interval": "percentile 95%, case-level paired macro coverage",
+        "scope": "fixed 24-question diagnostic set; not a population guarantee; subgroups descriptive"
+      },
+      "failure_attribution": "post-hoc frozen support-pool IDs; no support IDs enter candidate production",
+      "source_pool_limit": "完整包含原文的同论文等价块已审计；其他语义等价段落可能未列入。另报论文覆盖但不当作事实覆盖。",
+      "negative_policy": "source diagnostics only; exclude from aggregate recall; no refusal correctness",
+      "reporting": "aggregate, categories, graph-source-link strata, named/discovery, paired deltas and CI, charts, latency, usage, all 40 details and traces"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索对照；无模型答案、无答案准确率",
+      "controls": {
+        "arms": [
+          "Graph-only",
+          "Hybrid"
+        ],
+        "candidate_max": 40,
+        "hybrid_fulltext_top": 20,
+        "hybrid_dense_top": 20,
+        "graph_candidate_max": 40,
+        "graph_hops": 2,
+        "graph_paths_max": 40,
+        "graph_seed_entities_max": 40,
+        "graph_per_node": 8,
+        "graph_seed_chunks": 0,
+        "graph_text_fallback": false,
+        "graph_source_rank_hint": false,
+        "evidence_max": 8,
+        "evidence_budget_bytes": 6000,
+        "path_prompt_bytes": 0,
+        "reranker": "same GPU FP16 model; threshold 0.05; max_pair_tokens 1024",
+        "candidate_note": "same total cap, not forced equal returned counts; Hybrid has two channels of 20",
+        "order": "alternate two arms by case index",
+        "generation_requests_max": 0
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Graph-only / Hybrid 两组 Experiment",
+      "fields": [
+        "全部候选原文及分数",
+        "最终证据与位置",
+        "实体/路径/截断",
+        "逐事实失败归因",
+        "两组差异",
+        "时延与上下文字节",
+        "零生成与Token未报告说明",
+        "原始Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "F07.A01",
+        "requirement": "FACTKG 随k增加检索三元组增多但准确率变化不大",
+        "unit_ids": [
+          "F07.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F07.S01": [
+            "chunk_fbbb8f38df6e66a40727407ca912ae1a"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "F07.A02",
+        "requirement": "MetaQA 中更大的k检索到更多重要三元组，性能改善",
+        "unit_ids": [
+          "F07.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F07.S01": [
+            "chunk_fbbb8f38df6e66a40727407ca912ae1a"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "novelty": "新增分任务消融结果",
+    "query_form": "named",
+    "graph_source_link_stratum": "no_source_blocks_linked"
+  },
+  "metadata": {
+    "case_id": "F07",
+    "category": "fact",
+    "benchmark": "benchmark-relation-holdout-v1",
+    "benchmark_sha256": "6f0b9710ce0a265304b63fee8e8bd91e1a18f2cf0337e13753b211cdcbe6ceba",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; not independent human annotation",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

@@ -1,0 +1,1110 @@
+{
+  "request_id": "994adba9-bab7-4bc3-b031-c422f7bc393e",
+  "status": "partial",
+  "answer": "证据不足以完整回答该对比。ToG 的方法段说明 BM25/SentenceBERT 替换 LLM 剪枝会显著降性能（CWQ 平均降 8.4%、WebQSP 平均降 15.1%），并称 LLM 作为剪枝工具效果最佳 [chunk_bdd2301d529922318ec27681c94f593a]；但所给证据中未找到 ToG 为何选 N=3、Dmax=3 的直接说明。ToG-2 的剪枝选择方面，原文称 BGE-Reranker 在更长上下文输入下结果更好，而 LLM 效果下降；BGE-Reranker 整体略超 LLM，作者归因于更多上下文可容忍无关文档且 DRM 能处理大量候选，而 LLM 受输入长度显著约束，因此选择基于 DRM 的实体剪枝，理由含成本效益与泛化性 [chunk_d4f6a4a037b6e147680603d67ba56fc0]；运行时分析也称 ToG-2 用 DRM 可处理更多候选并更快计算相关性分数，使实体剪枝阶段平均降至 ToG 的 68.7% [chunk_734b4d6c3516e11a7a54795847f3f56f]。但 ToG-2 的宽度/深度设置数值在所给原文中仅出现图表标题，未给出选取理由，流程证据不足 [chunk_d4f6a4a037b6e147680603d67ba56fc0]；且两文实验条件是否可比无法由现有片段确认。",
+  "citations": [
+    {
+      "chunk_id": "chunk_bdd2301d529922318ec27681c94f593a",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 1919,
+          "end_char": 3559,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1640,
+          "block_bboxes": [
+            [
+              345.294,
+              561.149,
+              505.65,
+              582.036
+            ],
+            [
+              107.532,
+              451.28,
+              503.997,
+              625.794
+            ],
+            [
+              107.532,
+              632.692,
+              503.997,
+              653.689
+            ],
+            [
+              108.249,
+              668.856,
+              390.039,
+              678.819
+            ],
+            [
+              107.691,
+              689.399,
+              504.0,
+              732.252
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 1641,
+          "chunk_end_char": 1686,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 5: Performances of ToG using dif-\nferent pruning tools.\nComparing the affects from different pruning tools.\nOther than the LLM, lightweight models that can mea-\nsure text similarity like BM25 and SentenceBERT, can\nbe employed as pruning tools in the exploration phase.\nWe can select top-N entities and relations based on their\nliteral similarities with the question. We investigate the\nimpacts of different pruning tools on the performance of\nthe ToG, as demonstrated in Table 5. The replacement of\nthe LLM with either BM25 or SentenceBERT results in\nthe significant performance degradation of our approach.\nConcretely, the results on CWQ drop on average by 8.4%,\nand the results on WebQSP drop on average by 15.1%.\nThe results show that the LLMs perform best as a pruning\ntool in terms of effectiveness. On the other hand, after utilizing the BM25 or SentenceBERT, we",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 12.011777877807617
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8343510627746582
+        }
+      ],
+      "rerank_score": 0.9334307909011841,
+      "context_bytes": 2068,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_d4f6a4a037b6e147680603d67ba56fc0",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 9,
+      "page_end": 9,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 289,
+          "end_char": 1176,
+          "chunk_start_char": 0,
+          "chunk_end_char": 887,
+          "block_bboxes": [
+            [
+              108.0,
+              269.013,
+              504.003,
+              366.877
+            ],
+            [
+              108.249,
+              381.665,
+              259.02,
+              391.628
+            ],
+            [
+              327.215,
+              480.573,
+              502.587,
+              490.536
+            ]
+          ]
+        }
+      ],
+      "quote": "Then we conduct another experiment in Figure 3b to find the best setting of context numbers K.\nOur findings indicate that BGE-Reranker tends to yield better results with longer context inputs,\nwhereas LLM shows diminished effectiveness. Nevertheless, the overall performance of the pruning\ntool using BGE-Reranker slightly exceeds that of the LLM. We attribute this outcome to the fact that\nreasonably more contexts allow for greater tolerance toward irrelevant documents, and DRMs can\nhandle a large number of candidates. While LLM possesses strong discriminative capabilities and\noffers greater flexibility, its performance is significantly constrained by the input length. Thus, we\nopt for entity pruning based on the DRM approach, considering its advantages in cost-effectiveness\nand enhanced generalization.\n4.5.3\nWIDTH & DEPTH SETTINGS\nFigure 4: Width and depth settings analysis.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 11.343413352966309
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8146629333496094
+        }
+      ],
+      "rerank_score": 0.9581479430198669,
+      "context_bytes": 1239,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 16,
+      "page_end": 17,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 16,
+          "start_char": 2327,
+          "end_char": 3584,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1257,
+          "block_bboxes": [
+            [
+              108.249,
+              547.362,
+              261.328,
+              557.325
+            ],
+            [
+              108.0,
+              567.795,
+              504.003,
+              610.725
+            ],
+            [
+              108.0,
+              617.468,
+              504.003,
+              693.414
+            ],
+            [
+              108.0,
+              700.388,
+              504.003,
+              732.269
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 17,
+          "start_char": 0,
+          "end_char": 53,
+          "chunk_start_char": 1258,
+          "chunk_end_char": 1311,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              114.838,
+              86.708,
+              497.165,
+              94.753
+            ]
+          ]
+        }
+      ],
+      "quote": "based entity pruning, while ToG-2 leverages DRMs, which can handle more candidates and compute\nrelevance scores faster.\nTo better illustrate the efficiency of our method compared to the baselines, we analyze the average\ntotal runtime and API call counts for each method on HotpotQA. The results are summarized in\nTable 9 below. ToG: For each question, ToG requires up to 2WD+D+1 API calls, where W is the\n16\n\nPublished as a conference paper at ICLR 2025\nDataset",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 11.619059562683105
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7957820892333984
+        }
+      ],
+      "rerank_score": 0.9535353183746338,
+      "context_bytes": 1710,
+      "eid": "E3"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_bdd2301d529922318ec27681c94f593a",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 1919,
+          "end_char": 3559,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1640,
+          "block_bboxes": [
+            [
+              345.294,
+              561.149,
+              505.65,
+              582.036
+            ],
+            [
+              107.532,
+              451.28,
+              503.997,
+              625.794
+            ],
+            [
+              107.532,
+              632.692,
+              503.997,
+              653.689
+            ],
+            [
+              108.249,
+              668.856,
+              390.039,
+              678.819
+            ],
+            [
+              107.691,
+              689.399,
+              504.0,
+              732.252
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 1641,
+          "chunk_end_char": 1686,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 5: Performances of ToG using dif-\nferent pruning tools.\nComparing the affects from different pruning tools.\nOther than the LLM, lightweight models that can mea-\nsure text similarity like BM25 and SentenceBERT, can\nbe employed as pruning tools in the exploration phase.\nWe can select top-N entities and relations based on their\nliteral similarities with the question. We investigate the\nimpacts of different pruning tools on the performance of\nthe ToG, as demonstrated in Table 5. The replacement of\nthe LLM with either BM25 or SentenceBERT results in\nthe significant performance degradation of our approach.\nConcretely, the results on CWQ drop on average by 8.4%,\nand the results on WebQSP drop on average by 15.1%.\nThe results show that the LLMs perform best as a pruning\ntool in terms of effectiveness. On the other hand, after utilizing the BM25 or SentenceBERT, we\nonly need D + 1 calls to the LLM instead of 2ND + D + 1 as we discuss in Section 2.1.3, which\nenhances the efficiency of ToG.\nWe conduct additional ablation studies on the effect of the number of seed exemplars and the\ndifference between ToG and naive beam search on the KG, which can be seen in Appendix B.1.\n3.3\nKNOWLEDGE TRACEABILITY AND CORRECTABILITY IN TOG\nThe quality of KG is very important for correct reasoning by ToG. An interesting feature of ToG is\nknowledge traceability and knowledge correctability during LLM reasoning, and it provides a way to\nimprove KG’s quality using ToG itself and reduce the cost of KG construction and correction. As\nillustrated in Figure 4, the explicit reasoning paths of the ToGs can be displayed to users. If potential\n8\n\nPublished as a conference paper at ICLR 2024\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 12.011777877807617
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8343510627746582
+        }
+      ],
+      "rerank_score": 0.9334307909011841,
+      "context_bytes": 2068
+    },
+    {
+      "chunk_id": "chunk_d4f6a4a037b6e147680603d67ba56fc0",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 9,
+      "page_end": 9,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 289,
+          "end_char": 1176,
+          "chunk_start_char": 0,
+          "chunk_end_char": 887,
+          "block_bboxes": [
+            [
+              108.0,
+              269.013,
+              504.003,
+              366.877
+            ],
+            [
+              108.249,
+              381.665,
+              259.02,
+              391.628
+            ],
+            [
+              327.215,
+              480.573,
+              502.587,
+              490.536
+            ]
+          ]
+        }
+      ],
+      "quote": "Then we conduct another experiment in Figure 3b to find the best setting of context numbers K.\nOur findings indicate that BGE-Reranker tends to yield better results with longer context inputs,\nwhereas LLM shows diminished effectiveness. Nevertheless, the overall performance of the pruning\ntool using BGE-Reranker slightly exceeds that of the LLM. We attribute this outcome to the fact that\nreasonably more contexts allow for greater tolerance toward irrelevant documents, and DRMs can\nhandle a large number of candidates. While LLM possesses strong discriminative capabilities and\noffers greater flexibility, its performance is significantly constrained by the input length. Thus, we\nopt for entity pruning based on the DRM approach, considering its advantages in cost-effectiveness\nand enhanced generalization.\n4.5.3\nWIDTH & DEPTH SETTINGS\nFigure 4: Width and depth settings analysis.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 11.343413352966309
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8146629333496094
+        }
+      ],
+      "rerank_score": 0.9581479430198669,
+      "context_bytes": 1239
+    },
+    {
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 16,
+      "page_end": 17,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 16,
+          "start_char": 2327,
+          "end_char": 3584,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1257,
+          "block_bboxes": [
+            [
+              108.249,
+              547.362,
+              261.328,
+              557.325
+            ],
+            [
+              108.0,
+              567.795,
+              504.003,
+              610.725
+            ],
+            [
+              108.0,
+              617.468,
+              504.003,
+              693.414
+            ],
+            [
+              108.0,
+              700.388,
+              504.003,
+              732.269
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 17,
+          "start_char": 0,
+          "end_char": 53,
+          "chunk_start_char": 1258,
+          "chunk_end_char": 1311,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              114.838,
+              86.708,
+              497.165,
+              94.753
+            ]
+          ]
+        }
+      ],
+      "quote": "B.4\nRUNTIME ANALYSIS RESULTS\nDoes ToG-2 improve graph exploring efficiency compared to ToG? Therefore, we first statis-\ntically compared the runtime of ToG and ToG-2 across different stages under the same settings.\nSpecifically, we analyze the average number of iterations in answering each discrete question, along\nwith the average runtime for each iteration.\nThe results in Table 8 show a substantial improvement in ToG-2’s relation pruning time, reducing it\nto just 45% of ToG’s. This gain comes from the relation pruning combination strategy, which cuts\ndown the number of LLM calls from W times to 1 time each iteration. Even though ToG-2 integrates\nadditional knowledge through entity context, ToG-2 still manages to reduce the entity pruning phase\nto 68.7% of ToG’s runtime on average across both datasets. This is because ToG relies on LLM-\nbased entity pruning, while ToG-2 leverages DRMs, which can handle more candidates and compute\nrelevance scores faster.\nTo better illustrate the efficiency of our method compared to the baselines, we analyze the average\ntotal runtime and API call counts for each method on HotpotQA. The results are summarized in\nTable 9 below. ToG: For each question, ToG requires up to 2WD+D+1 API calls, where W is the\n16\n\nPublished as a conference paper at ICLR 2025\nDataset\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 11.619059562683105
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7957820892333984
+        }
+      ],
+      "rerank_score": 0.9535353183746338,
+      "context_bytes": 1710
+    },
+    {
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 9,
+      "page_end": 9,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 2604,
+          "end_char": 3197,
+          "chunk_start_char": 0,
+          "chunk_end_char": 593,
+          "block_bboxes": [
+            [
+              108.0,
+              579.84,
+              315.842,
+              732.269
+            ]
+          ]
+        }
+      ],
+      "quote": "In the above-mentioned experiments, we use Equa-\ntion 3 in Relation Prune for efficiency. Under this\nsetting, the reasoning process of ToG-2 needs at\nmost 2D+(D−1)+1 calls to the LLM. When using\nEquation 2 in relation pruning, ToG-2 needs at most\nWD + D + 1 LLM calls and can achieve slightly\nhigher performances on several datasets as shown in\nAppendix B.3 Table 7. In Table 7, we also report\nthe results of an additional ablation study. By con-\ntrast, ToG needs at most 2WD + D + 1 LLM calls.\nWe compare the specific runtime between ToG and\nToG-2 on different datasets in Appendix B.4 Table\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 13.433621406555176
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8068838119506836
+        }
+      ],
+      "rerank_score": 0.8633915781974792,
+      "context_bytes": 947
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 32,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "text_only",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 6.278377900016494,
+      "inference_seconds": 0.9199354000156745,
+      "elapsed_seconds": 0.9229331000242382,
+      "peak_cuda_memory_bytes": 1194747904,
+      "request_count": 32,
+      "batch_size": 4
+    },
+    "evidence_count": 4,
+    "context_bytes": 5964,
+    "evidence_bytes": 5964,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5685,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "ToG",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "requested_names": [
+          "ToG"
+        ]
+      },
+      {
+        "name": "ToG-2",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "requested_names": [
+          "ToG-2"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "ToG",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "requested_names": [
+          "ToG"
+        ],
+        "eligible_candidate_count": 13,
+        "selected_chunk_ids": [
+          "chunk_bdd2301d529922318ec27681c94f593a"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "ToG-2",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "requested_names": [
+          "ToG-2"
+        ],
+        "eligible_candidate_count": 19,
+        "selected_chunk_ids": [
+          "chunk_d4f6a4a037b6e147680603d67ba56fc0",
+          "chunk_734b4d6c3516e11a7a54795847f3f56f",
+          "chunk_5850f1e050af430b0a9f17150c790c83"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 1874,
+    "total_tokens": 2345,
+    "completion_tokens": 471,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 1874
+    },
+    "completion_tokens_details": {
+      "text_tokens": 471
+    }
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "errors": [],
+  "raw": "{\"answer\":\"证据不足以完整回答该对比。ToG 的方法段说明 BM25/SentenceBERT 替换 LLM 剪枝会显著降性能（CWQ 平均降 8.4%、WebQSP 平均降 15.1%），并称 LLM 作为剪枝工具效果最佳 [chunk_bdd2301d529922318ec27681c94f593a]；但所给证据中未找到 ToG 为何选 N=3、Dmax=3 的直接说明。ToG-2 的剪枝选择方面，原文称 BGE-Reranker 在更长上下文输入下结果更好，而 LLM 效果下降；BGE-Reranker 整体略超 LLM，作者归因于更多上下文可容忍无关文档且 DRM 能处理大量候选，而 LLM 受输入长度显著约束，因此选择基于 DRM 的实体剪枝，理由含成本效益与泛化性 [chunk_d4f6a4a037b6e147680603d67ba56fc0]；运行时分析也称 ToG-2 用 DRM 可处理更多候选并更快计算相关性分数，使实体剪枝阶段平均降至 ToG 的 68.7% [chunk_734b4d6c3516e11a7a54795847f3f56f]。但 ToG-2 的宽度/深度设置数值在所给原文中仅出现图表标题，未给出选取理由，流程证据不足 [chunk_d4f6a4a037b6e147680603d67ba56fc0]；且两文实验条件是否可比无法由现有片段确认。\",\"citations\":[{\"chunk_id\":\"chunk_bdd2301d529922318ec27681c94f593a\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_d4f6a4a037b6e147680603d67ba56fc0\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_734b4d6c3516e11a7a54795847f3f56f\",\"quote_id\":\"q2\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_d4f6a4a037b6e147680603d67ba56fc0",
+      "score": 0.029571646010002173,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 11.343413352966309
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8146629333496094
+        }
+      ],
+      "rerank_score": 0.9581479430198669
+    },
+    {
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.02819138376017471,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 11.619059562683105
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7957820892333984
+        }
+      ],
+      "rerank_score": 0.9535353183746338
+    },
+    {
+      "chunk_id": "chunk_bdd2301d529922318ec27681c94f593a",
+      "score": 0.03131881575727918,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 12.011777877807617
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8343510627746582
+        }
+      ],
+      "rerank_score": 0.9334307909011841
+    },
+    {
+      "chunk_id": "chunk_5d7ff60c6e6d8ed3d35fddd69c75e903",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 11.45078182220459
+        }
+      ],
+      "rerank_score": 0.9302051067352295
+    },
+    {
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 16.380508422851562
+        }
+      ],
+      "rerank_score": 0.9097468256950378
+    },
+    {
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "score": 0.028612012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 12.691595077514648
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7919225692749023
+        }
+      ],
+      "rerank_score": 0.9056565761566162
+    },
+    {
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.031054405392392875,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 13.433621406555176
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8068838119506836
+        }
+      ],
+      "rerank_score": 0.8633915781974792
+    },
+    {
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.029877369007803793,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 12.562911987304688
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7982525825500488
+        }
+      ],
+      "rerank_score": 0.8589553833007812
+    },
+    {
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 10.902138710021973
+        }
+      ],
+      "rerank_score": 0.846831202507019
+    },
+    {
+      "chunk_id": "chunk_9c3795187f69ce14c244c9ad74c8e821",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 11.981224060058594
+        }
+      ],
+      "rerank_score": 0.8374870419502258
+    },
+    {
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8071365356445312
+        }
+      ],
+      "rerank_score": 0.8065480589866638
+    },
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8073396682739258
+        }
+      ],
+      "rerank_score": 0.7843191027641296
+    },
+    {
+      "chunk_id": "chunk_eff9e47d69abba56a62073720f2bd77b",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8180532455444336
+        }
+      ],
+      "rerank_score": 0.7730450630187988
+    },
+    {
+      "chunk_id": "chunk_270d9350248b566ed224ba5147a295a2",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7982048988342285
+        }
+      ],
+      "rerank_score": 0.7489036321640015
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 12.272491455078125
+        }
+      ],
+      "rerank_score": 0.7422349452972412
+    },
+    {
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 0.027417840375586856,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 11.13936996459961
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7968611717224121
+        }
+      ],
+      "rerank_score": 0.7226248383522034
+    },
+    {
+      "chunk_id": "chunk_031b7aaba8f20d011a94bb6a15b0f3b1",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 12.71574878692627
+        }
+      ],
+      "rerank_score": 0.7034476399421692
+    },
+    {
+      "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7927188873291016
+        }
+      ],
+      "rerank_score": 0.7023258805274963
+    },
+    {
+      "chunk_id": "chunk_36588119f2aacd0893d97ed15e4ed276",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 11.0938720703125
+        }
+      ],
+      "rerank_score": 0.6932653188705444
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 10.89492416381836
+        }
+      ],
+      "rerank_score": 0.6841585040092468
+    },
+    {
+      "chunk_id": "chunk_beb4580eff94eef584b0b4d58d070c2c",
+      "score": 0.029910714285714284,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 11.523900985717773
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8092989921569824
+        }
+      ],
+      "rerank_score": 0.6839474439620972
+    },
+    {
+      "chunk_id": "chunk_8b9e861ea949a3eb2fc9ed5a97b24644",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7869992256164551
+        }
+      ],
+      "rerank_score": 0.6514657735824585
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7990617752075195
+        }
+      ],
+      "rerank_score": 0.6508002281188965
+    },
+    {
+      "chunk_id": "chunk_2e13f6f43858420cb85904c33d3b39df",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 11.485569953918457
+        }
+      ],
+      "rerank_score": 0.6474639773368835
+    },
+    {
+      "chunk_id": "chunk_ed6850570b5301d9c28d549903bb9f7b",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7892708778381348
+        }
+      ],
+      "rerank_score": 0.5816001296043396
+    },
+    {
+      "chunk_id": "chunk_5bae8019568ab15dd39f15ae0e4e74a8",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7952728271484375
+        }
+      ],
+      "rerank_score": 0.5751704573631287
+    },
+    {
+      "chunk_id": "chunk_9eadf098f08b0e28d9965aeb46062d4e",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 11.117552757263184
+        }
+      ],
+      "rerank_score": 0.48134714365005493
+    },
+    {
+      "chunk_id": "chunk_2a773898d4837d44bc3ec29b329f1825",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7967386245727539
+        }
+      ],
+      "rerank_score": 0.4617144763469696
+    },
+    {
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 11.306425094604492
+        }
+      ],
+      "rerank_score": 0.2879680097103119
+    },
+    {
+      "chunk_id": "chunk_f99077c01e2b49914150ff933b0cf783",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7944798469543457
+        }
+      ],
+      "rerank_score": 0.1630452573299408
+    },
+    {
+      "chunk_id": "chunk_7ac089f731dde3a5b09b48a00fc48587",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 10.529674530029297
+        }
+      ],
+      "rerank_score": 0.08093670755624771
+    },
+    {
+      "chunk_id": "chunk_22761de9415eaae3dc9344ec763b2014",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7900714874267578
+        }
+      ],
+      "rerank_score": 0.05997643992304802
+    }
+  ],
+  "case_id": "H-R01",
+  "question": "对比 ToG 与 ToG-2 的剪枝与深度宽度设置：ToG 在默认宽度与深度上为何选 N=3、Dmax=3 且 LLM 剪枝优于 BM25/SentenceBERT？而 ToG-2 在基于上下文的实体剪枝实验中为何转而选用 BGE-Reranker（DRM）而不是 LLM 剪枝？",
+  "category": "cross",
+  "arm": "Legacy-Hybrid",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0007261999417096376
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.03285880002658814
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 9.600073099136353e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9239016999490559
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0027637999737635255
+    }
+  ],
+  "retrieval_compute_seconds": 0.9602600999642164,
+  "request_wall_seconds": 9.383959099999629,
+  "embedding_source": "shared Q00 cloud vectors across arms; live planned subquery vectors for Production-Final",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.3943876000121236,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 5.605913200066425,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.499959500040859,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 4.5785190999740735,
+      "usage": "{\"prompt_tokens\": 1874, \"total_tokens\": 2345, \"completion_tokens\": 471}"
+    }
+  ],
+  "criterion_source_coverage": [],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 1.0,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/50e0e8b7-004b-4c07-8f75-db4b508196da?poll=true"
+}

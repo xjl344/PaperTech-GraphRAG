@@ -1,0 +1,194 @@
+{
+  "id": "cd2fb267-a927-5561-b24a-73e9e8edbb29",
+  "inputs": {
+    "question": "KGP 为什么用真实邻居段落去匹配模型预测的下一条证据？结合 CuriousLLM 对原 KGP 错误关键词的观察，说明模型生成的“缺失证据”为什么仍需回取原文。"
+  },
+  "outputs": {
+    "expected_answer": "KGP 示例中模型可预测错误出生日期，再从真实文档邻居匹配段落以纠正；预测证据不是已核实原文。\nCuriousLLM 作者观察原KGP虽能猜到缺失证据，仍可能使用无关或错误关键词而妨碍检索。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R17.S01",
+        "answer_point": "KGP 示例中模型可预测错误出生日期，再从真实文档邻居匹配段落以纠正；预测证据不是已核实原文。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "pages": [
+          5,
+          5
+        ],
+        "known_support_chunks": [
+          "chunk_adcc17b94d9058357729c73998e78ba9"
+        ]
+      },
+      {
+        "unit_id": "R17.S02",
+        "answer_point": "CuriousLLM 作者观察原KGP虽能猜到缺失证据，仍可能使用无关或错误关键词而妨碍检索。",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "primary_chunk": "chunk_f58319afb1c636475f807715f48a7a93",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_f58319afb1c636475f807715f48a7a93"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R17",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R17.S01",
+        "required_fact": "KGP 示例中模型可预测错误出生日期，再从真实文档邻居匹配段落以纠正；预测证据不是已核实原文。",
+        "primary_chunk": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "supporting_chunks": [
+          "chunk_adcc17b94d9058357729c73998e78ba9"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R17.S02",
+        "required_fact": "CuriousLLM 作者观察原KGP虽能猜到缺失证据，仍可能使用无关或错误关键词而妨碍检索。",
+        "primary_chunk": "chunk_f58319afb1c636475f807715f48a7a93",
+        "supporting_chunks": [
+          "chunk_f58319afb1c636475f807715f48a7a93"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 5,
+        "page_end": 5,
+        "source_spans": [
+          {
+            "pdf_page": 5,
+            "start_char": 1622,
+            "end_char": 3271,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1649,
+            "block_bboxes": [
+              [
+                54.0,
+                387.595,
+                292.505,
+                638.654
+              ],
+              [
+                54.0,
+                639.649,
+                292.505,
+                704.406
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "e46970d6da9bd03b8cfb2aa52e235fd83ac47f4e2d72da93feb53ed6044efd26",
+        "section": "Introduction",
+        "text": "Figure 4 presents the content-based question asking ‘In\nwhat year was the creator of the current arrangement of\nSimpson’s Theme born?’. We use TF-IDF search to initial-\nize the seeding passage Node 1, which reads: ‘Alf Heiberg\nClausen (born March 28, 1941) is an American film com-\nposer’. Subsequently, we prefix the currently retrieved-\ncontext (Node 1) with the question and prompt the LLM to\ngenerate the next evidence required to approach the question\none step closer. Because we augment the reasoning capabil-\nity of the LLM by instruction fine-tuning, it is expected to\nrecognize the logical association between the question and\nthe currently retrieved context. Consequently, it can predict\nthe subsequent passage that maintains logical coherence, al-\nbeit may contain factual mistakes, i.e., ‘Alf Clausen (born\nApril 16, 1941) is an American composer of film and tele-\nvision scores.’ To rectify this potential factual mistake, we\nselect nodes from the candidate neighbors that match the\nmost with the LLM-generated passage, in this case, Node\n4 ‘Alf Heiberg Clausen (born March 28, 1941) is an Ameri-\ncan film composer’. Since this passage sources directly from\ndocuments, it inherently ensures the validity of the informa-\ntion. Then we prompt LLMs along with the retrieved context\nNode 1 and 4 for the answer.\nAdditionally, for questions asking about document struc-\ntures, we extract the document structure names and locate\ntheir corresponding structural nodes in the KG. For the table\nnode, we retrieve its markdown formatted content while for\nthe page node, we traverse its one-hop neighbor and obtain\npassages belonging to that page.\n"
+      },
+      {
+        "chunk_id": "chunk_f58319afb1c636475f807715f48a7a93",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 3374,
+            "end_char": 3780,
+            "chunk_start_char": 0,
+            "chunk_end_char": 406,
+            "block_bboxes": [
+              [
+                305.324,
+                574.956,
+                526.313,
+                775.443
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "657f45478c7e386b1ac5be986b2f5ba2b16be6c4889e858a93c15cc370ea68f9",
+        "section": "Introduction",
+        "text": "However, during our experiments, we notice that\nthe original KGP technique involves fine-tuning a\nT5 (Raffel et al., 2020) agent with a large corpus.\nDespite this, the agent’s performance remains lim-\nited due to hallucination: While correctly predicts\nmissing evidence, it often uses irrelevant or erro-\nneous keywords, which obscure the search for the\nactual piece of missing evidence, as shown in Table\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "paper_89aee91e4037c087e3c100bfc84ed45f"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "R11 route restored and four archived subqueries retained",
+      "others": "23 Local-LLM routes and subqueries byte-equivalent after replay",
+      "semantic": "not assessed"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "题面子查询拆分；不运行检索或答案生成",
+      "controls": {
+        "parent_router_version": "benchmark-query-router-v1",
+        "parent_router_run": "6181b95b9e3545f58ab4ceaa8c1789d9",
+        "model_replay": "archived parsed_output only; no Qwen call",
+        "validation_fix": "exact quote, whitespace normalized, then punctuation normalized, original offset mapping",
+        "prompt_unchanged": true,
+        "retrieval": "only changed plan R11 is re-retrieved in follow-up; other plans compared for identity",
+        "generation": false
+      },
+      "models": {
+        "local_router": "qwen2.5:14b",
+        "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6"
+      }
+    },
+    "result_display": {
+      "location": "Rule=保持原题 / Local-LLM=通用分流",
+      "fields": [
+        "分流决策与理由",
+        "规则候选",
+        "补充子查询",
+        "未解析内容",
+        "机械校验",
+        "逐题审阅",
+        "Token时延Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "decomposition_rubric": {
+      "primary": "R11 route restored and four archived subqueries retained",
+      "others": "23 Local-LLM routes and subqueries byte-equivalent after replay",
+      "semantic": "not assessed"
+    }
+  },
+  "metadata": {
+    "case_id": "R17",
+    "category": "cross",
+    "benchmark": "benchmark-query-router-fix-v1",
+    "benchmark_sha256": "701715827b41bbadb8816fc50468eb4301c0dc5158fc4e668324ee195c6eba34",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

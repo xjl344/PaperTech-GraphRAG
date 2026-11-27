@@ -1,0 +1,330 @@
+{
+  "id": "4bbeca53-950f-5d08-aa3a-1b23f573ddd8",
+  "inputs": {
+    "question": "CuriousLLM 复用的 MDR 段落编码器与 HippoRAG 的同义边编码器，分别学习或比较什么？请区分“下一段支持证据”和“概念名称相似”。"
+  },
+  "outputs": {
+    "expected_answer": "CuriousLLM 延用MDR训练，使用HotpotQA学习支持段落对接近、无关段落远离以建图。\nHippoRAG 对抽取的概念表示计算余弦相似度，用阈值增加同义边。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R13.S01",
+        "answer_point": "CuriousLLM 延用MDR训练，使用HotpotQA学习支持段落对接近、无关段落远离以建图。",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "primary_chunk": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "pages": [
+          3,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_69407b618c1969f701e74bd3cf523c95"
+        ]
+      },
+      {
+        "unit_id": "R13.S02",
+        "answer_point": "HippoRAG 对抽取的概念表示计算余弦相似度，用阈值增加同义边。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_008861356c216ab780f62dad7796e2d4",
+        "pages": [
+          4,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_008861356c216ab780f62dad7796e2d4"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R13",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R13.S01",
+        "required_fact": "CuriousLLM 延用MDR训练，使用HotpotQA学习支持段落对接近、无关段落远离以建图。",
+        "primary_chunk": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "supporting_chunks": [
+          "chunk_69407b618c1969f701e74bd3cf523c95"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R13.S02",
+        "required_fact": "HippoRAG 对抽取的概念表示计算余弦相似度，用阈值增加同义边。",
+        "primary_chunk": "chunk_008861356c216ab780f62dad7796e2d4",
+        "supporting_chunks": [
+          "chunk_008861356c216ab780f62dad7796e2d4"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+        "page_start": 3,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 3,
+            "start_char": 2170,
+            "end_char": 3088,
+            "chunk_start_char": 0,
+            "chunk_end_char": 918,
+            "block_bboxes": [
+              [
+                305.782,
+                520.593,
+                526.225,
+                775.496
+              ],
+              [
+                294.911,
+                794.449,
+                300.366,
+                805.358
+              ]
+            ]
+          },
+          {
+            "pdf_page": 4,
+            "start_char": 0,
+            "end_char": 706,
+            "chunk_start_char": 919,
+            "chunk_end_char": 1625,
+            "block_bboxes": [
+              [
+                101.172,
+                72.192,
+                374.599,
+                117.873
+              ],
+              [
+                100.934,
+                96.461,
+                494.102,
+                189.564
+              ],
+              [
+                303.058,
+                144.327,
+                494.104,
+                177.674
+              ],
+              [
+                101.172,
+                192.143,
+                453.704,
+                213.694
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "9a63eb00322c9aa8cfdce79dd0439adaddd74d092e5a143a308220b4e1e3577b",
+        "section": "Methodology",
+        "text": "In the original KGP experiments, construct-\ning KG by multi-hop dense retriever (MDR-KG)\n(Wang et al., 2023) outperforms other KG con-\nstruction approaches, such as k-nearest neigh-\nbors (KNN) (Cunningham and Delany, 2021) and\nTF-IDF. Following the methodology for building\nMDR-KG , we employ the MDR training technique\n(Xiong et al., 2021) to develop a BERT-based pas-\nsage encoder using the HotpotQA dataset. This\nencoder is trained to predict subsequent supporting\npassages given an initial retrieved passage. The\ngoal is to minimize the distances between passage\npairs that are used together to answer questions\nin HotpotQA while simultaneously increasing the\ndistances between unrelated passages through neg-\native sampling. This training technique equips the\nencoder with reasoning capabilities, enabling it to\nunderstand the logical associations between differ-\nent passages. Finally, we construct our KGs by\n3\n\nExample 1\nExample 2\n(Input) Question:\n(Input) Question:\nIn what city is the university, for which Kim En-\nglish played college basketball, located?\nTina Charles and Maya Moore were teammates on\nthe UConn women’s team that won championships\nin what years?\n(Input) Given:\n(Input) Given:\nKim English played college basketball for the Uni-\nversity of Missouri before being selected by the\nDetroit Pistons with the 44th overall pick in the\n2012 NBA draft.\nIn 2009 and 2010, Tina Charles and her teammate\nMaya Moore led the Connecticut Huskies to two\nundefeated national championships.\n(Ground Truth) Follow-up Question:\n(Ground Truth) Follow-up Question:\nIn which city is the University of Missouri located?\nNA\n"
+      },
+      {
+        "chunk_id": "chunk_008861356c216ab780f62dad7796e2d4",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 1381,
+            "end_char": 2535,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1154,
+            "block_bboxes": [
+              [
+                107.253,
+                445.556,
+                505.658,
+                575.749
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "513e8af1dd62ac1274c657d1b38ffba433a47012da68b86cb6ee54a868be9741",
+        "section": "Introduction",
+        "text": "Offline Indexing. Our indexing process involves processing a set of passages P using an instruction-\ntuned LLM L and a retrieval encoder M. As seen in Figure 2 we first use L to extract a set of noun\nphrase nodes N and relation edges E from each passage in P via OpenIE. This process is done via\n1-shot prompting of the LLM with the prompts shown in Appendix I. Specifically, we first extract a\nset of named entities from each passage. We then add the named entities to the OpenIE prompt to\nextract the final triples, which also contain concepts (noun phrases) beyond named entities. We find\nthat this two-step prompt configuration leads to an appropriate balance between generality and bias\ntowards named entities. Finally, we use M to add the extra set of synonymy relations E′ discussed\nabove when the cosine similarity between two entity representations in N is above a threshold τ. As\nstated above, this introduces more edges to our hippocampal index and allows for more effective\npattern completion. This indexing process defines a |N| × |P| matrix P, which contains the number\nof times each noun phrase in the KG appears in each original passage.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "paper_45e21fe95d28e544e8b55c6a986ff63e"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "automatic": [
+        "valid source fragments",
+        "method coverage",
+        "non-method-only output",
+        "shared-task presence"
+      ],
+      "semantic": "Codex review of task retention and ownership; not independent human scoring",
+      "rubric": [
+        "only named methods",
+        "no invented facts",
+        "no unsupported method/technical-term pairing",
+        "retain per-method retrieval target",
+        "record unresolved text",
+        "preserve no-anchor behavior"
+      ],
+      "primary": "逐题保留目标与归属质量审阅；不把JSON成功当质量成功",
+      "latency": "wall time includes model load; separately report load/prompt/eval durations",
+      "tokens": "Ollama prompt_eval_count / eval_count; no estimation",
+      "negative_policy": "not applicable: no answer evaluation"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "题面子查询拆分；不运行检索或答案生成",
+      "controls": {
+        "arms": [
+          "Rule",
+          "Local-LLM"
+        ],
+        "prompt": "任务是从题面提取子查询素材，绝不回答问题，也不使用论文知识。\n只读取 question 和 allowed_methods。按 allowed_methods 顺序，每个方法输出一个单元。\n所有 local_aspect、shared_task、unresolved 字符串必须逐字复制题面的连续片段，不改写，不增字，不自行补标点。方法名由程序添加。\nlocal_aspect：只属于该方法的技术描述或任务对象。shared_task：适用于所有方法的共同问题、目的、比较维度和限制。\n两个字段不可有重复或重叠的片段。方法专属描述不准放入 shared_task；shared_task 不准包含任何方法名或前者/后者/它们/两者等悬空指代。\n若题面写明前者/后者，只按题面两个方法的出现顺序解析，标 assignment=pronoun；原文片段从前者或后者开始，程序负责去除代词。\n若技术描述紧接自己的方法名，标 explicit。找不到明确属于某方法的描述，local_aspect 留空，标 shared_only，保留有信息的共享任务。\n仅仅列出两个方法、然后列出两种技术，不能凭论文知识或列举顺序猜测对应关系。归属不明的技术片段放 unresolved，不强行分配，也不把它们都当 shared_task。\nreason 最多12个汉字，只解释题面依据。不要重复方法名或说明论文答案。\n示例题面：甲法与乙法怎样处理输入？前者处理表格，后者处理段落。\n甲法的 local_aspect=[\"前者处理表格\"]，乙法的 local_aspect=[\"后者处理段落\"]，两者 shared_task=[\"怎样处理输入？\"]，assignment=pronoun。\n示例题面：甲法与乙法怎么编码？比较甲编码和乙编码。\n不能猜测编码归属：local_aspect=[]，shared_task=[\"怎么编码？\"]，assignment=shared_only，unresolved=[\"甲编码和乙编码\"]。\n必须保留有用的问句目标，不要仅给方法名。只输出 schema JSON。",
+        "schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "methods": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "method": {
+                    "type": "string"
+                  },
+                  "local_aspect": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shared_task": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "assignment": {
+                    "type": "string",
+                    "enum": [
+                      "explicit",
+                      "pronoun",
+                      "ordered",
+                      "shared_only"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "method",
+                  "local_aspect",
+                  "shared_task",
+                  "assignment",
+                  "reason"
+                ]
+              }
+            },
+            "unresolved": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "methods",
+            "unresolved"
+          ]
+        },
+        "options": {
+          "temperature": 0,
+          "seed": 42,
+          "num_ctx": 8192,
+          "num_predict": 2200
+        },
+        "inputs": "question + explicit method names only",
+        "corpus_or_reference_in_model": false,
+        "no_anchor": "keep original question, skip LLM",
+        "query_assembly": "verified source snippets; resolved pronoun prefix may be removed",
+        "retrieval": false,
+        "embedding": false,
+        "reranking": false,
+        "answer_generation": false
+      },
+      "models": {
+        "local_decomposer": "qwen2.5:14b",
+        "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6"
+      }
+    },
+    "result_display": {
+      "location": "Rule / Local-LLM Experiments",
+      "fields": [
+        "子查询原文",
+        "题面来源片段与偏移",
+        "归属与未解析内容",
+        "机械校验",
+        "时延与Token",
+        "逐题质量审阅",
+        "Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "decomposition_rubric": {
+      "automatic": [
+        "valid source fragments",
+        "method coverage",
+        "non-method-only output",
+        "shared-task presence"
+      ],
+      "semantic": "Codex review of task retention and ownership; not independent human scoring",
+      "rubric": [
+        "only named methods",
+        "no invented facts",
+        "no unsupported method/technical-term pairing",
+        "retain per-method retrieval target",
+        "record unresolved text",
+        "preserve no-anchor behavior"
+      ],
+      "primary": "逐题保留目标与归属质量审阅；不把JSON成功当质量成功",
+      "latency": "wall time includes model load; separately report load/prompt/eval durations",
+      "tokens": "Ollama prompt_eval_count / eval_count; no estimation",
+      "negative_policy": "not applicable: no answer evaluation"
+    }
+  },
+  "metadata": {
+    "case_id": "R13",
+    "category": "cross",
+    "benchmark": "benchmark-subquery-quality-v2",
+    "benchmark_sha256": "de536603654c42527ddd37d3e6825d66ce19fdafb1e52d898111b797313bbc40",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

@@ -1,0 +1,1275 @@
+{
+  "name": "papertech-stage4-benchmark-v1",
+  "description": "论文 RAG 开发集；参考来源有限、非独立金标。两组共用题目和预算；不预设 Graph 胜出。",
+  "metadata": {
+    "benchmark": "benchmark-v1",
+    "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+    "capture_scope": "questions, paraphrased reference points and source IDs; no source text or vectors",
+    "prior_exposure": "Stage3 previously used ToG/ToG-2 and HippoRAG examples; this is a development evaluation, not a held-out benchmark.",
+    "scoring": {
+      "primary": "macro SupportRecall@5: fraction of required evidence units with any known supporting chunk among top5 reranked candidates",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40: reciprocal first rank containing any known supporting unit",
+        "selected evidence unit coverage",
+        "all-units coverage"
+      ],
+      "denominator": "24 answerable questions; negatives separately; negatives with counterevidence excluded from recall aggregate",
+      "relevance": "known source support pool, not exhaustive relevance judgments; absence from pool does not prove irrelevance",
+      "latency": "retrieval compute measured around production methods, excludes audit stage uploads and shared cloud embedding batch; generation separately timed incl provider tracing",
+      "p95": "numpy linear quantile over 24 single runs per arm, descriptive and unstable; not SLA or significance",
+      "answer_review": "10 frozen pairs; source-based delegated review of keypoints, citation support and gaps; no automated LLM judge; no acceptance threshold invented",
+      "interpretation": "report paired gains, ties and regressions; no superiority or expansion decision from a single small development set"
+    }
+  },
+  "examples": [
+    {
+      "id": "a3af3cd6-a9c1-50bf-8c62-132485a58a48",
+      "inputs": {
+        "question": "G-Retriever 把相关子图检索形式化成什么优化问题？"
+      },
+      "outputs": {
+        "expected_answer": "G-Retriever 将图检索表述为 Prize-Collecting Steiner Tree 优化。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "pcst",
+            "answer_point": "G-Retriever 将图检索表述为 Prize-Collecting Steiner Tree 优化。",
+            "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+            "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+            "primary_chunk": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+              "chunk_5c9e14854565607ec53c355da481c451",
+              "chunk_04c0673f276b70d320674636d537dc80"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "F01",
+        "category": "fact",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "fact"
+      ]
+    },
+    {
+      "id": "978b1dfa-c0b6-5cc7-9bfd-71f4d1ea20e5",
+      "inputs": {
+        "question": "KG-GPT 的三个处理步骤分别是什么？"
+      },
+      "outputs": {
+        "expected_answer": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "kggpt",
+            "answer_point": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+            "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+            "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+            "primary_chunk": "chunk_61e96cb10e247f7d002b4163920cc737",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_61e96cb10e247f7d002b4163920cc737",
+              "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+              "chunk_cfe612908773552496db582da6b6b26c",
+              "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+              "chunk_6d513ef9de004b3c675d2c25a69d5330",
+              "chunk_45c598ca774c47ab2be0c3b734efd4de"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "F02",
+        "category": "fact",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "fact"
+      ]
+    },
+    {
+      "id": "f5fedb3d-0732-5393-9c01-e98eece1a341",
+      "inputs": {
+        "question": "StructGPT 的 IRR 全称是什么，接口与 LLM 分别负责什么？"
+      },
+      "outputs": {
+        "expected_answer": "StructGPT 采用 Iterative Reading-then-Reasoning，专门接口读证据后交给 LLM 推理。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "struct",
+            "answer_point": "StructGPT 采用 Iterative Reading-then-Reasoning，专门接口读证据后交给 LLM 推理。",
+            "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+            "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+            "primary_chunk": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+              "chunk_c0d2bbf48afc9940787c84d1f1a259b5"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "F03",
+        "category": "fact",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "fact"
+      ]
+    },
+    {
+      "id": "b7233973-2298-52d4-b06f-7c9618ac23fc",
+      "inputs": {
+        "question": "STaRK 检索基准覆盖哪三个应用领域？"
+      },
+      "outputs": {
+        "expected_answer": "STaRK 覆盖产品搜索、学术论文搜索和精准医疗。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "stark",
+            "answer_point": "STaRK 覆盖产品搜索、学术论文搜索和精准医疗。",
+            "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+            "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+            "primary_chunk": "chunk_6b5383484693f6226010eab8143f80d6",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_6b5383484693f6226010eab8143f80d6",
+              "chunk_77331dc18e1518cd0c883724d737af4f"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "F04",
+        "category": "fact",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "fact"
+      ]
+    },
+    {
+      "id": "04547e62-149f-5886-92ab-b03997d42849",
+      "inputs": {
+        "question": "Unifying Large Language Models and Knowledge Graphs: A Roadmap 将融合路线分成哪三类？"
+      },
+      "outputs": {
+        "expected_answer": "三类路线为 KG-enhanced LLMs、LLM-augmented KGs、Synergized LLMs + KGs。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "roadmap",
+            "answer_point": "三类路线为 KG-enhanced LLMs、LLM-augmented KGs、Synergized LLMs + KGs。",
+            "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+            "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+            "primary_chunk": "chunk_f9acd01074a4f478a8d9fe8c7e77be91",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_f9acd01074a4f478a8d9fe8c7e77be91",
+              "chunk_9b7abacf7f2b491b3d96cb2f09e81d67",
+              "chunk_d6bd0011be13058eaf14a03f66d2c20f",
+              "chunk_a040927fc07adf7c226b32d94784ba37",
+              "chunk_0acc8d7e24d50270a979f9b37c31f676",
+              "chunk_5e3a3b8e4f92acaae396053b580967a8",
+              "chunk_a7364f55eaae9e366377f62e5af2f9d7"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "F05",
+        "category": "fact",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "fact"
+      ]
+    },
+    {
+      "id": "6f44078c-9504-5de7-bd97-3931acb1bd60",
+      "inputs": {
+        "question": "Tree-of-Traversals 的 MusicBrainz-x-Wikidata 有多少题，涉及哪两个知识来源？"
+      },
+      "outputs": {
+        "expected_answer": "MusicBrainz-x-Wikidata 有 109 题，需要结合 MusicBrainz 与 Wikidata。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "totmusic",
+            "answer_point": "MusicBrainz-x-Wikidata 有 109 题，需要结合 MusicBrainz 与 Wikidata。",
+            "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+            "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+            "primary_chunk": "chunk_f4962498025654850621ee329d0af7d6",
+            "pages": [
+              5,
+              6
+            ],
+            "known_support_chunks": [
+              "chunk_f4962498025654850621ee329d0af7d6"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "F06",
+        "category": "fact",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "fact"
+      ]
+    },
+    {
+      "id": "13a602ee-3a68-5721-bc81-cc280d816ab5",
+      "inputs": {
+        "question": "LPKG 提出的 CLQA-Wiki 来自什么知识图谱，覆盖哪些逻辑题型？"
+      },
+      "outputs": {
+        "expected_answer": "CLQA-Wiki 来自 Wikidata 子集，覆盖 multi-hop、comparison、intersection、union。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "lpbench",
+            "answer_point": "CLQA-Wiki 来自 Wikidata 子集，覆盖 multi-hop、comparison、intersection、union。",
+            "paper_id": "paper_900c57868044724d396de2c95dd00435",
+            "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+            "primary_chunk": "chunk_ab66789d9bc91de68948962d6c3f0011",
+            "pages": [
+              2,
+              2
+            ],
+            "known_support_chunks": [
+              "chunk_ab66789d9bc91de68948962d6c3f0011",
+              "chunk_f8b1ae3d38356062df26e776ba255c06"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "F07",
+        "category": "fact",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "fact"
+      ]
+    },
+    {
+      "id": "c3062d09-c9bf-529b-92fc-a75f7bc3c44a",
+      "inputs": {
+        "question": "MindMap 如何结合模型内部知识和外部知识，论文重点提到哪个问答领域？"
+      },
+      "outputs": {
+        "expected_answer": "MindMap 合并 LLM 隐式知识与外部 KG，以 mind map 展示推理路径，重点包括医学问答。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "mind",
+            "answer_point": "MindMap 合并 LLM 隐式知识与外部 KG，以 mind map 展示推理路径，重点包括医学问答。",
+            "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+            "title": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+            "primary_chunk": "chunk_2f4809d54362f998c1c0710e915a721b",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_2f4809d54362f998c1c0710e915a721b"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "F08",
+        "category": "fact",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "fact"
+      ]
+    },
+    {
+      "id": "ad3dfd0d-1c2b-52d6-86d0-4567a97edfda",
+      "inputs": {
+        "question": "ToG-2 怎样让结构化关系与文档段落互相帮助检索，而不是把两路结果简单拼接？"
+      },
+      "outputs": {
+        "expected_answer": "ToG-2 通过实体连接文档，用文档作为实体上下文，交替进行图检索与上下文检索。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "tog2",
+            "answer_point": "ToG-2 通过实体连接文档，用文档作为实体上下文，交替进行图检索与上下文检索。",
+            "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+            "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+            "primary_chunk": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_9b63637ef18ed2d67ff105ef55092df3"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "P01",
+        "category": "paraphrase",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "paraphrase"
+      ]
+    },
+    {
+      "id": "bb7a2379-e6e1-5c1f-8642-2ba07caf326a",
+      "inputs": {
+        "question": "HippoRAG 怎样从问题中的关键概念出发，在一次检索里关联分散段落？"
+      },
+      "outputs": {
+        "expected_answer": "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "hippo",
+            "answer_point": "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。",
+            "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+            "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+            "primary_chunk": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+            "pages": [
+              2,
+              2
+            ],
+            "known_support_chunks": [
+              "chunk_a58244558a2137d85a4b8e53d5c4ebaf"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "P02",
+        "category": "paraphrase",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "paraphrase"
+      ]
+    },
+    {
+      "id": "7e60358c-4453-5d9c-b984-8a868a6e9a8e",
+      "inputs": {
+        "question": "CuriousLLM 如何判断还缺哪些材料，训练这种追问能力的数据输入与目标是什么？"
+      },
+      "outputs": {
+        "expected_answer": "CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "curious",
+            "answer_point": "CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。",
+            "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+            "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+            "primary_chunk": "chunk_43145c0748762d6b4c650c65721f826f",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_43145c0748762d6b4c650c65721f826f"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "P03",
+        "category": "paraphrase",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "paraphrase"
+      ]
+    },
+    {
+      "id": "245f9caa-2d3f-5135-9689-0111eeefeebc",
+      "inputs": {
+        "question": "RoG 在真正回答问题前先安排什么路线，随后怎样沿路线找可靠材料？"
+      },
+      "outputs": {
+        "expected_answer": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "rog",
+            "answer_point": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。",
+            "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+            "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+            "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+              "chunk_8d1de153f62070216bf23df5989bda21"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "P04",
+        "category": "paraphrase",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "paraphrase"
+      ]
+    },
+    {
+      "id": "a41b51e5-1597-5a5a-b3ae-9708897f22be",
+      "inputs": {
+        "question": "KGP 如何把多文档片段组织成可以导航的网络，网络节点、连线与导航者各是什么？"
+      },
+      "outputs": {
+        "expected_answer": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "kgp",
+            "answer_point": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+            "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+            "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+            "primary_chunk": "chunk_b959214e888053dae53b16a5259d7ea9",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_b959214e888053dae53b16a5259d7ea9",
+              "chunk_4c2f9284ed69432f1dd6ad5217a9a783"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "P05",
+        "category": "paraphrase",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "paraphrase"
+      ]
+    },
+    {
+      "id": "e32e87c6-1ea1-5ec3-86fe-992e6f93624d",
+      "inputs": {
+        "question": "Tree-of-Traversals 如何防止一直搜索下去，达到搜索预算后怎么处理？"
+      },
+      "outputs": {
+        "expected_answer": "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "totbound",
+            "answer_point": "Tree-of-Traversals 用 max depth 和 max expansions 控制搜索，达到扩展限额时返回 Cannot find answer。",
+            "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+            "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+            "primary_chunk": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+            "pages": [
+              4,
+              4
+            ],
+            "known_support_chunks": [
+              "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "P06",
+        "category": "paraphrase",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "paraphrase"
+      ]
+    },
+    {
+      "id": "d3c85768-3c5c-53d5-a3f5-c582a357623e",
+      "inputs": {
+        "question": "G-Retriever 为什么不把整个大图直接转成文本或截断后交给模型，它如何控制输入规模？"
+      },
+      "outputs": {
+        "expected_answer": "整图文本化会超过上下文窗口，直接截断丢信息；G-Retriever 选择相关子图以扩展到大图。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "grscale",
+            "answer_point": "整图文本化会超过上下文窗口，直接截断丢信息；G-Retriever 选择相关子图以扩展到大图。",
+            "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+            "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+            "primary_chunk": "chunk_5c9e14854565607ec53c355da481c451",
+            "pages": [
+              2,
+              3
+            ],
+            "known_support_chunks": [
+              "chunk_5c9e14854565607ec53c355da481c451"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "P07",
+        "category": "paraphrase",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "paraphrase"
+      ]
+    },
+    {
+      "id": "12a9a759-aa2a-5e3c-9f0f-d077b631e5d7",
+      "inputs": {
+        "question": "LPKG 不依赖大量人工编写的分解示范时，从哪里获得规划训练信号，用它改善什么能力？"
+      },
+      "outputs": {
+        "expected_answer": "LPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "lpdata",
+            "answer_point": "LPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。",
+            "paper_id": "paper_900c57868044724d396de2c95dd00435",
+            "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+            "primary_chunk": "chunk_e07b345ba2a42d01f295e47f196061d5",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_e07b345ba2a42d01f295e47f196061d5"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "P08",
+        "category": "paraphrase",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "paraphrase"
+      ]
+    },
+    {
+      "id": "b4d9bb3c-f661-515b-bc79-3c9d56e42ff3",
+      "inputs": {
+        "question": "比较 ToG 与 ToG-2 的知识检索机制：前者怎样探索图，后者怎样联动图与文档？分别引用两篇论文。"
+      },
+      "outputs": {
+        "expected_answer": "ToG 将 LLM 当作代理，迭代执行 KG beam search 探索实体/关系和推理路径，免额外训练。\nToG-2 通过实体连接文档，用文档作为实体上下文，交替进行图检索与上下文检索。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "tog",
+            "answer_point": "ToG 将 LLM 当作代理，迭代执行 KG beam search 探索实体/关系和推理路径，免额外训练。",
+            "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+            "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+            "primary_chunk": "chunk_e09b5a88c34014513aad6c0d6121f790",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_e09b5a88c34014513aad6c0d6121f790",
+              "chunk_87176a877d810cf3e38e4f5280725679",
+              "chunk_270d9350248b566ed224ba5147a295a2"
+            ]
+          },
+          {
+            "unit_id": "tog2",
+            "answer_point": "ToG-2 通过实体连接文档，用文档作为实体上下文，交替进行图检索与上下文检索。",
+            "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+            "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+            "primary_chunk": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_9b63637ef18ed2d67ff105ef55092df3"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "C01",
+        "category": "cross",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "cross"
+      ]
+    },
+    {
+      "id": "2a4ab921-124b-5345-bed6-a3bbb622141f",
+      "inputs": {
+        "question": "比较 HippoRAG 和 RoG：前者用什么图算法整合信息，后者如何用关系路径制定计划？不要把关联解释为继承。"
+      },
+      "outputs": {
+        "expected_answer": "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。\nRoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "hippo",
+            "answer_point": "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。",
+            "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+            "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+            "primary_chunk": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+            "pages": [
+              2,
+              2
+            ],
+            "known_support_chunks": [
+              "chunk_a58244558a2137d85a4b8e53d5c4ebaf"
+            ]
+          },
+          {
+            "unit_id": "rog",
+            "answer_point": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。",
+            "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+            "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+            "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+              "chunk_8d1de153f62070216bf23df5989bda21"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "C02",
+        "category": "cross",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "cross"
+      ]
+    },
+    {
+      "id": "8d50aa68-9fcd-5927-affe-5e07e157ee14",
+      "inputs": {
+        "question": "比较 ToG 和 ToG-2 的评估数据集：各自是否包含 WebQSP 与 QALD10-en，能否仅据共同数据集断定谁更好？"
+      },
+      "outputs": {
+        "expected_answer": "ToG 在 KBQA 中使用 WebQSP、QALD10-en，也覆盖 Creak；共同数据集不保证一致实验条件。\nToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "togds",
+            "answer_point": "ToG 在 KBQA 中使用 WebQSP、QALD10-en，也覆盖 Creak；共同数据集不保证一致实验条件。",
+            "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+            "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+            "primary_chunk": "chunk_deb9eea46e529705dffdd1103729c44c",
+            "pages": [
+              5,
+              5
+            ],
+            "known_support_chunks": [
+              "chunk_deb9eea46e529705dffdd1103729c44c",
+              "chunk_b5d573a408ceb1009fa63dcd9cdd6a1c",
+              "chunk_270d9350248b566ed224ba5147a295a2",
+              "chunk_2a773898d4837d44bc3ec29b329f1825"
+            ]
+          },
+          {
+            "unit_id": "tog2ds",
+            "answer_point": "ToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。",
+            "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+            "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+            "primary_chunk": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+            "pages": [
+              6,
+              6
+            ],
+            "known_support_chunks": [
+              "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+              "chunk_2e13f6f43858420cb85904c33d3b39df",
+              "chunk_9c3795187f69ce14c244c9ad74c8e821",
+              "chunk_031b7aaba8f20d011a94bb6a15b0f3b1"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "C03",
+        "category": "cross",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "cross"
+      ]
+    },
+    {
+      "id": "d2a4e5e9-85c0-574d-908c-647c7c56bf89",
+      "inputs": {
+        "question": "比较 HippoRAG 与 Tree-of-Traversals 的多跳测试集：两文分别使用什么名称的 2Wiki 数据集，还有哪些测试集？保留原文名称差异。"
+      },
+      "outputs": {
+        "expected_answer": "HippoRAG 主要评估 MuSiQue(answerable)、2WikiMultiHopQA，也纳入 HotpotQA。\nTree-of-Traversals 在 2WikiMultiHop、QALD-10 评估。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "hippods",
+            "answer_point": "HippoRAG 主要评估 MuSiQue(answerable)、2WikiMultiHopQA，也纳入 HotpotQA。",
+            "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+            "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+            "primary_chunk": "chunk_3fa28005a4df0de5249826585cf9d713",
+            "pages": [
+              5,
+              5
+            ],
+            "known_support_chunks": [
+              "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+              "chunk_3fa28005a4df0de5249826585cf9d713",
+              "chunk_8cc831cc45851cce50b9f34648070765",
+              "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+              "chunk_d374bd95d509d622be8512f20e59b674",
+              "chunk_8245d0849e8cf0df364eb6980d96843c",
+              "chunk_f2730b810f92d04b5307ad0780e7ace5"
+            ]
+          },
+          {
+            "unit_id": "totds",
+            "answer_point": "Tree-of-Traversals 在 2WikiMultiHop、QALD-10 评估。",
+            "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+            "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+            "primary_chunk": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+            "pages": [
+              5,
+              5
+            ],
+            "known_support_chunks": [
+              "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+              "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+              "chunk_4393ed9a076f7e200b63f80b74abf37e",
+              "chunk_f4962498025654850621ee329d0af7d6",
+              "chunk_bc1cd12431f46892d2877dff73dab5e5",
+              "chunk_406249e1d98db3baa838606c7a974998",
+              "chunk_de3c9f51149251b0107325a7b92035cd"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "C04",
+        "category": "cross",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "cross"
+      ]
+    },
+    {
+      "id": "fb40929c-0963-5efe-b27d-125429607945",
+      "inputs": {
+        "question": "比较 KG-GPT 与 RoG 对 MetaQA 的评估：前者出现什么基准和指标，后者扩展实验是哪种跳数、什么知识来源？"
+      },
+      "outputs": {
+        "expected_answer": "KG-GPT 表中包含 FACTKG 与 MetaQA(Hits@1)。\nRoG 的迁移/扩展实验选 MetaQA-3hop，基于 Wiki-Movies，并取 1000 个训练样本。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "kggptds",
+            "answer_point": "KG-GPT 表中包含 FACTKG 与 MetaQA(Hits@1)。",
+            "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+            "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+            "primary_chunk": "chunk_3f7eb65828761447433c66c28ad111a4",
+            "pages": [
+              4,
+              4
+            ],
+            "known_support_chunks": [
+              "chunk_cfe612908773552496db582da6b6b26c",
+              "chunk_cb0cb02a1cffcc44146c10998e6d6034",
+              "chunk_3aa0cdece98e31f453ae4c5546e718b8",
+              "chunk_3f7eb65828761447433c66c28ad111a4",
+              "chunk_6d513ef9de004b3c675d2c25a69d5330",
+              "chunk_13719303fa087942493eb1fb55fd4c52",
+              "chunk_fbbb8f38df6e66a40727407ca912ae1a",
+              "chunk_710cdd68fb6c3e90f213f8f4e175614e",
+              "chunk_cb9bf1d80ff057c49b68a51673cbf674",
+              "chunk_bfa2a30300802f424fbbabe46b4f6157",
+              "chunk_c4aff3857b56ad130ded1c8eb0ea78f7",
+              "chunk_824adcbe65ba1e83748225ffd450f9d7",
+              "chunk_646e3c0392b4a7b2a255e33664c8f173"
+            ]
+          },
+          {
+            "unit_id": "rogmeta",
+            "answer_point": "RoG 的迁移/扩展实验选 MetaQA-3hop，基于 Wiki-Movies，并取 1000 个训练样本。",
+            "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+            "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+            "primary_chunk": "chunk_f5c88d605f651f26c093f30b836a98aa",
+            "pages": [
+              20,
+              20
+            ],
+            "known_support_chunks": [
+              "chunk_297df214042add51d3facf35d1934a3d",
+              "chunk_546ad813142a1141c46e47c2f9ed5c1a",
+              "chunk_f5c88d605f651f26c093f30b836a98aa"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "C05",
+        "category": "cross",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "cross"
+      ]
+    },
+    {
+      "id": "958787a8-096a-5f37-8182-a493bdb91ca2",
+      "inputs": {
+        "question": "比较 KGP 和 CuriousLLM 的下一步证据搜索：KGP 的图遍历代理怎样收集段落，CuriousLLM 怎样利用后续问题？"
+      },
+      "outputs": {
+        "expected_answer": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。\nCuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "kgp",
+            "answer_point": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+            "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+            "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+            "primary_chunk": "chunk_b959214e888053dae53b16a5259d7ea9",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_b959214e888053dae53b16a5259d7ea9",
+              "chunk_4c2f9284ed69432f1dd6ad5217a9a783"
+            ]
+          },
+          {
+            "unit_id": "curious",
+            "answer_point": "CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。",
+            "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+            "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+            "primary_chunk": "chunk_43145c0748762d6b4c650c65721f826f",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_43145c0748762d6b4c650c65721f826f"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "C06",
+        "category": "cross",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "cross"
+      ]
+    },
+    {
+      "id": "3711b361-02a5-5ec3-bf72-65ebf52a02a0",
+      "inputs": {
+        "question": "ToG-R 相对 ToG 改了什么剪枝方式，两者 LLM 调用次数公式怎样变化？这是作者的效率主张还是所有场景的已证优越性？"
+      },
+      "outputs": {
+        "expected_answer": "ToG-R 用随机实体剪枝替代 LLM 实体剪枝；ToG 调用数 2ND+D+1，ToG-R 为 ND+D+1。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "togr",
+            "answer_point": "ToG-R 用随机实体剪枝替代 LLM 实体剪枝；ToG 调用数 2ND+D+1，ToG-R 为 ND+D+1。",
+            "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+            "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+            "primary_chunk": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+            "pages": [
+              22,
+              22
+            ],
+            "known_support_chunks": [
+              "chunk_91a4a2e6943ad6a8074492d3f7229692"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "C07",
+        "category": "cross",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "cross"
+      ]
+    },
+    {
+      "id": "d27af14c-3bc4-52f5-888a-9a17d336b44c",
+      "inputs": {
+        "question": "比较 StructGPT 和 LPKG：谁用接口迭代读取结构化证据，谁用 KG 构造的数据训练规划能力？"
+      },
+      "outputs": {
+        "expected_answer": "StructGPT 采用 Iterative Reading-then-Reasoning，专门接口读证据后交给 LLM 推理。\nLPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。",
+        "answerable": true,
+        "negative_kind": null,
+        "source_references": [
+          {
+            "unit_id": "struct",
+            "answer_point": "StructGPT 采用 Iterative Reading-then-Reasoning，专门接口读证据后交给 LLM 推理。",
+            "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+            "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+            "primary_chunk": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+              "chunk_c0d2bbf48afc9940787c84d1f1a259b5"
+            ]
+          },
+          {
+            "unit_id": "lpdata",
+            "answer_point": "LPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。",
+            "paper_id": "paper_900c57868044724d396de2c95dd00435",
+            "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+            "primary_chunk": "chunk_e07b345ba2a42d01f295e47f196061d5",
+            "pages": [
+              1,
+              1
+            ],
+            "known_support_chunks": [
+              "chunk_e07b345ba2a42d01f295e47f196061d5"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "C08",
+        "category": "cross",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "cross"
+      ]
+    },
+    {
+      "id": "18953a0b-f9f4-5fbc-b281-5ddaf3c82bba",
+      "inputs": {
+        "question": "请给出 NebulaGraphRAG-2099 在 LunarQA-2099 的官方精确准确率。"
+      },
+      "outputs": {
+        "expected_answer": "",
+        "answerable": false,
+        "negative_kind": "no_corpus_answer",
+        "source_references": [],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "N01",
+        "category": "negative",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "negative"
+      ]
+    },
+    {
+      "id": "b41bdbc6-c575-5cbc-aedc-369b0da3e892",
+      "inputs": {
+        "question": "根据这14篇论文，告诉我今天北京实时气温是多少。"
+      },
+      "outputs": {
+        "expected_answer": "",
+        "answerable": false,
+        "negative_kind": "no_corpus_answer",
+        "source_references": [],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "N02",
+        "category": "negative",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "negative"
+      ]
+    },
+    {
+      "id": "2d109bca-add1-5c64-8e88-0d73b76d4c8a",
+      "inputs": {
+        "question": "ToG-2 是否已经证明在所有任务、所有底座模型上都严格优于 ToG？请检查这个前提，不能把部分实验外推到所有场景。"
+      },
+      "outputs": {
+        "expected_answer": "ToG 在 KBQA 中使用 WebQSP、QALD10-en，也覆盖 Creak；共同数据集不保证一致实验条件。\nToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。",
+        "answerable": false,
+        "negative_kind": "unsupported_universal_claim",
+        "source_references": [
+          {
+            "unit_id": "togds",
+            "answer_point": "ToG 在 KBQA 中使用 WebQSP、QALD10-en，也覆盖 Creak；共同数据集不保证一致实验条件。",
+            "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+            "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+            "primary_chunk": "chunk_deb9eea46e529705dffdd1103729c44c",
+            "pages": [
+              5,
+              5
+            ],
+            "known_support_chunks": [
+              "chunk_deb9eea46e529705dffdd1103729c44c",
+              "chunk_b5d573a408ceb1009fa63dcd9cdd6a1c",
+              "chunk_270d9350248b566ed224ba5147a295a2",
+              "chunk_2a773898d4837d44bc3ec29b329f1825"
+            ]
+          },
+          {
+            "unit_id": "tog2ds",
+            "answer_point": "ToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。",
+            "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+            "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+            "primary_chunk": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+            "pages": [
+              6,
+              6
+            ],
+            "known_support_chunks": [
+              "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+              "chunk_2e13f6f43858420cb85904c33d3b39df",
+              "chunk_9c3795187f69ce14c244c9ad74c8e821",
+              "chunk_031b7aaba8f20d011a94bb6a15b0f3b1"
+            ]
+          }
+        ],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "N03",
+        "category": "negative",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "negative"
+      ]
+    },
+    {
+      "id": "f84d5705-48c6-5cb2-9cb1-f640f8387951",
+      "inputs": {
+        "question": "请从这些论文给出作者 DeepSeek 服务账户的 API 密钥和本月账单金额。"
+      },
+      "outputs": {
+        "expected_answer": "",
+        "answerable": false,
+        "negative_kind": "no_corpus_answer",
+        "source_references": [],
+        "relation_outline": null,
+        "must_not_claim": null
+      },
+      "metadata": {
+        "case_id": "N04",
+        "category": "negative",
+        "benchmark": "benchmark-v1",
+        "benchmark_sha256": "5f67c64d75d94683825c992f60edf762b3dde5d67f9710abc7dcffbf2017ed39",
+        "corpus_id": "a6a19e2e97b11d9c450e",
+        "review_origin": "Codex delegated source review; not independent human scoring"
+      },
+      "split": [
+        "negative"
+      ]
+    }
+  ]
+}

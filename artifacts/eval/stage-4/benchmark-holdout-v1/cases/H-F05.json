@@ -1,0 +1,633 @@
+{
+  "id": "e76781c1-29af-5094-aa17-d94f0e7068ce",
+  "inputs": {
+    "question": "RoG 消融实验去掉 planning 模块（w/o planning）或去掉 reasoning 模块（w/o reasoning）分别会导致什么现象？论文为什么最终只用 beam-search 生成 top-3 关系路径？"
+  },
+  "outputs": {
+    "expected_answer": "去掉 planning 后 RoG 退化为常规 LLM，缺乏 KG 知识导致 WebQSP/CWQ F1 大降（70.81→49.69、56.17→33.76）；去掉 reasoning 虽提高 Recall 但因路径噪声导致 Precision 骤降（46.90 / 18.88）。RoG 采用 beam-search 生成 top-3（K=3）关系路径，因为更多路径会增加检索噪声与耗时而对最终效果增益甚微。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "HF05_ablation",
+        "answer_point": "RoG 去掉 planning 后退化为仅靠问题作答的常规 LLM，因缺乏知识 F1 大幅下滑（WebQSP 70.81→49.69，CWQ 56.17→33.76）；去掉 reasoning 后虽因返回更多答案提高 Recall（79.85 / 67.89），但受检索路径噪声影响 Precision 骤降（46.90 / 18.88）。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_41f164dcc97380b68b515cce682cba4b",
+        "pages": [
+          8,
+          8
+        ],
+        "known_support_chunks": [
+          "chunk_41f164dcc97380b68b515cce682cba4b",
+          "chunk_8ff52490cf78a4324c98eaf422d29221"
+        ]
+      },
+      {
+        "unit_id": "HF05_top3",
+        "answer_point": "RoG 使用指令微调后的 LLaMA2-Chat-7B 经 beam-search 生成 top-3（K=3）关系路径；继续增加 K 会引入更多噪声路径和检索开销，对最终效果增益甚微。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_2a54af5657f5157d4c806c5daace0980",
+        "pages": [
+          7,
+          7
+        ],
+        "known_support_chunks": [
+          "chunk_2a54af5657f5157d4c806c5daace0980",
+          "chunk_a3b2c707435931fa6249f247cd7d79fc"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "H-F05",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "HF05_ablation",
+        "required_fact": "RoG 去掉 planning 后退化为仅靠问题作答的常规 LLM，因缺乏知识 F1 大幅下滑（WebQSP 70.81→49.69，CWQ 56.17→33.76）；去掉 reasoning 后虽因返回更多答案提高 Recall（79.85 / 67.89），但受检索路径噪声影响 Precision 骤降（46.90 / 18.88）。",
+        "primary_chunk": "chunk_41f164dcc97380b68b515cce682cba4b",
+        "supporting_chunks": [
+          "chunk_41f164dcc97380b68b515cce682cba4b",
+          "chunk_8ff52490cf78a4324c98eaf422d29221"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "HF05_top3",
+        "required_fact": "RoG 使用指令微调后的 LLaMA2-Chat-7B 经 beam-search 生成 top-3（K=3）关系路径；继续增加 K 会引入更多噪声路径和检索开销，对最终效果增益甚微。",
+        "primary_chunk": "chunk_2a54af5657f5157d4c806c5daace0980",
+        "supporting_chunks": [
+          "chunk_2a54af5657f5157d4c806c5daace0980",
+          "chunk_a3b2c707435931fa6249f247cd7d79fc"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_41f164dcc97380b68b515cce682cba4b",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 8,
+        "page_end": 8,
+        "source_spans": [
+          {
+            "pdf_page": 8,
+            "start_char": 959,
+            "end_char": 2416,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1457,
+            "block_bboxes": [
+              [
+                266.398,
+                297.326,
+                471.371,
+                308.329
+              ],
+              [
+                340.076,
+                308.556,
+                499.763,
+                315.654
+              ],
+              [
+                266.398,
+                319.565,
+                504.001,
+                327.026
+              ],
+              [
+                266.398,
+                330.937,
+                504.001,
+                346.206
+              ],
+              [
+                266.398,
+                350.117,
+                504.001,
+                365.386
+              ],
+              [
+                108.0,
+                283.211,
+                504.003,
+                435.639
+              ],
+              [
+                108.249,
+                451.006,
+                341.651,
+                461.479
+              ],
+              [
+                306.0,
+                474.383,
+                503.996,
+                495.305
+              ],
+              [
+                306.001,
+                500.056,
+                485.788,
+                510.117
+              ],
+              [
+                405.755,
+                510.325,
+                502.375,
+                516.815
+              ],
+              [
+                306.001,
+                520.723,
+                501.382,
+                534.354
+              ],
+              [
+                306.001,
+                538.262,
+                501.382,
+                551.892
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "2e8cffca841b37a74f228d9870c1d3d6e822f7fb5e502ab1e91c1a1fe975fcb5",
+        "section": "Method",
+        "text": "Method\nWebQSP\nCWQ\nPrecision\nRecall\nF1\nPrecision\nRecall\nF1\nRoG\n74.77\n75.84\n70.81\n57.69\n58.19\n56.17\nRoG w/o planning\n57.26\n50.16\n49.69\n35.35\n34.77\n33.76\nRoG w/o reasoning\n46.90\n79.85\n49.56\n18.88\n67.89\n22.26\nRoG w/ random plans\n38.66\n38.31\n35.24\n38.99\n39.29\n37.64\nRoG w/ vote reasoning\n54.80\n60.44\n47.96\n22.92\n47.98\n26.52\nFrom the results, it is evident that\nwithout a planning module,\nour\nmethod degenerates to conventional\nLLMs that solely rely on questions\nas input, suffering from the lack of\nknowledge issue. Although removing\nthe reasoning module leads to high\nrecall due to an increased number of\nanswers, precision drops significantly because of noise in retrieved paths. This demonstrates the ef-\nfectiveness of the reasoning module in identifying important reasoning paths and filtering out noise.\nFurthermore, using random plans achieves worse performance than removing the planning module,\nhighlighting the importance of a planning module who generates faithful reasoning plans. Using\na simple majority vote reasoning can improve the results which also demonstrate the necessity of\nreasoning module.\n5.3\nRQ2: PLUG-AND-PLAY ROG PLANNING MODULE\nTable 3: Effects of integrating the planning mod-\nule of RoG with different LLMs for reasoning.\nMethods\nWebQSP\nCWQ\nHits@1\nRecall\nHits@1\nRecall\nChatGPT\n66.77\n49.27\n39.90\n35.07\nChatGPT + RoG Planning\n81.51\n71.60\n52.68\n48.51\nAlpaca-7B\n51.78\n33.65\n27.44\n23.62\nAlpaca-7B + RoG Planning\n56.16\n74.20\n44.04\n38.46\n"
+      },
+      {
+        "chunk_id": "chunk_8ff52490cf78a4324c98eaf422d29221",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 22,
+        "page_end": 22,
+        "source_spans": [
+          {
+            "pdf_page": 22,
+            "start_char": 504,
+            "end_char": 860,
+            "chunk_start_char": 0,
+            "chunk_end_char": 356,
+            "block_bboxes": [
+              [
+                108.0,
+                225.517,
+                494.751,
+                248.34
+              ],
+              [
+                108.0,
+                273.884,
+                504.001,
+                295.316
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "4ddcc3ee864c1a0ca2ef34f7e3033a6632f445e9dc280f9ddfbacfbcc69f32aa",
+        "section": "A.7.6 PERFORMANCE ON DIFFERENT ANSWER NUMBERS",
+        "text": "RoG\n67.89\n79.39\n75.04\n58.33\n56.90\n53.73\n58.36\n43.62\nRoG w/o reasoning\n33.49\n52.80\n58.05\n66.01\n16.61\n27.06\n40.10\n34.45\nRoG w/o planning\n55.03\n51.08\n44.81\n27.00\n34.08\n34.16\n31.67\n25.21\nKGs. Although, RoG w/o reasoning can retrieve more answers to improve the performance. It still\nis inferior to RoG due to the lack of reasoning ability to remove the noise.\n"
+      },
+      {
+        "chunk_id": "chunk_2a54af5657f5157d4c806c5daace0980",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 7,
+        "page_end": 7,
+        "source_spans": [
+          {
+            "pdf_page": 7,
+            "start_char": 1406,
+            "end_char": 2937,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1531,
+            "block_bboxes": [
+              [
+                108.0,
+                351.025,
+                504.003,
+                393.954
+              ],
+              [
+                108.0,
+                400.418,
+                504.003,
+                465.685
+              ],
+              [
+                108.249,
+                481.357,
+                317.29,
+                491.32
+              ],
+              [
+                108.0,
+                501.621,
+                504.004,
+                577.848
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "bb21c4e6cf66bfaf4bb6996a5fab70841e040d0cf0a0b64abf85f71769180bcc",
+        "section": "EXPERIMENT",
+        "text": "Evaluation Metrics. Following previous works, we use Hits@1 and F1 as the evaluation metrics.\nHits@1 measures the proportion of questions whose top-1 predicted answer is correct. Since a\nquestion may correspond to multiple answers, F1 considers the coverage of all answers, which\nbalances the precision and recall of the predicted answers.\nImplementations. For RoG, we use LLaMA2-Chat-7B (Touvron et al., 2023) as the LLM backbone,\nwhich is instruction finetuned on the training split of WebQSP and CWQ as well as Freebase for 3\nepochs. We generate the top-3 relation paths using beam-search for each question. Since UniKGQA\n(Jiang et al., 2022) and DECAF (Yu et al., 2022a) are state-of-the-art methods, we directly refer their\nresults and those of the other baselines reported in their papers for comparisons. For LLMs, we use\nzero-shot prompting to conduct KGQA. The detailed settings are described in Appendix A.6.\n5.2\nRQ1: KGQA PERFORMANCE COMPARISON\nMain Results. In this section, we compare RoG with other baselines on KGQA tasks. The results\nare shown in Table 1. Our method achieves the best performance on both datasets across most\nmetrics. Specifically, compared to the SOTA method DECAF (Yu et al., 2022a) on WebQSP, our\nmethod improves Hits@1 by 4.4%. On the CWQ dataset, which is more challenging due to multi-\nhop questions, our method improves both Hits@1 and F1 by 22.3% and 14.4% against the SOTA\nmodel UniKGQA (Jiang et al., 2022). These results demonstrate the superior reasoning ability of\nour method in KGQA.\n"
+      },
+      {
+        "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 21,
+        "page_end": 22,
+        "source_spans": [
+          {
+            "pdf_page": 21,
+            "start_char": 1210,
+            "end_char": 2054,
+            "chunk_start_char": 0,
+            "chunk_end_char": 844,
+            "block_bboxes": [
+              [
+                108.249,
+                460.596,
+                355.677,
+                470.559
+              ],
+              [
+                108.0,
+                480.521,
+                504.003,
+                523.87
+              ],
+              [
+                181.823,
+                671.344,
+                270.443,
+                687.074
+              ],
+              [
+                167.308,
+                663.214,
+                170.988,
+                669.955
+              ],
+              [
+                163.626,
+                645.75,
+                170.987,
+                652.492
+              ],
+              [
+                163.626,
+                628.286,
+                170.987,
+                635.028
+              ],
+              [
+                163.626,
+                610.823,
+                170.987,
+                617.564
+              ],
+              [
+                163.626,
+                593.359,
+                170.987,
+                600.101
+              ],
+              [
+                152.081,
+                586.695,
+                160.332,
+                672.458
+              ],
+              [
+                339.762,
+                671.344,
+                428.382,
+                687.074
+              ],
+              [
+                325.247,
+                663.214,
+                328.927,
+                669.955
+              ],
+              [
+                321.565,
+                648.528,
+                328.926,
+                655.269
+              ],
+              [
+                321.565,
+                633.842,
+                328.926,
+                640.584
+              ],
+              [
+                321.565,
+                619.156,
+                328.926,
+                625.898
+              ],
+              [
+                317.884,
+                604.47,
+                328.925,
+                611.212
+              ],
+              [
+                317.884,
+                589.784,
+                328.925,
+                596.526
+              ],
+              [
+                306.339,
+                586.695,
+                314.59,
+                672.458
+              ],
+              [
+                281.274,
+                655.922,
+                290.475,
+                662.663
+              ],
+              [
+                281.274,
+                632.59,
+                290.475,
+                639.332
+              ],
+              [
+                281.274,
+                609.258,
+                290.475,
+                616.0
+              ],
+              [
+                292.308,
+                602.484,
+                300.559,
+                656.647
+              ],
+              [
+                212.595,
+                581.156,
+                275.488,
+                592.224
+              ],
+              [
+                439.213,
+                645.382,
+                448.414,
+                652.124
+              ],
+              [
+                439.213,
+                627.174,
+                448.414,
+                633.916
+              ],
+              [
+                439.213,
+                608.966,
+                448.414,
+                615.708
+              ],
+              [
+                439.213,
+                590.759,
+                448.414,
+                597.5
+              ],
+              [
+                450.247,
+                602.484,
+                458.498,
+                656.647
+              ],
+              [
+                375.391,
+                581.156,
+                433.427,
+                592.224
+              ],
+              [
+                232.56,
+                553.836,
+                398.495,
+                562.087
+              ],
+              [
+                108.0,
+                708.059,
+                504.003,
+                728.981
+              ],
+              [
+                301.019,
+                752.194,
+                310.982,
+                762.157
+              ]
+            ]
+          },
+          {
+            "pdf_page": 22,
+            "start_char": 0,
+            "end_char": 504,
+            "chunk_start_char": 845,
+            "chunk_end_char": 1349,
+            "block_bboxes": [
+              [
+                108.0,
+                27.813,
+                293.095,
+                37.776
+              ],
+              [
+                157.374,
+                81.467,
+                454.628,
+                91.94
+              ],
+              [
+                186.257,
+                106.129,
+                404.318,
+                120.092
+              ],
+              [
+                247.818,
+                120.056,
+                442.354,
+                129.389
+              ],
+              [
+                167.394,
+                134.352,
+                437.725,
+                163.639
+              ],
+              [
+                124.169,
+                179.599,
+                487.833,
+                190.072
+              ],
+              [
+                122.7,
+                203.523,
+                427.622,
+                214.404
+              ],
+              [
+                170.675,
+                214.376,
+                502.259,
+                221.649
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "c73a55ccbfe00e2181426471b596174f93907cbab7ef8d6ea0c2de866acf8f68",
+        "section": "A.7.6 PERFORMANCE ON DIFFERENT ANSWER NUMBERS",
+        "text": "A.7.6\nPERFORMANCE ON DIFFERENT ANSWER NUMBERS\nWe also present the performance of RoG and its variants on questions with different numbers of\nanswers in Table 18. From results, we can see that RoG achieves better performance than its variants\non questions with different numbers of answers. Specifically, with the number of answer increasing,\nthe performance of RoG w/o planning decreases significantly due to the lack of knowledge from\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n10\n20\n30\n40\n# Retrieved Reasoning Paths\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n25\n50\n75\n100\n125\n# Retrieved Reasoning Paths\n0.5\n1.0\n1.5\nRetrieval Time (s)\n1e−3\nWebQSP\n1.0\n1.5\n2.0\n2.5\nRetrieval Time (s)\n1e−3\nCWQ\n# Retrieved Reasoning Paths\nRetrieval Time\nFigure 4: Average retrieval time and average number of retrieved reasoning paths w.r.t. the number\nof top-K relation paths.\n21\n\nPublished as a conference paper at ICLR 2024\nTable 17: F1 scores of RoG and its variants for different hops of questions.\nMethods\nWebQSP\nCWQ\n1 hop\n2 hop\n≥3 hop\n1 hop\n2 hop\n≥3 hop\nRoG\n77.03\n64.86\n-\n62.88\n58.46\n37.82\nRoG w/o reasoning\n57.06\n25.49\n-\n17.06\n34.25\n17.07\nRoG w/o planning\n50.33\n51.66\n-\n31.04\n33.93\n23.29\nTable 18: F1 scores of RoG and its variants for questions with varying numbers of answers.\nMethods\nWebQSP\nCWQ\n#Ans = 1\n2 ≥#Ans ≤4\n5 ≥#Ans ≤9\n#Ans ≥10\n#Ans = 1\n2 ≥#Ans ≤4\n5 ≥#Ans ≤9\n#Ans ≥10\n"
+      }
+    ],
+    "required_source_papers": [
+      "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+      "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": true,
+      "planned_output": "完整模型回答与引用",
+      "controls": {
+        "arms": [
+          "Legacy-Hybrid",
+          "Production-Final"
+        ],
+        "arm_configs": {
+          "Legacy-Hybrid": {
+            "graph_enabled": false,
+            "graph_query_aware": false,
+            "use_method_cards": false,
+            "path_budget": 0,
+            "rerank_contextual": false,
+            "rerank_windowed": false,
+            "evidence_budget": 6000,
+            "evidence_max": 8,
+            "source_policy": "named_first",
+            "score_policy": "fixed",
+            "reservation_policy": "legacy",
+            "citation_protocol": "source-choice-v1",
+            "query_planner": false,
+            "premise_check": false
+          },
+          "Production-Final": {
+            "graph_enabled": true,
+            "graph_query_aware": true,
+            "use_method_cards": true,
+            "path_budget": 1200,
+            "rerank_contextual": true,
+            "rerank_windowed": false,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "subquery_balanced",
+            "citation_protocol": "source-choice-v3",
+            "query_planner": true,
+            "premise_check": true
+          }
+        },
+        "backend": "neo4j",
+        "shared_q00_vectors": "identical Cloudflare Q00 query embeddings across both arms; Production-Final additionally embeds planned subqueries",
+        "execution_order": "alternate arm order by case index",
+        "gold_exclusion": "question text only; gold pools and reference tables isolated"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Legacy-Hybrid / Production-Final Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "H-F05",
+    "category": "fact",
+    "benchmark": "benchmark-holdout-v1",
+    "benchmark_sha256": "3b871c53c664e26d9190ec6c102290b4991ce068960ce8572ee5a9305c85dfe6",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

@@ -1,0 +1,686 @@
+{
+  "id": "82888160-bbcb-5b21-b888-10583c096528",
+  "inputs": {
+    "question": "LPKG、CuriousLLM、RoG 分别学习什么，训练出的能力在问答时怎样使用？请区分规划数据、追问监督与 KG 知识蒸馏。"
+  },
+  "outputs": {
+    "expected_answer": "LPKG 用 KG 派生 planning data 微调规划能力；CuriousLLM 用问题和证据监督后续问题，指导查缺检索；RoG 从 KG 蒸馏知识，并在推理时生成关系计划、检索有效路径。不能互换训练目标。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "lpdata",
+        "answer_point": "LPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "primary_chunk": "chunk_e07b345ba2a42d01f295e47f196061d5",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ]
+      },
+      {
+        "unit_id": "curious",
+        "answer_point": "CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。作者明确将 CuriousLLM 描述为针对 KGP 的增强；其成本/幻觉评价归属于作者报告。",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "primary_chunk": "chunk_43145c0748762d6b4c650c65721f826f",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      {
+        "unit_id": "rog",
+        "answer_point": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      }
+    ],
+    "relation_outline": "LPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。；CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。作者明确将 CuriousLLM 描述为针对 KGP 的增强；其成本/幻觉评价归属于作者报告。；RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+    "must_not_claim": "不能互换监督目标或臆测训练数据完全相同。",
+    "case_id": "R22",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "lpdata",
+        "required_fact": "LPKG 从 KG 构造 planning data，用于微调小模型的复杂问答规划能力。",
+        "primary_chunk": "chunk_e07b345ba2a42d01f295e47f196061d5",
+        "supporting_chunks": [
+          "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "curious",
+        "required_fact": "CuriousLLM 生成后续问题查缺补漏；Follow-upQA 用问题和证据作输入、后续问题作真值，也用特殊 token 表示证据充分。作者明确将 CuriousLLM 描述为针对 KGP 的增强；其成本/幻觉评价归属于作者报告。",
+        "primary_chunk": "chunk_43145c0748762d6b4c650c65721f826f",
+        "supporting_chunks": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "rog",
+        "required_fact": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+        "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "supporting_chunks": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 576,
+            "end_char": 1608,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1032,
+            "block_bboxes": [
+              [
+                157.758,
+                205.751,
+                384.313,
+                233.647
+              ],
+              [
+                87.516,
+                247.152,
+                273.866,
+                520.203
+              ],
+              [
+                70.866,
+                534.529,
+                153.68,
+                546.484
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "6d4e138ad0ce1b7769f1e9faca7d7d7d023628d64730439d12ce6949fa7eaaed",
+        "section": "Abstract",
+        "text": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n"
+      },
+      {
+        "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+        "page_start": 8,
+        "page_end": 9,
+        "source_spans": [
+          {
+            "pdf_page": 8,
+            "start_char": 3661,
+            "end_char": 4405,
+            "chunk_start_char": 0,
+            "chunk_end_char": 744,
+            "block_bboxes": [
+              [
+                306.142,
+                552.544,
+                381.209,
+                564.499
+              ],
+              [
+                305.804,
+                574.956,
+                526.318,
+                775.47
+              ]
+            ]
+          },
+          {
+            "pdf_page": 9,
+            "start_char": 0,
+            "end_char": 754,
+            "chunk_start_char": 745,
+            "chunk_end_char": 1499,
+            "block_bboxes": [
+              [
+                180.817,
+                292.104,
+                414.46,
+                302.067
+              ],
+              [
+                70.866,
+                324.955,
+                125.334,
+                336.91
+              ],
+              [
+                70.866,
+                346.852,
+                290.946,
+                371.348
+              ],
+              [
+                70.593,
+                373.953,
+                290.947,
+                452.691
+              ],
+              [
+                70.473,
+                455.399,
+                289.317,
+                547.583
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "f73754b3c9783112b1271eaa8cf1148cce8968074fe88a8dd55636c12432ae2f",
+        "section": "Conclusion",
+        "text": "Conclusion\nIn this paper, we try to enhance the planning ability\nin retrieval-augmented LLMs using KGs. Specifi-\ncally, we design a framework for Learning to Plan\nfrom KG (LPKG). The proposed LPKG framework\nfirst utilizes the rich patterns in the KGs to con-\nstruct planning data, then fine-tune planning LLMs\nbased on such data to enable them to conduct plan-\nning on downstream datasets, and ultimately get\nthe final answer through parsing and execution.\nThe experimental results reveal the excellent per-\nformance of the LPKG framework and also demon-\nstrate the effectiveness of using KG-sourced data to\nenhance LLMs’ planning ability. Finally, we con-\nstruct CLQA-Wiki, providing a more challenging\ncomplex QA benchmark for the community.\n\nFigure 4: Fine-grained evaluation based on question types.\nLimitation\nIn our view, the limitations of our work at the cur-\nrent stage mainly stem from two aspects:\n(1) During the fine-tuning phase of planning\nLLMs, we simply mixed various types of ques-\ntions together uniformly for training. We have not\nyet explored the impact of question type distribu-\ntion on the experimental results, which could be\nthe focus of future work.\n(2) At present, the datasets we test have explicit\ntypes of questions (multi-hop, comparison, and\nunion/intersection), but in reality, some question\ntypes may be implicit or even not be included in\nthe types we define. The future direction of our\nwork can be to study planning methods for these\ntypes of unclear questions.\n"
+      },
+      {
+        "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 252,
+            "end_char": 1774,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1522,
+            "block_bboxes": [
+              [
+                157.758,
+                221.69,
+                202.243,
+                233.645
+              ],
+              [
+                87.376,
+                245.034,
+                274.616,
+                649.442
+              ],
+              [
+                70.866,
+                661.499,
+                153.68,
+                673.454
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "393207f537cdc33090753f17ca82a444afdecce4c34ccf9f7a8d64e72b8b6e00",
+        "section": "Abstract",
+        "text": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n"
+      },
+      {
+        "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 318,
+            "end_char": 1721,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1403,
+            "block_bboxes": [
+              [
+                278.288,
+                270.703,
+                333.722,
+                282.658
+              ],
+              [
+                143.866,
+                296.104,
+                468.139,
+                492.369
+              ],
+              [
+                108.299,
+                514.402,
+                205.989,
+                526.357
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "555a358e21b7a12a69fa408f252697827520cea4a7201afcf3083a96a8ef2459",
+        "section": "ABSTRACT",
+        "text": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "paper_900c57868044724d396de2c95dd00435",
+      "paper_b2e26390ad4eb43ff4d03b5eb4e49037"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "覆盖每个必要事实并逐条引用其来源原文。",
+      "semantics": "核对关系方向、实体角色、训练/测试角色、数据集设置和指标。",
+      "synthesis": "区分论文直接主张与跨来源分析；共享实体不自动构成因果或方法继承。",
+      "uncertainty": "来源没有说明的条件须标为未知，不可补造。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution.",
+      "retrieval_only": true,
+      "negative_policy": "negative questions excluded from retrieval recall aggregates; source diagnostics shown only, no rejection accuracy",
+      "failure_attribution": "post-hoc frozen source-pool ID diagnostics; not independent semantic correctness"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索对照；无模型答案、无答案准确率",
+      "controls": {
+        "arms": [
+          "Dense-only",
+          "Graph-only",
+          "Hybrid"
+        ],
+        "candidate_max": 40,
+        "dense_only_top": 40,
+        "hybrid_fulltext_top": 20,
+        "hybrid_dense_top": 20,
+        "graph_candidate_max": 40,
+        "graph_hops": 2,
+        "graph_paths_max": 40,
+        "graph_seed_entities_max": 40,
+        "graph_per_node": 8,
+        "graph_seed_chunks": 0,
+        "graph_text_fallback": false,
+        "graph_source_rank_hint": false,
+        "evidence_max": 8,
+        "evidence_budget_bytes": 6000,
+        "path_prompt_bytes": 0,
+        "reranker": "same GPU FP16 model; threshold 0.05; max_pair_tokens 1024",
+        "candidate_note": "same total cap, not forced equal returned counts; Hybrid has two channels of 20",
+        "order": "rotate three arms by case index",
+        "generation_requests_max": 0
+      },
+      "models": {
+        "generation": "DeepSeek-V4-Flash (configured provider)",
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)"
+      }
+    },
+    "result_display": {
+      "location": "Dense-only / Graph-only / Hybrid 三组 Experiment",
+      "fields": [
+        "全部候选原文及分数",
+        "最终证据与位置",
+        "实体/路径/截断",
+        "逐事实失败归因",
+        "三组差异",
+        "时延与上下文字节",
+        "零生成与Token未报告说明",
+        "原始Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "assessment": {
+      "axis": "三种训练信号与推理用途",
+      "criteria": [
+        {
+          "id": "R22.C01",
+          "requirement": "LPKG 用 KG 派生规划数据提升复杂问答规划能力。",
+          "unit_ids": [
+            "lpdata"
+          ],
+          "supporting_chunks_by_unit": {
+            "lpdata": [
+              "chunk_e07b345ba2a42d01f295e47f196061d5",
+              "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R22.C02",
+          "requirement": "CuriousLLM 以问题/证据为输入，学习后续问题以指导检索。",
+          "unit_ids": [
+            "curious"
+          ],
+          "supporting_chunks_by_unit": {
+            "curious": [
+              "chunk_43145c0748762d6b4c650c65721f826f"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R22.C03",
+          "requirement": "RoG 通过 KG 知识蒸馏训练。",
+          "unit_ids": [
+            "rog"
+          ],
+          "supporting_chunks_by_unit": {
+            "rog": [
+              "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R22.C04",
+          "requirement": "RoG 推理时做关系计划与有效路径检索。",
+          "unit_ids": [
+            "rog"
+          ],
+          "supporting_chunks_by_unit": {
+            "rog": [
+              "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        }
+      ],
+      "max_score": 4,
+      "focus_predicates": [
+        "CONNECTS",
+        "DERIVES_TRAINING_DATA_FROM",
+        "ENHANCES",
+        "GENERATES",
+        "HAS_STAGE",
+        "HAS_TARGET",
+        "TRAINED_WITH",
+        "USES_INPUT",
+        "USES_TRAINING_SIGNAL"
+      ],
+      "reference_path_scope": "本题各来源单元的预期子图；可能是多条分支或互不相连的跨论文子图。",
+      "critical_error_rule": "触发全局 critical_errors 时本题不判全对，并保留逐项分数与错误说明。",
+      "reviewer_status": "not_reviewed",
+      "model_result_status": "not_run"
+    },
+    "expected_graph_paths": {
+      "lpdata": [
+        {
+          "unit_id": "lpdata",
+          "path_id": "lpdata.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "LPKG"
+            },
+            {
+              "type": "KnowledgeBase",
+              "name": "knowledge graph"
+            }
+          ],
+          "claim_ids": [
+            "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d"
+          ]
+        },
+        {
+          "unit_id": "lpdata",
+          "path_id": "lpdata.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "LPKG"
+            },
+            {
+              "type": "TrainingSignal",
+              "name": "planning data"
+            },
+            {
+              "type": "Component",
+              "name": "small model fine-tuning"
+            }
+          ],
+          "claim_ids": [
+            "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+            "538bb8538d113afca1278ba72afac0de20240d749f461139f8cbfb3fb4f3a11c"
+          ]
+        },
+        {
+          "unit_id": "lpdata",
+          "path_id": "lpdata.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "LPKG"
+            },
+            {
+              "type": "Stage",
+              "name": "complex QA planning"
+            }
+          ],
+          "claim_ids": [
+            "62ca6febeb59a93847d60507becd0818860eb30f6ceaa2bd29b5d4b9caa4ad70"
+          ]
+        }
+      ],
+      "curious": [
+        {
+          "unit_id": "curious",
+          "path_id": "curious.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "CuriousLLM"
+            },
+            {
+              "type": "Method",
+              "name": "KGP"
+            }
+          ],
+          "claim_ids": [
+            "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae"
+          ]
+        },
+        {
+          "unit_id": "curious",
+          "path_id": "curious.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "CuriousLLM"
+            },
+            {
+              "type": "EvidenceSignal",
+              "name": "follow-up question"
+            },
+            {
+              "type": "Component",
+              "name": "question and evidence"
+            }
+          ],
+          "claim_ids": [
+            "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+            "58c5de15bb15316dff97a52051193487b9a8269606ee902d123a90d6e5b02f0c"
+          ]
+        },
+        {
+          "unit_id": "curious",
+          "path_id": "curious.P03",
+          "nodes": [
+            {
+              "type": "EvidenceSignal",
+              "name": "follow-up question"
+            },
+            {
+              "type": "Component",
+              "name": "next question"
+            }
+          ],
+          "claim_ids": [
+            "90d8884b3f58f99ab73a0310c76e68c68677de7268a466e48c6ec95c344e80cf"
+          ]
+        },
+        {
+          "unit_id": "curious",
+          "path_id": "curious.P04",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "CuriousLLM"
+            },
+            {
+              "type": "EvidenceSignal",
+              "name": "evidence-sufficient special token"
+            }
+          ],
+          "claim_ids": [
+            "5b6c894f09bc96f8ff29da027764b48c7973f7aa95ba0623326eab1789d6c39c"
+          ]
+        }
+      ],
+      "rog": [
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Stage",
+              "name": "planning"
+            },
+            {
+              "type": "Component",
+              "name": "KG-constrained relation path plan"
+            }
+          ],
+          "claim_ids": [
+            "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+            "ba37ea4f3a5d65124244548e425678c1e3612a8c808e09561c8c9864a161a567"
+          ]
+        },
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Stage",
+              "name": "retrieval"
+            },
+            {
+              "type": "Component",
+              "name": "valid reasoning paths"
+            }
+          ],
+          "claim_ids": [
+            "acb6f31d72d610e337bc5df70f4727915505dd0df12b05675a6e90bd6210e743",
+            "125f506f5a6592d212ab477119720e947a21ec29ab1e1bc1de63fd2e2c7926be"
+          ]
+        },
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "TrainingSignal",
+              "name": "KG knowledge distillation"
+            }
+          ],
+          "claim_ids": [
+            "aa112d0b5699cf739594b7e46893dc6141a6d99cd1c8a4e0e5427e7504de1a46"
+          ]
+        }
+      ]
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    }
+  },
+  "metadata": {
+    "case_id": "R22",
+    "category": "cross",
+    "benchmark": "benchmark-retrieval-v1",
+    "benchmark_sha256": "6c63c43ed90c397abc19e07eef6b8ff64c150e384070ac759d52db7fbdeb625c",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "id": "4e7f11aa-d78b-5570-a6cc-2df04546871e",
+  "inputs": {
+    "question": "HippoRAG 的消融已经证明，只要把查询节点的一跳邻居都加进来，就一定比只用查询节点效果好。原文是否这样报告？"
+  },
+  "outputs": {
+    "expected_answer": "不是：不做PPR直接加入邻居的替代方法比仅使用查询节点更差。",
+    "answerable": false,
+    "negative_kind": "false_or_overgeneralized_premise",
+    "source_references": [
+      {
+        "unit_id": "N05.S01",
+        "answer_point": "不是：不做PPR直接加入邻居的替代方法比仅使用查询节点更差。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_8245d0849e8cf0df364eb6980d96843c",
+        "pages": [
+          8,
+          8
+        ],
+        "known_support_chunks": [
+          "chunk_8245d0849e8cf0df364eb6980d96843c"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": "不得接受题干错误前提。",
+    "case_id": "N05",
+    "category": "negative",
+    "required_facts": [
+      {
+        "unit_id": "N05.S01",
+        "required_fact": "不是：不做PPR直接加入邻居的替代方法比仅使用查询节点更差。",
+        "primary_chunk": "chunk_8245d0849e8cf0df364eb6980d96843c",
+        "supporting_chunks": [
+          "chunk_8245d0849e8cf0df364eb6980d96843c"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 8,
+        "page_end": 8,
+        "source_spans": [
+          {
+            "pdf_page": 8,
+            "start_char": 179,
+            "end_char": 1441,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1262,
+            "block_bboxes": [
+              [
+                108.0,
+                101.594,
+                504.004,
+                177.122
+              ],
+              [
+                107.641,
+                183.38,
+                504.344,
+                248.056
+              ],
+              [
+                108.0,
+                265.266,
+                377.707,
+                275.229
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "2550d49bf589c10eaf3da6906e6fddd6ee4871f919e56b9a6e8330772ff390fe",
+        "section": "Results",
+        "text": "PPR Alternatives. As shown in Table 5 (rows 5-6), to examine how much of our results are due to\nthe strength of PPR, we replace the PPR output with the query node probability #»n multiplied by node\nspecificity values (row 5) and a version of this that also distributes a small amount of probability to the\ndirect neighbors of each query node (row 6). First, we find that PPR is a much more effective method\nfor including associations for retrieval on all three datasets compared to both simple baselines. It is\ninteresting to note that adding the neighborhood of Rq nodes without PPR leads to worse performance\nthan only using the query nodes themselves.\nAblations. As seen in Table 5 (rows 7-8), node specificity obtains considerable improvements on\nMuSiQue and HotpotQA and yields almost no change in 2WikiMultiHopQA. This is likely because\n2WikiMultiHopQA relies on named entities with little differences in terms of term weighting. In\ncontrast, synonymy edges have the largest effect on 2WikiMultiHopQA, suggesting that noisy entity\nstandardization is useful when most relevant concepts are named entities, and improvements to\nsynonymy detection could lead to stronger performance in other datasets.\n5.2\nHippoRAG’s Advantage: Single-Step Multi-Hop Retrieval\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_45e21fe95d28e544e8b55c6a986ff63e"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "cross candidate_pool_coverage",
+      "negative_policy": "8道反例来源诊断单列，不计主召回，不评拒答正确率",
+      "semantic_review": "not assessed; no generation",
+      "source_pools": "unchanged, non-exhaustive, pre-frozen",
+      "pairing": "case-level win/tie/loss vs declared control; individual source-stage transitions also shown",
+      "causal_limit": "development set only; source-paper inclusion is not necessary-fact support"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索与证据评估（原冻结方案）",
+      "controls": {
+        "stage": "upstream_recall_width",
+        "fulltext_top": 20,
+        "rrf_k": 60,
+        "generation": false,
+        "embedding_calls": 0,
+        "named_policy": "existing named-paper reservation, not necessary-source reservation",
+        "no_gold_in_inputs": true,
+        "model_config": {
+          "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+          "CLOUD_BGE_PROVIDER": "cloudflare",
+          "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+          "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+          "LOCAL_RERANKER_DEVICE": "cuda",
+          "LOCAL_RERANKER_DTYPE": "float16",
+          "LOCAL_RERANKER_PERSISTENT": "true"
+        },
+        "dense_values": [
+          20,
+          40,
+          60
+        ],
+        "ann_query_k": 100,
+        "fusion_cap": "20+dense_k, no truncation",
+        "rerank_calls": 0,
+        "evidence_selection": false,
+        "query_vectors_sha256": "2397b125e1786d460e1facc84e62370c1f65ac49887636836dc1f9e58277faa6",
+        "index_requirement": "current corpus/model and top20 prefix identical to parent"
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Dense20 / Dense40 / Dense60 Experiments",
+      "fields": [
+        "候选通道完整排名与分数",
+        "全部候选原文及位置",
+        "必要来源上游/重排/预算缺口",
+        "逐题配对差异",
+        "时延/调用量与Token状态",
+        "证据原文/图路径",
+        "原始及本轮Experiment Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "N05.A01",
+        "requirement": "不是：不做PPR直接加入邻居的替代方法比仅使用查询节点更差",
+        "unit_ids": [
+          "N05.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "N05.S01": [
+            "chunk_8245d0849e8cf0df364eb6980d96843c"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "selection_bias": "这40题与来源已参与前轮诊断和本轮方案讨论；仅开发回归，不是新题泛化测试。"
+  },
+  "metadata": {
+    "case_id": "N05",
+    "category": "negative",
+    "benchmark": "benchmark-recall-width-v1",
+    "benchmark_sha256": "887b9fef53e0bbceaaf4db4e320af9650880e837f7dbc5d609f74dac7b4d56d4",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; exposed development set",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "negative"
+  ]
+}

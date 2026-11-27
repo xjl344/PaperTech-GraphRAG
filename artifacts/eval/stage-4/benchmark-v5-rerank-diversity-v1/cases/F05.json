@@ -1,0 +1,358 @@
+{
+  "id": "a3850e39-5703-5346-a561-a9d3ada16b32",
+  "inputs": {
+    "question": "KGP 的文档图怎样定义节点和边？LLM 图遍历代理负责收集什么？请区分图结构与代理动作。"
+  },
+  "outputs": {
+    "expected_answer": "节点表示段落或文档结构（如页面、表格）；边表示段落间语义/词法相似或文档结构关系。LLM 遍历代理沿节点导航并收集支持段落。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "kgp",
+        "answer_point": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_b959214e888053dae53b16a5259d7ea9",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ]
+      }
+    ],
+    "relation_outline": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+    "must_not_claim": null,
+    "case_id": "F05",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "kgp",
+        "required_fact": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+        "primary_chunk": "chunk_b959214e888053dae53b16a5259d7ea9",
+        "supporting_chunks": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 310,
+            "end_char": 1851,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1541,
+            "block_bboxes": [
+              [
+                154.715,
+                218.316,
+                191.786,
+                228.279
+              ],
+              [
+                63.963,
+                235.864,
+                282.537,
+                493.897
+              ],
+              [
+                54.0,
+                509.791,
+                292.505,
+                677.594
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "0e322000b7328f184512788b9a3673e33daf048e076992ed152feb0614cda55f",
+        "section": "Abstract",
+        "text": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_57e4088ab0410527356a07d8b6f88f3b"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "零云端费用离线三组消融回放（不生成新答案）。",
+      "controls": {
+        "arms": [
+          "P3-Baseline",
+          "Balanced-MMR",
+          "WindowRerank+Balanced-MMR"
+        ],
+        "candidate_pool": "frozen P3-Graph+MethodCard ranked candidates per question (0 new retrieval/cloud calls)",
+        "evidence_budget": 18000,
+        "evidence_max": 12,
+        "path_budget": 1200,
+        "diversity_threshold": 0.55,
+        "window_config": {
+          "max_chars": 700,
+          "overlap": 250,
+          "max_windows": 5,
+          "aggregation": "max(whole, windows)"
+        },
+        "generation_calls": 0,
+        "cloud_embedding_calls": 0,
+        "gold_exclusion": "gold pools never used in windowing, reranking, or selection"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      },
+      "cloud_calls": 0
+    },
+    "result_display": {
+      "location": "本题关联的 P3-Baseline / Balanced-MMR / WindowRerank+Balanced-MMR Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "assessment": {
+      "axis": "图表示与代理职责",
+      "criteria": [
+        {
+          "id": "F05.C01",
+          "requirement": "节点可以是段落，也可以是页面、表格等文档结构。",
+          "unit_ids": [
+            "kgp"
+          ],
+          "supporting_chunks_by_unit": {
+            "kgp": [
+              "chunk_b959214e888053dae53b16a5259d7ea9"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "F05.C02",
+          "requirement": "边可以表示语义/词法相似，也可以表示文档结构关系。",
+          "unit_ids": [
+            "kgp"
+          ],
+          "supporting_chunks_by_unit": {
+            "kgp": [
+              "chunk_b959214e888053dae53b16a5259d7ea9"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "F05.C03",
+          "requirement": "遍历代理导航并收集支持段落。",
+          "unit_ids": [
+            "kgp"
+          ],
+          "supporting_chunks_by_unit": {
+            "kgp": [
+              "chunk_b959214e888053dae53b16a5259d7ea9"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        }
+      ],
+      "max_score": 3,
+      "focus_predicates": [
+        "COLLECTS",
+        "HAS_EDGE_TYPE",
+        "HAS_GRAPH_REPRESENTATION",
+        "HAS_NODE_TYPE",
+        "USES_AGENT"
+      ],
+      "reference_path_scope": "本题各来源单元的预期子图；可能是多条分支或互不相连的跨论文子图。",
+      "critical_error_rule": "触发全局 critical_errors 时本题不判全对，并保留逐项分数与错误说明。",
+      "reviewer_status": "not_reviewed",
+      "model_result_status": "not_run"
+    },
+    "expected_graph_paths": {
+      "kgp": [
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KGP"
+            },
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "NodeType",
+              "name": "passage"
+            }
+          ],
+          "claim_ids": [
+            "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+            "eb5171accf1be44d16790280d8bd57cdd379fa7597d3523f320aac52ad59cb71"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P02",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "NodeType",
+              "name": "document structure"
+            }
+          ],
+          "claim_ids": [
+            "1e3957d6e1180c018346c68fe2539a2672cb9050c21e505f439850d189ce6350"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P03",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "EdgeType",
+              "name": "lexical or semantic similarity"
+            }
+          ],
+          "claim_ids": [
+            "6907499f10078dae84bea86a35d8cf49d88827d0e6797631d8c127508e0ed51d"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P04",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "EdgeType",
+              "name": "intra-document structure"
+            }
+          ],
+          "claim_ids": [
+            "2b82744a57f83f7c8ec618da410cd5c6666e804df78bcf15249b6cb7196fa356"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P05",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KGP"
+            },
+            {
+              "type": "Component",
+              "name": "LLM graph traversal agent"
+            },
+            {
+              "type": "Component",
+              "name": "supporting passages"
+            }
+          ],
+          "claim_ids": [
+            "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+            "5b83b7227eb362c7813c6c2eaec2395b28c4b2f2057ed4eb12387f55490367fb"
+          ]
+        }
+      ]
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    }
+  },
+  "metadata": {
+    "case_id": "F05",
+    "category": "fact",
+    "benchmark": "benchmark-v5-rerank-diversity-v1",
+    "benchmark_sha256": "7662799530b177ceed6bf54c5fdd1afea00ba44c926054d65687d0a404e96a15",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

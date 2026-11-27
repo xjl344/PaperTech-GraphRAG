@@ -1,0 +1,2050 @@
+{
+  "request_id": "b1f613ee-2151-4e2d-80ad-e8c8cea617f1",
+  "status": "ok",
+  "answer": "图结构方面，KGP 在给定文档集合上构建知识图谱，节点象征 passage 或文档结构（如页、表），边表示 passage 之间的词法/语义相似性，或文档内部的结构关系（如归属关系）[E1][E2][E3][E10]。具体构造上，文档被切分为 passage，通过预训练编码器得到嵌入或用关键词构成词袋特征，再按嵌入相似度或是否共享关键词连接两个 passage；表格/页由 API 抽取后作为结构节点加入，若页包含 passage 和表格则加有向边表示归属关系 [E10]。代理动作方面，LLM 图遍历代理在已访问节点基础上推理并生成下一段证据，再从候选邻居中选出最值得访问的节点，即“推理 + 检索”交替进行 [E1]。它充当局部导航者，跨节点导航并收集支持性 passage，而构建的图充当全局约束、限定 passage 间的过渡空间 [E2]。操作层面，代理对候选邻居队列中的邻居排序，选 top-k passage 节点访问并更新队列，直至候选队列为空或达到检索 passage 的预算 K [E5]。代理的目标是基于已访问 passage 走向最有助于回答问题的下一个 passage [E6]。二者区别在于：图规定可过渡的空间与结构关系（全局），代理在其上做问题定制的邻居排序与访问以收集上下文（局部动作）[E2][E6]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1783,
+          "end_char": 2945,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1162,
+          "block_bboxes": [
+            [
+              54.0,
+              530.06,
+              292.505,
+              704.407
+            ],
+            [
+              319.5,
+              253.181,
+              558.005,
+              296.021
+            ]
+          ]
+        }
+      ],
+      "quote": "Given the above challenges, we propose a knowledge\ngraph prompting (KGP) method for enhancing LLMs in\nMD-QA. Specifically, we construct a KG over the given doc-\numents with nodes symbolizing passages or document struc-\ntures and edges denoting their lexical/semantic similarity be-\ntween passages or intra-document structural relations. Then\nfor the first challenge of alternative reasoning and retrieving\nknowledge across different documents, we design an LLM-\nbased KG traversal agent, which can alternatively generate\nthe next evidence to approach the question, i.e., reasoning,\nand select the most promising neighbor to visit from the con-\nstructed KG based on the generated evidence, i.e., retrieval.\nMoreover, we apply the instruction fine-tuning strategy to\naugment the reasoning capability of the LLM-based KG\ntraversal agent and hence refrain from repeatedly prompting",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.534059524536133
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.800018310546875
+        }
+      ],
+      "rerank_score": 0.8580061793327332,
+      "context_bytes": 1505,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 310,
+          "end_char": 1851,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1541,
+          "block_bboxes": [
+            [
+              154.715,
+              218.316,
+              191.786,
+              228.279
+            ],
+            [
+              63.963,
+              235.864,
+              282.537,
+              493.897
+            ],
+            [
+              54.0,
+              509.791,
+              292.505,
+              677.594
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 12.471960067749023
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7935080528259277
+        }
+      ],
+      "rerank_score": 0.8562121987342834,
+      "context_bytes": 1896,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 310,
+          "end_char": 1851,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1541,
+          "block_bboxes": [
+            [
+              154.715,
+              218.316,
+              191.786,
+              228.279
+            ],
+            [
+              63.963,
+              235.864,
+              282.537,
+              493.897
+            ],
+            [
+              54.0,
+              509.791,
+              292.505,
+              677.594
+            ]
+          ]
+        }
+      ],
+      "quote": "based graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 12.471960067749023
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7935080528259277
+        }
+      ],
+      "rerank_score": 0.8562121987342834,
+      "context_bytes": 1896,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 4081,
+          "end_char": 5057,
+          "chunk_start_char": 0,
+          "chunk_end_char": 976,
+          "block_bboxes": [
+            [
+              319.5,
+              502.637,
+              558.005,
+              704.406
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nAnswering multi-document questions demands knowledge\nreasoning and retrieving from different documents across\nvarious modalities, presenting challenges for applying the\nparadigm of ‘pre-train, prompt and predict’ with LLMs.\nRecognizing the logical associations among passages and\nstructural relations within documents, we propose a Knowl-\nedge Graph Prompting method (KGP) for aiding LLMs in\nMD-QA. The KGP constructs KGs from documents with\nnodes as sentences or document structures, and edges as\ntheir lexical/semantic similarity/structural relations. Since\nconstructed KGs may contain irrelevant neighbor informa-\ntion, we further design an LLM-based graph traversal agent\nthat selectively visits the most promising node in approach-\ning the question. In the future, we plan to investigate the\ncapability of LLMs in understanding graph topology and ex-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.059829711914062
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8103880882263184
+        }
+      ],
+      "rerank_score": 0.8085212111473083,
+      "context_bytes": 1321,
+      "eid": "E3"
+    },
+    {
+      "chunk_id": "chunk_a7f02d5588485cab6fe295889c95ea84",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 4335,
+          "end_char": 4771,
+          "chunk_start_char": 0,
+          "chunk_end_char": 436,
+          "block_bboxes": [
+            [
+              319.5,
+              617.731,
+              558.005,
+              672.14
+            ],
+            [
+              319.5,
+              661.567,
+              558.005,
+              704.406
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 765,
+          "chunk_start_char": 437,
+          "chunk_end_char": 1202,
+          "block_bboxes": [
+            [
+              54.0,
+              205.679,
+              557.998,
+              270.436
+            ],
+            [
+              82.314,
+              283.063,
+              264.188,
+              295.018
+            ]
+          ]
+        }
+      ],
+      "quote": "i=1 representing document structures\n(e.g., passages/pages/tables, etc.) and the edge set E ⊂V×V\nrepresenting the connections among different nodes (e.g.,\nsemantic/lexical similarity and belonging relations among\ndocument structures, etc.). Let X = {Xi}n\ni be node fea-\ntures and Xi corresponds to the feature of node vi, the form\nof which could be the text for the passage, the markdown for\nthe table and the page number for the page.\n\nFigure 3: Knowledge Graph Construction. We split each document in the document collection into passages. For each passage,\nwe either directly obtain their embeddings via pre-trained encoders or extract their keywords to build bag-of-word (BOW)\nfeatures. Then we connect two passages based on their embedding similarity or whether they share common keywords. Addi-\ntionally, we extract tables/pages via Extract-PDF API and add them as structural nodes to the KG.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.4142913818359375
+        }
+      ],
+      "rerank_score": 0.5025444030761719,
+      "context_bytes": 1547,
+      "eid": "E10"
+    },
+    {
+      "chunk_id": "chunk_a7f02d5588485cab6fe295889c95ea84",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 4335,
+          "end_char": 4771,
+          "chunk_start_char": 0,
+          "chunk_end_char": 436,
+          "block_bboxes": [
+            [
+              319.5,
+              617.731,
+              558.005,
+              672.14
+            ],
+            [
+              319.5,
+              661.567,
+              558.005,
+              704.406
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 765,
+          "chunk_start_char": 437,
+          "chunk_end_char": 1202,
+          "block_bboxes": [
+            [
+              54.0,
+              205.679,
+              557.998,
+              270.436
+            ],
+            [
+              82.314,
+              283.063,
+              264.188,
+              295.018
+            ]
+          ]
+        }
+      ],
+      "quote": "If pages include passages\nand tables, we add a directed edge to denote the belonging relations. The table nodes include the markdown formatted content\nof that table as Figure 8 in Supplementary has empirically shown that LLMs are able to understand tables in this format.\n3\nKnowledge Graph Construction",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.4142913818359375
+        }
+      ],
+      "rerank_score": 0.5025444030761719,
+      "context_bytes": 1547,
+      "eid": "E10"
+    },
+    {
+      "chunk_id": "chunk_84038d4c6f7949959af0974d04ee2379",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 4051,
+          "end_char": 5399,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1348,
+          "block_bboxes": [
+            [
+              319.5,
+              295.894,
+              558.005,
+              481.199
+            ],
+            [
+              319.5,
+              470.877,
+              558.005,
+              546.953
+            ],
+            [
+              319.5,
+              558.428,
+              558.005,
+              606.009
+            ]
+          ]
+        }
+      ],
+      "quote": "sal agent to rank the dequeued neighbors in Ci by Eq. (1)\n(lines 5-7). Last, we select top-k passage nodes V′\ni from Ci to\nvisit next based on their rank and correspondingly update the\ncandidate neighbor queue and reasoning path queue (lines 8-\n13). The above process terminates when either the candidate\nneighbor queue becomes empty or the prefixed budget K for\nthe retrieved passages is met. The time and space complexity\nare thoroughly analyzed in Section 8.3 in Supplementary.\n5",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7899971008300781
+        }
+      ],
+      "rerank_score": 0.6351093053817749,
+      "context_bytes": 1700,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_482d183305062f8854269ff9c16777d7",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 4,
+      "page_end": 5,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 2619,
+          "end_char": 4024,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1405,
+          "block_bboxes": [
+            [
+              319.5,
+              411.775,
+              558.005,
+              542.286
+            ],
+            [
+              346.254,
+              556.067,
+              531.249,
+              568.022
+            ],
+            [
+              319.5,
+              573.896,
+              558.005,
+              704.407
+            ]
+          ]
+        },
+        {
+          "pdf_page": 5,
+          "start_char": 0,
+          "end_char": 230,
+          "chunk_start_char": 1406,
+          "chunk_end_char": 1636,
+          "block_bboxes": [
+            [
+              54.0,
+              56.177,
+              292.505,
+              90.495
+            ],
+            [
+              54.0,
+              79.921,
+              292.503,
+              102.337
+            ],
+            [
+              93.294,
+              108.743,
+              159.738,
+              120.2
+            ],
+            [
+              132.71,
+              119.351,
+              151.767,
+              126.976
+            ]
+          ]
+        }
+      ],
+      "quote": "of the already-visited nodes in our case, thereby determining\nwhich ones to visit next. The most straightforward way is to\napply heuristic-based fuzzy matching or embedding-based\nsimilarity ranking, which cannot capture the intrinsic logical\nrelations between the already traversed paths and the nodes\nto visit next. Instead, we fine-tune a large language model\n(LLM) to guide the knowledge graph traversal towards the\nnext most promising passages in approaching the question\nbased on the visited passages, which we term as the LLM-\nbased KG traversal agent.\n\nGiven a question q asking about the document content, the\nLLM-based graph traversal agent reasons over previously\nvisited nodes/retrieved passages {sk}j\nk=0 and then generates\nthe next passage sj+1 as follows:\nsj+1 = arg max\nv∈Nj",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.567963600158691
+        }
+      ],
+      "rerank_score": 0.621540904045105,
+      "context_bytes": 1995,
+      "eid": "E6"
+    }
+  ],
+  "premise_check": [
+    {
+      "premise": "KGP 文档图的节点表示 passage 或文档结构（页/表等）",
+      "supported": true,
+      "evidence_eids": [
+        "E1",
+        "E2",
+        "E3",
+        "E10"
+      ],
+      "note": "多处原文一致说明节点语义"
+    },
+    {
+      "premise": "KGP 文档图的边表示 passage 间词法/语义相似性或文档结构关系",
+      "supported": true,
+      "evidence_eids": [
+        "E1",
+        "E2",
+        "E3",
+        "E10"
+      ],
+      "note": "原文明确边的定义，含结构归属的有向边"
+    },
+    {
+      "premise": "LLM 图遍历代理负责收集支持性 passage / 选取下一个最值得访问的邻居",
+      "supported": true,
+      "evidence_eids": [
+        "E2",
+        "E6",
+        "E5"
+      ],
+      "note": "代理作为局部导航者，排序候选邻居并访问"
+    },
+    {
+      "premise": "图结构与代理动作可区分：图是全局约束/过渡空间，代理是局部导航",
+      "supported": true,
+      "evidence_eids": [
+        "E2"
+      ],
+      "note": "原文直接对比二者角色"
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1783,
+          "end_char": 2945,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1162,
+          "block_bboxes": [
+            [
+              54.0,
+              530.06,
+              292.505,
+              704.407
+            ],
+            [
+              319.5,
+              253.181,
+              558.005,
+              296.021
+            ]
+          ]
+        }
+      ],
+      "quote": "Given the above challenges, we propose a knowledge\ngraph prompting (KGP) method for enhancing LLMs in\nMD-QA. Specifically, we construct a KG over the given doc-\numents with nodes symbolizing passages or document struc-\ntures and edges denoting their lexical/semantic similarity be-\ntween passages or intra-document structural relations. Then\nfor the first challenge of alternative reasoning and retrieving\nknowledge across different documents, we design an LLM-\nbased KG traversal agent, which can alternatively generate\nthe next evidence to approach the question, i.e., reasoning,\nand select the most promising neighbor to visit from the con-\nstructed KG based on the generated evidence, i.e., retrieval.\nMoreover, we apply the instruction fine-tuning strategy to\naugment the reasoning capability of the LLM-based KG\ntraversal agent and hence refrain from repeatedly prompting\nnon-open-sourced LLMs for evidence generation. For the\nmulti-modality challenge, we add different types of nodes\nto the KG characterizing different document structures and\nhence enabling content retrieval within those specific struc-\ntures. We highlight our contributions as follows:\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.534059524536133
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.800018310546875
+        }
+      ],
+      "rerank_score": 0.8580061793327332,
+      "context_bytes": 1505
+    },
+    {
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 310,
+          "end_char": 1851,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1541,
+          "block_bboxes": [
+            [
+              154.715,
+              218.316,
+              191.786,
+              228.279
+            ],
+            [
+              63.963,
+              235.864,
+              282.537,
+              493.897
+            ],
+            [
+              54.0,
+              509.791,
+              292.505,
+              677.594
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 12.471960067749023
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7935080528259277
+        }
+      ],
+      "rerank_score": 0.8562121987342834,
+      "context_bytes": 1896
+    },
+    {
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 4081,
+          "end_char": 5057,
+          "chunk_start_char": 0,
+          "chunk_end_char": 976,
+          "block_bboxes": [
+            [
+              319.5,
+              502.637,
+              558.005,
+              704.406
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nAnswering multi-document questions demands knowledge\nreasoning and retrieving from different documents across\nvarious modalities, presenting challenges for applying the\nparadigm of ‘pre-train, prompt and predict’ with LLMs.\nRecognizing the logical associations among passages and\nstructural relations within documents, we propose a Knowl-\nedge Graph Prompting method (KGP) for aiding LLMs in\nMD-QA. The KGP constructs KGs from documents with\nnodes as sentences or document structures, and edges as\ntheir lexical/semantic similarity/structural relations. Since\nconstructed KGs may contain irrelevant neighbor informa-\ntion, we further design an LLM-based graph traversal agent\nthat selectively visits the most promising node in approach-\ning the question. In the future, we plan to investigate the\ncapability of LLMs in understanding graph topology and ex-\nplore the potential of fine-tuning/prompting LLMs to encode\ncomplex topological signals hidden in the graph.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.059829711914062
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8103880882263184
+        }
+      ],
+      "rerank_score": 0.8085212111473083,
+      "context_bytes": 1321
+    },
+    {
+      "chunk_id": "chunk_00e67cd199d4e3b3ffb299633cfbac2e",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2945,
+          "end_char": 4335,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1390,
+          "block_bboxes": [
+            [
+              319.5,
+              304.04,
+              558.005,
+              412.723
+            ],
+            [
+              319.5,
+              417.825,
+              558.005,
+              493.632
+            ],
+            [
+              319.5,
+              498.735,
+              558.005,
+              563.582
+            ],
+            [
+              405.21,
+              577.686,
+              472.291,
+              589.642
+            ],
+            [
+              319.5,
+              595.454,
+              557.999,
+              628.305
+            ]
+          ]
+        }
+      ],
+      "quote": "• Generally-applicable KG Construction. We propose\nthree KG construction methods over documents, with pas-\nsages or document structures as nodes and their lexical/se-\nmantical similarity or structural relations as edges. Then\nwe empirically evaluate the quality of the constructed\nKGs in MD-QA by checking the level of overlap between\nthe neighborhood and the supporting facts for each ques-\ntion (Figure 5). Additionally, we provide a comprehensive\nsummary of both our proposed and existing KG construc-\ntion methods in Table 5 in Supplementary.\n• Engaging KG for Prompt Formulation. We design a\nKnowledge Graph Prompting (KGP) method, which lever-\nages the LLM-based KG traversal agent to retrieve the\nquestion-relevant contexts by traversing the constructed\nKG. Moreover, we fine-tune this agent to adaptively tra-\nverse the most promising neighbors for approaching the\nquestion based on the visited nodes (retrieved passages).\n• Case Studies Verifying MD-QA Framework. We com-\npare the performance of MD-QA when using different\ntypes of LLM agents in graph traversal (Table 2) on the\nKGs constructed over different numbers of documents\n(Figure 7(c)). We conduct case studies on visualizing KGP\nfor MD-QA in Section 8.7 in Supplementary.\n2\nNotations\nFollowing (Tian et al. 2023a), let G = (V, E) be a knowl-\nedge graph constructed from a set of documents D, where\nthe node set V = {vi}n\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 12.259340286254883
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7841534614562988
+        }
+      ],
+      "rerank_score": 0.6802417039871216,
+      "context_bytes": 1747
+    },
+    {
+      "chunk_id": "chunk_84038d4c6f7949959af0974d04ee2379",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 4051,
+          "end_char": 5399,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1348,
+          "block_bboxes": [
+            [
+              319.5,
+              295.894,
+              558.005,
+              481.199
+            ],
+            [
+              319.5,
+              470.877,
+              558.005,
+              546.953
+            ],
+            [
+              319.5,
+              558.428,
+              558.005,
+              606.009
+            ]
+          ]
+        }
+      ],
+      "quote": "Here we present the algorithm for our proposed KGP\nmethod for MD-QA. Given a question, we first apply LLM\nto classify whether the question is asking about the docu-\nment structure or content. If the question focuses on the doc-\nument structure, we extract the structural keywords such as\nPage or Table, and retrieve the content in the correspond-\ning structural nodes in KG. If the question focuses on the\ndocument content, we follow the step according to Algo-\nrithm 1. Specifically, we first initialize seeding passages Vs\nand the reasoning path queue P by TF-IDF search. Then\nfor each seeding passage vi ∈Vs, we add its neighbor-\ning passage nodes Ni into the candidate neighbor queue C\n(lines 1-4). After that, we iteratively dequeue the earliest en-\nqueued reasoning path/candidate neighborhood Pi/Ci from\nP/C and employ the fine-tuned LLM-based graph traver-\nsal agent to rank the dequeued neighbors in Ci by Eq. (1)\n(lines 5-7). Last, we select top-k passage nodes V′\ni from Ci to\nvisit next based on their rank and correspondingly update the\ncandidate neighbor queue and reasoning path queue (lines 8-\n13). The above process terminates when either the candidate\nneighbor queue becomes empty or the prefixed budget K for\nthe retrieved passages is met. The time and space complexity\nare thoroughly analyzed in Section 8.3 in Supplementary.\n5\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7899971008300781
+        }
+      ],
+      "rerank_score": 0.6351093053817749,
+      "context_bytes": 1700
+    },
+    {
+      "chunk_id": "chunk_482d183305062f8854269ff9c16777d7",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 4,
+      "page_end": 5,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 2619,
+          "end_char": 4024,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1405,
+          "block_bboxes": [
+            [
+              319.5,
+              411.775,
+              558.005,
+              542.286
+            ],
+            [
+              346.254,
+              556.067,
+              531.249,
+              568.022
+            ],
+            [
+              319.5,
+              573.896,
+              558.005,
+              704.407
+            ]
+          ]
+        },
+        {
+          "pdf_page": 5,
+          "start_char": 0,
+          "end_char": 230,
+          "chunk_start_char": 1406,
+          "chunk_end_char": 1636,
+          "block_bboxes": [
+            [
+              54.0,
+              56.177,
+              292.505,
+              90.495
+            ],
+            [
+              54.0,
+              79.921,
+              292.503,
+              102.337
+            ],
+            [
+              93.294,
+              108.743,
+              159.738,
+              120.2
+            ],
+            [
+              132.71,
+              119.351,
+              151.767,
+              126.976
+            ]
+          ]
+        }
+      ],
+      "quote": "To summarize, although high SF-EM indicates that the\nsupporting facts for most questions are fully covered by\nthe neighbors of seeding passages, low precision signifies\nthat most of these neighboring passages are irrelevant to the\nquestion. Therefore, if we blindly perform graph traversal\nwithout any question-tailored adaptation, our retrieved con-\ntexts would include redundant passages and compromise the\ncapability of LLMs in MD-QA (which is also verified by the\nlower performance of KGP-Random in Table 2). To remedy\nthis issue, in the next section, we introduce an LLM-based\nKG traversal agent to adaptively visit neighboring passages\nthat are most conducive to answering the given question.\n4\nLLM-based KG Traversal Agent\nA natural solution to enable adaptive knowledge graph\ntraversal is to rank the candidate nodes, i.e., the neighbors\nof the already-visited nodes in our case, thereby determining\nwhich ones to visit next. The most straightforward way is to\napply heuristic-based fuzzy matching or embedding-based\nsimilarity ranking, which cannot capture the intrinsic logical\nrelations between the already traversed paths and the nodes\nto visit next. Instead, we fine-tune a large language model\n(LLM) to guide the knowledge graph traversal towards the\nnext most promising passages in approaching the question\nbased on the visited passages, which we term as the LLM-\nbased KG traversal agent.\n\nGiven a question q asking about the document content, the\nLLM-based graph traversal agent reasons over previously\nvisited nodes/retrieved passages {sk}j\nk=0 and then generates\nthe next passage sj+1 as follows:\nsj+1 = arg max\nv∈Nj\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.567963600158691
+        }
+      ],
+      "rerank_score": 0.621540904045105,
+      "context_bytes": 1995
+    },
+    {
+      "chunk_id": "chunk_0498eae1a386ebf0d6d488dedfd6381d",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 1222,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1222,
+          "block_bboxes": [
+            [
+              54.0,
+              170.843,
+              558.004,
+              202.814
+            ],
+            [
+              54.0,
+              216.243,
+              292.505,
+              394.718
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 7: (a)-(b): Performance first increases and then decreases as the branching factor increases. The results are averaged\nacross 100 sampled questions on 2WikiMQA and MuSiQue. (c): Performance/Efficiency increases/decreases as the number of\ndocuments increases on MuSiQue. KGP-T5 achieves higher performance/efficiency than DPR.\n5.3\nImpact of Graph Traversal Agent\nHere we study the influence of using different LLM agents to\ntraverse over TAGME-constructed KG on MD-QA. Specif-\nically, we compare agents that select the next neighbor to\nvisit randomly or intelligently via guidance from ChatGPT,\nLLaMA, T5, and MDR in Table 2. Because the random\nagent only blindly traverses the KG without any guidance\nfrom LLM, it unavoidably collects irrelevant passages and\nhence achieves the worst performance than others under\nLLMs’ guidance. This aligns with our previous observation\non the low precision in Figure 5 and further demonstrates the\nnecessity of using LLMs to guide the graph traversal. Inter-\nestingly, we find that KGP-T5 performs better than LLaMA\neven though the parameters of LLaMA-7B are more than the\nones with T5-0.7B. We hypothesize this is because LLaMA-\n7B requires more data to fine-tune than T5-0.7B.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.254780769348145
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7879209518432617
+        }
+      ],
+      "rerank_score": 0.5515435338020325,
+      "context_bytes": 1567
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Follow-upQA examples of input questions, given information, and the corresponding follow-up questions\ngenerated.\nencoding passages and connecting them based on\ncosine similarity.\n2.3\nCurious LLM Traversal Agent\nWe introduce CuriousLLM as our graph traversal\nagent to enhance the KGP framework. This ap-\nproach is rooted in intuitive reasoning. For ex-\nample, when asked to determine who is older, Bob\nBryan or Mariaan de Swardt, and given information\nabout Bob’s age, one would intuitively ask a follow-\nup question about Mariaan’s age. This follow-up\nquestion guides the search for relevant informa-\ntion. This intuition forms the basis of Follow-upQA\nand our model’s training objective. The advan-\ntage of this approach is that, although the passages\nabout Bob’s and Mariaan’s ages are unrelated, or,\nin other words, not semantically similar, the follow-\nup question about Mariaan’s age creates a logical\nlink between them. As a result, instead of matching\ntwo unrelated passages, once we find one passage,\nwe can identify the other through follow-up ques-\ntions. Furthermore, we train the LLM agent to\nknow when to end the search, and this early termi-\nnation mechanism significantly reduces the latency\nassociated with the original T5 agent.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.586751937866211
+        }
+      ],
+      "rerank_score": 0.5119224786758423,
+      "context_bytes": 1642
+    },
+    {
+      "chunk_id": "chunk_30d979161517d3f1d0c20edfcfcd1896",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 1020,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1020,
+          "block_bboxes": [
+            [
+              54.0,
+              211.47,
+              557.998,
+              276.228
+            ],
+            [
+              54.0,
+              449.341,
+              292.505,
+              514.098
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 4: LLM-based KG traversal agent for context retrieval. For questions on document structures (left), we employ LLM\nto extract structures and retrieve their corresponding contents (the content of pages are passages belonging to that page and\nthe content of tables is the markdown-formatted text). For questions on document content, we concatenate it with the currently\nretrieved context and prompt the LLM to generate the next evidence to answer the question. By comparing the similarity\nbetween the candidate neighboring sentences and the generated passage, we determine the next passage node to traverse.\nCorrespondingly, the candidate neighbors are updated for the next round of traversal.\nFigure 5: Quality of KGs on HotpotQA. For each KG Con-\nstruction method, as the average number of neighbors in-\ncreases (KG becomes denser) in the right y-axis, the SF-\nEM increases while the precision decreases. KNN-MDR\nachieves a better trade-off than TF-IDF and KNN-ST. KGs\nconstructed by TAGME are denser than others.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.25369644165039
+        },
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7818813323974609
+        }
+      ],
+      "rerank_score": 0.5044211149215698,
+      "context_bytes": 1355
+    },
+    {
+      "chunk_id": "chunk_a7f02d5588485cab6fe295889c95ea84",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 4335,
+          "end_char": 4771,
+          "chunk_start_char": 0,
+          "chunk_end_char": 436,
+          "block_bboxes": [
+            [
+              319.5,
+              617.731,
+              558.005,
+              672.14
+            ],
+            [
+              319.5,
+              661.567,
+              558.005,
+              704.406
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 765,
+          "chunk_start_char": 437,
+          "chunk_end_char": 1202,
+          "block_bboxes": [
+            [
+              54.0,
+              205.679,
+              557.998,
+              270.436
+            ],
+            [
+              82.314,
+              283.063,
+              264.188,
+              295.018
+            ]
+          ]
+        }
+      ],
+      "quote": "i=1 representing document structures\n(e.g., passages/pages/tables, etc.) and the edge set E ⊂V×V\nrepresenting the connections among different nodes (e.g.,\nsemantic/lexical similarity and belonging relations among\ndocument structures, etc.). Let X = {Xi}n\ni be node fea-\ntures and Xi corresponds to the feature of node vi, the form\nof which could be the text for the passage, the markdown for\nthe table and the page number for the page.\n\nFigure 3: Knowledge Graph Construction. We split each document in the document collection into passages. For each passage,\nwe either directly obtain their embeddings via pre-trained encoders or extract their keywords to build bag-of-word (BOW)\nfeatures. Then we connect two passages based on their embedding similarity or whether they share common keywords. Addi-\ntionally, we extract tables/pages via Extract-PDF API and add them as structural nodes to the KG. If pages include passages\nand tables, we add a directed edge to denote the belonging relations. The table nodes include the markdown formatted content\nof that table as Figure 8 in Supplementary has empirically shown that LLMs are able to understand tables in this format.\n3\nKnowledge Graph Construction\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.4142913818359375
+        }
+      ],
+      "rerank_score": 0.5025444030761719,
+      "context_bytes": 1547
+    },
+    {
+      "chunk_id": "chunk_34d2313e26d59d7e146cdb1386b80c62",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 3007,
+          "end_char": 4290,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1283,
+          "block_bboxes": [
+            [
+              54.0,
+              351.107,
+              292.505,
+              704.407
+            ],
+            [
+              319.5,
+              210.329,
+              558.005,
+              253.169
+            ],
+            [
+              321.493,
+              255.738,
+              556.555,
+              304.809
+            ],
+            [
+              319.5,
+              319.333,
+              558.005,
+              406.009
+            ],
+            [
+              319.5,
+              417.628,
+              500.395,
+              428.537
+            ]
+          ]
+        }
+      ],
+      "quote": "the event last when Wing-\nfield lost his fortune?’, which poses unique difficulty due to\nLLMs’ inferior arithmetic capability (Yuan et al. 2023).\nTable 2: Comparing different LLM-based KG Traversal\nAgents, including off-the-shelf ChatGPT equipped with\nfew-shot demonstration with fine-tuned LLaMA/T5/MDR\non TAGME-constructed KG.\nTraversal\nHotpotQA\nIIRC\n2WikiMQA\nMuSiQue\nAgent\nAcc\nEM\nF1\nAcc\nEM\nF1\nAcc\nEM\nF1\nAcc\nEM\nF1\nTF-IDF\n73.52 43.79 63.14 46.30 27.70 41.43 58.12 35.07 45.95 44.67 21.93 32.90\nMDR\n75.72 46.09 65.77 49.58 29.32 43.21 60.94 37.22 51.29 51.22 27.76 41.11\nChatGPT\n77.80 46.03 66.57 46.27 26.01 39.35 61.62 36.16 49.39 50.61 26.92 38.66\nLLaMA\n75.66 46.22 66.31 49.57 28.09 42.56 62.45 37.55 52.45 50.81 26.72 40.01\nT5\n76.53 46.51 66.77 48.28 26.94 41.54 63.50 39.80 53.50 50.92 27.90 41.19\nMoreover, without any particular design for document\nstructures, no existing baselines can handle structural ques-\ntions in PDFTriage, e.g. ‘What is the difference between\nPage 1 and Page 2’ or ‘In Table 3, which station has the high-\nest average flow rate?’. Fortunately, with the constructed KG\nincorporating structural nodes and our designed traversal al-\ngorithm retrieving structural contexts, our proposed method\nachieves 67% Struct-EM.\n5.2\nImpact of the Constructed Graph\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.426544666290283
+        }
+      ],
+      "rerank_score": 0.3928608000278473,
+      "context_bytes": 1663
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 34,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "query_plan": {
+      "planner_version": "cloud-query-planner-v1",
+      "decision": "no_split",
+      "reason": "该问题聚焦单一系统KGP，区分其图结构定义与代理职责，属于同一论文/系统的两个关联属性核对，不涉及跨论文比较，整体查证更合适。",
+      "english_keywords": [
+        "KGP",
+        "document graph",
+        "node definition",
+        "edge definition",
+        "LLM graph traversal agent",
+        "agent actions"
+      ],
+      "subqueries": [],
+      "quote_spans": [
+        {
+          "text": "KGP 的文档图怎样定义节点和边？",
+          "start": 0,
+          "end": 17,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "KGP 的文档图怎样定义节点和边？"
+        },
+        {
+          "text": "LLM 图遍历代理负责收集什么？",
+          "start": 17,
+          "end": 33,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "LLM 图遍历代理负责收集什么？"
+        },
+        {
+          "text": "请区分图结构与代理动作。",
+          "start": 33,
+          "end": 45,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "请区分图结构与代理动作。"
+        }
+      ],
+      "fallback": false,
+      "elapsed_seconds": 3.4307373999617994,
+      "usage": {
+        "prompt_tokens": 423,
+        "total_tokens": 542,
+        "completion_tokens": 119,
+        "prompt_tokens_details": {
+          "cached_tokens": 384,
+          "image_tokens": 0,
+          "text_tokens": 423
+        },
+        "completion_tokens_details": {
+          "text_tokens": 119
+        }
+      }
+    },
+    "subquery_count": 0,
+    "per_query_hits": {
+      "Q00": {
+        "fulltext": 20,
+        "dense": 20
+      }
+    },
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 14.144518400018569,
+      "inference_seconds": 1.1016928000026383,
+      "elapsed_seconds": 1.1086464000400156,
+      "peak_cuda_memory_bytes": 1199166464,
+      "request_count": 13,
+      "batch_size": 4
+    },
+    "evidence_count": 11,
+    "context_bytes": 17938,
+    "evidence_bytes": 17938,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 17113,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "source_coverage": [],
+    "limitations": [],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4699,
+    "total_tokens": 5352,
+    "completion_tokens": 653,
+    "prompt_tokens_details": {
+      "cached_tokens": 384,
+      "image_tokens": 0,
+      "text_tokens": 4699
+    },
+    "completion_tokens_details": {
+      "text_tokens": 653
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"premise_check\":[{\"premise\":\"KGP 文档图的节点表示 passage 或文档结构（页/表等）\",\"supported\":true,\"evidence_eids\":[\"E1\",\"E2\",\"E3\",\"E10\"],\"note\":\"多处原文一致说明节点语义\"},{\"premise\":\"KGP 文档图的边表示 passage 间词法/语义相似性或文档结构关系\",\"supported\":true,\"evidence_eids\":[\"E1\",\"E2\",\"E3\",\"E10\"],\"note\":\"原文明确边的定义，含结构归属的有向边\"},{\"premise\":\"LLM 图遍历代理负责收集支持性 passage / 选取下一个最值得访问的邻居\",\"supported\":true,\"evidence_eids\":[\"E2\",\"E6\",\"E5\"],\"note\":\"代理作为局部导航者，排序候选邻居并访问\"},{\"premise\":\"图结构与代理动作可区分：图是全局约束/过渡空间，代理是局部导航\",\"supported\":true,\"evidence_eids\":[\"E2\"],\"note\":\"原文直接对比二者角色\"}],\"answer\":\"图结构方面，KGP 在给定文档集合上构建知识图谱，节点象征 passage 或文档结构（如页、表），边表示 passage 之间的词法/语义相似性，或文档内部的结构关系（如归属关系）[E1][E2][E3][E10]。具体构造上，文档被切分为 passage，通过预训练编码器得到嵌入或用关键词构成词袋特征，再按嵌入相似度或是否共享关键词连接两个 passage；表格/页由 API 抽取后作为结构节点加入，若页包含 passage 和表格则加有向边表示归属关系 [E10]。代理动作方面，LLM 图遍历代理在已访问节点基础上推理并生成下一段证据，再从候选邻居中选出最值得访问的节点，即“推理 + 检索”交替进行 [E1]。它充当局部导航者，跨节点导航并收集支持性 passage，而构建的图充当全局约束、限定 passage 间的过渡空间 [E2]。操作层面，代理对候选邻居队列中的邻居排序，选 top-k passage 节点访问并更新队列，直至候选队列为空或达到检索 passage 的预算 K [E5]。代理的目标是基于已访问 passage 走向最有助于回答问题的下一个 passage [E6]。二者区别在于：图规定可过渡的空间与结构关系（全局），代理在其上做问题定制的邻居排序与访问以收集上下文（局部动作）[E2][E6]。\",\"citations\":[{\"eid\":\"E1\",\"quote_id\":\"q1\"},{\"eid\":\"E2\",\"quote_id\":\"q1\"},{\"eid\":\"E2\",\"quote_id\":\"q2\"},{\"eid\":\"E3\",\"quote_id\":\"q1\"},{\"eid\":\"E10\",\"quote_id\":\"q1\"},{\"eid\":\"E10\",\"quote_id\":\"q2\"},{\"eid\":\"E5\",\"quote_id\":\"q2\"},{\"eid\":\"E6\",\"quote_id\":\"q2\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 0.0315136476426799,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.534059524536133
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.800018310546875
+        }
+      ],
+      "rerank_score": 0.8580061793327332
+    },
+    {
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "score": 0.0315136476426799,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 12.471960067749023
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7935080528259277
+        }
+      ],
+      "rerank_score": 0.8562121987342834
+    },
+    {
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "score": 0.03278688524590164,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.059829711914062
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8103880882263184
+        }
+      ],
+      "rerank_score": 0.8085212111473083
+    },
+    {
+      "chunk_id": "chunk_00e67cd199d4e3b3ffb299633cfbac2e",
+      "score": 0.029386529386529386,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 12.259340286254883
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7841534614562988
+        }
+      ],
+      "rerank_score": 0.6802417039871216
+    },
+    {
+      "chunk_id": "chunk_84038d4c6f7949959af0974d04ee2379",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7899971008300781
+        }
+      ],
+      "rerank_score": 0.6351093053817749
+    },
+    {
+      "chunk_id": "chunk_482d183305062f8854269ff9c16777d7",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 10.567963600158691
+        }
+      ],
+      "rerank_score": 0.621540904045105
+    },
+    {
+      "chunk_id": "chunk_0498eae1a386ebf0d6d488dedfd6381d",
+      "score": 0.028991596638655463,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.254780769348145
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7879209518432617
+        }
+      ],
+      "rerank_score": 0.5515435338020325
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 8.586751937866211
+        }
+      ],
+      "rerank_score": 0.5119224786758423
+    },
+    {
+      "chunk_id": "chunk_30d979161517d3f1d0c20edfcfcd1896",
+      "score": 0.026992753623188405,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.25369644165039
+        },
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7818813323974609
+        }
+      ],
+      "rerank_score": 0.5044211149215698
+    },
+    {
+      "chunk_id": "chunk_a7f02d5588485cab6fe295889c95ea84",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.4142913818359375
+        }
+      ],
+      "rerank_score": 0.5025444030761719
+    },
+    {
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.737011909484863
+        }
+      ],
+      "rerank_score": 0.46429428458213806
+    },
+    {
+      "chunk_id": "chunk_8e19a73abbe8d3148f9bd5614582a314",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 9.020522117614746
+        }
+      ],
+      "rerank_score": 0.4449566602706909
+    },
+    {
+      "chunk_id": "chunk_34d2313e26d59d7e146cdb1386b80c62",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.426544666290283
+        }
+      ],
+      "rerank_score": 0.3928608000278473
+    },
+    {
+      "chunk_id": "chunk_f46ac2b9c96b3169b250df92b61e528f",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.899548530578613
+        }
+      ],
+      "rerank_score": 0.3638729155063629
+    },
+    {
+      "chunk_id": "chunk_3ba8d13b3fdeb6b301aa9aa15f1315d1",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.741637229919434
+        }
+      ],
+      "rerank_score": 0.3274531960487366
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 10.430017471313477
+        }
+      ],
+      "rerank_score": 0.28437721729278564
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 7.378177642822266
+        }
+      ],
+      "rerank_score": 0.269229531288147
+    },
+    {
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 10.412732124328613
+        }
+      ],
+      "rerank_score": 0.2540460228919983
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 8.497518539428711
+        }
+      ],
+      "rerank_score": 0.22695492208003998
+    },
+    {
+      "chunk_id": "chunk_b926195b594b5226494ac67d3237e329",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.829036712646484
+        }
+      ],
+      "rerank_score": 0.22592855989933014
+    },
+    {
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7873563766479492
+        }
+      ],
+      "rerank_score": 0.2112540602684021
+    },
+    {
+      "chunk_id": "chunk_d720bf874be63c5d052532f0cfe67851",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7849264144897461
+        }
+      ],
+      "rerank_score": 0.17981843650341034
+    },
+    {
+      "chunk_id": "chunk_ee258b6732cc2d906b8a9bec70e66b6b",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7826681137084961
+        }
+      ],
+      "rerank_score": 0.17938674986362457
+    },
+    {
+      "chunk_id": "chunk_91e3528176ce32b0ceb0217e90dc68a4",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7925190925598145
+        }
+      ],
+      "rerank_score": 0.16371266543865204
+    },
+    {
+      "chunk_id": "chunk_62cff1277a68997e15c44a4b007a50bd",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.788060188293457
+        }
+      ],
+      "rerank_score": 0.15584777295589447
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.546194076538086
+        }
+      ],
+      "rerank_score": 0.13139596581459045
+    },
+    {
+      "chunk_id": "chunk_7a8b9a01cf49366e041cd2e24076e671",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.78985595703125
+        }
+      ],
+      "rerank_score": 0.07172112911939621
+    },
+    {
+      "chunk_id": "chunk_718968e29945feb0aed42bf26ce81d91",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7942256927490234
+        }
+      ],
+      "rerank_score": 0.05460060387849808
+    },
+    {
+      "chunk_id": "chunk_236bad38770c3ba0ccb7db3b854bb874",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7844185829162598
+        }
+      ],
+      "rerank_score": 0.045183755457401276
+    },
+    {
+      "chunk_id": "chunk_88de9ef01acd16c34fde2c9091445dd8",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7833042144775391
+        }
+      ],
+      "rerank_score": 0.03371654078364372
+    },
+    {
+      "chunk_id": "chunk_6ce8f0a4dc3d0a9b4c697c1ed1ac0c93",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7941117286682129
+        }
+      ],
+      "rerank_score": 0.03271312639117241
+    },
+    {
+      "chunk_id": "chunk_1f8a38e505bd98b11a1249179f3264ae",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7827587127685547
+        }
+      ],
+      "rerank_score": 0.02409944497048855
+    },
+    {
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7838821411132812
+        }
+      ],
+      "rerank_score": 0.018124720081686974
+    },
+    {
+      "chunk_id": "chunk_fdffeffc56ad04f8c112ce4b3213f94e",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7831707000732422
+        }
+      ],
+      "rerank_score": 0.008985428139567375
+    }
+  ],
+  "case_id": "F05",
+  "question": "KGP 的文档图怎样定义节点和边？LLM 图遍历代理负责收集什么？请区分图结构与代理动作。",
+  "category": "fact",
+  "arm": "P2-Planner-OwnerRerank",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.00043120002374053
+    },
+    {
+      "name": "retrieve",
+      "seconds": 3.4774468000396155
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 9.500014130026102e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 1.1108453999622725
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0018899000133387744
+    }
+  ],
+  "retrieval_compute_seconds": 4.590622800053097,
+  "request_wall_seconds": 14.987235500011593,
+  "embedding_source": "shared frozen Q00 vector + live batch for planned subqueries",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 5.027566300006583,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 7.558222299965564,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4653995999833569,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 2.9542277000145987,
+      "usage": "{\"prompt_tokens\": 423, \"total_tokens\": 542, \"completion_tokens\": 119}"
+    },
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 6.607056499982718,
+      "usage": "{\"prompt_tokens\": 4699, \"total_tokens\": 5352, \"completion_tokens\": 653}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "score": 0.8103880882263184
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 0.800018310546875
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_718968e29945feb0aed42bf26ce81d91",
+      "score": 0.7942256927490234
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_6ce8f0a4dc3d0a9b4c697c1ed1ac0c93",
+      "score": 0.7941117286682129
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "score": 0.7935080528259277
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_91e3528176ce32b0ceb0217e90dc68a4",
+      "score": 0.7925190925598145
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_84038d4c6f7949959af0974d04ee2379",
+      "score": 0.7899971008300781
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_7a8b9a01cf49366e041cd2e24076e671",
+      "score": 0.78985595703125
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_62cff1277a68997e15c44a4b007a50bd",
+      "score": 0.788060188293457
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_0498eae1a386ebf0d6d488dedfd6381d",
+      "score": 0.7879209518432617
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.7873563766479492
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_d720bf874be63c5d052532f0cfe67851",
+      "score": 0.7849264144897461
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_236bad38770c3ba0ccb7db3b854bb874",
+      "score": 0.7844185829162598
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_00e67cd199d4e3b3ffb299633cfbac2e",
+      "score": 0.7841534614562988
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 0.7838821411132812
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_88de9ef01acd16c34fde2c9091445dd8",
+      "score": 0.7833042144775391
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_fdffeffc56ad04f8c112ce4b3213f94e",
+      "score": 0.7831707000732422
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_1f8a38e505bd98b11a1249179f3264ae",
+      "score": 0.7827587127685547
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_ee258b6732cc2d906b8a9bec70e66b6b",
+      "score": 0.7826681137084961
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_30d979161517d3f1d0c20edfcfcd1896",
+      "score": 0.7818813323974609
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "score": 13.059829711914062
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "score": 12.471960067749023
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_00e67cd199d4e3b3ffb299633cfbac2e",
+      "score": 12.259340286254883
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_482d183305062f8854269ff9c16777d7",
+      "score": 10.567963600158691
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 10.534059524536133
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 10.430017471313477
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 10.412732124328613
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_0498eae1a386ebf0d6d488dedfd6381d",
+      "score": 9.254780769348145
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_30d979161517d3f1d0c20edfcfcd1896",
+      "score": 9.25369644165039
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_8e19a73abbe8d3148f9bd5614582a314",
+      "score": 9.020522117614746
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_f46ac2b9c96b3169b250df92b61e528f",
+      "score": 8.899548530578613
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_b926195b594b5226494ac67d3237e329",
+      "score": 8.829036712646484
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 8.737011909484863
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 8.586751937866211
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 8.497518539428711
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_3ba8d13b3fdeb6b301aa9aa15f1315d1",
+      "score": 7.741637229919434
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 7.546194076538086
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_34d2313e26d59d7e146cdb1386b80c62",
+      "score": 7.426544666290283
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_a7f02d5588485cab6fe295889c95ea84",
+      "score": 7.4142913818359375
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 7.378177642822266
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "F05.C01",
+      "requirement": "节点可以是段落，也可以是页面、表格等文档结构。",
+      "selected_matches_by_unit": {
+        "kgp": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "F05.C02",
+      "requirement": "边可以表示语义/词法相似，也可以表示文档结构关系。",
+      "selected_matches_by_unit": {
+        "kgp": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "F05.C03",
+      "requirement": "遍历代理导航并收集支持段落。",
+      "selected_matches_by_unit": {
+        "kgp": [
+          "chunk_b959214e888053dae53b16a5259d7ea9"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 1.0,
+    "recall8": 1.0,
+    "mrr40": 0.5,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/11cf6230-3f18-414e-bdc3-6200f906eea7?poll=true"
+}

@@ -1,0 +1,3600 @@
+{
+  "request_id": "3b6edf43-ff0b-4072-af46-4bb51623cdf7",
+  "status": "partial",
+  "answer": "ToG/ToG-R 的算法以“depth limit Dmax”和“sample limit N”为输入，并以 D≤Dmax 为循环条件，深度超过 Dmax 时直接 Generate（回答），因此其约束的是搜索深度步数及采样上限这一过程量 [chunk_9eadf098f08b0e28d9965aeb46062d4e]。Tree-of-Traversals 为约束搜索空间加入两个超参数：max depth 达到后算法被迫转入 done 状态（回答查询），max expansions 达到后模型停止探索并返回“Cannot find answer” [chunk_dac5f23e1b87249cf88eff5c6cc54355]；原文还说明 max depth 按“最小但足以回答多数问题”解析选定，max expansions 纯粹用于防止模型在单个问题上挂起、取值有些任意且对准确率影响极小 [chunk_e3ad7608dae3913ef4231b54065c5882]。因此两套方法各自约束的是搜索树/图的深度与扩展/采样次数等离散过程预算，而非墙钟时延；所给证据没有给出把深度或扩展次数换算为实际运行时间的公式或跨方法计时协议，故不能据此直接换算为跨方法墙钟时延排名 [chunk_9eadf098f08b0e28d9965aeb46062d4e][chunk_dac5f23e1b87249cf88eff5c6cc54355][chunk_e3ad7608dae3913ef4231b54065c5882]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_9eadf098f08b0e28d9965aeb46062d4e",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 17,
+      "page_end": 17,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 17,
+          "start_char": 45,
+          "end_char": 1021,
+          "chunk_start_char": 0,
+          "chunk_end_char": 976,
+          "block_bboxes": [
+            [
+              108.299,
+              82.757,
+              244.097,
+              94.712
+            ],
+            [
+              107.532,
+              107.954,
+              503.997,
+              128.951
+            ],
+            [
+              107.641,
+              154.765,
+              307.654,
+              179.559
+            ],
+            [
+              117.963,
+              178.854,
+              307.245,
+              223.327
+            ],
+            [
+              132.907,
+              221.411,
+              147.062,
+              232.652
+            ],
+            [
+              132.907,
+              221.32,
+              284.23,
+              245.082
+            ],
+            [
+              132.907,
+              234.889,
+              280.897,
+              257.049
+            ],
+            [
+              132.907,
+              245.717,
+              303.869,
+              269.479
+            ],
+            [
+              132.907,
+              259.286,
+              280.974,
+              280.438
+            ],
+            [
+              117.963,
+              281.204,
+              219.914,
+              347.595
+            ],
+            [
+              117.963,
+              346.957,
+              192.209,
+              368.018
+            ],
+            [
+              307.534,
+              154.765,
+              507.547,
+              179.559
+            ],
+            [
+              317.856,
+              178.854,
+              507.138,
+              223.327
+            ],
+            [
+              332.8,
+              221.411,
+              346.954,
+              232.652
+            ],
+            [
+              332.8,
+              221.32,
+              484.122,
+              245.082
+            ],
+            [
+              332.8,
+              234.889,
+              480.789,
+              257.049
+            ],
+            [
+              332.799,
+              245.717,
+              503.761,
+              269.479
+            ],
+            [
+              347.743,
+              259.425,
+              470.644,
+              281.677
+            ],
+            [
+              332.799,
+              271.714,
+              455.406,
+              314.554
+            ],
+            [
+              317.855,
+              304.361,
+              497.918,
+              348.834
+            ],
+            [
+              317.855,
+              348.197,
+              392.1,
+              369.258
+            ]
+          ]
+        }
+      ],
+      "quote": "A\nALGORITHM FOR TOG\nWe summarize the comprehensive algorithmic procedure of ToG and ToG-R, as shown in Figure\nAlgorithm 1 and 2.\nAlgorithm 1 ToG\nRequire: Input x, LLM π, depth limit Dmax sam-\nple limit N.\nInitialize E0 ←Extract entities on x, P ←[],\nM ←0.\nwhile D ≤Dmax do\nRD\ncand, Pcand ←Search(x, ED−1, P)\nRD, P ←Prune(π, x, RD\ncand, Pcand)\nED\ncand, Pcand ←Search(x, ED−1, RD, P)\nED, P ←Prune(π, x, ED\ncand, Pcand)\nif Reasoning(π, x, P) then\nGenerate(π, x, P)\nbreak\nend if\nIncrement D by 1.\nend while\nif D > Dmax then\nGenerate(π, x)\nend if\nAlgorithm 2 ToG-R\nRequire: Input x, LLM π, depth limit Dmax sam-\nple limit N.\nInitialize E0 ←Extract entities on x, P ←[],\nM ←0.\nwhile D ≤Dmax do\nRD\ncand, Pcand ←Search(x, ED−1, P)\nRD, P ←Prune(π, x, RD\ncand, Pcand)\nED\ncand, Pcand ←Search(x, ED−1, RD, P)\nif Reasoning(π, x, P, ED\ncand) then\nGenerate(π, x, P, ED\ncand)\nbreak\nend if\nED, P ←Random_Prune(ED",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7783188819885254
+        }
+      ],
+      "rerank_score": 0.8118252158164978,
+      "context_bytes": 1432
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 780,
+          "end_char": 2398,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1618,
+          "block_bboxes": [
+            [
+              70.473,
+              323.184,
+              290.949,
+              496.704
+            ],
+            [
+              70.473,
+              505.386,
+              290.941,
+              773.66
+            ]
+          ]
+        }
+      ],
+      "quote": "on the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 13.541318893432617
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7745881080627441
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.24184732139110565,
+      "context_bytes": 2034
+    },
+    {
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 13,
+      "page_end": 14,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 13,
+          "start_char": 2599,
+          "end_char": 3431,
+          "chunk_start_char": 0,
+          "chunk_end_char": 832,
+          "block_bboxes": [
+            [
+              305.749,
+              517.199,
+              524.6,
+              582.388
+            ],
+            [
+              305.804,
+              585.303,
+              526.221,
+              650.662
+            ],
+            [
+              305.749,
+              653.747,
+              526.222,
+              746.034
+            ],
+            [
+              306.142,
+              748.949,
+              524.414,
+              773.686
+            ]
+          ]
+        },
+        {
+          "pdf_page": 14,
+          "start_char": 0,
+          "end_char": 717,
+          "chunk_start_char": 833,
+          "chunk_end_char": 1550,
+          "block_bboxes": [
+            [
+              70.866,
+              73.469,
+              290.502,
+              152.207
+            ],
+            [
+              70.866,
+              155.283,
+              289.317,
+              220.471
+            ],
+            [
+              70.866,
+              223.547,
+              290.948,
+              275.186
+            ],
+            [
+              70.866,
+              288.358,
+              159.339,
+              299.267
+            ],
+            [
+              70.353,
+              307.046,
+              290.949,
+              317.845
+            ],
+            [
+              70.866,
+              320.512,
+              91.648,
+              331.421
+            ]
+          ]
+        }
+      ],
+      "quote": "time and increasing expenses. Smaller k did not\ngenerate as much diversity and options. It is worth\nnoting that even with k = 3 and diversity sampling,\nsometimes the actual number of unique outputs is\nless than 3.\nThe max depth was chosen analytically to\nbe minimal while enabling answering of most\nquestions.\nSome questions in QALD-10 and\nMusicBrainz-x-Wikidata would require a greater\ndepth to answer.\nThe maximum expansions cutoff was chosen\npurely to ensure the model does not hang on a sin-\ngle question too long. The actual value is somewhat\narbitrary and has minimal impact on accuracy.\nB.3\nKG Interface\nWe present some additional details of the KG Inter-\nface.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.575660705566406
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7811684608459473
+        }
+      ],
+      "rerank_score": 0.4119977653026581,
+      "context_bytes": 1967
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_9eadf098f08b0e28d9965aeb46062d4e",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 17,
+      "page_end": 17,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 17,
+          "start_char": 45,
+          "end_char": 1021,
+          "chunk_start_char": 0,
+          "chunk_end_char": 976,
+          "block_bboxes": [
+            [
+              108.299,
+              82.757,
+              244.097,
+              94.712
+            ],
+            [
+              107.532,
+              107.954,
+              503.997,
+              128.951
+            ],
+            [
+              107.641,
+              154.765,
+              307.654,
+              179.559
+            ],
+            [
+              117.963,
+              178.854,
+              307.245,
+              223.327
+            ],
+            [
+              132.907,
+              221.411,
+              147.062,
+              232.652
+            ],
+            [
+              132.907,
+              221.32,
+              284.23,
+              245.082
+            ],
+            [
+              132.907,
+              234.889,
+              280.897,
+              257.049
+            ],
+            [
+              132.907,
+              245.717,
+              303.869,
+              269.479
+            ],
+            [
+              132.907,
+              259.286,
+              280.974,
+              280.438
+            ],
+            [
+              117.963,
+              281.204,
+              219.914,
+              347.595
+            ],
+            [
+              117.963,
+              346.957,
+              192.209,
+              368.018
+            ],
+            [
+              307.534,
+              154.765,
+              507.547,
+              179.559
+            ],
+            [
+              317.856,
+              178.854,
+              507.138,
+              223.327
+            ],
+            [
+              332.8,
+              221.411,
+              346.954,
+              232.652
+            ],
+            [
+              332.8,
+              221.32,
+              484.122,
+              245.082
+            ],
+            [
+              332.8,
+              234.889,
+              480.789,
+              257.049
+            ],
+            [
+              332.799,
+              245.717,
+              503.761,
+              269.479
+            ],
+            [
+              347.743,
+              259.425,
+              470.644,
+              281.677
+            ],
+            [
+              332.799,
+              271.714,
+              455.406,
+              314.554
+            ],
+            [
+              317.855,
+              304.361,
+              497.918,
+              348.834
+            ],
+            [
+              317.855,
+              348.197,
+              392.1,
+              369.258
+            ]
+          ]
+        }
+      ],
+      "quote": "A\nALGORITHM FOR TOG\nWe summarize the comprehensive algorithmic procedure of ToG and ToG-R, as shown in Figure\nAlgorithm 1 and 2.\nAlgorithm 1 ToG\nRequire: Input x, LLM π, depth limit Dmax sam-\nple limit N.\nInitialize E0 ←Extract entities on x, P ←[],\nM ←0.\nwhile D ≤Dmax do\nRD\ncand, Pcand ←Search(x, ED−1, P)\nRD, P ←Prune(π, x, RD\ncand, Pcand)\nED\ncand, Pcand ←Search(x, ED−1, RD, P)\nED, P ←Prune(π, x, ED\ncand, Pcand)\nif Reasoning(π, x, P) then\nGenerate(π, x, P)\nbreak\nend if\nIncrement D by 1.\nend while\nif D > Dmax then\nGenerate(π, x)\nend if\nAlgorithm 2 ToG-R\nRequire: Input x, LLM π, depth limit Dmax sam-\nple limit N.\nInitialize E0 ←Extract entities on x, P ←[],\nM ←0.\nwhile D ≤Dmax do\nRD\ncand, Pcand ←Search(x, ED−1, P)\nRD, P ←Prune(π, x, RD\ncand, Pcand)\nED\ncand, Pcand ←Search(x, ED−1, RD, P)\nif Reasoning(π, x, P, ED\ncand) then\nGenerate(π, x, P, ED\ncand)\nbreak\nend if\nED, P ←Random_Prune(ED\ncand, Pcand)\nIncrement D by 1.\nend while\nif D > Dmax then\nGenerate(π, x)\nend if\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7783188819885254
+        }
+      ],
+      "rerank_score": 0.8118252158164978,
+      "context_bytes": 1432
+    },
+    {
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 13,
+      "page_end": 14,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 13,
+          "start_char": 2599,
+          "end_char": 3431,
+          "chunk_start_char": 0,
+          "chunk_end_char": 832,
+          "block_bboxes": [
+            [
+              305.749,
+              517.199,
+              524.6,
+              582.388
+            ],
+            [
+              305.804,
+              585.303,
+              526.221,
+              650.662
+            ],
+            [
+              305.749,
+              653.747,
+              526.222,
+              746.034
+            ],
+            [
+              306.142,
+              748.949,
+              524.414,
+              773.686
+            ]
+          ]
+        },
+        {
+          "pdf_page": 14,
+          "start_char": 0,
+          "end_char": 717,
+          "chunk_start_char": 833,
+          "chunk_end_char": 1550,
+          "block_bboxes": [
+            [
+              70.866,
+              73.469,
+              290.502,
+              152.207
+            ],
+            [
+              70.866,
+              155.283,
+              289.317,
+              220.471
+            ],
+            [
+              70.866,
+              223.547,
+              290.948,
+              275.186
+            ],
+            [
+              70.866,
+              288.358,
+              159.339,
+              299.267
+            ],
+            [
+              70.353,
+              307.046,
+              290.949,
+              317.845
+            ],
+            [
+              70.866,
+              320.512,
+              91.648,
+              331.421
+            ]
+          ]
+        }
+      ],
+      "quote": "Tree-of-Traversals does not have a huge number\nof hyperparamters. Most of the hyperparameters\nwere chosen analytically, though some were chosen\nbased on preliminary experiments. We share some\ninformation on choosing them.\nτ was chosen analytically in conjunction with\nthe prompt for evaluate on the done state (Ap-\npendix F.5). Chosen to be 0.8 so that Tree-of-\nTraversals only stops when it is confident that the\nanswer is supported by the KG.\nThe temperature was chosen to be 1.0 to pro-\nmote diversity. If implementing with other models\nwhich can have temperature >1.0, we recommend\nhyperparameter tuning or using a sample prompt\nof each type and analytically choosing the tem-\nperature such that diverse but sensible actions are\noutput.\nThe branching factor k = 3 was chosen based\non small scale experimentation. Larger k makes\n\nthe model spend longer searching, taking longer\ntime and increasing expenses. Smaller k did not\ngenerate as much diversity and options. It is worth\nnoting that even with k = 3 and diversity sampling,\nsometimes the actual number of unique outputs is\nless than 3.\nThe max depth was chosen analytically to\nbe minimal while enabling answering of most\nquestions.\nSome questions in QALD-10 and\nMusicBrainz-x-Wikidata would require a greater\ndepth to answer.\nThe maximum expansions cutoff was chosen\npurely to ensure the model does not hang on a sin-\ngle question too long. The actual value is somewhat\narbitrary and has minimal impact on accuracy.\nB.3\nKG Interface\nWe present some additional details of the KG Inter-\nface.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.575660705566406
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7811684608459473
+        }
+      ],
+      "rerank_score": 0.4119977653026581,
+      "context_bytes": 1967
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 780,
+          "end_char": 2398,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1618,
+          "block_bboxes": [
+            [
+              70.473,
+              323.184,
+              290.949,
+              496.704
+            ],
+            [
+              70.473,
+              505.386,
+              290.941,
+              773.66
+            ]
+          ]
+        }
+      ],
+      "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 13.541318893432617
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7745881080627441
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.24184732139110565,
+      "context_bytes": 2034
+    }
+  ],
+  "graph_paths": [
+    {
+      "nodes": [
+        {
+          "id": "fb218bdfe50f69d418861f9f8a73944f9cbda1e9c1064e84f1b7236ad84e7d3c",
+          "name": "max depth",
+          "type": "Parameter",
+          "canonical": "max depth"
+        },
+        {
+          "id": "e6a2679d94b215f4e534e04cee39aa3b4b152a850a1ecb7acec18b31d177d5d0",
+          "name": "forced transition to done",
+          "type": "Outcome"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4",
+          "subject": "max depth",
+          "object": "forced transition to done"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "c8891cd1142ea5915bf68c0ef503348bac6681eda9a4e839f1fcbc2cda85a2f4",
+          "name": "max expansions",
+          "type": "Parameter",
+          "canonical": "max expansions"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "subject": "Tree-of-Traversals",
+          "object": "max expansions"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "fb218bdfe50f69d418861f9f8a73944f9cbda1e9c1064e84f1b7236ad84e7d3c",
+          "name": "max depth",
+          "type": "Parameter",
+          "canonical": "max depth"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "subject": "Tree-of-Traversals",
+          "object": "max depth"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "c8891cd1142ea5915bf68c0ef503348bac6681eda9a4e839f1fcbc2cda85a2f4",
+          "name": "max expansions",
+          "type": "Parameter",
+          "canonical": "max expansions"
+        },
+        {
+          "id": "9a848980d60c793f2eba09a49991e4fa765d0d1aea9abbc83d59d471b6573687",
+          "name": "Cannot find answer",
+          "type": "Outcome"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "ee17bfade2a238131cfcdf686479ace5265a9e6f185f724503181b7eddf5dcaf",
+          "subject": "max expansions",
+          "object": "Cannot find answer"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ee17bfade2a238131cfcdf686479ace5265a9e6f185f724503181b7eddf5dcaf",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "161fe1e866f5ec96fd901c1f287aa00a0a7cce993204a722393c9ebe84e74889",
+          "name": "2ND + D + 1 LLM calls",
+          "type": "Formula"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_CALL_BOUND",
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "subject": "ToG",
+          "object": "2ND + D + 1 LLM calls"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "HAS_CALL_BOUND"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "48ef57a19007c1fa2342a8966526bef9e3044108e115ac4580a9d51189da2663",
+          "name": "random entity pruning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "9e5fb4131bd7d344d6a550f2503f5648d59e57aedff63b70be98d69330bd1915",
+          "subject": "ToG-R",
+          "object": "random entity pruning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9e5fb4131bd7d344d6a550f2503f5648d59e57aedff63b70be98d69330bd1915",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "d821fa6213c1b27d6d2edee9647972a5520ead5cdddc153d272e00eb9db27577",
+          "name": "node value exceeds answer threshold",
+          "type": "StopCondition"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STOP_CONDITION",
+          "claim_id": "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+          "subject": "Tree-of-Traversals",
+          "object": "node value exceeds answer threshold"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "HAS_STOP_CONDITION"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "31f23346ac35023be1b02a4b68e497e9bcba2826c8ba4fb65a3afa748cb96178",
+          "name": "LLM-based entity pruning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "subject": "ToG",
+          "object": "LLM-based entity pruning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "f8f9e32d61978878186cc05876e9ab73c5f296307cf450407657c6a03ad7fa3c",
+          "name": "ND + D + 1 LLM calls",
+          "type": "Formula"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_CALL_BOUND",
+          "claim_id": "ad58dff47dc5390fa52aeea64422049635c0b90a49e843835cef72480ab21e46",
+          "subject": "ToG-R",
+          "object": "ND + D + 1 LLM calls"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ad58dff47dc5390fa52aeea64422049635c0b90a49e843835cef72480ab21e46",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "HAS_CALL_BOUND"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "subject": "ToG-R",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "d4b8d1bd345d2cac62909fcdcf9098f75f98b5638b32682bd60bc53d0147d6ed",
+          "name": "reduced risk with unfamiliar intermediate entities",
+          "type": "Benefit"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "CLAIMS_BENEFIT",
+          "claim_id": "b4bcd8105b5a3b01cf1a7dde8033862bbe057c0f21354fec3cd2530927c41b4e",
+          "subject": "ToG-R",
+          "object": "reduced risk with unfamiliar intermediate entities"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "b4bcd8105b5a3b01cf1a7dde8033862bbe057c0f21354fec3cd2530927c41b4e",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "CLAIMS_BENEFIT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "f07b447eb1f998f8d7a2da507e7b046e1402333d3eda229dd63463e873c8bec7",
+          "name": "exploration of the action space",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5f8789d2b0e15721864505edf8a0361c133c573e0bae6723bd2db139c1e087e3",
+          "subject": "Tree-of-Traversals",
+          "object": "exploration of the action space"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5f8789d2b0e15721864505edf8a0361c133c573e0bae6723bd2db139c1e087e3",
+          "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+          "page_start": 4,
+          "page_end": 5,
+          "quote": "These\nvalues are then used to guide the exploration of\nthe action space.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "75eba7e5705a90cbe1dbfb64c7fe3f1003919a7e66f826dd0eb5acc11c2b9805",
+          "name": "errors or uncertainties in ToG answers",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "subject": "ToG",
+          "object": "errors or uncertainties in ToG answers"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+          "page_start": 9,
+          "page_end": 9,
+          "quote": "errors or uncertainties in ToG answers are discovered by human users/experts or other LLMs, ToG\nhas the ability to trace back and examine the reasoning path, find suspicious triples with errors, and\ncorrect them.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "bf90da0d725db56f72f684f9741eddd1b4e14d58fc5dcc5277d12f78f72f19f5",
+          "name": "2WikiMultiHop",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "36b9a422e34cc1bc63ae53dfb8f2c9f94812e58ead8b2ab902d0b77c1d56ad19",
+          "subject": "Tree-of-Traversals",
+          "object": "2WikiMultiHop"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "36b9a422e34cc1bc63ae53dfb8f2c9f94812e58ead8b2ab902d0b77c1d56ad19",
+          "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "Table 1 presents the results of our experiments on\n2WikiMultiHop and QALD-10.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "f8202af81480878a83f00728cd7e5a52679353c2710b30f364ce05c08071e761",
+          "name": "CWQ dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "subject": "ToG",
+          "object": "CWQ dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+          "page_start": 25,
+          "page_end": 25,
+          "quote": "In this section, we present a case analysis of the CWQ dataset to evaluate the utility and limitations\nof the ToG.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "c3d53de4d956ea8f23236ad58b26795e2989cde2e5d5e3d3e4de53806a60e613",
+          "name": "lower LLM-call cost and reasoning time",
+          "type": "Benefit"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "CLAIMS_BENEFIT",
+          "claim_id": "f3ab4e60b750841f890f3b19b01d437195e87c3e9eb18d27ed53c88a0c61da2f",
+          "subject": "ToG-R",
+          "object": "lower LLM-call cost and reasoning time"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "f3ab4e60b750841f890f3b19b01d437195e87c3e9eb18d27ed53c88a0c61da2f",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "CLAIMS_BENEFIT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "a95c2abb838f1adb8e93110083df33753087ef71f4e65eb0022f34efe0134b3f",
+          "name": "QALD-10",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "788d66c10fad008c6545146f7428c2aab521b12234210fb9263b80cbc73dc767",
+          "subject": "Tree-of-Traversals",
+          "object": "QALD-10"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "788d66c10fad008c6545146f7428c2aab521b12234210fb9263b80cbc73dc767",
+          "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "Table 1 presents the results of our experiments on\n2WikiMultiHop and QALD-10.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "12b4b024220782fe0738eeb63983706d165263ad9cb3caba31f3fde30c55a7a5",
+          "name": "training-free",
+          "type": "TrainingMode"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_TRAINING_MODE",
+          "claim_id": "216d292d82e3ca363fc4cebe10d5f645ad370d0db6bb931db424fb595d83dc4a",
+          "subject": "ToG",
+          "object": "training-free"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "216d292d82e3ca363fc4cebe10d5f645ad370d0db6bb931db424fb595d83dc4a",
+          "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following\nadvantages of ToG: 1) compared with LLMs, ToG has better deep reasoning power;\n2) ToG has the ability of knowledge traceability and knowledge correctability by\nleveraging LLMs reasoning and expert feedback; 3) ToG provides a flexible plug-\nand-play framework for different LLMs, KGs and prompting strategies without\nany additional training cost; 4) the performance of ToG with small LLM models\ncould exceed large LLM such as GPT-4 in certain scenarios and this reduces the\ncost of LLM deployment and application. As a training-free method with lower\ncomputational cost and better generality, ToG achieves overall SOTA in 6 out of\n9 datasets where most previous SOTAs rely on additional training. Our code is\npublicly available at https://github.com/IDEA-FinAI/ToG.\n1\n",
+          "predicate": "USES_TRAINING_MODE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "ea9998a8062ab427a29661d1fbecb7c54fd39fab9f9a0a43faf08f3d47d0f170",
+          "name": "WebQSP",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "subject": "ToG-R",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "db2ae84fe148bfee18850873064d7152e79b6b26fc3150db8709a9dda07c0731",
+          "name": "MusicBrainz-x-Wikidata",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "e0744ecc275d215295fee2282a159c3d87a1646f87565c399487a794878d319e",
+          "subject": "Tree-of-Traversals",
+          "object": "MusicBrainz-x-Wikidata"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "e0744ecc275d215295fee2282a159c3d87a1646f87565c399487a794878d319e",
+          "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "On MusicBrainz-x-Wikidata (Table 2), which\ncontains challenging reasoning questions requiring\naccess to two KGs, there is an average of 37.4%\nrelative improvement from Tree-of-Traversals over\nChain-of-Traversals as shown in Table 2.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "f2c03e772f50c7fcc03ff5690c2b9305c181aa1684fd757f2f43f443e32246a3",
+          "name": "LLM explainability",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "217f506318d8eb51b9b0a55eacacb7d8e2a97272d98fd89132821d8659d9b90d",
+          "subject": "ToG",
+          "object": "LLM explainability"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "217f506318d8eb51b9b0a55eacacb7d8e2a97272d98fd89132821d8659d9b90d",
+          "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+          "page_start": 3,
+          "page_end": 3,
+          "quote": "Explicit, editable reasoning\npaths improve the explainability of the reasoning process of LLMs, and enable the tracing and\ncorrection of the provenances of models’ outputs.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "subject": "ToG-R",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "db2ae84fe148bfee18850873064d7152e79b6b26fc3150db8709a9dda07c0731",
+          "name": "MusicBrainz-x-Wikidata",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "96268ce7b862a738daf2368f014a8e239980397d1f5522e4980cdbb1269808d3",
+          "subject": "Tree-of-Traversals",
+          "object": "MusicBrainz-x-Wikidata"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "96268ce7b862a738daf2368f014a8e239980397d1f5522e4980cdbb1269808d3",
+          "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+          "page_start": 7,
+          "page_end": 8,
+          "quote": "Table 2: EM-in on MusicBrainz-x-Wikidata dataset.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "fb218bdfe50f69d418861f9f8a73944f9cbda1e9c1064e84f1b7236ad84e7d3c",
+          "name": "max depth",
+          "type": "Parameter",
+          "canonical": "max depth"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        },
+        {
+          "id": "c8891cd1142ea5915bf68c0ef503348bac6681eda9a4e839f1fcbc2cda85a2f4",
+          "name": "max expansions",
+          "type": "Parameter"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "subject": "Tree-of-Traversals",
+          "object": "max depth"
+        },
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "subject": "Tree-of-Traversals",
+          "object": "max expansions"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "c8891cd1142ea5915bf68c0ef503348bac6681eda9a4e839f1fcbc2cda85a2f4",
+          "name": "max expansions",
+          "type": "Parameter",
+          "canonical": "max expansions"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        },
+        {
+          "id": "d821fa6213c1b27d6d2edee9647972a5520ead5cdddc153d272e00eb9db27577",
+          "name": "node value exceeds answer threshold",
+          "type": "StopCondition"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "subject": "Tree-of-Traversals",
+          "object": "max expansions"
+        },
+        {
+          "predicate": "HAS_STOP_CONDITION",
+          "claim_id": "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+          "subject": "Tree-of-Traversals",
+          "object": "node value exceeds answer threshold"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "HAS_STOP_CONDITION"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method"
+        },
+        {
+          "id": "48ef57a19007c1fa2342a8966526bef9e3044108e115ac4580a9d51189da2663",
+          "name": "random entity pruning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "9e5fb4131bd7d344d6a550f2503f5648d59e57aedff63b70be98d69330bd1915",
+          "subject": "ToG-R",
+          "object": "random entity pruning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "9e5fb4131bd7d344d6a550f2503f5648d59e57aedff63b70be98d69330bd1915",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "161fe1e866f5ec96fd901c1f287aa00a0a7cce993204a722393c9ebe84e74889",
+          "name": "2ND + D + 1 LLM calls",
+          "type": "Formula"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "HAS_CALL_BOUND",
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "subject": "ToG",
+          "object": "2ND + D + 1 LLM calls"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "HAS_CALL_BOUND"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "c8891cd1142ea5915bf68c0ef503348bac6681eda9a4e839f1fcbc2cda85a2f4",
+          "name": "max expansions",
+          "type": "Parameter"
+        },
+        {
+          "id": "9a848980d60c793f2eba09a49991e4fa765d0d1aea9abbc83d59d471b6573687",
+          "name": "Cannot find answer",
+          "type": "Outcome"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "subject": "Tree-of-Traversals",
+          "object": "max expansions"
+        },
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "ee17bfade2a238131cfcdf686479ace5265a9e6f185f724503181b7eddf5dcaf",
+          "subject": "max expansions",
+          "object": "Cannot find answer"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "ee17bfade2a238131cfcdf686479ace5265a9e6f185f724503181b7eddf5dcaf",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "fb218bdfe50f69d418861f9f8a73944f9cbda1e9c1064e84f1b7236ad84e7d3c",
+          "name": "max depth",
+          "type": "Parameter",
+          "canonical": "max depth"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        },
+        {
+          "id": "d821fa6213c1b27d6d2edee9647972a5520ead5cdddc153d272e00eb9db27577",
+          "name": "node value exceeds answer threshold",
+          "type": "StopCondition"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "subject": "Tree-of-Traversals",
+          "object": "max depth"
+        },
+        {
+          "predicate": "HAS_STOP_CONDITION",
+          "claim_id": "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+          "subject": "Tree-of-Traversals",
+          "object": "node value exceeds answer threshold"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "HAS_STOP_CONDITION"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method"
+        },
+        {
+          "id": "f8f9e32d61978878186cc05876e9ab73c5f296307cf450407657c6a03ad7fa3c",
+          "name": "ND + D + 1 LLM calls",
+          "type": "Formula"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "HAS_CALL_BOUND",
+          "claim_id": "ad58dff47dc5390fa52aeea64422049635c0b90a49e843835cef72480ab21e46",
+          "subject": "ToG-R",
+          "object": "ND + D + 1 LLM calls"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "ad58dff47dc5390fa52aeea64422049635c0b90a49e843835cef72480ab21e46",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "HAS_CALL_BOUND"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "31f23346ac35023be1b02a4b68e497e9bcba2826c8ba4fb65a3afa748cb96178",
+          "name": "LLM-based entity pruning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "subject": "ToG",
+          "object": "LLM-based entity pruning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "d821fa6213c1b27d6d2edee9647972a5520ead5cdddc153d272e00eb9db27577",
+          "name": "node value exceeds answer threshold",
+          "type": "StopCondition"
+        },
+        {
+          "id": "c3647a061d6d9404a66cc37c5a6c3426802b6d9b365b228b2bb1eda9941a17ee",
+          "name": "answer found",
+          "type": "Outcome"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STOP_CONDITION",
+          "claim_id": "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+          "subject": "Tree-of-Traversals",
+          "object": "node value exceeds answer threshold"
+        },
+        {
+          "predicate": "RETURNS",
+          "claim_id": "5776cc65d611e52235603c31a6e344d51fb734d134a30426bf69ab19ce4664e5",
+          "subject": "node value exceeds answer threshold",
+          "object": "answer found"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "644b39d3320d9229d0aa611fffc94d5d3906e91ba2a6ebe7afd46fb4866fde33",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "HAS_STOP_CONDITION"
+        },
+        {
+          "claim_id": "5776cc65d611e52235603c31a6e344d51fb734d134a30426bf69ab19ce4664e5",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "RETURNS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "fb218bdfe50f69d418861f9f8a73944f9cbda1e9c1064e84f1b7236ad84e7d3c",
+          "name": "max depth",
+          "type": "Parameter",
+          "canonical": "max depth"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        },
+        {
+          "id": "f07b447eb1f998f8d7a2da507e7b046e1402333d3eda229dd63463e873c8bec7",
+          "name": "exploration of the action space",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "subject": "Tree-of-Traversals",
+          "object": "max depth"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5f8789d2b0e15721864505edf8a0361c133c573e0bae6723bd2db139c1e087e3",
+          "subject": "Tree-of-Traversals",
+          "object": "exploration of the action space"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "5f8789d2b0e15721864505edf8a0361c133c573e0bae6723bd2db139c1e087e3",
+          "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+          "page_start": 4,
+          "page_end": 5,
+          "quote": "These\nvalues are then used to guide the exploration of\nthe action space.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "c8891cd1142ea5915bf68c0ef503348bac6681eda9a4e839f1fcbc2cda85a2f4",
+          "name": "max expansions",
+          "type": "Parameter",
+          "canonical": "max expansions"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        },
+        {
+          "id": "f07b447eb1f998f8d7a2da507e7b046e1402333d3eda229dd63463e873c8bec7",
+          "name": "exploration of the action space",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "subject": "Tree-of-Traversals",
+          "object": "max expansions"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "5f8789d2b0e15721864505edf8a0361c133c573e0bae6723bd2db139c1e087e3",
+          "subject": "Tree-of-Traversals",
+          "object": "exploration of the action space"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "5f8789d2b0e15721864505edf8a0361c133c573e0bae6723bd2db139c1e087e3",
+          "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+          "page_start": 4,
+          "page_end": 5,
+          "quote": "These\nvalues are then used to guide the exploration of\nthe action space.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method"
+        },
+        {
+          "id": "d4b8d1bd345d2cac62909fcdcf9098f75f98b5638b32682bd60bc53d0147d6ed",
+          "name": "reduced risk with unfamiliar intermediate entities",
+          "type": "Benefit"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "CLAIMS_BENEFIT",
+          "claim_id": "b4bcd8105b5a3b01cf1a7dde8033862bbe057c0f21354fec3cd2530927c41b4e",
+          "subject": "ToG-R",
+          "object": "reduced risk with unfamiliar intermediate entities"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "b4bcd8105b5a3b01cf1a7dde8033862bbe057c0f21354fec3cd2530927c41b4e",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "CLAIMS_BENEFIT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "75eba7e5705a90cbe1dbfb64c7fe3f1003919a7e66f826dd0eb5acc11c2b9805",
+          "name": "errors or uncertainties in ToG answers",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "subject": "ToG",
+          "object": "errors or uncertainties in ToG answers"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+          "page_start": 9,
+          "page_end": 9,
+          "quote": "errors or uncertainties in ToG answers are discovered by human users/experts or other LLMs, ToG\nhas the ability to trace back and examine the reasoning path, find suspicious triples with errors, and\ncorrect them.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        },
+        {
+          "id": "fb218bdfe50f69d418861f9f8a73944f9cbda1e9c1064e84f1b7236ad84e7d3c",
+          "name": "max depth",
+          "type": "Parameter"
+        },
+        {
+          "id": "e6a2679d94b215f4e534e04cee39aa3b4b152a850a1ecb7acec18b31d177d5d0",
+          "name": "forced transition to done",
+          "type": "Outcome"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "subject": "Tree-of-Traversals",
+          "object": "max depth"
+        },
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4",
+          "subject": "max depth",
+          "object": "forced transition to done"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "fb218bdfe50f69d418861f9f8a73944f9cbda1e9c1064e84f1b7236ad84e7d3c",
+          "name": "max depth",
+          "type": "Parameter",
+          "canonical": "max depth"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        },
+        {
+          "id": "bf90da0d725db56f72f684f9741eddd1b4e14d58fc5dcc5277d12f78f72f19f5",
+          "name": "2WikiMultiHop",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "subject": "Tree-of-Traversals",
+          "object": "max depth"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "36b9a422e34cc1bc63ae53dfb8f2c9f94812e58ead8b2ab902d0b77c1d56ad19",
+          "subject": "Tree-of-Traversals",
+          "object": "2WikiMultiHop"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8b02e24d68853b28abf4926082e85da3af77bc5ff37e92d5ddec9c805aebd199",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "36b9a422e34cc1bc63ae53dfb8f2c9f94812e58ead8b2ab902d0b77c1d56ad19",
+          "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "Table 1 presents the results of our experiments on\n2WikiMultiHop and QALD-10.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "c8891cd1142ea5915bf68c0ef503348bac6681eda9a4e839f1fcbc2cda85a2f4",
+          "name": "max expansions",
+          "type": "Parameter",
+          "canonical": "max expansions"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        },
+        {
+          "id": "bf90da0d725db56f72f684f9741eddd1b4e14d58fc5dcc5277d12f78f72f19f5",
+          "name": "2WikiMultiHop",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "subject": "Tree-of-Traversals",
+          "object": "max expansions"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "36b9a422e34cc1bc63ae53dfb8f2c9f94812e58ead8b2ab902d0b77c1d56ad19",
+          "subject": "Tree-of-Traversals",
+          "object": "2WikiMultiHop"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        },
+        {
+          "claim_id": "36b9a422e34cc1bc63ae53dfb8f2c9f94812e58ead8b2ab902d0b77c1d56ad19",
+          "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "Table 1 presents the results of our experiments on\n2WikiMultiHop and QALD-10.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    }
+  ],
+  "generation_paths": [
+    {
+      "nodes": [
+        {
+          "name": "max depth",
+          "type": "Parameter"
+        },
+        {
+          "name": "forced transition to done",
+          "type": "Outcome"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4",
+          "subject": "max depth",
+          "object": "forced transition to done"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "name": "max expansions",
+          "type": "Parameter"
+        },
+        {
+          "name": "Tree-of-Traversals",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "BOUNDED_BY",
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "subject": "Tree-of-Traversals",
+          "object": "max expansions"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+          "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "page_start": 4,
+          "page_end": 4,
+          "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+          "predicate": "BOUNDED_BY"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 39,
+    "graph_executed": true,
+    "graph_hits": 11,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_paths": 40,
+    "graph_audit": {
+      "backend": "isolated_sqlite",
+      "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "anchors": [
+        {
+          "id": "fb218bdfe50f69d418861f9f8a73944f9cbda1e9c1064e84f1b7236ad84e7d3c",
+          "name": "max depth",
+          "type": "Parameter",
+          "canonical": "max depth"
+        },
+        {
+          "id": "c8891cd1142ea5915bf68c0ef503348bac6681eda9a4e839f1fcbc2cda85a2f4",
+          "name": "max expansions",
+          "type": "Parameter",
+          "canonical": "max expansions"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f",
+          "name": "Tree-of-Traversals",
+          "type": "Method",
+          "canonical": "tree-of-traversals"
+        }
+      ],
+      "seed_count": 5,
+      "max_hops": 2,
+      "max_paths": 40,
+      "per_node": 8,
+      "deadline_seconds": 10,
+      "degree_truncated": [
+        "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+        "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+        "afc57c25c0a71914d705b85ce5c11c22dcd05656acc51d3e2d9778adc9ccf93f"
+      ],
+      "reference_tables_access": "denied by SQLite authorizer",
+      "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+      "returned_paths": 40,
+      "expanded_nodes": 23,
+      "elapsed_seconds": 0.011382200000298326
+    },
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 4.804802499998914,
+      "inference_seconds": 0.9908159999995405,
+      "elapsed_seconds": 0.9934424000002764,
+      "peak_cuda_memory_bytes": 1155563520,
+      "request_count": 63
+    },
+    "evidence_count": 3,
+    "context_bytes": 6428,
+    "evidence_bytes": 5433,
+    "graph_context_bytes": 995,
+    "serialized_content_bytes": 6225,
+    "prompt_graph_paths": [
+      {
+        "nodes": [
+          {
+            "name": "max depth",
+            "type": "Parameter"
+          },
+          {
+            "name": "forced transition to done",
+            "type": "Outcome"
+          }
+        ],
+        "edges": [
+          {
+            "predicate": "CONNECTS",
+            "claim_id": "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4",
+            "subject": "max depth",
+            "object": "forced transition to done"
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+            "quote_ids": [
+              "q1",
+              "q2"
+            ],
+            "source_span": [
+              0,
+              1618
+            ],
+            "claim_id": "3d77336ac80dc874acc7cb49872c00604b403a9510af31ce8de35a412d4fccf4"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          {
+            "name": "max expansions",
+            "type": "Parameter"
+          },
+          {
+            "name": "Tree-of-Traversals",
+            "type": "Method"
+          }
+        ],
+        "edges": [
+          {
+            "predicate": "BOUNDED_BY",
+            "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8",
+            "subject": "Tree-of-Traversals",
+            "object": "max expansions"
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+            "quote_ids": [
+              "q1",
+              "q2"
+            ],
+            "source_span": [
+              0,
+              1618
+            ],
+            "claim_id": "3342ed675af954bee38c4e3aa8c12bd197af10e087559f3bb67489d29e6234b8"
+          }
+        ]
+      }
+    ],
+    "path_policy": "additional_path_budget",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "ToG",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "requested_names": [
+          "ToG",
+          "ToG-R"
+        ]
+      },
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "ToG",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "requested_names": [
+          "ToG",
+          "ToG-R"
+        ],
+        "eligible_candidate_count": 8,
+        "selected_chunk_ids": [
+          "chunk_9eadf098f08b0e28d9965aeb46062d4e"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ],
+        "eligible_candidate_count": 6,
+        "selected_chunk_ids": [
+          "chunk_e3ad7608dae3913ef4231b54065c5882",
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "evidence_budget_bytes": 6000,
+    "path_budget_bytes": 1200,
+    "total_budget_bytes": 7200,
+    "context_budget_bytes": 7200,
+    "generation_path_count": 2,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 2249,
+    "total_tokens": 2710,
+    "completion_tokens": 461,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "image_tokens": 0,
+      "text_tokens": 2249
+    },
+    "completion_tokens_details": {
+      "text_tokens": 461
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"ToG/ToG-R 的算法以“depth limit Dmax”和“sample limit N”为输入，并以 D≤Dmax 为循环条件，深度超过 Dmax 时直接 Generate（回答），因此其约束的是搜索深度步数及采样上限这一过程量 [chunk_9eadf098f08b0e28d9965aeb46062d4e]。Tree-of-Traversals 为约束搜索空间加入两个超参数：max depth 达到后算法被迫转入 done 状态（回答查询），max expansions 达到后模型停止探索并返回“Cannot find answer” [chunk_dac5f23e1b87249cf88eff5c6cc54355]；原文还说明 max depth 按“最小但足以回答多数问题”解析选定，max expansions 纯粹用于防止模型在单个问题上挂起、取值有些任意且对准确率影响极小 [chunk_e3ad7608dae3913ef4231b54065c5882]。因此两套方法各自约束的是搜索树/图的深度与扩展/采样次数等离散过程预算，而非墙钟时延；所给证据没有给出把深度或扩展次数换算为实际运行时间的公式或跨方法计时协议，故不能据此直接换算为跨方法墙钟时延排名 [chunk_9eadf098f08b0e28d9965aeb46062d4e][chunk_dac5f23e1b87249cf88eff5c6cc54355][chunk_e3ad7608dae3913ef4231b54065c5882]。\",\"citations\":[{\"chunk_id\":\"chunk_9eadf098f08b0e28d9965aeb46062d4e\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_dac5f23e1b87249cf88eff5c6cc54355\",\"quote_id\":\"q2\"},{\"chunk_id\":\"chunk_e3ad7608dae3913ef4231b54065c5882\",\"quote_id\":\"q2\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_9eadf098f08b0e28d9965aeb46062d4e",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7783188819885254
+        }
+      ],
+      "rerank_score": 0.8118252158164978
+    },
+    {
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "score": 0.03252247488101534,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.575660705566406
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7811684608459473
+        }
+      ],
+      "rerank_score": 0.4119977653026581
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "score": 0.0474478480153437,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 13.541318893432617
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7745881080627441
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.24184732139110565
+    },
+    {
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 10.423744201660156
+        }
+      ],
+      "rerank_score": 0.22592855989933014
+    },
+    {
+      "chunk_id": "chunk_e2267f27e994c288c8ff1de490f65ca7",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7678794860839844
+        }
+      ],
+      "rerank_score": 0.1630452573299408
+    },
+    {
+      "chunk_id": "chunk_270d9350248b566ed224ba5147a295a2",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7708249092102051
+        }
+      ],
+      "rerank_score": 0.1291828602552414
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.538365840911865
+        }
+      ],
+      "rerank_score": 0.12220858037471771
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 10,
+          "score": 0.1
+        }
+      ],
+      "rerank_score": 0.1108555868268013
+    },
+    {
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7680377960205078
+        }
+      ],
+      "rerank_score": 0.09089674800634384
+    },
+    {
+      "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+      "score": 0.027205882352941177,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.746059894561768
+        },
+        {
+          "channel": "graph",
+          "rank": 8,
+          "score": 0.125
+        }
+      ],
+      "rerank_score": 0.09041372686624527
+    },
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 9,
+          "score": 0.1111111111111111
+        }
+      ],
+      "rerank_score": 0.08525123447179794
+    },
+    {
+      "chunk_id": "chunk_a0d7d9ec00b3e121441cb8d4c6815b59",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7623076438903809
+        }
+      ],
+      "rerank_score": 0.08079154044389725
+    },
+    {
+      "chunk_id": "chunk_729fce1e558e36caab6046b7e5a8ca4a",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.3165740966796875
+        }
+      ],
+      "rerank_score": 0.07779745012521744
+    },
+    {
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.0315136476426799,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7758407592773438
+        },
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.07599521428346634
+    },
+    {
+      "chunk_id": "chunk_8b9e861ea949a3eb2fc9ed5a97b24644",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7715115547180176
+        }
+      ],
+      "rerank_score": 0.07276838272809982
+    },
+    {
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 0.031544957774465976,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.917819023132324
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.78619384765625
+        }
+      ],
+      "rerank_score": 0.046638038009405136
+    },
+    {
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.312259674072266
+        }
+      ],
+      "rerank_score": 0.04586266353726387
+    },
+    {
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 0.046649531024531024,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 8.647509574890137
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.775477409362793
+        },
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.04476431384682655
+    },
+    {
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.7314133644104
+        }
+      ],
+      "rerank_score": 0.04130730405449867
+    },
+    {
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 0.043927125506072875,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.9458441734313965
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7638711929321289
+        },
+        {
+          "channel": "graph",
+          "rank": 5,
+          "score": 0.2
+        }
+      ],
+      "rerank_score": 0.03767939284443855
+    },
+    {
+      "chunk_id": "chunk_5bae8019568ab15dd39f15ae0e4e74a8",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7679858207702637
+        }
+      ],
+      "rerank_score": 0.029256708920001984
+    },
+    {
+      "chunk_id": "chunk_e1a638ad66c9677e3b21b218e22f0aed",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.918736934661865
+        }
+      ],
+      "rerank_score": 0.02498779632151127
+    },
+    {
+      "chunk_id": "chunk_22761de9415eaae3dc9344ec763b2014",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7607851028442383
+        }
+      ],
+      "rerank_score": 0.02456308901309967
+    },
+    {
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.777101993560791
+        }
+      ],
+      "rerank_score": 0.023962024599313736
+    },
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 7,
+          "score": 0.14285714285714285
+        }
+      ],
+      "rerank_score": 0.02178117074072361
+    },
+    {
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.230220317840576
+        }
+      ],
+      "rerank_score": 0.021409768611192703
+    },
+    {
+      "chunk_id": "chunk_54195d498800a946748950b0238fda0f",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.151087284088135
+        }
+      ],
+      "rerank_score": 0.020645929500460625
+    },
+    {
+      "chunk_id": "chunk_ac2dd6acd17189360638268b42945e7b",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.265714168548584
+        }
+      ],
+      "rerank_score": 0.020567094907164574
+    },
+    {
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 0.04166810802468315,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.831502437591553
+        },
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7614130973815918
+        },
+        {
+          "channel": "graph",
+          "rank": 11,
+          "score": 0.09090909090909091
+        }
+      ],
+      "rerank_score": 0.01784873753786087
+    },
+    {
+      "chunk_id": "chunk_c9487cbd571de7247dab7359aeb33936",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.081750392913818
+        }
+      ],
+      "rerank_score": 0.017176708206534386
+    },
+    {
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.772240161895752
+        }
+      ],
+      "rerank_score": 0.01572399213910103
+    },
+    {
+      "chunk_id": "chunk_dbc1fae04646d9e523a5b16481732daf",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7675457000732422
+        }
+      ],
+      "rerank_score": 0.01196109689772129
+    },
+    {
+      "chunk_id": "chunk_eff9e47d69abba56a62073720f2bd77b",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7709393501281738
+        }
+      ],
+      "rerank_score": 0.011419613845646381
+    },
+    {
+      "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 6,
+          "score": 0.16666666666666666
+        }
+      ],
+      "rerank_score": 0.008813166059553623
+    },
+    {
+      "chunk_id": "chunk_20ad4ca6811d52ca011e181dadb57ba4",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.074681282043457
+        }
+      ],
+      "rerank_score": 0.006877107545733452
+    },
+    {
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7740907669067383
+        }
+      ],
+      "rerank_score": 0.00651349825784564
+    },
+    {
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.408199787139893
+        }
+      ],
+      "rerank_score": 0.003976227715611458
+    },
+    {
+      "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 4,
+          "score": 0.25
+        }
+      ],
+      "rerank_score": 0.0033634924329817295
+    },
+    {
+      "chunk_id": "chunk_ed6850570b5301d9c28d549903bb9f7b",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7625136375427246
+        }
+      ],
+      "rerank_score": 0.0013511208817362785
+    }
+  ],
+  "case_id": "R23",
+  "question": "ToG/ToG-R 的调用公式与 Tree-of-Traversals 的 max depth/max expansions 各约束什么量？为什么不能把它们直接换算成跨方法墙钟时延排名？",
+  "category": "cross",
+  "arm": "Hybrid+Graph",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.000903199999811477
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.03284189999976661
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 0.019373200000700308
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9939728999997897
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.001934899999469053
+    }
+  ],
+  "retrieval_compute_seconds": 1.049026099999537,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.3361683999992238,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 4.619008900001063,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.29008190000058676,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 4.010334299999158,
+      "usage": "{\"prompt_tokens\": 2249, \"total_tokens\": 2710, \"completion_tokens\": 461}"
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 0.3333333333333333,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "execution_config": {
+    "benchmark": "benchmark-v4",
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    },
+    "models": {
+      "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+      "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+      "CLOUD_BGE_PROVIDER": "cloudflare",
+      "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+      "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+      "LOCAL_RERANKER_DEVICE": "cuda",
+      "LOCAL_RERANKER_DTYPE": "float16",
+      "LOCAL_RERANKER_PERSISTENT": "true"
+    },
+    "endpoint_fingerprints": {
+      "DEEPSEEK_BASE_URL": "aebde9d32c41ca5aff41444d1ef2feaa0f3574a19195d60c588f826a6ea88c01",
+      "CLOUD_BGE_BASE_URL": "73dd98c51038dadb140c44d42e350a9ae3c52013d53336b34e055aa1bf12087d",
+      "CLOUDFLARE_ACCOUNT_ID": "8157dbe7227fcba3fcada3a5c46dc0a3a12f71bebb5b653de5256c0ae456e407",
+      "NEO4J_URI": "b1d4217b5d8c41b8b641a146d7facd744b01a415fe2ac0d943188a78e5f007f0"
+    },
+    "dependencies": {
+      "neo4j": "6.4.1",
+      "langsmith": "0.14.17",
+      "langgraph": "1.2.21",
+      "httpx": "0.28.1"
+    },
+    "code_sha256": {
+      "scripts/eval-stage4.py": "3fda792fb4ceea527961fa1f6eca2fc335412b64ff087bd5120f2f6c26dcf60b",
+      "src/papertech/evaluation_runtime.py": "d433b2ce3a6f189f698f4775275430e82cd8898df8c0fa8a015095506d3c1ccc",
+      "src/papertech/isolated_graph.py": "039d27009ec94003cfc6f25024ae2015ab7c12b27f9f7cfe5dc21979f1c41586",
+      "src/papertech/workflow.py": "6fe7b530e355f19886c34bd61c98046b6cd10598b74f94220dae63d64130964a",
+      "src/papertech/graph_store.py": "485c50edfbc99e26554d903b0f637ae4893ecf06168be34a767cd986c4d07476",
+      "src/papertech/retrieval.py": "ef2480079acc98095c86394ce6ae5bf894a7034a47d0d394cf584f871e41ae65",
+      "src/papertech/evidence_context.py": "b9bfe29885ffe4b82086a78572ffe4d031d3de9c497b0681aa732525a46f89f6",
+      "src/papertech/entity_aliases.py": "2725c08d7ca72f46c3bf7adbb3207eb75331f963a1998826bc6397e375699ea6",
+      "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+      "src/papertech/citations.py": "6465c41be136683a5ec723720820fca5c246c9365836914ca8967e5805175372",
+      "src/papertech/evaluation.py": "cb3714275490177d79bf755ef156e14f485748dbea590a95b54ab769fde96e31",
+      "src/papertech/evaluation_details.py": "a88e734e7fbe7a0b1f977dfdbd88aeed27da5a952431da94e4a66bc74a9a2090",
+      "src/papertech/evaluation_datasets.py": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+      "src/papertech/local_models.py": "62f465e7615a7208a8f4bfda6c9f4b545843e3115ef91768d47f5a7e787edddb",
+      "src/papertech/rerank_service.py": "156293246350d8b4a8c7bd23d45edb26f471d1bfe690480412edcf942617d693",
+      "scripts/rerank-service.py": "562927f8ebd62834e8aca53ae55a436eac4d82f39b66e1ad92b017f1b73facf5"
+    },
+    "controls": {
+      "arms": [
+        "Hybrid",
+        "Hybrid+Graph"
+      ],
+      "backend": "neo4j",
+      "graph_backend": "isolated_sqlite",
+      "fulltext_top": 20,
+      "dense_top": 20,
+      "fusion_max": 40,
+      "graph_candidates_max": 20,
+      "graph_seed_chunks": 12,
+      "graph_seed_entities": 40,
+      "graph_max_paths": 40,
+      "graph_hops": 2,
+      "graph_per_node": 8,
+      "evidence_max": 8,
+      "evidence_bytes": 6000,
+      "path_bytes": 1200,
+      "context_bytes": 7200,
+      "path_budget_mode": "additional",
+      "generation_max_tokens": 2048,
+      "thinking": "disabled",
+      "generation_requests_max": 80,
+      "sampling": "provider default; one sample per arm",
+      "treatment_scope": "graph candidates plus up to 1200 additional path bytes; not an equal actual input-token ablation",
+      "execution_order": "alternate which arm goes first",
+      "query_vector": "one shared Cloudflare batch",
+      "gold_exclusion": "question text only; reference tables and claim unit/path IDs denied by SQLite authorizer"
+    },
+    "latency": "retrieval compute excludes audit upload, generation, and shared embedding batch; request wall time reported separately",
+    "status": "frozen_before_execution"
+  },
+  "request_wall_seconds": 7.506691399999909,
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 0.78619384765625
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "score": 0.7811684608459473
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_9eadf098f08b0e28d9965aeb46062d4e",
+      "score": 0.7783188819885254
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.777101993560791
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.7758407592773438
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 0.775477409362793
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "score": 0.7745881080627441
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.7740907669067383
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_8b9e861ea949a3eb2fc9ed5a97b24644",
+      "score": 0.7715115547180176
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_eff9e47d69abba56a62073720f2bd77b",
+      "score": 0.7709393501281738
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_270d9350248b566ed224ba5147a295a2",
+      "score": 0.7708249092102051
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "score": 0.7680377960205078
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_5bae8019568ab15dd39f15ae0e4e74a8",
+      "score": 0.7679858207702637
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_e2267f27e994c288c8ff1de490f65ca7",
+      "score": 0.7678794860839844
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_dbc1fae04646d9e523a5b16481732daf",
+      "score": 0.7675457000732422
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 0.7638711929321289
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_ed6850570b5301d9c28d549903bb9f7b",
+      "score": 0.7625136375427246
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_a0d7d9ec00b3e121441cb8d4c6815b59",
+      "score": 0.7623076438903809
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 0.7614130973815918
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_22761de9415eaae3dc9344ec763b2014",
+      "score": 0.7607851028442383
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "score": 13.575660705566406
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "score": 13.541318893432617
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "score": 10.423744201660156
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 8.647509574890137
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 7.9458441734313965
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 7.917819023132324
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 7.831502437591553
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "score": 7.772240161895752
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "score": 7.7314133644104
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 7.538365840911865
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "score": 7.408199787139893
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_729fce1e558e36caab6046b7e5a8ca4a",
+      "score": 7.3165740966796875
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 7.312259674072266
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_ac2dd6acd17189360638268b42945e7b",
+      "score": 7.265714168548584
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "score": 7.230220317840576
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_54195d498800a946748950b0238fda0f",
+      "score": 7.151087284088135
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_c9487cbd571de7247dab7359aeb33936",
+      "score": 7.081750392913818
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_20ad4ca6811d52ca011e181dadb57ba4",
+      "score": 7.074681282043457
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_e1a638ad66c9677e3b21b218e22f0aed",
+      "score": 6.918736934661865
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+      "score": 6.746059894561768
+    },
+    {
+      "channel": "graph",
+      "rank": 1,
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "score": 1.0
+    },
+    {
+      "channel": "graph",
+      "rank": 2,
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.5
+    },
+    {
+      "channel": "graph",
+      "rank": 3,
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 0.3333333333333333
+    },
+    {
+      "channel": "graph",
+      "rank": 4,
+      "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+      "score": 0.25
+    },
+    {
+      "channel": "graph",
+      "rank": 5,
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 0.2
+    },
+    {
+      "channel": "graph",
+      "rank": 6,
+      "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+      "score": 0.16666666666666666
+    },
+    {
+      "channel": "graph",
+      "rank": 7,
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.14285714285714285
+    },
+    {
+      "channel": "graph",
+      "rank": 8,
+      "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+      "score": 0.125
+    },
+    {
+      "channel": "graph",
+      "rank": 9,
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.1111111111111111
+    },
+    {
+      "channel": "graph",
+      "rank": 10,
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 0.1
+    },
+    {
+      "channel": "graph",
+      "rank": 11,
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 0.09090909090909091
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R23.C01",
+      "requirement": "两种调用公式依次是 2ND+D+1 与 ND+D+1。",
+      "selected_matches_by_unit": {
+        "togr": []
+      },
+      "missing_units": [
+        "togr"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R23.C02",
+      "requirement": "max depth/max expansions 是搜索边界。",
+      "selected_matches_by_unit": {
+        "totbound": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R23.C03",
+      "requirement": "调用数量、深度、扩展数属于不同量。",
+      "selected_matches_by_unit": {
+        "togr": [],
+        "totbound": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ]
+      },
+      "missing_units": [
+        "togr"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R23.C04",
+      "requirement": "缺少每次调用耗时等条件，不能直接推断跨方法时延排名。",
+      "selected_matches_by_unit": {
+        "togr": [],
+        "totbound": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ]
+      },
+      "missing_units": [
+        "togr"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/1a7ecce7-273b-4607-8377-7f6b77f4776b?poll=true"
+}

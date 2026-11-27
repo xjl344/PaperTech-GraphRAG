@@ -1,0 +1,2647 @@
+{
+  "validation": "48 rows, 49 sources per arm, exact historical baseline sets, independent channel/provenance/coverage recomputation passed",
+  "source_transitions": {
+    "baseline_source_retained": 28,
+    "recovered_and_retained": 5,
+    "still_upstream_missing": 11,
+    "recovered_but_capped": 4,
+    "lost_baseline_source": 1
+  },
+  "latency": {
+    "Original": {
+      "p50": 0.026779349995194934,
+      "p95": 0.0479918000055477,
+      "total": 0.7646822999522556,
+      "count": 24
+    },
+    "Expanded": {
+      "p50": 0.07926670000597369,
+      "p95": 0.16262670001015067,
+      "total": 2.1578518000314943,
+      "count": 24
+    }
+  },
+  "results": [
+    {
+      "case_id": "R01",
+      "question": "G-Retriever 与 KG-GPT 所说的“图问答”是否对应同一种输出任务？比较前者对文本图的回答与可视定位，和后者的事实核验及 KGQA。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R01.S01",
+          "paper": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+          "required_fact": "G-Retriever 面向带文本属性的图，生成文本回答并标出相关图部分，涵盖场景图、常识及知识图推理。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第6名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+              "found_by": [
+                "SQ01",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.8034205436706543
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 10,
+                  "score": 5.566380023956299
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 12,
+                  "score": 0.7891645431518555
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 16,
+                  "score": 5.566380023956299
+                }
+              ],
+              "merged_rank": 6,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R01.S02",
+          "paper": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+          "required_fact": "KG-GPT 用于KG事实验证及KGQA，通过分割、图检索、推理处理结构化知识。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第8名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+              "found_by": [
+                "Q0",
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 7.043564319610596
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 7.043564319610596
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 17,
+                  "score": 0.7701067924499512
+                }
+              ],
+              "merged_rank": 8,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "G-Retriever 与 KG-GPT 所说的“图问答”是否对应同一种输出任务？比较前者对文本图的回答与可视定位，和后者的事实核验及 KGQA。"
+        },
+        {
+          "id": "SQ01",
+          "text": "G-Retriever 对文本图的回答与可视定位是什么？"
+        },
+        {
+          "id": "SQ02",
+          "text": "KG-GPT 的事实核验及 KGQA 是什么？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R02",
+      "question": "LPKG 和 RoG 都从 KG 学习规划，它们的计划表示能直接互换吗？分别说明自然语言子问题与关系路径怎样连接到后续执行。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R02.S01",
+          "paper": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+          "required_fact": "LPKG 把落地的KG模式转成复杂问题及自然语言子问题，训练后解析并执行计划。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第30名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+              "found_by": [
+                "Q0",
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 7,
+                  "score": 0.799077033996582
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 13,
+                  "score": 2.8291640281677246
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 13,
+                  "score": 1.9664783477783203
+                }
+              ],
+              "merged_rank": 30,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R02.S02",
+          "paper": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+          "required_fact": "RoG 生成KG约束的关系路径计划，用于检索有效推理路径。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第14名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+              "found_by": [
+                "Q0",
+                "SQ01",
+                "SQ03"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 4,
+                  "score": 0.8097686767578125
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 8,
+                  "score": 0.7623586654663086
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 10,
+                  "score": 3.251981735229492
+                },
+                {
+                  "query_id": "SQ03",
+                  "channel": "fulltext",
+                  "rank": 13,
+                  "score": 2.4513139724731445
+                }
+              ],
+              "merged_rank": 14,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "LPKG 和 RoG 都从 KG 学习规划，它们的计划表示能直接互换吗？分别说明自然语言子问题与关系路径怎样连接到后续执行。"
+        },
+        {
+          "id": "SQ01",
+          "text": "LPKG 的计划表示能直接与 RoG 的计划表示互换吗？"
+        },
+        {
+          "id": "SQ02",
+          "text": "自然语言子问题怎样连接到 LPKG 的后续执行？"
+        },
+        {
+          "id": "SQ03",
+          "text": "关系路径怎样连接到 RoG 的后续执行？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R03",
+      "question": "CuriousLLM 与 StructGPT 的迭代步骤各会产出什么供下一步使用？比较“追问”和“读取后推理”，不要把中间产物都写成最终答案。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R03.S01",
+          "paper": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+          "required_fact": "CuriousLLM 用问题和支持证据生成后续问题来指导补充检索；充分时用特殊token。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第2名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+              "found_by": [
+                "Q0",
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8428325653076172
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8355917930603027
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 4.575524806976318
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 4,
+                  "score": 4.575524806976318
+                }
+              ],
+              "merged_rank": 2,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R03.S02",
+          "paper": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+          "required_fact": "StructGPT 迭代接口调用、线性化与生成，接口负责读取证据，LLM负责推理。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第3名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+              "found_by": [
+                "SQ02",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 1,
+                  "score": 4.222936153411865
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.7972002029418945
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 4,
+                  "score": 0.8247418403625488
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 5,
+                  "score": 4.222936153411865
+                }
+              ],
+              "merged_rank": 3,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "CuriousLLM 与 StructGPT 的迭代步骤各会产出什么供下一步使用？比较“追问”和“读取后推理”，不要把中间产物都写成最终答案。"
+        },
+        {
+          "id": "SQ01",
+          "text": "CuriousLLM 的迭代步骤各会产出什么供下一步使用？"
+        },
+        {
+          "id": "SQ02",
+          "text": "StructGPT 的迭代步骤各会产出什么供下一步使用？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R04",
+      "question": "KGP 与 STaRK 的检索成功各指找到了什么？比较支持段落和答案实体，说明两者的召回分母为什么不能直接混用。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R04.S01",
+          "paper": "Knowledge Graph Prompting for Multi-Document Question Answering",
+          "required_fact": "KGP 的图遍历代理检索支持段落，节点也可包含文档结构。",
+          "kind": "recovered_and_retained",
+          "explanation": "基线漏召回；由SQ01 的 dense 第7名；SQ01 的 fulltext 第13名补回，合并第32名，保留在40条内。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+              "found_by": [
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 7,
+                  "score": 0.7581920623779297
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 13,
+                  "score": 2.1049458980560303
+                }
+              ],
+              "merged_rank": 32,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R04.S02",
+          "paper": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+          "required_fact": "STaRK 以SKB中的节点实体为真值答案，不是论文支持段落。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第16名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_2c06f903c181ffbdb1246026daa909b0",
+              "found_by": [
+                "SQ03",
+                "SQ02",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ03",
+                  "channel": "dense",
+                  "rank": 3,
+                  "score": 0.7286539077758789
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 8,
+                  "score": 3.940892457962036
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 8,
+                  "score": 0.7489385604858398
+                },
+                {
+                  "query_id": "SQ03",
+                  "channel": "fulltext",
+                  "rank": 8,
+                  "score": 3.940892457962036
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 9,
+                  "score": 3.940892457962036
+                }
+              ],
+              "merged_rank": 16,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "KGP 与 STaRK 的检索成功各指找到了什么？比较支持段落和答案实体，说明两者的召回分母为什么不能直接混用。"
+        },
+        {
+          "id": "SQ01",
+          "text": "KGP 检索成功的定义是什么？"
+        },
+        {
+          "id": "SQ02",
+          "text": "STaRK 检索成功的定义是什么？"
+        },
+        {
+          "id": "SQ03",
+          "text": "为什么 KGP 和 STaRK 的召回分母不能直接混用？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R05",
+      "question": "MindMap 与 G-Retriever 都把图交给模型，但图结构进入模型的方式一样吗？比较 LLM 合并证据子图与 GAT、池化、MLP 的职责。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R05.S01",
+          "paper": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+          "required_fact": "MindMap 用LLM把证据子图合成统一推理图，再供后续生成。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        },
+        {
+          "unit_id": "R05.S02",
+          "paper": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+          "required_fact": "G-Retriever 用GAT编码子图、均值池化得到图向量，再由MLP投影到LLM空间。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第19名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_5832b6bfb3218fc28548dbb991a42540",
+              "found_by": [
+                "Q0",
+                "SQ02",
+                "SQ04"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 7.176982879638672
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 2.717053174972534
+                },
+                {
+                  "query_id": "SQ04",
+                  "channel": "fulltext",
+                  "rank": 4,
+                  "score": 2.5376665592193604
+                }
+              ],
+              "merged_rank": 19,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "MindMap 与 G-Retriever 都把图交给模型，但图结构进入模型的方式一样吗？比较 LLM 合并证据子图与 GAT、池化、MLP 的职责。"
+        },
+        {
+          "id": "SQ01",
+          "text": "MindMap 和 G-Retriever 把图交给模型的方式是否相同？"
+        },
+        {
+          "id": "SQ02",
+          "text": "LLM 合并证据子图与 GAT 的职责有何不同？"
+        },
+        {
+          "id": "SQ03",
+          "text": "比较 LLM 合并证据子图和池化的职责。"
+        },
+        {
+          "id": "SQ04",
+          "text": "比较 LLM 合并证据子图和 MLP 的职责。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R06",
+      "question": "ToG 的束搜索与 Tree-of-Traversals 的搜索状态回溯各保留什么选择机会？后者发现低价值状态后怎样换路？",
+      "route": "rule",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R06.S01",
+          "paper": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+          "required_fact": "ToG 用LLM代理迭代执行图上的束搜索，探索实体关系与推理路径。",
+          "kind": "recovered_but_capped",
+          "explanation": "基线漏召回；由SQ01 的 fulltext 第20名补回，合并第62名，仍被40条上限截掉。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": false,
+          "matches": [
+            {
+              "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+              "found_by": [
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 20,
+                  "score": 2.1011910438537598
+                }
+              ],
+              "merged_rank": 62,
+              "retained": false
+            }
+          ]
+        },
+        {
+          "unit_id": "R06.S02",
+          "paper": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+          "required_fact": "Tree-of-Traversals 示例在低价值状态后回溯到最佳备选状态，再重新选择扩展。",
+          "kind": "recovered_but_capped",
+          "explanation": "基线漏召回；由SQ02 的 dense 第17名补回，合并第54名，仍被40条上限截掉。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": false,
+          "matches": [
+            {
+              "chunk_id": "chunk_50dee9a8765be04263849aca87ab67d3",
+              "found_by": [
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 17,
+                  "score": 0.7827491760253906
+                }
+              ],
+              "merged_rank": 54,
+              "retained": false
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "ToG 的束搜索与 Tree-of-Traversals 的搜索状态回溯各保留什么选择机会？后者发现低价值状态后怎样换路？"
+        },
+        {
+          "id": "SQ01",
+          "text": "ToG 的束搜索 各保留什么选择机会？"
+        },
+        {
+          "id": "SQ02",
+          "text": "Tree-of-Traversals 的搜索状态回溯 各保留什么选择机会？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.0,
+        "cap40_coverage": 0.0,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 0.0,
+        "union_all": true,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R07",
+      "question": "请从论文库找出两种让“语义上相关的材料”在图中连起来的不同办法：一种连接不同叫法的概念，另一种学习相邻支持段落。分别说明建边依据和训练信号。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R07.S01",
+          "paper": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+          "required_fact": "HippoRAG 用检索编码器表示的余弦相似度超过阈值来增加同义边。",
+          "kind": "recovered_and_retained",
+          "explanation": "基线漏召回；由SQ01 的 dense 第5名补回，合并第10名，保留在40条内。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_008861356c216ab780f62dad7796e2d4",
+              "found_by": [
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 5,
+                  "score": 0.7763462066650391
+                }
+              ],
+              "merged_rank": 10,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R07.S02",
+          "paper": "Knowledge Graph Prompting for Multi-Document Question Answering",
+          "required_fact": "KGP 的MDR句子编码器学习由已知支持事实预测后续支持事实，再用嵌入相似构建KNN图。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第1名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_1da329a96f21568de531f98b40b330e7",
+              "found_by": [
+                "Q0",
+                "SQ02",
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.7951302528381348
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8083052635192871
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 3,
+                  "score": 0.7793755531311035
+                }
+              ],
+              "merged_rank": 1,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "请从论文库找出两种让“语义上相关的材料”在图中连起来的不同办法：一种连接不同叫法的概念，另一种学习相邻支持段落。分别说明建边依据和训练信号。"
+        },
+        {
+          "id": "SQ01",
+          "text": "找出一种让语义上相关的材料在图中连起来的方法，该方法用于连接不同叫法的概念。"
+        },
+        {
+          "id": "SQ02",
+          "text": "找出另一种让语义上相关的材料在图中连起来的方法，该方法用于学习相邻支持段落。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 0.5,
+        "cap40_paper_coverage": 0.5
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R08",
+      "question": "ToG-2 和 STaRK 都使用重排模型。前者对实体上下文数量的分析与后者的候选重排设置，分别暴露了哪些成本或输入长度限制？",
+      "route": "llm",
+      "notes": [
+        "ToG-2 的必要来源实际由 STaRK 子查询 SQ02 找到；发现通道不等于论文/子查询归属，后续重排不能假定二者相同。"
+      ],
+      "sources": [
+        {
+          "unit_id": "R08.S01",
+          "paper": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+          "required_fact": "ToG-2 增加上下文时BGE重排器收益较好，而LLM有效性下降，作者指出LLM受输入长度限制并考虑成本。",
+          "kind": "recovered_but_capped",
+          "explanation": "基线漏召回；由SQ02 的 dense 第13名补回，合并第43名，仍被40条上限截掉。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": false,
+          "matches": [
+            {
+              "chunk_id": "chunk_d4f6a4a037b6e147680603d67ba56fc0",
+              "found_by": [
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 13,
+                  "score": 0.7422518730163574
+                }
+              ],
+              "merged_rank": 43,
+              "retained": false
+            }
+          ]
+        },
+        {
+          "unit_id": "R08.S02",
+          "paper": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+          "required_fact": "STaRK 的LLM重排因成本高仅测试随机10%问题，合成/人工候选数为20/10。",
+          "kind": "recovered_but_capped",
+          "explanation": "基线漏召回；由SQ02 的 dense 第19名补回，合并第60名，仍被40条上限截掉。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": false,
+          "matches": [
+            {
+              "chunk_id": "chunk_bb730573725b148aa7913e7f17bb9261",
+              "found_by": [
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 19,
+                  "score": 0.7389540672302246
+                }
+              ],
+              "merged_rank": 60,
+              "retained": false
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "ToG-2 和 STaRK 都使用重排模型。前者对实体上下文数量的分析与后者的候选重排设置，分别暴露了哪些成本或输入长度限制？"
+        },
+        {
+          "id": "SQ01",
+          "text": "ToG-2 对实体上下文数量的分析暴露了哪些成本或输入长度限制？"
+        },
+        {
+          "id": "SQ02",
+          "text": "STaRK 的候选重排设置暴露了哪些成本或输入长度限制？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.0,
+        "cap40_coverage": 0.0,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 0.0,
+        "union_all": true,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R09",
+      "question": "HippoRAG 的“查询节点加邻居”消融与 KG-GPT 的 top-k 关系实验，是否支持“取更多邻居必然更好”？分别说明结果及适用任务。",
+      "route": "fallback",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R09.S01",
+          "paper": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+          "required_fact": "HippoRAG 不做PPR而直接加查询邻居的替代方法，比只用查询节点更差。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第7名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+              "found_by": [
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 4,
+                  "score": 0.8005304336547852
+                }
+              ],
+              "merged_rank": 7,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R09.S02",
+          "paper": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+          "required_fact": "KG-GPT FACTKG 增大k准确率变化不大，MetaQA 增大k表现改善。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第13名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_fbbb8f38df6e66a40727407ca912ae1a",
+              "found_by": [
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 7,
+                  "score": 0.7876973152160645
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 16,
+                  "score": 4.873268127441406
+                }
+              ],
+              "merged_rank": 13,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "HippoRAG 的“查询节点加邻居”消融与 KG-GPT 的 top-k 关系实验，是否支持“取更多邻居必然更好”？分别说明结果及适用任务。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R10",
+      "question": "请找两篇直接讨论图证据冗余的工作：一篇分析图变密后支持事实覆盖与精度的取舍，另一篇通过聚类、采样保持多样性。它们分别控制哪个阶段？",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R10.S01",
+          "paper": "Knowledge Graph Prompting for Multi-Document Question Answering",
+          "required_fact": "KGP 图变密时支持事实覆盖上升而精度下降；这是建图/邻居候选的取舍。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        },
+        {
+          "unit_id": "R10.S02",
+          "paper": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+          "required_fact": "MindMap 对已探索的路径和邻居证据子图聚类采样，属于证据选择与压缩。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第4名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_18e6db2a25659ad12b8e68e6cc51dfda",
+              "found_by": [
+                "Q0",
+                "SQ02",
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.7793731689453125
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.7943019866943359
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 6,
+                  "score": 0.7779898643493652
+                }
+              ],
+              "merged_rank": 4,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "请找两篇直接讨论图证据冗余的工作：一篇分析图变密后支持事实覆盖与精度的取舍，另一篇通过聚类、采样保持多样性。它们分别控制哪个阶段？"
+        },
+        {
+          "id": "SQ01",
+          "text": "一篇直接讨论图证据冗余，分析图变密后支持事实覆盖与精度取舍的工作。"
+        },
+        {
+          "id": "SQ02",
+          "text": "另一篇通过聚类、采样保持多样性的图证据冗余工作。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R11",
+      "question": "面对结构化材料放不进提示词的问题，G-Retriever 与 StructGPT 分别在哪一步缩小输入？比较子图检索和专门接口过滤，说明它们是否都需要先把整库文本化。",
+      "route": "fallback",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R11.S01",
+          "paper": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+          "required_fact": "G-Retriever 通过相关子图选择缓解整图文本化超窗口或截断丢信息的问题。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第5名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_5c9e14854565607ec53c355da481c451",
+              "found_by": [
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 3,
+                  "score": 0.8100056648254395
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 14,
+                  "score": 7.167072772979736
+                }
+              ],
+              "merged_rank": 5,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R11.S02",
+          "paper": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+          "required_fact": "StructGPT 指出整份结构化数据线性化太大，以专门接口操纵和缩小所需记录范围。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。本题分流校验失败，只有原问题召回，没有运行子查询。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "面对结构化材料放不进提示词的问题，G-Retriever 与 StructGPT 分别在哪一步缩小输入？比较子图检索和专门接口过滤，说明它们是否都需要先把整库文本化。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R12",
+      "question": "ToG-R 与 ToG-2 对候选实体分别更依赖哪类信息？比较随机实体剪枝与文档提供的实体上下文，说明两者不能视作同一种实体筛选。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R12.S01",
+          "paper": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+          "required_fact": "ToG-R 以随机实体剪枝替代ToG中的LLM实体剪枝。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第20名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+              "found_by": [
+                "SQ01",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 5,
+                  "score": 0.7859625816345215
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 15,
+                  "score": 0.7670965194702148
+                }
+              ],
+              "merged_rank": 20,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R12.S02",
+          "paper": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+          "required_fact": "ToG-2 以文档作为实体上下文以支持图检索，并用实体联接文档。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第21名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+              "found_by": [
+                "SQ02",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 5,
+                  "score": 2.888340473175049
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 17,
+                  "score": 2.888340473175049
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 18,
+                  "score": 0.7646627426147461
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 19,
+                  "score": 0.7712917327880859
+                }
+              ],
+              "merged_rank": 21,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "ToG-R 与 ToG-2 对候选实体分别更依赖哪类信息？比较随机实体剪枝与文档提供的实体上下文，说明两者不能视作同一种实体筛选。"
+        },
+        {
+          "id": "SQ01",
+          "text": "ToG-R 对候选实体更依赖哪类信息？"
+        },
+        {
+          "id": "SQ02",
+          "text": "ToG-2 对候选实体更依赖哪类信息？"
+        },
+        {
+          "id": "SQ03",
+          "text": "随机实体剪枝与文档提供的实体上下文有何区别，说明两者不能视作同一种实体筛选。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R13",
+      "question": "CuriousLLM 复用的 MDR 段落编码器与 HippoRAG 的同义边编码器，分别学习或比较什么？请区分“下一段支持证据”和“概念名称相似”。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R13.S01",
+          "paper": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+          "required_fact": "CuriousLLM 延用MDR训练，使用HotpotQA学习支持段落对接近、无关段落远离以建图。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第24名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_69407b618c1969f701e74bd3cf523c95",
+              "found_by": [
+                "Q0",
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 6,
+                  "score": 4.0537285804748535
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 6,
+                  "score": 4.0537285804748535
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 18,
+                  "score": 0.7576007843017578
+                }
+              ],
+              "merged_rank": 24,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R13.S02",
+          "paper": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+          "required_fact": "HippoRAG 对抽取的概念表示计算余弦相似度，用阈值增加同义边。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "CuriousLLM 复用的 MDR 段落编码器与 HippoRAG 的同义边编码器，分别学习或比较什么？请区分“下一段支持证据”和“概念名称相似”。"
+        },
+        {
+          "id": "SQ01",
+          "text": "CuriousLLM 复用的 MDR 段落编码器学习什么？"
+        },
+        {
+          "id": "SQ02",
+          "text": "HippoRAG 的同义边编码器学习什么？"
+        },
+        {
+          "id": "SQ03",
+          "text": "区分下一段支持证据和概念名称相似"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R14",
+      "question": "RoG 的受约束广度优先搜索与 Tree-of-Traversals 的动作状态机怎样分别限制下一步动作？比较预先关系序列与可行操作空间。",
+      "route": "rule",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R14.S01",
+          "paper": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+          "required_fact": "RoG 从问题实体出发，沿计划的关系序列执行受约束BFS，检索有效推理路径。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        },
+        {
+          "unit_id": "R14.S02",
+          "paper": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+          "required_fact": "Tree-of-Traversals 的ASM定义与KG交互的可行动作、状态及提示模板；树搜索管理搜索轨迹和回溯。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第17名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+              "found_by": [
+                "SQ02",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 4,
+                  "score": 0.7718043327331543
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 5,
+                  "score": 7.538365840911865
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 5,
+                  "score": 7.538365840911865
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 6,
+                  "score": 0.7665376663208008
+                }
+              ],
+              "merged_rank": 17,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "RoG 的受约束广度优先搜索与 Tree-of-Traversals 的动作状态机怎样分别限制下一步动作？比较预先关系序列与可行操作空间。"
+        },
+        {
+          "id": "SQ01",
+          "text": "RoG 的受约束广度优先搜索 怎样分别限制下一步动作？"
+        },
+        {
+          "id": "SQ02",
+          "text": "Tree-of-Traversals 的动作状态机 怎样分别限制下一步动作？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R15",
+      "question": "LPKG 的 CLQA-Wiki 与 STaRK 各想补足什么评测缺口？比较交并逻辑覆盖和文本属性＋关系条件的组合，并指出真值对象差异。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R15.S01",
+          "paper": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+          "required_fact": "CLQA-Wiki 覆盖多跳、比较、交集、并集，强调逻辑操作及可能多答案。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第1名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+              "found_by": [
+                "Q0",
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 1,
+                  "score": 8.125449180603027
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8192543983459473
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 1,
+                  "score": 5.61279296875
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8286280632019043
+                }
+              ],
+              "merged_rank": 1,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R15.S02",
+          "paper": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+          "required_fact": "STaRK 将关系条件与复杂文本属性一起构造自然查询，真值是答案条目/实体。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第10名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_6b5383484693f6226010eab8143f80d6",
+              "found_by": [
+                "SQ02",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.7652082443237305
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 6,
+                  "score": 0.7863574028015137
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 11,
+                  "score": 3.768080711364746
+                }
+              ],
+              "merged_rank": 10,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "LPKG 的 CLQA-Wiki 与 STaRK 各想补足什么评测缺口？比较交并逻辑覆盖和文本属性＋关系条件的组合，并指出真值对象差异。"
+        },
+        {
+          "id": "SQ01",
+          "text": "CLQA-Wiki 想补足什么评测缺口？"
+        },
+        {
+          "id": "SQ02",
+          "text": "STaRK 想补足什么评测缺口？"
+        },
+        {
+          "id": "SQ03",
+          "text": "交并逻辑覆盖和文本属性＋关系条件组合有何不同？"
+        },
+        {
+          "id": "SQ04",
+          "text": "真值对象在两种方法中的差异是什么？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R16",
+      "question": "StructGPT 与 KG-GPT 处理结构化信息时，哪些任务需要生成可执行表达式，哪些需要判断事实或给出图问答答案？据此比较两者的任务边界。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R16.S01",
+          "paper": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+          "required_fact": "StructGPT 覆盖KGQA、TableQA、Text-to-SQL，可输出待执行的SQL表达式。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第7名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_3a66017788061f8f662ca365c955591a",
+              "found_by": [
+                "SQ02",
+                "Q0",
+                "SQ01",
+                "SQ04",
+                "SQ03"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.8256793022155762
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 4,
+                  "score": 0.8069119453430176
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 4,
+                  "score": 0.8004941940307617
+                },
+                {
+                  "query_id": "SQ04",
+                  "channel": "dense",
+                  "rank": 5,
+                  "score": 0.8216991424560547
+                },
+                {
+                  "query_id": "SQ03",
+                  "channel": "dense",
+                  "rank": 8,
+                  "score": 0.7960371971130371
+                }
+              ],
+              "merged_rank": 7,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R16.S02",
+          "paper": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+          "required_fact": "KG-GPT 针对KG事实验证与KGQA，不凭此推断其具备数据库SQL生成能力。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第4名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+              "found_by": [
+                "SQ03",
+                "Q0",
+                "SQ04",
+                "SQ01",
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ03",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8214635848999023
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.8167080879211426
+                },
+                {
+                  "query_id": "SQ04",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.8317146301269531
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 6,
+                  "score": 5.4520134925842285
+                },
+                {
+                  "query_id": "SQ03",
+                  "channel": "fulltext",
+                  "rank": 6,
+                  "score": 5.4520134925842285
+                },
+                {
+                  "query_id": "SQ04",
+                  "channel": "fulltext",
+                  "rank": 6,
+                  "score": 5.4520134925842285
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 9,
+                  "score": 0.7901730537414551
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 11,
+                  "score": 0.800117015838623
+                }
+              ],
+              "merged_rank": 4,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "StructGPT 与 KG-GPT 处理结构化信息时，哪些任务需要生成可执行表达式，哪些需要判断事实或给出图问答答案？据此比较两者的任务边界。"
+        },
+        {
+          "id": "SQ01",
+          "text": "StructGPT 处理结构化信息时，哪些任务需要生成可执行表达式？"
+        },
+        {
+          "id": "SQ02",
+          "text": "StructGPT 处理结构化信息时，哪些任务需要判断事实或给出图问答答案？"
+        },
+        {
+          "id": "SQ03",
+          "text": "KG-GPT 处理结构化信息时，哪些任务需要生成可执行表达式？"
+        },
+        {
+          "id": "SQ04",
+          "text": "KG-GPT 处理结构化信息时，哪些任务需要判断事实或给出图问答答案？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R17",
+      "question": "KGP 为什么用真实邻居段落去匹配模型预测的下一条证据？结合 CuriousLLM 对原 KGP 错误关键词的观察，说明模型生成的“缺失证据”为什么仍需回取原文。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R17.S01",
+          "paper": "Knowledge Graph Prompting for Multi-Document Question Answering",
+          "required_fact": "KGP 示例中模型可预测错误出生日期，再从真实文档邻居匹配段落以纠正；预测证据不是已核实原文。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        },
+        {
+          "unit_id": "R17.S02",
+          "paper": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+          "required_fact": "CuriousLLM 作者观察原KGP虽能猜到缺失证据，仍可能使用无关或错误关键词而妨碍检索。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第2名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_f58319afb1c636475f807715f48a7a93",
+              "found_by": [
+                "Q0",
+                "SQ01",
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8238215446472168
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.7931089401245117
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.8273959159851074
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 8,
+                  "score": 5.900729656219482
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 11,
+                  "score": 3.7092485427856445
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 12,
+                  "score": 2.191481113433838
+                }
+              ],
+              "merged_rank": 2,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "KGP 为什么用真实邻居段落去匹配模型预测的下一条证据？结合 CuriousLLM 对原 KGP 错误关键词的观察，说明模型生成的“缺失证据”为什么仍需回取原文。"
+        },
+        {
+          "id": "SQ01",
+          "text": "为什么 KGP 用真实邻居段落去匹配模型预测的下一条证据？"
+        },
+        {
+          "id": "SQ02",
+          "text": "结合 CuriousLLM 对原 KGP 错误关键词的观察，说明模型生成的“缺失证据”为什么仍需回取原文。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R18",
+      "question": "请从论文库举两个“图方法仍使用向量”的例子：一个用于把问题实体映射到图节点，另一个用于检索相关节点和边。比较向量所在的阶段，不能只回答方法名。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R18.S01",
+          "paper": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+          "required_fact": "HippoRAG 编码问题命名实体，用最高余弦相似度匹配KG节点。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        },
+        {
+          "unit_id": "R18.S02",
+          "paper": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+          "required_fact": "G-Retriever 编码问题及节点/边属性，用KNN和余弦相似度选top-k节点/边。",
+          "kind": "recovered_and_retained",
+          "explanation": "基线漏召回；由SQ02 的 dense 第15名补回，合并第36名，保留在40条内。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_8c5476c0307c733adb60d1afe861e4d2",
+              "found_by": [
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 15,
+                  "score": 0.7700581550598145
+                }
+              ],
+              "merged_rank": 36,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "请从论文库举两个“图方法仍使用向量”的例子：一个用于把问题实体映射到图节点，另一个用于检索相关节点和边。比较向量所在的阶段，不能只回答方法名。"
+        },
+        {
+          "id": "SQ01",
+          "text": "找出一个论文例子，其中图方法将问题实体映射到图节点时仍使用向量。"
+        },
+        {
+          "id": "SQ02",
+          "text": "找出另一个论文例子，其中图方法在检索相关节点和边时使用向量。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.0,
+        "cap40_coverage": 0.0,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 0.5,
+        "cap40_paper_coverage": 0.5
+      },
+      "expanded": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R19",
+      "question": "G-Retriever 冻结 LLM 的软提示训练与 ToG-2 的 training-free 分别意味着什么？比较是否训练其他组件，避免仅凭底座参数不变就判定整套系统免训练。",
+      "route": "rule",
+      "notes": [
+        "冻结规则查询漏掉G-Retriever，误以LLM为主语。本题必要来源由保留的原题覆盖，持平不能证明该拆分正确。"
+      ],
+      "sources": [
+        {
+          "unit_id": "R19.S01",
+          "paper": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+          "required_fact": "G-Retriever 冻结LLM但以GNN输出的软提示做高效微调。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第23名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+              "found_by": [
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 5,
+                  "score": 6.8085126876831055
+                }
+              ],
+              "merged_rank": 23,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R19.S02",
+          "paper": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+          "required_fact": "ToG-2 将自身描述为training-free且可即插即用不同LLM。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第22名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+              "found_by": [
+                "SQ02",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 4,
+                  "score": 0.752556324005127
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 5,
+                  "score": 2.888340473175049
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 16,
+                  "score": 5.17957878112793
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 20,
+                  "score": 0.765345573425293
+                }
+              ],
+              "merged_rank": 22,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "G-Retriever 冻结 LLM 的软提示训练与 ToG-2 的 training-free 分别意味着什么？比较是否训练其他组件，避免仅凭底座参数不变就判定整套系统免训练。"
+        },
+        {
+          "id": "SQ01",
+          "text": "LLM 的软提示训练 分别意味着什么？"
+        },
+        {
+          "id": "SQ02",
+          "text": "ToG-2 的training-free 分别意味着什么？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R20",
+      "question": "ToG 的 training-free 和 StructGPT 的 zero-shot/few-shot 是同一个分类维度吗？结合两篇方法描述，区分参数更新与提示中示例数量。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R20.S01",
+          "paper": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+          "required_fact": "ToG 自述training-free，无需额外训练。",
+          "kind": "recovered_and_retained",
+          "explanation": "基线漏召回；由SQ01 的 fulltext 第3名；SQ01 的 dense 第3名补回，合并第13名，保留在40条内。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+              "found_by": [
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 4.392429351806641
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 3,
+                  "score": 0.7489457130432129
+                }
+              ],
+              "merged_rank": 13,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R20.S02",
+          "paper": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+          "required_fact": "StructGPT 报告zero-shot和few-shot设置，利用接口迭代读取和推理；示例数和参数更新是不同描述维度。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第5名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+              "found_by": [
+                "SQ02",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 1,
+                  "score": 9.012330055236816
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 9.012330055236816
+                }
+              ],
+              "merged_rank": 5,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "ToG 的 training-free 和 StructGPT 的 zero-shot/few-shot 是同一个分类维度吗？结合两篇方法描述，区分参数更新与提示中示例数量。"
+        },
+        {
+          "id": "SQ01",
+          "text": "ToG 的 training-free 是什么含义？"
+        },
+        {
+          "id": "SQ02",
+          "text": "StructGPT 的 zero-shot/few-shot 是什么含义？"
+        },
+        {
+          "id": "SQ03",
+          "text": "参数更新与提示中示例数量的区别是什么？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R21",
+      "question": "KGP 预测下一段证据与 RoG 生成关系路径后，分别怎样约束实际检索？比较邻居段落的相似匹配与沿关系序列的图搜索。",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R21.S01",
+          "paper": "Knowledge Graph Prompting for Multi-Document Question Answering",
+          "required_fact": "KGP 将预测证据与真实邻居匹配，选择相似的文档段落。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        },
+        {
+          "unit_id": "R21.S02",
+          "paper": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+          "required_fact": "RoG 从问题实体沿关系序列进行受约束BFS。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "KGP 预测下一段证据与 RoG 生成关系路径后，分别怎样约束实际检索？比较邻居段落的相似匹配与沿关系序列的图搜索。"
+        },
+        {
+          "id": "SQ01",
+          "text": "KGP 预测下一段证据后怎样约束实际检索？"
+        },
+        {
+          "id": "SQ02",
+          "text": "RoG 生成关系路径后怎样约束实际检索？"
+        },
+        {
+          "id": "SQ03",
+          "text": "比较邻居段落的相似匹配与沿关系序列的图搜索。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.0,
+        "cap40_coverage": 0.0,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.0,
+        "cap40_coverage": 0.0,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R22",
+      "question": "MindMap 的证据图合并和 CuriousLLM 的追问各会怎样改变后续可用信息？区分重组织已有证据与请求继续找证据。",
+      "route": "rule",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R22.S01",
+          "paper": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+          "required_fact": "MindMap 先裁剪，再由LLM合并已取得的证据子图成统一推理图。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        },
+        {
+          "unit_id": "R22.S02",
+          "paper": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+          "required_fact": "CuriousLLM 用追问指出还缺什么以指导后续检索，证据足够则产生特殊信号。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第5名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+              "found_by": [
+                "SQ02",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8308219909667969
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.8222465515136719
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 4.575524806976318
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 3,
+                  "score": 4.575524806976318
+                }
+              ],
+              "merged_rank": 5,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "MindMap 的证据图合并和 CuriousLLM 的追问各会怎样改变后续可用信息？区分重组织已有证据与请求继续找证据。"
+        },
+        {
+          "id": "SQ01",
+          "text": "MindMap 的证据图合并 各会怎样改变后续可用信息？"
+        },
+        {
+          "id": "SQ02",
+          "text": "CuriousLLM 的追问 各会怎样改变后续可用信息？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.5,
+        "cap40_coverage": 0.5,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R23",
+      "question": "请找出一项按候选答案条目集合衡量 Recall@k 的工作，以及一项可能生成 SQL 的结构化问答工作。为什么前者的 Recall@k 不能直接作为后者的 SQL 执行正确率？",
+      "route": "llm",
+      "notes": [],
+      "sources": [
+        {
+          "unit_id": "R23.S01",
+          "paper": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+          "required_fact": "STaRK Recall@k 计算top-k结果里相关条目的比例。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第3名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_bb730573725b148aa7913e7f17bb9261",
+              "found_by": [
+                "SQ01",
+                "Q0"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 1,
+                  "score": 3.4631388187408447
+                },
+                {
+                  "query_id": "SQ01",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8030304908752441
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 2,
+                  "score": 6.9262776374816895
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 3,
+                  "score": 0.7810173034667969
+                }
+              ],
+              "merged_rank": 3,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R23.S02",
+          "paper": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+          "required_fact": "StructGPT 可生成需执行得到答案的SQL；执行正确率与条目召回不是同一指标。",
+          "kind": "baseline_source_retained",
+          "explanation": "基线已经命中，扩展后合并第1名仍在40条内；本来源没有新增覆盖收益。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_3a66017788061f8f662ca365c955591a",
+              "found_by": [
+                "Q0",
+                "SQ02"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "fulltext",
+                  "rank": 1,
+                  "score": 7.124905586242676
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "dense",
+                  "rank": 1,
+                  "score": 0.8242568969726562
+                },
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 2,
+                  "score": 0.784764289855957
+                },
+                {
+                  "query_id": "SQ02",
+                  "channel": "fulltext",
+                  "rank": 11,
+                  "score": 2.241824150085449
+                }
+              ],
+              "merged_rank": 1,
+              "retained": true
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "请找出一项按候选答案条目集合衡量 Recall@k 的工作，以及一项可能生成 SQL 的结构化问答工作。为什么前者的 Recall@k 不能直接作为后者的 SQL 执行正确率？"
+        },
+        {
+          "id": "SQ01",
+          "text": "找出一项按候选答案条目集合衡量 Recall@k 的工作。"
+        },
+        {
+          "id": "SQ02",
+          "text": "找出一项可能生成 SQL 的结构化问答工作。"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 1.0,
+        "cap40_coverage": 1.0,
+        "union_all": true,
+        "cap40_all": true,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    },
+    {
+      "case_id": "R24",
+      "question": "HippoRAG 的节点 specificity、G-Retriever 的节点/边奖励、KG-GPT 的 top-k 参数分别改变了什么？按“排序权重、子图优化、候选数量”对齐，并说明三者不能共用一个参数。",
+      "route": "rule",
+      "notes": [
+        "题目覆盖率1/3持平，但S01新增、S03丢失；严格的逐来源无退化条件未满足。"
+      ],
+      "sources": [
+        {
+          "unit_id": "R24.S01",
+          "paper": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+          "required_fact": "HippoRAG specificity 在PPR前调整查询节点概率。",
+          "kind": "recovered_and_retained",
+          "explanation": "基线漏召回；由SQ01 的 fulltext 第2名补回，合并第10名，保留在40条内。",
+          "baseline_hit": false,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": true,
+          "matches": [
+            {
+              "chunk_id": "chunk_3847660df4256f0bd39f8b49c7b9864e",
+              "found_by": [
+                "SQ01"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "SQ01",
+                  "channel": "fulltext",
+                  "rank": 2,
+                  "score": 5.343153953552246
+                }
+              ],
+              "merged_rank": 10,
+              "retained": true
+            }
+          ]
+        },
+        {
+          "unit_id": "R24.S02",
+          "paper": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+          "required_fact": "G-Retriever 依据相关性给节点/边奖励，在连通子图优化中折中奖励和边成本。",
+          "kind": "still_upstream_missing",
+          "explanation": "所有已执行查询的全文Top20和向量Top20均未命中冻结支持池；不是重排或上下文预算丢弃。",
+          "baseline_hit": false,
+          "expanded_union_hit": false,
+          "expanded_cap40_hit": false,
+          "matches": []
+        },
+        {
+          "unit_id": "R24.S03",
+          "paper": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+          "required_fact": "KG-GPT 的top-k决定关系检索范围，改变检索三元组数量。",
+          "kind": "lost_baseline_source",
+          "explanation": "基线已命中；扩展并集仍命中，但轮转合并第58名，超过40条上限，被截掉。",
+          "baseline_hit": true,
+          "expanded_union_hit": true,
+          "expanded_cap40_hit": false,
+          "matches": [
+            {
+              "chunk_id": "chunk_fbbb8f38df6e66a40727407ca912ae1a",
+              "found_by": [
+                "Q0",
+                "SQ03"
+              ],
+              "discoveries": [
+                {
+                  "query_id": "Q0",
+                  "channel": "dense",
+                  "rank": 13,
+                  "score": 0.7797679901123047
+                },
+                {
+                  "query_id": "SQ03",
+                  "channel": "fulltext",
+                  "rank": 16,
+                  "score": 2.8600802421569824
+                }
+              ],
+              "merged_rank": 58,
+              "retained": false
+            }
+          ]
+        }
+      ],
+      "original_queries": [
+        {
+          "id": "Q0",
+          "text": "HippoRAG 的节点 specificity、G-Retriever 的节点/边奖励、KG-GPT 的 top-k 参数分别改变了什么？按“排序权重、子图优化、候选数量”对齐，并说明三者不能共用一个参数。"
+        },
+        {
+          "id": "SQ01",
+          "text": "HippoRAG 的节点 specificity 分别改变了什么？"
+        },
+        {
+          "id": "SQ02",
+          "text": "G-Retriever 的节点/边奖励 分别改变了什么？"
+        },
+        {
+          "id": "SQ03",
+          "text": "KG-GPT 的top-k 参数 分别改变了什么？"
+        }
+      ],
+      "baseline": {
+        "union_coverage": 0.3333333333333333,
+        "cap40_coverage": 0.3333333333333333,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      },
+      "expanded": {
+        "union_coverage": 0.6666666666666666,
+        "cap40_coverage": 0.3333333333333333,
+        "union_all": false,
+        "cap40_all": false,
+        "union_paper_coverage": 1.0,
+        "cap40_paper_coverage": 1.0
+      }
+    }
+  ],
+  "conclusion": "子查询对上游召回有开发集增益；40候选截断损失5个并集来源，其中含1个基线已有来源。不自动接入生产，不声称最终答案收益。"
+}

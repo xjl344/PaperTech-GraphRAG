@@ -1,0 +1,251 @@
+{
+  "id": "b0d12862-a9ae-5976-87d2-a59d5bff766f",
+  "inputs": {
+    "question": "请找出一项按候选答案条目集合衡量 Recall@k 的工作，以及一项可能生成 SQL 的结构化问答工作。为什么前者的 Recall@k 不能直接作为后者的 SQL 执行正确率？"
+  },
+  "outputs": {
+    "expected_answer": "STaRK Recall@k 计算top-k结果里相关条目的比例。\nStructGPT 可生成需执行得到答案的SQL；执行正确率与条目召回不是同一指标。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R23.S01",
+        "answer_point": "STaRK Recall@k 计算top-k结果里相关条目的比例。",
+        "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+        "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+        "primary_chunk": "chunk_bb730573725b148aa7913e7f17bb9261",
+        "pages": [
+          7,
+          7
+        ],
+        "known_support_chunks": [
+          "chunk_bb730573725b148aa7913e7f17bb9261"
+        ]
+      },
+      {
+        "unit_id": "R23.S02",
+        "answer_point": "StructGPT 可生成需执行得到答案的SQL；执行正确率与条目召回不是同一指标。",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+        "primary_chunk": "chunk_3a66017788061f8f662ca365c955591a",
+        "pages": [
+          3,
+          3
+        ],
+        "known_support_chunks": [
+          "chunk_3a66017788061f8f662ca365c955591a"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R23",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R23.S01",
+        "required_fact": "STaRK Recall@k 计算top-k结果里相关条目的比例。",
+        "primary_chunk": "chunk_bb730573725b148aa7913e7f17bb9261",
+        "supporting_chunks": [
+          "chunk_bb730573725b148aa7913e7f17bb9261"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R23.S02",
+        "required_fact": "StructGPT 可生成需执行得到答案的SQL；执行正确率与条目召回不是同一指标。",
+        "primary_chunk": "chunk_3a66017788061f8f662ca365c955591a",
+        "supporting_chunks": [
+          "chunk_3a66017788061f8f662ca365c955591a"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_bb730573725b148aa7913e7f17bb9261",
+        "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+        "parse_id": "parse_eb044438d75316972ee239a81710c919",
+        "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+        "source_relative_path": "Resources/002_STaRK Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases.pdf",
+        "page_start": 7,
+        "page_end": 7,
+        "source_spans": [
+          {
+            "pdf_page": 7,
+            "start_char": 2413,
+            "end_char": 3663,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1250,
+            "block_bboxes": [
+              [
+                108.0,
+                494.427,
+                504.004,
+                558.972
+              ],
+              [
+                107.691,
+                571.321,
+                452.128,
+                581.284
+              ],
+              [
+                108.0,
+                589.391,
+                504.004,
+                621.402
+              ],
+              [
+                108.0,
+                628.984,
+                505.247,
+                671.905
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "e3645042e8fa1db19322302d9398f691f06ddf5d1d132e559caa7e5dbad8ccae",
+        "section": "Experiments",
+        "text": "• LLM Rerankers: Claude3 and GPT-4 rerankers [11, 62]. These models improve the precision of\ntop-k ada-002 results by reranking them using large language models. We employ GPT-4-turbo\n(gpt-4-1106-preview) and Claude3 (claude-3-opus), setting k = 20 for synthesized\nqueries and k = 10 for human-generated queries. Given a query, the LLMs assign a satisfaction\nscore from 0 to 1 to each candidate entity based on textual and relational information. Due to high\ncomputational costs, we evaluate these rerankers on a random 10% sample of test queries.\nThe performance of these models are measured using standard retrieval metrics below.\n• Hit@k assesses whether the correct item is among the top-k results from the model. We used\nk = 1 and k = 5 for evaluation. At k = 1, it evaluates the accuracy of the top recommendation; at\nk = 5, it examines the model’s precision in a wider recommendation set.\n• Recall@k measures the proportion of relevant items in the top-k results. For synthesized queries,\nk = 20 is used, as the answer length of all of the queries in our benchmarks are equal or smaller\nthen 20. This metric offers insight into the model’s ability to identify all relevant items, particularly\nin scenarios where missing any could be critical.\n"
+      },
+      {
+        "chunk_id": "chunk_3a66017788061f8f662ca365c955591a",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "parse_id": "parse_0f17805b3b51899f139913f99df23591",
+        "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+        "source_relative_path": "Methods/229_StructGPT A General Framework for Large Language Model to Reason over Structured Data.pdf",
+        "page_start": 3,
+        "page_end": 3,
+        "source_spans": [
+          {
+            "pdf_page": 3,
+            "start_char": 1457,
+            "end_char": 2482,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1025,
+            "block_bboxes": [
+              [
+                191.464,
+                462.942,
+                224.205,
+                479.919
+              ],
+              [
+                212.74,
+                462.942,
+                288.634,
+                480.561
+              ],
+              [
+                70.866,
+                471.949,
+                280.313,
+                495.113
+              ],
+              [
+                70.866,
+                483.925,
+                289.133,
+                508.636
+              ],
+              [
+                70.866,
+                518.514,
+                291.042,
+                732.843
+              ],
+              [
+                81.775,
+                735.146,
+                278.466,
+                773.66
+              ],
+              [
+                306.142,
+                72.649,
+                374.705,
+                84.604
+              ],
+              [
+                306.142,
+                94.622,
+                375.306,
+                105.531
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "a7c7f3f0af12e6ea85c419f4dfc640ee10aed7e79f89677b29ef1d01589e55da",
+        "section": "Related Work",
+        "text": "i\n, c(h)\nj )}, where c(k)\ni\nand c(h)\nj\ndenote the i-th and j-th columns in the\nk-th and h-th tables, respectively.\nProblem Statement. This work mainly focuses\non using LLMs to solve complex reasoning tasks\nbased on structured data. Formally, it can be de-\nscribed as a question answering task: given a nat-\nural language question q and an accessible struc-\ntured data S (e.g., a knowledge graph, a table, or\ndatabase), the LLM needs to extract useful evi-\ndence from S and then generates the expected re-\nsult to answer the question q based on the extracted\nevidence. According to the task requirement, the\ngenerated result can be either free-form answers\nin natural language or structured expressions (e.g.,\nSQL statements) to be executed for obtaining the\nanswer from S. Since we consider three types of\nstructured data (Section 4), our tasks can be instan-\ntiated as follows:\n• KG based question answering (KGQA)\n• Table based question answering (TableQA)\n• DB based semantic parsing (Text-to-SQL)\n4\nApproach\n4.1\nOverview\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "paper_cedbfddc8030ded4258640a1e0a0a733"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "necessary source coverage after Top40 rerank and after 6000-byte/8-block evidence selection",
+      "source": "any known_support_chunks match",
+      "semantic": "not assessed; no answer generation",
+      "pairing": "Original-Reused control; report wins/ties/losses and source substitutions",
+      "costs": "only cleaned owner rerank pairs are new; original scores are reused; evidence selection is deterministic"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "清洗子查询重排与6000字节/8块证据选择；不生成答案",
+      "controls": {
+        "candidate_source": "frozen expanded full union from prior policy run; no retrieval or embedding",
+        "cleanup": "remove only shared scaffolding tokens: 分别, 各, 各自, 各会; keep method names, technical terms and substantive interrogatives",
+        "owner": "score each chunk against every cleaned subquery that discovered it; max owner score selects owner-only",
+        "original": "reuse previous original-question score on the identical candidate and model",
+        "max_fusion": "max(original reused score, cleaned owner score)",
+        "fallback": "chunks discovered by no subquery use original score for owner and max",
+        "candidate_cap": 40,
+        "reranker_max_pair_tokens": 1024,
+        "reranker_batch_size": 1,
+        "evidence_budget_bytes": 6000,
+        "evidence_max": 8,
+        "evidence_policy": "existing assemble named_first; no graph paths",
+        "generation": false
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Owner-Clean / Original-Reused / Max-Original-Owner Experiments",
+      "fields": [
+        "清洗前后子查询",
+        "三种分数及排名",
+        "Top40必要来源覆盖",
+        "6000字节/8块证据选择",
+        "R08.S02原文语义审计",
+        "成本与Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "R23",
+    "category": "cross",
+    "benchmark": "benchmark-subquery-rerank-clean-v1",
+    "benchmark_sha256": "ee787ceacfd9695b15f0276d4aa61d7e3ae67cf98d5bd67aa73556472935c1f1",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

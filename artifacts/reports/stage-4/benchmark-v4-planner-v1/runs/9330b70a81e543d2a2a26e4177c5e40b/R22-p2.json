@@ -1,0 +1,4588 @@
+{
+  "request_id": "2066db4a-60d3-4f4a-af13-c9c3eb7b7100",
+  "status": "ok",
+  "answer": "LPKG 利用 KG 中的模式构造规划数据（将预定义模式 grounding 到开放域 KG 提取实例，再 verbalize 为复杂问题及对应子问题），并以此微调规划 LLM，使其能为复杂问题生成计划；问答时通过解析和执行这些计划得到最终答案 [E6, E3]。CuriousLLM 在 Follow-upQA 数据集上以 next-token prediction 微调 LLM agent（基于 Mistral-7B），学习生成追问：或询问仍缺失的信息，或用特殊 token 表示已检索证据充分；问答时 agent 在 KG 上通过 BFS 遍历，将生成的追问与相邻段落比较以指导检索，直到达到预算或模型认为信息足够 [E2, E5, E8]。RoG 通过规划优化从 KG 蒸馏知识，使 LLM 生成由 KG 接地的关系路径作为忠实计划，并通过检索-推理优化使 LLM 基于检索到的路径进行推理并生成可解释结果；问答时先由规划模块生成关系路径，再从 KG 检索有效推理路径，最后基于路径推理作答，且规划模块可即插即用于任意 LLM [E1, E9]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3661,
+          "end_char": 4405,
+          "chunk_start_char": 0,
+          "chunk_end_char": 744,
+          "block_bboxes": [
+            [
+              306.142,
+              552.544,
+              381.209,
+              564.499
+            ],
+            [
+              305.804,
+              574.956,
+              526.318,
+              775.47
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 754,
+          "chunk_start_char": 745,
+          "chunk_end_char": 1499,
+          "block_bboxes": [
+            [
+              180.817,
+              292.104,
+              414.46,
+              302.067
+            ],
+            [
+              70.866,
+              324.955,
+              125.334,
+              336.91
+            ],
+            [
+              70.866,
+              346.852,
+              290.946,
+              371.348
+            ],
+            [
+              70.593,
+              373.953,
+              290.947,
+              452.691
+            ],
+            [
+              70.473,
+              455.399,
+              289.317,
+              547.583
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nIn this paper, we try to enhance the planning ability\nin retrieval-augmented LLMs using KGs. Specifi-\ncally, we design a framework for Learning to Plan\nfrom KG (LPKG). The proposed LPKG framework\nfirst utilizes the rich patterns in the KGs to con-\nstruct planning data, then fine-tune planning LLMs\nbased on such data to enable them to conduct plan-\nning on downstream datasets, and ultimately get\nthe final answer through parsing and execution.\nThe experimental results reveal the excellent per-\nformance of the LPKG framework and also demon-\nstrate the effectiveness of using KG-sourced data to\nenhance LLMs’ planning ability. Finally, we con-\nstruct CLQA-Wiki, providing a more challenging\ncomplex QA benchmark for the community.\n\nFigure 4: Fine-grained evaluation based on question types.\nLimitation\nIn our view, the limitations of our work at the cur-",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.985445022583008
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8162651062011719
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 8.70882511138916
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8190112113952637
+        }
+      ],
+      "rerank_score": 0.4459819197654724,
+      "context_bytes": 1879,
+      "eid": "E3"
+    },
+    {
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 188,
+          "end_char": 1158,
+          "chunk_start_char": 0,
+          "chunk_end_char": 970,
+          "block_bboxes": [
+            [
+              70.473,
+              136.708,
+              291.045,
+              405.126
+            ]
+          ]
+        }
+      ],
+      "quote": "Knowledge Graphs (KGs) (Pan et al., 2017b,a)\nusually store accurate knowledge in a structured\nway. We find that a KG pattern can be viewed as\nthe abstract of a complex question, as shown in\nFigure 1, which reveals the connection between\nquestion planning and patterns. This opens up\nthe possibility of constructing training data to en-\nhance the planning capabilities of LLMs using KGs.\nSpecifically, we start by grounding predefined pat-\nterns in an open-domain KG to extract numerous\ninstances, which we then verbalize into complex\nquestions and corresponding sub-questions in nat-\nural language. In this way, we effectively create\na large number of accurate planning data for fine-\ntuning. Being fine-tuned with these planning data,\nLLMs’ capability of generating plans for complex\nquestions is enhanced, resulting in better final an-\nswers by parsing and executing these plans. We",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.058633327484131
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8054919242858887
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.290307998657227
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7983245849609375
+        }
+      ],
+      "rerank_score": 0.43404144048690796,
+      "context_bytes": 1336,
+      "eid": "E6"
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "is the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.053387641906738
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8114862442016602
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 9.917236328125
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8192501068115234
+        }
+      ],
+      "rerank_score": 0.643105149269104,
+      "context_bytes": 1908,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Follow-upQA examples of input questions, given information, and the corresponding follow-up questions\ngenerated.\nencoding passages and connecting them based on\ncosine similarity.\n2.3\nCurious LLM Traversal Agent\nWe introduce CuriousLLM as our graph traversal\nagent to enhance the KGP framework. This ap-\nproach is rooted in intuitive reasoning. For ex-\nample, when asked to determine who is older, Bob\nBryan or Mariaan de Swardt, and given information\nabout Bob’s age, one would intuitively ask a follow-\nup question about Mariaan’s age. This follow-up\nquestion guides the search for relevant informa-\ntion. This intuition forms the basis of Follow-upQA\nand our model’s training objective. The advan-\ntage of this approach is that, although the passages\nabout Bob’s and Mariaan’s ages are unrelated, or,\nin other words, not semantically similar, the follow-",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.067376136779785
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7934432029724121
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.491958618164062
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8072104454040527
+        }
+      ],
+      "rerank_score": 0.6066732406616211,
+      "context_bytes": 1642,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "up question about Mariaan’s age creates a logical\nlink between them. As a result, instead of matching\ntwo unrelated passages, once we find one passage,\nwe can identify the other through follow-up ques-\ntions. Furthermore, we train the LLM agent to\nknow when to end the search, and this early termi-\nnation mechanism significantly reduces the latency\nassociated with the original T5 agent.",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.067376136779785
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7934432029724121
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.491958618164062
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8072104454040527
+        }
+      ],
+      "rerank_score": 0.6066732406616211,
+      "context_bytes": 1642,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1961,
+          "end_char": 3377,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1416,
+          "block_bboxes": [
+            [
+              70.593,
+              612.118,
+              291.043,
+              744.903
+            ],
+            [
+              70.866,
+              754.53,
+              234.952,
+              774.709
+            ],
+            [
+              305.804,
+              271.699,
+              526.22,
+              350.437
+            ],
+            [
+              305.804,
+              353.123,
+              526.318,
+              513.028
+            ]
+          ]
+        }
+      ],
+      "quote": "rent node in the KG, the question is compared\nagainst the neighboring passages of the node. We\nalso employ a pre-trained Multi-QA sentence trans-\nformer 3, which produces dense representations to\nminimize the semantic distance between the follow-\nup question and relevant passages. The search\nthrough KG is carried out using a breadth-first\nsearch strategy (BFS), as shown in Algorithm 1.\nThis iterative process continues until reaching a\npredefined budget or the model deems it has suffi-\ncient information to answer the query.",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.670403957366943
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.467513084411621
+        }
+      ],
+      "rerank_score": 0.5094974637031555,
+      "context_bytes": 1796,
+      "eid": "E8"
+    },
+    {
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2029,
+          "end_char": 3360,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1331,
+          "block_bboxes": [
+            [
+              108.0,
+              392.515,
+              504.003,
+              545.454
+            ],
+            [
+              108.299,
+              564.401,
+              211.196,
+              576.356
+            ]
+          ]
+        }
+      ],
+      "quote": "In this paper, we propose a novel method called reasoning on graphs (RoG) that synergizes LLMs\nwith KGs to conduct faithful and interpretable reasoning. To alleviate the issues of hallucinations\nand lack of knowledge, we present a planning-retrieval-reasoning framework, where RoG first gen-\nerates relation paths grounded by KGs as faithful plans via the planning module. These plans are\nthen used to retrieve valid reasoning paths from KGs to conduct faithful reasoning by the retrieval-\nreasoning module. In this way, we not only retrieve the latest knowledge from KGs but also consider\nthe guidance of KG structure for reasoning and explanations. Moreover, the planning module of RoG\ncan be plug-and-play with different LLMs during inference to improve their performance. Based on\nthis framework, RoG is optimized by two tasks: 1) planning optimization, where we distill knowl-",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7834315299987793
+        }
+      ],
+      "rerank_score": 0.4394165575504303,
+      "context_bytes": 1684,
+      "eid": "E9"
+    },
+    {
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2029,
+          "end_char": 3360,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1331,
+          "block_bboxes": [
+            [
+              108.0,
+              392.515,
+              504.003,
+              545.454
+            ],
+            [
+              108.299,
+              564.401,
+              211.196,
+              576.356
+            ]
+          ]
+        }
+      ],
+      "quote": "edge from KGs into LLMs to generate faithful relation paths as plans; and 2) retrieval-reasoning\noptimization, where we enable LLMs to conduct faithful reasoning based on retrieved paths and gen-\nerate interpretable results. We conduct extensive experiments on two benchmark KGQA datasets,\nand the results demonstrate that RoG achieves state-of-the-art performance on KG reasoning tasks\nand generates faithful and interpretable reasoning results.\n2",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7834315299987793
+        }
+      ],
+      "rerank_score": 0.4394165575504303,
+      "context_bytes": 1684,
+      "eid": "E9"
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 318,
+          "end_char": 1721,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1403,
+          "block_bboxes": [
+            [
+              278.288,
+              270.703,
+              333.722,
+              282.658
+            ],
+            [
+              143.866,
+              296.104,
+              468.139,
+              492.369
+            ],
+            [
+              108.299,
+              514.402,
+              205.989,
+              526.357
+            ]
+          ]
+        }
+      ],
+      "quote": "These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8097739219665527
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.789982795715332
+        }
+      ],
+      "rerank_score": 0.7479842901229858,
+      "context_bytes": 1762,
+      "eid": "E1"
+    }
+  ],
+  "premise_check": [
+    {
+      "premise": "LPKG、CuriousLLM、RoG 分别学习什么，训练出的能力在问答时怎样使用？",
+      "supported": true,
+      "evidence_eids": [
+        "E3",
+        "E6",
+        "E2",
+        "E5",
+        "E8",
+        "E1",
+        "E9"
+      ],
+      "note": "原文分别描述了三种方法的学习内容与使用方式，但未对三者进行直接对比。"
+    },
+    {
+      "premise": "区分规划数据、追问监督与 KG 知识蒸馏。",
+      "supported": true,
+      "evidence_eids": [
+        "E6",
+        "E2",
+        "E5",
+        "E9"
+      ],
+      "note": "LPKG 使用 KG 构造规划数据；CuriousLLM 使用 Follow-upQA 进行追问监督；RoG 通过规划优化从 KG 蒸馏知识。"
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 318,
+          "end_char": 1721,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1403,
+          "block_bboxes": [
+            [
+              278.288,
+              270.703,
+              333.722,
+              282.658
+            ],
+            [
+              143.866,
+              296.104,
+              468.139,
+              492.369
+            ],
+            [
+              108.299,
+              514.402,
+              205.989,
+              526.357
+            ]
+          ]
+        }
+      ],
+      "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8097739219665527
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.789982795715332
+        }
+      ],
+      "rerank_score": 0.7479842901229858,
+      "context_bytes": 1762
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.053387641906738
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8114862442016602
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 9.917236328125
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8192501068115234
+        }
+      ],
+      "rerank_score": 0.643105149269104,
+      "context_bytes": 1908
+    },
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3661,
+          "end_char": 4405,
+          "chunk_start_char": 0,
+          "chunk_end_char": 744,
+          "block_bboxes": [
+            [
+              306.142,
+              552.544,
+              381.209,
+              564.499
+            ],
+            [
+              305.804,
+              574.956,
+              526.318,
+              775.47
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 754,
+          "chunk_start_char": 745,
+          "chunk_end_char": 1499,
+          "block_bboxes": [
+            [
+              180.817,
+              292.104,
+              414.46,
+              302.067
+            ],
+            [
+              70.866,
+              324.955,
+              125.334,
+              336.91
+            ],
+            [
+              70.866,
+              346.852,
+              290.946,
+              371.348
+            ],
+            [
+              70.593,
+              373.953,
+              290.947,
+              452.691
+            ],
+            [
+              70.473,
+              455.399,
+              289.317,
+              547.583
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nIn this paper, we try to enhance the planning ability\nin retrieval-augmented LLMs using KGs. Specifi-\ncally, we design a framework for Learning to Plan\nfrom KG (LPKG). The proposed LPKG framework\nfirst utilizes the rich patterns in the KGs to con-\nstruct planning data, then fine-tune planning LLMs\nbased on such data to enable them to conduct plan-\nning on downstream datasets, and ultimately get\nthe final answer through parsing and execution.\nThe experimental results reveal the excellent per-\nformance of the LPKG framework and also demon-\nstrate the effectiveness of using KG-sourced data to\nenhance LLMs’ planning ability. Finally, we con-\nstruct CLQA-Wiki, providing a more challenging\ncomplex QA benchmark for the community.\n\nFigure 4: Fine-grained evaluation based on question types.\nLimitation\nIn our view, the limitations of our work at the cur-\nrent stage mainly stem from two aspects:\n(1) During the fine-tuning phase of planning\nLLMs, we simply mixed various types of ques-\ntions together uniformly for training. We have not\nyet explored the impact of question type distribu-\ntion on the experimental results, which could be\nthe focus of future work.\n(2) At present, the datasets we test have explicit\ntypes of questions (multi-hop, comparison, and\nunion/intersection), but in reality, some question\ntypes may be implicit or even not be included in\nthe types we define. The future direction of our\nwork can be to study planning methods for these\ntypes of unclear questions.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.985445022583008
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8162651062011719
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 8.70882511138916
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8190112113952637
+        }
+      ],
+      "rerank_score": 0.4459819197654724,
+      "context_bytes": 1879
+    },
+    {
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 9,
+      "page_end": 10,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 9,
+          "start_char": 3961,
+          "end_char": 4655,
+          "chunk_start_char": 0,
+          "chunk_end_char": 694,
+          "block_bboxes": [
+            [
+              108.299,
+              617.101,
+              195.378,
+              629.057
+            ],
+            [
+              108.0,
+              641.763,
+              504.003,
+              717.989
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 10,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 695,
+          "chunk_end_char": 740,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "CONCLUSION\nIn this paper, we propose a novel method called reasoning on graphs (RoG) that synergizes LLMs\nwith KGs to conduct faithful and interpretable reasoning. To alleviate the issues of hallucinations\nand lack of knowledge, we present a planning-retrieval-reasoning framework, which allows LLMs\nto access the latest knowledge while reasoning based on faithful plans on graphs. RoG not only en-\nhances the reasoning capability of LLMs by distilling knowledge from KGs through training but also\nenables seamless integration with any LLMs during inference. Extensive experiments on two bench-\nmark KGQA datasets demonstrate the superiority of RoG in reasoning ability and interpretability.\n9\n\nPublished as a conference paper at ICLR 2024\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7955985069274902
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7812604904174805
+        }
+      ],
+      "rerank_score": 0.5215625166893005,
+      "context_bytes": 1059
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Follow-upQA examples of input questions, given information, and the corresponding follow-up questions\ngenerated.\nencoding passages and connecting them based on\ncosine similarity.\n2.3\nCurious LLM Traversal Agent\nWe introduce CuriousLLM as our graph traversal\nagent to enhance the KGP framework. This ap-\nproach is rooted in intuitive reasoning. For ex-\nample, when asked to determine who is older, Bob\nBryan or Mariaan de Swardt, and given information\nabout Bob’s age, one would intuitively ask a follow-\nup question about Mariaan’s age. This follow-up\nquestion guides the search for relevant informa-\ntion. This intuition forms the basis of Follow-upQA\nand our model’s training objective. The advan-\ntage of this approach is that, although the passages\nabout Bob’s and Mariaan’s ages are unrelated, or,\nin other words, not semantically similar, the follow-\nup question about Mariaan’s age creates a logical\nlink between them. As a result, instead of matching\ntwo unrelated passages, once we find one passage,\nwe can identify the other through follow-up ques-\ntions. Furthermore, we train the LLM agent to\nknow when to end the search, and this early termi-\nnation mechanism significantly reduces the latency\nassociated with the original T5 agent.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.067376136779785
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7934432029724121
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.491958618164062
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8072104454040527
+        }
+      ],
+      "rerank_score": 0.6066732406616211,
+      "context_bytes": 1642
+    },
+    {
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 188,
+          "end_char": 1158,
+          "chunk_start_char": 0,
+          "chunk_end_char": 970,
+          "block_bboxes": [
+            [
+              70.473,
+              136.708,
+              291.045,
+              405.126
+            ]
+          ]
+        }
+      ],
+      "quote": "Knowledge Graphs (KGs) (Pan et al., 2017b,a)\nusually store accurate knowledge in a structured\nway. We find that a KG pattern can be viewed as\nthe abstract of a complex question, as shown in\nFigure 1, which reveals the connection between\nquestion planning and patterns. This opens up\nthe possibility of constructing training data to en-\nhance the planning capabilities of LLMs using KGs.\nSpecifically, we start by grounding predefined pat-\nterns in an open-domain KG to extract numerous\ninstances, which we then verbalize into complex\nquestions and corresponding sub-questions in nat-\nural language. In this way, we effectively create\na large number of accurate planning data for fine-\ntuning. Being fine-tuned with these planning data,\nLLMs’ capability of generating plans for complex\nquestions is enhanced, resulting in better final an-\nswers by parsing and executing these plans. We\nrefer to this innovative framework as Learning to\nPlan from Knowledge Graphs (LPKG).\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.058633327484131
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8054919242858887
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.290307998657227
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7983245849609375
+        }
+      ],
+      "rerank_score": 0.43404144048690796,
+      "context_bytes": 1336
+    },
+    {
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 13,
+      "page_end": 13,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 13,
+          "start_char": 1253,
+          "end_char": 2920,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1667,
+          "block_bboxes": [
+            [
+              70.321,
+              465.098,
+              290.946,
+              679.427
+            ],
+            [
+              70.866,
+              683.183,
+              289.139,
+              775.47
+            ],
+            [
+              306.142,
+              72.649,
+              385.19,
+              84.604
+            ],
+            [
+              305.629,
+              94.382,
+              526.216,
+              146.022
+            ],
+            [
+              305.749,
+              155.951,
+              526.225,
+              275.328
+            ]
+          ]
+        }
+      ],
+      "quote": "Training Step Analysis for MD-QA Optimiza-\ntion.\nWe assess the MD-QA capabilities of the\nMistral models at different end-to-end checkpoints\non HotpotQA. In Figure 5, we observe a clear trend\nindicating that the MD-QA capability peaks at\n1, 200 steps. At this checkpoint, the model achieves\nits highest accuracy and EM scores. This suggests\nthat the model benefits significantly from training\nup to this point, with both accuracy and EM scores\nimproving steadily from 0 to 1, 200 steps. However,\nbeyond 1, 200 steps, there is a slight decline in both\nmetrics. Specifically, at 1, 500 steps, both the accu-\nracy and EM scores decrease, suggesting that the\nmodel may begin to overfit the training data or that\nadditional training steps introduce noise, slightly\ndegrading performance.\nOverall, the results underscore the importance\nof selecting an optimal number of training steps\nto maximize the performance of the KG traversal\nagent. Training up to 1, 200 steps appears to be the\nmost effective strategy for this particular model and\ndataset, balancing sufficient learning with avoiding\noverfitting.\nE\nLimitations\nWhile CuriousLLM demonstrates significant ad-\nvancements in multi-document question answering\n(MD-QA), there are several limitations that merit\ndiscussion:\nQuestion Scope.\nThis system primarily focuses\non addressing comparison and bridging questions,\nwhich require reasoning across multiple pieces of\nevidence. However, it leaves other common ques-\ntion types, such as what, where, and how, unex-\nplored.\nExpanding the system to handle these\nbroader types of questions would increase its ap-\nplicability and robustness in diverse real-world sce-\nnarios.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 5.232270240783691
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7904763221740723
+        }
+      ],
+      "rerank_score": 0.5714676380157471,
+      "context_bytes": 2058
+    },
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1961,
+          "end_char": 3377,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1416,
+          "block_bboxes": [
+            [
+              70.593,
+              612.118,
+              291.043,
+              744.903
+            ],
+            [
+              70.866,
+              754.53,
+              234.952,
+              774.709
+            ],
+            [
+              305.804,
+              271.699,
+              526.22,
+              350.437
+            ],
+            [
+              305.804,
+              353.123,
+              526.318,
+              513.028
+            ]
+          ]
+        }
+      ],
+      "quote": "We use the Mistral-7B model (Jiang et al., 2023)\n2 as the backbone and fine-tune it on the Follow-\nupQA dataset with the objective of next-token pre-\ndiction. Specifically, for each sample in the dataset,\nas shown in Table 2, we concatenate the question,\nthe given passage, and the follow-up question. We\nemploy QLoRA (Dettmers et al., 2023) to train the\nmodel: we load the model at 8 bit precision and\nthen train a LoRA adapter using a LoRA rank of\n32, a learning rate of 10−5, and a batch size of 12.\n2https://huggingface.co/mistralai/\nMistral-7B-Instruct-v0.2\nThe training is implemented with a split between\nthe training validation test of 90% - 5% - 5%. Com-\npared to the time required to train an identical T5\nmodel in the original KGP framework, we reduce\nthe training time of our model by 85% using the\nsame computing resources.\nAfter generating a follow-up question at the cur-\nrent node in the KG, the question is compared\nagainst the neighboring passages of the node. We\nalso employ a pre-trained Multi-QA sentence trans-\nformer 3, which produces dense representations to\nminimize the semantic distance between the follow-\nup question and relevant passages. The search\nthrough KG is carried out using a breadth-first\nsearch strategy (BFS), as shown in Algorithm 1.\nThis iterative process continues until reaching a\npredefined budget or the model deems it has suffi-\ncient information to answer the query.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.670403957366943
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.467513084411621
+        }
+      ],
+      "rerank_score": 0.5094974637031555,
+      "context_bytes": 1796
+    },
+    {
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2029,
+          "end_char": 3360,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1331,
+          "block_bboxes": [
+            [
+              108.0,
+              392.515,
+              504.003,
+              545.454
+            ],
+            [
+              108.299,
+              564.401,
+              211.196,
+              576.356
+            ]
+          ]
+        }
+      ],
+      "quote": "In this paper, we propose a novel method called reasoning on graphs (RoG) that synergizes LLMs\nwith KGs to conduct faithful and interpretable reasoning. To alleviate the issues of hallucinations\nand lack of knowledge, we present a planning-retrieval-reasoning framework, where RoG first gen-\nerates relation paths grounded by KGs as faithful plans via the planning module. These plans are\nthen used to retrieve valid reasoning paths from KGs to conduct faithful reasoning by the retrieval-\nreasoning module. In this way, we not only retrieve the latest knowledge from KGs but also consider\nthe guidance of KG structure for reasoning and explanations. Moreover, the planning module of RoG\ncan be plug-and-play with different LLMs during inference to improve their performance. Based on\nthis framework, RoG is optimized by two tasks: 1) planning optimization, where we distill knowl-\nedge from KGs into LLMs to generate faithful relation paths as plans; and 2) retrieval-reasoning\noptimization, where we enable LLMs to conduct faithful reasoning based on retrieved paths and gen-\nerate interpretable results. We conduct extensive experiments on two benchmark KGQA datasets,\nand the results demonstrate that RoG achieves state-of-the-art performance on KG reasoning tasks\nand generates faithful and interpretable reasoning results.\n2\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7834315299987793
+        }
+      ],
+      "rerank_score": 0.4394165575504303,
+      "context_bytes": 1684
+    },
+    {
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+      "parse_id": "parse_ac25f303898d80df63f3fc436bb321a5",
+      "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Surveys/010_Unifying Large Language Models and Knowledge Graphs A Roadmap.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 4423,
+          "end_char": 5640,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1217,
+          "block_bboxes": [
+            [
+              312.0,
+              506.563,
+              563.997,
+              746.863
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 386,
+          "chunk_start_char": 1218,
+          "chunk_end_char": 1604,
+          "block_bboxes": [
+            [
+              48.0,
+              28.175,
+              564.0,
+              37.006
+            ],
+            [
+              48.0,
+              44.963,
+              299.997,
+              66.003
+            ],
+            [
+              48.0,
+              68.065,
+              299.997,
+              112.185
+            ],
+            [
+              48.0,
+              129.517,
+              199.411,
+              139.017
+            ]
+          ]
+        }
+      ],
+      "quote": "Instead of injecting factual knowledge into LLMs, the KGs\nInstruction-tuning aims to fine-tune LLMs to better com-\nprehend the structure of KGs and effectively follow user\ninstructions to conduct complex tasks. KGs Instruction-\ntuning utilizes both facts and the structure of KGs to cre-\nate instruction-tuning datasets. LLMs finetuned on these\ndatasets can extract both factual and structural knowledge\nfrom KGs, enhancing the reasoning ability of LLMs. KP-\nPLM [109] first designs several prompt templates to transfer\nstructural graphs into natural language text. Then, two self-\nsupervised tasks are proposed to finetune LLMs to further\nleverage the knowledge from these prompts. OntoPrompt\n[110] proposes an ontology-enhanced prompt-tuning that\ncan place knowledge of entities into the context of LLMs,\nwhich are further finetuned on several downstream tasks.\nChatKBQA [111] finetunes LLMs on KG structure to gener-\nate logical queries, which can be executed on KGs to obtain\nanswers. To better reason on graphs, RoG [112] presents a\nplanning-retrieval-reasoning framework. RoG is finetuned\non KG structure to generate relation paths grounded by KGs\nas faithful plans. These plans are then used to retrieve valid\n\nJOURNAL OF LATEX CLASS FILES, VOL. ??, NO. ??, MONTH 20YY\n9\nreasoning paths from the KGs for LLMs to conduct faithful\nreasoning and generate interpretable results.\nKGs Instruction-tuning can better leverage the knowl-\nedge from KGs for downstream tasks. However, it requires\nretraining the models, which is time-consuming and re-\nquires lots of resources.\n4.2\nKG-enhanced LLM Inference\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8119935989379883
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7788882255554199
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7801508903503418
+        }
+      ],
+      "rerank_score": 0.40798187255859375,
+      "context_bytes": 1958
+    },
+    {
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 0,
+          "end_char": 252,
+          "chunk_start_char": 0,
+          "chunk_end_char": 252,
+          "block_bboxes": [
+            [
+              91.191,
+              78.74,
+              504.089,
+              93.086
+            ],
+            [
+              156.422,
+              94.68,
+              438.856,
+              109.026
+            ],
+            [
+              193.916,
+              129.398,
+              404.349,
+              142.632
+            ],
+            [
+              157.656,
+              157.366,
+              437.623,
+              170.638
+            ],
+            [
+              186.944,
+              174.814,
+              408.333,
+              183.862
+            ]
+          ]
+        }
+      ],
+      "quote": "CuriousLLM: Elevating Multi-Document Question Answering with\nLLM-Enhanced Knowledge Graph Reasoning\nZukang Yang1, Zixuan Zhu1, Xuan Zhu1,\n1School of Information, University of California, Berkeley\nCorrespondence: zukangy, zzhu248, zhuxuan@berkeley.edu\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.370087146759033
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 6.335300922393799
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7728786468505859
+        }
+      ],
+      "rerank_score": 0.25627321004867554,
+      "context_bytes": 574
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 64,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "multi_query_quota_union cap=64",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "query_plan": {
+      "planner_version": "cloud-query-planner-v1",
+      "decision": "split",
+      "reason": "题面要求分别查证 LPKG、CuriousLLM、RoG 三个方法各自学习的内容及问答时能力使用方式，并区分规划数据、追问监督与 KG 知识蒸馏，属于多方法多维度对比，需拆分为独立检索目标。",
+      "english_keywords": [
+        "LPKG",
+        "CuriousLLM",
+        "RoG",
+        "planning data",
+        "follow-up supervision",
+        "knowledge graph distillation"
+      ],
+      "subqueries": [
+        {
+          "id": "SQ01",
+          "text": "LPKG 学习什么，训练出的能力在问答时怎样使用？",
+          "english_keywords": [
+            "LPKG",
+            "learning objective",
+            "question answering",
+            "planning data"
+          ]
+        },
+        {
+          "id": "SQ02",
+          "text": "CuriousLLM 学习什么，追问监督如何训练并在问答时使用？",
+          "english_keywords": [
+            "CuriousLLM",
+            "follow-up supervision",
+            "question answering",
+            "learning objective"
+          ]
+        },
+        {
+          "id": "SQ03",
+          "text": "RoG 学习什么，KG 知识蒸馏如何训练并在问答时使用？",
+          "english_keywords": [
+            "RoG",
+            "knowledge graph distillation",
+            "question answering",
+            "learning objective"
+          ]
+        }
+      ],
+      "quote_spans": [
+        {
+          "text": "LPKG、CuriousLLM、RoG 分别学习什么",
+          "start": 0,
+          "end": 26,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "LPKG、CuriousLLM、RoG 分别学习什么"
+        },
+        {
+          "text": "训练出的能力在问答时怎样使用",
+          "start": 27,
+          "end": 41,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "训练出的能力在问答时怎样使用"
+        },
+        {
+          "text": "请区分规划数据、追问监督与 KG 知识蒸馏",
+          "start": 42,
+          "end": 63,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "请区分规划数据、追问监督与 KG 知识蒸馏"
+        }
+      ],
+      "fallback": false,
+      "elapsed_seconds": 3.7160406000330113,
+      "usage": {
+        "prompt_tokens": 431,
+        "total_tokens": 705,
+        "completion_tokens": 274,
+        "prompt_tokens_details": {
+          "cached_tokens": 384,
+          "image_tokens": 0,
+          "text_tokens": 431
+        },
+        "completion_tokens_details": {
+          "text_tokens": 274
+        }
+      }
+    },
+    "subquery_count": 3,
+    "per_query_hits": {
+      "Q00": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ01": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ02": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ03": {
+        "fulltext": 20,
+        "dense": 20
+      }
+    },
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "rerank_mode": "owner_subquery",
+      "rerank_batches": 4,
+      "total_inference_seconds": 1.915613800054416,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 14.144518400018569,
+      "peak_cuda_memory_bytes": 1165478400,
+      "request_count": 118,
+      "batch_size": 4
+    },
+    "evidence_count": 11,
+    "context_bytes": 17656,
+    "evidence_bytes": 17656,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 16831,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ]
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ]
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ],
+        "eligible_candidate_count": 9,
+        "selected_chunk_ids": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "chunk_75e927b201e488543d00046d05b35db7",
+          "chunk_8d1de153f62070216bf23df5989bda21"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ],
+        "eligible_candidate_count": 15,
+        "selected_chunk_ids": [
+          "chunk_43145c0748762d6b4c650c65721f826f",
+          "chunk_9f06285c9b321c365675a3b670256a07",
+          "chunk_dfaf52b10157ecfff59f042049b83d35",
+          "chunk_fb24ed864a9886ec8722f831391af3b7",
+          "chunk_8e57fb05b711b97bf1a88bf918fa57a5"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ],
+        "eligible_candidate_count": 14,
+        "selected_chunk_ids": [
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+          "chunk_072d1d7f534ffdbb7644a330aeea94fa"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4493,
+    "total_tokens": 5130,
+    "completion_tokens": 637,
+    "prompt_tokens_details": {
+      "cached_tokens": 384,
+      "image_tokens": 0,
+      "text_tokens": 4493
+    },
+    "completion_tokens_details": {
+      "text_tokens": 637
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\n  \"premise_check\": [\n    {\n      \"premise\": \"LPKG、CuriousLLM、RoG 分别学习什么，训练出的能力在问答时怎样使用？\",\n      \"supported\": true,\n      \"evidence_eids\": [\"E3\", \"E6\", \"E2\", \"E5\", \"E8\", \"E1\", \"E9\"],\n      \"note\": \"原文分别描述了三种方法的学习内容与使用方式，但未对三者进行直接对比。\"\n    },\n    {\n      \"premise\": \"区分规划数据、追问监督与 KG 知识蒸馏。\",\n      \"supported\": true,\n      \"evidence_eids\": [\"E6\", \"E2\", \"E5\", \"E9\"],\n      \"note\": \"LPKG 使用 KG 构造规划数据；CuriousLLM 使用 Follow-upQA 进行追问监督；RoG 通过规划优化从 KG 蒸馏知识。\"\n    }\n  ],\n  \"answer\": \"LPKG 利用 KG 中的模式构造规划数据（将预定义模式 grounding 到开放域 KG 提取实例，再 verbalize 为复杂问题及对应子问题），并以此微调规划 LLM，使其能为复杂问题生成计划；问答时通过解析和执行这些计划得到最终答案 [E6, E3]。CuriousLLM 在 Follow-upQA 数据集上以 next-token prediction 微调 LLM agent（基于 Mistral-7B），学习生成追问：或询问仍缺失的信息，或用特殊 token 表示已检索证据充分；问答时 agent 在 KG 上通过 BFS 遍历，将生成的追问与相邻段落比较以指导检索，直到达到预算或模型认为信息足够 [E2, E5, E8]。RoG 通过规划优化从 KG 蒸馏知识，使 LLM 生成由 KG 接地的关系路径作为忠实计划，并通过检索-推理优化使 LLM 基于检索到的路径进行推理并生成可解释结果；问答时先由规划模块生成关系路径，再从 KG 检索有效推理路径，最后基于路径推理作答，且规划模块可即插即用于任意 LLM [E1, E9]。\",\n  \"citations\": [\n    {\"eid\": \"E3\", \"quote_id\": \"q1\"},\n    {\"eid\": \"E6\", \"quote_id\": \"q1\"},\n    {\"eid\": \"E2\", \"quote_id\": \"q2\"},\n    {\"eid\": \"E5\", \"quote_id\": \"q1\"},\n    {\"eid\": \"E5\", \"quote_id\": \"q2\"},\n    {\"eid\": \"E8\", \"quote_id\": \"q2\"},\n    {\"eid\": \"E9\", \"quote_id\": \"q1\"},\n    {\"eid\": \"E9\", \"quote_id\": \"q2\"},\n    {\"eid\": \"E1\", \"quote_id\": \"q2\"}\n  ],\n  \"status\": \"ok\"\n}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "first_discovery": 23,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8097739219665527
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.789982795715332
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8097739219665527
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.789982795715332
+        }
+      ],
+      "score": 0.03125763125763126,
+      "rerank_score": 0.7479842901229858,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.7479842901229858
+      }
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "first_discovery": 1,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.053387641906738
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8114862442016602
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 9.917236328125
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8192501068115234
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.053387641906738
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8114862442016602
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 9.917236328125
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8192501068115234
+        }
+      ],
+      "score": 0.06454091750396616,
+      "rerank_score": 0.643105149269104,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.643105149269104
+      }
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "first_discovery": 3,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.067376136779785
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7934432029724121
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.491958618164062
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8072104454040527
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.067376136779785
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7934432029724121
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.491958618164062
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8072104454040527
+        }
+      ],
+      "score": 0.06079770221708383,
+      "rerank_score": 0.6066732406616211,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.6066732406616211
+      }
+    },
+    {
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "first_discovery": 57,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 5.232270240783691
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7904763221740723
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 5.232270240783691
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7904763221740723
+        }
+      ],
+      "score": 0.028665028665028666,
+      "rerank_score": 0.5714676380157471,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.5714676380157471
+      }
+    },
+    {
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "first_discovery": 29,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7955985069274902
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7812604904174805
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7955985069274902
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7812604904174805
+        }
+      ],
+      "score": 0.02782608695652174,
+      "rerank_score": 0.5215625166893005,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.5215625166893005
+      }
+    },
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "first_discovery": 19,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.670403957366943
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.467513084411621
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.670403957366943
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.467513084411621
+        }
+      ],
+      "score": 0.028531243721117136,
+      "rerank_score": 0.5094974637031555,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.5094974637031555
+      }
+    },
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "first_discovery": 17,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.985445022583008
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8162651062011719
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 8.70882511138916
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8190112113952637
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.985445022583008
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8162651062011719
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 8.70882511138916
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8190112113952637
+        }
+      ],
+      "score": 0.06216734085586545,
+      "rerank_score": 0.4459819197654724,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.4459819197654724
+      }
+    },
+    {
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "first_discovery": 93,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7834315299987793
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7834315299987793
+        }
+      ],
+      "score": 0.015151515151515152,
+      "rerank_score": 0.4394165575504303,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.4394165575504303
+      }
+    },
+    {
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "first_discovery": 14,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.058633327484131
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8054919242858887
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.290307998657227
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7983245849609375
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.058633327484131
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8054919242858887
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.290307998657227
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7983245849609375
+        }
+      ],
+      "score": 0.060667076796109054,
+      "rerank_score": 0.43404144048690796,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.43404144048690796
+      }
+    },
+    {
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "first_discovery": 21,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8119935989379883
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7788882255554199
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7801508903503418
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8119935989379883
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7788882255554199
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7801508903503418
+        }
+      ],
+      "score": 0.04491942165325921,
+      "rerank_score": 0.40798187255859375,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.0014158706180751324,
+        "SQ03": 0.40798187255859375
+      }
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "first_discovery": 12,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.269026279449463
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.054993629455566
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8076953887939453
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.269026279449463
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.054993629455566
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8076953887939453
+        }
+      ],
+      "score": 0.045169436298468556,
+      "rerank_score": 0.39805537462234497,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.39805537462234497
+      }
+    },
+    {
+      "chunk_id": "chunk_5b721f972c7b5804123038b6fafc6105",
+      "first_discovery": 55,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 5.475896835327148
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 5.475896835327148
+        }
+      ],
+      "score": 0.013888888888888888,
+      "rerank_score": 0.3091279864311218,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.3091279864311218
+      }
+    },
+    {
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "first_discovery": 18,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.756657600402832
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7987957000732422
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.327050685882568
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7779088020324707
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.756657600402832
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7987957000732422
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.327050685882568
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7779088020324707
+        }
+      ],
+      "score": 0.055695409257961036,
+      "rerank_score": 0.28736767172813416,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.28736767172813416
+      }
+    },
+    {
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "first_discovery": 2,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 9.820554733276367
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7996768951416016
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.269045829772949
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.778038501739502
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 9.820554733276367
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7996768951416016
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.269045829772949
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.778038501739502
+        }
+      ],
+      "score": 0.059400253790155615,
+      "rerank_score": 0.2656899094581604,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.2656899094581604
+      }
+    },
+    {
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "first_discovery": 20,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.370087146759033
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 6.335300922393799
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7728786468505859
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.370087146759033
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 6.335300922393799
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7728786468505859
+        }
+      ],
+      "score": 0.0412903893951947,
+      "rerank_score": 0.25627321004867554,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.25627321004867554
+      }
+    },
+    {
+      "chunk_id": "chunk_df6135a67cc53ecdf272f7917812fb75",
+      "first_discovery": 36,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 6.657134532928467
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 6.657134532928467
+        }
+      ],
+      "score": 0.013888888888888888,
+      "rerank_score": 0.2501792907714844,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.2501792907714844
+      }
+    },
+    {
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "first_discovery": 16,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.040707588195801
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.603047847747803
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7818670272827148
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.040707588195801
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.603047847747803
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7818670272827148
+        }
+      ],
+      "score": 0.04346092503987241,
+      "rerank_score": 0.2285006195306778,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.2285006195306778
+      }
+    },
+    {
+      "chunk_id": "chunk_c29b1beb1a7c48f679fa8aa27e231137",
+      "first_discovery": 35,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 6.983827114105225
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 6.983827114105225
+        }
+      ],
+      "score": 0.014084507042253521,
+      "rerank_score": 0.22490549087524414,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.22490549087524414
+      }
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "first_discovery": 7,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.197477340698242
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.802299976348877
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.619485855102539
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8047842979431152
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.197477340698242
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.802299976348877
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.619485855102539
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8047842979431152
+        }
+      ],
+      "score": 0.060860361653272105,
+      "rerank_score": 0.22388571500778198,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.22388571500778198
+      }
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "first_discovery": 66,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7820019721984863
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7820019721984863
+        }
+      ],
+      "score": 0.014285714285714285,
+      "rerank_score": 0.22354651987552643,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.22354651987552643
+      }
+    },
+    {
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "first_discovery": 15,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.042515754699707
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 6.8284831047058105
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8030509948730469
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.042515754699707
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 6.8284831047058105
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8030509948730469
+        }
+      ],
+      "score": 0.04364332185227708,
+      "rerank_score": 0.22084616124629974,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.22084616124629974
+      }
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "first_discovery": 64,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7897758483886719
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7897758483886719
+        }
+      ],
+      "score": 0.014925373134328358,
+      "rerank_score": 0.2137051820755005,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.2137051820755005
+      }
+    },
+    {
+      "chunk_id": "chunk_27b6486b825caa61f6f8fd333d2d11b2",
+      "first_discovery": 5,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 8.334836959838867
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 7.859726905822754
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 8.334836959838867
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 7.859726905822754
+        }
+      ],
+      "score": 0.031009615384615385,
+      "rerank_score": 0.20833994448184967,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.20833994448184967
+      }
+    },
+    {
+      "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+      "first_discovery": 13,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.188471794128418
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 5.997366905212402
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.145887851715088
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.188471794128418
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 5.997366905212402
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.145887851715088
+        }
+      ],
+      "score": 0.04298555713189292,
+      "rerank_score": 0.20197059214115143,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.001512938179075718,
+        "SQ03": 0.20197059214115143
+      }
+    },
+    {
+      "chunk_id": "chunk_d789604e2c23a5ca259488aea034fed2",
+      "first_discovery": 34,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.368685722351074
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7771883010864258
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.368685722351074
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7771883010864258
+        }
+      ],
+      "score": 0.028438886647841874,
+      "rerank_score": 0.20055769383907318,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.20055769383907318
+      }
+    },
+    {
+      "chunk_id": "chunk_7d9e24b10c382d84f416c7e5d421edb4",
+      "first_discovery": 92,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7896671295166016
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7896671295166016
+        }
+      ],
+      "score": 0.015625,
+      "rerank_score": 0.15713684260845184,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.15713684260845184
+      }
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "first_discovery": 9,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.556048393249512
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.8414716720581055
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.556048393249512
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.8414716720581055
+        }
+      ],
+      "score": 0.029877369007803793,
+      "rerank_score": 0.1561049073934555,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.1561049073934555
+      }
+    },
+    {
+      "chunk_id": "chunk_13fff028f79bff64399cfcf345628f0e",
+      "first_discovery": 96,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.779390811920166
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.779390811920166
+        }
+      ],
+      "score": 0.013888888888888888,
+      "rerank_score": 0.14792406558990479,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.14792406558990479
+      }
+    },
+    {
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "first_discovery": 8,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.737515449523926
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 7.913947105407715
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.737515449523926
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 7.913947105407715
+        }
+      ],
+      "score": 0.030330882352941176,
+      "rerank_score": 0.13432104885578156,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.13432104885578156
+      }
+    },
+    {
+      "chunk_id": "chunk_36d77471f4590e12dcf3ee6034c1a26f",
+      "first_discovery": 10,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.539638519287109
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 5.736093044281006
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.539638519287109
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 5.736093044281006
+        }
+      ],
+      "score": 0.028370221327967807,
+      "rerank_score": 0.1204388216137886,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.1204388216137886
+      }
+    },
+    {
+      "chunk_id": "chunk_bb6c258ff3a6d9e0cb0053c1e9330d43",
+      "first_discovery": 75,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 6.361050128936768
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 6.361050128936768
+        }
+      ],
+      "score": 0.01639344262295082,
+      "rerank_score": 0.0918697863817215,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.0918697863817215
+      }
+    },
+    {
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "first_discovery": 65,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7822799682617188
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7822799682617188
+        }
+      ],
+      "score": 0.014492753623188406,
+      "rerank_score": 0.09170696139335632,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.09170696139335632
+      }
+    },
+    {
+      "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+      "first_discovery": 6,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 8.250005722045898
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.201851844787598
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7797799110412598
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 8.250005722045898
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.201851844787598
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7797799110412598
+        }
+      ],
+      "score": 0.044362602571557795,
+      "rerank_score": 0.08225394785404205,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.08225394785404205
+      }
+    },
+    {
+      "chunk_id": "chunk_d92f1c7f2c2af36785e361b3b995532a",
+      "first_discovery": 53,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 6.008402347564697
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 6.008402347564697
+        }
+      ],
+      "score": 0.014492753623188406,
+      "rerank_score": 0.08021324872970581,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.08021324872970581
+      }
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "first_discovery": 42,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 5.713796138763428
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7812457084655762
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 5.713796138763428
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7812457084655762
+        }
+      ],
+      "score": 0.026785714285714288,
+      "rerank_score": 0.07779745012521744,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.0010775026166811585,
+        "SQ03": 0.07779745012521744
+      }
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "first_discovery": 22,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8119783401489258
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.7959818840026855
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8119783401489258
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.7959818840026855
+        }
+      ],
+      "score": 0.032266458495966696,
+      "rerank_score": 0.06954174488782883,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.06954174488782883
+      }
+    },
+    {
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "first_discovery": 11,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.391599655151367
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 8.439448356628418
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7764153480529785
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.391599655151367
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 8.439448356628418
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7764153480529785
+        }
+      ],
+      "score": 0.04337143403716014,
+      "rerank_score": 0.0633663460612297,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0633663460612297
+      }
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "first_discovery": 4,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 8.6050386428833
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 6.561707496643066
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 8.6050386428833
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 6.561707496643066
+        }
+      ],
+      "score": 0.029138513513513514,
+      "rerank_score": 0.04922211170196533,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.04922211170196533
+      }
+    },
+    {
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "first_discovery": 78,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.940557479858398
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.940557479858398
+        }
+      ],
+      "score": 0.015384615384615385,
+      "rerank_score": 0.048496000468730927,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.048496000468730927
+      }
+    },
+    {
+      "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+      "first_discovery": 94,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7834024429321289
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7834024429321289
+        }
+      ],
+      "score": 0.014925373134328358,
+      "rerank_score": 0.04509957134723663,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.04509957134723663
+      }
+    },
+    {
+      "chunk_id": "chunk_85cf026687ef7fad0688db2c4af1d3a9",
+      "first_discovery": 26,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7980074882507324
+        }
+      ],
+      "found_by": [
+        "Q00"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7980074882507324
+        }
+      ],
+      "score": 0.013888888888888888,
+      "rerank_score": 0.0361519381403923,
+      "best_query_id": "Q00",
+      "owner_scores": {
+        "Q00": 0.0361519381403923
+      }
+    },
+    {
+      "chunk_id": "chunk_c56673127e6033eeeee53e2b317aac94",
+      "first_discovery": 91,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7916803359985352
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7916803359985352
+        }
+      ],
+      "score": 0.016129032258064516,
+      "rerank_score": 0.034423548728227615,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.034423548728227615
+      }
+    },
+    {
+      "chunk_id": "chunk_c8372b1b00fdee8ddcf8b17d0c6a629c",
+      "first_discovery": 83,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 5.4889960289001465
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 5.4889960289001465
+        }
+      ],
+      "score": 0.013888888888888888,
+      "rerank_score": 0.024283869192004204,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.024283869192004204
+      }
+    },
+    {
+      "chunk_id": "chunk_f5fe3f798d143563fde927ff67dbe1be",
+      "first_discovery": 76,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 6.0620245933532715
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 6.0620245933532715
+        }
+      ],
+      "score": 0.015873015873015872,
+      "rerank_score": 0.022889839485287666,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.022889839485287666
+      }
+    },
+    {
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "first_discovery": 24,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8018841743469238
+        }
+      ],
+      "found_by": [
+        "Q00"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8018841743469238
+        }
+      ],
+      "score": 0.014705882352941176,
+      "rerank_score": 0.02161533385515213,
+      "best_query_id": "Q00",
+      "owner_scores": {
+        "Q00": 0.02161533385515213
+      }
+    },
+    {
+      "chunk_id": "chunk_99f814179c04fd58c1d6505e8ad31dee",
+      "first_discovery": 79,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.927979469299316
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.927979469299316
+        }
+      ],
+      "score": 0.015151515151515152,
+      "rerank_score": 0.019794780761003494,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.019794780761003494
+      }
+    },
+    {
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "first_discovery": 47,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7777194976806641
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 5.137357234954834
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7777194976806641
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 5.137357234954834
+        }
+      ],
+      "score": 0.026547116736990152,
+      "rerank_score": 0.015247589908540249,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.0013670255430042744,
+        "SQ03": 0.015247589908540249
+      }
+    },
+    {
+      "chunk_id": "chunk_d4417adcf5fa74f507b8d4e876d17fce",
+      "first_discovery": 25,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.798823356628418
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7750158309936523
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.798823356628418
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7750158309936523
+        }
+      ],
+      "score": 0.027443609022556388,
+      "rerank_score": 0.013325147330760956,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.013325147330760956
+      }
+    },
+    {
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "first_discovery": 31,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7937459945678711
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7841777801513672
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7937459945678711
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7841777801513672
+        }
+      ],
+      "score": 0.028371628371628373,
+      "rerank_score": 0.009596454910933971,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.009596454910933971
+      }
+    },
+    {
+      "chunk_id": "chunk_482d183305062f8854269ff9c16777d7",
+      "first_discovery": 77,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.960860729217529
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.960860729217529
+        }
+      ],
+      "score": 0.015625,
+      "rerank_score": 0.008478401228785515,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.008478401228785515
+      }
+    },
+    {
+      "chunk_id": "chunk_4fa6a736a305a9766ad9fcce311453a4",
+      "first_discovery": 45,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7857861518859863
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7695255279541016
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7857861518859863
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7695255279541016
+        }
+      ],
+      "score": 0.029083245521601686,
+      "rerank_score": 0.008030813187360764,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ01": 0.0055333878844976425,
+        "SQ02": 0.008030813187360764
+      }
+    },
+    {
+      "chunk_id": "chunk_d0d36620a971f366bb82c605d1921087",
+      "first_discovery": 54,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.904181003570557
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.904181003570557
+        }
+      ],
+      "score": 0.014285714285714285,
+      "rerank_score": 0.005730246659368277,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.005730246659368277
+      }
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "first_discovery": 95,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7819395065307617
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7819395065307617
+        }
+      ],
+      "score": 0.014705882352941176,
+      "rerank_score": 0.004182493779808283,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.004182493779808283
+      }
+    },
+    {
+      "chunk_id": "chunk_0802e0680bb22a20ca92d602db68f734",
+      "first_discovery": 28,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7957377433776855
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.777468204498291
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7957377433776855
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.777468204498291
+        }
+      ],
+      "score": 0.027212143650499815,
+      "rerank_score": 0.003429603995755315,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.003429603995755315
+      }
+    },
+    {
+      "chunk_id": "chunk_1d7581035fb8824818f57a8c5b81ab75",
+      "first_discovery": 67,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.770848274230957
+        }
+      ],
+      "found_by": [
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.770848274230957
+        }
+      ],
+      "score": 0.013888888888888888,
+      "rerank_score": 0.0029694451950490475,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.0029694451950490475
+      }
+    },
+    {
+      "chunk_id": "chunk_3beb28682a38078eab6b92eae915913a",
+      "first_discovery": 60,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 4.682529449462891
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.886880397796631
+        }
+      ],
+      "found_by": [
+        "SQ02",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 4.682529449462891
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.886880397796631
+        }
+      ],
+      "score": 0.027912386121341344,
+      "rerank_score": 0.0028449096716940403,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ02": 0.0013406204525381327,
+        "SQ03": 0.0028449096716940403
+      }
+    },
+    {
+      "chunk_id": "chunk_910f5da3cd87329015353b413b854cc8",
+      "first_discovery": 43,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7902331352233887
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7902331352233887
+        }
+      ],
+      "score": 0.015873015873015872,
+      "rerank_score": 0.002833849750459194,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.002833849750459194
+      }
+    },
+    {
+      "chunk_id": "chunk_f101d58113e23a04a630040d9b8c5e82",
+      "first_discovery": 80,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 5.719053745269775
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 5.719053745269775
+        }
+      ],
+      "score": 0.014705882352941176,
+      "rerank_score": 0.0018748616566881537,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.0018748616566881537
+      }
+    },
+    {
+      "chunk_id": "chunk_5d51520dac0417d5af9c88604241f9b0",
+      "first_discovery": 44,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7871651649475098
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7871651649475098
+        }
+      ],
+      "score": 0.015625,
+      "rerank_score": 0.0016166499117389321,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0016166499117389321
+      }
+    },
+    {
+      "chunk_id": "chunk_6b284e491656722154c860c69f089b9e",
+      "first_discovery": 52,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7732248306274414
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7840733528137207
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7732248306274414
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7840733528137207
+        }
+      ],
+      "score": 0.027205882352941177,
+      "rerank_score": 0.0012943679466843605,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ01": 0.00032503585680387914,
+        "SQ02": 0.0012943679466843605
+      }
+    },
+    {
+      "chunk_id": "chunk_0508cb04b043a4bea596fd76431621a6",
+      "first_discovery": 62,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 4.510890960693359
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 5.610293865203857
+        }
+      ],
+      "found_by": [
+        "SQ02",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 4.510890960693359
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 5.610293865203857
+        }
+      ],
+      "score": 0.026742734890354787,
+      "rerank_score": 0.0009659748757258058,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ02": 0.0003077430883422494,
+        "SQ03": 0.0009659748757258058
+      }
+    },
+    {
+      "chunk_id": "chunk_6a19bda3bc719f8ba8c5153a4321bfbb",
+      "first_discovery": 81,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 5.6954240798950195
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 5.6954240798950195
+        }
+      ],
+      "score": 0.014492753623188406,
+      "rerank_score": 0.000954731716774404,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.000954731716774404
+      }
+    },
+    {
+      "chunk_id": "chunk_74aaff2a4beeb724a5ac9ed87a77b701",
+      "first_discovery": 46,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7786731719970703
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7786731719970703
+        }
+      ],
+      "score": 0.014492753623188406,
+      "rerank_score": 0.0008864988922141492,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0008864988922141492
+      }
+    },
+    {
+      "chunk_id": "chunk_175382cc3c27e9fea3f52e6d0dc72f26",
+      "first_discovery": 82,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.662927150726318
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.662927150726318
+        }
+      ],
+      "score": 0.014285714285714285,
+      "rerank_score": 0.0003077430883422494,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.0003077430883422494
+      }
+    }
+  ],
+  "case_id": "R22",
+  "question": "LPKG、CuriousLLM、RoG 分别学习什么，训练出的能力在问答时怎样使用？请区分规划数据、追问监督与 KG 知识蒸馏。",
+  "category": "cross",
+  "arm": "P2-Planner-OwnerRerank",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0014812999870628119
+    },
+    {
+      "name": "retrieve",
+      "seconds": 5.389028400008101
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 1.260003773495555e-05
+    },
+    {
+      "name": "rerank",
+      "seconds": 1.9351748000481166
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.004811400023754686
+    }
+  ],
+  "retrieval_compute_seconds": 7.33050850010477,
+  "request_wall_seconds": 17.85002470004838,
+  "embedding_source": "shared frozen Q00 vector + live batch for planned subqueries",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 7.8273274000384845,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 7.607515499985311,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4483905999804847,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 3.1953331000404432,
+      "usage": "{\"prompt_tokens\": 431, \"total_tokens\": 705, \"completion_tokens\": 274}"
+    },
+    {
+      "provider": "cloudflare",
+      "attempt": 1,
+      "status": "usage_unknown",
+      "http_status": 200,
+      "seconds": 1.0269145999918692,
+      "usage": null
+    },
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 6.5771441999822855,
+      "usage": "{\"prompt_tokens\": 4493, \"total_tokens\": 5130, \"completion_tokens\": 637}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 0.8162651062011719
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.8119935989379883
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.8119783401489258
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.8114862442016602
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "score": 0.8097739219665527
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 0.8054919242858887
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.802299976348877
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.8018841743469238
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "score": 0.7996768951416016
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_d4417adcf5fa74f507b8d4e876d17fce",
+      "score": 0.798823356628418
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 0.7987957000732422
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_85cf026687ef7fad0688db2c4af1d3a9",
+      "score": 0.7980074882507324
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 0.7964944839477539
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_0802e0680bb22a20ca92d602db68f734",
+      "score": 0.7957377433776855
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "score": 0.7955985069274902
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_81f9b590314ead5a660cbb63b0a79d80",
+      "score": 0.7950263023376465
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.7937459945678711
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_b1bd739c57f6cdf536000af5bc1af59a",
+      "score": 0.7935981750488281
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.7934432029724121
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_3e6e9684fba4b44fe201725df8351c03",
+      "score": 0.7932286262512207
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 10.053387641906738
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "score": 9.820554733276367
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 9.067376136779785
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "score": 8.6050386428833
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_27b6486b825caa61f6f8fd333d2d11b2",
+      "score": 8.334836959838867
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+      "score": 8.250005722045898
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 8.197477340698242
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 7.737515449523926
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 7.556048393249512
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_36d77471f4590e12dcf3ee6034c1a26f",
+      "score": 7.539638519287109
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "score": 7.391599655151367
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 7.269026279449463
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+      "score": 7.188471794128418
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 7.058633327484131
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 7.042515754699707
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "score": 7.040707588195801
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 6.985445022583008
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 6.756657600402832
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "score": 6.670403957366943
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "score": 6.370087146759033
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R22.C01",
+      "requirement": "LPKG 用 KG 派生规划数据提升复杂问答规划能力。",
+      "selected_matches_by_unit": {
+        "lpdata": [
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R22.C02",
+      "requirement": "CuriousLLM 以问题/证据为输入，学习后续问题以指导检索。",
+      "selected_matches_by_unit": {
+        "curious": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R22.C03",
+      "requirement": "RoG 通过 KG 知识蒸馏训练。",
+      "selected_matches_by_unit": {
+        "rog": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R22.C04",
+      "requirement": "RoG 推理时做关系计划与有效路径检索。",
+      "selected_matches_by_unit": {
+        "rog": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.6666666666666666,
+    "recall8": 1.0,
+    "mrr40": 1.0,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/1b0e61b1-e389-4f89-99ff-eb954eeac9b6?poll=true"
+}

@@ -1,0 +1,434 @@
+{
+  "id": "44628a5e989120c446fb2846f56c25d309d2d9033f62d0a5f6cb955609f0657d",
+  "inputs": {
+    "question": "ToG 与 ToG-2 对 Creak/QA 报告的指标与知识来源设置有何不同？跨论文比较还缺哪些条件？"
+  },
+  "outputs": {
+    "expected_answer": "按原文保留 ToG 的 exact match accuracy（Hits@1）；ToG-2 对 Creak/FEVER 报告 Acc.、其他数据集报告 EM，并写明 full Wikipedia/Wikidata。还须逐项核对划分、底座和提示条件。",
+    "answerable": true,
+    "negative_kind": null,
+    "required_facts": [
+      "ToG 在 KBQA 中使用 WebQSP、QALD10-en，也覆盖 Creak；共同数据集不保证一致实验条件。原文称各数据集采用 exact match accuracy (Hits@1)。",
+      "ToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。AdvHotpotQA 是 HotpotQA 挑战子集；FEVER/Creak 用 Acc.，其他用 EM；知识来源为 full Wikipedia/Wikidata。"
+    ],
+    "source_references": [
+      {
+        "unit_id": "togds",
+        "answer_point": "ToG 在 KBQA 中使用 WebQSP、QALD10-en，也覆盖 Creak；共同数据集不保证一致实验条件。原文称各数据集采用 exact match accuracy (Hits@1)。",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "primary_chunk": "chunk_deb9eea46e529705dffdd1103729c44c",
+        "pages": [
+          5,
+          5
+        ]
+      },
+      {
+        "unit_id": "tog2ds",
+        "answer_point": "ToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。AdvHotpotQA 是 HotpotQA 挑战子集；FEVER/Creak 用 Acc.，其他用 EM；知识来源为 full Wikipedia/Wikidata。",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "primary_chunk": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+        "pages": [
+          6,
+          6
+        ]
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_deb9eea46e529705dffdd1103729c44c",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+        "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+        "page_start": 5,
+        "page_end": 5,
+        "source_spans": [
+          {
+            "pdf_page": 5,
+            "start_char": 2914,
+            "end_char": 4358,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1444,
+            "block_bboxes": [
+              [
+                108.299,
+                482.573,
+                200.083,
+                494.529
+              ],
+              [
+                108.249,
+                507.855,
+                235.26,
+                517.818
+              ],
+              [
+                108.249,
+                528.452,
+                305.88,
+                538.415
+              ],
+              [
+                107.671,
+                547.628,
+                504.824,
+                656.296
+              ],
+              [
+                108.249,
+                670.178,
+                310.993,
+                680.141
+              ],
+              [
+                107.532,
+                689.505,
+                505.652,
+                732.293
+              ],
+              [
+                303.509,
+                752.194,
+                308.49,
+                762.157
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "728381cfe1e28ae86998089c5d3f2fd8411019b323a69ced9b0652f8ac04482d",
+        "section": "EXPERIMENTS",
+        "text": "EXPERIMENTS\n3.1\nEXPERIMENTAL DESIGN\n3.1.1\nDATASETS AND EVALUATION METRICS\nIn order to test ToG’s ability on multi-hop knowledge-intensive reasoning tasks, we evaluate ToG\non five KBQA datasets (4 Multi-hop and 1 Single-hop): CWQ (Talmor & Berant, 2018), WebQSP\n(Yih et al., 2016), GrailQA (Gu et al., 2021), QALD10-en (Perevalov et al., 2022), Simple Questions\n(Bordes et al., 2015). Moreover, in order to examine ToG on more generic tasks, we also prepare\none open-domain QA dataset: WebQuestions (Berant et al., 2013); two slot filling datasets: T-REx\n(ElSahar et al., 2018) and Zero-Shot RE (Petroni et al., 2021); and one fact-checking dataset: Creak\n(Onoe et al., 2021). Note that, for two big datasets GrailQA and Simple Questions, we only randomly\nselected 1,000 samples each for testing in order to save computational cost. For all datasets, exact\nmatch accuracy (Hits@1) is used as our evaluation metric following previous works (Li et al., 2023c;\nBaek et al., 2023b; Jiang et al., 2023; Li et al., 2023a).\n3.1.2\nMETHODS SELECTED FOR COMPARISON\nWe compare with standard prompting (IO prompt) (Brown et al., 2020b), Chain-of-Thought prompting\n(CoT prompt) (Wei et al., 2022), and Self-Consistency (Wang et al., 2023c) with 6 in-context\nexemplars and \"step-by-step\" reasoning chains. Moreover, for each dataset, we pick previous state-of-\nthe-art (SOTA) works for comparison. We notice that fine-tuning methods trained specifically on\n5\n"
+      },
+      {
+        "chunk_id": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+        "page_start": 6,
+        "page_end": 6,
+        "source_spans": [
+          {
+            "pdf_page": 6,
+            "start_char": 1827,
+            "end_char": 2910,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1083,
+            "block_bboxes": [
+              [
+                108.299,
+                418.062,
+                200.083,
+                430.017
+              ],
+              [
+                108.249,
+                442.645,
+                239.271,
+                452.608
+              ],
+              [
+                108.0,
+                463.168,
+                504.003,
+                582.72
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "7a280ebe4f0f92691ef9d72ff9376b74cbab58ff051c88d66a0a6c791bdd2931",
+        "section": "EXPERIMENTS",
+        "text": "EXPERIMENTS\n4.1\nDATASETS AND METRICS\nWe evaluated our method on different knowledge-intensive reasoning benchmark datasets, including\ntwo multi-hop KBQA datasets WebQSP (Yih et al., 2016) and QALD10-en (Usbeck et al., 2023), a\nmulti-hop complex document QA dataset AdvHotpotQA (Ye & Durrett, 2022) which is a challeng-\ning subset of HotpotQA (Yang et al., 2018), a slot filling dataset Zero-Shot RE(Petroni et al., 2021),\nand two fact verification dataset FEVER (Thorne et al., 2018) and Creak (Onoe et al., 2021). The\nevaluation metric for FEVER and Creak is Accuracy (Acc.), while the metric for other datasets is\nExact Match (EM). Recall and F1 scores are not used since knowledge sources are not limited to\ndocument databases. Following previous work (Li et al., 2024c), full Wikipedia and Wikidata are\nused as unstructured and structured knowledge sources for all of these datasets. Compared to the\ndistractor setting, this full Wiki setting makes the retrieval process more challenging and can better\nevaluate the effectiveness of various methods on knowledge reasoning tasks.\n"
+      }
+    ],
+    "relation_outline": "ToG 在 KBQA 中使用 WebQSP、QALD10-en，也覆盖 Creak；共同数据集不保证一致实验条件。原文称各数据集采用 exact match accuracy (Hits@1)。；ToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。AdvHotpotQA 是 HotpotQA 挑战子集；FEVER/Creak 用 Acc.，其他用 EM；知识来源为 full Wikipedia/Wikidata。",
+    "relation_review": {
+      "evidence": "覆盖每个必要事实并逐条引用其来源原文。",
+      "semantics": "核对关系方向、实体角色、训练/测试角色、数据集设置和指标。",
+      "synthesis": "区分论文直接主张与跨来源分析；共享实体不自动构成因果或方法继承。",
+      "uncertainty": "来源没有说明的条件须标为未知，不可补造。"
+    },
+    "must_not_claim": "指标名称相近不等于受控比较；未提供的 ToG 条件不能补写。",
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "All required facts and citations; direction, entity roles, train/test role, evaluation setup and unsupported claims reviewed separately.",
+      "graph_coverage": "Each answerable relation case must expose a source-backed path for every required unit; negative cases must not contain their prohibited edge.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins."
+    },
+    "expected_graph_paths": [
+      [
+        {
+          "unit_id": "togds",
+          "path_id": "togds.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG"
+            },
+            {
+              "type": "Dataset",
+              "name": "WebQSP"
+            }
+          ],
+          "claim_ids": [
+            "d1893af0d70297959164c25ed4351fd379785f8d18ca3d90b3e471faf5369f2b"
+          ]
+        },
+        {
+          "unit_id": "togds",
+          "path_id": "togds.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG"
+            },
+            {
+              "type": "Dataset",
+              "name": "QALD10-en"
+            }
+          ],
+          "claim_ids": [
+            "f20cb7dee5ef4214928f33e99cec7cede855a8cb24ded2be5c1415c3dc13db08"
+          ]
+        },
+        {
+          "unit_id": "togds",
+          "path_id": "togds.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG"
+            },
+            {
+              "type": "Dataset",
+              "name": "Creak"
+            }
+          ],
+          "claim_ids": [
+            "b5d32bc2db63b319d033025f4e93f0e7c2cd0191c5ab4592848dbad8a7c197f3"
+          ]
+        },
+        {
+          "unit_id": "togds",
+          "path_id": "togds.P04",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG"
+            },
+            {
+              "type": "Metric",
+              "name": "exact match accuracy (Hits@1)"
+            }
+          ],
+          "claim_ids": [
+            "b468e19c6706bf34e1f55d03e1fb9a23e4e626e7d627697a452bdb1af6ca8601"
+          ]
+        }
+      ],
+      [
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "Dataset",
+              "name": "WebQSP"
+            }
+          ],
+          "claim_ids": [
+            "29ee4b1fd76d8a815dbe72c3fa8907e8c419844e86a810e5ecbefc50c0e9cd74"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "Dataset",
+              "name": "QALD10-en"
+            }
+          ],
+          "claim_ids": [
+            "eb8ee0c45f073859c2a74d06ffff64e2915ede3db3a41bd258080f33d010cc90"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "Dataset",
+              "name": "AdvHotpotQA"
+            }
+          ],
+          "claim_ids": [
+            "b0847583d36622ec5b8c0e7236dbe22ce81990e9a2972e8928da016c25d3353f"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P04",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "Dataset",
+              "name": "FEVER"
+            }
+          ],
+          "claim_ids": [
+            "9d69dd4944a223f03cd36b99beb978b21da680b37d49811bb46673a57a37e8ec"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P05",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "Dataset",
+              "name": "Creak"
+            }
+          ],
+          "claim_ids": [
+            "7998c6c2f99451deb793a5193a4a81bba0455893246ba6cfaabbddab2657ece8"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P06",
+          "nodes": [
+            {
+              "type": "Dataset",
+              "name": "AdvHotpotQA"
+            },
+            {
+              "type": "Dataset",
+              "name": "HotpotQA"
+            }
+          ],
+          "claim_ids": [
+            "535f0b5c7e2048b1346a0d2cc4b994c3e2f19788c1bca559619e21dac0c89906"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P07",
+          "nodes": [
+            {
+              "type": "EvaluationSetting",
+              "name": "ToG-2 evaluation"
+            },
+            {
+              "type": "KnowledgeBase",
+              "name": "full Wikipedia and Wikidata"
+            }
+          ],
+          "claim_ids": [
+            "9542bc1e00f7ce2fbab9540df4d6714edd81acc35d5e79e026a8408156368b6d"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P08",
+          "nodes": [
+            {
+              "type": "EvaluationSetting",
+              "name": "ToG-2 evaluation"
+            },
+            {
+              "type": "Metric",
+              "name": "Accuracy on FEVER and Creak"
+            }
+          ],
+          "claim_ids": [
+            "34feb5ce22c53b737adb3d6f28c2b3cf78b4dccd57a26018d8c1c7529955b02c"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P09",
+          "nodes": [
+            {
+              "type": "EvaluationSetting",
+              "name": "ToG-2 evaluation"
+            },
+            {
+              "type": "Metric",
+              "name": "EM on other datasets"
+            }
+          ],
+          "claim_ids": [
+            "aaf66e4afcec48207f1b022364dca22556b853ef8acbe06b59ad3d3b85edb524"
+          ]
+        },
+        {
+          "unit_id": "tog2ds",
+          "path_id": "tog2ds.P10",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "EvaluationSetting",
+              "name": "ToG-2 evaluation"
+            }
+          ],
+          "claim_ids": [
+            "494741fc42a5bbcb7905ac49785921560de710ee60417fc4eacc0557d57926ad"
+          ]
+        }
+      ]
+    ],
+    "result_fields": [
+      "full answer",
+      "ranked candidates and scores",
+      "evidence and citation locations",
+      "graph paths",
+      "per-fact coverage and gaps",
+      "stage timings",
+      "tokens",
+      "paired differences",
+      "trace URLs"
+    ]
+  },
+  "metadata": {
+    "case_id": "R14",
+    "category": "cross",
+    "benchmark": "benchmark-v3",
+    "benchmark_sha256": "3ffb13a824016b58fd2cb5585bab2f3dbbf9767bd38b714ce148097122f6ac87",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "curated source review; not independent human gold"
+  },
+  "split": [
+    "cross"
+  ]
+}

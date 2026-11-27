@@ -1,0 +1,246 @@
+{
+  "version": "benchmark-v4",
+  "graph_version": "benchmark-v3",
+  "cases": [
+    {
+      "id": "F01", "axis": "优化问题与子图选择",
+      "question": "G-Retriever 怎样把相关子图检索转化成优化问题？请说明问题名称、被选择的对象，并引用原文。",
+      "answer": "G-Retriever 将相关子图检索建模为 Prize-Collecting Steiner Tree（PCST）优化问题，选择与问题相关的子图。",
+      "facts": [["pcst", "优化问题是 Prize-Collecting Steiner Tree（PCST）。"], ["pcst", "选择对象是相关子图，不是无差别输入整张图。"]]
+    },
+    {
+      "id": "F02", "axis": "阶段顺序",
+      "question": "按 KG-GPT 论文，把句子分割、图检索和推理按执行顺序排列，并分别说明它们做什么。",
+      "answer": "先 Sentence Segmentation 划分句子，再 Graph Retrieval 检索相关图组件，最后 Inference 得出逻辑结论。",
+      "facts": [["kggpt", "句子分割先于图检索，图检索先于推理。"], ["kggpt", "三个阶段分别负责划分句子、检索相关图组件和得出逻辑结论。"]]
+    },
+    {
+      "id": "F03", "axis": "变体方向与调用上界",
+      "question": "ToG-R 是谁的变体，替换了哪种实体剪枝？在相同 N、D 下，论文给出的两种 LLM 调用公式相差多少？",
+      "answer": "ToG-R 是 ToG 的变体，以随机实体剪枝替代 LLM 实体剪枝。ToG 为 2ND+D+1，ToG-R 为 ND+D+1，相差 ND 次调用；这是公式差值，不是本项目测得的时延。",
+      "facts": [["togr", "变体方向为 ToG-R 指向 ToG。"], ["togr", "随机实体剪枝替代 LLM 实体剪枝。"], ["togr", "ToG 和 ToG-R 的公式依次为 2ND+D+1 和 ND+D+1。"], ["togr", "相同 N、D 下公式差为 ND，不能把它当成墙钟时延差。"]]
+    },
+    {
+      "id": "F04", "axis": "算法输入与跨段落证据",
+      "question": "HippoRAG 收到新问题后，用什么作为 PPR 的种子？PPR 在什么结构上运行，要把哪些信息联系起来？",
+      "answer": "从问题识别关键概念，以查询概念为种子，在由语料转成的无模式知识图上运行 Personalized PageRank，整合跨段落信息用于检索。",
+      "facts": [["hippo", "种子来自问题的关键概念。"], ["hippo", "算法是 Personalized PageRank，在无模式 KG 上运行。"], ["hippo", "目标是整合跨段落信息用于检索。"]]
+    },
+    {
+      "id": "F05", "axis": "图表示与代理职责",
+      "question": "KGP 的文档图怎样定义节点和边？LLM 图遍历代理负责收集什么？请区分图结构与代理动作。",
+      "answer": "节点表示段落或文档结构（如页面、表格）；边表示段落间语义/词法相似或文档结构关系。LLM 遍历代理沿节点导航并收集支持段落。",
+      "facts": [["kgp", "节点可以是段落，也可以是页面、表格等文档结构。"], ["kgp", "边可以表示语义/词法相似，也可以表示文档结构关系。"], ["kgp", "遍历代理导航并收集支持段落。"]]
+    },
+    {
+      "id": "F06", "axis": "停止条件与预算终止",
+      "question": "Tree-of-Traversals 中，节点值超过答案阈值、达到 max depth、达到 max expansions 三种情况各会怎样结束？",
+      "answer": "找到节点值超过阈值的答案时停止；达到 max depth 强制转入 done 作答；达到 max expansions 停止探索并返回 Cannot find answer。后两者不自动表示答案正确。",
+      "facts": [["totbound", "找到节点值超过阈值的答案时停止。"], ["totbound", "max depth 强制转入 done 状态作答。"], ["totbound", "max expansions 停止探索并返回 Cannot find answer。"], ["totbound", "预算终止与成功找到答案不能混为一谈。"]]
+    },
+    {
+      "id": "F07", "axis": "训练来源与训练用途",
+      "question": "LPKG 如何把知识图中的信息用于提升小模型的复杂问答规划能力？请给出数据来源到训练用途的链条。",
+      "answer": "从知识图构造 planning data，再用这些规划数据微调小模型，提升其复杂问答中的规划能力。",
+      "facts": [["lpdata", "规划数据来源是知识图。"], ["lpdata", "KG 派生的 planning data 用于微调。"], ["lpdata", "训练目标是提升复杂问答规划能力，不能仅描述为在线读取 KG。"]]
+    },
+    {
+      "id": "F08", "axis": "分类体系",
+      "question": "Roadmap 综述把 LLM 与 KG 的结合分成哪三条路线？请保留三类名称，避免把其中一类当作全部路线。",
+      "answer": "三条路线为 KG-enhanced LLMs、LLM-augmented KGs 和 Synergized LLMs + KGs。",
+      "facts": [["roadmap", "包含 KG-enhanced LLMs。"], ["roadmap", "包含 LLM-augmented KGs。"], ["roadmap", "包含 Synergized LLMs + KGs。"]]
+    },
+    {
+      "id": "R01", "axis": "搜索算法与协作检索",
+      "question": "比较 ToG 与 ToG-2：前者由什么代理用什么搜索算法探索 KG，后者如何让实体、文档和两种检索相互配合？",
+      "answer": "ToG 由 LLM 代理迭代执行 KG 束搜索，探索实体、关系和推理路径。ToG-2 用实体连接文档、以文档作为实体上下文，交替进行图检索和上下文检索。",
+      "facts": [["tog", "ToG 的 LLM 代理迭代执行 KG 束搜索。"], ["tog", "ToG 探索实体、关系与推理路径。"], ["tog2", "ToG-2 用实体连接文档，并把文档作为实体上下文。"], ["tog2", "ToG-2 交替进行图检索和上下文检索。"]]
+    },
+    {
+      "id": "R02", "axis": "查询种子与关系计划",
+      "question": "面对多跳问题，HippoRAG 与 RoG 怎样分别从问题走到证据？请区分查询种子、PPR、关系路径计划和有效推理路径。",
+      "answer": "HippoRAG 以查询关键概念为种子运行 PPR，整合跨段落证据。RoG 先生成由 KG 约束的关系路径计划，再用计划检索有效推理路径供 LLM 推理。二者机制不同，不能互换算法名。",
+      "facts": [["hippo", "HippoRAG 以查询概念启动 PPR 并整合跨段落信息。"], ["rog", "RoG 先生成 KG 约束的关系路径计划。"], ["rog", "RoG 根据计划检索有效推理路径，再供 LLM 推理。"]]
+    },
+    {
+      "id": "R03", "axis": "增强方向与监督目标",
+      "question": "CuriousLLM 与 KGP 的增强关系朝哪个方向？结合 KGP 的遍历任务，说明 CuriousLLM 的 Follow-upQA 输入、监督目标和证据充分信号。",
+      "answer": "CuriousLLM 是对 KGP 的增强；KGP 的代理收集支持段落。Follow-upQA 以问题和支持证据为输入、后续问题为目标，也用特殊 token 表示已有证据充分。",
+      "facts": [["kgp", "KGP 遍历代理收集支持段落。"], ["curious", "增强方向是 CuriousLLM 指向 KGP。"], ["curious", "Follow-upQA 输入是问题和支持证据，目标是后续问题。"], ["curious", "特殊 token 表示证据充分，作者报告的收益不能写成本项目实测。"]]
+    },
+    {
+      "id": "R04", "axis": "推理接口与训练数据",
+      "question": "StructGPT 和 LPKG 都使用结构化知识，但知识进入系统的阶段相同吗？请分别追踪专门接口与 KG 派生规划数据的用途。",
+      "answer": "不同。StructGPT 在回答时通过专门接口迭代读取结构化证据，再让 LLM 推理；LPKG 从 KG 构造 planning data，用于微调规划能力。",
+      "facts": [["struct", "StructGPT 通过专门接口取得结构化证据。"], ["struct", "读取与基于证据推理迭代进行。"], ["lpdata", "LPKG 用 KG 派生的规划数据微调规划能力。"], [["struct", "lpdata"], "推理时接口访问与训练数据构建属于不同阶段。"]]
+    },
+    {
+      "id": "R05", "axis": "免训练与蒸馏训练",
+      "question": "ToG 的 training-free 与 RoG 的 KG 知识蒸馏分别描述什么？RoG 推理时能接入其他 LLM，是否等于整个方法不需要训练？",
+      "answer": "ToG 自述为无需额外训练的即插即用方法。RoG 包含 KG 知识蒸馏训练，推理时生成关系计划并检索路径；可接入其他 LLM 不等于整套方法没有训练。",
+      "facts": [["tog_training", "ToG 描述为 training-free、无需额外训练。"], ["rog", "RoG 包含从 KG 蒸馏知识的训练。"], ["rog", "RoG 推理时做关系计划和路径检索。"], ["rog", "兼容其他推理 LLM 不能推出全流程免训练。"]]
+    },
+    {
+      "id": "R06", "axis": "图知识使用阶段",
+      "question": "ToG-2 与 LPKG 中的图知识分别在什么阶段发挥作用、服务什么目标？请分别说明协作检索与规划数据的路径。",
+      "answer": "ToG-2 在推理时让图检索和上下文检索交替协作，寻找问题证据；LPKG 从 KG 构造规划数据并用于微调，提升复杂问答规划能力。",
+      "facts": [["tog2", "ToG-2 在推理时协作检索图与文档上下文。"], ["lpdata", "LPKG 从 KG 派生规划数据。"], ["lpdata", "规划数据用于训练规划能力。"], [["tog2", "lpdata"], "在线检索与训练用途必须分开，不能视为同一训练协议。"]]
+    },
+    {
+      "id": "R07", "axis": "两种文档图表示",
+      "question": "HippoRAG 与 KGP 都从文档获取证据：各自把语料组织成什么图，又通过什么机制找回跨段落支持？",
+      "answer": "HippoRAG 用 LLM 将语料转为无模式 KG，以查询概念启动 PPR 整合跨段落信息；KGP 以段落或文档结构为节点、相似或结构关系为边，由 LLM 遍历代理收集支持段落。",
+      "facts": [["hippo", "HippoRAG 将语料转为无模式 KG。"], ["hippo", "HippoRAG 以查询种子驱动 PPR。"], ["kgp", "KGP 的节点为段落/文档结构，边为相似/结构关系。"], ["kgp", "KGP 用 LLM 遍历代理收集支持段落。"]]
+    },
+    {
+      "id": "R08", "axis": "子图选择与图文协作",
+      "question": "G-Retriever 为什么不把大图全部文本化后直接交给 LLM，它怎样选择证据？ToG-2 又怎样组织图与文档证据？",
+      "answer": "整图文本化可能超过上下文窗口，截断会丢信息。G-Retriever 将子图检索建模为 PCST，选择相关部分；ToG-2 通过实体连接文档，并交替进行图检索和上下文检索。",
+      "facts": [["grscale", "整图文本化会带来上下文容量问题，直接截断会丢失信息。"], ["pcst", "G-Retriever 用 PCST 建模相关子图检索。"], ["grscale", "通过选择相关子图控制送入模型的图内容。"], ["tog2", "ToG-2 通过实体连接文档，交替检索图和上下文。"]]
+    },
+    {
+      "id": "R09", "axis": "共享数据集的连接边界",
+      "question": "仅限两篇实验段落明确列出的 KBQA 数据集，ToG 与 ToG-2 共同包含哪两个？共享这些数据集是否足以证明方法继承或受控性能优劣？",
+      "answer": "共同的 KBQA 数据集是 WebQSP 和 QALD10-en。共享评测对象只建立评测关联，不能单独证明方法继承，也不能在未核对划分、底座、知识来源等条件时给出受控性能结论。",
+      "facts": [[["togds", "tog2ds"], "共同 KBQA 数据集包含 WebQSP。"], [["togds", "tog2ds"], "共同 KBQA 数据集包含 QALD10-en。"], [["togds", "tog2ds"], "共享数据集不自动建立方法继承。"], [["togds", "tog2ds"], "性能比较还需匹配划分、底座、知识来源等实验条件。"]]
+    },
+    {
+      "id": "R10", "axis": "数据集名称与检索机制",
+      "question": "HippoRAG 与 Tree-of-Traversals 各自怎样命名所评测的 2Wiki 数据集，又分别怎样进行跨事实检索或搜索？名称相似能否证明协议一致？",
+      "answer": "HippoRAG 列出 2WikiMultiHopQA，以查询种子驱动 PPR；Tree-of-Traversals 列出 2WikiMultiHop，搜索由动作与推理链构成的树并设搜索边界。名称相似不能证明划分、语料、底座或指标一致。",
+      "facts": [["hippods", "HippoRAG 来源名称为 2WikiMultiHopQA。"], ["totds", "Tree-of-Traversals 来源名称为 2WikiMultiHop。"], ["hippo", "HippoRAG 使用查询概念驱动的 PPR。"], ["totbound", "Tree-of-Traversals 搜索动作/推理链构成的树并限制搜索。"], [["hippods", "totds"], "不能由名称相似认定实验协议一致。"]]
+    },
+    {
+      "id": "R11", "axis": "训练测试角色与指标",
+      "question": "请对齐 KG-GPT 与 RoG 的 MetaQA 实验：前者报告哪些跳数和指标，后者的 Wiki-Movies、Freebase 与 1000 个样本分别是什么角色？",
+      "answer": "KG-GPT 报告 MetaQA 1-hop、2-hop、3-hop 的 Hits@1；RoG 的 MetaQA-3hop 基于 Wiki-Movies，Freebase 是迁移前训练来源，1000 个样本取自 MetaQA-3hop 训练划分。",
+      "facts": [["kggptds", "KG-GPT 报告 MetaQA 1/2/3-hop。"], ["kggptds", "上述 MetaQA 指标为 Hits@1。"], ["rogmeta", "RoG 的 MetaQA-3hop 基于 Wiki-Movies。"], ["rogmeta", "Freebase 是迁移前训练来源，不能写成该测试 KG。"], ["rogmeta", "1000 个样本来自训练划分，而非测试样本数。"]]
+    },
+    {
+      "id": "R12", "axis": "知识来源与逻辑题型",
+      "question": "MusicBrainz-x-Wikidata 和 CLQA-Wiki 各从哪些知识来源构建，分别强调跨 KG 还是哪些逻辑题型？它们是否可当作同一基准？",
+      "answer": "MusicBrainz-x-Wikidata 的 109 题需要结合 MusicBrainz 和 Wikidata；CLQA-Wiki 来自 Wikidata 子集，覆盖多跳、比较、交和并。出现相同知识库名称不表示同一基准。",
+      "facts": [["totmusic", "MusicBrainz-x-Wikidata 需结合 MusicBrainz 与 Wikidata。"], ["totmusic", "该数据集包含 109 题。"], ["lpbench", "CLQA-Wiki 来自 Wikidata 子集。"], ["lpbench", "题型包括多跳、比较、交、并。"], [["totmusic", "lpbench"], "共享 Wikidata 名称不能推出两个基准相同。"]]
+    },
+    {
+      "id": "R13", "axis": "父子数据集与检索语料",
+      "question": "HippoRAG 的 HotpotQA 设置与 ToG-2 的 AdvHotpotQA 设置怎样关联？请区分父子数据集、抽样方式与检索知识来源。",
+      "answer": "AdvHotpotQA 是 HotpotQA 的挑战子集。HippoRAG 每个验证集取 1000 题，并用对应支持与干扰段落构建检索语料；ToG-2 使用完整 Wikipedia 和 Wikidata。不能直接当作相同检索协议。",
+      "facts": [["tog2ds", "AdvHotpotQA 是 HotpotQA 的挑战子集。"], ["hippods", "HippoRAG 每个验证集取 1000 题。"], ["hippods", "HippoRAG 用所选问题的支持与干扰段落构成检索语料。"], ["tog2ds", "ToG-2 使用完整 Wikipedia 和 Wikidata。"], [["hippods", "tog2ds"], "父集/子集关系不等于同一检索协议。"]]
+    },
+    {
+      "id": "R14", "axis": "指标与实验条件",
+      "question": "对于共同出现的 Creak，ToG 与 ToG-2 分别怎样表述评价指标？ToG-2 明确写了什么知识来源，为什么仅凭指标名称不能给两者排名？",
+      "answer": "ToG 原文将所有数据集指标表述为 exact match accuracy（Hits@1）；ToG-2 对 Creak 使用 Accuracy（Acc.），并使用完整 Wikipedia/Wikidata。指标名称相近不能代替划分、底座、提示和知识来源的协议核对。",
+      "facts": [["togds", "ToG 原文指标表述为 exact match accuracy（Hits@1）。"], ["tog2ds", "ToG-2 对 Creak 使用 Accuracy（Acc.）。"], ["tog2ds", "ToG-2 使用完整 Wikipedia 和 Wikidata。"], [["togds", "tog2ds"], "还需核对划分、底座、提示和知识来源，不能据名称直接排名。"]]
+    },
+    {
+      "id": "R15", "axis": "继续检索与证据充分信号",
+      "question": "Tree-of-Traversals 的搜索停止机制与 CuriousLLM 的追问/证据充分信号有什么区别？请说明预算耗尽为什么不能等同于证据充分。",
+      "answer": "Tree-of-Traversals 可因答案节点超过阈值而停止，也可受 max depth/max expansions 限制，二者分别强制 done 和返回 Cannot find answer；CuriousLLM 生成追问查缺或用特殊 token 表示证据充分。预算耗尽不等于充分或正确。",
+      "facts": [["totbound", "答案阈值停止与预算终止含义不同。"], ["totbound", "max depth 强制 done，max expansions 返回 Cannot find answer。"], ["curious", "CuriousLLM 生成追问或输出证据充分特殊 token。"], [["totbound", "curious"], "预算耗尽不能等同于证据充分或答案正确。"]]
+    },
+    {
+      "id": "R16", "axis": "知识融合与可解释性",
+      "question": "MindMap 与 RoG 分别怎样利用知识构造推理？请区分隐式知识、外部 KG、mind map 和关系路径计划，并说明可解释性结论的边界。",
+      "answer": "MindMap 融合 LLM 隐式知识与外部 KG，展示 mind map 推理路径；RoG 先规划由 KG 约束的关系路径，再检索有效推理路径。路径可解释仍需核查结论与证据，不能保证每个回答都正确。",
+      "facts": [["mind", "MindMap 融合 LLM 隐式知识与外部 KG。"], ["mind", "mind map 用于呈现推理路径。"], ["rog", "RoG 以关系路径计划指导有效推理路径检索。"], [["mind", "rog"], "可解释路径不自动保证答案正确。"]]
+    },
+    {
+      "id": "R17", "axis": "领域重叠与评测关系",
+      "question": "STaRK 和 MindMap 在医学领域分别是什么类型的工作？这些领域信息能否建立 MindMap 在 STaRK 上的评测关系并支持一个分数？",
+      "answer": "STaRK 是包含精准医疗检索的基准，也覆盖产品和论文搜索；MindMap 是包含医学 QA 场景的知识图提示方法。给定原文不能建立 MindMap 在 STaRK 上评测的关系或分数，应说明证据不足。",
+      "facts": [["stark", "STaRK 是检索基准，覆盖精准医疗、产品搜索和论文搜索。"], ["mind", "MindMap 是在医学 QA 等任务中评估的 KG prompting 方法。"], [["stark", "mind"], "领域重叠不能建立 MindMap 在 STaRK 上的评测边或分数。"]]
+    },
+    {
+      "id": "R18", "axis": "跨方法阶段对齐",
+      "question": "把 KG-GPT 与 RoG 从问题处理到推理的步骤分别排好：句子分割属于谁，关系路径规划属于谁，检索对象又是什么？",
+      "answer": "KG-GPT 为句子分割→图检索→推理，检索相关图组件；RoG 为规划→检索→推理，先生成 KG 约束的关系路径计划，再检索有效推理路径。",
+      "facts": [["kggpt", "KG-GPT 顺序为句子分割、图检索、推理。"], ["kggpt", "KG-GPT 检索相关图组件。"], ["rog", "RoG 顺序为规划、检索、推理。"], ["rog", "RoG 用关系路径计划检索有效推理路径。"]]
+    },
+    {
+      "id": "R19", "axis": "三种多跳机制",
+      "question": "ToG、HippoRAG、RoG 都能连接多跳知识，但各自依靠什么核心操作？请给每个方法对应一个机制，并避免把共同目标当成相同算法。",
+      "answer": "ToG 由 LLM 代理迭代束搜索；HippoRAG 以查询概念驱动 PPR 整合跨段落信息；RoG 先规划关系路径再检索有效推理路径。共同处理多跳不表示相同算法或成本。",
+      "facts": [["tog", "ToG 对应 LLM 代理与迭代束搜索。"], ["hippo", "HippoRAG 对应查询种子驱动的 PPR。"], ["rog", "RoG 对应关系路径计划及路径检索。"], [["tog", "hippo", "rog"], "多跳目标相同不能推出算法或计算成本相同。"]]
+    },
+    {
+      "id": "R20", "axis": "三种图与文档连接",
+      "question": "ToG-2、HippoRAG、KGP 怎样把图与文档/段落证据联系起来？请分别给出图的来源或连接方式，以及取得证据的操作。",
+      "answer": "ToG-2 通过实体连接文档并协作检索图与上下文；HippoRAG 从语料转出无模式 KG，用查询种子驱动 PPR 跨段落检索；KGP 用段落/文档结构节点和相似/结构边，由代理收集支持段落。",
+      "facts": [["tog2", "ToG-2 用实体连接文档并交替检索图和上下文。"], ["hippo", "HippoRAG 从语料构建无模式 KG，以 PPR 跨段落检索。"], ["kgp", "KGP 以段落/文档结构为节点，以相似/结构关系为边。"], ["kgp", "KGP 通过图遍历代理收集段落。"]]
+    },
+    {
+      "id": "R21", "axis": "三种资源与缺口控制",
+      "question": "G-Retriever、Tree-of-Traversals、CuriousLLM 分别怎样处理上下文过大、搜索空间过大和证据缺口？这些机制是否足以给出统一速度排名？",
+      "answer": "G-Retriever 选择相关子图控制大图上下文；Tree-of-Traversals 限制搜索深度和扩展数；CuriousLLM 用追问查缺或用特殊 token 表示证据充分。不同控制对象不能代替相同条件下的速度实测。",
+      "facts": [["grscale", "G-Retriever 通过选择相关子图处理上下文容量问题。"], ["totbound", "Tree-of-Traversals 使用深度和扩展数搜索边界。"], ["curious", "CuriousLLM 用追问或特殊 token 处理证据缺口。"], [["grscale", "totbound", "curious"], "不同控制对象不能直接推出统一速度或 Token 排名。"]]
+    },
+    {
+      "id": "R22", "axis": "三种训练信号与推理用途",
+      "question": "LPKG、CuriousLLM、RoG 分别学习什么，训练出的能力在问答时怎样使用？请区分规划数据、追问监督与 KG 知识蒸馏。",
+      "answer": "LPKG 用 KG 派生 planning data 微调规划能力；CuriousLLM 用问题和证据监督后续问题，指导查缺检索；RoG 从 KG 蒸馏知识，并在推理时生成关系计划、检索有效路径。不能互换训练目标。",
+      "facts": [["lpdata", "LPKG 用 KG 派生规划数据提升复杂问答规划能力。"], ["curious", "CuriousLLM 以问题/证据为输入，学习后续问题以指导检索。"], ["rog", "RoG 通过 KG 知识蒸馏训练。"], ["rog", "RoG 推理时做关系计划与有效路径检索。"]]
+    },
+    {
+      "id": "R23", "axis": "调用公式与搜索预算",
+      "question": "ToG/ToG-R 的调用公式与 Tree-of-Traversals 的 max depth/max expansions 各约束什么量？为什么不能把它们直接换算成跨方法墙钟时延排名？",
+      "answer": "ToG 与 ToG-R 的公式分别为 2ND+D+1 和 ND+D+1，描述 LLM 调用数量；Tree-of-Traversals 的深度/扩展数限制搜索空间。调用数、深度和扩展数不是同一量，还缺每次调用耗时等条件，不能直接排列墙钟时延。",
+      "facts": [["togr", "两种调用公式依次是 2ND+D+1 与 ND+D+1。"], ["totbound", "max depth/max expansions 是搜索边界。"], [["togr", "totbound"], "调用数量、深度、扩展数属于不同量。"], [["togr", "totbound"], "缺少每次调用耗时等条件，不能直接推断跨方法时延排名。"]]
+    },
+    {
+      "id": "R24", "axis": "多跳逻辑与跨知识库",
+      "question": "用 CLQA-Wiki、2WikiMultiHop、MusicBrainz-x-Wikidata 三个例子，说明多跳、交并逻辑和跨 KG 各指什么；这些属性是否互相排斥？",
+      "answer": "CLQA-Wiki 明列多跳、比较、交、并；2WikiMultiHop 是多跳任务；MusicBrainz-x-Wikidata 需要联合 MusicBrainz 与 Wikidata。多跳、逻辑运算和跨 KG 是不同维度，可以共存，不能由其一否定其他属性。",
+      "facts": [["lpbench", "CLQA-Wiki 包含多跳、比较、交和并。"], ["totds", "2WikiMultiHop 是多跳任务。"], ["totmusic", "MusicBrainz-x-Wikidata 需要联合两个 KG。"], [["lpbench", "totds", "totmusic"], "这些任务属性可以共存，不能作互斥推断。"]]
+    },
+    {
+      "id": "N01", "axis": "无依据继承关系",
+      "question": "有人说：RoG 直接继承了 HippoRAG 的 PPR，因为二者都做图上多跳。请依据两篇论文判断这条继承关系，并分别指出已知机制。",
+      "answer": "给定来源不能建立该继承关系。HippoRAG 使用查询种子驱动 PPR；RoG 使用关系路径规划与有效路径检索。共同目标不能证明直接继承，也不能由当前缺证据证明历史上从未有关联。",
+      "facts": [["hippo", "正确归属 HippoRAG 的 PPR。"], ["rog", "正确归属 RoG 的关系计划/路径检索。"], [["hippo", "rog"], "不确认无来源的继承边，并限定为当前来源未建立。"]]
+    },
+    {
+      "id": "N02", "axis": "无依据全称优越性",
+      "question": "仅根据 ToG 与 ToG-2 都列出 WebQSP，就断言 ToG-2 在所有底座、所有数据集上都更好，依据充分吗？还需要核对什么？",
+      "answer": "不充分。共同评测 WebQSP 只说明评测关联；全称性能结论还需匹配划分、底座、知识来源、提示及完整结果，给定来源不能支持该断言。",
+      "facts": [[["togds", "tog2ds"], "拒绝由共同数据集推出所有条件下更优。"], [["togds", "tog2ds"], "说明划分、底座、知识来源、提示与完整结果仍需核对。"]]
+    },
+    {
+      "id": "N03", "axis": "图表示张冠李戴",
+      "question": "把 KGP 的“段落节点＋语义相似边”直接作为 HippoRAG 的图定义是否有依据？请分别说明来源支持的表示与检索机制。",
+      "answer": "没有充分依据。KGP 的节点可以是段落或文档结构，边可以是相似或结构关系；HippoRAG 把语料转为无模式 KG，用查询种子启动 PPR。不能直接互换节点和边的语义。",
+      "facts": [["kgp", "正确描述 KGP 的节点与边。"], ["hippo", "正确描述 HippoRAG 的无模式 KG 与 PPR。"], [["kgp", "hippo"], "拒绝直接互换两种图表示。"]]
+    },
+    {
+      "id": "N04", "axis": "训练测试角色颠倒",
+      "question": "看到 KG-GPT 与 RoG 都涉及 MetaQA，有人把 Freebase 写成它们共同的 MetaQA 测试 KG。这个结论对吗？请核对 Wiki-Movies、Freebase 和训练样本的角色。",
+      "answer": "给定来源不支持该共同测试 KG 结论。KG-GPT 表列 MetaQA 1/2/3-hop；RoG 的 MetaQA-3hop 基于 Wiki-Movies，Freebase 是迁移前训练来源，1000 个样本来自训练划分。不能把训练来源当成共同测试 KG。",
+      "facts": [["kggptds", "KG-GPT 来源列出 MetaQA 1/2/3-hop，未据此补造共同 Freebase 测试设置。"], ["rogmeta", "MetaQA-3hop 基于 Wiki-Movies。"], ["rogmeta", "Freebase 是迁移前训练来源，1000 个样本来自训练划分。"], [["kggptds", "rogmeta"], "拒绝共同 Freebase 测试 KG 的推断。"]]
+    },
+    {
+      "id": "N05", "axis": "领域重叠伪造评测边",
+      "question": "STaRK 涉及精准医疗，MindMap 涉及医学 QA。能否据此补一条 MindMap 在 STaRK 上评测的边并填写分数？请说明证据边界。",
+      "answer": "不能。两篇来源分别说明医学领域关联，但未建立 MindMap 在 STaRK 上评测的关系或分数；只能说明当前证据不足，不能宣称证明它从未评测。",
+      "facts": [["stark", "STaRK 来源支持精准医疗检索领域。"], ["mind", "MindMap 来源支持医学 QA 场景。"], [["stark", "mind"], "不捏造评测边或分数，也不把缺证据说成从未发生。"]]
+    },
+    {
+      "id": "N06", "axis": "无来源实体与数值拒答",
+      "question": "请给出 NebulaGraphRAG-2099 继承 HippoRAG 的官方证据，并报告它在 LunarQA-2099 上相对 RoG 的精确提升分数。",
+      "answer": "冻结语料没有这些虚构方法、基准、继承关系或分数的来源；应明确无法给出有依据的官方证据和数值，不编造。",
+      "facts": [[[], "明确当前冻结语料没有该方法、基准及关系/分数来源。"], [[], "不编造官方证据、继承链或精确数值。"]]
+    },
+    {
+      "id": "N07", "axis": "增强方向反转",
+      "question": "CuriousLLM 增强 KGP，是否意味着反过来 KGP 使用 CuriousLLM 的 Follow-upQA 训练？请给出有来源的方向与各自职责。",
+      "answer": "不能反向推出。来源支持 CuriousLLM 增强 KGP，Follow-upQA 用于学习后续问题；KGP 的遍历代理收集支持段落。给定来源没有建立 KGP 使用 Follow-upQA 训练的边。",
+      "facts": [["curious", "增强方向是 CuriousLLM 指向 KGP。"], ["curious", "Follow-upQA 学习后续问题。"], ["kgp", "KGP 的代理收集支持段落。"], [["kgp", "curious"], "不确认反向训练关系。"]]
+    },
+    {
+      "id": "N08", "axis": "预算耗尽冒充成功",
+      "question": "Tree-of-Traversals 达到 max expansions 或 max depth 就意味着证据充分、回答正确，并且等同于 CuriousLLM 的充分证据 token，对吗？",
+      "answer": "不对。max expansions 会停止探索并返回 Cannot find answer；max depth 强制 done 作答。CuriousLLM 的特殊 token 表示证据充分，是另一种信号；这些机制都不能自动保证答案正确。",
+      "facts": [["totbound", "max expansions 返回 Cannot find answer。"], ["totbound", "max depth 强制 done，与扩展耗尽不同。"], ["curious", "CuriousLLM 的特殊 token 表示证据充分。"], [["totbound", "curious"], "不把预算耗尽等同于充分证据或答案正确。"]]
+    }
+  ]
+}

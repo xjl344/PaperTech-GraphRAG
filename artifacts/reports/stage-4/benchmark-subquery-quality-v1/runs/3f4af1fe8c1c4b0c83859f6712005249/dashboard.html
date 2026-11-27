@@ -1,0 +1,919 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>本地模型子查询拆分</title><style>body{font:16px/1.65 system-ui;max-width:1400px;margin:25px auto;padding:15px;background:#f3f6fa;color:#172235}article{background:white;padding:20px;margin:18px 0;border-radius:8px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}small{color:#526174}li{margin:8px 0}@media(max-width:800px){.pair{grid-template-columns:1fr}}</style><section style="background:#fff3db;padding:20px"><h2>校验结果与质量审阅</h2><p>机械校验不是语义评分；失败结果保留原始模型文本。以下为审阅记录。</p><pre># 拆分诊断：读取已有实测结果
+
+程序校验失败不等于模型所有语义判断都错误；校验通过也不等于子查询可用。
+
+```json
+{
+  &quot;completed_model_calls&quot;: 4,
+  &quot;valid&quot;: 4,
+  &quot;invalid&quot;: 0,
+  &quot;validation_error_types&quot;: {},
+  &quot;model_wall_seconds&quot;: 174.3526828000322,
+  &quot;prompt_tokens&quot;: 1506,
+  &quot;completion_tokens&quot;: 656,
+  &quot;missing_usage_rows&quot;: [],
+  &quot;source_fragment_validity_is_not_semantic_accuracy&quot;: true,
+  &quot;mean_seconds&quot;: 43.58817070000805,
+  &quot;median_seconds&quot;: 40.49873010000738,
+  &quot;load_seconds&quot;: 15.170239700000002,
+  &quot;prompt_eval_seconds&quot;: 4.25753,
+  &quot;eval_seconds&quot;: 154.731144
+}
+```
+</pre></section><h1>规则与本地 Qwen2.5-14B：题面拆分</h1><p>interrupted；仅拆分，不跑检索。机械校验与语义质量分开。</p><pre>{
+  &quot;Rule&quot;: {
+    &quot;cases&quot;: 5,
+    &quot;applied&quot;: 5,
+    &quot;subqueries&quot;: 10,
+    &quot;method_only&quot;: 10,
+    &quot;invalid&quot;: 0,
+    &quot;seconds&quot;: 0.011829400056740269,
+    &quot;prompt_tokens&quot;: 0,
+    &quot;completion_tokens&quot;: 0
+  },
+  &quot;Local-LLM&quot;: {
+    &quot;cases&quot;: 4,
+    &quot;applied&quot;: 4,
+    &quot;subqueries&quot;: 8,
+    &quot;method_only&quot;: 0,
+    &quot;invalid&quot;: 0,
+    &quot;seconds&quot;: 174.3526828000322,
+    &quot;prompt_tokens&quot;: 1506,
+    &quot;completion_tokens&quot;: 656
+  }
+}</pre><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 130"><title>带题面描述的子查询数量，不是准确率</title><text x="0" y="35">Rule</text><rect x="140" y="15" width="0" height="27" fill="#3975b7"/><text x="150" y="35">0</text><text x="0" y="80">Local-LLM</text><rect x="140" y="60" width="96" height="27" fill="#bd653e"/><text x="246" y="80">8</text><text x="140" y="125">带题面描述的子查询数量；不是语义准确率</text></svg><article id="R01"><h2>R01</h2><p>G-Retriever 与 KG-GPT 所说的“图问答”是否对应同一种输出任务？比较前者对文本图的回答与可视定位，和后者的事实核验及 KGQA。</p><div class="pair"><section><h3>Rule</h3><ul><li>G-Retriever</li><li>KG-GPT</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R01&quot;,
+  &quot;question&quot;: &quot;G-Retriever 与 KG-GPT 所说的“图问答”是否对应同一种输出任务？比较前者对文本图的回答与可视定位，和后者的事实核验及 KGQA。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Rule&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:02:17.882128+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [],
+  &quot;usage&quot;: null,
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 0,
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;G-Retriever&quot;,
+      &quot;source_group&quot;: &quot;G-Retriever&quot;,
+      &quot;text&quot;: &quot;G-Retriever&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 11,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;G-Retriever&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;KG-GPT&quot;,
+      &quot;source_group&quot;: &quot;KG-GPT&quot;,
+      &quot;text&quot;: &quot;KG-GPT&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 14,
+          &quot;end&quot;: 20,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;KG-GPT&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:02:17.885791+00:00&quot;,
+  &quot;seconds&quot;: 0.0036566000198945403,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 0,
+    &quot;task_present_count&quot;: 0
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/9ba7cc8b-b92a-5f09-96cb-d6145a6fc57d&quot;
+}</pre></details></section><section><h3>Local-LLM</h3><ul><li>G-Retriever 比较前者对文本图的回答与可视定位 比较前者对文本图的回答与可视定位 和后者的事实核验及 KGQA</li><li>KG-GPT 和后者的事实核验及 KGQA 比较前者对文本图的回答与可视定位 和后者的事实核验及 KGQA</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R01&quot;,
+  &quot;question&quot;: &quot;G-Retriever 与 KG-GPT 所说的“图问答”是否对应同一种输出任务？比较前者对文本图的回答与可视定位，和后者的事实核验及 KGQA。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Local-LLM&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:02:17.892791+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [],
+  &quot;usage&quot;: {
+    &quot;prompt_tokens&quot;: 382,
+    &quot;completion_tokens&quot;: 171,
+    &quot;total_tokens&quot;: 553
+  },
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 1,
+  &quot;parsed_output&quot;: {
+    &quot;methods&quot;: [
+      {
+        &quot;method&quot;: &quot;G-Retriever&quot;,
+        &quot;local_aspect&quot;: [
+          &quot;比较前者对文本图的回答与可视定位&quot;
+        ],
+        &quot;shared_task&quot;: [
+          &quot;比较前者对文本图的回答与可视定位&quot;,
+          &quot;和后者的事实核验及 KGQA&quot;
+        ],
+        &quot;assignment&quot;: &quot;explicit&quot;,
+        &quot;reason&quot;: &quot;题面明确指出了前者的任务&quot;
+      },
+      {
+        &quot;method&quot;: &quot;KG-GPT&quot;,
+        &quot;local_aspect&quot;: [
+          &quot;和后者的事实核验及 KGQA&quot;
+        ],
+        &quot;shared_task&quot;: [
+          &quot;比较前者对文本图的回答与可视定位&quot;,
+          &quot;和后者的事实核验及 KGQA&quot;
+        ],
+        &quot;assignment&quot;: &quot;explicit&quot;,
+        &quot;reason&quot;: &quot;题面明确指出了后者的任务&quot;
+      }
+    ],
+    &quot;unresolved&quot;: []
+  },
+  &quot;runtime&quot;: {
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 55967529300,
+    &quot;load_duration&quot;: 14292250900,
+    &quot;prompt_eval_duration&quot;: 1288902000,
+    &quot;eval_duration&quot;: 40356510000
+  },
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;G-Retriever&quot;,
+      &quot;text&quot;: &quot;G-Retriever 比较前者对文本图的回答与可视定位 比较前者对文本图的回答与可视定位 和后者的事实核验及 KGQA&quot;,
+      &quot;subquery_source&quot;: &quot;llm_spans&quot;,
+      &quot;local_aspect&quot;: [
+        &quot;比较前者对文本图的回答与可视定位&quot;
+      ],
+      &quot;shared_task&quot;: [
+        &quot;比较前者对文本图的回答与可视定位&quot;,
+        &quot;和后者的事实核验及 KGQA&quot;
+      ],
+      &quot;assignment&quot;: &quot;explicit&quot;,
+      &quot;reason&quot;: &quot;题面明确指出了前者的任务&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;text&quot;: &quot;比较前者对文本图的回答与可视定位&quot;,
+          &quot;role&quot;: &quot;local_aspect&quot;,
+          &quot;start&quot;: 41,
+          &quot;end&quot;: 57,
+          &quot;possible_starts&quot;: [
+            41
+          ],
+          &quot;offset_ambiguous&quot;: false
+        },
+        {
+          &quot;text&quot;: &quot;比较前者对文本图的回答与可视定位&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 41,
+          &quot;end&quot;: 57,
+          &quot;possible_starts&quot;: [
+            41
+          ],
+          &quot;offset_ambiguous&quot;: false
+        },
+        {
+          &quot;text&quot;: &quot;和后者的事实核验及 KGQA&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 58,
+          &quot;end&quot;: 72,
+          &quot;possible_starts&quot;: [
+            58
+          ],
+          &quot;offset_ambiguous&quot;: false
+        }
+      ],
+      &quot;transformations&quot;: [],
+      &quot;method_only&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;KG-GPT&quot;,
+      &quot;text&quot;: &quot;KG-GPT 和后者的事实核验及 KGQA 比较前者对文本图的回答与可视定位 和后者的事实核验及 KGQA&quot;,
+      &quot;subquery_source&quot;: &quot;llm_spans&quot;,
+      &quot;local_aspect&quot;: [
+        &quot;和后者的事实核验及 KGQA&quot;
+      ],
+      &quot;shared_task&quot;: [
+        &quot;比较前者对文本图的回答与可视定位&quot;,
+        &quot;和后者的事实核验及 KGQA&quot;
+      ],
+      &quot;assignment&quot;: &quot;explicit&quot;,
+      &quot;reason&quot;: &quot;题面明确指出了后者的任务&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;text&quot;: &quot;和后者的事实核验及 KGQA&quot;,
+          &quot;role&quot;: &quot;local_aspect&quot;,
+          &quot;start&quot;: 58,
+          &quot;end&quot;: 72,
+          &quot;possible_starts&quot;: [
+            58
+          ],
+          &quot;offset_ambiguous&quot;: false
+        },
+        {
+          &quot;text&quot;: &quot;比较前者对文本图的回答与可视定位&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 41,
+          &quot;end&quot;: 57,
+          &quot;possible_starts&quot;: [
+            41
+          ],
+          &quot;offset_ambiguous&quot;: false
+        },
+        {
+          &quot;text&quot;: &quot;和后者的事实核验及 KGQA&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 58,
+          &quot;end&quot;: 72,
+          &quot;possible_starts&quot;: [
+            58
+          ],
+          &quot;offset_ambiguous&quot;: false
+        }
+      ],
+      &quot;transformations&quot;: [],
+      &quot;method_only&quot;: false
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:03:13.906042+00:00&quot;,
+  &quot;seconds&quot;: 56.013294900010806,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 2,
+    &quot;task_present_count&quot;: 2
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/8efcc6c8-7eba-5edb-a631-cb6480c1144e&quot;
+}</pre></details></section></div></article><article id="R02"><h2>R02</h2><p>LPKG 和 RoG 都从 KG 学习规划，它们的计划表示能直接互换吗？分别说明自然语言子问题与关系路径怎样连接到后续执行。</p><div class="pair"><section><h3>Rule</h3><ul><li>LPKG</li><li>RoG</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R02&quot;,
+  &quot;question&quot;: &quot;LPKG 和 RoG 都从 KG 学习规划，它们的计划表示能直接互换吗？分别说明自然语言子问题与关系路径怎样连接到后续执行。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Rule&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:03:13.921095+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [],
+  &quot;usage&quot;: null,
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 0,
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;LPKG&quot;,
+      &quot;source_group&quot;: &quot;LPKG&quot;,
+      &quot;text&quot;: &quot;LPKG&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 4,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;LPKG&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;RoG&quot;,
+      &quot;source_group&quot;: &quot;RoG&quot;,
+      &quot;text&quot;: &quot;RoG&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 7,
+          &quot;end&quot;: 10,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;RoG&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:03:13.923328+00:00&quot;,
+  &quot;seconds&quot;: 0.002127900021150708,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 0,
+    &quot;task_present_count&quot;: 0
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/db8bff2e-8777-5328-9033-1420fec3dd0f&quot;
+}</pre></details></section><section><h3>Local-LLM</h3><ul><li>LPKG 它们的计划表示能直接互换吗？</li><li>RoG 它们的计划表示能直接互换吗？</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R02&quot;,
+  &quot;question&quot;: &quot;LPKG 和 RoG 都从 KG 学习规划，它们的计划表示能直接互换吗？分别说明自然语言子问题与关系路径怎样连接到后续执行。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Local-LLM&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:03:13.935770+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [
+    {
+      &quot;text&quot;: &quot;自然语言子问题与关系路径怎样连接到后续执行&quot;,
+      &quot;role&quot;: &quot;unresolved&quot;,
+      &quot;start&quot;: 40,
+      &quot;end&quot;: 61,
+      &quot;possible_starts&quot;: [
+        40
+      ],
+      &quot;offset_ambiguous&quot;: false
+    }
+  ],
+  &quot;usage&quot;: {
+    &quot;prompt_tokens&quot;: 374,
+    &quot;completion_tokens&quot;: 147,
+    &quot;total_tokens&quot;: 521
+  },
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 1,
+  &quot;parsed_output&quot;: {
+    &quot;methods&quot;: [
+      {
+        &quot;method&quot;: &quot;LPKG&quot;,
+        &quot;local_aspect&quot;: [],
+        &quot;shared_task&quot;: [
+          &quot;它们的计划表示能直接互换吗？&quot;
+        ],
+        &quot;assignment&quot;: &quot;shared_only&quot;,
+        &quot;reason&quot;: &quot;题面未明确绑定 LPKG 方法的具体描述&quot;
+      },
+      {
+        &quot;method&quot;: &quot;RoG&quot;,
+        &quot;local_aspect&quot;: [],
+        &quot;shared_task&quot;: [
+          &quot;它们的计划表示能直接互换吗？&quot;
+        ],
+        &quot;assignment&quot;: &quot;shared_only&quot;,
+        &quot;reason&quot;: &quot;题面未明确绑定 RoG 方法的具体描述&quot;
+      }
+    ],
+    &quot;unresolved&quot;: [
+      &quot;自然语言子问题与关系路径怎样连接到后续执行&quot;
+    ]
+  },
+  &quot;runtime&quot;: {
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 37313997700,
+    &quot;load_duration&quot;: 383983500,
+    &quot;prompt_eval_duration&quot;: 1012974000,
+    &quot;eval_duration&quot;: 35896429000
+  },
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;LPKG&quot;,
+      &quot;text&quot;: &quot;LPKG 它们的计划表示能直接互换吗？&quot;,
+      &quot;subquery_source&quot;: &quot;llm_spans&quot;,
+      &quot;local_aspect&quot;: [],
+      &quot;shared_task&quot;: [
+        &quot;它们的计划表示能直接互换吗？&quot;
+      ],
+      &quot;assignment&quot;: &quot;shared_only&quot;,
+      &quot;reason&quot;: &quot;题面未明确绑定 LPKG 方法的具体描述&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;text&quot;: &quot;它们的计划表示能直接互换吗？&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 22,
+          &quot;end&quot;: 36,
+          &quot;possible_starts&quot;: [
+            22
+          ],
+          &quot;offset_ambiguous&quot;: false
+        }
+      ],
+      &quot;transformations&quot;: [],
+      &quot;method_only&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;RoG&quot;,
+      &quot;text&quot;: &quot;RoG 它们的计划表示能直接互换吗？&quot;,
+      &quot;subquery_source&quot;: &quot;llm_spans&quot;,
+      &quot;local_aspect&quot;: [],
+      &quot;shared_task&quot;: [
+        &quot;它们的计划表示能直接互换吗？&quot;
+      ],
+      &quot;assignment&quot;: &quot;shared_only&quot;,
+      &quot;reason&quot;: &quot;题面未明确绑定 RoG 方法的具体描述&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;text&quot;: &quot;它们的计划表示能直接互换吗？&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 22,
+          &quot;end&quot;: 36,
+          &quot;possible_starts&quot;: [
+            22
+          ],
+          &quot;offset_ambiguous&quot;: false
+        }
+      ],
+      &quot;transformations&quot;: [],
+      &quot;method_only&quot;: false
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:03:51.277773+00:00&quot;,
+  &quot;seconds&quot;: 37.341927700006636,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 2,
+    &quot;task_present_count&quot;: 2
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/95e61d53-5c85-58ff-987b-1f1aaf55c361&quot;
+}</pre></details></section></div></article><article id="R03"><h2>R03</h2><p>CuriousLLM 与 StructGPT 的迭代步骤各会产出什么供下一步使用？比较“追问”和“读取后推理”，不要把中间产物都写成最终答案。</p><div class="pair"><section><h3>Rule</h3><ul><li>CuriousLLM</li><li>StructGPT</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R03&quot;,
+  &quot;question&quot;: &quot;CuriousLLM 与 StructGPT 的迭代步骤各会产出什么供下一步使用？比较“追问”和“读取后推理”，不要把中间产物都写成最终答案。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Rule&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:03:51.287954+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [],
+  &quot;usage&quot;: null,
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 0,
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;CuriousLLM&quot;,
+      &quot;source_group&quot;: &quot;CuriousLLM&quot;,
+      &quot;text&quot;: &quot;CuriousLLM&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 10,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;CuriousLLM&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;StructGPT&quot;,
+      &quot;source_group&quot;: &quot;StructGPT&quot;,
+      &quot;text&quot;: &quot;StructGPT&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 13,
+          &quot;end&quot;: 22,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;StructGPT&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:03:51.291378+00:00&quot;,
+  &quot;seconds&quot;: 0.0034192000166513026,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 0,
+    &quot;task_present_count&quot;: 0
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/621de3c2-f1f7-50d3-8176-c1e5cf053eb6&quot;
+}</pre></details></section><section><h3>Local-LLM</h3><ul><li>CuriousLLM 比较“追问”和“读取后推理”</li><li>StructGPT 比较“追问”和“读取后推理”</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R03&quot;,
+  &quot;question&quot;: &quot;CuriousLLM 与 StructGPT 的迭代步骤各会产出什么供下一步使用？比较“追问”和“读取后推理”，不要把中间产物都写成最终答案。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Local-LLM&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:03:51.302293+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [
+    {
+      &quot;text&quot;: &quot;CuriousLLM 与 StructGPT 的迭代步骤各会产出什么供下一步使用？&quot;,
+      &quot;role&quot;: &quot;unresolved&quot;,
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 41,
+      &quot;possible_starts&quot;: [
+        0
+      ],
+      &quot;offset_ambiguous&quot;: false
+    }
+  ],
+  &quot;usage&quot;: {
+    &quot;prompt_tokens&quot;: 379,
+    &quot;completion_tokens&quot;: 158,
+    &quot;total_tokens&quot;: 537
+  },
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 1,
+  &quot;parsed_output&quot;: {
+    &quot;methods&quot;: [
+      {
+        &quot;method&quot;: &quot;CuriousLLM&quot;,
+        &quot;local_aspect&quot;: [],
+        &quot;shared_task&quot;: [
+          &quot;比较“追问”和“读取后推理”&quot;
+        ],
+        &quot;assignment&quot;: &quot;shared_only&quot;,
+        &quot;reason&quot;: &quot;题面未明确绑定方法与技术词&quot;
+      },
+      {
+        &quot;method&quot;: &quot;StructGPT&quot;,
+        &quot;local_aspect&quot;: [],
+        &quot;shared_task&quot;: [
+          &quot;比较“追问”和“读取后推理”&quot;
+        ],
+        &quot;assignment&quot;: &quot;shared_only&quot;,
+        &quot;reason&quot;: &quot;题面未明确绑定方法与技术词&quot;
+      }
+    ],
+    &quot;unresolved&quot;: [
+      &quot;CuriousLLM 与 StructGPT 的迭代步骤各会产出什么供下一步使用？&quot;
+    ]
+  },
+  &quot;runtime&quot;: {
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 38905176400,
+    &quot;load_duration&quot;: 281687700,
+    &quot;prompt_eval_duration&quot;: 971047000,
+    &quot;eval_duration&quot;: 37639847000
+  },
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;CuriousLLM&quot;,
+      &quot;text&quot;: &quot;CuriousLLM 比较“追问”和“读取后推理”&quot;,
+      &quot;subquery_source&quot;: &quot;llm_spans&quot;,
+      &quot;local_aspect&quot;: [],
+      &quot;shared_task&quot;: [
+        &quot;比较“追问”和“读取后推理”&quot;
+      ],
+      &quot;assignment&quot;: &quot;shared_only&quot;,
+      &quot;reason&quot;: &quot;题面未明确绑定方法与技术词&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;text&quot;: &quot;比较“追问”和“读取后推理”&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 41,
+          &quot;end&quot;: 55,
+          &quot;possible_starts&quot;: [
+            41
+          ],
+          &quot;offset_ambiguous&quot;: false
+        }
+      ],
+      &quot;transformations&quot;: [],
+      &quot;method_only&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;StructGPT&quot;,
+      &quot;text&quot;: &quot;StructGPT 比较“追问”和“读取后推理”&quot;,
+      &quot;subquery_source&quot;: &quot;llm_spans&quot;,
+      &quot;local_aspect&quot;: [],
+      &quot;shared_task&quot;: [
+        &quot;比较“追问”和“读取后推理”&quot;
+      ],
+      &quot;assignment&quot;: &quot;shared_only&quot;,
+      &quot;reason&quot;: &quot;题面未明确绑定方法与技术词&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;text&quot;: &quot;比较“追问”和“读取后推理”&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 41,
+          &quot;end&quot;: 55,
+          &quot;possible_starts&quot;: [
+            41
+          ],
+          &quot;offset_ambiguous&quot;: false
+        }
+      ],
+      &quot;transformations&quot;: [],
+      &quot;method_only&quot;: false
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:04:30.225884+00:00&quot;,
+  &quot;seconds&quot;: 38.92359389999183,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 2,
+    &quot;task_present_count&quot;: 2
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/22d1aded-b579-57e2-af12-d308af5ad565&quot;
+}</pre></details></section></div></article><article id="R04"><h2>R04</h2><p>KGP 与 STaRK 的检索成功各指找到了什么？比较支持段落和答案实体，说明两者的召回分母为什么不能直接混用。</p><div class="pair"><section><h3>Rule</h3><ul><li>KGP</li><li>STaRK</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R04&quot;,
+  &quot;question&quot;: &quot;KGP 与 STaRK 的检索成功各指找到了什么？比较支持段落和答案实体，说明两者的召回分母为什么不能直接混用。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Rule&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:04:30.236579+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [],
+  &quot;usage&quot;: null,
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 0,
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;KGP&quot;,
+      &quot;source_group&quot;: &quot;KGP&quot;,
+      &quot;text&quot;: &quot;KGP&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 3,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;KGP&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;STaRK&quot;,
+      &quot;source_group&quot;: &quot;STaRK&quot;,
+      &quot;text&quot;: &quot;STaRK&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 6,
+          &quot;end&quot;: 11,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;STaRK&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:04:30.238095+00:00&quot;,
+  &quot;seconds&quot;: 0.0014805000100750476,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 0,
+    &quot;task_present_count&quot;: 0
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/38809201-56f0-5a32-8631-3e490561e0c7&quot;
+}</pre></details></section><section><h3>Local-LLM</h3><ul><li>KGP 比较支持段落和答案实体</li><li>STaRK 比较支持段落和答案实体</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R04&quot;,
+  &quot;question&quot;: &quot;KGP 与 STaRK 的检索成功各指找到了什么？比较支持段落和答案实体，说明两者的召回分母为什么不能直接混用。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Local-LLM&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:04:30.248850+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [
+    {
+      &quot;text&quot;: &quot;KGP 与 STaRK 的检索成功各指找到了什么？&quot;,
+      &quot;role&quot;: &quot;unresolved&quot;,
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 25,
+      &quot;possible_starts&quot;: [
+        0
+      ],
+      &quot;offset_ambiguous&quot;: false
+    },
+    {
+      &quot;text&quot;: &quot;说明两者的召回分母为什么不能直接混用。&quot;,
+      &quot;role&quot;: &quot;unresolved&quot;,
+      &quot;start&quot;: 37,
+      &quot;end&quot;: 56,
+      &quot;possible_starts&quot;: [
+        37
+      ],
+      &quot;offset_ambiguous&quot;: false
+    }
+  ],
+  &quot;usage&quot;: {
+    &quot;prompt_tokens&quot;: 371,
+    &quot;completion_tokens&quot;: 180,
+    &quot;total_tokens&quot;: 551
+  },
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 1,
+  &quot;parsed_output&quot;: {
+    &quot;methods&quot;: [
+      {
+        &quot;method&quot;: &quot;KGP&quot;,
+        &quot;local_aspect&quot;: [],
+        &quot;shared_task&quot;: [
+          &quot;比较支持段落和答案实体&quot;
+        ],
+        &quot;assignment&quot;: &quot;shared_only&quot;,
+        &quot;reason&quot;: &quot;题面未明确指出 KGP 的检索成功指什么，仅提及了需要比较的部分。&quot;
+      },
+      {
+        &quot;method&quot;: &quot;STaRK&quot;,
+        &quot;local_aspect&quot;: [],
+        &quot;shared_task&quot;: [
+          &quot;比较支持段落和答案实体&quot;
+        ],
+        &quot;assignment&quot;: &quot;shared_only&quot;,
+        &quot;reason&quot;: &quot;题面未明确指出 STaRK 的检索成功指什么，仅提及了需要比较的部分。&quot;
+      }
+    ],
+    &quot;unresolved&quot;: [
+      &quot;KGP 与 STaRK 的检索成功各指找到了什么？&quot;,
+      &quot;说明两者的召回分母为什么不能直接混用。&quot;
+    ]
+  },
+  &quot;runtime&quot;: {
+    &quot;done_reason&quot;: &quot;stop&quot;,
+    &quot;total_duration&quot;: 42048157400,
+    &quot;load_duration&quot;: 212317600,
+    &quot;prompt_eval_duration&quot;: 984607000,
+    &quot;eval_duration&quot;: 40838358000
+  },
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;KGP&quot;,
+      &quot;text&quot;: &quot;KGP 比较支持段落和答案实体&quot;,
+      &quot;subquery_source&quot;: &quot;llm_spans&quot;,
+      &quot;local_aspect&quot;: [],
+      &quot;shared_task&quot;: [
+        &quot;比较支持段落和答案实体&quot;
+      ],
+      &quot;assignment&quot;: &quot;shared_only&quot;,
+      &quot;reason&quot;: &quot;题面未明确指出 KGP 的检索成功指什么，仅提及了需要比较的部分。&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;text&quot;: &quot;比较支持段落和答案实体&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 25,
+          &quot;end&quot;: 36,
+          &quot;possible_starts&quot;: [
+            25
+          ],
+          &quot;offset_ambiguous&quot;: false
+        }
+      ],
+      &quot;transformations&quot;: [],
+      &quot;method_only&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;STaRK&quot;,
+      &quot;text&quot;: &quot;STaRK 比较支持段落和答案实体&quot;,
+      &quot;subquery_source&quot;: &quot;llm_spans&quot;,
+      &quot;local_aspect&quot;: [],
+      &quot;shared_task&quot;: [
+        &quot;比较支持段落和答案实体&quot;
+      ],
+      &quot;assignment&quot;: &quot;shared_only&quot;,
+      &quot;reason&quot;: &quot;题面未明确指出 STaRK 的检索成功指什么，仅提及了需要比较的部分。&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;text&quot;: &quot;比较支持段落和答案实体&quot;,
+          &quot;role&quot;: &quot;shared_task&quot;,
+          &quot;start&quot;: 25,
+          &quot;end&quot;: 36,
+          &quot;possible_starts&quot;: [
+            25
+          ],
+          &quot;offset_ambiguous&quot;: false
+        }
+      ],
+      &quot;transformations&quot;: [],
+      &quot;method_only&quot;: false
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:05:12.322714+00:00&quot;,
+  &quot;seconds&quot;: 42.07386630002293,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 2,
+    &quot;task_present_count&quot;: 2
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/63658c3f-20d8-58d1-aecb-a27e4374f674&quot;
+}</pre></details></section></div></article><article id="R05"><h2>R05</h2><p>MindMap 与 G-Retriever 都把图交给模型，但图结构进入模型的方式一样吗？比较 LLM 合并证据子图与 GAT、池化、MLP 的职责。</p><div class="pair"><section><h3>Rule</h3><ul><li>MindMap</li><li>G-Retriever</li></ul><details><summary>片段、归属、未解析内容与成本</summary><pre>{
+  &quot;case_id&quot;: &quot;R05&quot;,
+  &quot;question&quot;: &quot;MindMap 与 G-Retriever 都把图交给模型，但图结构进入模型的方式一样吗？比较 LLM 合并证据子图与 GAT、池化、MLP 的职责。&quot;,
+  &quot;category&quot;: &quot;cross&quot;,
+  &quot;arm&quot;: &quot;Rule&quot;,
+  &quot;started&quot;: &quot;2026-11-23T10:05:12.336913+00:00&quot;,
+  &quot;validation_errors&quot;: [],
+  &quot;unresolved&quot;: [],
+  &quot;usage&quot;: null,
+  &quot;valid&quot;: true,
+  &quot;model_calls&quot;: 0,
+  &quot;subqueries&quot;: [
+    {
+      &quot;id&quot;: &quot;SQ01&quot;,
+      &quot;method&quot;: &quot;MindMap&quot;,
+      &quot;source_group&quot;: &quot;MindMap&quot;,
+      &quot;text&quot;: &quot;MindMap&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 7,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;MindMap&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;SQ02&quot;,
+      &quot;method&quot;: &quot;G-Retriever&quot;,
+      &quot;source_group&quot;: &quot;G-Retriever&quot;,
+      &quot;text&quot;: &quot;G-Retriever&quot;,
+      &quot;subquery_source&quot;: &quot;method_only&quot;,
+      &quot;source_spans&quot;: [
+        {
+          &quot;start&quot;: 10,
+          &quot;end&quot;: 21,
+          &quot;role&quot;: &quot;method&quot;,
+          &quot;text&quot;: &quot;G-Retriever&quot;
+        }
+      ],
+      &quot;fallback_reason&quot;: &quot;coordinated_methods_with_unassigned_details&quot;,
+      &quot;warnings&quot;: [
+        &quot;shared_details_not_assigned&quot;
+      ]
+    }
+  ],
+  &quot;finished&quot;: &quot;2026-11-23T10:05:12.338305+00:00&quot;,
+  &quot;seconds&quot;: 0.0011451999889686704,
+  &quot;metrics&quot;: {
+    &quot;valid_source_output&quot;: 1,
+    &quot;split_applied&quot;: 1,
+    &quot;subquery_count&quot;: 2,
+    &quot;non_method_only_count&quot;: 0,
+    &quot;task_present_count&quot;: 0
+  },
+  &quot;trace_url&quot;: &quot;https://smith.langchain.com/r/fc5b3562-1022-591a-9ccb-4d08054729ba&quot;
+}</pre></details></section><section><h3>Local-LLM</h3>未运行</section></div></article><h2>分类与成本</h2><pre>{
+  &quot;case_ids&quot;: {
+    &quot;anchored&quot;: [
+      &quot;R01&quot;,
+      &quot;R02&quot;,
+      &quot;R03&quot;,
+      &quot;R04&quot;,
+      &quot;R05&quot;
+    ]
+  },
+  &quot;statistics&quot;: {
+    &quot;anchored&quot;: {
+      &quot;Rule&quot;: {
+        &quot;cases&quot;: 5,
+        &quot;subqueries&quot;: 10,
+        &quot;method_only&quot;: 10,
+        &quot;invalid&quot;: 0,
+        &quot;seconds&quot;: 0.011829400056740269,
+        &quot;prompt_tokens&quot;: 0,
+        &quot;completion_tokens&quot;: 0
+      },
+      &quot;Local-LLM&quot;: {
+        &quot;cases&quot;: 4,
+        &quot;subqueries&quot;: 8,
+        &quot;method_only&quot;: 0,
+        &quot;invalid&quot;: 0,
+        &quot;seconds&quot;: 174.3526828000322,
+        &quot;prompt_tokens&quot;: 1506,
+        &quot;completion_tokens&quot;: 656
+      }
+    }
+  }
+}</pre><a href="https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/406747b3-9bfc-43b6-ab19-35d426c52a66/compare?selectedSessions=2c6fdbee-d5ec-455a-aeea-03fc88139a50,9406b92c-4fcd-4ad9-8369-15eb5799860b">LangSmith 对照</a></html>

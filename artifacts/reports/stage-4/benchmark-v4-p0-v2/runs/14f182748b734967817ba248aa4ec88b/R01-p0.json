@@ -1,0 +1,1765 @@
+{
+  "request_id": "03e6085a-2804-4147-ba91-c22948775088",
+  "status": "ok",
+  "answer": "ToG 方面，原文称其把 LLM 当作代理、在 KG 上迭代执行 beam search 来发现推理路径并返回推理结果 [E1]；该文还称 ToG 是“training-free method with lower computational cost and better generality” [E1]。ToG-2 方面，原文称其以紧耦合方式从非结构化与结构化知识源迭代检索信息 [E6]；具体流程是先从问题抽取主题实体作为图搜索起点，每轮在 KG 上做关系检索以扩展候选实体，并检索这些候选实体关联文档中的相关文本 [E5]；随后依据上下文检索结果剪枝候选实体、更新主题实体集合并作为下一轮起点 [E5]；原文还说明 ToG-2 把文档作为实体上下文以实现精确高效的图检索，并在图检索与上下文检索之间交替以寻找与问题相关的深入线索 [E6]。方法层面，ToG-2 称其借鉴 ToG 在 KG 内多跳搜索的做法，从查询中的关键实体出发、借助提示驱动的推理过程沿实体与关系向外探索 [E8]。关于两种检索如何相互配合，原文称 ToG-2 通过迭代执行知识引导的上下文检索与上下文增强的图检索，把基于三元组的逻辑链扩展与相关实体的非结构化上下文知识结合起来 [E8]；并有“knowledge-guided context retrieval”与“context-enhance graph retrieval”的迭代配合表述 [E8]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 517,
+          "end_char": 2163,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1646,
+          "block_bboxes": [
+            [
+              278.288,
+              276.647,
+              333.722,
+              288.602
+            ],
+            [
+              143.507,
+              303.075,
+              469.793,
+              532.166
+            ],
+            [
+              108.299,
+              556.334,
+              205.989,
+              568.289
+            ]
+          ]
+        }
+      ],
+      "quote": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7982516288757324
+        }
+      ],
+      "rerank_score": 0.8453049659729004,
+      "context_bytes": 2026,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 621,
+          "end_char": 2250,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1629,
+          "block_bboxes": [
+            [
+              143.866,
+              279.608,
+              468.139,
+              530.667
+            ]
+          ]
+        }
+      ],
+      "quote": "Retrieval-augmented generation (RAG) has improved large language models\n(LLMs) by using knowledge retrieval to overcome knowledge deficiencies. How-\never, current RAG methods often fall short of ensuring the depth and complete-\nness of retrieved information, which is necessary for complex reasoning tasks.\nIn this work, we introduce Think-on-Graph 2.0 (ToG-2), a hybrid RAG frame-\nwork that iteratively retrieves information from both unstructured and structured\nknowledge sources in a tight-coupling manner.\nSpecifically, ToG-2 leverages\nknowledge graphs (KGs) to link documents via entities, facilitating deep and\nknowledge-guided context retrieval. Simultaneously, it utilizes documents as en-\ntity contexts to achieve precise and efficient graph retrieval. ToG-2 alternates\nbetween graph retrieval and context retrieval to search for in-depth clues rele-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.689652442932129
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8198132514953613
+        }
+      ],
+      "rerank_score": 0.9461008310317993,
+      "context_bytes": 2023,
+      "eid": "E6"
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2179,
+          "end_char": 3450,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1271,
+          "block_bboxes": [
+            [
+              108.0,
+              590.569,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 223,
+          "chunk_start_char": 1272,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              84.268,
+              504.003,
+              105.19
+            ]
+          ]
+        }
+      ],
+      "quote": "Considering the aforementioned challenges, we propose Think-on-Graph 2.0 (ToG-2), a tight-\ncoupling hybrid (KG×Text) RAG paradigm which effectively integrates unstructured knowledge\nfrom texts with structured insights from KGs, serving as a roadmap to enhance complex problem-\nsolving. As shown in Figure 1(d), ToG-2 first initializes the starting point for graph search by\nextracting topic entities from the question. At the beginning of each retrieval round, ToG-2 explores\nmore candidate entities by performing relation retrieval on the KG and retrieves relevant text from\ndocuments associated with these candidate entities. Following knowledge-guided context retrieval,\nToG-2 prunes the candidate entities based on the results of the context retrieval, updates the set of\ntopic entities and uses it as the starting point for the next round of retrieval. After each retrieval",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.509570121765137
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8298797607421875
+        }
+      ],
+      "rerank_score": 0.9521309733390808,
+      "context_bytes": 1885,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 3,
+      "page_end": 4,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 4482,
+          "end_char": 4688,
+          "chunk_start_char": 0,
+          "chunk_end_char": 206,
+          "block_bboxes": [
+            [
+              108.299,
+              685.254,
+              209.231,
+              697.209
+            ],
+            [
+              108.0,
+              711.347,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 1380,
+          "chunk_start_char": 207,
+          "chunk_end_char": 1587,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              191.097,
+              271.545,
+              420.903,
+              281.738
+            ],
+            [
+              108.0,
+              289.117,
+              504.003,
+              331.957
+            ],
+            [
+              108.0,
+              338.93,
+              504.003,
+              436.565
+            ],
+            [
+              108.249,
+              451.234,
+              194.499,
+              461.197
+            ]
+          ]
+        }
+      ],
+      "quote": "METHODOLOGY\nThe proposed method ToG-2 draws from the ToG approach Sun et al. (2024) in multi-hop searches\nwithin KGs, starting from key entities identified in the query and exploring outward based on en-\n3\n\nPublished as a conference paper at ICLR 2025\nFigure 2: An example illustrating the workflow of ToG-2.\ntities and relationships with a prompt-driven inferential process. ToG-2 combines the logical chain\nextensions based on triples with unstructured contextual knowledge of relevant entities by iteratively\nperforming knowledge-guided context retrieval and context-enhance graph retrieval, thus more ef-\nfectively integrating and utilizing heterogeneous external knowledge.\nSpecifically, ToG-2 begins by extracting entities from the given question as initial topic entities.\nIt then performs an iterative process of graph retrieval, context retrieval and LLM reasoning. At",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.446642875671387
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8211402893066406
+        }
+      ],
+      "rerank_score": 0.9099069833755493,
+      "context_bytes": 1980,
+      "eid": "E8"
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 517,
+          "end_char": 2163,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1646,
+          "block_bboxes": [
+            [
+              278.288,
+              276.647,
+              333.722,
+              288.602
+            ],
+            [
+              143.507,
+              303.075,
+              469.793,
+              532.166
+            ],
+            [
+              108.299,
+              556.334,
+              205.989,
+              568.289
+            ]
+          ]
+        }
+      ],
+      "quote": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following\nadvantages of ToG: 1) compared with LLMs, ToG has better deep reasoning power;\n2) ToG has the ability of knowledge traceability and knowledge correctability by\nleveraging LLMs reasoning and expert feedback; 3) ToG provides a flexible plug-\nand-play framework for different LLMs, KGs and prompting strategies without\nany additional training cost; 4) the performance of ToG with small LLM models\ncould exceed large LLM such as GPT-4 in certain scenarios and this reduces the\ncost of LLM deployment and application. As a training-free method with lower\ncomputational cost and better generality, ToG achieves overall SOTA in 6 out of\n9 datasets where most previous SOTAs rely on additional training. Our code is\npublicly available at https://github.com/IDEA-FinAI/ToG.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7982516288757324
+        }
+      ],
+      "rerank_score": 0.8453049659729004,
+      "context_bytes": 2026
+    },
+    {
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 3,
+      "page_end": 3,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 223,
+          "end_char": 1439,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1216,
+          "block_bboxes": [
+            [
+              108.0,
+              112.073,
+              504.003,
+              253.634
+            ],
+            [
+              108.299,
+              272.586,
+              217.097,
+              284.541
+            ]
+          ]
+        }
+      ],
+      "quote": "The advantage of ToG-2 can be summarized as: (1) In-depth retrieval: ToG-2 achieves in-depth\nand reliable context retrieval through the guide of KGs and performs precise graph retrieval by\ntreating documents as node contexts, achieving a tight-coupling combination of KG and text RAG,\nenabling deep and comprehensive retrieval processes. (2) Faithful reasoning: ToG-2 iteratively\nperforms a collaborative retrieval process based on KG and text, using retrieved heterogeneous\nknowledge as the basis for LLM reasoning and enhancing the faithfulness of LLM-generated con-\ntent (3) Efficiency and Effectiveness: a) ToG-2 is a training-free and plug-and-play framework that\ncan be applied to various LLMs; b) ToG-2 can be executed between any associated KG and docu-\nment database, while for purely document database, entities can be extracted from the documents\nfirst, and then a graph can be constructed through relation extraction or entity co-occurrence (Edge\net al., 2024); c) ToG-2 achieves new SOTA performances on various complex knowledge reasoning\ndatasets and can elevate the reasoning capabilities of smaller LLMs, e.g., Llama2-13B to a level\ncomparable to direct reasoning with powerful LLMs like GPT-3.5.\n2\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 5.94752836227417
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.826202392578125
+        }
+      ],
+      "rerank_score": 0.9651191234588623,
+      "context_bytes": 1601
+    },
+    {
+      "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 1567,
+          "end_char": 2984,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1417,
+          "block_bboxes": [
+            [
+              107.671,
+              304.804,
+              504.173,
+              380.595
+            ],
+            [
+              107.641,
+              387.6,
+              504.003,
+              430.409
+            ],
+            [
+              108.249,
+              445.13,
+              217.544,
+              455.093
+            ],
+            [
+              108.0,
+              464.655,
+              504.0,
+              496.598
+            ],
+            [
+              354.246,
+              519.242,
+              495.369,
+              529.411
+            ],
+            [
+              354.246,
+              536.427,
+              484.539,
+              614.616
+            ],
+            [
+              345.294,
+              625.925,
+              505.651,
+              657.881
+            ]
+          ]
+        }
+      ],
+      "quote": "Given ToG’s flexibility of plug-and-play, we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP. Table 2 shows that, as we expected, the performance\nof CoT improves with the size (also reflecting partially the reasoning ability) of backbone models\n(GPT-4 > ChatGPT > Llama-2). Furthermore, we see that, the larger the backbone model, the larger\nthe gap between CoT and ToG (the gain increases from 18.5% for Llama-2 to 23.5% for GPT-4\non CWQ, and from 11.5% for Llama-2 to 15.3% for GPT-4 on WebQSP), and this indicates more\npotential of KG can be mined using a more powerful LLM.\nIn addition, even if using the smallest model Llama-2 (70B parameters), ToG outperforms CoT with\nGPT-4. This implies a much cheaper technical route for LLM deployment and application, i.e., TOG\nwith cheap small LLM may be a candidate for substituting expensive big LLM, especially in vertical\nscenarios that external KGs can cover.\n3.2.3\nABLATION STUDY\nWe perform various ablation studies to understand the importance of different factors in ToG. We\nconduct our ablation studies on two subsets of the test sets of CWQ and WebQSP, each of which\ncontains 1,000 randomly sampled questions.\nMethod\nCWQ\nWebQSP\nCoT\n37.6\n62.0\nToG\nw/ Freebase\n58.8\n76.2\nw/ WikiData\n54.9\n68.6\nToG-R\nw/ Freebase\n59.2\n75.1\nw/ WikiData\n51.9\n66.7\nTable 3: Performances of ToG using\ndifferent source KGs on CWQ and We-\nbQSP.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7979221343994141
+        }
+      ],
+      "rerank_score": 0.7986582517623901,
+      "context_bytes": 1809
+    },
+    {
+      "chunk_id": "chunk_9c3795187f69ce14c244c9ad74c8e821",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2915,
+          "end_char": 3843,
+          "chunk_start_char": 0,
+          "chunk_end_char": 928,
+          "block_bboxes": [
+            [
+              108.0,
+              623.446,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 352,
+          "chunk_start_char": 929,
+          "chunk_end_char": 1281,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              198.485,
+              85.419,
+              456.871,
+              93.352
+            ],
+            [
+              181.697,
+              98.843,
+              466.207,
+              106.776
+            ],
+            [
+              131.37,
+              112.139,
+              480.631,
+              139.556
+            ]
+          ]
+        }
+      ],
+      "quote": "The main results of several open-source datasets are shown in Table 1. We note that ToG-2 out-\nperforms other baselines on WebQSP, AdvHotpotQA, QALD-10-en, and Zero-Shot RE. Notably,\nWebQSP, AdvHotpotQA and QALD-10-en are multi-hop reasoning datasets. On Fever, ToG-2 has\na competitive performance to CoK since the fact statements in Fever mainly are about single-hop\nrelations and thus do not need in-depth information retrieval. In another fact verification dataset\nCreak, all fact statements can be verified based on Wikidata. Thus, ToG-2 and ToG have similar per-\nformances on Creak. Meanwhile, compared to original ToG, ToG-2 achieved a substantial improve-\nment on AdvHotpotQA (16.6%) and also demonstrated notable enhancements on other datasets\n(4.93% on WebQSP, 3.85% on QALD-10-en, 3% on Zero-Shot RE, and 10.4% on FEVER). This\ndemonstrates the advantages of our KG×Text RAG framework in addressing complex problems.\n7\n\nPublished as a conference paper at ICLR 2025\nLlama-3-8B\nQwen2-7B\nGPT-3.5-turbo\nGPT-4o\nDirect\nToG-2\nDirect\nToG-2\nDirect\nToG-2\nDirect\nToG-2\nAdvHotpotQA 20.8 34.7 (66.8% ↑) 17.9 30.8 (72.1% ↑) 23.1 42.9 (85.7% ↑) 47.7 53.3 (11.3% ↑)\nFEVER\n35.5 52.9 (49.0% ↑) 38.6 53.1 (38.1% ↑) 51.8 63.1 (21.8% ↑) 66.2\n70.1 (5.9% ↑)\nToG-FinQA\n0\n8.2\n0\n10.3\n0\n34.0\n0\n36.1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 5.785130977630615
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8091073036193848
+        }
+      ],
+      "rerank_score": 0.9552357196807861,
+      "context_bytes": 1707
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2179,
+          "end_char": 3450,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1271,
+          "block_bboxes": [
+            [
+              108.0,
+              590.569,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 223,
+          "chunk_start_char": 1272,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              84.268,
+              504.003,
+              105.19
+            ]
+          ]
+        }
+      ],
+      "quote": "Considering the aforementioned challenges, we propose Think-on-Graph 2.0 (ToG-2), a tight-\ncoupling hybrid (KG×Text) RAG paradigm which effectively integrates unstructured knowledge\nfrom texts with structured insights from KGs, serving as a roadmap to enhance complex problem-\nsolving. As shown in Figure 1(d), ToG-2 first initializes the starting point for graph search by\nextracting topic entities from the question. At the beginning of each retrieval round, ToG-2 explores\nmore candidate entities by performing relation retrieval on the KG and retrieves relevant text from\ndocuments associated with these candidate entities. Following knowledge-guided context retrieval,\nToG-2 prunes the candidate entities based on the results of the context retrieval, updates the set of\ntopic entities and uses it as the starting point for the next round of retrieval. After each retrieval\nround, ToG-2 prompts the LLM to answer the question based on the highly relevant knowledge\ntriples and contexts obtained during the retrieval process. If the retrieved information is insufficient\nto answer the question, the next round of retrieval continues for searching more in-depth clues. Such\na tight-coupling hybrid RAG paradigm makes LLM perform closer to human when solving complex\n2\n\nPublished as a conference paper at ICLR 2025\nproblems: examining current clues and associating potential entities based on their existing knowl-\nedge framework, continuously digging into the topic until finding the answer.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.509570121765137
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8298797607421875
+        }
+      ],
+      "rerank_score": 0.9521309733390808,
+      "context_bytes": 1885
+    },
+    {
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 621,
+          "end_char": 2250,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1629,
+          "block_bboxes": [
+            [
+              143.866,
+              279.608,
+              468.139,
+              530.667
+            ]
+          ]
+        }
+      ],
+      "quote": "Retrieval-augmented generation (RAG) has improved large language models\n(LLMs) by using knowledge retrieval to overcome knowledge deficiencies. How-\never, current RAG methods often fall short of ensuring the depth and complete-\nness of retrieved information, which is necessary for complex reasoning tasks.\nIn this work, we introduce Think-on-Graph 2.0 (ToG-2), a hybrid RAG frame-\nwork that iteratively retrieves information from both unstructured and structured\nknowledge sources in a tight-coupling manner.\nSpecifically, ToG-2 leverages\nknowledge graphs (KGs) to link documents via entities, facilitating deep and\nknowledge-guided context retrieval. Simultaneously, it utilizes documents as en-\ntity contexts to achieve precise and efficient graph retrieval. ToG-2 alternates\nbetween graph retrieval and context retrieval to search for in-depth clues rele-\nvant to the question, enabling LLMs to generate answers. We conduct a series\nof well-designed experiments to highlight the following advantages of ToG-2:\n1) ToG-2 tightly couples the processes of context retrieval and graph retrieval,\ndeepening context retrieval via the KG while enabling reliable graph retrieval\nbased on contexts; 2) it achieves deep and faithful reasoning in LLMs through\nan iterative knowledge retrieval process of collaboration between contexts and\nthe KG; and 3) ToG-2 is training-free and plug-and-play compatible with vari-\nous LLMs. Extensive experiments demonstrate that ToG-2 achieves overall state-\nof-the-art (SOTA) performance on 6 out of 7 knowledge-intensive datasets with\nGPT-3.5, and can elevate the performance of smaller models (e.g",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.689652442932129
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8198132514953613
+        }
+      ],
+      "rerank_score": 0.9461008310317993,
+      "context_bytes": 2023
+    },
+    {
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 17,
+      "page_end": 17,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 17,
+          "start_char": 53,
+          "end_char": 1514,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1461,
+          "block_bboxes": [
+            [
+              114.838,
+              86.708,
+              497.165,
+              94.753
+            ],
+            [
+              114.838,
+              102.253,
+              485.492,
+              121.802
+            ],
+            [
+              114.838,
+              129.301,
+              485.492,
+              148.851
+            ],
+            [
+              117.902,
+              162.465,
+              494.1,
+              172.428
+            ],
+            [
+              212.476,
+              180.156,
+              399.524,
+              190.119
+            ],
+            [
+              212.476,
+              195.978,
+              387.618,
+              239.048
+            ],
+            [
+              162.614,
+              252.519,
+              449.387,
+              262.482
+            ],
+            [
+              108.0,
+              285.038,
+              504.003,
+              317.149
+            ],
+            [
+              108.0,
+              324.123,
+              504.005,
+              377.921
+            ],
+            [
+              108.0,
+              384.665,
+              504.003,
+              416.776
+            ],
+            [
+              108.0,
+              423.39,
+              448.469,
+              433.712
+            ]
+          ]
+        }
+      ],
+      "quote": "Method\nAvg. time per RP (s)\nAvg. time per EP (s)\nAvg. time per Reasoning (s)\nAvg. Depth\nFEVER\nToG-2\n6.4\n4.5\n5.9\n2.21\nToG\n14.2\n6.5\n5.5\n1.94\nAdvHotpotQA\nToG-2\n6.1\n4.3\n5.7\n2.17\nToG\n13.8\n6.3\n5.4\n1.71\nTable 8: Running time comparison of ToG-2 and ToG on FEVER and AdvHotpotQA datasets.\nMethod\nAvg Total Time (s)\nAPI Calls\nToG-2\n27.3\n5.4\nNaiveRAG\n10.2\n1\nToG\n69.3\n16.3\nCoK\n30.1\n11\nTable 9: Comparison of API Call Counts and Runtime Across Methods.\nmaximum width (number of knowledge triplets explored in parallel) and D is the maximum iteration\ndepth. This structure enables comprehensive multi-hop reasoning and knowledge exploration, but\nresults in a relatively high number of API calls per question.\nCoK: To ensure fairness in comparison, we restricted the knowledge domain to factual data from\nWikiData, Wikipedia, and DPR. We also adopted the update rationales at once setting\nfrom the original implementation. CoK has a fixed API call count of 11 per question: 1 domain\nselection call, 1 chain-of-thought sub-question generation call, 2 × 3 knowledge retrieval calls, 2\nrationale editing calls, and 1 final answer generation call.\nNaiveRAG: To simulate a retrieval corpus, we use all entity documents encountered during ToG-2\niterations. NaiveRAG uses a two-stage retrieval system that combines BM25 with BGE-Reranker,\nresulting in the fewest API calls among the compared methods.\nToG-2: For each question, ToG-2 requires up to 2D + (D −1) + 1 API calls, where:\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 5.085171222686768
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7944169044494629
+        }
+      ],
+      "rerank_score": 0.9282788634300232,
+      "context_bytes": 1893
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 3,
+      "page_end": 4,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 4482,
+          "end_char": 4688,
+          "chunk_start_char": 0,
+          "chunk_end_char": 206,
+          "block_bboxes": [
+            [
+              108.299,
+              685.254,
+              209.231,
+              697.209
+            ],
+            [
+              108.0,
+              711.347,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 1380,
+          "chunk_start_char": 207,
+          "chunk_end_char": 1587,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              191.097,
+              271.545,
+              420.903,
+              281.738
+            ],
+            [
+              108.0,
+              289.117,
+              504.003,
+              331.957
+            ],
+            [
+              108.0,
+              338.93,
+              504.003,
+              436.565
+            ],
+            [
+              108.249,
+              451.234,
+              194.499,
+              461.197
+            ]
+          ]
+        }
+      ],
+      "quote": "METHODOLOGY\nThe proposed method ToG-2 draws from the ToG approach Sun et al. (2024) in multi-hop searches\nwithin KGs, starting from key entities identified in the query and exploring outward based on en-\n3\n\nPublished as a conference paper at ICLR 2025\nFigure 2: An example illustrating the workflow of ToG-2.\ntities and relationships with a prompt-driven inferential process. ToG-2 combines the logical chain\nextensions based on triples with unstructured contextual knowledge of relevant entities by iteratively\nperforming knowledge-guided context retrieval and context-enhance graph retrieval, thus more ef-\nfectively integrating and utilizing heterogeneous external knowledge.\nSpecifically, ToG-2 begins by extracting entities from the given question as initial topic entities.\nIt then performs an iterative process of graph retrieval, context retrieval and LLM reasoning. At\nthe start of each iteration, ToG-2 selectively explores entities neighboring the current topic entities\non the KG, using the newly encountered entities to refine the retrieval scope, thereby enhancing\nboth efficiency and accuracy. Next, ToG-2 ranks and selects entities based on the query and the\ncontextual knowledge retrieved from relevant documents, reducing ambiguity and ensuring accurate\nexploration for the next step. After, the LLM utilizes heterogeneous knowledge, including triple\npaths and entity contexts, to either answer the question or proceed with further rounds of retrieval if\nthe information gathered is insufficient. In this section, we will explain each step in detail.\n3.1\nINITIALIZTION\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.446642875671387
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8211402893066406
+        }
+      ],
+      "rerank_score": 0.9099069833755493,
+      "context_bytes": 1980
+    },
+    {
+      "chunk_id": "chunk_8b9e861ea949a3eb2fc9ed5a97b24644",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2984,
+          "end_char": 4138,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1154,
+          "block_bboxes": [
+            [
+              107.641,
+              511.153,
+              337.38,
+              685.666
+            ],
+            [
+              108.0,
+              700.359,
+              505.652,
+              732.267
+            ],
+            [
+              303.385,
+              752.194,
+              308.366,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 426,
+          "chunk_start_char": 1155,
+          "chunk_end_char": 1581,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              162.764,
+              162.371,
+              449.239,
+              172.334
+            ],
+            [
+              108.0,
+              195.733,
+              505.242,
+              227.538
+            ],
+            [
+              354.044,
+              260.478,
+              495.568,
+              270.409
+            ]
+          ]
+        }
+      ],
+      "quote": "Do search depth and width matter for ToG?\nTo ex-\nplore the influence of the search depth Dmax and the beam\nwidth N on ToG’s performance, we conduct experiments\nunder settings with depths ranging from 1 to 4 and widths\nfrom 1 to 4. As shown in Figure 3, ToG’s performance im-\nproves with the search depth and width. This also implies\nthat ToG’s performance could potentially be improved\nwith the increment of the exploration depth and breadth.\nHowever, considering the computational cost (which in-\ncreases linearly with the depth), we set both the depth\nand width to 3 as the default experimental setting. On\nthe other hand, the performance growth diminishes when\nthe depth exceeds 3. This is mainly because only a small\npart of questions have the reasoning depths (based on the\nnumber of relations in SPARQL, as seen in Figure 12 in\nthe Appendix) of greater than 3.\nDo different KGs affect ToG’s performance?\nOne of the main advantages of ToG is its plug-and-\nplay capabilities. As shown in Table 3, ToG achieves significant improvements with different source\nKGs on CWQ and WebQSP, compared to CoT. On the other hand, different source KGs might have\n7\n\nPublished as a conference paper at ICLR 2024\nFigure 3: Performances of ToG with different search depths and widths.\ndifferent effects on the performance of ToG. Notably, Freebase brings more significant improvements\non CWQ and WebQSP than Wikidata, since both datasets are constructed upon Freebase. Moreover,\nin a very large KG like Wikidata, the searching and pruning processes are relatively challenging.\nMethod\nCWQ\nWebQSP\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.797823429107666
+        }
+      ],
+      "rerank_score": 0.7186931371688843,
+      "context_bytes": 1971
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 27,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 5.223222700005863,
+      "inference_seconds": 0.7308094000327401,
+      "elapsed_seconds": 0.7331143000046723,
+      "peak_cuda_memory_bytes": 1193936384,
+      "request_count": 19,
+      "batch_size": 4
+    },
+    "evidence_count": 9,
+    "context_bytes": 16895,
+    "evidence_bytes": 16895,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 16226,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "ToG",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "requested_names": [
+          "ToG"
+        ]
+      },
+      {
+        "name": "ToG-2",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "requested_names": [
+          "ToG-2"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "ToG",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+        "requested_names": [
+          "ToG"
+        ],
+        "eligible_candidate_count": 6,
+        "selected_chunk_ids": [
+          "chunk_e09b5a88c34014513aad6c0d6121f790",
+          "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+          "chunk_8b9e861ea949a3eb2fc9ed5a97b24644"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "ToG-2",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "requested_names": [
+          "ToG-2"
+        ],
+        "eligible_candidate_count": 20,
+        "selected_chunk_ids": [
+          "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+          "chunk_9c3795187f69ce14c244c9ad74c8e821",
+          "chunk_fd05fc6099086f633f4ad41747c6caac",
+          "chunk_9b63637ef18ed2d67ff105ef55092df3",
+          "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+          "chunk_ae3b975ae8b5619f33cca171b000c8b6"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4466,
+    "total_tokens": 4844,
+    "completion_tokens": 378,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 4466
+    },
+    "completion_tokens_details": {
+      "text_tokens": 378
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"ToG 方面，原文称其把 LLM 当作代理、在 KG 上迭代执行 beam search 来发现推理路径并返回推理结果 [E1]；该文还称 ToG 是“training-free method with lower computational cost and better generality” [E1]。ToG-2 方面，原文称其以紧耦合方式从非结构化与结构化知识源迭代检索信息 [E6]；具体流程是先从问题抽取主题实体作为图搜索起点，每轮在 KG 上做关系检索以扩展候选实体，并检索这些候选实体关联文档中的相关文本 [E5]；随后依据上下文检索结果剪枝候选实体、更新主题实体集合并作为下一轮起点 [E5]；原文还说明 ToG-2 把文档作为实体上下文以实现精确高效的图检索，并在图检索与上下文检索之间交替以寻找与问题相关的深入线索 [E6]。方法层面，ToG-2 称其借鉴 ToG 在 KG 内多跳搜索的做法，从查询中的关键实体出发、借助提示驱动的推理过程沿实体与关系向外探索 [E8]。关于两种检索如何相互配合，原文称 ToG-2 通过迭代执行知识引导的上下文检索与上下文增强的图检索，把基于三元组的逻辑链扩展与相关实体的非结构化上下文知识结合起来 [E8]；并有“knowledge-guided context retrieval”与“context-enhance graph retrieval”的迭代配合表述 [E8]。\",\"citations\":[{\"eid\":\"E1\",\"quote_id\":\"q1\"},{\"eid\":\"E6\",\"quote_id\":\"q1\"},{\"eid\":\"E5\",\"quote_id\":\"q1\"},{\"eid\":\"E8\",\"quote_id\":\"q1\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "score": 0.03252247488101534,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 5.94752836227417
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.826202392578125
+        }
+      ],
+      "rerank_score": 0.9651191234588623
+    },
+    {
+      "chunk_id": "chunk_9c3795187f69ce14c244c9ad74c8e821",
+      "score": 0.030834914611005692,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 5.785130977630615
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8091073036193848
+        }
+      ],
+      "rerank_score": 0.9552357196807861
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 0.032018442622950824,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.509570121765137
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8298797607421875
+        }
+      ],
+      "rerank_score": 0.9521309733390808
+    },
+    {
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "score": 0.03125763125763126,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.689652442932129
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8198132514953613
+        }
+      ],
+      "rerank_score": 0.9461008310317993
+    },
+    {
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "score": 0.027071520029266508,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 5.085171222686768
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7944169044494629
+        }
+      ],
+      "rerank_score": 0.9282788634300232
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "score": 0.031009615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.446642875671387
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8211402893066406
+        }
+      ],
+      "rerank_score": 0.9099069833755493
+    },
+    {
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "score": 0.03036576949620428,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 5.110581398010254
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8257017135620117
+        }
+      ],
+      "rerank_score": 0.9048188328742981
+    },
+    {
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 0.029631255487269532,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 5.186588764190674
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8164010047912598
+        }
+      ],
+      "rerank_score": 0.8996515870094299
+    },
+    {
+      "chunk_id": "chunk_dbc1fae04646d9e523a5b16481732daf",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 4.7326741218566895
+        }
+      ],
+      "rerank_score": 0.8996515870094299
+    },
+    {
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.029418126757516764,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.272049427032471
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8034462928771973
+        }
+      ],
+      "rerank_score": 0.8806945085525513
+    },
+    {
+      "chunk_id": "chunk_a68d09dd1334dcb0207c235cca9292cf",
+      "score": 0.02638888888888889,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 5.017669200897217
+        },
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7897830009460449
+        }
+      ],
+      "rerank_score": 0.879974365234375
+    },
+    {
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.028484848484848488,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.989656448364258
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8164725303649902
+        }
+      ],
+      "rerank_score": 0.8663588762283325
+    },
+    {
+      "chunk_id": "chunk_2e13f6f43858420cb85904c33d3b39df",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 4.972405910491943
+        }
+      ],
+      "rerank_score": 0.8588370084762573
+    },
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7982516288757324
+        }
+      ],
+      "rerank_score": 0.8453049659729004
+    },
+    {
+      "chunk_id": "chunk_fe16188c28a71e379a82b1c61a524ada",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7932171821594238
+        }
+      ],
+      "rerank_score": 0.8413047790527344
+    },
+    {
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.028370221327967807,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.089707851409912
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7999577522277832
+        }
+      ],
+      "rerank_score": 0.8166989684104919
+    },
+    {
+      "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7979221343994141
+        }
+      ],
+      "rerank_score": 0.7986582517623901
+    },
+    {
+      "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 4.934833526611328
+        }
+      ],
+      "rerank_score": 0.727878749370575
+    },
+    {
+      "chunk_id": "chunk_8b9e861ea949a3eb2fc9ed5a97b24644",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.797823429107666
+        }
+      ],
+      "rerank_score": 0.7186931371688843
+    },
+    {
+      "chunk_id": "chunk_36588119f2aacd0893d97ed15e4ed276",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 4.8592987060546875
+        }
+      ],
+      "rerank_score": 0.7143292427062988
+    },
+    {
+      "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7968044281005859
+        }
+      ],
+      "rerank_score": 0.6594051122665405
+    },
+    {
+      "chunk_id": "chunk_031b7aaba8f20d011a94bb6a15b0f3b1",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 5.009674072265625
+        }
+      ],
+      "rerank_score": 0.6570984721183777
+    },
+    {
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 0.02667140825035562,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 5.008747100830078
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7949175834655762
+        }
+      ],
+      "rerank_score": 0.6214260458946228
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7910995483398438
+        }
+      ],
+      "rerank_score": 0.576899528503418
+    },
+    {
+      "chunk_id": "chunk_853a28afafe05201ef953b7076d05b6b",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8027243614196777
+        }
+      ],
+      "rerank_score": 0.47755420207977295
+    },
+    {
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 4.8754119873046875
+        }
+      ],
+      "rerank_score": 0.45132648944854736
+    },
+    {
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.426296234130859
+        }
+      ],
+      "rerank_score": 0.004962942097336054
+    }
+  ],
+  "case_id": "R01",
+  "question": "比较 ToG 与 ToG-2：前者由什么代理用什么搜索算法探索 KG，后者如何让实体、文档和两种检索相互配合？",
+  "category": "cross",
+  "arm": "P0-Optimized",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0003369000041857362
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.039812899951357394
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 6.299989763647318e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.7338522999780253
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0012380999978631735
+    }
+  ],
+  "retrieval_compute_seconds": 0.7752464999211952,
+  "request_wall_seconds": 14.024929800012615,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.2044359999708831,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 10.563745099992957,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4449715999653563,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 9.63652539998293,
+      "usage": "{\"prompt_tokens\": 4466, \"total_tokens\": 4844, \"completion_tokens\": 378}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 0.8298797607421875
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "score": 0.826202392578125
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "score": 0.8257017135620117
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "score": 0.8211402893066406
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "score": 0.8198132514953613
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.8164725303649902
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 0.8164010047912598
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_9c3795187f69ce14c244c9ad74c8e821",
+      "score": 0.8091073036193848
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.8034462928771973
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_853a28afafe05201ef953b7076d05b6b",
+      "score": 0.8027243614196777
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.7999577522277832
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.7982516288757324
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+      "score": 0.7979221343994141
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_8b9e861ea949a3eb2fc9ed5a97b24644",
+      "score": 0.797823429107666
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+      "score": 0.7968044281005859
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 0.7949175834655762
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "score": 0.7944169044494629
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_fe16188c28a71e379a82b1c61a524ada",
+      "score": 0.7932171821594238
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.7910995483398438
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_a68d09dd1334dcb0207c235cca9292cf",
+      "score": 0.7897830009460449
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "score": 5.94752836227417
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_9c3795187f69ce14c244c9ad74c8e821",
+      "score": 5.785130977630615
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "score": 5.689652442932129
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 5.509570121765137
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "score": 5.446642875671387
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 5.426296234130859
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 5.272049427032471
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 5.186588764190674
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "score": 5.110581398010254
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 5.089707851409912
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "score": 5.085171222686768
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_a68d09dd1334dcb0207c235cca9292cf",
+      "score": 5.017669200897217
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_031b7aaba8f20d011a94bb6a15b0f3b1",
+      "score": 5.009674072265625
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 5.008747100830078
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 4.989656448364258
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_2e13f6f43858420cb85904c33d3b39df",
+      "score": 4.972405910491943
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9",
+      "score": 4.934833526611328
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 4.8754119873046875
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_36588119f2aacd0893d97ed15e4ed276",
+      "score": 4.8592987060546875
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_dbc1fae04646d9e523a5b16481732daf",
+      "score": 4.7326741218566895
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R01.C01",
+      "requirement": "ToG 的 LLM 代理迭代执行 KG 束搜索。",
+      "selected_matches_by_unit": {
+        "tog": [
+          "chunk_e09b5a88c34014513aad6c0d6121f790"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R01.C02",
+      "requirement": "ToG 探索实体、关系与推理路径。",
+      "selected_matches_by_unit": {
+        "tog": [
+          "chunk_e09b5a88c34014513aad6c0d6121f790"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R01.C03",
+      "requirement": "ToG-2 用实体连接文档，并把文档作为实体上下文。",
+      "selected_matches_by_unit": {
+        "tog2": [
+          "chunk_9b63637ef18ed2d67ff105ef55092df3",
+          "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R01.C04",
+      "requirement": "ToG-2 交替进行图检索和上下文检索。",
+      "selected_matches_by_unit": {
+        "tog2": [
+          "chunk_9b63637ef18ed2d67ff105ef55092df3",
+          "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 1.0,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/caa75f8d-21e5-44ce-82f5-96449525dad7?poll=true"
+}

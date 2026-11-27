@@ -1,0 +1,250 @@
+{
+  "id": "b886d156-e380-568d-8ff0-5df9c3e29158",
+  "inputs": {
+    "question": "LPKG 之所以在 HotPotQA 和 CLQA-Wiki 上击败 ReAct 和 Self-Ask，是因为它把规划 LLM 和回答用的 QA LLM 一起在 Wikidata15k 上做了全参数微调并统一换成了 Llama3-8B，对吗？"
+  },
+  "outputs": {
+    "expected_answer": "不对。LPKG 将规划与 RAG/QA 解耦为两个独立模型：仅用 Wikidata15k 派生的规划数据对规划 LLM（CodeQwen1.5-7B-Chat 或 Llama3-8B-Instruct）做 LoRA 微调，而 QA LLM 固定为 GPT-3.5 不变以对齐基线、消除 QA 模型差异。",
+    "answerable": false,
+    "negative_kind": "false_premise",
+    "source_references": [
+      {
+        "unit_id": "HN02_lpkg_decoupled",
+        "answer_point": "LPKG 将规划 LLM 与 QA LLM 解耦：仅用 KG 派生规划数据对规划 LLM（CodeQwen1.5-7B-Chat、Llama3-8B-Instruct）做 LoRA 微调，QA LLM 固定为 GPT-3.5 保持不变，并非全参联合微调或替换 QA LLM。",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "primary_chunk": "chunk_8b27c0cb47d598cdda2eb2204b132786",
+        "pages": [
+          6,
+          6
+        ],
+        "known_support_chunks": [
+          "chunk_8b27c0cb47d598cdda2eb2204b132786",
+          "chunk_36fd3f5ddb484701ba81edeecc069767"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "H-N02",
+    "category": "negative",
+    "required_facts": [
+      {
+        "unit_id": "HN02_lpkg_decoupled",
+        "required_fact": "LPKG 将规划 LLM 与 QA LLM 解耦：仅用 KG 派生规划数据对规划 LLM（CodeQwen1.5-7B-Chat、Llama3-8B-Instruct）做 LoRA 微调，QA LLM 固定为 GPT-3.5 保持不变，并非全参联合微调或替换 QA LLM。",
+        "primary_chunk": "chunk_8b27c0cb47d598cdda2eb2204b132786",
+        "supporting_chunks": [
+          "chunk_8b27c0cb47d598cdda2eb2204b132786",
+          "chunk_36fd3f5ddb484701ba81edeecc069767"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_8b27c0cb47d598cdda2eb2204b132786",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+        "page_start": 6,
+        "page_end": 6,
+        "source_spans": [
+          {
+            "pdf_page": 6,
+            "start_char": 2548,
+            "end_char": 3600,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1052,
+            "block_bboxes": [
+              [
+                305.324,
+                169.146,
+                526.314,
+                451.122
+              ],
+              [
+                306.142,
+                465.38,
+                507.12,
+                476.289
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "d33b99a257b7cc25c3a8bd2e1352bda288b41859342e27c136cad91358cc3bcf",
+        "section": "Experiment",
+        "text": "In our framework: (1) For pattern grounding,\nwe use Wikidata15k as KG, which contains about\n15k entities and 263 relations.\nThe extraction\ntool in grounding is modified from existing works\n(Ren and Leskovec, 2020). (2) For the planning\nLLM Mp, we choose CodeQwen1.5-7B-Chat and\nLlama3-8B-Instruct, one excels at coding while\nthe other excels at common sense reasoning. We\nfine-tune them with Lora tuning, running on 4x80G\nA100 GPUs for about 3 hours. The fine-tuning is\nconducted for 2 epochs, with a learning rate of\n5e-5 and a cosine learning rate scheduler. (3) For\nretrieval, following previous works (Shao et al.,\n2023; Asai et al., 2023), we employ Wikipedia as\nthe corpus for document retrieval and use the off-\nthe-shelf Contriever-MS as the retriever. We select\nthe Top 5 documents as the retrieved information.\n(4) For QA LLM, since we only care about the abil-\nity of the planning LLMs, in order to eliminate the\nimpact of differences in the ability of QA LLMs,\nwe use GPT-3.5 to align with baselines.\n5.2\nResults on Conventional Complex QA\n"
+      },
+      {
+        "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+        "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+        "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+        "page_start": 6,
+        "page_end": 7,
+        "source_spans": [
+          {
+            "pdf_page": 6,
+            "start_char": 3600,
+            "end_char": 4612,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1012,
+            "block_bboxes": [
+              [
+                305.749,
+                484.585,
+                526.225,
+                752.948
+              ],
+              [
+                318.794,
+                764.492,
+                520.035,
+                775.0
+              ]
+            ]
+          },
+          {
+            "pdf_page": 7,
+            "start_char": 0,
+            "end_char": 354,
+            "chunk_start_char": 1013,
+            "chunk_end_char": 1367,
+            "block_bboxes": [
+              [
+                91.629,
+                76.141,
+                503.646,
+                208.042
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "eca82183627bf22c6a687ff00cb7ce7ffc616920bb55f875534ab5763cae40d4",
+        "section": "Experiment",
+        "text": "Main Results (RQ1,RQ2)\nTable 2 shows results\non conventional complex QA datasets. Since the\nQA LLM remains unchanged in our framework, we\nuse “LPKG(Llama3)” and “LPKG(CodeQwen)” to\nrepresent LPKG frameworks using different plan-\nning LLMs, respectively. They are fine-tuned on\nLlama3-8B-Instruct and CodeQwen1.5-7B-Chat\nwith KG-sourced planning data. It can be found\nthat our framework outperforms the baseline meth-\nods on the majority of datasets. Particularly, com-\npared to ReAct and Self-Ask, our approach shows\nsignificant improvement. It is worth noting that\nboth ReAct and Self-Ask iterative planning and\nRAG in their workflows, whereas our approach de-\ncouples planning and RAG into two separate mod-\nels. This allows each model to focus more inten-\nsively on its individual task. Moreover, we specifi-\ncally enhance the planning part by fine-tuning Mp\nwith planning data sourced from KG. These two\nchanges have brought significant improvements to\n1https://platform.openai.com/docs/models/gpt-3-5-turbo\n\nPlanning\nRAG\nHotPotQA\n2WikiMQA\nBamboogle\nMuSiQue\nDirect\n%\n%\n0.268\n0.284\n0.128\n0.090\nCoT\n\"\n%\n0.288\n0.286\n0.280\n0.090\nDirect RAG\n%\n\"\n0.292\n0.230\n0.080\n0.088\nReAct\n\"\n\"\n0.211\n0.216\n0.168\n0.060\nSelf-Ask\n\"\n\"\n0.176\n0.194\n0.136\n0.116\nICLPKG(GPT-3.5)\n\"\n\"\n0.352\n0.344\n0.296\n0.254\nLPKG(CodeQwen)\n\"\n\"\n0.338\n0.356\n0.280\n0.266\nLPKG(Llama3)\n\"\n\"\n0.376\n0.372\n0.304\n0.296\n"
+      }
+    ],
+    "required_source_papers": [
+      "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs"
+    ],
+    "min_source_papers": 0,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+      "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": true,
+      "planned_output": "完整模型回答与引用",
+      "controls": {
+        "arms": [
+          "Legacy-Hybrid",
+          "Production-Final"
+        ],
+        "arm_configs": {
+          "Legacy-Hybrid": {
+            "graph_enabled": false,
+            "graph_query_aware": false,
+            "use_method_cards": false,
+            "path_budget": 0,
+            "rerank_contextual": false,
+            "rerank_windowed": false,
+            "evidence_budget": 6000,
+            "evidence_max": 8,
+            "source_policy": "named_first",
+            "score_policy": "fixed",
+            "reservation_policy": "legacy",
+            "citation_protocol": "source-choice-v1",
+            "query_planner": false,
+            "premise_check": false
+          },
+          "Production-Final": {
+            "graph_enabled": true,
+            "graph_query_aware": true,
+            "use_method_cards": true,
+            "path_budget": 1200,
+            "rerank_contextual": true,
+            "rerank_windowed": false,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "subquery_balanced",
+            "citation_protocol": "source-choice-v3",
+            "query_planner": true,
+            "premise_check": true
+          }
+        },
+        "backend": "neo4j",
+        "shared_q00_vectors": "identical Cloudflare Q00 query embeddings across both arms; Production-Final additionally embeds planned subqueries",
+        "execution_order": "alternate arm order by case index",
+        "gold_exclusion": "question text only; gold pools and reference tables isolated"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Legacy-Hybrid / Production-Final Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "H-N02",
+    "category": "negative",
+    "benchmark": "benchmark-holdout-v1",
+    "benchmark_sha256": "3b871c53c664e26d9190ec6c102290b4991ce068960ce8572ee5a9305c85dfe6",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "negative"
+  ]
+}

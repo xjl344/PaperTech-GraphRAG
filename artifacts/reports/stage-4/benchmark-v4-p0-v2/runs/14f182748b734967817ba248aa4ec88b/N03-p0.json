@@ -1,0 +1,1656 @@
+{
+  "request_id": "5e23eca9-3625-448a-88a9-4d72b12c9520",
+  "status": "ok",
+  "answer": "无依据表明 HippoRAG 直接采用“段落节点＋语义相似边”作为图定义。KGP 的表示是“nodes symbolizing passages or document structures and edges denoting their lexical/semantic similarity between passages or intra-document structural relations”，并在方法描述里“split each document into individual passages...add edges by checking the lexical/semantic similarity between pairs of passage nodes” [E2, E4]。HippoRAG 的表示则是“use an LLM to process passages into open KG triples, which are then added to our artificial hippocampal index, while our synthetic parahippocampal regions (PHR) detect synonymy”，即开放 KG 三元组加同义边；其检索“leverage the Personalized PageRank algorithm”，并“aggregate the output PPR node probability over the previously indexed passages”来排序 [E7]。因此，把 KGP 的段落节点＋语义相似边当作 HippoRAG 图定义，与来源支持的两套表示不符；来源也未给出 HippoRAG 使用 KGP 图定义的流程证据。",
+  "citations": [
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1783,
+          "end_char": 2945,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1162,
+          "block_bboxes": [
+            [
+              54.0,
+              530.06,
+              292.505,
+              704.407
+            ],
+            [
+              319.5,
+              253.181,
+              558.005,
+              296.021
+            ]
+          ]
+        }
+      ],
+      "quote": "Given the above challenges, we propose a knowledge\ngraph prompting (KGP) method for enhancing LLMs in\nMD-QA. Specifically, we construct a KG over the given doc-\numents with nodes symbolizing passages or document struc-\ntures and edges denoting their lexical/semantic similarity be-\ntween passages or intra-document structural relations. Then\nfor the first challenge of alternative reasoning and retrieving\nknowledge across different documents, we design an LLM-\nbased KG traversal agent, which can alternatively generate\nthe next evidence to approach the question, i.e., reasoning,\nand select the most promising neighbor to visit from the con-\nstructed KG based on the generated evidence, i.e., retrieval.\nMoreover, we apply the instruction fine-tuning strategy to\naugment the reasoning capability of the LLM-based KG\ntraversal agent and hence refrain from repeatedly prompting",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7776346206665039
+        }
+      ],
+      "rerank_score": 0.5637983083724976,
+      "context_bytes": 1505,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_a006300cceffa4ef993988ac0e2e4f8c",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 3,
+      "page_end": 3,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 765,
+          "end_char": 2234,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1469,
+          "block_bboxes": [
+            [
+              54.0,
+              301.319,
+              292.505,
+              398.954
+            ],
+            [
+              54.0,
+              400.846,
+              292.505,
+              575.192
+            ]
+          ]
+        }
+      ],
+      "quote": "bridges passage S1 and passage S2 in Figure 2(a), or 2) se-\nmantic similarity: syntactic elements that convey semantic\nrelations, e.g., ‘nationality’ and ‘American director’ in Fig-\nure 2(b). This motivates us to construct the graph by mod-\neling passages as nodes and their lexical/semantic similarity\nas edges. More specifically in Figure 3, we split each docu-\nment into individual passages, and for each passage Si, we\nadd a node vi to the KG with its feature being the text of that\npassage Xi. Then we add edges by checking the lexical/se-\nmantic similarity between pairs of passage nodes.",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7767553329467773
+        }
+      ],
+      "rerank_score": 0.31605255603790283,
+      "context_bytes": 1829,
+      "eid": "E4"
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 315,
+          "end_char": 1381,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1066,
+          "block_bboxes": [
+            [
+              107.641,
+              275.692,
+              505.245,
+              362.078
+            ],
+            [
+              108.0,
+              374.922,
+              504.002,
+              408.051
+            ],
+            [
+              108.0,
+              424.788,
+              224.224,
+              434.75
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 2: Detailed HippoRAG Methodology. We model the three components of human long-term\nmemory to mimic its pattern separation and completion functions. For offline indexing (Middle),\nwe use an LLM to process passages into open KG triples, which are then added to our artificial\nhippocampal index, while our synthetic parahippocampal regions (PHR) detect synonymy. In the\nexample above, triples involving Professor Thomas are extracted and integrated into the KG. For\nonline retrieval (Bottom), our LLM neocortex extracts named entities from a query while our\nparahippocampal retrieval encoders link them to our hippocampal index. We then leverage the\nPersonalized PageRank algorithm to enable context-based retrieval and extract Professor Thomas.4\nset of query nodes, just as the hippocampus extracts associated signals from specific partial cues.2",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7816410064697266
+        }
+      ],
+      "rerank_score": 0.361390084028244,
+      "context_bytes": 1418,
+      "eid": "E7"
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 315,
+          "end_char": 1381,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1066,
+          "block_bboxes": [
+            [
+              107.641,
+              275.692,
+              505.245,
+              362.078
+            ],
+            [
+              108.0,
+              374.922,
+              504.002,
+              408.051
+            ],
+            [
+              108.0,
+              424.788,
+              224.224,
+              434.75
+            ]
+          ]
+        }
+      ],
+      "quote": "Finally, as is done when the hippocampal signal is sent upstream, we aggregate the output PPR node\nprobability over the previously indexed passages and use that to rank them for retrieval.\n2.3\nDetailed Methodology",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7816410064697266
+        }
+      ],
+      "rerank_score": 0.361390084028244,
+      "context_bytes": 1418,
+      "eid": "E7"
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_67a081d945c23e9c2de3a746cbacb122",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 26,
+      "page_end": 27,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 26,
+          "start_char": 2212,
+          "end_char": 3228,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1016,
+          "block_bboxes": [
+            [
+              114.997,
+              575.932,
+              495.835,
+              595.068
+            ],
+            [
+              114.997,
+              601.27,
+              194.932,
+              620.199
+            ],
+            [
+              206.887,
+              601.062,
+              496.882,
+              620.199
+            ],
+            [
+              107.641,
+              636.005,
+              505.244,
+              722.431
+            ],
+            [
+              301.019,
+              742.332,
+              310.982,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 27,
+          "start_char": 0,
+          "end_char": 165,
+          "chunk_start_char": 1017,
+          "chunk_end_char": 1182,
+          "block_bboxes": [
+            [
+              108.0,
+              74.177,
+              505.245,
+              95.279
+            ]
+          ]
+        }
+      ],
+      "quote": "HippoRAG\nContriever\n41.0\n52.1\n71.5\n89.5\n59.0\n76.2\n57.2\n72.6\nColBERTv2\n40.9\n51.9\n70.7\n89.1\n60.5\n77.7\n57.4\n72.9\nHippoRAG w/\nUncertainty Ensemble\nContriever\n42.3\n54.5\n71.3\n87.2\n60.6\n79.1\n58.1\n73.6\nColBERTv2\n42.5\n54.8\n71.9\n89.0\n62.5\n80.0\n59.0\n74.6\nTo get a better trade-off between concepts and context, we introduce an ensembling setting where\nHippoRAG scores are ensembled with dense retrievers when our parahippocampal region shows\nuncertainty regarding the link between query and KG entities. This process represents instances\nwhen no hippocampal index was fully activated by the upstream parahippocampal signal and thus\nthe neocortex must be relied on more strongly. We only use uncertainty ensembling if one of the\nquery-KG entity scores cosine_similarity(M(ci), M(ej)) is lower than a threshold θ, for example,\nif there was no Stanford node in the KG and the closest node in the KG is something that has a cosine\nsimilarity lower than θ such as Stanford Medical Center. The final passage score for uncertainty\n26\n\nensembling is the average of the HippoRAG scores and standard passage retrieval using model M,\nboth of which are first normalized into the 0 to 1 over all passages.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 3.647865056991577
+        }
+      ],
+      "rerank_score": 0.5510603785514832,
+      "context_bytes": 1576
+    },
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1783,
+          "end_char": 2945,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1162,
+          "block_bboxes": [
+            [
+              54.0,
+              530.06,
+              292.505,
+              704.407
+            ],
+            [
+              319.5,
+              253.181,
+              558.005,
+              296.021
+            ]
+          ]
+        }
+      ],
+      "quote": "Given the above challenges, we propose a knowledge\ngraph prompting (KGP) method for enhancing LLMs in\nMD-QA. Specifically, we construct a KG over the given doc-\numents with nodes symbolizing passages or document struc-\ntures and edges denoting their lexical/semantic similarity be-\ntween passages or intra-document structural relations. Then\nfor the first challenge of alternative reasoning and retrieving\nknowledge across different documents, we design an LLM-\nbased KG traversal agent, which can alternatively generate\nthe next evidence to approach the question, i.e., reasoning,\nand select the most promising neighbor to visit from the con-\nstructed KG based on the generated evidence, i.e., retrieval.\nMoreover, we apply the instruction fine-tuning strategy to\naugment the reasoning capability of the LLM-based KG\ntraversal agent and hence refrain from repeatedly prompting\nnon-open-sourced LLMs for evidence generation. For the\nmulti-modality challenge, we add different types of nodes\nto the KG characterizing different document structures and\nhence enabling content retrieval within those specific struc-\ntures. We highlight our contributions as follows:\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7776346206665039
+        }
+      ],
+      "rerank_score": 0.5637983083724976,
+      "context_bytes": 1505
+    },
+    {
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2586,
+          "end_char": 3354,
+          "chunk_start_char": 0,
+          "chunk_end_char": 768,
+          "block_bboxes": [
+            [
+              107.691,
+              559.485,
+              504.531,
+              580.525
+            ],
+            [
+              281.994,
+              592.047,
+              497.34,
+              601.014
+            ],
+            [
+              275.729,
+              607.098,
+              509.585,
+              616.064
+            ],
+            [
+              108.0,
+              622.058,
+              509.467,
+              631.232
+            ],
+            [
+              108.0,
+              642.416,
+              151.469,
+              661.344
+            ],
+            [
+              165.665,
+              637.227,
+              508.419,
+              666.326
+            ],
+            [
+              108.0,
+              672.528,
+              151.469,
+              691.456
+            ],
+            [
+              172.19,
+              672.32,
+              508.419,
+              692.452
+            ],
+            [
+              108.0,
+              697.451,
+              508.419,
+              716.587
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 179,
+          "chunk_start_char": 769,
+          "chunk_end_char": 948,
+          "block_bboxes": [
+            [
+              108.0,
+              74.355,
+              504.001,
+              95.279
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 5: Dissecting HippoRAG. To understand what makes it work well, we replace its OpenIE\nmodule and PPR with plausible alternatives and ablate node specificity and synonymy-based edges.\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nHippoRAG\n40.9\n51.9\n70.7\n89.1\n60.5\n77.7\n57.4\n72.9\nOpenIE\nAlternatives\nREBEL [34]\n31.7\n39.6\n63.1\n76.5\n43.9\n59.2\n46.2\n58.4\nLlama-3.1-8B-Instruct [1]\n40.8\n51.9\n62.5\n77.5\n59.9\n75.1\n54.4\n67.8\nLlama-3.1-70B-Instruct [1]\n41.8\n53.7\n68.8\n85.3\n60.8\n78.6\n57.1\n72.5\nPPR\nAlternatives\nRq Nodes Only\n37.1\n41.0\n59.1\n61.4\n55.9\n66.2\n50.7\n56.2\nRq Nodes & Neighbors\n25.4\n38.5\n53.4\n74.7\n47.8\n64.5\n42.2\n59.2\nAblations\nw/o Node Specificity\n37.6\n50.2\n70.1\n88.8\n56.3\n73.7\n54.7\n70.9\nw/o Synonymy Edges\n40.2\n50.2\n69.2\n85.6\n59.1\n75.7\n56.2\n70.5\n7\n\nmodels underperform GPT-3.5 slightly on this intrinsic evaluation but all LLMs vastly outperform\nREBEL. More details about this evaluation experiments can be found in Appendix D.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 3.224102735519409
+        }
+      ],
+      "rerank_score": 0.40397825837135315,
+      "context_bytes": 1383
+    },
+    {
+      "chunk_id": "chunk_a006300cceffa4ef993988ac0e2e4f8c",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 3,
+      "page_end": 3,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 765,
+          "end_char": 2234,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1469,
+          "block_bboxes": [
+            [
+              54.0,
+              301.319,
+              292.505,
+              398.954
+            ],
+            [
+              54.0,
+              400.846,
+              292.505,
+              575.192
+            ]
+          ]
+        }
+      ],
+      "quote": "Despite numerous well-established KGs (Hoffart et al. 2013;\nTian et al. 2023b), they treat nodes/edges as entities/rela-\ntions, which necessitates sophisticated relational extraction\ntechniques and thereby limits their applicability in general\ndomains (Huang et al. 2021). Additionally, their primary fo-\ncus on the Wikipedia domain also restricts their usage for\nanswering non-Wikipedia questions such as ones over legal\nor financial documents. To remedy this issue, we propose\ngenerally applicable KG construction methods.\nWe first analyze two representative questions in Fig-\nure 2(a)-(b) to motivate our KG construction. Answering\nthese two questions necessitates the deduction of logical as-\nsociations among different passages. These associations are\nencoded either through 1) lexical similarity: common key-\nwords shared among different passages, e.g., ‘Alf Clausen’\nbridges passage S1 and passage S2 in Figure 2(a), or 2) se-\nmantic similarity: syntactic elements that convey semantic\nrelations, e.g., ‘nationality’ and ‘American director’ in Fig-\nure 2(b). This motivates us to construct the graph by mod-\neling passages as nodes and their lexical/semantic similarity\nas edges. More specifically in Figure 3, we split each docu-\nment into individual passages, and for each passage Si, we\nadd a node vi to the KG with its feature being the text of that\npassage Xi. Then we add edges by checking the lexical/se-\nmantic similarity between pairs of passage nodes.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7767553329467773
+        }
+      ],
+      "rerank_score": 0.31605255603790283,
+      "context_bytes": 1829
+    },
+    {
+      "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 2205,
+          "end_char": 3400,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1195,
+          "block_bboxes": [
+            [
+              107.532,
+              383.68,
+              505.653,
+              470.063
+            ],
+            [
+              119.512,
+              481.129,
+              492.488,
+              491.322
+            ],
+            [
+              314.205,
+              502.845,
+              447.078,
+              511.811
+            ],
+            [
+              162.683,
+              517.888,
+              447.078,
+              577.187
+            ],
+            [
+              108.0,
+              592.604,
+              169.718,
+              602.566
+            ]
+          ]
+        }
+      ],
+      "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.776618480682373
+        }
+      ],
+      "rerank_score": 0.3847387433052063,
+      "context_bytes": 1578
+    },
+    {
+      "chunk_id": "chunk_94f3984fea87c32c884454a6a284044d",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 26,
+      "page_end": 26,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 26,
+          "start_char": 713,
+          "end_char": 2212,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1499,
+          "block_bboxes": [
+            [
+              106.675,
+              252.103,
+              505.658,
+              305.719
+            ],
+            [
+              107.641,
+              306.659,
+              260.637,
+              316.622
+            ],
+            [
+              162.958,
+              326.843,
+              449.044,
+              336.806
+            ],
+            [
+              134.615,
+              348.328,
+              415.768,
+              357.544
+            ],
+            [
+              134.615,
+              363.828,
+              246.534,
+              412.644
+            ],
+            [
+              258.488,
+              373.708,
+              325.844,
+              402.681
+            ],
+            [
+              369.296,
+              373.79,
+              477.386,
+              402.681
+            ],
+            [
+              134.615,
+              418.846,
+              245.906,
+              457.7
+            ],
+            [
+              258.488,
+              423.827,
+              357.343,
+              452.719
+            ],
+            [
+              369.296,
+              423.745,
+              429.81,
+              452.719
+            ],
+            [
+              107.691,
+              477.469,
+              505.652,
+              509.267
+            ],
+            [
+              114.997,
+              520.79,
+              484.753,
+              529.757
+            ],
+            [
+              263.145,
+              535.841,
+              497.0,
+              544.807
+            ],
+            [
+              114.997,
+              550.801,
+              495.835,
+              569.938
+            ]
+          ]
+        }
+      ],
+      "quote": "Unfortunately, this design is also one of our method’s greatest limitations since ignoring contextual\ncues accounts for around 48% of errors in our small-scale error analysis. This problem is more appar-\nent in the second example since the concepts are general, making the context more important. Since\nthe only concept tagged by HippoRAG is “protons”, it extracts passages related to “Uranium” and\n“nuclear weapons” while ColBERTv2 uses the context to extract more relevant passages associated\nwith the discovery of atomic numbers.\nTable 12: Examples showing the concept-context tradeoff on MuSiQue.\nQuestion\nHippoRAG\nColBERTv2\nWhose father was a navigator\nwho explored the east coast\nof the continental region where\nSergio Villanueva would\nlater be born?\nSergio Villanueva\nCésar Gaytan\nFaustino Reyes\nFrancisco de Eliza (navigator)\nExploration of N. America\nVicente Pinzón (navigator)\nWhat undertaking included the\nperson who discovered that the\nnumber of protons in each\nelement’s atoms is unique?\nUranium\nChemical element\nHistory of nuclear weapons\nAtomic number\nAtomic theory\nAtomic nucleus\nTable 13: Single-step retrieval performance. HippoRAG performs substantially better on MuSiQue\nand 2WikiMultiHopQA than all baselines and achieves comparable performance on the less challeng-\ning HotpotQA dataset.\nModel\nRetriever\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nBaseline\nContriever\n34.8\n46.6\n46.6\n57.5\n57.2\n75.5\n46.2\n59.9\nColBERTv2\n37.9\n49.2\n59.2\n68.2\n64.7\n79.3\n53.9\n65.6\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 3.3418571949005127
+        }
+      ],
+      "rerank_score": 0.3667031228542328,
+      "context_bytes": 1925
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 315,
+          "end_char": 1381,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1066,
+          "block_bboxes": [
+            [
+              107.641,
+              275.692,
+              505.245,
+              362.078
+            ],
+            [
+              108.0,
+              374.922,
+              504.002,
+              408.051
+            ],
+            [
+              108.0,
+              424.788,
+              224.224,
+              434.75
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 2: Detailed HippoRAG Methodology. We model the three components of human long-term\nmemory to mimic its pattern separation and completion functions. For offline indexing (Middle),\nwe use an LLM to process passages into open KG triples, which are then added to our artificial\nhippocampal index, while our synthetic parahippocampal regions (PHR) detect synonymy. In the\nexample above, triples involving Professor Thomas are extracted and integrated into the KG. For\nonline retrieval (Bottom), our LLM neocortex extracts named entities from a query while our\nparahippocampal retrieval encoders link them to our hippocampal index. We then leverage the\nPersonalized PageRank algorithm to enable context-based retrieval and extract Professor Thomas.4\nset of query nodes, just as the hippocampus extracts associated signals from specific partial cues.2\nFinally, as is done when the hippocampal signal is sent upstream, we aggregate the output PPR node\nprobability over the previously indexed passages and use that to rank them for retrieval.\n2.3\nDetailed Methodology\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7816410064697266
+        }
+      ],
+      "rerank_score": 0.361390084028244,
+      "context_bytes": 1418
+    },
+    {
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 28,
+      "page_end": 29,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 28,
+          "start_char": 2787,
+          "end_char": 3236,
+          "chunk_start_char": 0,
+          "chunk_end_char": 449,
+          "block_bboxes": [
+            [
+              108.0,
+              671.081,
+              503.998,
+              701.514
+            ],
+            [
+              107.677,
+              701.695,
+              505.572,
+              722.166
+            ],
+            [
+              301.019,
+              742.332,
+              310.982,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 29,
+          "start_char": 0,
+          "end_char": 873,
+          "chunk_start_char": 450,
+          "chunk_end_char": 1323,
+          "block_bboxes": [
+            [
+              108.0,
+              72.787,
+              386.712,
+              84.742
+            ],
+            [
+              107.641,
+              97.445,
+              505.649,
+              194.756
+            ]
+          ]
+        }
+      ],
+      "quote": "6We use a single thread to query the OpenAI API for online retrieval in both IRCoT and HippoRAG. Since\nIRCoT is an iterative process and each of the iterations must be done sequentially, these speed comparisons are\nappropriate.\n7To speed up indexing, we use 10 threads querying gpt-3.5-turbo-1106 through the OpenAI API in parallel.\nAt the time of writing, the cost of the API is $1 for a million input tokens and $2 for a million output tokens.\n28\n\nH\nImplementation Details & Compute Requirements\nApart from the details included in §3.4, we use implementations based on PyTorch [59] and Hug-\ngingFace [86] for both Contriever [35] and ColBERTv2 [70]. We use the python-igraph [13]\nimplementation of the PPR algorithm. For BM25, we employ Elastic Search [24]. For multi-step\nretrieval, we use the same prompt implementation as IRCoT [78] and retrieve the top-10 passages at\neach step. We set the maximum number of reasoning steps to 2 for HotpotQA and 2WikiMultiHopQA\nand 4 for MuSiQue due to their maximum reasoning chain length. We combine IRCoT with different\nretrievers by replacing its base retriever BM25 with each retrieval method, including HippoRAG,\nnoted as “IRCoT + HippoRAG” below.8 For the QA reader, we use top-5 retrieved passages as the\ncontext and 1-shot QA demonstration with CoT prompting strategy [78].\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 3.3819615840911865
+        }
+      ],
+      "rerank_score": 0.33589524030685425,
+      "context_bytes": 1688
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 34,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 5.223222700005863,
+      "inference_seconds": 0.9535998999490403,
+      "elapsed_seconds": 0.9565883000032045,
+      "peak_cuda_memory_bytes": 1194477056,
+      "request_count": 71,
+      "batch_size": 4
+    },
+    "evidence_count": 8,
+    "context_bytes": 12902,
+    "evidence_bytes": 12902,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 12311,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ]
+      },
+      {
+        "name": "KGP",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "requested_names": [
+          "KGP"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ],
+        "eligible_candidate_count": 26,
+        "selected_chunk_ids": [
+          "chunk_67a081d945c23e9c2de3a746cbacb122",
+          "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+          "chunk_3fa28005a4df0de5249826585cf9d713",
+          "chunk_94f3984fea87c32c884454a6a284044d",
+          "chunk_2b91faafba587efd8a416d2355639ee0",
+          "chunk_271d801be77a71a56210c9063643330b"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "KGP",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "requested_names": [
+          "KGP"
+        ],
+        "eligible_candidate_count": 2,
+        "selected_chunk_ids": [
+          "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+          "chunk_a006300cceffa4ef993988ac0e2e4f8c"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 3789,
+    "total_tokens": 4084,
+    "completion_tokens": 295,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 3789
+    },
+    "completion_tokens_details": {
+      "text_tokens": 295
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"无依据表明 HippoRAG 直接采用“段落节点＋语义相似边”作为图定义。KGP 的表示是“nodes symbolizing passages or document structures and edges denoting their lexical/semantic similarity between passages or intra-document structural relations”，并在方法描述里“split each document into individual passages...add edges by checking the lexical/semantic similarity between pairs of passage nodes” [E2, E4]。HippoRAG 的表示则是“use an LLM to process passages into open KG triples, which are then added to our artificial hippocampal index, while our synthetic parahippocampal regions (PHR) detect synonymy”，即开放 KG 三元组加同义边；其检索“leverage the Personalized PageRank algorithm”，并“aggregate the output PPR node probability over the previously indexed passages”来排序 [E7]。因此，把 KGP 的段落节点＋语义相似边当作 HippoRAG 图定义，与来源支持的两套表示不符；来源也未给出 HippoRAG 使用 KGP 图定义的流程证据。\",\"citations\":[{\"eid\":\"E2\",\"quote_id\":\"q1\"},{\"eid\":\"E4\",\"quote_id\":\"q2\"},{\"eid\":\"E7\",\"quote_id\":\"q1\"},{\"eid\":\"E7\",\"quote_id\":\"q2\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7776346206665039
+        }
+      ],
+      "rerank_score": 0.5637983083724976
+    },
+    {
+      "chunk_id": "chunk_67a081d945c23e9c2de3a746cbacb122",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 3.647865056991577
+        }
+      ],
+      "rerank_score": 0.5510603785514832
+    },
+    {
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 3.224102735519409
+        }
+      ],
+      "rerank_score": 0.40397825837135315
+    },
+    {
+      "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.776618480682373
+        }
+      ],
+      "rerank_score": 0.3847387433052063
+    },
+    {
+      "chunk_id": "chunk_94f3984fea87c32c884454a6a284044d",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 3.3418571949005127
+        }
+      ],
+      "rerank_score": 0.3667031228542328
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7816410064697266
+        }
+      ],
+      "rerank_score": 0.361390084028244
+    },
+    {
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 3.3819615840911865
+        }
+      ],
+      "rerank_score": 0.33589524030685425
+    },
+    {
+      "chunk_id": "chunk_5165b9cf6ecfd6eecbf447ff18649999",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 3.1724069118499756
+        }
+      ],
+      "rerank_score": 0.3342633843421936
+    },
+    {
+      "chunk_id": "chunk_fbeebb7d77e97866867648455a11895e",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7915067672729492
+        }
+      ],
+      "rerank_score": 0.32562777400016785
+    },
+    {
+      "chunk_id": "chunk_a006300cceffa4ef993988ac0e2e4f8c",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7767553329467773
+        }
+      ],
+      "rerank_score": 0.31605255603790283
+    },
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 0.029709507042253523,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 3.42353892326355
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7908868789672852
+        }
+      ],
+      "rerank_score": 0.30611205101013184
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 0.03036576949620428,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 3.737443208694458
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7806448936462402
+        }
+      ],
+      "rerank_score": 0.28736767172813416
+    },
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7789187431335449
+        }
+      ],
+      "rerank_score": 0.2859697937965393
+    },
+    {
+      "chunk_id": "chunk_18bee03d708874e36549c17129df7d7f",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 3.511451244354248
+        }
+      ],
+      "rerank_score": 0.26913347840309143
+    },
+    {
+      "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.779599666595459
+        }
+      ],
+      "rerank_score": 0.2632204294204712
+    },
+    {
+      "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.7981982231140137
+        }
+      ],
+      "rerank_score": 0.22439517080783844
+    },
+    {
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7764248847961426
+        }
+      ],
+      "rerank_score": 0.2230384200811386
+    },
+    {
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 3.503635883331299
+        }
+      ],
+      "rerank_score": 0.17652960121631622
+    },
+    {
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 3.3960793018341064
+        }
+      ],
+      "rerank_score": 0.1661335527896881
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.029411764705882353,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 3.511451244354248
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7811131477355957
+        }
+      ],
+      "rerank_score": 0.15623357892036438
+    },
+    {
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7925963401794434
+        }
+      ],
+      "rerank_score": 0.15215818583965302
+    },
+    {
+      "chunk_id": "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7839984893798828
+        }
+      ],
+      "rerank_score": 0.14021846652030945
+    },
+    {
+      "chunk_id": "chunk_d3f807335721c7a0d68e16aa03976b5f",
+      "score": 0.026785714285714288,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 3.1231887340545654
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7798600196838379
+        }
+      ],
+      "rerank_score": 0.13834533095359802
+    },
+    {
+      "chunk_id": "chunk_ae9f5c6eeafcaff8f5a4d2a4a849b4f3",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 3.503635883331299
+        }
+      ],
+      "rerank_score": 0.10338596254587173
+    },
+    {
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 0.028629032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 3.9362916946411133
+        },
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7750353813171387
+        }
+      ],
+      "rerank_score": 0.0991208627820015
+    },
+    {
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 3.610196828842163
+        }
+      ],
+      "rerank_score": 0.09704755246639252
+    },
+    {
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 3.511451244354248
+        }
+      ],
+      "rerank_score": 0.0787840187549591
+    },
+    {
+      "chunk_id": "chunk_833d3ae6337718121b5253c6b1048934",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7758965492248535
+        }
+      ],
+      "rerank_score": 0.07779745012521744
+    },
+    {
+      "chunk_id": "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7754068374633789
+        }
+      ],
+      "rerank_score": 0.052327629178762436
+    },
+    {
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 0.026856524873828405,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.3067171573638916
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7789106369018555
+        }
+      ],
+      "rerank_score": 0.04867657274007797
+    },
+    {
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7907991409301758
+        }
+      ],
+      "rerank_score": 0.04084571450948715
+    },
+    {
+      "chunk_id": "chunk_8e26b737d927e9880327e7178bfba648",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 3.324740171432495
+        }
+      ],
+      "rerank_score": 0.008577484637498856
+    },
+    {
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 3.2360570430755615
+        }
+      ],
+      "rerank_score": 0.0006361912237480283
+    },
+    {
+      "chunk_id": "chunk_6312cd468a11fe34506dc29b38949d6c",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 4.670544624328613
+        }
+      ],
+      "rerank_score": 0.0003668626013677567
+    }
+  ],
+  "case_id": "N03",
+  "question": "把 KGP 的“段落节点＋语义相似边”直接作为 HippoRAG 的图定义是否有依据？请分别说明来源支持的表示与检索机制。",
+  "category": "negative",
+  "arm": "P0-Optimized",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0003250000299885869
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.03050459997029975
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 5.699985194951296e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9573355999891646
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.00137779995566234
+    }
+  ],
+  "retrieval_compute_seconds": 0.9895486999303102,
+  "request_wall_seconds": 8.335928099986631,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.4084496999857947,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 4.637637400010135,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.44276339997304603,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 3.7353106000227854,
+      "usage": "{\"prompt_tokens\": 3789, \"total_tokens\": 4084, \"completion_tokens\": 295}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+      "score": 0.7981982231140137
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.7925963401794434
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_fbeebb7d77e97866867648455a11895e",
+      "score": 0.7915067672729492
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 0.7908868789672852
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "score": 0.7907991409301758
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+      "score": 0.7839984893798828
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "score": 0.7816410064697266
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.7811131477355957
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 0.7806448936462402
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_d3f807335721c7a0d68e16aa03976b5f",
+      "score": 0.7798600196838379
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+      "score": 0.779599666595459
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 0.7789187431335449
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 0.7789106369018555
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 0.7776346206665039
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_a006300cceffa4ef993988ac0e2e4f8c",
+      "score": 0.7767553329467773
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+      "score": 0.776618480682373
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "score": 0.7764248847961426
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_833d3ae6337718121b5253c6b1048934",
+      "score": 0.7758965492248535
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_e702747b8cb7850698f65ab65a3d7d8c",
+      "score": 0.7754068374633789
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 0.7750353813171387
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_6312cd468a11fe34506dc29b38949d6c",
+      "score": 4.670544624328613
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 3.9362916946411133
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 3.737443208694458
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_67a081d945c23e9c2de3a746cbacb122",
+      "score": 3.647865056991577
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "score": 3.610196828842163
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "score": 3.511451244354248
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_18bee03d708874e36549c17129df7d7f",
+      "score": 3.511451244354248
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 3.511451244354248
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_ae9f5c6eeafcaff8f5a4d2a4a849b4f3",
+      "score": 3.503635883331299
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 3.503635883331299
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 3.42353892326355
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "score": 3.3960793018341064
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "score": 3.3819615840911865
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_94f3984fea87c32c884454a6a284044d",
+      "score": 3.3418571949005127
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_8e26b737d927e9880327e7178bfba648",
+      "score": 3.324740171432495
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 3.3067171573638916
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 3.2360570430755615
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "score": 3.224102735519409
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_5165b9cf6ecfd6eecbf447ff18649999",
+      "score": 3.1724069118499756
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_d3f807335721c7a0d68e16aa03976b5f",
+      "score": 3.1231887340545654
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "N03.C01",
+      "requirement": "正确描述 KGP 的节点与边。",
+      "selected_matches_by_unit": {
+        "kgp": []
+      },
+      "missing_units": [
+        "kgp"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "N03.C02",
+      "requirement": "正确描述 HippoRAG 的无模式 KG 与 PPR。",
+      "selected_matches_by_unit": {
+        "hippo": []
+      },
+      "missing_units": [
+        "hippo"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "N03.C03",
+      "requirement": "拒绝直接互换两种图表示。",
+      "selected_matches_by_unit": {
+        "kgp": [],
+        "hippo": []
+      },
+      "missing_units": [
+        "kgp",
+        "hippo"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.0,
+    "recall8": 0.0,
+    "mrr40": 0.09090909090909091,
+    "evidence_coverage": 0.0,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/35e9ddda-eedc-4904-9acd-608ccbefff01?poll=true"
+}

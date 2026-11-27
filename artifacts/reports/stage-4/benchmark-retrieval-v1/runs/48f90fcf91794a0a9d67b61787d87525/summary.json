@@ -1,0 +1,98 @@
+{
+  "run_id": "48f90fcf91794a0a9d67b61787d87525",
+  "benchmark": "benchmark-retrieval-v1",
+  "benchmark_sha256": "6c63c43ed90c397abc19e07eef6b8ff64c150e384070ac759d52db7fbdeb625c",
+  "status": "interrupted",
+  "started": "2026-11-21T05:00:27.909792+00:00",
+  "results": [],
+  "execution_config": {
+    "controls": {
+      "arms": [
+        "Dense-only",
+        "Graph-only",
+        "Hybrid"
+      ],
+      "candidate_max": 40,
+      "dense_only_top": 40,
+      "hybrid_fulltext_top": 20,
+      "hybrid_dense_top": 20,
+      "graph_candidate_max": 40,
+      "graph_hops": 2,
+      "graph_paths_max": 40,
+      "graph_seed_entities_max": 40,
+      "graph_per_node": 8,
+      "graph_seed_chunks": 0,
+      "graph_text_fallback": false,
+      "graph_source_rank_hint": false,
+      "evidence_max": 8,
+      "evidence_budget_bytes": 6000,
+      "path_prompt_bytes": 0,
+      "reranker": "same GPU FP16 model; threshold 0.05; max_pair_tokens 1024",
+      "candidate_note": "same total cap, not forced equal returned counts; Hybrid has two channels of 20",
+      "order": "rotate three arms by case index",
+      "generation_requests_max": 0
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    },
+    "code_sha256": {
+      "src/papertech/retrieval_comparison.py": "b38068e047b6de6fcbe0ff6a12cebb23709270c79ae125955d25c86e39734197",
+      "scripts/eval-stage4.py": "fb34f1aae4be58e821d88e5a045ca6ddd5558bf15c40a02fbacad63ed144204a",
+      "src/papertech/graph_store.py": "6ccf136fbdf71cd2efa3addafbf474097545b04d7de8f302e539877716a9f92f",
+      "src/papertech/isolated_graph.py": "039d27009ec94003cfc6f25024ae2015ab7c12b27f9f7cfe5dc21979f1c41586",
+      "src/papertech/workflow.py": "6fe7b530e355f19886c34bd61c98046b6cd10598b74f94220dae63d64130964a",
+      "src/papertech/retrieval.py": "ef2480079acc98095c86394ce6ae5bf894a7034a47d0d394cf584f871e41ae65",
+      "src/papertech/entity_aliases.py": "2725c08d7ca72f46c3bf7adbb3207eb75331f963a1998826bc6397e375699ea6",
+      "src/papertech/evidence_context.py": "b9bfe29885ffe4b82086a78572ffe4d031d3de9c497b0681aa732525a46f89f6",
+      "src/papertech/evaluation.py": "cb3714275490177d79bf755ef156e14f485748dbea590a95b54ab769fde96e31",
+      "src/papertech/evaluation_details.py": "3144dd71ddaeb869f157521a877ac26b27631d81ebee09beb9e3f25138446b4f",
+      "src/papertech/evaluation_datasets.py": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+      "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+      "src/papertech/local_models.py": "62f465e7615a7208a8f4bfda6c9f4b545843e3115ef91768d47f5a7e787edddb",
+      "src/papertech/rerank_service.py": "156293246350d8b4a8c7bd23d45edb26f471d1bfe690480412edcf942617d693",
+      "scripts/rerank-service.py": "562927f8ebd62834e8aca53ae55a436eac4d82f39b66e1ad92b017f1b73facf5"
+    },
+    "models": {
+      "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+      "CLOUD_BGE_PROVIDER": "cloudflare",
+      "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+      "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+      "LOCAL_RERANKER_DEVICE": "cuda",
+      "LOCAL_RERANKER_DTYPE": "float16",
+      "LOCAL_RERANKER_PERSISTENT": "true"
+    },
+    "endpoints": {
+      "CLOUD_BGE_BASE_URL": "73dd98c51038dadb140c44d42e350a9ae3c52013d53336b34e055aa1bf12087d",
+      "NEO4J_URI": "b1d4217b5d8c41b8b641a146d7facd744b01a415fe2ac0d943188a78e5f007f0"
+    },
+    "latency": "retrieval compute excludes shared embedding batch, GPU warmup, audit/trace network; request wall includes tracing",
+    "generation": false,
+    "reference_exclusion": "only question/arm/query-vector passed to retrieval; scoring after evidence selection"
+  },
+  "error_type": "ServiceUnavailable",
+  "finished": "2026-11-21T05:00:31.001821+00:00",
+  "verification": {
+    "status": "passed",
+    "results": 0,
+    "expected": 120,
+    "counts": {},
+    "generation_calls": 0,
+    "budgets": true,
+    "channels": true,
+    "sources": true,
+    "benchmark_sha256": "6c63c43ed90c397abc19e07eef6b8ff64c150e384070ac759d52db7fbdeb625c"
+  },
+  "trace_verification": {
+    "verified": true,
+    "expected_spans": 0,
+    "verified_spans": 0,
+    "roots": 0,
+    "pending_events": 0
+  }
+}

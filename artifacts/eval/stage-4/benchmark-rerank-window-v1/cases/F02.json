@@ -1,0 +1,246 @@
+{
+  "id": "5a391ba6-9c62-55bc-834e-bcdae2db408f",
+  "inputs": {
+    "question": "G-Retriever 怎样处理边奖励大于边成本、从而产生负边成本的情况？虚拟节点的奖励和新边成本如何设置？"
+  },
+  "outputs": {
+    "expected_answer": "Pe>Ce 时用虚拟节点替代原边，虚拟节点奖励 Pe-Ce，连接两个端点的新边成本为0。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "F02.S01",
+        "answer_point": "Pe>Ce 时用虚拟节点替代原边，虚拟节点奖励 Pe-Ce，连接两个端点的新边成本为0。",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "primary_chunk": "chunk_5832b6bfb3218fc28548dbb991a42540",
+        "pages": [
+          7,
+          7
+        ],
+        "known_support_chunks": [
+          "chunk_5832b6bfb3218fc28548dbb991a42540"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "F02",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "F02.S01",
+        "required_fact": "Pe>Ce 时用虚拟节点替代原边，虚拟节点奖励 Pe-Ce，连接两个端点的新边成本为0。",
+        "primary_chunk": "chunk_5832b6bfb3218fc28548dbb991a42540",
+        "supporting_chunks": [
+          "chunk_5832b6bfb3218fc28548dbb991a42540"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_5832b6bfb3218fc28548dbb991a42540",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+        "page_start": 7,
+        "page_end": 7,
+        "source_spans": [
+          {
+            "pdf_page": 7,
+            "start_char": 2023,
+            "end_char": 3540,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1517,
+            "block_bboxes": [
+              [
+                108.0,
+                410.428,
+                504.667,
+                436.729
+              ],
+              [
+                107.691,
+                441.585,
+                505.389,
+                538.896
+              ],
+              [
+                108.0,
+                553.177,
+                213.703,
+                563.14
+              ],
+              [
+                108.0,
+                571.643,
+                505.744,
+                605.024
+              ],
+              [
+                236.931,
+                611.056,
+                504.667,
+                624.69
+              ],
+              [
+                108.0,
+                630.433,
+                489.146,
+                642.121
+              ],
+              [
+                107.751,
+                646.942,
+                504.003,
+                667.924
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "5296e092b76168dc20a8da94b1042555c734b337134a82b9a13bc184fef87e8f",
+        "section": "Related Work",
+        "text": "cost(S) = |ES| × Ce,\n(8)\nand Ce denotes a predefined cost per edge, which is adjustable to control the subgraph size.\nThe original PCST algorithm is designed for node prizes only. However, given the significance of\nedge semantics in certain scenarios, we adapt the algorithm to accommodate edge prizes as follows:\nConsider an edge e with a cost Ce and a prize Pe. If Ce > Pe, it can be treated as a reduced edge cost\nof Ce −Pe. However, if Pe > Ce, negative edge costs are not allowed in the original algorithm. Our\nsolution involves replacing edge e with a ‘virtual node’ ve, connected to both endpoints of e. This\nvirtual node is assigned a prize of Pe −Ce, and the cost of the two new edges leading to the virtual\nnode is set to zero. This modification effectively mirrors the original problem, as including edge e\nin the original graph is analogous to including the virtual node in the modified graph. Finally, we\noptimize the PCST problem using a near-linear time approach [9].\n5.4\nAnswer Generation\nGraph Encoder. Let S∗= (V ∗, E∗) represent the retrieved subgraph. We use a graph encoder to\nmodel the structure of this graph, specifically using a standard Graph Attention Network (GAT) [43].\nOur approach for encoding the retrieved subgraph is defined as follows:\nhg = POOL(GNNϕ1(S∗)) ∈Rdg,\n(9)\nHere, POOL denotes the mean pooling operation, and dg is the dimension of the graph encoder.\nProjection Layer. We incorporate a multilayer perceptron (MLP) to align the graph token with the\nvector space of the LLM:\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_42a876c95c3fe85af679c0dbc03a8a7d"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "R05/R24必要来源逐个记录候选存在性、重排排名与分数；池外来源标N/A，不补入。",
+      "secondary": "Recall@5/@8、最终必要来源覆盖；整块分数与历史分数复现误差；仅4题描述性诊断。",
+      "causal_limit": "两组原始输入均未超过1024时，排名变化不能归因于避免截断；可能涉及段落聚焦和max聚合偏差。",
+      "semantic_review": "not assessed, generation not run",
+      "negative_policy": "no negative cases in this selected subset"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索与证据评估（原冻结方案）",
+      "controls": {
+        "arms": [
+          "Whole-block",
+          "Quote-window"
+        ],
+        "candidate_pool": "same saved Hybrid candidates; no new recall",
+        "max_pair_tokens": 1024,
+        "window_document_tokens": 160,
+        "window_overlap": "50% characters",
+        "window_score": "max over all windows of each candidate; all candidates treated equally",
+        "window_selection": "gold-free source-text lengths only; no claims or reference requirements",
+        "context": "original full source chunks only, 6000 UTF-8 bytes, maximum 8; score threshold .05",
+        "order": "alternate arm order by case index",
+        "generation_calls": 0
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Whole-block / Quote-window Experiments",
+      "fields": [
+        "全部固定候选与原文",
+        "每个引文窗口与字符位置及分数",
+        "必要来源排名与缺口",
+        "真实Token长度与截断量",
+        "时延与评分对数",
+        "两组差异",
+        "原始Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "F02.A01",
+        "requirement": "Pe>Ce 时用虚拟节点替代原边，虚拟节点奖励 Pe-Ce，连接两个端点的新边成本为0",
+        "unit_ids": [
+          "F02.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F02.S01": [
+            "chunk_5832b6bfb3218fc28548dbb991a42540"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "frozen_candidate_ids": [
+      "chunk_f800cd4e8fa59900491c3efa5f890329",
+      "chunk_e2737c14a5cd36e6bd408af049fd0aac",
+      "chunk_000fb51c29790f99fdf023d7b338666c",
+      "chunk_2da94a87e97c2e0f30e8eec5659e202d",
+      "chunk_b8f804ce7bc81bbbf659aff60ac33d60",
+      "chunk_5c9e14854565607ec53c355da481c451",
+      "chunk_5832b6bfb3218fc28548dbb991a42540",
+      "chunk_04c0673f276b70d320674636d537dc80",
+      "chunk_91ab4f17396428b71094655d96c29bb6",
+      "chunk_1c0665884871324e60a54bfc31c0d8b4",
+      "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "chunk_3230a7429a621a89f8fef1361c527b3a",
+      "chunk_18bee03d708874e36549c17129df7d7f",
+      "chunk_a001225c0afa46199e503f9e9f8bd803",
+      "chunk_aba70e6f2f67df9b074a9e14ead47b00",
+      "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+      "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "chunk_675c20afd5f26d294c1e46627fdf87c2",
+      "chunk_0e365600a243ad5257f9003b561ff2ea",
+      "chunk_271d801be77a71a56210c9063643330b",
+      "chunk_99b18cdbb0bd9a36674e8b314d553ad3",
+      "chunk_67201fef435f6ac14b79550309c5d685",
+      "chunk_ae9f5c6eeafcaff8f5a4d2a4a849b4f3",
+      "chunk_9954ac297e86a9093f805de039efb2b4",
+      "chunk_2d205d86b7b38e9dd501796f8bb2fc89",
+      "chunk_e1075e95da37350e255f0b8602384c99",
+      "chunk_8db3e9d7320c34cbe75489a6c8adda4d",
+      "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "chunk_4f8f2c64e9d32bf8b04cec70d8bfd76d",
+      "chunk_6dd525643d338cdc93632ce465c4e4b6",
+      "chunk_0255df5c4b9623ff21490ee84ba695ab",
+      "chunk_3f7eb65828761447433c66c28ad111a4",
+      "chunk_2c4c44b040d8a819d548ea724880b74a",
+      "chunk_ef38cd56bcf4e9b4b67a55a2fc94e036"
+    ],
+    "input_window_policy": {
+      "arms": [
+        "Whole-block",
+        "Quote-window"
+      ],
+      "candidate_pool": "same saved Hybrid candidates; no new recall",
+      "max_pair_tokens": 1024,
+      "window_document_tokens": 160,
+      "window_overlap": "50% characters",
+      "window_score": "max over all windows of each candidate; all candidates treated equally",
+      "window_selection": "gold-free source-text lengths only; no claims or reference requirements",
+      "context": "original full source chunks only, 6000 UTF-8 bytes, maximum 8; score threshold .05",
+      "order": "alternate arm order by case index",
+      "generation_calls": 0
+    },
+    "selection_bias": "按已观察到的异常选择4题，有选择偏差；窗口仅依原文长度生成，不用参考答案、来源池或图Claim选窗。"
+  },
+  "metadata": {
+    "case_id": "F02",
+    "category": "fact",
+    "benchmark": "benchmark-rerank-window-v1",
+    "benchmark_sha256": "b3890a8864ad2f2ea33457632b880cbcbfebb40085ff9a7dfcf17aa381282b73",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; selected diagnostic subset",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

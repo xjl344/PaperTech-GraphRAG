@@ -1,0 +1,1725 @@
+{
+  "request_id": "4f522085-8e34-4e36-b8a1-a8f75647ed8a",
+  "status": "citation_error",
+  "answer": "生成结果未通过引用校验，已保留证据；未自动重新生成。",
+  "citations": [],
+  "evidence": [
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 2,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 3780,
+          "end_char": 4175,
+          "chunk_start_char": 0,
+          "chunk_end_char": 395,
+          "block_bboxes": [
+            [
+              305.324,
+              574.956,
+              526.313,
+              775.443
+            ],
+            [
+              294.911,
+              794.449,
+              300.366,
+              805.358
+            ],
+            [
+              10.94,
+              263.25,
+              37.62,
+              609.89
+            ]
+          ]
+        },
+        {
+          "pdf_page": 2,
+          "start_char": 0,
+          "end_char": 1099,
+          "chunk_start_char": 396,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              70.866,
+              251.641,
+              524.41,
+              273.634
+            ],
+            [
+              70.866,
+              297.425,
+              220.997,
+              308.334
+            ],
+            [
+              70.866,
+              311.036,
+              290.949,
+              470.924
+            ],
+            [
+              83.885,
+              480.711,
+              289.527,
+              573.069
+            ]
+          ]
+        }
+      ],
+      "quote": "1. Additionally, this technique tends to exhaust its\npreset search budget because it lacks a mechanism\nto determine when to stop the search, even when\nthe retrieved documents are sufficient to answer the\nquestion. The more passages supplied to the LLM\nfor response generation, the higher the latency of\nthe QA system, since the LLM must reason through\n1\narXiv:2404.09077v3  [cs.CL]  18 Feb 2025\n\nFigure 1: Two common types of questions in HotpotQA (Yang et al., 2018): (1) Comparison questions require\nparallel reasoning over different documents. (2) Bridging questions require sequential reasoning.\nall passages to arrive at an answer.\nTo address these challenges, we propose a novel\nframework by fine-tuning an LLM agent to emulate\nthe curious nature of a human researcher. Instead of\npredicting missing evidence, our agent asks follow-\nup questions to more efficiently guide the search\ntoward missing evidence. Compared to the orig-\ninal approach, our CuriousLLM: 1) requires sig-\nnificantly fewer training samples for fine-tuning,\n2) markedly improves MD-QA performance, and\n3) can terminate the search before exhausting the\npreset search budget, thereby reducing latency. Our\ncontributions are as follows.\n• Follow-upQA Dataset: We introduce a new\ndataset specifically designed to train LLMs\nto generate pertinent follow-up questions that\nenhance the retrieval process within the KGP\nframework for MD-QA tasks. In addition, we\noffer this dataset as a benchmark to inspire\nfurther research.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8161754608154297
+        }
+      ],
+      "rerank_score": 0.8633915781974792,
+      "context_bytes": 1877
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 780,
+          "end_char": 2398,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1618,
+          "block_bboxes": [
+            [
+              70.473,
+              323.184,
+              290.949,
+              496.704
+            ],
+            [
+              70.473,
+              505.386,
+              290.941,
+              773.66
+            ]
+          ]
+        }
+      ],
+      "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8089723587036133
+        }
+      ],
+      "rerank_score": 0.7416740655899048,
+      "context_bytes": 2034
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 10,
+      "page_end": 11,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 10,
+          "start_char": 3851,
+          "end_char": 4613,
+          "chunk_start_char": 0,
+          "chunk_end_char": 762,
+          "block_bboxes": [
+            [
+              305.782,
+              560.938,
+              526.225,
+              720.848
+            ],
+            [
+              305.629,
+              723.963,
+              526.317,
+              775.496
+            ],
+            [
+              292.183,
+              794.449,
+              303.092,
+              805.358
+            ]
+          ]
+        },
+        {
+          "pdf_page": 11,
+          "start_char": 0,
+          "end_char": 734,
+          "chunk_start_char": 763,
+          "chunk_end_char": 1497,
+          "block_bboxes": [
+            [
+              70.473,
+              118.171,
+              524.409,
+              142.646
+            ],
+            [
+              70.866,
+              148.452,
+              524.414,
+              159.755
+            ],
+            [
+              89.412,
+              162.142,
+              524.591,
+              186.6
+            ],
+            [
+              76.981,
+              185.281,
+              271.347,
+              200.302
+            ],
+            [
+              76.981,
+              201.127,
+              356.139,
+              215.194
+            ],
+            [
+              76.981,
+              214.677,
+              356.379,
+              228.743
+            ],
+            [
+              76.981,
+              229.55,
+              343.856,
+              248.641
+            ],
+            [
+              76.981,
+              243.296,
+              297.727,
+              254.499
+            ],
+            [
+              76.981,
+              256.845,
+              276.76,
+              269.39
+            ],
+            [
+              76.981,
+              268.77,
+              110.199,
+              281.303
+            ],
+            [
+              107.006,
+              270.535,
+              245.108,
+              284.5
+            ],
+            [
+              76.981,
+              282.32,
+              119.591,
+              295.146
+            ],
+            [
+              116.398,
+              283.943,
+              163.424,
+              298.049
+            ],
+            [
+              76.981,
+              297.787,
+              199.31,
+              308.696
+            ],
+            [
+              72.498,
+              311.336,
+              126.688,
+              322.245
+            ],
+            [
+              72.498,
+              322.967,
+              169.531,
+              335.794
+            ],
+            [
+              166.338,
+              324.885,
+              184.277,
+              338.85
+            ]
+          ]
+        }
+      ],
+      "quote": "Our evaluation of early traversal termination using\nthe CuriousLLM agent demonstrates substantial\nimprovements in efficiency while maintaining com-\npetitive accuracy in MD-QA tasks. Our mistral\nmodel, fine-tuned to generate a termination signal\n(\"NA\") when it has gathered sufficient evidence,\nsignificantly reduces traversal time without com-\npromising the quality of the final answer. This\nearly termination feature allows the agent to stop\nthe search process as soon as necessary information\nis identified, thus minimizing unnecessary compu-\ntation and latency.\nWe compare three different agents: Mistral with\nearly termination (Mistral-ET), the standard Mis-\ntral without early termination, and the T5 model.\nWe collect questions that are closed early by\n10\n\nAlgorithm 1 LLM-based KG Traversal Algorithm for Retrieving Relevant Context Given a Content-based\nUser Query\nRequire: An initial query q over a set of documents D, the constructed KG G = {V, E, X} over D, the\nLLM graph traversal agent Fagent, the preset passage budget K, the TF-IDF seeding passage retriever\ng\n1: Initialize seed passages Vs = g(V, X, q)\n2: Initialize the retrieved passage queue P = {[vi] | vi ∈Vs}\n3: Initialize the candidate neighbor queue C = [Ni | vi ∈Vs]\n4: Initialize the retrieved passage counter k = P\nPi∈P |Pi|\n5: while queue P and queue C are not empty do\n6:\nPi ←P.dequeue(), Ci ←C.dequeue()\n7:\nV′\ni = Traversal Agent(q, Pi, Ci)\n8:\nif V′\ni = ∅then\n9:\nTerminate the loop\n10:\nend if\n11:\nfor each v ∈V′\ni do\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.808835506439209
+        }
+      ],
+      "rerank_score": 0.8365545868873596,
+      "context_bytes": 1913
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2406,
+          "end_char": 3845,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1439,
+          "block_bboxes": [
+            [
+              79.521,
+              559.21,
+              290.95,
+              610.85
+            ],
+            [
+              70.866,
+              622.754,
+              290.95,
+              660.774
+            ],
+            [
+              70.866,
+              672.997,
+              182.671,
+              684.952
+            ],
+            [
+              70.528,
+              695.075,
+              289.139,
+              773.686
+            ],
+            [
+              305.749,
+              396.054,
+              526.224,
+              623.667
+            ],
+            [
+              306.142,
+              636.148,
+              461.477,
+              647.057
+            ]
+          ]
+        }
+      ],
+      "quote": "3. Development of a new dataset to test com-\nbined reasoning over a general and a domain-\nspecific KG, and evaluation of Tree-of-\nTraversals on this dataset.\nWe conduct detailed experiments on three mod-\nels of varied sizes hosted on Amazon Bedrock and\npresent detailed ablation studies.\n2\nTree-of-Traversals\nThe Tree-of-Traversals algorithm maintains a local\nKG subgraph that is repeatedly expanded until it\ncontains all the information required by an LLM\nto answer the given query. At the start, a local\nKG subgraph is initialized to contain the entities\npresent in the original query. It is then expanded\nusing a tree search algorithm to choose actions and\nthoughts generated by an LLM in order to obtain\nrelevant knowledge from the KG using a KG inter-\nface. The algorithm halts when the LLM is able\nto answer the original query using the local KG\nsubgraph as context. Tree-of-Traversals consists of\nthree major components. (1) A knowledge graph\ninterface implemented to interact with one or more\nrequired KGs. (2) An action state machine (ASM)\nwhich is a finite state machine that defines the fea-\nsible space of actions, states, and prompt templates\nwhen the LLM interacts with a KG to expand the\nlocal KG subgraph. (3) A tree search algorithm\nwhich defines the overall LLM search trajectory\nsuch as best first search, backtrack upon making a\nmistake, and termination condition when an answer\nis found.\n2.1\nKnowledge Graph Interface\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.538365840911865
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7789492607116699
+        }
+      ],
+      "rerank_score": 0.612367570400238,
+      "context_bytes": 1848
+    },
+    {
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 11,
+      "page_end": 13,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 11,
+          "start_char": 734,
+          "end_char": 1478,
+          "chunk_start_char": 0,
+          "chunk_end_char": 744,
+          "block_bboxes": [
+            [
+              72.498,
+              338.14,
+              285.119,
+              350.686
+            ],
+            [
+              72.498,
+              351.689,
+              159.033,
+              362.739
+            ],
+            [
+              72.498,
+              365.38,
+              174.57,
+              376.442
+            ],
+            [
+              72.498,
+              379.082,
+              210.219,
+              389.991
+            ],
+            [
+              72.498,
+              392.631,
+              137.597,
+              403.54
+            ],
+            [
+              72.498,
+              406.18,
+              133.681,
+              417.089
+            ],
+            [
+              72.498,
+              419.729,
+              133.965,
+              430.638
+            ],
+            [
+              72.498,
+              432.985,
+              252.294,
+              444.188
+            ],
+            [
+              70.473,
+              548.918,
+              402.142,
+              559.927
+            ],
+            [
+              70.866,
+              565.209,
+              524.413,
+              577.98
+            ],
+            [
+              89.412,
+              578.617,
+              524.406,
+              604.405
+            ],
+            [
+              76.981,
+              605.715,
+              208.355,
+              618.261
+            ],
+            [
+              76.981,
+              619.265,
+              246.101,
+              631.82
+            ],
+            [
+              76.981,
+              632.955,
+              204.528,
+              645.51
+            ],
+            [
+              76.981,
+              646.363,
+              146.618,
+              657.566
+            ],
+            [
+              76.981,
+              660.206,
+              106.375,
+              671.115
+            ],
+            [
+              76.981,
+              673.461,
+              305.578,
+              685.7
+            ],
+            [
+              76.981,
+              687.011,
+              291.412,
+              698.314
+            ],
+            [
+              76.981,
+              700.701,
+              240.383,
+              711.863
+            ],
+            [
+              76.981,
+              714.403,
+              115.778,
+              725.312
+            ],
+            [
+              292.183,
+              794.449,
+              303.092,
+              805.358
+            ]
+          ]
+        },
+        {
+          "pdf_page": 12,
+          "start_char": 0,
+          "end_char": 427,
+          "chunk_start_char": 745,
+          "chunk_end_char": 1172,
+          "block_bboxes": [
+            [
+              70.507,
+              315.437,
+              526.15,
+              349.235
+            ],
+            [
+              102.258,
+              698.056,
+              493.021,
+              708.019
+            ],
+            [
+              292.183,
+              794.449,
+              303.092,
+              805.358
+            ]
+          ]
+        },
+        {
+          "pdf_page": 13,
+          "start_char": 0,
+          "end_char": 284,
+          "chunk_start_char": 1173,
+          "chunk_end_char": 1457,
+          "block_bboxes": [
+            [
+              70.473,
+              73.469,
+              290.94,
+              152.207
+            ]
+          ]
+        }
+      ],
+      "quote": "12:\nP.enqueue(Pi ∪{v}), C.enqueue(Nv)\n13:\nk ←k + 1\n14:\nif k > K then\n15:\nTerminate the loop\n16:\nend if\n17:\nend for\n18: end while\n19: return Retrieved Passage Queue P\nAlgorithm 2 CuriousLLM to Ask Follow-up Questions to Guide the Search\nRequire: q as initial query, Pi as list of retrieved passages, Ci as list of neighbor passages (these are inputs\nto Traversal Agent from Algorithm 1), preset top_k context budget, CuriousLLM LM, sentence\ntransformer Emb, similarity function fsim, and ranker R.\n1: qnew ←CONCAT({q}, Pi)\n2: qfollow_up ←LM(qnew) from Eq (1)\n3: if qfollow_up == ’NA’ then\n4:\nreturn {}\n5: else\n6:\nSim_scores ←fsim(Emb(qfollow_up), Emb(Ci))\n7:\nCandidates ←R(Sim_scores) from Eq. (2)\n8:\nreturn the top_k in Candidates\n9: end if\n11\n\nFigure 4: A comparison of MD-QA across LLM agents. Mistral_ET is Mistral agent with early traversal termination.\nAccuracy calculates the correct rate of the questions that are early terminated by Mistral_ET. Iterations can be\ninterpreted as the number of nodes visited. Runtime records the average runtime in second per question.\nFigure 5: MD-QA performance on HotpotQA with Mistral agent at different training checkpoints.\n12\n\nMistral-ET and evaluate the accuracy scores on\nthese questions across all LLM agents. Moreover,\nwe record the number of iterations or prompt refor-\nmulations for all questions, since fewer iterations\ntypically result in lower latency. We also track the\nrun-time across all questions.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7837820053100586
+        }
+      ],
+      "rerank_score": 0.4855463206768036,
+      "context_bytes": 1868
+    },
+    {
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 259,
+          "end_char": 1627,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1368,
+          "block_bboxes": [
+            [
+              70.593,
+              226.785,
+              291.042,
+              495.046
+            ],
+            [
+              70.866,
+              520.384,
+              195.121,
+              531.293
+            ],
+            [
+              70.353,
+              545.881,
+              291.045,
+              651.693
+            ]
+          ]
+        }
+      ],
+      "quote": "For MusicBrainz-x-Wikidata dataset, we only com-\npare against Chain-of-Thought since the implemen-\ntations for other baseline algorithms do not have\naccess to similar music-specific knowledge bases.\nDespite this, we observed some interesting results.\nChain-of-Thought does far worse on MusicBrainz-\nx-Wikidata than on the more general datasets based\nexclusively on Wikipedia/Wikidata (10.1%-13.8%\nvs. 25.2%-47.4%). This could be because LLMs\nare trained on vast amount of general knowledge\nsuch as that found in Wikipedia, but they are not\ntrained with as much data from specific domains\nsuch as music. Besides the presence of KG inter-\nface and ASM with Tree-of-Traversals, this could\nbe an additional reason why Tree-of-Traversals\ndoes 2.2 times as well as Chain-of-Thought on\nMusicBrainz-x-Wikidata. This demonstrates the\nimportance of augmenting LLMs with domain-\nspecific KGs and/or multiple KGs which the pro-\nposed Tree-of-Traversals is capable of.\n4.4\nAnalysis of Baselines.\nReAct underperforms Chain-of-Thought in most\ncases. This phenomenon was seen in the origi-\nnal ReAct paper which noted that their approach\nsignificantly reduced hallucinations despite lower\naccuracy (Yao et al., 2022). Therefore, falling back\non Chain-of-Thought results in an accuracy im-\nprovements for for Llama2-70b and Claude-Instant.\nWe note that claude-instant vastly underper-\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.230220317840576
+        }
+      ],
+      "rerank_score": 0.43785351514816284,
+      "context_bytes": 1772
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Follow-upQA examples of input questions, given information, and the corresponding follow-up questions\ngenerated.\nencoding passages and connecting them based on\ncosine similarity.\n2.3\nCurious LLM Traversal Agent\nWe introduce CuriousLLM as our graph traversal\nagent to enhance the KGP framework. This ap-\nproach is rooted in intuitive reasoning. For ex-\nample, when asked to determine who is older, Bob\nBryan or Mariaan de Swardt, and given information\nabout Bob’s age, one would intuitively ask a follow-\nup question about Mariaan’s age. This follow-up\nquestion guides the search for relevant informa-\ntion. This intuition forms the basis of Follow-upQA\nand our model’s training objective. The advan-\ntage of this approach is that, although the passages\nabout Bob’s and Mariaan’s ages are unrelated, or,\nin other words, not semantically similar, the follow-\nup question about Mariaan’s age creates a logical\nlink between them. As a result, instead of matching\ntwo unrelated passages, once we find one passage,\nwe can identify the other through follow-up ques-\ntions. Furthermore, we train the LLM agent to\nknow when to end the search, and this early termi-\nnation mechanism significantly reduces the latency\nassociated with the original T5 agent.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7685952186584473
+        }
+      ],
+      "rerank_score": 0.3791484832763672,
+      "context_bytes": 1642
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7939777374267578
+        }
+      ],
+      "rerank_score": 0.3621792793273926,
+      "context_bytes": 1908
+    },
+    {
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 13,
+      "page_end": 14,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 13,
+          "start_char": 2599,
+          "end_char": 3431,
+          "chunk_start_char": 0,
+          "chunk_end_char": 832,
+          "block_bboxes": [
+            [
+              305.749,
+              517.199,
+              524.6,
+              582.388
+            ],
+            [
+              305.804,
+              585.303,
+              526.221,
+              650.662
+            ],
+            [
+              305.749,
+              653.747,
+              526.222,
+              746.034
+            ],
+            [
+              306.142,
+              748.949,
+              524.414,
+              773.686
+            ]
+          ]
+        },
+        {
+          "pdf_page": 14,
+          "start_char": 0,
+          "end_char": 717,
+          "chunk_start_char": 833,
+          "chunk_end_char": 1550,
+          "block_bboxes": [
+            [
+              70.866,
+              73.469,
+              290.502,
+              152.207
+            ],
+            [
+              70.866,
+              155.283,
+              289.317,
+              220.471
+            ],
+            [
+              70.866,
+              223.547,
+              290.948,
+              275.186
+            ],
+            [
+              70.866,
+              288.358,
+              159.339,
+              299.267
+            ],
+            [
+              70.353,
+              307.046,
+              290.949,
+              317.845
+            ],
+            [
+              70.866,
+              320.512,
+              91.648,
+              331.421
+            ]
+          ]
+        }
+      ],
+      "quote": "Tree-of-Traversals does not have a huge number\nof hyperparamters. Most of the hyperparameters\nwere chosen analytically, though some were chosen\nbased on preliminary experiments. We share some\ninformation on choosing them.\nτ was chosen analytically in conjunction with\nthe prompt for evaluate on the done state (Ap-\npendix F.5). Chosen to be 0.8 so that Tree-of-\nTraversals only stops when it is confident that the\nanswer is supported by the KG.\nThe temperature was chosen to be 1.0 to pro-\nmote diversity. If implementing with other models\nwhich can have temperature >1.0, we recommend\nhyperparameter tuning or using a sample prompt\nof each type and analytically choosing the tem-\nperature such that diverse but sensible actions are\noutput.\nThe branching factor k = 3 was chosen based\non small scale experimentation. Larger k makes\n\nthe model spend longer searching, taking longer\ntime and increasing expenses. Smaller k did not\ngenerate as much diversity and options. It is worth\nnoting that even with k = 3 and diversity sampling,\nsometimes the actual number of unique outputs is\nless than 3.\nThe max depth was chosen analytically to\nbe minimal while enabling answering of most\nquestions.\nSome questions in QALD-10 and\nMusicBrainz-x-Wikidata would require a greater\ndepth to answer.\nThe maximum expansions cutoff was chosen\npurely to ensure the model does not hang on a sin-\ngle question too long. The actual value is somewhat\narbitrary and has minimal impact on accuracy.\nB.3\nKG Interface\nWe present some additional details of the KG Inter-\nface.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.454320907592773
+        }
+      ],
+      "rerank_score": 0.35488009452819824,
+      "context_bytes": 1967
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 32,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 5.223222700005863,
+      "inference_seconds": 0.7435253999428824,
+      "elapsed_seconds": 0.7461715000099503,
+      "peak_cuda_memory_bytes": 1193395200,
+      "request_count": 47,
+      "batch_size": 4
+    },
+    "evidence_count": 9,
+    "context_bytes": 16829,
+    "evidence_bytes": 16829,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 16160,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ]
+      },
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ],
+        "eligible_candidate_count": 6,
+        "selected_chunk_ids": [
+          "chunk_d911a73017c3747c65463e9c0b9e089d",
+          "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+          "chunk_bf0253a0494926a37f68352dc236b9eb",
+          "chunk_9f06285c9b321c365675a3b670256a07",
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ],
+        "eligible_candidate_count": 24,
+        "selected_chunk_ids": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+          "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+          "chunk_4791e22bc0940fa51d33b62696708b9b",
+          "chunk_e3ad7608dae3913ef4231b54065c5882"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4331,
+    "total_tokens": 4932,
+    "completion_tokens": 601,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 4331
+    },
+    "completion_tokens_details": {
+      "text_tokens": 601
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [
+    "invalid_generated_citations"
+  ],
+  "raw": "{\"answer\":\"Tree-of-Traversals 的停止条件有两类：一是“当找到节点值超过阈值 τ 的答案时搜索停止”[E2, q2]，作者称 τ=0.8 是为让算法“仅在确信答案有 KG 支持时才停止”[E9, q1]；二是为限制搜索空间设置的两个超参数，“树搜索最大深度，超过后强制转入 done 状态（即回答查询），以及最大扩展次数，超过后模型停止探索并返回 \\\"Cannot find answer\\\"”[E2, q2]；其算法组件也把“找到答案时的终止条件”列为树搜索的一部分[E4, q2]，总述称算法在 LLM 能用本地 KG 子图回答原查询时停止[E4, q1]。CuriousLLM 的机制是让 agent 生成追问，但 Follow-upQA 的追问“要么询问完全回答用户查询还缺什么，要么用特殊 token 表示已检索证据充分”[E8, q2]；其微调模型被训练为“在已收集充分证据时生成终止信号（\\\"NA\\\"）”[E3, q1]，算法 2 中若追问等于 'NA' 则返回空集[E5, q1]，作者称由此可在用尽预设搜索预算前终止搜索以降低延迟[E1, q2]。因此区别在于：Tree-of-Traversals 以答案节点值超过阈值 τ 作为答案充分性停止条件，并另有深度/扩展上限作为强制约束[E2, q2, E9, q1]；CuriousLLM 以模型生成的 'NA' 作为证据充分信号并提前终止[E3, q1, E5, q1]。预算耗尽不等同于证据充分，是因为原文指出原方法“缺乏判断何时停止搜索的机制……即使检索到的文档已足以回答问题”，仍会耗尽预设搜索预算[E1, q1]；CuriousLLM 的终止信号 'NA' 对应“已收集充分证据”[E3, q1]，而算法 1 的 k > K 只是预算触发的循环终止[E5, q1]，原文未把它表述为证据充分判断。\",\"citations\":[{\"eid\":\"E2\",\"quote_id\":\"q2\"},{\"eid\":\"E9\",\"quote_id\":\"q1\"},{\"eid\":\"E4\",\"quote_id\":\"q2\"},{\"eid\":\"E4\",\"quote_id\":\"q1\"},{\"eid\":\"E8\",\"quote_id\":\"q2\"},{\"eid\":\"E3\",\"quote_id\":\"q1\"},{\"eid\":\"E5\",\"quote_id\":\"q1\"},{\"eid\":\"E1\",\"quote_id\":\"q2\"},{\"eid\":\"E1\",\"quote_id\":\"q1\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8161754608154297
+        }
+      ],
+      "rerank_score": 0.8633915781974792
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.808835506439209
+        }
+      ],
+      "rerank_score": 0.8365545868873596
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8089723587036133
+        }
+      ],
+      "rerank_score": 0.7416740655899048
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 0.030309988518943745,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 7.538365840911865
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7789492607116699
+        }
+      ],
+      "rerank_score": 0.612367570400238
+    },
+    {
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7837820053100586
+        }
+      ],
+      "rerank_score": 0.4855463206768036
+    },
+    {
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.230220317840576
+        }
+      ],
+      "rerank_score": 0.43785351514816284
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7685952186584473
+        }
+      ],
+      "rerank_score": 0.3791484832763672
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7939777374267578
+        }
+      ],
+      "rerank_score": 0.3621792793273926
+    },
+    {
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.454320907592773
+        }
+      ],
+      "rerank_score": 0.35488009452819824
+    },
+    {
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 0.028612012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.627045154571533
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7963652610778809
+        }
+      ],
+      "rerank_score": 0.3473156988620758
+    },
+    {
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "score": 0.02715098147128967,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.454320907592773
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7726082801818848
+        }
+      ],
+      "rerank_score": 0.3228461444377899
+    },
+    {
+      "chunk_id": "chunk_85cf026687ef7fad0688db2c4af1d3a9",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7677412033081055
+        }
+      ],
+      "rerank_score": 0.30663084983825684
+    },
+    {
+      "chunk_id": "chunk_e1a638ad66c9677e3b21b218e22f0aed",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 6.918736934661865
+        }
+      ],
+      "rerank_score": 0.2613309323787689
+    },
+    {
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 0.027364110201042444,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.312259674072266
+        },
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7678632736206055
+        }
+      ],
+      "rerank_score": 0.24725967645645142
+    },
+    {
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.312259674072266
+        }
+      ],
+      "rerank_score": 0.2366926223039627
+    },
+    {
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 0.03047794966520434,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.9458441734313965
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7716460227966309
+        }
+      ],
+      "rerank_score": 0.1901218295097351
+    },
+    {
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "score": 0.029030910609857977,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 7.772240161895752
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7697062492370605
+        }
+      ],
+      "rerank_score": 0.18403315544128418
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7705316543579102
+        }
+      ],
+      "rerank_score": 0.15765489637851715
+    },
+    {
+      "chunk_id": "chunk_54195d498800a946748950b0238fda0f",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.151087284088135
+        }
+      ],
+      "rerank_score": 0.15418487787246704
+    },
+    {
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 0.030017921146953404,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 7.831502437591553
+        },
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7709808349609375
+        }
+      ],
+      "rerank_score": 0.13273923099040985
+    },
+    {
+      "chunk_id": "chunk_38da659aa383a51b58357d084fd1cd39",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.771977424621582
+        }
+      ],
+      "rerank_score": 0.12951278686523438
+    },
+    {
+      "chunk_id": "chunk_f4962498025654850621ee329d0af7d6",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 6.719615936279297
+        }
+      ],
+      "rerank_score": 0.12495855987071991
+    },
+    {
+      "chunk_id": "chunk_c9487cbd571de7247dab7359aeb33936",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.081750392913818
+        }
+      ],
+      "rerank_score": 0.12294378876686096
+    },
+    {
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 7.7314133644104
+        }
+      ],
+      "rerank_score": 0.1155608743429184
+    },
+    {
+      "chunk_id": "chunk_7c3a7be987627b104ec877903108110f",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 6.719615936279297
+        }
+      ],
+      "rerank_score": 0.09451042860746384
+    },
+    {
+      "chunk_id": "chunk_ac2dd6acd17189360638268b42945e7b",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.265714168548584
+        }
+      ],
+      "rerank_score": 0.0918697863817215
+    },
+    {
+      "chunk_id": "chunk_4393ed9a076f7e200b63f80b74abf37e",
+      "score": 0.02548701298701299,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 5.997927665710449
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7689151763916016
+        }
+      ],
+      "rerank_score": 0.08494710177183151
+    },
+    {
+      "chunk_id": "chunk_05496eba4d13c6d7723a9275c420eb98",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7754669189453125
+        }
+      ],
+      "rerank_score": 0.08284562826156616
+    },
+    {
+      "chunk_id": "chunk_20ad4ca6811d52ca011e181dadb57ba4",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.074681282043457
+        }
+      ],
+      "rerank_score": 0.01590639166533947
+    },
+    {
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.408199787139893
+        }
+      ],
+      "rerank_score": 0.012673736549913883
+    },
+    {
+      "chunk_id": "chunk_51338a1f8613d75a2afeb29bd8252936",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7709751129150391
+        }
+      ],
+      "rerank_score": 0.002491967985406518
+    },
+    {
+      "chunk_id": "chunk_77331dc18e1518cd0c883724d737af4f",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7704205513000488
+        }
+      ],
+      "rerank_score": 0.0019267346942797303
+    }
+  ],
+  "case_id": "R15",
+  "question": "Tree-of-Traversals 的搜索停止机制与 CuriousLLM 的追问/证据充分信号有什么区别？请说明预算耗尽为什么不能等同于证据充分。",
+  "category": "cross",
+  "arm": "P0-Optimized",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.00038839998887851834
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.0295683000003919
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 6.999995093792677e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.7468535999651067
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.002057800011243671
+    }
+  ],
+  "retrieval_compute_seconds": 0.7788750999607146,
+  "request_wall_seconds": 11.900988900044467,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.2122650999808684,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 8.454319800017402,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4325815999764018,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 7.571207700006198,
+      "usage": "{\"prompt_tokens\": 4331, \"total_tokens\": 4932, \"completion_tokens\": 601}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.8161754608154297
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "score": 0.8089723587036133
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.808835506439209
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 0.7963652610778809
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.7939777374267578
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 0.7837820053100586
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 0.7789492607116699
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_05496eba4d13c6d7723a9275c420eb98",
+      "score": 0.7754669189453125
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "score": 0.7726082801818848
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_38da659aa383a51b58357d084fd1cd39",
+      "score": 0.771977424621582
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 0.7716460227966309
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 0.7709808349609375
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_51338a1f8613d75a2afeb29bd8252936",
+      "score": 0.7709751129150391
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.7705316543579102
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_77331dc18e1518cd0c883724d737af4f",
+      "score": 0.7704205513000488
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "score": 0.7697062492370605
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_4393ed9a076f7e200b63f80b74abf37e",
+      "score": 0.7689151763916016
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.7685952186584473
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 0.7678632736206055
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_85cf026687ef7fad0688db2c4af1d3a9",
+      "score": 0.7677412033081055
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 7.9458441734313965
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 7.831502437591553
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "score": 7.772240161895752
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "score": 7.7314133644104
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 7.538365840911865
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "score": 7.408199787139893
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 7.312259674072266
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 7.312259674072266
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_ac2dd6acd17189360638268b42945e7b",
+      "score": 7.265714168548584
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "score": 7.230220317840576
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_54195d498800a946748950b0238fda0f",
+      "score": 7.151087284088135
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_c9487cbd571de7247dab7359aeb33936",
+      "score": 7.081750392913818
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_20ad4ca6811d52ca011e181dadb57ba4",
+      "score": 7.074681282043457
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_e1a638ad66c9677e3b21b218e22f0aed",
+      "score": 6.918736934661865
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_7c3a7be987627b104ec877903108110f",
+      "score": 6.719615936279297
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_f4962498025654850621ee329d0af7d6",
+      "score": 6.719615936279297
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 6.627045154571533
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "score": 6.454320907592773
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "score": 6.454320907592773
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_4393ed9a076f7e200b63f80b74abf37e",
+      "score": 5.997927665710449
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R15.C01",
+      "requirement": "答案阈值停止与预算终止含义不同。",
+      "selected_matches_by_unit": {
+        "totbound": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R15.C02",
+      "requirement": "max depth 强制 done，max expansions 返回 Cannot find answer。",
+      "selected_matches_by_unit": {
+        "totbound": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R15.C03",
+      "requirement": "CuriousLLM 生成追问或输出证据充分特殊 token。",
+      "selected_matches_by_unit": {
+        "curious": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R15.C04",
+      "requirement": "预算耗尽不能等同于证据充分或答案正确。",
+      "selected_matches_by_unit": {
+        "totbound": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ],
+        "curious": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 1.0,
+    "mrr40": 0.3333333333333333,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/e2d8e96b-3546-4a10-a515-27f8e296ad31?poll=true"
+}

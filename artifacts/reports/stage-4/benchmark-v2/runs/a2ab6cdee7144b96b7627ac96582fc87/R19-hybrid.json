@@ -1,0 +1,784 @@
+{
+  "request_id": "0f644cf6-56ed-4cc5-a650-9e22314029de",
+  "status": "citation_error",
+  "answer": "生成结果未通过引用校验，已保留证据；未自动重新生成。",
+  "citations": [],
+  "evidence": [
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 3,
+      "page_end": 3,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 1410,
+          "end_char": 2828,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1418,
+          "block_bboxes": [
+            [
+              108.0,
+              324.877,
+              504.363,
+              378.751
+            ],
+            [
+              107.671,
+              404.127,
+              503.998,
+              425.124
+            ],
+            [
+              107.691,
+              431.931,
+              505.656,
+              529.732
+            ],
+            [
+              108.299,
+              549.669,
+              178.722,
+              561.625
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 2: An example workflow of ToG. The glowing entities are the central entities where the\nsearch starts at each iteration (depth), and the entities with boldface are the selected central entities\nfor the next iteration after pruning. At each pruning step, the darkness of the edges represents the\nranking score given by LLM, and the dashed lines indicate relations that have been pruned due to low\nevaluation scores.\ninformation through the top-N reasoning paths in beam search is gathered to answer the question\n(judged by LLMs in \"Think\" step) or the predefined maximum search depth is reached.\nThe advantage of ToG can be abbreviated as (1) Deep reasoning: ToG extracts diverse and multi-\nhop reasoning paths from KGs as the basis for LLM reasoning, enhancing LLMs’ deep reasoning\ncapabilities for knowledge-intensive tasks. (2) Responsible reasoning: Explicit, editable reasoning\npaths improve the explainability of the reasoning process of LLMs, and enable the tracing and\ncorrection of the provenances of models’ outputs. (3) Flexibility and efficiency: a) ToG is a plug-\nand-play framework that can be applied to a variety of LLMs and KGs seamlessly. b) Under ToG\nframework, knowledge can be updated frequently via KG instead of LLM whose knowledge-update\nis expensive and slow. c) ToG enhances the reasoning ability of small LLMs (e.g., LLAMA2-70B) to\nbe competitive with big LLMs (e.g., GPT-4).\n2\nMETHODS\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8261761665344238
+        }
+      ],
+      "rerank_score": 0.40927982330322266,
+      "context_bytes": 1793
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 3,
+      "page_end": 4,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 4482,
+          "end_char": 4688,
+          "chunk_start_char": 0,
+          "chunk_end_char": 206,
+          "block_bboxes": [
+            [
+              108.299,
+              685.254,
+              209.231,
+              697.209
+            ],
+            [
+              108.0,
+              711.347,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 1380,
+          "chunk_start_char": 207,
+          "chunk_end_char": 1587,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              191.097,
+              271.545,
+              420.903,
+              281.738
+            ],
+            [
+              108.0,
+              289.117,
+              504.003,
+              331.957
+            ],
+            [
+              108.0,
+              338.93,
+              504.003,
+              436.565
+            ],
+            [
+              108.249,
+              451.234,
+              194.499,
+              461.197
+            ]
+          ]
+        }
+      ],
+      "quote": "METHODOLOGY\nThe proposed method ToG-2 draws from the ToG approach Sun et al. (2024) in multi-hop searches\nwithin KGs, starting from key entities identified in the query and exploring outward based on en-\n3\n\nPublished as a conference paper at ICLR 2025\nFigure 2: An example illustrating the workflow of ToG-2.\ntities and relationships with a prompt-driven inferential process. ToG-2 combines the logical chain\nextensions based on triples with unstructured contextual knowledge of relevant entities by iteratively\nperforming knowledge-guided context retrieval and context-enhance graph retrieval, thus more ef-\nfectively integrating and utilizing heterogeneous external knowledge.\nSpecifically, ToG-2 begins by extracting entities from the given question as initial topic entities.\nIt then performs an iterative process of graph retrieval, context retrieval and LLM reasoning. At\nthe start of each iteration, ToG-2 selectively explores entities neighboring the current topic entities\non the KG, using the newly encountered entities to refine the retrieval scope, thereby enhancing\nboth efficiency and accuracy. Next, ToG-2 ranks and selects entities based on the query and the\ncontextual knowledge retrieved from relevant documents, reducing ambiguity and ensuring accurate\nexploration for the next step. After, the LLM utilizes heterogeneous knowledge, including triple\npaths and entity contexts, to either answer the question or proceed with further rounds of retrieval if\nthe information gathered is insufficient. In this section, we will explain each step in detail.\n3.1\nINITIALIZTION\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8408126831054688
+        }
+      ],
+      "rerank_score": 0.6997675895690918,
+      "context_bytes": 1980
+    },
+    {
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 218,
+          "end_char": 1574,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1356,
+          "block_bboxes": [
+            [
+              107.641,
+              302.258,
+              504.352,
+              399.508
+            ],
+            [
+              108.0,
+              412.411,
+              505.741,
+              465.967
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 1: Knowledge Integration & RAG. Tasks that require knowledge integration are particularly\nchallenging for current RAG systems. In the above example, we want to find a Stanford professor\nthat does Alzheimer’s research from a pool of passages describing potentially thousands Stanford\nprofessors and Alzheimer’s researchers. Since current methods encode passages in isolation, they\nwould struggle to identify Prof. Thomas unless a passage mentions both characteristics at once. In\ncontrast, most people familiar with this professor would remember him quickly due to our brain’s\nassociative memory capabilities, thought to be driven by the index structure depicted in the C-shaped\nhippocampus above (in blue). Inspired by this mechanism, HippoRAG allows LLMs to build and\nleverage a similar graph of associations to tackle knowledge integration tasks.\nstandard multi-hop question answering (QA) also requires integrating information between passages\nin a retrieval corpus. In order to solve such tasks, current RAG systems resort to using multiple\nretrieval and LLM generation steps iteratively to join disparate passages [64, 78]. Nevertheless, even\nperfectly executed multi-step RAG is still oftentimes insufficient to accomplish many scenarios of\nknowledge integration, as we illustrate in what we call path-finding multi-hop questions in Figure 1.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.508333206176758
+        },
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.8249979019165039
+        }
+      ],
+      "rerank_score": 0.6964746713638306,
+      "context_bytes": 1715
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 36,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 8.57325149999997,
+      "inference_seconds": 1.0229352000005747,
+      "elapsed_seconds": 1.026285400001143,
+      "peak_cuda_memory_bytes": 1158044672,
+      "request_count": 54
+    },
+    "evidence_count": 3,
+    "context_bytes": 5488,
+    "evidence_bytes": 5488,
+    "graph_context_bytes": 0,
+    "comparison_groups": [
+      {
+        "name": "ToG",
+        "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed"
+      }
+    ],
+    "missing_comparison_groups": [],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 1555,
+    "total_tokens": 1851,
+    "completion_tokens": 296,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "image_tokens": 0,
+      "text_tokens": 1555
+    },
+    "completion_tokens_details": {
+      "text_tokens": 296
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [
+    "invalid_generated_citations"
+  ],
+  "raw": "{\"answer\":\"ToG 原文显示其以 LLM 逐步探索图：搜索从每轮（深度）的中心实体开始，由 LLM 对边打分并剪枝低分关系，再依据前 N 条推理路径由 LLM 判断作答或达到最大搜索深度，因此多跳关联在迭代的实体扩展与路径推理步骤中形成 [chunk_b160799030dcc4aeb6145d3dd00db7f3]。HippoRAG 的材料将多跳关联归于检索语料中跨段落信息的整合，并把标准多跳问答描述为需要整合段落信息；但所给引句未描述“查询种子驱动图算法”的具体流程，因此该方法的流程证据不足，无法据引句说明多跳关联发生在哪一步 [chunk_d32e1706909cc088dae124d6b0f3893c]。RoG 在所给证据中没有任何原文片段，无法给出其方法与多跳关联步骤，方法证据不足 [chunk_id缺失]。\",\"citations\":[{\"chunk_id\":\"chunk_b160799030dcc4aeb6145d3dd00db7f3\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_d32e1706909cc088dae124d6b0f3893c\",\"quote_id\":\"q2\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8408126831054688
+        }
+      ],
+      "rerank_score": 0.6997675895690918
+    },
+    {
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "score": 0.02871794871794872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.508333206176758
+        },
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.8249979019165039
+        }
+      ],
+      "rerank_score": 0.6964746713638306
+    },
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 4.985844612121582
+        }
+      ],
+      "rerank_score": 0.6087684631347656
+    },
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.501071453094482
+        }
+      ],
+      "rerank_score": 0.4684866666793823
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.285053253173828
+        }
+      ],
+      "rerank_score": 0.4249488413333893
+    },
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8261761665344238
+        }
+      ],
+      "rerank_score": 0.40927982330322266
+    },
+    {
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.129354953765869
+        }
+      ],
+      "rerank_score": 0.39204585552215576
+    },
+    {
+      "chunk_id": "chunk_fbeebb7d77e97866867648455a11895e",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 4.7123613357543945
+        }
+      ],
+      "rerank_score": 0.35253605246543884
+    },
+    {
+      "chunk_id": "chunk_e595dc20307a9f6a2c07d16595f5ca21",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8268876075744629
+        }
+      ],
+      "rerank_score": 0.32380759716033936
+    },
+    {
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.0288981288981289,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 4.865789890289307
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8363423347473145
+        }
+      ],
+      "rerank_score": 0.3222059905529022
+    },
+    {
+      "chunk_id": "chunk_8eeb2944a7ceb3bfebc67f8259978867",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 4.373422622680664
+        }
+      ],
+      "rerank_score": 0.3170032203197479
+    },
+    {
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "score": 0.028991596638655463,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.085635662078857
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8315896987915039
+        }
+      ],
+      "rerank_score": 0.289572536945343
+    },
+    {
+      "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+      "score": 0.028283227848101264,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.785608291625977
+        },
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.8231916427612305
+        }
+      ],
+      "rerank_score": 0.27953338623046875
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.822364330291748
+        }
+      ],
+      "rerank_score": 0.2683658003807068
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8293008804321289
+        }
+      ],
+      "rerank_score": 0.26454830169677734
+    },
+    {
+      "chunk_id": "chunk_18bee03d708874e36549c17129df7d7f",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 4.53364372253418
+        }
+      ],
+      "rerank_score": 0.2609540820121765
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.825261116027832
+        }
+      ],
+      "rerank_score": 0.23405630886554718
+    },
+    {
+      "chunk_id": "chunk_813477b074abcc4657cb828fdd775b2b",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8308296203613281
+        }
+      ],
+      "rerank_score": 0.2112540602684021
+    },
+    {
+      "chunk_id": "chunk_deb9eea46e529705dffdd1103729c44c",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8237290382385254
+        }
+      ],
+      "rerank_score": 0.20689405500888824
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.843116283416748
+        }
+      ],
+      "rerank_score": 0.18286287784576416
+    },
+    {
+      "chunk_id": "chunk_7ac089f731dde3a5b09b48a00fc48587",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8254461288452148
+        }
+      ],
+      "rerank_score": 0.15830442309379578
+    },
+    {
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8316226005554199
+        }
+      ],
+      "rerank_score": 0.15674921870231628
+    },
+    {
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 5.1418070793151855
+        }
+      ],
+      "rerank_score": 0.14940722286701202
+    },
+    {
+      "chunk_id": "chunk_5463211e0f0b5a2231540050ade349e9",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.762890338897705
+        }
+      ],
+      "rerank_score": 0.14033624529838562
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 6.080933570861816
+        }
+      ],
+      "rerank_score": 0.13753245770931244
+    },
+    {
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.837468147277832
+        }
+      ],
+      "rerank_score": 0.13488984107971191
+    },
+    {
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8435492515563965
+        }
+      ],
+      "rerank_score": 0.12442563474178314
+    },
+    {
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.8236446380615234
+        }
+      ],
+      "rerank_score": 0.1225232183933258
+    },
+    {
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 4.731936454772949
+        }
+      ],
+      "rerank_score": 0.0938439592719078
+    },
+    {
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8343691825866699
+        }
+      ],
+      "rerank_score": 0.09367800503969193
+    },
+    {
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 4.583399772644043
+        }
+      ],
+      "rerank_score": 0.08897849172353745
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.8246016502380371
+        }
+      ],
+      "rerank_score": 0.08093670755624771
+    },
+    {
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 5.173607349395752
+        }
+      ],
+      "rerank_score": 0.07668380439281464
+    },
+    {
+      "chunk_id": "chunk_f99077c01e2b49914150ff933b0cf783",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 4.934555530548096
+        }
+      ],
+      "rerank_score": 0.05310790613293648
+    },
+    {
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 4.985844612121582
+        }
+      ],
+      "rerank_score": 0.023554330691695213
+    },
+    {
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 6.632547378540039
+        }
+      ],
+      "rerank_score": 0.0012793075293302536
+    }
+  ],
+  "case_id": "R19",
+  "question": "在 ToG、HippoRAG 与 RoG 中，分别找出“LLM 逐步探索图”“查询种子驱动图算法”“先规划关系路径再取证”的方法。每项给出一篇原文，并比较多跳关联发生在哪一步。",
+  "category": "cross",
+  "arm": "Hybrid",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 6.100000064179767e-05
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.03808960000060324
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 6.399999620043673e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 1.0269600000010541
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0007267000000865664
+    }
+  ],
+  "retrieval_compute_seconds": 1.0658437000020058,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.384480499998972,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 3.735319699999309,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.32291169999916747,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 2.947818200000256,
+      "usage": "{\"prompt_tokens\": 1555, \"total_tokens\": 1851, \"completion_tokens\": 296}"
+    }
+  ],
+  "metrics": {
+    "recall5": 0.3333333333333333,
+    "recall8": 0.3333333333333333,
+    "mrr40": 0.25,
+    "evidence_coverage": 0.0,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/96cc8d61-b3a2-4e81-8a12-57592e5f5850?poll=true"
+}

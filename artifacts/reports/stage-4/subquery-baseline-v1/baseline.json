@@ -1,0 +1,359 @@
+{
+  "version": "subquery-baseline-v1",
+  "created_at": "2026-11-25T13:14:45.375609+00:00",
+  "status": "frozen",
+  "purpose": "冻结知识图谱对照前的子查询检索基线；不修改图谱、不运行模型。",
+  "scope": {
+    "questions": 24,
+    "necessary_sources": 49,
+    "corpus": "980 chunks / 14 papers",
+    "development_only": true,
+    "answer_generation": false,
+    "graph_excluded": true
+  },
+  "selected_baseline": {
+    "router": "benchmark-query-router-fix-v1",
+    "retrieval": "Expanded vs Original from benchmark-subquery-recall-v1",
+    "candidate_policy": "Rerank-OwnerSubquery-Union40",
+    "evidence_policy": "Owner-Clean, 6000 bytes / 8 blocks / named_first"
+  },
+  "measurements": {
+    "router": {
+      "Rule": {
+        "questions": 24,
+        "valid_outputs": 24,
+        "split_applied": 0,
+        "subqueries": 0,
+        "model_calls": 0
+      },
+      "Local-LLM": {
+        "questions": 24,
+        "valid_outputs": 23,
+        "split_applied": 23,
+        "subqueries": 61,
+        "model_calls": 0
+      }
+    },
+    "retrieval": {
+      "Expanded": {
+        "questions": 24,
+        "source_total": 49,
+        "cap40_coverage": 0.6805555555555555,
+        "union_coverage": 0.7777777777777778,
+        "cap40_source_hits": 33,
+        "union_source_hits": 38,
+        "cap40_complete": 12,
+        "union_complete": 14,
+        "avg_candidate_union": 66.91666666666667
+      },
+      "Original": {
+        "questions": 24,
+        "source_total": 49,
+        "cap40_coverage": 0.5972222222222222,
+        "union_coverage": 0.5972222222222222,
+        "cap40_source_hits": 29,
+        "union_source_hits": 29,
+        "cap40_complete": 9,
+        "union_complete": 9,
+        "avg_candidate_union": 32.333333333333336
+      }
+    },
+    "candidate_policy": {
+      "QueryHits-BestRank-40": {
+        "questions": 24,
+        "coverage": 0.6736111111111112,
+        "source_hits": 33,
+        "source_total": 49,
+        "complete": 11
+      },
+      "Quota-N13": {
+        "questions": 24,
+        "coverage": 0.6736111111111112,
+        "source_hits": 33,
+        "source_total": 49,
+        "complete": 11
+      },
+      "Quota-N20": {
+        "questions": 24,
+        "coverage": 0.6736111111111112,
+        "source_hits": 33,
+        "source_total": 49,
+        "complete": 11
+      },
+      "Quota-N6": {
+        "questions": 24,
+        "coverage": 0.6597222222222222,
+        "source_hits": 32,
+        "source_total": 49,
+        "complete": 11
+      },
+      "Quota-N9": {
+        "questions": 24,
+        "coverage": 0.6805555555555555,
+        "source_hits": 33,
+        "source_total": 49,
+        "complete": 12
+      },
+      "Rerank-Original-Union40": {
+        "questions": 24,
+        "coverage": 0.7083333333333334,
+        "source_hits": 34,
+        "source_total": 49,
+        "complete": 13
+      },
+      "Rerank-OwnerSubquery-Union40": {
+        "questions": 24,
+        "coverage": 0.7430555555555555,
+        "source_hits": 36,
+        "source_total": 49,
+        "complete": 13
+      },
+      "RoundRobin-40": {
+        "questions": 24,
+        "coverage": 0.6805555555555555,
+        "source_hits": 33,
+        "source_total": 49,
+        "complete": 12
+      }
+    },
+    "rerank_and_evidence": {
+      "Max-Original-Owner": {
+        "questions": 24,
+        "top40_coverage": 0.7222222222222222,
+        "top40_source_hits": 35,
+        "source_total": 49,
+        "top40_complete": 13,
+        "evidence_coverage": 0.3958333333333333,
+        "evidence_source_hits": 19,
+        "evidence_complete": 3,
+        "evidence_blocks": 86,
+        "rerank_pairs": 0,
+        "rerank_seconds": 0
+      },
+      "Original-Reused": {
+        "questions": 24,
+        "top40_coverage": 0.7083333333333334,
+        "top40_source_hits": 34,
+        "source_total": 49,
+        "top40_complete": 13,
+        "evidence_coverage": 0.3125,
+        "evidence_source_hits": 15,
+        "evidence_complete": 1,
+        "evidence_blocks": 83,
+        "rerank_pairs": 0,
+        "rerank_seconds": 0
+      },
+      "Owner-Clean": {
+        "questions": 24,
+        "top40_coverage": 0.7430555555555555,
+        "top40_source_hits": 36,
+        "source_total": 49,
+        "top40_complete": 13,
+        "evidence_coverage": 0.4166666666666667,
+        "evidence_source_hits": 20,
+        "evidence_complete": 3,
+        "evidence_blocks": 85,
+        "rerank_pairs": 1856,
+        "rerank_seconds": 50.26460480003152
+      }
+    },
+    "r11_router_fix": {
+      "route_change_count": 1,
+      "R11": {
+        "Original": {
+          "union_coverage": 0.5,
+          "cap40_coverage": 0.5,
+          "source_hits": 1,
+          "retained_hits": 1,
+          "candidate_count": 31
+        },
+        "Expanded": {
+          "union_coverage": 0.5,
+          "cap40_coverage": 0.5,
+          "source_hits": 1,
+          "retained_hits": 1,
+          "candidate_count": 90
+        }
+      }
+    }
+  },
+  "interpretation": {
+    "retrieval": "Expanded improves necessary-source coverage in the full recall comparison; this is source coverage, not answer accuracy.",
+    "policy": "Quota-N9 and RoundRobin-40 are tied at 33/49; owner reranking reaches 36/49 before evidence selection.",
+    "evidence": "Owner-Clean retains 20/49 necessary sources under 6000 bytes / 8 blocks.",
+    "router_fix": "R11 fallback to llm repair restores four subqueries, but R11 remains 1/2 necessary sources.",
+    "limitation": "24 questions and support pools are exposed development material; rerank/evidence runs predate the isolated R11 rerun for the other 23 rows.",
+    "semantic_accuracy": "not evaluated"
+  },
+  "source_runs": {
+    "router_fix": {
+      "benchmark": "benchmark-query-router-fix-v1",
+      "run_id": "c22f0bb403e744139598cee5161cde3b",
+      "benchmark_sha256": "701715827b41bbadb8816fc50468eb4301c0dc5158fc4e668324ee195c6eba34",
+      "summary_sha256": "9b938d498622417c49e17a78eb2d55c9f70de04439b03e1f313814bcb903c4f2",
+      "dataset_id": "5a66b27d-0f93-4e20-b796-22d397f184c7",
+      "dataset_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/5a66b27d-0f93-4e20-b796-22d397f184c7",
+      "comparison_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/5a66b27d-0f93-4e20-b796-22d397f184c7/compare?selectedSessions=2679d4cf-07d9-4055-ae81-d8b7870035dc,a5e86f17-68db-4b16-9753-daa9d49437f0",
+      "experiments": [
+        {
+          "arm": "Rule",
+          "project_id": "2679d4cf-07d9-4055-ae81-d8b7870035dc",
+          "runs_verified": 24,
+          "feedback_verified": 120
+        },
+        {
+          "arm": "Local-LLM",
+          "project_id": "a5e86f17-68db-4b16-9753-daa9d49437f0",
+          "runs_verified": 24,
+          "feedback_verified": 144
+        }
+      ]
+    },
+    "recall_full": {
+      "benchmark": "benchmark-subquery-recall-v1",
+      "run_id": "e158c260284d4273b8b55c9bd7a8b8f7",
+      "benchmark_sha256": "f3708a226e28c8baf047a76217780d3066255b505cf09c64a17f8ba415dd5036",
+      "summary_sha256": "ced49bd418da1a384a00901edc979ffcda9423357c7109dd2e221f70261fe70c",
+      "dataset_id": "267ea085-39ea-4815-99dd-b2f36f2b1954",
+      "dataset_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/267ea085-39ea-4815-99dd-b2f36f2b1954",
+      "comparison_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/267ea085-39ea-4815-99dd-b2f36f2b1954/compare?selectedSessions=9239e993-2f34-4d5e-aac2-804257c80ca2,c29992a9-535c-42d7-ad1b-1ce89a6efa20",
+      "experiments": [
+        {
+          "arm": "Original",
+          "project_id": "9239e993-2f34-4d5e-aac2-804257c80ca2",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "Expanded",
+          "project_id": "c29992a9-535c-42d7-ad1b-1ce89a6efa20",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        }
+      ]
+    },
+    "recall_router_fix": {
+      "benchmark": "benchmark-subquery-recall-router-fix-v1",
+      "run_id": "e73ddd804e6c4dd6a54873ec47b74727",
+      "benchmark_sha256": "c48620b6e885fd730cac8db762b04e52d38abc1cb888be8356696841fced4594",
+      "summary_sha256": "00a1adad7c8eb6459f4ed5d231ab2a1077a0a5eef4d96c4fc0429b225242d582",
+      "dataset_id": "4539be45-c34f-48ea-931d-ecdf1518878e",
+      "dataset_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/4539be45-c34f-48ea-931d-ecdf1518878e",
+      "comparison_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/4539be45-c34f-48ea-931d-ecdf1518878e/compare?selectedSessions=376930ea-d7f2-4150-992e-68ff6d342868,6b50a156-c8e1-4934-b340-24e66844e07e",
+      "experiments": [
+        {
+          "arm": "Original",
+          "project_id": "376930ea-d7f2-4150-992e-68ff6d342868",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "Expanded",
+          "project_id": "6b50a156-c8e1-4934-b340-24e66844e07e",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        }
+      ]
+    },
+    "policy": {
+      "benchmark": "benchmark-subquery-recall-policy-v1",
+      "run_id": "436a8f4429df42c3b6fafe2c12216b5b",
+      "benchmark_sha256": "b337609798c1876818dcfa03ac7c78fc0ffff2ba0e7cc0e20c83992460f7e42a",
+      "summary_sha256": "e8d7c3390e5f7a7830ad90e126c02a8c07b019f065c2df7db63cc14aa27327c9",
+      "dataset_id": "b0aefb4a-a733-4151-8def-4e0cbf8e5942",
+      "dataset_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/b0aefb4a-a733-4151-8def-4e0cbf8e5942",
+      "comparison_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/b0aefb4a-a733-4151-8def-4e0cbf8e5942/compare?selectedSessions=608743bc-108f-4685-9502-883f8de4c6a6,e6512f9f-201c-4d23-9998-03f684d400ee,805f25ba-a657-48de-8a1b-aaacea4174e8,a81b8658-347b-4a6d-90da-42a9c5634204,fd0d33a8-4138-4c99-a0b5-49f5ecb5754d,2cd82e14-931e-4806-bfd8-553d3f8fcfee,daf86c62-4bf6-4829-b383-50ced0e89874,04a195f2-b394-4d44-9bfe-94c957da01df",
+      "experiments": [
+        {
+          "arm": "Quota-N6",
+          "project_id": "608743bc-108f-4685-9502-883f8de4c6a6",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "Quota-N9",
+          "project_id": "e6512f9f-201c-4d23-9998-03f684d400ee",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "Quota-N13",
+          "project_id": "805f25ba-a657-48de-8a1b-aaacea4174e8",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "Quota-N20",
+          "project_id": "a81b8658-347b-4a6d-90da-42a9c5634204",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "RoundRobin-40",
+          "project_id": "fd0d33a8-4138-4c99-a0b5-49f5ecb5754d",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "QueryHits-BestRank-40",
+          "project_id": "2cd82e14-931e-4806-bfd8-553d3f8fcfee",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "Rerank-Original-Union40",
+          "project_id": "daf86c62-4bf6-4829-b383-50ced0e89874",
+          "runs_verified": 24,
+          "feedback_verified": 336
+        },
+        {
+          "arm": "Rerank-OwnerSubquery-Union40",
+          "project_id": "04a195f2-b394-4d44-9bfe-94c957da01df",
+          "runs_verified": 24,
+          "feedback_verified": 336
+        }
+      ]
+    },
+    "rerank_clean": {
+      "benchmark": "benchmark-subquery-rerank-clean-v1",
+      "run_id": "f4738bf1db924730b67f99a6c971c9ea",
+      "benchmark_sha256": "ee787ceacfd9695b15f0276d4aa61d7e3ae67cf98d5bd67aa73556472935c1f1",
+      "summary_sha256": "b54187753db432f3f9d4e570ccd34b5e9e4a7658f1e54e61ba30c841bca230d8",
+      "dataset_id": "a0cbbb0a-b809-4ada-871b-9cdc9da9b8ab",
+      "dataset_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/a0cbbb0a-b809-4ada-871b-9cdc9da9b8ab",
+      "comparison_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/a0cbbb0a-b809-4ada-871b-9cdc9da9b8ab/compare?selectedSessions=06481603-5634-48e8-9d5d-ddcc0ed7794f,7f40e948-e8ff-4cb4-8dca-aac93b3ba797,66db67bd-5933-45b5-9ea7-49407421603c",
+      "experiments": [
+        {
+          "arm": "Owner-Clean",
+          "project_id": "06481603-5634-48e8-9d5d-ddcc0ed7794f",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "Original-Reused",
+          "project_id": "7f40e948-e8ff-4cb4-8dca-aac93b3ba797",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        },
+        {
+          "arm": "Max-Original-Owner",
+          "project_id": "66db67bd-5933-45b5-9ea7-49407421603c",
+          "runs_verified": 24,
+          "feedback_verified": 288
+        }
+      ]
+    }
+  },
+  "hashes": {
+    "artifacts/eval/stage-4/benchmark-query-router-fix-v1/benchmark.json": "701715827b41bbadb8816fc50468eb4301c0dc5158fc4e668324ee195c6eba34",
+    "artifacts/reports/stage-4/benchmark-query-router-fix-v1/runs/c22f0bb403e744139598cee5161cde3b/summary.json": "9b938d498622417c49e17a78eb2d55c9f70de04439b03e1f313814bcb903c4f2",
+    "artifacts/eval/stage-4/benchmark-subquery-recall-v1/benchmark.json": "f3708a226e28c8baf047a76217780d3066255b505cf09c64a17f8ba415dd5036",
+    "artifacts/reports/stage-4/benchmark-subquery-recall-v1/runs/e158c260284d4273b8b55c9bd7a8b8f7/summary.json": "ced49bd418da1a384a00901edc979ffcda9423357c7109dd2e221f70261fe70c",
+    "artifacts/eval/stage-4/benchmark-subquery-recall-router-fix-v1/benchmark.json": "c48620b6e885fd730cac8db762b04e52d38abc1cb888be8356696841fced4594",
+    "artifacts/reports/stage-4/benchmark-subquery-recall-router-fix-v1/runs/e73ddd804e6c4dd6a54873ec47b74727/summary.json": "00a1adad7c8eb6459f4ed5d231ab2a1077a0a5eef4d96c4fc0429b225242d582",
+    "artifacts/eval/stage-4/benchmark-subquery-recall-policy-v1/benchmark.json": "b337609798c1876818dcfa03ac7c78fc0ffff2ba0e7cc0e20c83992460f7e42a",
+    "artifacts/reports/stage-4/benchmark-subquery-recall-policy-v1/runs/436a8f4429df42c3b6fafe2c12216b5b/summary.json": "e8d7c3390e5f7a7830ad90e126c02a8c07b019f065c2df7db63cc14aa27327c9",
+    "artifacts/eval/stage-4/benchmark-subquery-rerank-clean-v1/benchmark.json": "ee787ceacfd9695b15f0276d4aa61d7e3ae67cf98d5bd67aa73556472935c1f1",
+    "artifacts/reports/stage-4/benchmark-subquery-rerank-clean-v1/runs/f4738bf1db924730b67f99a6c971c9ea/summary.json": "b54187753db432f3f9d4e570ccd34b5e9e4a7658f1e54e61ba30c841bca230d8"
+  }
+}

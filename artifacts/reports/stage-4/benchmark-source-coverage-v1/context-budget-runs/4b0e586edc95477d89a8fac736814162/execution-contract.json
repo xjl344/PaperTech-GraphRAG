@@ -1,0 +1,40 @@
+{
+  "benchmark": "benchmark-source-coverage-v1",
+  "benchmark_sha256": "fcbffc2cd3012d7e49daa8361e202f2b6211095974236c48dc8bfe057f7fb7f6",
+  "run_id": "4b0e586edc95477d89a8fac736814162",
+  "mode": "context_budget_evidence_replay",
+  "arms": [
+    "Budget-before",
+    "Evidence-first",
+    "Compact-paths"
+  ],
+  "budget_bytes": 6000,
+  "max_evidence": 8,
+  "max_paths": 4,
+  "parent_run_id": "e1283443e92d4181ab64cd2dd645fa13",
+  "parent_summary_sha256": "8a6ab7a19389925482d364813c38587b0bd4e1f8099d4c4aa45af0f9f19e233c",
+  "baseline_contract_sha256": "7324e9d65b61fe1a3090659c21397392a3af2ebf236c0460147cfd603e872c7e",
+  "fixed": [
+    "16 questions and reference facts",
+    "ranked candidates and scores",
+    "retrieved graph paths",
+    "source reservation",
+    "rerank score threshold",
+    "6000-byte context budget"
+  ],
+  "interventions": {
+    "Budget-before": "Step1 path reservation may evict evidence; full quotes in paths.",
+    "Evidence-first": "Keep selected original text. Full paths only use leftover budget.",
+    "Compact-paths": "Same original text as Evidence-first. Path references use existing chunk/quote IDs."
+  },
+  "metrics": "No gold enters assembly. Compare retained source papers, frozen fact coverage, paths, bytes and assembly time.",
+  "scope": "Evidence/path payload budget excludes question, system prompt and limitations; bytes are not tokens.",
+  "model_calls": 0,
+  "code_sha256": {
+    "src/papertech/evidence_context.py": "c0436d416c5acf52d426b9c0689a08ff12b74321bfa6f09b480f412026e61498",
+    "src/papertech/workflow.py": "ba65afafa761d1d42ff0739b94a93764ac8621bc71e53b4a927f050b39bdb905",
+    "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+    "scripts/eval-context-budget.py": "81e6ea7ad7f4847343c24c13e9e900894950b49979d0bcd6280ce1422eb242c2",
+    "scripts/eval-source-coverage.py": "014f704c2d9acbc800dc2c2c65754c1a40c4cd38f7ff5df44943a262e8d1f23c"
+  }
+}

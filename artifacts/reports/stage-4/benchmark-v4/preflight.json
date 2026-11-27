@@ -1,0 +1,249 @@
+{
+  "status": "passed",
+  "benchmark_sha256": "2904af152a4bffd86119cbbf030d0ac658e909cc22d1abdf2b4d398f67d02451",
+  "contract": {
+    "benchmark": "benchmark-v4",
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    },
+    "models": {
+      "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+      "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+      "CLOUD_BGE_PROVIDER": "cloudflare",
+      "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+      "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+      "LOCAL_RERANKER_DEVICE": "cuda",
+      "LOCAL_RERANKER_DTYPE": "float16"
+    },
+    "code_sha256": {
+      "scripts/eval-stage4.py": "848fa7222a6b0294a3aa937988be1405fd76656c14708134bac7ef7549e9195b",
+      "src/papertech/evaluation_runtime.py": "7e1dbed565a7ff23f20c81a77cd9510fdab30984dd9abe136d7fcda934a5e080",
+      "src/papertech/isolated_graph.py": "039d27009ec94003cfc6f25024ae2015ab7c12b27f9f7cfe5dc21979f1c41586",
+      "src/papertech/workflow.py": "6fe7b530e355f19886c34bd61c98046b6cd10598b74f94220dae63d64130964a",
+      "src/papertech/graph_store.py": "485c50edfbc99e26554d903b0f637ae4893ecf06168be34a767cd986c4d07476",
+      "src/papertech/retrieval.py": "ef2480079acc98095c86394ce6ae5bf894a7034a47d0d394cf584f871e41ae65",
+      "src/papertech/evidence_context.py": "b9bfe29885ffe4b82086a78572ffe4d031d3de9c497b0681aa732525a46f89f6",
+      "src/papertech/entity_aliases.py": "2725c08d7ca72f46c3bf7adbb3207eb75331f963a1998826bc6397e375699ea6",
+      "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+      "src/papertech/citations.py": "6465c41be136683a5ec723720820fca5c246c9365836914ca8967e5805175372",
+      "src/papertech/evaluation.py": "66243bab25fad68e90116f09bcb6292840bb4a70167fdadaa8bde9298c877874",
+      "src/papertech/evaluation_details.py": "ae5a19eeef264e9c389c7181d8009935afbd3629f516d0de73cc50d8cb364c14",
+      "src/papertech/evaluation_datasets.py": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+      "src/papertech/local_models.py": "62f465e7615a7208a8f4bfda6c9f4b545843e3115ef91768d47f5a7e787edddb",
+      "src/papertech/rerank_service.py": "156293246350d8b4a8c7bd23d45edb26f471d1bfe690480412edcf942617d693",
+      "scripts/rerank-service.py": "562927f8ebd62834e8aca53ae55a436eac4d82f39b66e1ad92b017f1b73facf5"
+    },
+    "controls": {
+      "arms": [
+        "Hybrid",
+        "Hybrid+Graph"
+      ],
+      "backend": "neo4j",
+      "graph_backend": "isolated_sqlite",
+      "fulltext_top": 20,
+      "dense_top": 20,
+      "fusion_max": 40,
+      "graph_candidates_max": 20,
+      "graph_seed_chunks": 12,
+      "graph_seed_entities": 40,
+      "graph_max_paths": 40,
+      "graph_hops": 2,
+      "graph_per_node": 8,
+      "evidence_max": 8,
+      "evidence_bytes": 6000,
+      "path_bytes": 1200,
+      "context_bytes": 7200,
+      "path_budget_mode": "additional",
+      "generation_max_tokens": 2048,
+      "thinking": "disabled",
+      "generation_requests_expected": 80,
+      "sampling": "provider default; one sample per arm",
+      "execution_order": "alternate which arm goes first",
+      "query_vector": "one shared Cloudflare batch",
+      "gold_exclusion": "question text only; reference tables and claim unit/path IDs denied by SQLite authorizer"
+    },
+    "latency": "retrieval compute excludes audit upload, generation, and shared embedding batch; request wall time reported separately",
+    "status": "frozen_before_execution"
+  },
+  "index": {
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "corpus": [
+      {
+        "status": "ready",
+        "model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+        "expected_chunks": 980
+      }
+    ],
+    "counts": [
+      {
+        "chunks": 980,
+        "papers": 14
+      }
+    ],
+    "semantic_counts": [
+      {
+        "entities": 98
+      }
+    ],
+    "indexes": [
+      {
+        "name": "papertech_text",
+        "type": "FULLTEXT",
+        "state": "ONLINE",
+        "options": {
+          "indexProvider": "fulltext-1.0",
+          "indexConfig": {
+            "fulltext.analyzer": "standard-no-stop-words",
+            "fulltext.eventually_consistent": false
+          }
+        }
+      },
+      {
+        "name": "papertech_vector",
+        "type": "VECTOR",
+        "state": "ONLINE",
+        "options": {
+          "indexProvider": "vector-2.0",
+          "indexConfig": {
+            "vector.hnsw.m": 16,
+            "vector.hnsw.ef_construction": 100,
+            "vector.dimensions": 1024,
+            "vector.similarity_function": "COSINE",
+            "vector.quantization.enabled": true
+          }
+        }
+      }
+    ],
+    "version": [
+      {
+        "name": "Neo4j Kernel",
+        "versions": [
+          "5.26.12"
+        ],
+        "edition": "community"
+      }
+    ]
+  },
+  "graph_probes": [
+    {
+      "question": "G-Retriever 怎样选择相关子图？",
+      "paths": 6,
+      "audit": {
+        "backend": "isolated_sqlite",
+        "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+        "anchors": [
+          {
+            "id": "a327bdc94ebba23f0ea1289d017badecf4c00c8683a9239a6a4f1c7fdd7076b3",
+            "name": "G-Retriever",
+            "type": "Method",
+            "canonical": "g-retriever"
+          }
+        ],
+        "seed_count": 1,
+        "max_hops": 2,
+        "max_paths": 40,
+        "per_node": 8,
+        "deadline_seconds": 10,
+        "degree_truncated": [],
+        "reference_tables_access": "denied by SQLite authorizer",
+        "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+        "returned_paths": 6,
+        "expanded_nodes": 2,
+        "elapsed_seconds": 0.017442800000935677
+      }
+    },
+    {
+      "question": "比较 HippoRAG 与 RoG 的检索机制。",
+      "paths": 35,
+      "audit": {
+        "backend": "isolated_sqlite",
+        "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+        "anchors": [
+          {
+            "id": "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+            "name": "HippoRAG",
+            "type": "Method",
+            "canonical": "hipporag"
+          },
+          {
+            "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+            "name": "RoG",
+            "type": "Method",
+            "canonical": "rog"
+          }
+        ],
+        "seed_count": 2,
+        "max_hops": 2,
+        "max_paths": 40,
+        "per_node": 8,
+        "deadline_seconds": 10,
+        "degree_truncated": [
+          "d9dfdd3b16e8d052878d6d3bfe5efe7dba32cd05552e63ff4129e42719d76ed5",
+          "f144c942f311e3cd8437d824d67e35e2144984d8b7b464cfea4b4201f6df7cec"
+        ],
+        "reference_tables_access": "denied by SQLite authorizer",
+        "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+        "returned_paths": 35,
+        "expanded_nodes": 17,
+        "elapsed_seconds": 0.007850899999539251
+      }
+    },
+    {
+      "question": "ToG-2 怎样检索？",
+      "paths": 24,
+      "audit": {
+        "backend": "isolated_sqlite",
+        "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+        "anchors": [
+          {
+            "id": "4a6653a8aebdb4e2a367174818143a7ff503565ca6a21ce45856d893cac554bc",
+            "name": "Think-on-Graph 2.0",
+            "type": "Method",
+            "canonical": "tog-2"
+          },
+          {
+            "id": "fc2c2aae9edc49b2a8cb8d1de2e71db25e87711eb7fc8ec4e76ad873fc1507d9",
+            "name": "ToG-2",
+            "type": "Method",
+            "canonical": "tog-2"
+          }
+        ],
+        "seed_count": 2,
+        "max_hops": 2,
+        "max_paths": 40,
+        "per_node": 8,
+        "deadline_seconds": 10,
+        "degree_truncated": [
+          "fc2c2aae9edc49b2a8cb8d1de2e71db25e87711eb7fc8ec4e76ad873fc1507d9"
+        ],
+        "reference_tables_access": "denied by SQLite authorizer",
+        "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+        "returned_paths": 24,
+        "expanded_nodes": 16,
+        "elapsed_seconds": 0.007104899999831105
+      }
+    }
+  ],
+  "gpu": {
+    "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+    "device": "cuda",
+    "dtype": "float16",
+    "model_reused": false,
+    "request_count": 1,
+    "load_seconds": 5.74636559999999,
+    "inference_seconds": 0.5316407999998773,
+    "batch_size": 1,
+    "max_pair_tokens": 1024,
+    "peak_cuda_memory_bytes": 1144480256,
+    "elapsed_seconds": 63.43700279999939,
+    "persistent": true
+  },
+  "generation_calls": 0,
+  "embedding_api_calls": 0
+}

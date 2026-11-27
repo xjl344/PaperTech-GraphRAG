@@ -1,0 +1,5900 @@
+{
+  "request_id": "2f5f22c5-49e5-47b8-9618-f6502c118a2c",
+  "status": "partial",
+  "answer": "HippoRAG 将所评测数据集写作“2WikiMultiHopQA”，表格中简写为“2Wiki” [E9, E1]。其跨事实检索依赖知识图谱上的随机游走类关联：原文说明 PPR 比简单基线更能纳入关联用于检索，且 synonymy edges 对 2WikiMultiHopQA 影响最大 [E10]；但所给引句未展开完整检索流程，流程证据不足以做细节比较。Tree-of-Traversals 将其写作“2WikiMultiHop” [E2, E7]，表头亦为“2WikiMultiHop” [E4, E5]。其搜索是构建搜索树：按节点价值选择扩展节点，从 LLM 采样 k 个动作，应用转移函数并用 LLM 价值函数评估，答案超过阈值 τ 即停止，并以最大深度和最大扩展数约束搜索空间 [E8]；对 2WikiMultiHop 使用 Wikidata 知识图谱和 Wikidata SPARQL 接口 [E6]。名称相似不能证明协议一致：HippoRAG 从其验证集抽取 1,000 个问题并汇集候选段落形成检索语料，报告 R@2/R@5 [E9, E1]；Tree-of-Traversals 在 2WikiMultiHop 上以 Wikidata 为 KG 做问答并报告 EM 类指标 [E5, E6]。因此二者共享数据集名称，但评测任务、知识来源与指标不同，不能由名称推断协议一致。",
+  "citations": [
+    {
+      "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 2205,
+          "end_char": 3400,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1195,
+          "block_bboxes": [
+            [
+              107.532,
+              383.68,
+              505.653,
+              470.063
+            ],
+            [
+              119.512,
+              481.129,
+              492.488,
+              491.322
+            ],
+            [
+              314.205,
+              502.845,
+              447.078,
+              511.811
+            ],
+            [
+              162.683,
+              517.888,
+              447.078,
+              577.187
+            ],
+            [
+              108.0,
+              592.604,
+              169.718,
+              602.566
+            ]
+          ]
+        }
+      ],
+      "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 4.221471786499023
+        }
+      ],
+      "rerank_score": 0.5535354018211365,
+      "context_bytes": 1578,
+      "eid": "E9"
+    },
+    {
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 27,
+      "page_end": 27,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 27,
+          "start_char": 165,
+          "end_char": 1355,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1190,
+          "block_bboxes": [
+            [
+              107.532,
+              101.451,
+              505.241,
+              166.213
+            ],
+            [
+              107.691,
+              182.901,
+              503.995,
+              203.941
+            ],
+            [
+              111.644,
+              215.463,
+              488.107,
+              224.429
+            ],
+            [
+              266.498,
+              230.514,
+              500.354,
+              239.48
+            ],
+            [
+              111.644,
+              245.474,
+              499.188,
+              264.611
+            ],
+            [
+              111.644,
+              270.605,
+              499.188,
+              289.742
+            ],
+            [
+              111.644,
+              295.944,
+              198.286,
+              314.872
+            ],
+            [
+              210.24,
+              295.736,
+              500.236,
+              314.872
+            ],
+            [
+              108.0,
+              351.832,
+              215.955,
+              361.794
+            ]
+          ]
+        }
+      ],
+      "quote": "When HippoRAG is ensembled with M under “Uncertainty Ensemble”, it further improves on\nMuSiQue and outperforms our baselines in R@5 for HotpotQA, as shown in Table 13. When used in\ncombination with IRCoT, as shown in Table 14, the ColBERTv2 ensemble outperforms all previous\nbaselines in both R@2 and R@5 on HotpotQA. Although the simplicity of this approach is promising,\nmore work needs to be done to solve this context-context tradeoff since simple ensembling does\nlower performance in some cases, especially for the 2WikiMultiHopQA dataset.\nTable 14: Multi-step retrieval performance. Combining HippoRAG with standard multi-step\nretrieval methods like IRCoT results in substantial improvements on all three datasets.\nModel\nRetriever\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nIRCoT\nContriever\n39.1\n52.2\n51.6\n63.8\n65.9\n81.6\n52.2\n65.9\nColBERTv2\n41.7\n53.7\n64.1\n74.4\n67.9\n82.0",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.167265892028809
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.774569034576416
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.378047943115234
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7800650596618652
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 4.399415016174316
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8027410507202148
+        }
+      ],
+      "rerank_score": 0.7185943722724915,
+      "context_bytes": 1617,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 179,
+          "end_char": 1441,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1262,
+          "block_bboxes": [
+            [
+              108.0,
+              101.594,
+              504.004,
+              177.122
+            ],
+            [
+              107.641,
+              183.38,
+              504.344,
+              248.056
+            ],
+            [
+              108.0,
+              265.266,
+              377.707,
+              275.229
+            ]
+          ]
+        }
+      ],
+      "quote": "2WikiMultiHopQA relies on named entities with little differences in terms of term weighting. In\ncontrast, synonymy edges have the largest effect on 2WikiMultiHopQA, suggesting that noisy entity\nstandardization is useful when most relevant concepts are named entities, and improvements to\nsynonymy detection could lead to stronger performance in other datasets.\n5.2\nHippoRAG’s Advantage: Single-Step Multi-Hop Retrieval",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7796106338500977
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.756007194519043
+        }
+      ],
+      "rerank_score": 0.519201397895813,
+      "context_bytes": 1619,
+      "eid": "E10"
+    },
+    {
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 888,
+          "end_char": 2200,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1312,
+          "block_bboxes": [
+            [
+              70.866,
+              373.795,
+              153.883,
+              385.75
+            ],
+            [
+              70.353,
+              397.537,
+              290.946,
+              408.538
+            ],
+            [
+              70.506,
+              409.426,
+              290.943,
+              516.91
+            ],
+            [
+              70.866,
+              531.077,
+              186.841,
+              541.986
+            ],
+            [
+              70.353,
+              550.22,
+              289.137,
+              561.172
+            ],
+            [
+              70.866,
+              563.885,
+              290.95,
+              628.908
+            ],
+            [
+              70.866,
+              632.233,
+              290.941,
+              751.637
+            ],
+            [
+              83.519,
+              762.682,
+              248.401,
+              772.731
+            ],
+            [
+              309.977,
+              73.825,
+              520.839,
+              98.283
+            ],
+            [
+              357.666,
+              100.732,
+              473.149,
+              111.832
+            ]
+          ]
+        }
+      ],
+      "quote": "Experiments\nWe evaluate Tree-of-Traversals using three differ-\nent models available on Amazon Bedrock3: Claude-\nInstant (claude-instant-v1), Llama2 70b\n(llama2-70b-chat-v1), and Llama2 13b\n(llama2-13b-chat-v1). AWS Bedrock pro-\nvides on-demand access through a single API to\nvarious Foundation Models, including both open\nsource and black box ones. This is precisely a use\ncase Tree-of-Traversals is designed for.\n3.1\nTasks and Datasets.\nWe first evaluate the Tree-of-Traversals algorithm\non two common tasks used for evaluating an LLM’s\nknowledge: 2WikiMultiHop and QALD-10. To al-\nlow testing on complex questions requiring knowl-\nedge from multiple KGs we create a new dataset\nthat requires knowledge from multiple KGs.\n2WikiMultiHop Dataset (Ho et al., 2020) was\nconstructed by extracting multi-hop templates from\nHotPotQA (Yang et al., 2018), combining tem-",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.504687309265137
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8023653030395508
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 8.504687309265137
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7936639785766602
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.312259674072266
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8265948295593262
+        }
+      ],
+      "rerank_score": 0.8643104434013367,
+      "context_bytes": 1722,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2278,
+          "end_char": 2406,
+          "chunk_start_char": 0,
+          "chunk_end_char": 128,
+          "block_bboxes": [
+            [
+              79.521,
+              509.369,
+              290.949,
+              547.376
+            ]
+          ]
+        }
+      ],
+      "quote": "2. Evaluation of Tree-of-Traversals on two ques-\ntion answering tasks: 2WikiMultiHop and\nQALD-10 and comparison with baselines.",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.408199787139893
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.805145263671875
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.22339916229248
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.795100212097168
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.408199787139893
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8140740394592285
+        }
+      ],
+      "rerank_score": 0.7887459397315979,
+      "context_bytes": 474,
+      "eid": "E7"
+    },
+    {
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2984,
+          "end_char": 3750,
+          "chunk_start_char": 0,
+          "chunk_end_char": 766,
+          "block_bboxes": [
+            [
+              305.749,
+              572.979,
+              526.225,
+              773.66
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 259,
+          "chunk_start_char": 767,
+          "chunk_end_char": 1026,
+          "block_bboxes": [
+            [
+              307.611,
+              75.747,
+              387.105,
+              87.05
+            ],
+            [
+              147.535,
+              95.172,
+              447.742,
+              106.081
+            ],
+            [
+              153.512,
+              114.421,
+              430.629,
+              152.329
+            ],
+            [
+              193.47,
+              167.469,
+              401.499,
+              177.432
+            ],
+            [
+              70.866,
+              201.123,
+              290.991,
+              212.032
+            ]
+          ]
+        }
+      ],
+      "quote": "Tree-of-Traversals\n40.4\n23.4\n16.5\nTable 2: EM-in on MusicBrainz-x-Wikidata dataset.\n4.3\nPerformance on MusicBrainz-x-Wikidata.",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.400364875793457
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7954645156860352
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.400364875793457
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7863626480102539
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.831502437591553
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8295550346374512
+        }
+      ],
+      "rerank_score": 0.8226169943809509,
+      "context_bytes": 1438,
+      "eid": "E4"
+    },
+    {
+      "chunk_id": "chunk_f4962498025654850621ee329d0af7d6",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 3325,
+          "end_char": 4344,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1019,
+          "block_bboxes": [
+            [
+              305.804,
+              480.537,
+              526.318,
+              749.037
+            ],
+            [
+              318.794,
+              762.682,
+              489.559,
+              772.731
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 314,
+          "chunk_start_char": 1020,
+          "chunk_end_char": 1334,
+          "block_bboxes": [
+            [
+              302.451,
+              75.747,
+              392.265,
+              87.05
+            ],
+            [
+              140.608,
+              95.172,
+              446.717,
+              106.081
+            ],
+            [
+              146.585,
+              114.421,
+              448.688,
+              192.976
+            ],
+            [
+              316.605,
+              201.022,
+              378.111,
+              212.325
+            ],
+            [
+              140.608,
+              220.447,
+              446.717,
+              231.356
+            ]
+          ]
+        }
+      ],
+      "quote": "The curated questions were checked for\nambiguity and sensibility. By design, each question\n4https://github.com/KGQA/QALD-10\n\n2WikiMultiHop (↑)\nAlgorithm\nClaude-Instant\nLlama2-70b\nLlama2-13b\nChain-of-Thought\n25.2\n30.4\n26.8\nReAct\n5.8\n30.4\n6.8\nReAct→CoT\n27.0 (84.8%)\n41.6 (41.6%)\n23.6 (71.8%)\nFLARe\n35.0\n45.4\n34.8\nChain-of-Traversals\n42.6\n45.0\n31.0\nTree-of-Traversals\n63.0\n56.6\n37.3\nQALD-10 (↑)\nAlgorithm\nClaude-Instant\nLlama2-70b\nLlama2-13b",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.201725006103516
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7771492004394531
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.201725006103516
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7861690521240234
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8070206642150879
+        }
+      ],
+      "rerank_score": 0.7980294823646545,
+      "context_bytes": 1771,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 780,
+          "end_char": 2398,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1618,
+          "block_bboxes": [
+            [
+              70.473,
+              323.184,
+              290.949,
+              496.704
+            ],
+            [
+              70.473,
+              505.386,
+              290.941,
+              773.66
+            ]
+          ]
+        }
+      ],
+      "quote": "on the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7600975036621094
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.918233394622803
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8346819877624512
+        }
+      ],
+      "rerank_score": 0.7829945087432861,
+      "context_bytes": 2034,
+      "eid": "E8"
+    },
+    {
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 1600,
+          "end_char": 3140,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1540,
+          "block_bboxes": [
+            [
+              70.506,
+              695.088,
+              290.949,
+              773.655
+            ],
+            [
+              306.142,
+              379.134,
+              526.225,
+              430.657
+            ],
+            [
+              306.142,
+              441.842,
+              440.989,
+              452.751
+            ],
+            [
+              306.142,
+              459.352,
+              526.225,
+              660.016
+            ],
+            [
+              305.629,
+              662.573,
+              524.408,
+              687.139
+            ],
+            [
+              306.142,
+              689.808,
+              526.226,
+              754.833
+            ]
+          ]
+        }
+      ],
+      "quote": "means that upon reaching the default action state\nbeyond depth 7, the only available action is to an-\nswer the question. For Tree-of-Traversals, we set\nthe maximum total expansions to 20. The answer\nthreshold τ is set to 0.8 which corresponds to high\nconfidence answers supported by the KG according\nthe evaluate prompt (Appendix F.5).\nFor 2WikiMultiHop and QALD-10, we use\nWikidata as the knowledge graph (Vrandeˇci´c and\nKrötzsch, 2014). For MusicBrainz-x-Wikidata, we\nuse MusicBrainz in addition to Wikidata. We im-\nplement the KG interface for Wikidata using Wiki-\ndata SPARQL queries5, and implement the KG in-\nterface for MusicBrainz KG using the MusicBrainz",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.359338760375977
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.845084190368652
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.968575477600098
+        }
+      ],
+      "rerank_score": 0.7897205948829651,
+      "context_bytes": 1952,
+      "eid": "E6"
+    }
+  ],
+  "premise_check": [
+    {
+      "premise": "HippoRAG 在论文中命名并评测 2Wiki 数据集",
+      "supported": true,
+      "evidence_eids": [
+        "E9",
+        "E10",
+        "E1"
+      ],
+      "note": "HippoRAG 原文称 2WikiMultiHopQA，表头简写 2Wiki"
+    },
+    {
+      "premise": "Tree-of-Traversals 在论文中命名并评测 2Wiki 数据集",
+      "supported": true,
+      "evidence_eids": [
+        "E2",
+        "E7",
+        "E4",
+        "E5"
+      ],
+      "note": "Tree-of-Traversals 原文称 2WikiMultiHop，表头简写 2WikiMultiHop"
+    },
+    {
+      "premise": "HippoRAG 描述了跨事实检索方式",
+      "supported": true,
+      "evidence_eids": [
+        "E3",
+        "E10"
+      ],
+      "note": "有 cross-passage knowledge integration 与 PPR 加 synonymy edges 的表述，但流程细节未在引句展开"
+    },
+    {
+      "premise": "Tree-of-Traversals 描述了搜索流程与 Wikidata 接口",
+      "supported": true,
+      "evidence_eids": [
+        "E8",
+        "E6"
+      ],
+      "note": "树搜索、分支、深度、扩展上限及 Wikidata SPARQL 接口"
+    },
+    {
+      "premise": "2Wiki 名称相似足以证明两者评测协议一致",
+      "supported": false,
+      "evidence_eids": [
+        "E9",
+        "E2",
+        "E6"
+      ],
+      "note": "HippoRAG 用 1000 问题验证集与检索语料，Tree-of-Traversals 用 Wikidata KG 做 QA；指标也不同（R@k 对 EM）"
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 27,
+      "page_end": 27,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 27,
+          "start_char": 165,
+          "end_char": 1355,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1190,
+          "block_bboxes": [
+            [
+              107.532,
+              101.451,
+              505.241,
+              166.213
+            ],
+            [
+              107.691,
+              182.901,
+              503.995,
+              203.941
+            ],
+            [
+              111.644,
+              215.463,
+              488.107,
+              224.429
+            ],
+            [
+              266.498,
+              230.514,
+              500.354,
+              239.48
+            ],
+            [
+              111.644,
+              245.474,
+              499.188,
+              264.611
+            ],
+            [
+              111.644,
+              270.605,
+              499.188,
+              289.742
+            ],
+            [
+              111.644,
+              295.944,
+              198.286,
+              314.872
+            ],
+            [
+              210.24,
+              295.736,
+              500.236,
+              314.872
+            ],
+            [
+              108.0,
+              351.832,
+              215.955,
+              361.794
+            ]
+          ]
+        }
+      ],
+      "quote": "When HippoRAG is ensembled with M under “Uncertainty Ensemble”, it further improves on\nMuSiQue and outperforms our baselines in R@5 for HotpotQA, as shown in Table 13. When used in\ncombination with IRCoT, as shown in Table 14, the ColBERTv2 ensemble outperforms all previous\nbaselines in both R@2 and R@5 on HotpotQA. Although the simplicity of this approach is promising,\nmore work needs to be done to solve this context-context tradeoff since simple ensembling does\nlower performance in some cases, especially for the 2WikiMultiHopQA dataset.\nTable 14: Multi-step retrieval performance. Combining HippoRAG with standard multi-step\nretrieval methods like IRCoT results in substantial improvements on all three datasets.\nModel\nRetriever\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nIRCoT\nContriever\n39.1\n52.2\n51.6\n63.8\n65.9\n81.6\n52.2\n65.9\nColBERTv2\n41.7\n53.7\n64.1\n74.4\n67.9\n82.0\n57.9\n70.0\nIRCoT + HippoRAG\nContriever\n43.9\n56.6\n75.3\n93.4\n65.8\n82.3\n61.7\n77.4\nColBERTv2\n45.3\n57.6\n75.8\n93.9\n67.0\n83.0\n62.7\n78.2\nIRCoT + HippoRAG w/\nUncertainty Ensemble\nContriever\n44.4\n58.5\n75.3\n91.5\n66.9\n85.0\n62.2\n78.3\nColBERTv2\n40.2\n53.4\n74.5\n91.2\n68.2\n85.3\n61.0\n76.6\nF.3\nOpenIE Limitations\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.167265892028809
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.774569034576416
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.378047943115234
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7800650596618652
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 4.399415016174316
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8027410507202148
+        }
+      ],
+      "rerank_score": 0.7185943722724915,
+      "context_bytes": 1617
+    },
+    {
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 888,
+          "end_char": 2200,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1312,
+          "block_bboxes": [
+            [
+              70.866,
+              373.795,
+              153.883,
+              385.75
+            ],
+            [
+              70.353,
+              397.537,
+              290.946,
+              408.538
+            ],
+            [
+              70.506,
+              409.426,
+              290.943,
+              516.91
+            ],
+            [
+              70.866,
+              531.077,
+              186.841,
+              541.986
+            ],
+            [
+              70.353,
+              550.22,
+              289.137,
+              561.172
+            ],
+            [
+              70.866,
+              563.885,
+              290.95,
+              628.908
+            ],
+            [
+              70.866,
+              632.233,
+              290.941,
+              751.637
+            ],
+            [
+              83.519,
+              762.682,
+              248.401,
+              772.731
+            ],
+            [
+              309.977,
+              73.825,
+              520.839,
+              98.283
+            ],
+            [
+              357.666,
+              100.732,
+              473.149,
+              111.832
+            ]
+          ]
+        }
+      ],
+      "quote": "Experiments\nWe evaluate Tree-of-Traversals using three differ-\nent models available on Amazon Bedrock3: Claude-\nInstant (claude-instant-v1), Llama2 70b\n(llama2-70b-chat-v1), and Llama2 13b\n(llama2-13b-chat-v1). AWS Bedrock pro-\nvides on-demand access through a single API to\nvarious Foundation Models, including both open\nsource and black box ones. This is precisely a use\ncase Tree-of-Traversals is designed for.\n3.1\nTasks and Datasets.\nWe first evaluate the Tree-of-Traversals algorithm\non two common tasks used for evaluating an LLM’s\nknowledge: 2WikiMultiHop and QALD-10. To al-\nlow testing on complex questions requiring knowl-\nedge from multiple KGs we create a new dataset\nthat requires knowledge from multiple KGs.\n2WikiMultiHop Dataset (Ho et al., 2020) was\nconstructed by extracting multi-hop templates from\nHotPotQA (Yang et al., 2018), combining tem-\nplates to get complex reasoning questions, gener-\nating candidate questions with Wikidata, and then\nconfirming that the entity mentions for each edge\nappear in the Wikipedia paragraphs. Answers to\nthese questions can be derived from both Wikipedia\nand Wikidata (Vrandeˇci´c and Krötzsch, 2014). We\n3https://aws.amazon.com/bedrock\nWhich event was hosted in a venue with a larger\nmaximum capacity, Fearless Tour: Indianapolis\nor Fearless Tour: Omaha?\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.504687309265137
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8023653030395508
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 8.504687309265137
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7936639785766602
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.312259674072266
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8265948295593262
+        }
+      ],
+      "rerank_score": 0.8643104434013367,
+      "context_bytes": 1722
+    },
+    {
+      "chunk_id": "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 24,
+      "page_end": 24,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 24,
+          "start_char": 2071,
+          "end_char": 2923,
+          "chunk_start_char": 0,
+          "chunk_end_char": 852,
+          "block_bboxes": [
+            [
+              108.0,
+              453.461,
+              504.004,
+              528.805
+            ],
+            [
+              108.0,
+              544.547,
+              217.957,
+              554.509
+            ],
+            [
+              108.0,
+              565.154,
+              503.997,
+              586.018
+            ]
+          ]
+        }
+      ],
+      "quote": "For the third question and our motivating example, we first choose a professor or a drug at random as\nthe answer for each question. We then obtain the university the professor works at or the disease the\ndrug treats as well as one other trait for the professor or drug (in these questions research topic and\nmechanism of action were chosen). In these questions, distractors were extracted from Wikipedia\nusing the University or disease on the one hand and the research topic or mechanism of action on\nthe other. This process, although quite tedious, allowed us to curate these challenging but realistic\npath-finding multi-hop questions.\nE.2\nQualitative Analysis\nIn Table 10, we show three more examples from three different domains that illustrate HippoRAG’s\npotential for solving retrieval tasks that require such cross-passage knowledge integration.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7610282897949219
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8236002922058105
+        }
+      ],
+      "rerank_score": 0.7073035836219788,
+      "context_bytes": 1175
+    },
+    {
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 8,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 2984,
+          "end_char": 3750,
+          "chunk_start_char": 0,
+          "chunk_end_char": 766,
+          "block_bboxes": [
+            [
+              305.749,
+              572.979,
+              526.225,
+              773.66
+            ]
+          ]
+        },
+        {
+          "pdf_page": 8,
+          "start_char": 0,
+          "end_char": 259,
+          "chunk_start_char": 767,
+          "chunk_end_char": 1026,
+          "block_bboxes": [
+            [
+              307.611,
+              75.747,
+              387.105,
+              87.05
+            ],
+            [
+              147.535,
+              95.172,
+              447.742,
+              106.081
+            ],
+            [
+              153.512,
+              114.421,
+              430.629,
+              152.329
+            ],
+            [
+              193.47,
+              167.469,
+              401.499,
+              177.432
+            ],
+            [
+              70.866,
+              201.123,
+              290.991,
+              212.032
+            ]
+          ]
+        }
+      ],
+      "quote": "To determine the effect of backtracking in Tree-\nof-Traversals, we ask the counter-factual of how\nwould the model perform if it could not backtrack\n(Figure 6). We limit the analysis to 2WikiMultiHop\nquestions in which Tree-of-Traversals generates an-\nswers on a subtree, and the model eventually back-\ntracks on that subtree (i.e., the cases where we have\na counter-factual). As a result, these questions are\ngenerally more challenging than the overall distri-\nbution of questions. In these cases, we compare the\nresult if the highest-valued answer was taken from\nthe first searched subtree compared to the ultimate\nanswer after backtracking. We find that the ability\nto backtrack gives Tree-of-Traversals a significant\naccuracy increase ranging from 4.1% to 12.3%.\n\nMusic-x-Wiki (↑)\nAlgorithm\nClaude-Instant\nLlama2-70b\nLlama2-13b\nChain-of-Thoughts\n11.9\n10.1\n13.8\nChain-of-Traversals\n22.0\n21.9\n14.7\nTree-of-Traversals\n40.4\n23.4\n16.5\nTable 2: EM-in on MusicBrainz-x-Wikidata dataset.\n4.3\nPerformance on MusicBrainz-x-Wikidata.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.400364875793457
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7954645156860352
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.400364875793457
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7863626480102539
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.831502437591553
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8295550346374512
+        }
+      ],
+      "rerank_score": 0.8226169943809509,
+      "context_bytes": 1438
+    },
+    {
+      "chunk_id": "chunk_f4962498025654850621ee329d0af7d6",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 3325,
+          "end_char": 4344,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1019,
+          "block_bboxes": [
+            [
+              305.804,
+              480.537,
+              526.318,
+              749.037
+            ],
+            [
+              318.794,
+              762.682,
+              489.559,
+              772.731
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 314,
+          "chunk_start_char": 1020,
+          "chunk_end_char": 1334,
+          "block_bboxes": [
+            [
+              302.451,
+              75.747,
+              392.265,
+              87.05
+            ],
+            [
+              140.608,
+              95.172,
+              446.717,
+              106.081
+            ],
+            [
+              146.585,
+              114.421,
+              448.688,
+              192.976
+            ],
+            [
+              316.605,
+              201.022,
+              378.111,
+              212.325
+            ],
+            [
+              140.608,
+              220.447,
+              446.717,
+              231.356
+            ]
+          ]
+        }
+      ],
+      "quote": "MusicBrainz-x-Wikidata Dataset One novel\nuse-case of Tree-of-Traversals is synthesizing and\nreasoning over multiple knowledge graph sources.\nThere is no existing dataset that requires synthesiz-\ning information from multiple KGs to answer indi-\nvidual questions. Therefore, to test the reasoning\nability using multiple KGs, we create a new dataset,\nMusicBrainz-x-Wikidata, containing 109 questions\nthat require reasoning with information from both\nMusicBrainz and Wikidata. Unlike Wikidata which\ncontains general knowledge, MusicBrainz is a deep\ndomain-specific database on the music industry.\nThe vast majority of this information is unlikely to\nbe known by large language models. We construct\nthe MusicBrainz-x-Wikidata dataset with human\nannotators who were provided with instructions\nto find reasoning paths between these two KGs,\nthe question types to focus on, and some example\nquestions. The curated questions were checked for\nambiguity and sensibility. By design, each question\n4https://github.com/KGQA/QALD-10\n\n2WikiMultiHop (↑)\nAlgorithm\nClaude-Instant\nLlama2-70b\nLlama2-13b\nChain-of-Thought\n25.2\n30.4\n26.8\nReAct\n5.8\n30.4\n6.8\nReAct→CoT\n27.0 (84.8%)\n41.6 (41.6%)\n23.6 (71.8%)\nFLARe\n35.0\n45.4\n34.8\nChain-of-Traversals\n42.6\n45.0\n31.0\nTree-of-Traversals\n63.0\n56.6\n37.3\nQALD-10 (↑)\nAlgorithm\nClaude-Instant\nLlama2-70b\nLlama2-13b\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.201725006103516
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7771492004394531
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.201725006103516
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7861690521240234
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8070206642150879
+        }
+      ],
+      "rerank_score": 0.7980294823646545,
+      "context_bytes": 1771
+    },
+    {
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 1600,
+          "end_char": 3140,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1540,
+          "block_bboxes": [
+            [
+              70.506,
+              695.088,
+              290.949,
+              773.655
+            ],
+            [
+              306.142,
+              379.134,
+              526.225,
+              430.657
+            ],
+            [
+              306.142,
+              441.842,
+              440.989,
+              452.751
+            ],
+            [
+              306.142,
+              459.352,
+              526.225,
+              660.016
+            ],
+            [
+              305.629,
+              662.573,
+              524.408,
+              687.139
+            ],
+            [
+              306.142,
+              689.808,
+              526.226,
+              754.833
+            ]
+          ]
+        }
+      ],
+      "quote": "that can work with any black-box LLMs: (1) Chain-\nof-Thought (CoT) prompting (Wei et al., 2022)\n(2) ReAct (Yao et al., 2022) which iterates be-\ntween generating thoughts and generating actions\nfor searching and retrieving from a text knowledge\nbase like Wikipedia, and (3) Forward Looking Ac-\ntive Retrieval (FLARe) (Jiang et al., 2023b) which\niterates between generating thoughts and then re-\ntrieving from a knowledge base to correct inaccu-\nracies.\n3.4\nImplementation details.\nFor all models, we use a sampling temperature of\n0.0 for the LLM when multiple samples are not re-\nquired and a temperature of 1.0 when diverse sam-\nples are required. We test our approach in two set-\ntings: (1) with a branching factor of k = 1 termed\nas Chain-of-Traversals, and (2) with a branching\nfactor of k = 3 termed as Tree-of-Traversals. In\nboth setups, we set maximum depth to 7 which\nmeans that upon reaching the default action state\nbeyond depth 7, the only available action is to an-\nswer the question. For Tree-of-Traversals, we set\nthe maximum total expansions to 20. The answer\nthreshold τ is set to 0.8 which corresponds to high\nconfidence answers supported by the KG according\nthe evaluate prompt (Appendix F.5).\nFor 2WikiMultiHop and QALD-10, we use\nWikidata as the knowledge graph (Vrandeˇci´c and\nKrötzsch, 2014). For MusicBrainz-x-Wikidata, we\nuse MusicBrainz in addition to Wikidata. We im-\nplement the KG interface for Wikidata using Wiki-\ndata SPARQL queries5, and implement the KG in-\nterface for MusicBrainz KG using the MusicBrainz\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.359338760375977
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.845084190368652
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.968575477600098
+        }
+      ],
+      "rerank_score": 0.7897205948829651,
+      "context_bytes": 1952
+    },
+    {
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2278,
+          "end_char": 2406,
+          "chunk_start_char": 0,
+          "chunk_end_char": 128,
+          "block_bboxes": [
+            [
+              79.521,
+              509.369,
+              290.949,
+              547.376
+            ]
+          ]
+        }
+      ],
+      "quote": "2. Evaluation of Tree-of-Traversals on two ques-\ntion answering tasks: 2WikiMultiHop and\nQALD-10 and comparison with baselines.\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.408199787139893
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.805145263671875
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.22339916229248
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.795100212097168
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.408199787139893
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8140740394592285
+        }
+      ],
+      "rerank_score": 0.7887459397315979,
+      "context_bytes": 474
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "parse_id": "parse_a204d8e241acef2f67932f740b8bb674",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/018_Tree-of-Traversals A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Model.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 780,
+          "end_char": 2398,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1618,
+          "block_bboxes": [
+            [
+              70.473,
+              323.184,
+              290.949,
+              496.704
+            ],
+            [
+              70.473,
+              505.386,
+              290.941,
+              773.66
+            ]
+          ]
+        }
+      ],
+      "quote": "building a search tree over the resulting reasoning\nchains. We extend this approach to augment LLMs\nwith KGs through allowing the generation of ac-\ntions in addition to thoughts, and building a search\ntree over them. Challenges arise because Tree-of-\nThoughts was not designed to incorporate actions\nand was not designed for knowledge intensive ques-\ntion answering tasks. As a result, we introduce\nsome modifications: incorporation of actions via\nthe ASM, a slightly different search procedure and\nstopping condition to better handle QA, and a dif-\nferent sampling procedure for improved diversity\nwhen doing constrained sampling.\nAlgorithm 1 presents the Tree-of-Traversals tree\nsearch algorithm. Given a query q it begins with\ninitialization using initialize(q) as described\nin Section 2.1. After initialization, it searches by\n(1) choosing the unexplored node to expand based\non the node’s value assigned by the value func-\ntion (Best First→Depth First as tie-breaker), (2)\nsampling k actions from the LLM (k is branching\nfactor) using the prompt associated with the se-\nlected node’s state in the ASM, (3) for each of the\nsampled action, applying the transition function,\nand (4) evaluating the value of the resulting nodes\nwith the LLM value function. The search stops\nwhen an answer is found with a node value exceed-\ning the threshold τ. To bound the search space\nwe add two hyper-parameters: max depth of the\ntree search, after which the algorithm is forced to\ntransition to the done state (i.e., answer the query),\nand max expansions after which the model halts\nexploration and returns \"Cannot find answer\".\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7600975036621094
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.918233394622803
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8346819877624512
+        }
+      ],
+      "rerank_score": 0.7829945087432861,
+      "context_bytes": 2034
+    },
+    {
+      "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 2205,
+          "end_char": 3400,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1195,
+          "block_bboxes": [
+            [
+              107.532,
+              383.68,
+              505.653,
+              470.063
+            ],
+            [
+              119.512,
+              481.129,
+              492.488,
+              491.322
+            ],
+            [
+              314.205,
+              502.845,
+              447.078,
+              511.811
+            ],
+            [
+              162.683,
+              517.888,
+              447.078,
+              577.187
+            ],
+            [
+              108.0,
+              592.604,
+              169.718,
+              602.566
+            ]
+          ]
+        }
+      ],
+      "quote": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 4.221471786499023
+        }
+      ],
+      "rerank_score": 0.5535354018211365,
+      "context_bytes": 1578
+    },
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 179,
+          "end_char": 1441,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1262,
+          "block_bboxes": [
+            [
+              108.0,
+              101.594,
+              504.004,
+              177.122
+            ],
+            [
+              107.641,
+              183.38,
+              504.344,
+              248.056
+            ],
+            [
+              108.0,
+              265.266,
+              377.707,
+              275.229
+            ]
+          ]
+        }
+      ],
+      "quote": "PPR Alternatives. As shown in Table 5 (rows 5-6), to examine how much of our results are due to\nthe strength of PPR, we replace the PPR output with the query node probability #»n multiplied by node\nspecificity values (row 5) and a version of this that also distributes a small amount of probability to the\ndirect neighbors of each query node (row 6). First, we find that PPR is a much more effective method\nfor including associations for retrieval on all three datasets compared to both simple baselines. It is\ninteresting to note that adding the neighborhood of Rq nodes without PPR leads to worse performance\nthan only using the query nodes themselves.\nAblations. As seen in Table 5 (rows 7-8), node specificity obtains considerable improvements on\nMuSiQue and HotpotQA and yields almost no change in 2WikiMultiHopQA. This is likely because\n2WikiMultiHopQA relies on named entities with little differences in terms of term weighting. In\ncontrast, synonymy edges have the largest effect on 2WikiMultiHopQA, suggesting that noisy entity\nstandardization is useful when most relevant concepts are named entities, and improvements to\nsynonymy detection could lead to stronger performance in other datasets.\n5.2\nHippoRAG’s Advantage: Single-Step Multi-Hop Retrieval\n",
+      "retrieval_sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7796106338500977
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.756007194519043
+        }
+      ],
+      "rerank_score": 0.519201397895813,
+      "context_bytes": 1619
+    },
+    {
+      "chunk_id": "chunk_18bee03d708874e36549c17129df7d7f",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 6,
+      "page_end": 6,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 251,
+          "end_char": 1243,
+          "chunk_start_char": 0,
+          "chunk_end_char": 992,
+          "block_bboxes": [
+            [
+              136.159,
+              133.714,
+              474.673,
+              212.626
+            ],
+            [
+              136.159,
+              218.622,
+              475.72,
+              237.757
+            ],
+            [
+              107.691,
+              259.593,
+              504.004,
+              280.479
+            ],
+            [
+              264.167,
+              292.002,
+              479.513,
+              300.969
+            ],
+            [
+              257.902,
+              307.053,
+              491.758,
+              316.019
+            ],
+            [
+              117.998,
+              322.013,
+              490.592,
+              351.112
+            ]
+          ]
+        }
+      ],
+      "quote": "BM25 [69]\n32.3\n41.2\n51.8\n61.9\n55.4\n72.2\n46.5\n58.4\nContriever [35]\n34.8\n46.6\n46.6\n57.5\n57.2\n75.5\n46.2\n59.9\nGTR [53]\n37.4\n49.1\n60.2\n67.9\n59.4\n73.3\n52.3\n63.4\nColBERTv2 [70]\n37.9\n49.2\n59.2\n68.2\n64.7\n79.3\n53.9\n65.6\nRAPTOR [71]\n35.7\n45.3\n46.3\n53.8\n58.1\n71.2\n46.7\n56.8\nRAPTOR (ColBERTv2)\n36.9\n46.5\n57.3\n64.7\n63.1\n75.6\n52.4\n62.3\nProposition [10]\n37.6\n49.3\n56.4\n63.1\n58.7\n71.1\n50.9\n61.2\nProposition (ColBERTv2)\n37.8\n50.1\n55.9\n64.9\n63.9\n78.1\n52.5\n64.4\nHippoRAG (Contriever)\n41.0\n52.1\n71.5\n89.5\n59.0\n76.2\n57.2\n72.6\nHippoRAG (ColBERTv2)\n40.9\n51.9\n70.7\n89.1\n60.5\n77.7\n57.4\n72.9\nTable 3: Multi-step retrieval performance. Combining HippoRAG with standard multi-step retrieval\nmethods like IRCoT results in strong complementary improvements on all three datasets.\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nR@2\nR@5\nIRCoT + BM25 (Default)\n34.2\n44.7\n61.2\n75.6\n65.6\n79.0\n53.7\n66.4\nIRCoT + Contriever\n39.1\n52.2\n51.6\n63.8\n65.9\n81.6\n52.2\n65.9\nIRCoT + ColBERTv2\n41.7\n53.7\n64.1\n74.4\n67.9\n82.0\n57.9\n70.0\n",
+      "retrieval_sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.563406944274902
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7666172981262207
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 4.340397834777832
+        }
+      ],
+      "rerank_score": 0.45199161767959595,
+      "context_bytes": 1462
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 64,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "multi_query_quota_union cap=64",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "query_plan": {
+      "planner_version": "cloud-query-planner-v1",
+      "decision": "split",
+      "reason": "问题包含三个可独立查证的目标：HippoRAG 如何命名 2Wiki 数据集、Tree-of-Traversals 如何命名 2Wiki 数据集，以及两者各自如何执行跨事实检索或搜索；名称相似是否证明协议一致属于比较判断。",
+      "english_keywords": [
+        "HippoRAG",
+        "Tree-of-Traversals",
+        "2Wiki dataset naming",
+        "cross-fact retrieval",
+        "search protocol"
+      ],
+      "subqueries": [
+        {
+          "id": "SQ01",
+          "text": "HippoRAG 怎样命名所评测的 2Wiki 数据集？",
+          "english_keywords": [
+            "HippoRAG",
+            "2Wiki dataset",
+            "dataset naming",
+            "evaluation dataset"
+          ]
+        },
+        {
+          "id": "SQ02",
+          "text": "Tree-of-Traversals 怎样命名所评测的 2Wiki 数据集？",
+          "english_keywords": [
+            "Tree-of-Traversals",
+            "2Wiki dataset",
+            "dataset naming",
+            "evaluation dataset"
+          ]
+        },
+        {
+          "id": "SQ03",
+          "text": "HippoRAG 怎样进行跨事实检索或搜索？",
+          "english_keywords": [
+            "HippoRAG",
+            "cross-fact retrieval",
+            "search",
+            "retrieval"
+          ]
+        },
+        {
+          "id": "SQ04",
+          "text": "Tree-of-Traversals 怎样进行跨事实检索或搜索？",
+          "english_keywords": [
+            "Tree-of-Traversals",
+            "cross-fact retrieval",
+            "search",
+            "traversal"
+          ]
+        }
+      ],
+      "quote_spans": [
+        {
+          "text": "HippoRAG 与 Tree-of-Traversals 各自怎样命名所评测的 2Wiki 数据集",
+          "start": 0,
+          "end": 50,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "HippoRAG 与 Tree-of-Traversals 各自怎样命名所评测的 2Wiki 数据集"
+        },
+        {
+          "text": "分别怎样进行跨事实检索或搜索",
+          "start": 52,
+          "end": 66,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "分别怎样进行跨事实检索或搜索"
+        },
+        {
+          "text": "名称相似能否证明协议一致",
+          "start": 67,
+          "end": 79,
+          "role": "decision_support",
+          "quote_normalized": false,
+          "normalization": null,
+          "quoted_text": "名称相似能否证明协议一致"
+        }
+      ],
+      "fallback": false,
+      "elapsed_seconds": 0.0007552000461146235,
+      "usage": {
+        "prompt_tokens": 437,
+        "total_tokens": 779,
+        "completion_tokens": 342,
+        "prompt_tokens_details": {
+          "cached_tokens": 384,
+          "image_tokens": 0,
+          "text_tokens": 437
+        },
+        "completion_tokens_details": {
+          "text_tokens": 342
+        }
+      }
+    },
+    "subquery_count": 4,
+    "per_query_hits": {
+      "Q00": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ01": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ02": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ03": {
+        "fulltext": 20,
+        "dense": 20
+      },
+      "SQ04": {
+        "fulltext": 20,
+        "dense": 20
+      }
+    },
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "rerank_mode": "owner_subquery",
+      "rerank_batches": 5,
+      "total_inference_seconds": 2.0465146000497043,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 5.997016799985431,
+      "peak_cuda_memory_bytes": 1150161408,
+      "request_count": 99,
+      "batch_size": 4
+    },
+    "evidence_count": 11,
+    "context_bytes": 16842,
+    "evidence_bytes": 16842,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 16017,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ]
+      },
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ],
+        "eligible_candidate_count": 33,
+        "selected_chunk_ids": [
+          "chunk_093458d20f2bfd701c7675a87561bf1b",
+          "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+          "chunk_3fa28005a4df0de5249826585cf9d713",
+          "chunk_8245d0849e8cf0df364eb6980d96843c",
+          "chunk_18bee03d708874e36549c17129df7d7f"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "Tree-of-Traversals",
+        "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+        "requested_names": [
+          "Tree-of-Traversals"
+        ],
+        "eligible_candidate_count": 24,
+        "selected_chunk_ids": [
+          "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+          "chunk_f381347013975ddbbd59d9d2e9198e70",
+          "chunk_f4962498025654850621ee329d0af7d6",
+          "chunk_bc1cd12431f46892d2877dff73dab5e5",
+          "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 5252,
+    "total_tokens": 6055,
+    "completion_tokens": 803,
+    "prompt_tokens_details": {
+      "cached_tokens": 512,
+      "image_tokens": 0,
+      "text_tokens": 5252
+    },
+    "completion_tokens_details": {
+      "text_tokens": 803
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"premise_check\":[{\"premise\":\"HippoRAG 在论文中命名并评测 2Wiki 数据集\",\"supported\":true,\"evidence_eids\":[\"E9\",\"E10\",\"E1\"],\"note\":\"HippoRAG 原文称 2WikiMultiHopQA，表头简写 2Wiki\"},{\"premise\":\"Tree-of-Traversals 在论文中命名并评测 2Wiki 数据集\",\"supported\":true,\"evidence_eids\":[\"E2\",\"E7\",\"E4\",\"E5\"],\"note\":\"Tree-of-Traversals 原文称 2WikiMultiHop，表头简写 2WikiMultiHop\"},{\"premise\":\"HippoRAG 描述了跨事实检索方式\",\"supported\":true,\"evidence_eids\":[\"E3\",\"E10\"],\"note\":\"有 cross-passage knowledge integration 与 PPR 加 synonymy edges 的表述，但流程细节未在引句展开\"},{\"premise\":\"Tree-of-Traversals 描述了搜索流程与 Wikidata 接口\",\"supported\":true,\"evidence_eids\":[\"E8\",\"E6\"],\"note\":\"树搜索、分支、深度、扩展上限及 Wikidata SPARQL 接口\"},{\"premise\":\"2Wiki 名称相似足以证明两者评测协议一致\",\"supported\":false,\"evidence_eids\":[\"E9\",\"E2\",\"E6\"],\"note\":\"HippoRAG 用 1000 问题验证集与检索语料，Tree-of-Traversals 用 Wikidata KG 做 QA；指标也不同（R@k 对 EM）\"}],\"answer\":\"HippoRAG 将所评测数据集写作“2WikiMultiHopQA”，表格中简写为“2Wiki” [E9, E1]。其跨事实检索依赖知识图谱上的随机游走类关联：原文说明 PPR 比简单基线更能纳入关联用于检索，且 synonymy edges 对 2WikiMultiHopQA 影响最大 [E10]；但所给引句未展开完整检索流程，流程证据不足以做细节比较。Tree-of-Traversals 将其写作“2WikiMultiHop” [E2, E7]，表头亦为“2WikiMultiHop” [E4, E5]。其搜索是构建搜索树：按节点价值选择扩展节点，从 LLM 采样 k 个动作，应用转移函数并用 LLM 价值函数评估，答案超过阈值 τ 即停止，并以最大深度和最大扩展数约束搜索空间 [E8]；对 2WikiMultiHop 使用 Wikidata 知识图谱和 Wikidata SPARQL 接口 [E6]。名称相似不能证明协议一致：HippoRAG 从其验证集抽取 1,000 个问题并汇集候选段落形成检索语料，报告 R@2/R@5 [E9, E1]；Tree-of-Traversals 在 2WikiMultiHop 上以 Wikidata 为 KG 做问答并报告 EM 类指标 [E5, E6]。因此二者共享数据集名称，但评测任务、知识来源与指标不同，不能由名称推断协议一致。\",\"citations\":[{\"eid\":\"E9\",\"quote_id\":\"q1\"},{\"eid\":\"E1\",\"quote_id\":\"q1\"},{\"eid\":\"E10\",\"quote_id\":\"q2\"},{\"eid\":\"E2\",\"quote_id\":\"q1\"},{\"eid\":\"E7\",\"quote_id\":\"q1\"},{\"eid\":\"E4\",\"quote_id\":\"q2\"},{\"eid\":\"E5\",\"quote_id\":\"q2\"},{\"eid\":\"E8\",\"quote_id\":\"q2\"},{\"eid\":\"E6\",\"quote_id\":\"q2\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "first_discovery": 7,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.504687309265137
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8023653030395508
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 8.504687309265137
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7936639785766602
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.312259674072266
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8265948295593262
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.504687309265137
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8023653030395508
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 8.504687309265137
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7936639785766602
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.312259674072266
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8265948295593262
+        }
+      ],
+      "score": 0.09153242707412877,
+      "rerank_score": 0.8643104434013367,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.8643104434013367,
+        "SQ04": 0.452747642993927
+      }
+    },
+    {
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "first_discovery": 1,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.400364875793457
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7954645156860352
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.400364875793457
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7863626480102539
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.831502437591553
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8295550346374512
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.400364875793457
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7954645156860352
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 10.400364875793457
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7863626480102539
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 7.831502437591553
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8295550346374512
+        }
+      ],
+      "score": 0.09483527425324588,
+      "rerank_score": 0.8226169943809509,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.5354020595550537,
+        "SQ04": 0.8226169943809509
+      }
+    },
+    {
+      "chunk_id": "chunk_f4962498025654850621ee329d0af7d6",
+      "first_discovery": 11,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.201725006103516
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7771492004394531
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.201725006103516
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7861690521240234
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8070206642150879
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.201725006103516
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7771492004394531
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.201725006103516
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7861690521240234
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.8070206642150879
+        }
+      ],
+      "score": 0.06993590202408329,
+      "rerank_score": 0.7980294823646545,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.7980294823646545,
+        "SQ04": 0.523039698600769
+      }
+    },
+    {
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "first_discovery": 9,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.359338760375977
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.845084190368652
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.968575477600098
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 8.359338760375977
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.845084190368652
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.968575477600098
+        }
+      ],
+      "score": 0.041564273652454915,
+      "rerank_score": 0.7897205948829651,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.7897205948829651,
+        "SQ04": 0.6268097162246704
+      }
+    },
+    {
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "first_discovery": 16,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.408199787139893
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.805145263671875
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.22339916229248
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.795100212097168
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.408199787139893
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8140740394592285
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.408199787139893
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.805145263671875
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.22339916229248
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.795100212097168
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.408199787139893
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8140740394592285
+        }
+      ],
+      "score": 0.08972798866547649,
+      "rerank_score": 0.7887459397315979,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.7887459397315979,
+        "SQ04": 0.12819735705852509
+      }
+    },
+    {
+      "chunk_id": "chunk_dac5f23e1b87249cf88eff5c6cc54355",
+      "first_discovery": 56,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7600975036621094
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.918233394622803
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8346819877624512
+        }
+      ],
+      "found_by": [
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7600975036621094
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.918233394622803
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8346819877624512
+        }
+      ],
+      "score": 0.0416077729266786,
+      "rerank_score": 0.7829945087432861,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.302494078874588,
+        "SQ04": 0.7829945087432861
+      }
+    },
+    {
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "first_discovery": 4,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 8.847636222839355
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.772240161895752
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7628707885742188
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 8.847636222839355
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8211007118225098
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 8.847636222839355
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.772240161895752
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7628707885742188
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 8.847636222839355
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8211007118225098
+        }
+      ],
+      "score": 0.0741854312684109,
+      "rerank_score": 0.7412996292114258,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.6089429259300232,
+        "SQ04": 0.7412996292114258
+      }
+    },
+    {
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "first_discovery": 2,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 10.170595169067383
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7817530632019043
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 9.716148376464844
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.778831958770752
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 9.032702445983887
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8358039855957031
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 10.170595169067383
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7817530632019043
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 9.716148376464844
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.778831958770752
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 9.032702445983887
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8358039855957031
+        }
+      ],
+      "score": 0.09445671446791304,
+      "rerank_score": 0.7232117056846619,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.41667795181274414,
+        "SQ04": 0.7232117056846619
+      }
+    },
+    {
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "first_discovery": 17,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.167265892028809
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.774569034576416
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.378047943115234
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7800650596618652
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 4.399415016174316
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8027410507202148
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.167265892028809
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.774569034576416
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.378047943115234
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7800650596618652
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 4.399415016174316
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8027410507202148
+        }
+      ],
+      "score": 0.08571207648842014,
+      "rerank_score": 0.7185943722724915,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.7185943722724915,
+        "SQ03": 0.0787840187549591
+      }
+    },
+    {
+      "chunk_id": "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+      "first_discovery": 50,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7610282897949219
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8236002922058105
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7610282897949219
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8236002922058105
+        }
+      ],
+      "score": 0.029386529386529386,
+      "rerank_score": 0.7073035836219788,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.028328312560915947,
+        "SQ03": 0.7073035836219788
+      }
+    },
+    {
+      "chunk_id": "chunk_4393ed9a076f7e200b63f80b74abf37e",
+      "first_discovery": 3,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.0444917678833
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 9.0444917678833
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7806806564331055
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 9.0444917678833
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 9.0444917678833
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7806806564331055
+        }
+      ],
+      "score": 0.046649531024531024,
+      "rerank_score": 0.7059877514839172,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.7059877514839172
+      }
+    },
+    {
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "first_discovery": 5,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 8.722829818725586
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8026547431945801
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 8.722829818725586
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.798459529876709
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.9458441734313965
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8172950744628906
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 8.722829818725586
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8026547431945801
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 8.722829818725586
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.798459529876709
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 7.9458441734313965
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8172950744628906
+        }
+      ],
+      "score": 0.09314910315470244,
+      "rerank_score": 0.6923300623893738,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.6923300623893738,
+        "SQ04": 0.4043310582637787
+      }
+    },
+    {
+      "chunk_id": "chunk_e2267f27e994c288c8ff1de490f65ca7",
+      "first_discovery": 55,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7717137336730957
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.8094148635864258
+        }
+      ],
+      "found_by": [
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7717137336730957
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.8094148635864258
+        }
+      ],
+      "score": 0.027443609022556388,
+      "rerank_score": 0.6885731220245361,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.39146408438682556,
+        "SQ04": 0.6885731220245361
+      }
+    },
+    {
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "first_discovery": 12,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.058967590332031
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7742276191711426
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.058967590332031
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7659811973571777
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.230220317840576
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.058967590332031
+        },
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7742276191711426
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.058967590332031
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7659811973571777
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.230220317840576
+        }
+      ],
+      "score": 0.06861060880048221,
+      "rerank_score": 0.6676896214485168,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.6676896214485168,
+        "SQ04": 0.3129996359348297
+      }
+    },
+    {
+      "chunk_id": "chunk_a0d7d9ec00b3e121441cb8d4c6815b59",
+      "first_discovery": 66,
+      "discoveries": [
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.0101189613342285
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8163886070251465
+        }
+      ],
+      "found_by": [
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.0101189613342285
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8163886070251465
+        }
+      ],
+      "score": 0.027650648360030512,
+      "rerank_score": 0.6463485956192017,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ04": 0.6463485956192017
+      }
+    },
+    {
+      "chunk_id": "chunk_7c3a7be987627b104ec877903108110f",
+      "first_discovery": 53,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.719615936279297
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7658095359802246
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.719615936279297
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8177118301391602
+        }
+      ],
+      "found_by": [
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.719615936279297
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7658095359802246
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 6.719615936279297
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8177118301391602
+        }
+      ],
+      "score": 0.05362400327131466,
+      "rerank_score": 0.6116139888763428,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.4109335243701935,
+        "SQ04": 0.6116139888763428
+      }
+    },
+    {
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "first_discovery": 10,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.202381134033203
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.423812866210938
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.770012378692627
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 8.202381134033203
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8154182434082031
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.202381134033203
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 8.423812866210938
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.770012378692627
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 8.202381134033203
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8154182434082031
+        }
+      ],
+      "score": 0.07276471688916507,
+      "rerank_score": 0.6087103486061096,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.3049723505973816,
+        "SQ04": 0.6087103486061096
+      }
+    },
+    {
+      "chunk_id": "chunk_e3ad7608dae3913ef4231b54065c5882",
+      "first_discovery": 54,
+      "discoveries": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7791347503662109
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.8100147247314453
+        }
+      ],
+      "found_by": [
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7791347503662109
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.8100147247314453
+        }
+      ],
+      "score": 0.028258706467661692,
+      "rerank_score": 0.5669777989387512,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.3301471471786499,
+        "SQ04": 0.5669777989387512
+      }
+    },
+    {
+      "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+      "first_discovery": 38,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 4.221471786499023
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 4.221471786499023
+        }
+      ],
+      "score": 0.014084507042253521,
+      "rerank_score": 0.5535354018211365,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.5535354018211365
+      }
+    },
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "first_discovery": 27,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7796106338500977
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.756007194519043
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7796106338500977
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.756007194519043
+        }
+      ],
+      "score": 0.026875901875901876,
+      "rerank_score": 0.519201397895813,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.519201397895813
+      }
+    },
+    {
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "first_discovery": 8,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 8.378610610961914
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.761481761932373
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 8.378610610961914
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8158349990844727
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 8.378610610961914
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.761481761932373
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 8.378610610961914
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8158349990844727
+        }
+      ],
+      "score": 0.05760360962566845,
+      "rerank_score": 0.49516692757606506,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.1773829609155655,
+        "SQ04": 0.49516692757606506
+      }
+    },
+    {
+      "chunk_id": "chunk_ac2dd6acd17189360638268b42945e7b",
+      "first_discovery": 6,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 8.674713134765625
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.265714168548584
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.674713134765625
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8117990493774414
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 8.674713134765625
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.265714168548584
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 8.674713134765625
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8117990493774414
+        }
+      ],
+      "score": 0.05805649449485066,
+      "rerank_score": 0.4684866666793823,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.1598721444606781,
+        "SQ04": 0.4684866666793823
+      }
+    },
+    {
+      "chunk_id": "chunk_18bee03d708874e36549c17129df7d7f",
+      "first_discovery": 34,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.563406944274902
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7666172981262207
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 4.340397834777832
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.563406944274902
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7666172981262207
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 4.340397834777832
+        }
+      ],
+      "score": 0.04375483671258319,
+      "rerank_score": 0.45199161767959595,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.45199161767959595,
+        "SQ03": 0.2878679037094116
+      }
+    },
+    {
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "first_discovery": 13,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.7314133644104
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.7314133644104
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.763242244720459
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.7314133644104
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8201494216918945
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.7314133644104
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.7314133644104
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.763242244720459
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 7.7314133644104
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8201494216918945
+        }
+      ],
+      "score": 0.07058799111176227,
+      "rerank_score": 0.4266798496246338,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.2546016275882721,
+        "SQ04": 0.4266798496246338
+      }
+    },
+    {
+      "chunk_id": "chunk_54195d498800a946748950b0238fda0f",
+      "first_discovery": 18,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.151087284088135
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.151087284088135
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7597951889038086
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.151087284088135
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.8115105628967285
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 7.151087284088135
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.151087284088135
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7597951889038086
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 7.151087284088135
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.8115105628967285
+        }
+      ],
+      "score": 0.06569055120785475,
+      "rerank_score": 0.42298123240470886,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.23074638843536377,
+        "SQ04": 0.42298123240470886
+      }
+    },
+    {
+      "chunk_id": "chunk_e1a638ad66c9677e3b21b218e22f0aed",
+      "first_discovery": 14,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.5281476974487305
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.918736934661865
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.5281476974487305
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.5281476974487305
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.918736934661865
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.5281476974487305
+        }
+      ],
+      "score": 0.04082677995721474,
+      "rerank_score": 0.42286208271980286,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.3597014546394348,
+        "SQ04": 0.42286208271980286
+      }
+    },
+    {
+      "chunk_id": "chunk_94f3984fea87c32c884454a6a284044d",
+      "first_discovery": 33,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.931262016296387
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7682790756225586
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 3.8726892471313477
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 5.931262016296387
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7682790756225586
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 3.8726892471313477
+        }
+      ],
+      "score": 0.04314574314574314,
+      "rerank_score": 0.41786524653434753,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.41786524653434753,
+        "SQ03": 0.20963142812252045
+      }
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "first_discovery": 41,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 3.737443208694458
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7874326705932617
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 4.718389511108398
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8270649909973145
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 3.737443208694458
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.7874326705932617
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 4.718389511108398
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8270649909973145
+        }
+      ],
+      "score": 0.06172882408736455,
+      "rerank_score": 0.404095858335495,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.08035746961832047,
+        "SQ03": 0.404095858335495
+      }
+    },
+    {
+      "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+      "first_discovery": 21,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7923226356506348
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.9048686027526855
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7829594612121582
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.8900399208068848
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8092026710510254
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7923226356506348
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.9048686027526855
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7829594612121582
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.8900399208068848
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8092026710510254
+        }
+      ],
+      "score": 0.07402490762591382,
+      "rerank_score": 0.3876323699951172,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.3876323699951172,
+        "SQ03": 0.20898497104644775
+      }
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "first_discovery": 22,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7824969291687012
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.563406944274902
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.7887492179870605
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 4.340397834777832
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8239827156066895
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7824969291687012
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.563406944274902
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.7887492179870605
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 4.340397834777832
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8239827156066895
+        }
+      ],
+      "score": 0.07731825880723406,
+      "rerank_score": 0.36954259872436523,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.18432661890983582,
+        "SQ03": 0.36954259872436523
+      }
+    },
+    {
+      "chunk_id": "chunk_d9f1cb9af7ebdb35209d9b574447922e",
+      "first_discovery": 51,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7570247650146484
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7570247650146484
+        }
+      ],
+      "score": 0.013333333333333334,
+      "rerank_score": 0.3592517375946045,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.3592517375946045
+      }
+    },
+    {
+      "chunk_id": "chunk_c9487cbd571de7247dab7359aeb33936",
+      "first_discovery": 19,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.081750392913818
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 8.345739364624023
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.761136531829834
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.081750392913818
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7961330413818359
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 7.081750392913818
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 8.345739364624023
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.761136531829834
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.081750392913818
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7961330413818359
+        }
+      ],
+      "score": 0.06619813653506877,
+      "rerank_score": 0.3300391733646393,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.297980397939682,
+        "SQ04": 0.3300391733646393
+      }
+    },
+    {
+      "chunk_id": "chunk_76854da568c96fda499c92cebf594161",
+      "first_discovery": 15,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.518465995788574
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.518465995788574
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7752137184143066
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.518465995788574
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.518465995788574
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7752137184143066
+        }
+      ],
+      "score": 0.04133960047003526,
+      "rerank_score": 0.3000272810459137,
+      "best_query_id": "SQ02",
+      "owner_scores": {
+        "SQ02": 0.3000272810459137
+      }
+    },
+    {
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "first_discovery": 29,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7787313461303711
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7846345901489258
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.814460277557373
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7787313461303711
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7846345901489258
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.814460277557373
+        }
+      ],
+      "score": 0.044763513513513514,
+      "rerank_score": 0.28140559792518616,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.2354598045349121,
+        "SQ03": 0.28140559792518616
+      }
+    },
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "first_discovery": 25,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7809643745422363
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8139653205871582
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7809643745422363
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8139653205871582
+        }
+      ],
+      "score": 0.02967032967032967,
+      "rerank_score": 0.2716379463672638,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.2716379463672638
+      }
+    },
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "first_discovery": 47,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7691130638122559
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 4.212757110595703
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8043498992919922
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7691130638122559
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 4.212757110595703
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8043498992919922
+        }
+      ],
+      "score": 0.04247709804588899,
+      "rerank_score": 0.2706729471683502,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.052134256809949875,
+        "SQ03": 0.2706729471683502
+      }
+    },
+    {
+      "chunk_id": "chunk_a70a7e6f52482951376452c97256c9ec",
+      "first_discovery": 61,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 3.7846286296844482
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 3.7846286296844482
+        }
+      ],
+      "score": 0.01282051282051282,
+      "rerank_score": 0.26454830169677734,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.26454830169677734
+      }
+    },
+    {
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "first_discovery": 31,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7772626876831055
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.235190391540527
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7832832336425781
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 4.612184047698975
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8040552139282227
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7772626876831055
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.235190391540527
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7832832336425781
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 4.612184047698975
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8040552139282227
+        }
+      ],
+      "score": 0.07317739029803937,
+      "rerank_score": 0.2560870945453644,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.2560870945453644,
+        "SQ03": 0.19667185842990875
+      }
+    },
+    {
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "first_discovery": 57,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 5.1335272789001465
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7947378158569336
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 5.1335272789001465
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7947378158569336
+        }
+      ],
+      "score": 0.029726775956284153,
+      "rerank_score": 0.24944725632667542,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.24944725632667542
+      }
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "first_discovery": 63,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 3.7527687549591064
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8027687072753906
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 3.7527687549591064
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8027687072753906
+        }
+      ],
+      "score": 0.02638888888888889,
+      "rerank_score": 0.24780535697937012,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.24780535697937012
+      }
+    },
+    {
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "first_discovery": 30,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7781853675842285
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 6.899949550628662
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7799954414367676
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7887110710144043
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7781853675842285
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 6.899949550628662
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7799954414367676
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7887110710144043
+        }
+      ],
+      "score": 0.05741967129623832,
+      "rerank_score": 0.23757591843605042,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.23757591843605042,
+        "SQ03": 0.05079945921897888
+      }
+    },
+    {
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "first_discovery": 32,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7740564346313477
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7547187805175781
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 4.602403163909912
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8058071136474609
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7740564346313477
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7547187805175781
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 4.602403163909912
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8058071136474609
+        }
+      ],
+      "score": 0.055197881828316614,
+      "rerank_score": 0.23196201026439667,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.031143832951784134,
+        "SQ03": 0.23196201026439667
+      }
+    },
+    {
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "first_discovery": 24,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7817444801330566
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 3.9362916946411133
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7862143516540527
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 4.90610408782959
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8121743202209473
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7817444801330566
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 3.9362916946411133
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.7862143516540527
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 4.90610408782959
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8121743202209473
+        }
+      ],
+      "score": 0.07534494704277026,
+      "rerank_score": 0.22320769727230072,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.22320769727230072,
+        "SQ03": 0.08494710177183151
+      }
+    },
+    {
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "first_discovery": 48,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7665472030639648
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 4.276529788970947
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8101301193237305
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7665472030639648
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 4.276529788970947
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8101301193237305
+        }
+      ],
+      "score": 0.04289876906547077,
+      "rerank_score": 0.21883627772331238,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.008881675079464912,
+        "SQ03": 0.21883627772331238
+      }
+    },
+    {
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "first_discovery": 58,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 4.395071506500244
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7877011299133301
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 4.395071506500244
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7877011299133301
+        }
+      ],
+      "score": 0.027583600982429624,
+      "rerank_score": 0.20228557288646698,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.20228557288646698
+      }
+    },
+    {
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "first_discovery": 65,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7883734703063965
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7883734703063965
+        }
+      ],
+      "score": 0.01282051282051282,
+      "rerank_score": 0.1650540828704834,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.1650540828704834
+      }
+    },
+    {
+      "chunk_id": "chunk_67a081d945c23e9c2de3a746cbacb122",
+      "first_discovery": 44,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 3.647865056991577
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 4.235527992248535
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.786677360534668
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 3.647865056991577
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 4.235527992248535
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.786677360534668
+        }
+      ],
+      "score": 0.03920940170940171,
+      "rerank_score": 0.15533456206321716,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ01": 0.042087726294994354,
+        "SQ03": 0.15533456206321716
+      }
+    },
+    {
+      "chunk_id": "chunk_9954ac297e86a9093f805de039efb2b4",
+      "first_discovery": 35,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 4.694241046905518
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 4.694241046905518
+        }
+      ],
+      "score": 0.014705882352941176,
+      "rerank_score": 0.1397482007741928,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.1397482007741928
+      }
+    },
+    {
+      "chunk_id": "chunk_5165b9cf6ecfd6eecbf447ff18649999",
+      "first_discovery": 59,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 4.09429407119751
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 4.09429407119751
+        }
+      ],
+      "score": 0.013513513513513514,
+      "rerank_score": 0.13195425271987915,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.13195425271987915
+      }
+    },
+    {
+      "chunk_id": "chunk_20ad4ca6811d52ca011e181dadb57ba4",
+      "first_discovery": 20,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 7.074681282043457
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.074681282043457
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7642307281494141
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.074681282043457
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.8016085624694824
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ02",
+        "SQ04"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 7.074681282043457
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 7.074681282043457
+        },
+        {
+          "query_id": "SQ02",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7642307281494141
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.074681282043457
+        },
+        {
+          "query_id": "SQ04",
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.8016085624694824
+        }
+      ],
+      "score": 0.06515437265437266,
+      "rerank_score": 0.12624557316303253,
+      "best_query_id": "SQ04",
+      "owner_scores": {
+        "SQ02": 0.12442563474178314,
+        "SQ04": 0.12624557316303253
+      }
+    },
+    {
+      "chunk_id": "chunk_fbeebb7d77e97866867648455a11895e",
+      "first_discovery": 64,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.8012857437133789
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.8012857437133789
+        }
+      ],
+      "score": 0.013513513513513514,
+      "rerank_score": 0.10875558853149414,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.10875558853149414
+      }
+    },
+    {
+      "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+      "first_discovery": 62,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 3.769615411758423
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7899861335754395
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 3.769615411758423
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7899861335754395
+        }
+      ],
+      "score": 0.02581612258494337,
+      "rerank_score": 0.09982065856456757,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.09982065856456757
+      }
+    },
+    {
+      "chunk_id": "chunk_4d5b9bb85c58b033807f97c51fb55e39",
+      "first_discovery": 42,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.6820881366729736
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 4.351519584655762
+        }
+      ],
+      "found_by": [
+        "SQ01",
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.6820881366729736
+        },
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 4.351519584655762
+        }
+      ],
+      "score": 0.02786377708978328,
+      "rerank_score": 0.05146276578307152,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.05146276578307152,
+        "SQ03": 0.04296247288584709
+      }
+    },
+    {
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "first_discovery": 49,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7612028121948242
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7612028121948242
+        }
+      ],
+      "score": 0.0136986301369863,
+      "rerank_score": 0.047691281884908676,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.047691281884908676
+      }
+    },
+    {
+      "chunk_id": "chunk_5463211e0f0b5a2231540050ade349e9",
+      "first_discovery": 36,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 4.650336265563965
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 4.650336265563965
+        }
+      ],
+      "score": 0.014492753623188406,
+      "rerank_score": 0.04716186597943306,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.04716186597943306
+      }
+    },
+    {
+      "chunk_id": "chunk_46cc64f1ac63912eb3830654d752efc3",
+      "first_discovery": 45,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 3.6400039196014404
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 3.6400039196014404
+        }
+      ],
+      "score": 0.012658227848101266,
+      "rerank_score": 0.04076926410198212,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.04076926410198212
+      }
+    },
+    {
+      "chunk_id": "chunk_ae9f5c6eeafcaff8f5a4d2a4a849b4f3",
+      "first_discovery": 60,
+      "discoveries": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.017890453338623
+        }
+      ],
+      "found_by": [
+        "SQ03"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ03",
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.017890453338623
+        }
+      ],
+      "score": 0.013333333333333334,
+      "rerank_score": 0.037750277668237686,
+      "best_query_id": "SQ03",
+      "owner_scores": {
+        "SQ03": 0.037750277668237686
+      }
+    },
+    {
+      "chunk_id": "chunk_57a72ad159a3b0cdc812a874bc6f1453",
+      "first_discovery": 23,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7821035385131836
+        }
+      ],
+      "found_by": [
+        "Q00"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7821035385131836
+        }
+      ],
+      "score": 0.014925373134328358,
+      "rerank_score": 0.01009131595492363,
+      "best_query_id": "Q00",
+      "owner_scores": {
+        "Q00": 0.01009131595492363
+      }
+    },
+    {
+      "chunk_id": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+      "first_discovery": 37,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 4.265302658081055
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7561025619506836
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 4.265302658081055
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7561025619506836
+        }
+      ],
+      "score": 0.027443609022556388,
+      "rerank_score": 0.004943688865751028,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.004943688865751028
+      }
+    },
+    {
+      "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+      "first_discovery": 39,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 4.084108829498291
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 4.084108829498291
+        }
+      ],
+      "score": 0.013888888888888888,
+      "rerank_score": 0.0019494021544232965,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0019494021544232965
+      }
+    },
+    {
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "first_discovery": 26,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.780797004699707
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7542214393615723
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.780797004699707
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7542214393615723
+        }
+      ],
+      "score": 0.02658450704225352,
+      "rerank_score": 0.0019342610612511635,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0019342610612511635
+      }
+    },
+    {
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "first_discovery": 28,
+      "discoveries": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7790865898132324
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7545289993286133
+        }
+      ],
+      "found_by": [
+        "Q00",
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "Q00",
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7790865898132324
+        },
+        {
+          "query_id": "SQ01",
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7545289993286133
+        }
+      ],
+      "score": 0.026356857985087564,
+      "rerank_score": 0.0017140384297817945,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0017140384297817945
+      }
+    },
+    {
+      "chunk_id": "chunk_297df214042add51d3facf35d1934a3d",
+      "first_discovery": 40,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 3.769432544708252
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 3.769432544708252
+        }
+      ],
+      "score": 0.013513513513513514,
+      "rerank_score": 0.0009622126235626638,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0009622126235626638
+      }
+    },
+    {
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "first_discovery": 43,
+      "discoveries": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 3.678053855895996
+        }
+      ],
+      "found_by": [
+        "SQ01"
+      ],
+      "sources": [
+        {
+          "query_id": "SQ01",
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 3.678053855895996
+        }
+      ],
+      "score": 0.012987012987012988,
+      "rerank_score": 0.0006538155721500516,
+      "best_query_id": "SQ01",
+      "owner_scores": {
+        "SQ01": 0.0006538155721500516
+      }
+    }
+  ],
+  "case_id": "R10",
+  "question": "HippoRAG 与 Tree-of-Traversals 各自怎样命名所评测的 2Wiki 数据集，又分别怎样进行跨事实检索或搜索？名称相似能否证明协议一致？",
+  "category": "cross",
+  "arm": "Strong-Hybrid-P2",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0006526999641209841
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.05473049997817725
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 9.800016414374113e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 2.0611132999765687
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.002237499982584268
+    }
+  ],
+  "retrieval_compute_seconds": 2.1187437999178655,
+  "request_wall_seconds": 12.397656599991024,
+  "embedding_source": "shared Q00 + shared planned subquery vectors across arms",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 2.553726900019683,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 7.558680000016466,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.43826170003740117,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 6.658002600015607,
+      "usage": "{\"prompt_tokens\": 5252, \"total_tokens\": 6055, \"completion_tokens\": 803}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "score": 0.805145263671875
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 0.8026547431945801
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 0.8023653030395508
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 0.7954645156860352
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_8cc831cc45851cce50b9f34648070765",
+      "score": 0.7923226356506348
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.7824969291687012
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_57a72ad159a3b0cdc812a874bc6f1453",
+      "score": 0.7821035385131836
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 0.7817530632019043
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 0.7817444801330566
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 0.7809643745422363
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "score": 0.780797004699707
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "score": 0.7796106338500977
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.7790865898132324
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.7787313461303711
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "score": 0.7781853675842285
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 0.7772626876831055
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_f4962498025654850621ee329d0af7d6",
+      "score": 0.7771492004394531
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "score": 0.774569034576416
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "score": 0.7742276191711426
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "score": 0.7740564346313477
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_f381347013975ddbbd59d9d2e9198e70",
+      "score": 10.400364875793457
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "score": 10.170595169067383
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_4393ed9a076f7e200b63f80b74abf37e",
+      "score": 9.0444917678833
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_c684fea40eeaf98c4d80f0c62119849d",
+      "score": 8.847636222839355
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_406249e1d98db3baa838606c7a974998",
+      "score": 8.722829818725586
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_ac2dd6acd17189360638268b42945e7b",
+      "score": 8.674713134765625
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_a8ce6be635ba6abbbc71daeb86e809e9",
+      "score": 8.504687309265137
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_9351dfe6266387c3fdc2fdb119551d11",
+      "score": 8.378610610961914
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_bc1cd12431f46892d2877dff73dab5e5",
+      "score": 8.359338760375977
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_226ee68d6f0960540c826792e6f5b531",
+      "score": 8.202381134033203
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_f4962498025654850621ee329d0af7d6",
+      "score": 8.201725006103516
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_4791e22bc0940fa51d33b62696708b9b",
+      "score": 8.058967590332031
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_4b9f25dbcd34cf81a689e230345e1d86",
+      "score": 7.7314133644104
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_e1a638ad66c9677e3b21b218e22f0aed",
+      "score": 7.5281476974487305
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_76854da568c96fda499c92cebf594161",
+      "score": 7.518465995788574
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_db3f4b0797f0910ec556e6c6930ef07b",
+      "score": 7.408199787139893
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_093458d20f2bfd701c7675a87561bf1b",
+      "score": 7.167265892028809
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_54195d498800a946748950b0238fda0f",
+      "score": 7.151087284088135
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_c9487cbd571de7247dab7359aeb33936",
+      "score": 7.081750392913818
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_20ad4ca6811d52ca011e181dadb57ba4",
+      "score": 7.074681282043457
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R10.C01",
+      "requirement": "HippoRAG 来源名称为 2WikiMultiHopQA。",
+      "selected_matches_by_unit": {
+        "hippods": [
+          "chunk_3fa28005a4df0de5249826585cf9d713"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R10.C02",
+      "requirement": "Tree-of-Traversals 来源名称为 2WikiMultiHop。",
+      "selected_matches_by_unit": {
+        "totds": [
+          "chunk_a8ce6be635ba6abbbc71daeb86e809e9"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R10.C03",
+      "requirement": "HippoRAG 使用查询概念驱动的 PPR。",
+      "selected_matches_by_unit": {
+        "hippo": []
+      },
+      "missing_units": [
+        "hippo"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R10.C04",
+      "requirement": "Tree-of-Traversals 搜索动作/推理链构成的树并限制搜索。",
+      "selected_matches_by_unit": {
+        "totbound": [
+          "chunk_dac5f23e1b87249cf88eff5c6cc54355"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R10.C05",
+      "requirement": "不能由名称相似认定实验协议一致。",
+      "selected_matches_by_unit": {
+        "hippods": [
+          "chunk_3fa28005a4df0de5249826585cf9d713"
+        ],
+        "totds": [
+          "chunk_a8ce6be635ba6abbbc71daeb86e809e9"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.25,
+    "recall8": 0.5,
+    "mrr40": 1.0,
+    "evidence_coverage": 0.75,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/3f14415b-1a57-4be7-b61d-b2d119766be7?poll=true"
+}

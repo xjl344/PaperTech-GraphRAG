@@ -1,0 +1,204 @@
+{
+  "id": "a873d2a7-3403-5d2f-831e-894b91de202c",
+  "inputs": {
+    "question": "请从论文库找出两种让“语义上相关的材料”在图中连起来的不同办法：一种连接不同叫法的概念，另一种学习相邻支持段落。分别说明建边依据和训练信号。"
+  },
+  "outputs": {
+    "expected_answer": "HippoRAG 用检索编码器表示的余弦相似度超过阈值来增加同义边。\nKGP 的MDR句子编码器学习由已知支持事实预测后续支持事实，再用嵌入相似构建KNN图。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R07.S01",
+        "answer_point": "HippoRAG 用检索编码器表示的余弦相似度超过阈值来增加同义边。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_008861356c216ab780f62dad7796e2d4",
+        "pages": [
+          4,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_008861356c216ab780f62dad7796e2d4"
+        ]
+      },
+      {
+        "unit_id": "R07.S02",
+        "answer_point": "KGP 的MDR句子编码器学习由已知支持事实预测后续支持事实，再用嵌入相似构建KNN图。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_1da329a96f21568de531f98b40b330e7",
+        "pages": [
+          3,
+          3
+        ],
+        "known_support_chunks": [
+          "chunk_1da329a96f21568de531f98b40b330e7"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R07",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R07.S01",
+        "required_fact": "HippoRAG 用检索编码器表示的余弦相似度超过阈值来增加同义边。",
+        "primary_chunk": "chunk_008861356c216ab780f62dad7796e2d4",
+        "supporting_chunks": [
+          "chunk_008861356c216ab780f62dad7796e2d4"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R07.S02",
+        "required_fact": "KGP 的MDR句子编码器学习由已知支持事实预测后续支持事实，再用嵌入相似构建KNN图。",
+        "primary_chunk": "chunk_1da329a96f21568de531f98b40b330e7",
+        "supporting_chunks": [
+          "chunk_1da329a96f21568de531f98b40b330e7"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_008861356c216ab780f62dad7796e2d4",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 1381,
+            "end_char": 2535,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1154,
+            "block_bboxes": [
+              [
+                107.253,
+                445.556,
+                505.658,
+                575.749
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "513e8af1dd62ac1274c657d1b38ffba433a47012da68b86cb6ee54a868be9741",
+        "section": "Introduction",
+        "text": "Offline Indexing. Our indexing process involves processing a set of passages P using an instruction-\ntuned LLM L and a retrieval encoder M. As seen in Figure 2 we first use L to extract a set of noun\nphrase nodes N and relation edges E from each passage in P via OpenIE. This process is done via\n1-shot prompting of the LLM with the prompts shown in Appendix I. Specifically, we first extract a\nset of named entities from each passage. We then add the named entities to the OpenIE prompt to\nextract the final triples, which also contain concepts (noun phrases) beyond named entities. We find\nthat this two-step prompt configuration leads to an appropriate balance between generality and bias\ntowards named entities. Finally, we use M to add the extra set of synonymy relations E′ discussed\nabove when the cosine similarity between two entity representations in N is above a threshold τ. As\nstated above, this introduces more edges to our hippocampal index and allows for more effective\npattern completion. This indexing process defines a |N| × |P| matrix P, which contains the number\nof times each noun phrase in the KG appears in each original passage.\n"
+      },
+      {
+        "chunk_id": "chunk_1da329a96f21568de531f98b40b330e7",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 3,
+        "page_end": 3,
+        "source_spans": [
+          {
+            "pdf_page": 3,
+            "start_char": 2234,
+            "end_char": 3823,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1589,
+            "block_bboxes": [
+              [
+                54.0,
+                584.764,
+                292.505,
+                704.407
+              ],
+              [
+                319.5,
+                284.592,
+                558.005,
+                469.988
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "df47e2b4a63562674f3ee0f9b73bca9f73e45f37a56e7ea614e8b02bb39c901b",
+        "section": "Introduction",
+        "text": "TF-IDF KG Construction\nFor adding edges according to\nlexical similarity, we first apply TF-IDF keyword extrac-\ntion (Ramos et al. 2003) over each document to filter out\nmeaningless words such as supporting verbs and articles,\nwhich also reduces the dimension of bag-of-word (BOW)\nfeatures, sparsifies the constructed graph and increases the\ngraph traversal efficiency. In addition, we add the document\ntitle into the extracted keyword set since some questions fo-\ncus on title entities. We collect the extracted keywords from\nall documents to form the keyword space W and then con-\nnect two passages if they share any common keyword in W.\nKNN-ST/MDR KG Construction\nFor adding edges ac-\ncording to semantic similarity, we can readily employ pre-\nexisting models such as sentence transformers to gener-\nate passage embedding Xi for each node vi and subse-\nquently compute pairwise similarity matrix to construct the\nK-nearest neighbor (KNN) graph. However, these off-the-\nshelf models, typically trained on tasks not so-related to\nMD-QA, may not adequately encapsulate necessary logical\nassociations in their embedding similarity demanded by the\nquestion. To overcome this problem, we follow the train-\ning strategy of MDR (Xiong et al. 2020) and train a sen-\ntence encoder by predicting the subsequent supporting facts\nbased on previously supporting facts, thereby endowing the\nencoder with reasoning capability. Consequently, the em-\nbedding similarity and the corresponding constructed KNN\ngraph fundamentally encapsulate the necessary logical asso-\nciations between different passages.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "paper_57e4088ab0410527356a07d8b6f88f3b"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "R11 candidate source coverage before/after quote-normalization routing fix; remaining 23 cases are unchanged replay context",
+      "gold": "any known_support_chunks match counts; non-exhaustive frozen support pools",
+      "separate": "paper inclusion is not required source passage coverage; neither is answer accuracy",
+      "pairing": "win/tie/loss plus source additions/removals, including equal-score substitutions",
+      "cost": "new embedding call and shared batch time separate; retrieval per query measured; historical router cost separate",
+      "semantic_review": "not assessed; no generated answers",
+      "negative_policy": "not applicable: 24 cross-paper questions only",
+      "causal_limit": "R11 is one diagnostic item; source support pools are frozen and non-exhaustive; no rerank or answer quality claim."
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅候选召回：同40条上限与全部并集；不重排、不生成",
+      "controls": {
+        "source_recall_run": "e158c260284d4273b8b55c9bd7a8b8f7",
+        "router_replay_run": "c22f0bb403e744139598cee5161cde3b",
+        "no_prompt_change": true,
+        "only_changed_case_retrieved": "R11",
+        "other_cases": "reuse original recall results byte-for-byte except replay metadata",
+        "R11_original": "reuse previous original-question result and its frozen Q0 channel hits",
+        "R11_expanded": "reuse Q0; freshly retrieve only the four fixed router subqueries using the same production indexes and compatible BGE",
+        "fulltext_top": 20,
+        "dense_top": 20,
+        "ann_query_k": 100,
+        "merge": "rank ascending, query order original then SQ, channel order fulltext then dense; first discovery order; no cross-query RRF",
+        "cap": 40,
+        "reranking": false,
+        "answer_generation": false,
+        "evidence_selection": false
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Original / Expanded Experiments",
+      "fields": [
+        "原题与冻结子查询",
+        "每查询每通道排名/分数",
+        "found_by 与合并截断",
+        "全部候选原文及位置",
+        "逐必要来源覆盖与缺口",
+        "两组逐题得失",
+        "调用/时延/Token状态",
+        "Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "R07",
+    "category": "cross",
+    "benchmark": "benchmark-subquery-recall-router-fix-v1",
+    "benchmark_sha256": "c48620b6e885fd730cac8db762b04e52d38abc1cb888be8356696841fced4594",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; exposed development data",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

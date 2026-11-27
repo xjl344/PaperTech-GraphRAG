@@ -1,0 +1,962 @@
+{
+  "request_id": "eccde272-afad-46f5-88cd-1b68d591fc5b",
+  "status": "partial",
+  "answer": "CuriousLLM（KGP-Mistral）的底座与微调：作者称“We use the Mistral-7B model... as the backbone and fine-tune it on the Follow-upQA dataset with the objective of next-token prediction”，并“employ QLoRA... load the model at 8 bit precision and then train a LoRA adapter using a LoRA rank of 32, a learning rate of 10−5, and a batch size of 12”，数据划分为“90% - 5% - 5%”[chunk_fb24ed864a9886ec8722f831391af3b7]。训练时间变化：作者称“Compared to the time required to train an identical T5 model in the original KGP framework, we reduce the training time of our model by 85% using the same computing resources”[chunk_fb24ed864a9886ec8722f831391af3b7]。MDR-KG段落编码器的训练思路：所提供的原文证据未描述其训练思路，流​​程证据不足；仅有“After generating a follow-up question... compared against the neighboring passages”及“Multi-QA sentence transformer... dense representations”[chunk_fb24ed864a9886ec8722f831391af3b7]，不能据此推断编码器训练方式。",
+  "citations": [
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1961,
+          "end_char": 3377,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1416,
+          "block_bboxes": [
+            [
+              70.593,
+              612.118,
+              291.043,
+              744.903
+            ],
+            [
+              70.866,
+              754.53,
+              234.952,
+              774.709
+            ],
+            [
+              305.804,
+              271.699,
+              526.22,
+              350.437
+            ],
+            [
+              305.804,
+              353.123,
+              526.318,
+              513.028
+            ]
+          ]
+        }
+      ],
+      "quote": "We use the Mistral-7B model (Jiang et al., 2023)\n2 as the backbone and fine-tune it on the Follow-\nupQA dataset with the objective of next-token pre-\ndiction. Specifically, for each sample in the dataset,\nas shown in Table 2, we concatenate the question,\nthe given passage, and the follow-up question. We\nemploy QLoRA (Dettmers et al., 2023) to train the\nmodel: we load the model at 8 bit precision and\nthen train a LoRA adapter using a LoRA rank of\n32, a learning rate of 10−5, and a batch size of 12.\n2https://huggingface.co/mistralai/\nMistral-7B-Instruct-v0.2\nThe training is implemented with a split between\nthe training validation test of 90% - 5% - 5%. Com-\npared to the time required to train an identical T5\nmodel in the original KGP framework, we reduce\nthe training time of our model by 85% using the\nsame computing resources.\nAfter generating a follow-up question at the cur-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.188122272491455
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8348250389099121
+        }
+      ],
+      "rerank_score": 0.9888849258422852,
+      "context_bytes": 1796,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1961,
+          "end_char": 3377,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1416,
+          "block_bboxes": [
+            [
+              70.593,
+              612.118,
+              291.043,
+              744.903
+            ],
+            [
+              70.866,
+              754.53,
+              234.952,
+              774.709
+            ],
+            [
+              305.804,
+              271.699,
+              526.22,
+              350.437
+            ],
+            [
+              305.804,
+              353.123,
+              526.318,
+              513.028
+            ]
+          ]
+        }
+      ],
+      "quote": "rent node in the KG, the question is compared\nagainst the neighboring passages of the node. We\nalso employ a pre-trained Multi-QA sentence trans-\nformer 3, which produces dense representations to\nminimize the semantic distance between the follow-\nup question and relevant passages. The search\nthrough KG is carried out using a breadth-first\nsearch strategy (BFS), as shown in Algorithm 1.\nThis iterative process continues until reaching a\npredefined budget or the model deems it has suffi-\ncient information to answer the query.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.188122272491455
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8348250389099121
+        }
+      ],
+      "rerank_score": 0.9888849258422852,
+      "context_bytes": 1796,
+      "eid": "E2"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_8e19a73abbe8d3148f9bd5614582a314",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 11,
+      "page_end": 11,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 11,
+          "start_char": 2075,
+          "end_char": 3657,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1582,
+          "block_bboxes": [
+            [
+              54.0,
+              148.943,
+              292.505,
+              673.493
+            ],
+            [
+              54.0,
+              683.695,
+              292.498,
+              704.166
+            ],
+            [
+              319.5,
+              55.058,
+              558.005,
+              145.205
+            ],
+            [
+              319.5,
+              149.452,
+              558.005,
+              170.374
+            ],
+            [
+              319.5,
+              180.185,
+              482.864,
+              191.094
+            ]
+          ]
+        }
+      ],
+      "quote": "ct 2 examples from\n‘gold with 2 distractors context’ for the demonstration\npurpose. We iteratively select top-5 passages based on the\ngenerated reason from LLM along with their document ti-\ntles and add them to the retrieved context until hitting the\nprefix budget. For the prompt used in the reading step, we\nuse exactly the same prompt as other baselines as we find\nit empirically leads to better performance than the original\none used in IRCoT (Trivedi et al. 2022a).\n• KGP-T5/LLaMA/MDR/ChatGPT:\nWe\nuse\nT5-\nlarge/LLaMA-7B/MDR/ChatGPT as the LLM to guide\nthe graph traversal respectively. For content-based ques-\ntions, similar to MDR, we perform a 2-hop retrieval but\nfor each hop, we only search the node to visit next from\nneighbor candidates. In the 1st-hop retrieval, we select\n10 passages and in 2nd-hop retrieval, we select 3 pas-\nsages, which totally forms 30 reasoning paths. Note that\npassages in the 1st-hop retrieval are allowed to overlap\n8We use Levenshtein-distance to measure the lexical distance\nbetween two passages.\nwith the ones in the 2nd-hop retrieval. For structural-based\nquestions, we first use ChatGPT to extract page/table\nstructures and then fetch relevant contents in those\nstructures. Future work could explore how to pre-train a\nstructural extraction model to obtain document structures.\n• KGP-TF-IDF: We remove the LLM-guided graph traver-\nsal but select passage nodes based on their TF-IDF simi-\nlarity to the given question.\nNote that we put the prompt template for running all the\nabove baselines in Section 8.9.\n8.3\nComplexity Analysis for KGP\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 4.1230034828186035
+        }
+      ],
+      "rerank_score": 0.467453271150589,
+      "context_bytes": 1950
+    },
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1961,
+          "end_char": 3377,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1416,
+          "block_bboxes": [
+            [
+              70.593,
+              612.118,
+              291.043,
+              744.903
+            ],
+            [
+              70.866,
+              754.53,
+              234.952,
+              774.709
+            ],
+            [
+              305.804,
+              271.699,
+              526.22,
+              350.437
+            ],
+            [
+              305.804,
+              353.123,
+              526.318,
+              513.028
+            ]
+          ]
+        }
+      ],
+      "quote": "We use the Mistral-7B model (Jiang et al., 2023)\n2 as the backbone and fine-tune it on the Follow-\nupQA dataset with the objective of next-token pre-\ndiction. Specifically, for each sample in the dataset,\nas shown in Table 2, we concatenate the question,\nthe given passage, and the follow-up question. We\nemploy QLoRA (Dettmers et al., 2023) to train the\nmodel: we load the model at 8 bit precision and\nthen train a LoRA adapter using a LoRA rank of\n32, a learning rate of 10−5, and a batch size of 12.\n2https://huggingface.co/mistralai/\nMistral-7B-Instruct-v0.2\nThe training is implemented with a split between\nthe training validation test of 90% - 5% - 5%. Com-\npared to the time required to train an identical T5\nmodel in the original KGP framework, we reduce\nthe training time of our model by 85% using the\nsame computing resources.\nAfter generating a follow-up question at the cur-\nrent node in the KG, the question is compared\nagainst the neighboring passages of the node. We\nalso employ a pre-trained Multi-QA sentence trans-\nformer 3, which produces dense representations to\nminimize the semantic distance between the follow-\nup question and relevant passages. The search\nthrough KG is carried out using a breadth-first\nsearch strategy (BFS), as shown in Algorithm 1.\nThis iterative process continues until reaching a\npredefined budget or the model deems it has suffi-\ncient information to answer the query.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.188122272491455
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8348250389099121
+        }
+      ],
+      "rerank_score": 0.9888849258422852,
+      "context_bytes": 1796
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 6,
+      "page_end": 7,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 3123,
+          "end_char": 3915,
+          "chunk_start_char": 0,
+          "chunk_end_char": 792,
+          "block_bboxes": [
+            [
+              306.142,
+              510.188,
+              381.209,
+              522.143
+            ],
+            [
+              306.142,
+              547.753,
+              526.318,
+              761.921
+            ],
+            [
+              294.911,
+              794.449,
+              300.366,
+              805.358
+            ]
+          ]
+        },
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 217,
+          "chunk_start_char": 793,
+          "chunk_end_char": 1010,
+          "block_bboxes": [
+            [
+              70.866,
+              379.203,
+              524.41,
+              401.196
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nOur new CuriousLLM-enhanced KGP framework\nrepresents a significant advance in the field of MD-\nQA by integrating an LLM-guided prompt refor-\nmulation mechanism into the KG traversal process.\nBy introducing the Follow-upQA dataset and a\ncuriosity-driven LLM traversal agent, the system\neffectively addresses challenges like hallucination,\ninefficient retrieval, and the limitations of the origi-\nnal KGP framework. Extensive experiments show\nthat this approach enhances MD-QA accuracy and\nefficiency while reducing computational overhead,\nmaking it a practical solution for real-world applica-\ntions. This work paves the way for future research\ninto optimizing LLM-guided retrieval processes by\noffering a scalable, robust framework balancing\nperformance and resource efficiency.\n6\n\nFigure 3: Benchmark Mistral-7B for Follow-upQA. First row: distribution plots for ROUGE-1, ROUGE-L, and\ncosine similarity across hyper-parameters. Second row: Mistral-7B performance at different training checkpoints.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 11.060479164123535
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8745565414428711
+        }
+      ],
+      "rerank_score": 0.9827572107315063,
+      "context_bytes": 1379
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1099,
+          "end_char": 1639,
+          "chunk_start_char": 0,
+          "chunk_end_char": 540,
+          "block_bboxes": [
+            [
+              83.885,
+              583.826,
+              290.95,
+              649.115
+            ],
+            [
+              83.885,
+              659.884,
+              291.047,
+              765.8
+            ],
+            [
+              306.142,
+              296.522,
+              391.155,
+              308.477
+            ]
+          ]
+        }
+      ],
+      "quote": "• CuriousLLM Agent: We design an LLM\nagent to ask follow-up questions, thus improv-\ning the efficiency and precision of the KGP\nframework without requiring extensive fine-\ntuning.\n• Experimental Validation: We present com-\nprehensive experimental results that demon-\nstrate significant improvements in both the\nperformance and efficiency of the KGP frame-\nwork using our approach. Furthermore, an\nablation study highlights the enhanced reason-\ning capabilities of our LLM agent, particularly\nafter fine-tuning on the Follow-upQA dataset.\n2\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 11.292682647705078
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8250536918640137
+        }
+      ],
+      "rerank_score": 0.952397346496582,
+      "context_bytes": 875
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 30,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "text_only",
+      "windowed": false,
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 6.278377900016494,
+      "inference_seconds": 0.9009632000233978,
+      "elapsed_seconds": 0.9033458000048995,
+      "peak_cuda_memory_bytes": 1196469248,
+      "request_count": 21,
+      "batch_size": 4
+    },
+    "evidence_count": 4,
+    "context_bytes": 6000,
+    "evidence_bytes": 6000,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 5721,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "KGP",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "requested_names": [
+          "KGP"
+        ]
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "KGP",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "requested_names": [
+          "KGP"
+        ],
+        "eligible_candidate_count": 4,
+        "selected_chunk_ids": [
+          "chunk_8e19a73abbe8d3148f9bd5614582a314"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ],
+        "eligible_candidate_count": 17,
+        "selected_chunk_ids": [
+          "chunk_fb24ed864a9886ec8722f831391af3b7",
+          "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+          "chunk_f783bd933d0d2a437496939e022a776a"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 1879,
+    "total_tokens": 2238,
+    "completion_tokens": 359,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 1879
+    },
+    "completion_tokens_details": {
+      "text_tokens": 359
+    }
+  },
+  "model_name": "deepseek-v4.1-flash",
+  "errors": [],
+  "raw": "{\"answer\":\"CuriousLLM（KGP-Mistral）的底座与微调：作者称“We use the Mistral-7B model... as the backbone and fine-tune it on the Follow-upQA dataset with the objective of next-token prediction”，并“employ QLoRA... load the model at 8 bit precision and then train a LoRA adapter using a LoRA rank of 32, a learning rate of 10−5, and a batch size of 12”，数据划分为“90% - 5% - 5%”[chunk_fb24ed864a9886ec8722f831391af3b7]。训练时间变化：作者称“Compared to the time required to train an identical T5 model in the original KGP framework, we reduce the training time of our model by 85% using the same computing resources”[chunk_fb24ed864a9886ec8722f831391af3b7]。MDR-KG段落编码器的训练思路：所提供的原文证据未描述其训练思路，流​​程证据不足；仅有“After generating a follow-up question... compared against the neighboring passages”及“Multi-QA sentence transformer... dense representations”[chunk_fb24ed864a9886ec8722f831391af3b7]，不能据此推断编码器训练方式。\",\"citations\":[{\"chunk_id\":\"chunk_fb24ed864a9886ec8722f831391af3b7\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_fb24ed864a9886ec8722f831391af3b7\",\"quote_id\":\"q2\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "score": 0.029910714285714284,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 7.188122272491455
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8348250389099121
+        }
+      ],
+      "rerank_score": 0.9888849258422852
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.031544957774465976,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 11.060479164123535
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8745565414428711
+        }
+      ],
+      "rerank_score": 0.9827572107315063
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.029631255487269532,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 11.002494812011719
+        },
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8141522407531738
+        }
+      ],
+      "rerank_score": 0.9816303849220276
+    },
+    {
+      "chunk_id": "chunk_f46ac2b9c96b3169b250df92b61e528f",
+      "score": 0.030886196246139225,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 13.06278133392334
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8020572662353516
+        }
+      ],
+      "rerank_score": 0.9664104580879211
+    },
+    {
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 0.03225806451612903,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 12.16636848449707
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8477239608764648
+        }
+      ],
+      "rerank_score": 0.9562273025512695
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.03076923076923077,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 11.292682647705078
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8250536918640137
+        }
+      ],
+      "rerank_score": 0.952397346496582
+    },
+    {
+      "chunk_id": "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 11.376863479614258
+        }
+      ],
+      "rerank_score": 0.9483462572097778
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.029418126757516764,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 7.855149745941162
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8226022720336914
+        }
+      ],
+      "rerank_score": 0.9450961351394653
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.027106227106227107,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 4.577945232391357
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7990612983703613
+        }
+      ],
+      "rerank_score": 0.937210738658905
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.03057889822595705,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 10.383474349975586
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8415098190307617
+        }
+      ],
+      "rerank_score": 0.936051607131958
+    },
+    {
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8240771293640137
+        }
+      ],
+      "rerank_score": 0.9273632764816284
+    },
+    {
+      "chunk_id": "chunk_69407b618c1969f701e74bd3cf523c95",
+      "score": 0.02668564312399929,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 5.840175628662109
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7964901924133301
+        }
+      ],
+      "rerank_score": 0.9084556102752686
+    },
+    {
+      "chunk_id": "chunk_27b6486b825caa61f6f8fd333d2d11b2",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 11.689360618591309
+        }
+      ],
+      "rerank_score": 0.8782098889350891
+    },
+    {
+      "chunk_id": "chunk_f58319afb1c636475f807715f48a7a93",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 5.730772018432617
+        }
+      ],
+      "rerank_score": 0.7697732448577881
+    },
+    {
+      "chunk_id": "chunk_ba08d3e55b962d6032077a51bafe9eca",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 4.496847629547119
+        }
+      ],
+      "rerank_score": 0.6295468807220459
+    },
+    {
+      "chunk_id": "chunk_ffc5734810fca0ae66c78d761d392ba7",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 6.076353073120117
+        }
+      ],
+      "rerank_score": 0.5067554116249084
+    },
+    {
+      "chunk_id": "chunk_8e19a73abbe8d3148f9bd5614582a314",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 4.1230034828186035
+        }
+      ],
+      "rerank_score": 0.467453271150589
+    },
+    {
+      "chunk_id": "chunk_2cdccff3910b914ee3f18d9beda20684",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7987022399902344
+        }
+      ],
+      "rerank_score": 0.39729517698287964
+    },
+    {
+      "chunk_id": "chunk_0498eae1a386ebf0d6d488dedfd6381d",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.838682651519775
+        }
+      ],
+      "rerank_score": 0.37284764647483826
+    },
+    {
+      "chunk_id": "chunk_0aebe5bfda4fb5843fd4e8a34f0b7ca3",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7978076934814453
+        }
+      ],
+      "rerank_score": 0.3312278985977173
+    },
+    {
+      "chunk_id": "chunk_5b721f972c7b5804123038b6fafc6105",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 6.941474437713623
+        }
+      ],
+      "rerank_score": 0.3296074867248535
+    },
+    {
+      "chunk_id": "chunk_358a932cf9be09a75cae0606806b9318",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7972393035888672
+        }
+      ],
+      "rerank_score": 0.24095316231250763
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7984404563903809
+        }
+      ],
+      "rerank_score": 0.21223202347755432
+    },
+    {
+      "chunk_id": "chunk_1d7581035fb8824818f57a8c5b81ab75",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7942256927490234
+        }
+      ],
+      "rerank_score": 0.1718936413526535
+    },
+    {
+      "chunk_id": "chunk_bb6c258ff3a6d9e0cb0053c1e9330d43",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.79681396484375
+        }
+      ],
+      "rerank_score": 0.13330234587192535
+    },
+    {
+      "chunk_id": "chunk_398f31416d02432fe5b213cc80d7ed87",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7939887046813965
+        }
+      ],
+      "rerank_score": 0.11676400154829025
+    },
+    {
+      "chunk_id": "chunk_bca043f33502bdedb273cd4b0ffe1769",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7965598106384277
+        }
+      ],
+      "rerank_score": 0.10875558853149414
+    },
+    {
+      "chunk_id": "chunk_91ab4f17396428b71094655d96c29bb6",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7939457893371582
+        }
+      ],
+      "rerank_score": 0.10230471193790436
+    },
+    {
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 4.589354515075684
+        }
+      ],
+      "rerank_score": 0.043042849749326706
+    },
+    {
+      "chunk_id": "chunk_6312cd468a11fe34506dc29b38949d6c",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 4.670544624328613
+        }
+      ],
+      "rerank_score": 0.0010403185151517391
+    }
+  ],
+  "case_id": "H-F04",
+  "question": "CuriousLLM（KGP-Mistral）采用什么底座模型与微调配置在 Follow-upQA 上训练？它在训练时间上相对原 KGP 的 T5 模型有何变化，并说明其 MDR-KG 段落编码器的训练思路。",
+  "category": "fact",
+  "arm": "Legacy-Hybrid",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0004385000793263316
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.029908900032751262
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 7.4999406933784485e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9040259000612423
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0015832999488338828
+    }
+  ],
+  "retrieval_compute_seconds": 0.9359641000628471,
+  "request_wall_seconds": 8.592938699992374,
+  "embedding_source": "shared Q00 cloud vectors across arms; live planned subquery vectors for Production-Final",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.4113512999610975,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 4.851174099952914,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4287367999786511,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 3.865046999999322,
+      "usage": "{\"prompt_tokens\": 1879, \"total_tokens\": 2238, \"completion_tokens\": 359}"
+    }
+  ],
+  "criterion_source_coverage": [],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 1.0,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/8c14a449-b7dc-4681-8f4b-010912e92d40?poll=true"
+}

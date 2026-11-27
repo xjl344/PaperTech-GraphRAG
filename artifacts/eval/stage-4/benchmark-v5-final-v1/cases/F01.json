@@ -1,0 +1,287 @@
+{
+  "id": "0fe08e7f-426c-5538-8c2a-bee7b6251580",
+  "inputs": {
+    "question": "G-Retriever 怎样把相关子图检索转化成优化问题？请说明问题名称、被选择的对象，并引用原文。"
+  },
+  "outputs": {
+    "expected_answer": "G-Retriever 将相关子图检索建模为 Prize-Collecting Steiner Tree（PCST）优化问题，选择与问题相关的子图。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "pcst",
+        "answer_point": "G-Retriever 将图检索表述为 Prize-Collecting Steiner Tree 优化。",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "primary_chunk": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_3a7f7a1f47b2586d9d9877afb9110567"
+        ]
+      }
+    ],
+    "relation_outline": "G-Retriever 将图检索表述为 Prize-Collecting Steiner Tree 优化。",
+    "must_not_claim": null,
+    "case_id": "F01",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "pcst",
+        "required_fact": "G-Retriever 将图检索表述为 Prize-Collecting Steiner Tree 优化。",
+        "primary_chunk": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+        "supporting_chunks": [
+          "chunk_3a7f7a1f47b2586d9d9877afb9110567"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 446,
+            "end_char": 1988,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1542,
+            "block_bboxes": [
+              [
+                283.758,
+                307.967,
+                328.243,
+                319.922
+              ],
+              [
+                143.507,
+                333.439,
+                469.787,
+                539.841
+              ],
+              [
+                108.0,
+                562.422,
+                190.814,
+                574.377
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "b19a2d053faea5a2dddcb08f15db46e39ca91c20626782da7eb4bd762a2963c5",
+        "section": "Abstract",
+        "text": "Abstract\nGiven a graph with textual attributes, we enable users to ‘chat with their graph’:\nthat is, to ask questions about the graph using a conversational interface. In re-\nsponse to a user’s questions, our method provides textual replies and highlights the\nrelevant parts of the graph. While existing works integrate large language models\n(LLMs) and graph neural networks (GNNs) in various ways, they mostly focus\non either conventional graph tasks (such as node, edge, and graph classification),\nor on answering simple graph queries on small or synthetic graphs. In contrast,\nwe develop a flexible question-answering framework targeting real-world textual\ngraphs, applicable to multiple applications including scene graph understanding,\ncommon sense reasoning, and knowledge graph reasoning. Toward this goal, we\nfirst develop a Graph Question Answering (GraphQA) benchmark with data col-\nlected from different tasks. Then, we propose our G-Retriever method, introducing\nthe first retrieval-augmented generation (RAG) approach for general textual graphs,\nwhich can be fine-tuned to enhance graph understanding via soft prompting. To\nresist hallucination and to allow for textual graphs that greatly exceed the LLM’s\ncontext window size, G-Retriever performs RAG over a graph by formulating this\ntask as a Prize-Collecting Steiner Tree optimization problem. Empirical evaluations\nshow that our method outperforms baselines on textual graph tasks from multiple\ndomains, scales well with larger graph sizes, and mitigates hallucination. 1\n1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_42a876c95c3fe85af679c0dbc03a8a7d"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": true,
+      "planned_output": "完整模型回答与引用",
+      "controls": {
+        "arms": [
+          "P3-RoundRobin-V2",
+          "P4-BalancedMMR-V3"
+        ],
+        "arm_configs": {
+          "P3-RoundRobin-V2": {
+            "graph_enabled": true,
+            "graph_query_aware": true,
+            "use_method_cards": true,
+            "path_budget": 1200,
+            "rerank_contextual": true,
+            "rerank_windowed": false,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "round_robin",
+            "citation_protocol": "source-choice-v2",
+            "query_planner": true,
+            "premise_check": true
+          },
+          "P4-BalancedMMR-V3": {
+            "graph_enabled": true,
+            "graph_query_aware": true,
+            "use_method_cards": true,
+            "path_budget": 1200,
+            "rerank_contextual": true,
+            "rerank_windowed": false,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "subquery_balanced",
+            "citation_protocol": "source-choice-v3",
+            "query_planner": true,
+            "premise_check": true
+          }
+        },
+        "backend": "neo4j",
+        "shared_planner_and_vectors": "identical query plan, query vectors, and upstream QA-Graph+MethodCard pool per question",
+        "execution_order": "alternate arm order by case index",
+        "gold_exclusion": "question text only; gold pools and reference tables isolated"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 P3-RoundRobin-V2 / P4-BalancedMMR-V3 Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "assessment": {
+      "axis": "优化问题与子图选择",
+      "criteria": [
+        {
+          "id": "F01.C01",
+          "requirement": "优化问题是 Prize-Collecting Steiner Tree（PCST）。",
+          "unit_ids": [
+            "pcst"
+          ],
+          "supporting_chunks_by_unit": {
+            "pcst": [
+              "chunk_3a7f7a1f47b2586d9d9877afb9110567"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "F01.C02",
+          "requirement": "选择对象是相关子图，不是无差别输入整张图。",
+          "unit_ids": [
+            "pcst"
+          ],
+          "supporting_chunks_by_unit": {
+            "pcst": [
+              "chunk_3a7f7a1f47b2586d9d9877afb9110567"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        }
+      ],
+      "max_score": 2,
+      "focus_predicates": [
+        "FORMULATES_AS",
+        "SELECTS"
+      ],
+      "reference_path_scope": "本题各来源单元的预期子图；可能是多条分支或互不相连的跨论文子图。",
+      "critical_error_rule": "触发全局 critical_errors 时本题不判全对，并保留逐项分数与错误说明。",
+      "reviewer_status": "not_reviewed",
+      "model_result_status": "not_run"
+    },
+    "expected_graph_paths": {
+      "pcst": [
+        {
+          "unit_id": "pcst",
+          "path_id": "pcst.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "G-Retriever"
+            },
+            {
+              "type": "Optimization",
+              "name": "Prize-Collecting Steiner Tree"
+            },
+            {
+              "type": "GraphComponent",
+              "name": "relevant subgraph"
+            }
+          ],
+          "claim_ids": [
+            "0557c5564c9196bb82bcc13ed69fd32a8680986d5e1ab904e992b16f31e196d3",
+            "63bfd522465c0dca25101efb0f914e9ffd8a621cf538b36aee4e9dceb7b89f73"
+          ]
+        }
+      ]
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    }
+  },
+  "metadata": {
+    "case_id": "F01",
+    "category": "fact",
+    "benchmark": "benchmark-v5-final-v1",
+    "benchmark_sha256": "7ddf3cfa20dc51d011f9451fac81f28ac74533b19d0c7b16421d1066a82ba001",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

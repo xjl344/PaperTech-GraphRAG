@@ -1,0 +1,897 @@
+{
+  "request_id": "70635a04-f306-418a-9cc9-0bdba5d9b303",
+  "status": "citation_error",
+  "answer": "生成结果未通过引用校验，已保留证据；未自动重新生成。",
+  "citations": [],
+  "evidence": [
+    {
+      "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 20,
+      "page_end": 20,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 20,
+          "start_char": 348,
+          "end_char": 1306,
+          "chunk_start_char": 0,
+          "chunk_end_char": 958,
+          "block_bboxes": [
+            [
+              108.249,
+              283.751,
+              292.912,
+              293.714
+            ],
+            [
+              108.0,
+              304.529,
+              504.003,
+              380.755
+            ],
+            [
+              108.0,
+              387.729,
+              504.003,
+              419.609
+            ]
+          ]
+        }
+      ],
+      "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 19.007518768310547
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8664727210998535
+        }
+      ],
+      "rerank_score": 0.9558990597724915,
+      "context_bytes": 1311
+    },
+    {
+      "chunk_id": "chunk_13fff028f79bff64399cfcf345628f0e",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 19,
+      "page_end": 20,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 19,
+          "start_char": 1838,
+          "end_char": 3181,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1343,
+          "block_bboxes": [
+            [
+              108.249,
+              519.1,
+              256.26,
+              529.063
+            ],
+            [
+              108.0,
+              539.113,
+              504.003,
+              615.34
+            ],
+            [
+              108.0,
+              622.313,
+              504.003,
+              654.194
+            ],
+            [
+              108.0,
+              660.657,
+              504.003,
+              704.007
+            ],
+            [
+              120.653,
+              710.645,
+              451.323,
+              732.028
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 20,
+          "start_char": 0,
+          "end_char": 237,
+          "chunk_start_char": 1344,
+          "chunk_end_char": 1581,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              207.077,
+              81.467,
+              404.924,
+              91.94
+            ],
+            [
+              208.636,
+              117.443,
+              247.779,
+              127.406
+            ],
+            [
+              338.757,
+              106.484,
+              396.859,
+              116.447
+            ],
+            [
+              338.229,
+              122.245,
+              397.417,
+              132.208
+            ],
+            [
+              208.636,
+              137.696,
+              403.364,
+              159.128
+            ],
+            [
+              233.084,
+              189.242,
+              378.917,
+              199.205
+            ]
+          ]
+        }
+      ],
+      "quote": "A.6\nIMPLEMENTATION SETTINGS\nFor RoG, we use LLaMA2-Chat-7B (Touvron et al., 2023) as the LLM backbone, which is instruc-\ntion finetuned on the training split of WebQSP and CWQ as well as Freebase for 3 epochs. The\nbatch size is set to 4 and the learning rate is set to 2e-5. We use the cosine learning rate scheduler\npolicy with the warmup ratio set to 0.03. The training is conducted on 2 A100-80G GPUs for 38\nhours. During inference, we first adopt the LLM to generate top-K relation paths with the highest\nprobability as the plans. Then, we adopt the Algorithm 1 to retrieve reasoning paths, which are fed\ninto the LLM to reason the final answers.\nFor LLM beelines, we use zero-shot prompting to conduct KGQA, which directly asks LLMs to\nanswer the question. For other baselines, we directly copy their results reported in UniKGQA (Jiang\net al., 2022) and DECAF (Yu et al., 2022a) for comparisons.\nFor combining the planning module of RoG with different LLMs, we use the planning module to\ngenerate plans (relation paths), which are executed on KGs to retrieve the reasoning paths. The\nretrieved paths are fed into different LLMs during inference by utilizing the reasoning prompts\ntemplate shown in Appendix A.10.\n8https://openai.com/blog/chatgpt\n9Experiments are conducted with the ChatGPT model released between July. to Sept., 2023.\n19\n\nPublished as a conference paper at ICLR 2024\nTable 12: Performance of RoG on MetaQA-3hop.\nStrategies\nMetaQA-3hop\nHits@1\nF1\nRoG (train from scratch)\n84.81\n41.32\nRoG (transfer from Freebase)\n88.98\n50.68\nTable 13: Training time comparison.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 15.465325355529785
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7787332534790039
+        }
+      ],
+      "rerank_score": 0.8828325867652893,
+      "context_bytes": 1954
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 6,
+      "page_end": 7,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 2177,
+          "end_char": 3239,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1062,
+          "block_bboxes": [
+            [
+              108.299,
+              521.162,
+              194.182,
+              533.117
+            ],
+            [
+              108.0,
+              548.174,
+              504.003,
+              591.524
+            ],
+            [
+              108.249,
+              610.484,
+              233.456,
+              620.447
+            ],
+            [
+              108.0,
+              632.063,
+              504.003,
+              686.372
+            ],
+            [
+              108.0,
+              701.594,
+              504.004,
+              732.028
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 414,
+          "chunk_start_char": 1063,
+          "chunk_end_char": 1477,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              134.455,
+              81.977,
+              477.547,
+              91.94
+            ],
+            [
+              183.476,
+              96.864,
+              426.646,
+              107.647
+            ],
+            [
+              349.262,
+              107.871,
+              439.21,
+              114.828
+            ],
+            [
+              174.307,
+              134.322,
+              206.386,
+              141.279
+            ],
+            [
+              223.173,
+              119.016,
+              441.625,
+              156.584
+            ],
+            [
+              177.767,
+              172.252,
+              202.924,
+              179.209
+            ]
+          ]
+        }
+      ],
+      "quote": "EXPERIMENT\nIn our experiments, we aim to answer the following research questions: RQ1: Can RoG achieve\nstate-of-the-art performance on the KGQA tasks? RQ2: Can the planning module of RoG be inte-\ngrated with other LLMs to improve their performance? RQ3: Can RoG conduct faithful reasoning\nand generate interpretable reasoning results?\n5.1\nEXPERIMENT SETTINGS\nDatasets. We evaluate the reasoning ability of RoG on two benchmark KGQA datasets: WebQues-\ntionSP (WebQSP) (Yih et al., 2016) and Complex WebQuestions (CWQ) (Talmor & Berant, 2018),\nwhich contain up to 4-hop questions. Freebase (Bollacker et al., 2008) is the background knowledge\ngraph for both datasets, which contains around 88 million entities, 20 thousand relations, and 126\nmillion triples. The details of the datasets are described in Appendix A.4.\n3The relation name r∗could be split into multiple tokens. For example, “born in” could be split into\n“born” and “ in” by tokenizer. In this way, we could fully utilize the semantic information in relation names\nand generalize to different KGs.\n6\n\nPublished as a conference paper at ICLR 2024\nTable 1: Performance comparison with different baselines on the two KGQA datasets.\nType\nMethods\nWebQSP\nCWQ\nHits@1\nF1\nHits@1\nF1\nEmbedding\nKV-Mem (Miller et al., 2016)\n46.7\n34.5\n18.4\n15.7\nEmbedKGQA (Saxena et al., 2020)\n66.6\n-\n45.9\n-\nNSM (He et al., 2021)\n68.7\n62.8\n47.6\n42.4\nTransferNet (Shi et al., 2021)\n71.4\n-\n48.6\n-\nKGT5 Saxena et al. (2022)\n56.1\n-\n36.5\n-\nRetrieval\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8292274475097656
+        }
+      ],
+      "rerank_score": 0.8330531716346741,
+      "context_bytes": 1884
+    },
+    {
+      "chunk_id": "chunk_bfa2a30300802f424fbbabe46b4f6157",
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 1953,
+          "end_char": 2228,
+          "chunk_start_char": 0,
+          "chunk_end_char": 275,
+          "block_bboxes": [
+            [
+              306.142,
+              401.104,
+              376.189,
+              412.013
+            ],
+            [
+              305.804,
+              418.648,
+              525.776,
+              456.688
+            ],
+            [
+              306.142,
+              468.065,
+              373.102,
+              478.974
+            ],
+            [
+              305.804,
+              485.72,
+              525.77,
+              523.649
+            ],
+            [
+              306.142,
+              535.602,
+              454.171,
+              547.557
+            ]
+          ]
+        }
+      ],
+      "quote": "E.1\nFACTKG\nTable 9 includes the graphs retrieved by KG-GPT,\nalong with the prediction results, for five different\nclaims.\nE.2\nMetaQA\nTable 10 includes the graphs retrieved by KG-GPT,\nalong with the prediction results, for nine different\nquestions.\nF\nTop-K Relation Retrieval\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 13.025136947631836
+        }
+      ],
+      "rerank_score": 0.12389466166496277,
+      "context_bytes": 605
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 30,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 8.57325149999997,
+      "inference_seconds": 0.9444292999996833,
+      "elapsed_seconds": 0.9470947999998316,
+      "peak_cuda_memory_bytes": 1155577856,
+      "request_count": 73
+    },
+    "evidence_count": 4,
+    "context_bytes": 5754,
+    "evidence_bytes": 5754,
+    "graph_context_bytes": 0,
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "limitations": [],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 1903,
+    "total_tokens": 2183,
+    "completion_tokens": 280,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "image_tokens": 0,
+      "text_tokens": 1903
+    },
+    "completion_tokens_details": {
+      "text_tokens": 280
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [
+    "invalid_generated_citations"
+  ],
+  "raw": "{\"answer\":\"不能推出。就 RoG 而言，其 MetaQA-3hop 实验使用的是基于 Wiki-Movies KGs 的数据集：“We select the MetaQA-3hop dataset (Zhang et al., 2018) which is based on Wiki-Movies KGs” [chunk_f5c88d605f651f26c093f30b836a98aa]。RoG 文中的“transfer from Freebase”指的是先在 Freebase 上训练，再用训练所得模型在 Wiki-Movies KGs 上继续微调，并非把 MetaQA 的测试 KG 设为 Freebase [chunk_f5c88d605f651f26c093f30b836a98aa]。至于 KG-GPT 的 MetaQA 实验，所提供证据仅有示例图的说明，未描述测试 KG，故其流程证据不足 [chunk_bfa2a30300802f424fbbabe46b4f6157]。\",\"citations\":[{\"chunk_id\":\"chunk_f5c88d605f651f26c093f30b836a98aa\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_bfa2a30300802f424fbbabe46b4f6157\",\"quote_id\":\"q2\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+      "score": 0.03278688524590164,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 19.007518768310547
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8664727210998535
+        }
+      ],
+      "rerank_score": 0.9558990597724915
+    },
+    {
+      "chunk_id": "chunk_13fff028f79bff64399cfcf345628f0e",
+      "score": 0.029116045245077504,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 15.465325355529785
+        },
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7787332534790039
+        }
+      ],
+      "rerank_score": 0.8828325867652893
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8292274475097656
+        }
+      ],
+      "rerank_score": 0.8330531716346741
+    },
+    {
+      "chunk_id": "chunk_5a1fd5f3826cd78a6219d6bddfaa91da",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.7963089942932129
+        }
+      ],
+      "rerank_score": 0.7962924242019653
+    },
+    {
+      "chunk_id": "chunk_297df214042add51d3facf35d1934a3d",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 13.283845901489258
+        }
+      ],
+      "rerank_score": 0.7694269418716431
+    },
+    {
+      "chunk_id": "chunk_6d513ef9de004b3c675d2c25a69d5330",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 14.611360549926758
+        }
+      ],
+      "rerank_score": 0.7081116437911987
+    },
+    {
+      "chunk_id": "chunk_3f7eb65828761447433c66c28ad111a4",
+      "score": 0.030798389007344232,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 14.653392791748047
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7899823188781738
+        }
+      ],
+      "rerank_score": 0.651576578617096
+    },
+    {
+      "chunk_id": "chunk_cfe612908773552496db582da6b6b26c",
+      "score": 0.02782608695652174,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 12.109492301940918
+        },
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.781400203704834
+        }
+      ],
+      "rerank_score": 0.590897262096405
+    },
+    {
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 8.519816398620605
+        }
+      ],
+      "rerank_score": 0.5452554821968079
+    },
+    {
+      "chunk_id": "chunk_270d9350248b566ed224ba5147a295a2",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7886562347412109
+        }
+      ],
+      "rerank_score": 0.5048559904098511
+    },
+    {
+      "chunk_id": "chunk_cb0cb02a1cffcc44146c10998e6d6034",
+      "score": 0.027046783625730993,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 10.928008079528809
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7811508178710938
+        }
+      ],
+      "rerank_score": 0.5010242462158203
+    },
+    {
+      "chunk_id": "chunk_3aa0cdece98e31f453ae4c5546e718b8",
+      "score": 0.02581612258494337,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 9.41713809967041
+        },
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7764921188354492
+        }
+      ],
+      "rerank_score": 0.418399840593338
+    },
+    {
+      "chunk_id": "chunk_2a54af5657f5157d4c806c5daace0980",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7776861190795898
+        }
+      ],
+      "rerank_score": 0.3380771279335022
+    },
+    {
+      "chunk_id": "chunk_c56673127e6033eeeee53e2b317aac94",
+      "score": 0.03021353930031804,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 11.506909370422363
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.836540699005127
+        }
+      ],
+      "rerank_score": 0.30600830912590027
+    },
+    {
+      "chunk_id": "chunk_546ad813142a1141c46e47c2f9ed5c1a",
+      "score": 0.027313266443701224,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 8.720972061157227
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7868814468383789
+        }
+      ],
+      "rerank_score": 0.27444860339164734
+    },
+    {
+      "chunk_id": "chunk_646e3c0392b4a7b2a255e33664c8f173",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 14.121487617492676
+        }
+      ],
+      "rerank_score": 0.23318208754062653
+    },
+    {
+      "chunk_id": "chunk_cb9bf1d80ff057c49b68a51673cbf674",
+      "score": 0.028790389395194696,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 12.914873123168945
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7849445343017578
+        }
+      ],
+      "rerank_score": 0.22507576644420624
+    },
+    {
+      "chunk_id": "chunk_c8372b1b00fdee8ddcf8b17d0c6a629c",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 8.055142402648926
+        }
+      ],
+      "rerank_score": 0.18491464853286743
+    },
+    {
+      "chunk_id": "chunk_13719303fa087942493eb1fb55fd4c52",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 11.552407264709473
+        }
+      ],
+      "rerank_score": 0.18447348475456238
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7752017974853516
+        }
+      ],
+      "rerank_score": 0.15190638601779938
+    },
+    {
+      "chunk_id": "chunk_bfa2a30300802f424fbbabe46b4f6157",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 13.025136947631836
+        }
+      ],
+      "rerank_score": 0.12389466166496277
+    },
+    {
+      "chunk_id": "chunk_9c3795187f69ce14c244c9ad74c8e821",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7866663932800293
+        }
+      ],
+      "rerank_score": 0.11240508407354355
+    },
+    {
+      "chunk_id": "chunk_710cdd68fb6c3e90f213f8f4e175614e",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 10.23536205291748
+        }
+      ],
+      "rerank_score": 0.09089674800634384
+    },
+    {
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7832756042480469
+        }
+      ],
+      "rerank_score": 0.07382971793413162
+    },
+    {
+      "chunk_id": "chunk_fbbb8f38df6e66a40727407ca912ae1a",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 9.545013427734375
+        }
+      ],
+      "rerank_score": 0.07133200019598007
+    },
+    {
+      "chunk_id": "chunk_853a28afafe05201ef953b7076d05b6b",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7924327850341797
+        }
+      ],
+      "rerank_score": 0.06608537584543228
+    },
+    {
+      "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8008308410644531
+        }
+      ],
+      "rerank_score": 0.054701510816812515
+    },
+    {
+      "chunk_id": "chunk_deb9eea46e529705dffdd1103729c44c",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7845501899719238
+        }
+      ],
+      "rerank_score": 0.03120281919836998
+    },
+    {
+      "chunk_id": "chunk_2a9b056cb06c6576369baa0b5f16404c",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 9.277800559997559
+        }
+      ],
+      "rerank_score": 0.024703869596123695
+    },
+    {
+      "chunk_id": "chunk_7657b86f985d17f66c0ddbf7e16a5c04",
+      "score": 0.027212143650499815,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 10.493303298950195
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7831583023071289
+        }
+      ],
+      "rerank_score": 0.008315778337419033
+    }
+  ],
+  "case_id": "N04",
+  "question": "KG-GPT 和 RoG 都评测 MetaQA；RoG 又写了 transfer from Freebase，是否可推出两篇 MetaQA 实验的测试 KG 都是 Freebase？",
+  "category": "negative",
+  "arm": "Hybrid",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 4.55999997939216e-05
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.028058100000635022
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 4.900000931229442e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9476016999997228
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0006995999992795987
+    }
+  ],
+  "retrieval_compute_seconds": 0.9764099000003625,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.3157824000008986,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 3.3820516999985557,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.3785470999991958,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 2.695123600000443,
+      "usage": "{\"prompt_tokens\": 1903, \"total_tokens\": 2183, \"completion_tokens\": 280}"
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 1.0,
+    "mrr40": 1.0,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/b2d69f3c-ed24-4970-ab98-9da52e77166e?poll=true"
+}

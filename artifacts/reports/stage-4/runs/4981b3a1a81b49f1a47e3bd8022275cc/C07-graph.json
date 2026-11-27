@@ -1,0 +1,2447 @@
+{
+  "request_id": "78bea489-9269-4028-85a6-3518e2ec1d2b",
+  "status": "evidence_only",
+  "answer": "本题按预先冻结口径仅比较检索证据。",
+  "citations": [],
+  "evidence": [
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1493,
+          "end_char": 2914,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              107.691,
+              291.768,
+              505.746,
+              323.653
+            ],
+            [
+              108.0,
+              318.617,
+              504.003,
+              356.541
+            ],
+            [
+              108.0,
+              346.529,
+              503.999,
+              368.751
+            ],
+            [
+              108.0,
+              358.694,
+              505.246,
+              382.28
+            ],
+            [
+              260.981,
+              370.81,
+              297.016,
+              384.221
+            ],
+            [
+              107.691,
+              372.327,
+              504.004,
+              415.159
+            ],
+            [
+              108.0,
+              422.208,
+              504.343,
+              464.972
+            ],
+            [
+              108.299,
+              482.573,
+              200.083,
+              494.529
+            ]
+          ]
+        }
+      ],
+      "quote": "n=1 instead of triple-based reasoning paths. ToG-R sequentially\nperforms relation search, relation prune and entity search in each iteration, which is the same as ToG.\nThen ToG-R performs the reasoning step based on all candidate reasoning paths ending with ED\ncand\nobtained by entity search. If the LLM determines that the retrieved candidate reasoning paths do not\ncontain enough information for the LLM to answer the question, we randomly sample N entities\nfrom the candidate entities ED\ncand and continue to the next iteration. Assuming that entities in each\nentity set ED\ncand,n probably belong to the same entity class and have similar neighboring relations,\nthe results of pruning the entity set {ED\ncand,n}N\nn=1 might have little impact on the following relation\nexploration. Thus, we use the random beam search instead of the LLM-constrained beam search in\nToG for entity prune, referred to as random prune. Algorithm 1 and 2 show the implementation\ndetails of the ToG and ToG-R. ToG-R needs at most ND + D + 1 calls to the LLM.\nCompared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.\n3\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 6.888503074645996
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8286628723144531
+        },
+        {
+          "channel": "graph",
+          "rank": 6,
+          "score": 0.16666666666666666
+        }
+      ],
+      "rerank_score": 0.9643214344978333,
+      "context_bytes": 1793
+    },
+    {
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 22,
+      "page_end": 22,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 22,
+          "start_char": 662,
+          "end_char": 2113,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1451,
+          "block_bboxes": [
+            [
+              107.641,
+              238.664,
+              505.247,
+              402.282
+            ]
+          ]
+        }
+      ],
+      "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 4.544709205627441
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8326187133789062
+        },
+        {
+          "channel": "graph",
+          "rank": 7,
+          "score": 0.14285714285714285
+        }
+      ],
+      "rerank_score": 0.9374402165412903,
+      "context_bytes": 1827
+    }
+  ],
+  "graph_paths": [
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "0eb47a943a93c961c21594b2cb1b5de0c90b87252a036b7fce73482f73a46287",
+          "name": "errors or uncertainties in ToG answers",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "object": "errors or uncertainties in ToG answers"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 9,
+          "page_end": 9,
+          "quote": "errors or uncertainties in ToG answers are discovered by human users/experts or other LLMs, ToG\nhas the ability to trace back and examine the reasoning path, find suspicious triples with errors, and\ncorrect them.",
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "b6459cf2253a76dc672d91678d699bbcdd5fbd30d29daa0654b0071a9e2c4477",
+          "name": "CWQ dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "object": "CWQ dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 25,
+          "page_end": 25,
+          "quote": "In this section, we present a case analysis of the CWQ dataset to evaluate the utility and limitations\nof the ToG.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "a36793c899ce5561687b2b616cd5ee399f533432a619ff9bc2cc5de5b242874c",
+          "name": "LLM explainability",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "ADDRESSES",
+          "claim_id": "217f506318d8eb51b9b0a55eacacb7d8e2a97272d98fd89132821d8659d9b90d",
+          "object": "LLM explainability"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 3,
+          "page_end": 3,
+          "quote": "Explicit, editable reasoning\npaths improve the explainability of the reasoning process of LLMs, and enable the tracing and\ncorrection of the provenances of models’ outputs.",
+          "predicate": "ADDRESSES",
+          "claim_id": "217f506318d8eb51b9b0a55eacacb7d8e2a97272d98fd89132821d8659d9b90d",
+          "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "453362e41688bdce3d66d91cc845416814c67fe3b5df14a3d76cb9aff4c6e592",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "453362e41688bdce3d66d91cc845416814c67fe3b5df14a3d76cb9aff4c6e592",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "57ade68e4423d1720724529da7523742c0b19f35dff90e1149f8e963867b9a56",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "For ToG-R,\nthe disparity between the two is primarily evident in the CWQ dataset, where the percentage of\nintervals (25,50] in ToG results is quite significant (nearly 40%), whereas ToG-R results tend to be\nmore evenly distributed as shown in Figure 11.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "57ade68e4423d1720724529da7523742c0b19f35dff90e1149f8e963867b9a56",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "4d4a8cd50eaca175faee823aecb53c64e1df443a6c62b7ec7e92929eb83242b6",
+          "name": "GrailQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "61be3c3f32511960116832ffdae9adb9ff29ee0c7e5117f703b1b52046c5526b",
+          "object": "GrailQA"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 10: The explored path overlap ratio of ToG on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "61be3c3f32511960116832ffdae9adb9ff29ee0c7e5117f703b1b52046c5526b",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "4d4a8cd50eaca175faee823aecb53c64e1df443a6c62b7ec7e92929eb83242b6",
+          "name": "GrailQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "a3438d59f219a0820445c59ae291ddff20f5d8350bdbad246e14f4c00320cb76",
+          "object": "GrailQA"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "a3438d59f219a0820445c59ae291ddff20f5d8350bdbad246e14f4c00320cb76",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d07e700f0dfef2307dbaffcea491c80db1878e1726bd1e873cda949ef0864849",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "For ToG-R,\nthe disparity between the two is primarily evident in the CWQ dataset, where the percentage of\nintervals (25,50] in ToG results is quite significant (nearly 40%), whereas ToG-R results tend to be\nmore evenly distributed as shown in Figure 11.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d07e700f0dfef2307dbaffcea491c80db1878e1726bd1e873cda949ef0864849",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "453362e41688bdce3d66d91cc845416814c67fe3b5df14a3d76cb9aff4c6e592",
+          "object": "CWQ"
+        },
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d07e700f0dfef2307dbaffcea491c80db1878e1726bd1e873cda949ef0864849",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "453362e41688bdce3d66d91cc845416814c67fe3b5df14a3d76cb9aff4c6e592",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "For ToG-R,\nthe disparity between the two is primarily evident in the CWQ dataset, where the percentage of\nintervals (25,50] in ToG results is quite significant (nearly 40%), whereas ToG-R results tend to be\nmore evenly distributed as shown in Figure 11.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d07e700f0dfef2307dbaffcea491c80db1878e1726bd1e873cda949ef0864849",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "object": "WebQSP"
+        },
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "acc172d921d4d01b8ab3fee11f46b1b0ac8096d0029049d891bd809b1043cfb4",
+          "name": "ToG-2",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "object": "WebQSP"
+        },
+        {
+          "subject": "ToG-2",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "6d41bdfd306a5ad206fa261fc38937de56ad991460c89da2593c04671c59d77b",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        },
+        {
+          "page_start": 19,
+          "page_end": 19,
+          "quote": "For the WebQSP, Zero-Shot-RE, QALD-10-en, and Creak datasets, we computed pairwise t-tests\ncomparing ToG-2 with CoK and ToG as in Table 12.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "6d41bdfd306a5ad206fa261fc38937de56ad991460c89da2593c04671c59d77b",
+          "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "57ade68e4423d1720724529da7523742c0b19f35dff90e1149f8e963867b9a56",
+          "object": "CWQ"
+        },
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d07e700f0dfef2307dbaffcea491c80db1878e1726bd1e873cda949ef0864849",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "For ToG-R,\nthe disparity between the two is primarily evident in the CWQ dataset, where the percentage of\nintervals (25,50] in ToG results is quite significant (nearly 40%), whereas ToG-R results tend to be\nmore evenly distributed as shown in Figure 11.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "57ade68e4423d1720724529da7523742c0b19f35dff90e1149f8e963867b9a56",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "For ToG-R,\nthe disparity between the two is primarily evident in the CWQ dataset, where the percentage of\nintervals (25,50] in ToG results is quite significant (nearly 40%), whereas ToG-R results tend to be\nmore evenly distributed as shown in Figure 11.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d07e700f0dfef2307dbaffcea491c80db1878e1726bd1e873cda949ef0864849",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "4d4a8cd50eaca175faee823aecb53c64e1df443a6c62b7ec7e92929eb83242b6",
+          "name": "GrailQA",
+          "type": "Dataset"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "61be3c3f32511960116832ffdae9adb9ff29ee0c7e5117f703b1b52046c5526b",
+          "object": "GrailQA"
+        },
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "a3438d59f219a0820445c59ae291ddff20f5d8350bdbad246e14f4c00320cb76",
+          "object": "GrailQA"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 10: The explored path overlap ratio of ToG on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "61be3c3f32511960116832ffdae9adb9ff29ee0c7e5117f703b1b52046c5526b",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "a3438d59f219a0820445c59ae291ddff20f5d8350bdbad246e14f4c00320cb76",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method"
+        },
+        {
+          "id": "4d4a8cd50eaca175faee823aecb53c64e1df443a6c62b7ec7e92929eb83242b6",
+          "name": "GrailQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "a3438d59f219a0820445c59ae291ddff20f5d8350bdbad246e14f4c00320cb76",
+          "object": "GrailQA"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "a3438d59f219a0820445c59ae291ddff20f5d8350bdbad246e14f4c00320cb76",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d07e700f0dfef2307dbaffcea491c80db1878e1726bd1e873cda949ef0864849",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "For ToG-R,\nthe disparity between the two is primarily evident in the CWQ dataset, where the percentage of\nintervals (25,50] in ToG results is quite significant (nearly 40%), whereas ToG-R results tend to be\nmore evenly distributed as shown in Figure 11.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d07e700f0dfef2307dbaffcea491c80db1878e1726bd1e873cda949ef0864849",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "acc172d921d4d01b8ab3fee11f46b1b0ac8096d0029049d891bd809b1043cfb4",
+          "name": "ToG-2",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "object": "WebQSP"
+        },
+        {
+          "subject": "ToG-2",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "6d41bdfd306a5ad206fa261fc38937de56ad991460c89da2593c04671c59d77b",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        },
+        {
+          "page_start": 19,
+          "page_end": 19,
+          "quote": "For the WebQSP, Zero-Shot-RE, QALD-10-en, and Creak datasets, we computed pairwise t-tests\ncomparing ToG-2 with CoK and ToG as in Table 12.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "6d41bdfd306a5ad206fa261fc38937de56ad991460c89da2593c04671c59d77b",
+          "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "object": "WebQSP"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "b8e7abb632be1f36528622b4ba13dab725e432e87e6d6c8f7f25ed355871fe02",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 10: The explored path overlap ratio of ToG on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "b8e7abb632be1f36528622b4ba13dab725e432e87e6d6c8f7f25ed355871fe02",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "0eb47a943a93c961c21594b2cb1b5de0c90b87252a036b7fce73482f73a46287",
+          "name": "errors or uncertainties in ToG answers",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "object": "errors or uncertainties in ToG answers"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 9,
+          "page_end": 9,
+          "quote": "errors or uncertainties in ToG answers are discovered by human users/experts or other LLMs, ToG\nhas the ability to trace back and examine the reasoning path, find suspicious triples with errors, and\ncorrect them.",
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "b6459cf2253a76dc672d91678d699bbcdd5fbd30d29daa0654b0071a9e2c4477",
+          "name": "CWQ dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "object": "CWQ dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 25,
+          "page_end": 25,
+          "quote": "In this section, we present a case analysis of the CWQ dataset to evaluate the utility and limitations\nof the ToG.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "a36793c899ce5561687b2b616cd5ee399f533432a619ff9bc2cc5de5b242874c",
+          "name": "LLM explainability",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "ADDRESSES",
+          "claim_id": "217f506318d8eb51b9b0a55eacacb7d8e2a97272d98fd89132821d8659d9b90d",
+          "object": "LLM explainability"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 3,
+          "page_end": 3,
+          "quote": "Explicit, editable reasoning\npaths improve the explainability of the reasoning process of LLMs, and enable the tracing and\ncorrection of the provenances of models’ outputs.",
+          "predicate": "ADDRESSES",
+          "claim_id": "217f506318d8eb51b9b0a55eacacb7d8e2a97272d98fd89132821d8659d9b90d",
+          "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "453362e41688bdce3d66d91cc845416814c67fe3b5df14a3d76cb9aff4c6e592",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "453362e41688bdce3d66d91cc845416814c67fe3b5df14a3d76cb9aff4c6e592",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "57ade68e4423d1720724529da7523742c0b19f35dff90e1149f8e963867b9a56",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "For ToG-R,\nthe disparity between the two is primarily evident in the CWQ dataset, where the percentage of\nintervals (25,50] in ToG results is quite significant (nearly 40%), whereas ToG-R results tend to be\nmore evenly distributed as shown in Figure 11.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "57ade68e4423d1720724529da7523742c0b19f35dff90e1149f8e963867b9a56",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "4d4a8cd50eaca175faee823aecb53c64e1df443a6c62b7ec7e92929eb83242b6",
+          "name": "GrailQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "61be3c3f32511960116832ffdae9adb9ff29ee0c7e5117f703b1b52046c5526b",
+          "object": "GrailQA"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 10: The explored path overlap ratio of ToG on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "61be3c3f32511960116832ffdae9adb9ff29ee0c7e5117f703b1b52046c5526b",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "0eb47a943a93c961c21594b2cb1b5de0c90b87252a036b7fce73482f73a46287",
+          "name": "errors or uncertainties in ToG answers",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "object": "errors or uncertainties in ToG answers"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        },
+        {
+          "page_start": 9,
+          "page_end": 9,
+          "quote": "errors or uncertainties in ToG answers are discovered by human users/experts or other LLMs, ToG\nhas the ability to trace back and examine the reasoning path, find suspicious triples with errors, and\ncorrect them.",
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "b6459cf2253a76dc672d91678d699bbcdd5fbd30d29daa0654b0071a9e2c4477",
+          "name": "CWQ dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "object": "CWQ dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        },
+        {
+          "page_start": 25,
+          "page_end": 25,
+          "quote": "In this section, we present a case analysis of the CWQ dataset to evaluate the utility and limitations\nof the ToG.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "a36793c899ce5561687b2b616cd5ee399f533432a619ff9bc2cc5de5b242874c",
+          "name": "LLM explainability",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "ADDRESSES",
+          "claim_id": "217f506318d8eb51b9b0a55eacacb7d8e2a97272d98fd89132821d8659d9b90d",
+          "object": "LLM explainability"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        },
+        {
+          "page_start": 3,
+          "page_end": 3,
+          "quote": "Explicit, editable reasoning\npaths improve the explainability of the reasoning process of LLMs, and enable the tracing and\ncorrection of the provenances of models’ outputs.",
+          "predicate": "ADDRESSES",
+          "claim_id": "217f506318d8eb51b9b0a55eacacb7d8e2a97272d98fd89132821d8659d9b90d",
+          "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "453362e41688bdce3d66d91cc845416814c67fe3b5df14a3d76cb9aff4c6e592",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        },
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "453362e41688bdce3d66d91cc845416814c67fe3b5df14a3d76cb9aff4c6e592",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "12f008619cb6b1d0093d8c6c19e63641d6b9967ca083dc2962ffe6827d3ebb6b",
+          "name": "WebQSP",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        },
+        {
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "7385232d64ca127331f3b9c79a5133a4c7443de44f6db9276014895037cdc2eb",
+          "name": "CWQ",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "57ade68e4423d1720724529da7523742c0b19f35dff90e1149f8e963867b9a56",
+          "object": "CWQ"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "For ToG-R,\nthe disparity between the two is primarily evident in the CWQ dataset, where the percentage of\nintervals (25,50] in ToG results is quite significant (nearly 40%), whereas ToG-R results tend to be\nmore evenly distributed as shown in Figure 11.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "57ade68e4423d1720724529da7523742c0b19f35dff90e1149f8e963867b9a56",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "4d4a8cd50eaca175faee823aecb53c64e1df443a6c62b7ec7e92929eb83242b6",
+          "name": "GrailQA",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "object": "ToG"
+        },
+        {
+          "subject": "ToG",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "61be3c3f32511960116832ffdae9adb9ff29ee0c7e5117f703b1b52046c5526b",
+          "object": "GrailQA"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        },
+        {
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 10: The explored path overlap ratio of ToG on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON",
+          "claim_id": "61be3c3f32511960116832ffdae9adb9ff29ee0c7e5117f703b1b52046c5526b",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf"
+        }
+      ]
+    }
+  ],
+  "generation_paths": [
+    {
+      "nodes": [
+        {
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "name": "ToG-R",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "subject": "ToG-R",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4"
+        }
+      ]
+    }
+  ],
+  "limitations": [],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 38,
+    "graph_executed": true,
+    "graph_hits": 8,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_paths": 36,
+    "graph_audit": {
+      "alias_version": "query-alias-v1",
+      "anchors": [
+        {
+          "id": "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed",
+          "name": "ToG",
+          "type": "Method",
+          "canonical": "tog"
+        },
+        {
+          "id": "6287158c9f9eff5f77f8a27e59cd983949825d171587334fa78c463898d89283",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        }
+      ],
+      "seed_count": 2,
+      "max_hops": 2,
+      "per_node": 8,
+      "max_paths": 40,
+      "deadline_seconds": 10,
+      "alias_policy": "query equivalence only; original entities retained",
+      "degree_truncated": [
+        "107813b8e3e6543bfd53265f6cc0c82605832d27415bfcc21094fdb98df807ed"
+      ],
+      "returned_paths": 36,
+      "expanded_nodes": 8,
+      "elapsed_seconds": 0.014363499998580664
+    },
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 5.444340000016382,
+      "inference_seconds": 0.95012220001081,
+      "elapsed_seconds": 0.9527537999965716,
+      "peak_cuda_memory_bytes": 1158073344,
+      "request_count": 47
+    },
+    "evidence_count": 2,
+    "context_bytes": 4471,
+    "evidence_bytes": 3620,
+    "graph_context_bytes": 851,
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "limitations": [],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 1,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": null,
+  "model_name": null,
+  "errors": [],
+  "raw": null,
+  "ranked": [
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 0.047169957774465976,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 6.888503074645996
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8286628723144531
+        },
+        {
+          "channel": "graph",
+          "rank": 6,
+          "score": 0.16666666666666666
+        }
+      ],
+      "rerank_score": 0.9643214344978333
+    },
+    {
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.04371263324049414,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 4.544709205627441
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8326187133789062
+        },
+        {
+          "channel": "graph",
+          "rank": 7,
+          "score": 0.14285714285714285
+        }
+      ],
+      "rerank_score": 0.9374402165412903
+    },
+    {
+      "chunk_id": "chunk_2a773898d4837d44bc3ec29b329f1825",
+      "score": 0.030886196246139225,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 5.422922611236572
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8379487991333008
+        }
+      ],
+      "rerank_score": 0.8413047790527344
+    },
+    {
+      "chunk_id": "chunk_853a28afafe05201ef953b7076d05b6b",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 4.72500467300415
+        }
+      ],
+      "rerank_score": 0.8002240657806396
+    },
+    {
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8264679908752441
+        }
+      ],
+      "rerank_score": 0.7824963331222534
+    },
+    {
+      "chunk_id": "chunk_9eadf098f08b0e28d9965aeb46062d4e",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 5.542154312133789
+        }
+      ],
+      "rerank_score": 0.7816641926765442
+    },
+    {
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8256263732910156
+        }
+      ],
+      "rerank_score": 0.73829185962677
+    },
+    {
+      "chunk_id": "chunk_beb4580eff94eef584b0b4d58d070c2c",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8279595375061035
+        }
+      ],
+      "rerank_score": 0.7263285517692566
+    },
+    {
+      "chunk_id": "chunk_bdd2301d529922318ec27681c94f593a",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8307023048400879
+        }
+      ],
+      "rerank_score": 0.5853381752967834
+    },
+    {
+      "chunk_id": "chunk_f99077c01e2b49914150ff933b0cf783",
+      "score": 0.02690501986276634,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 5.141074180603027
+        },
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7922062873840332
+        }
+      ],
+      "rerank_score": 0.5472826361656189
+    },
+    {
+      "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+      "score": 0.04211622807017544,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.8568549156188965
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7938871383666992
+        },
+        {
+          "channel": "graph",
+          "rank": 4,
+          "score": 0.25
+        }
+      ],
+      "rerank_score": 0.49888038635253906
+    },
+    {
+      "chunk_id": "chunk_33acc1cfbeb25edf68de2f951e8b69ca",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.9970293045043945
+        }
+      ],
+      "rerank_score": 0.4579850435256958
+    },
+    {
+      "chunk_id": "chunk_270d9350248b566ed224ba5147a295a2",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8059000968933105
+        }
+      ],
+      "rerank_score": 0.43812400102615356
+    },
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.029957522915269395,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8060722351074219
+        },
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.3849699795246124
+    },
+    {
+      "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+      "score": 0.029083245521601686,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 5.051301956176758
+        },
+        {
+          "channel": "graph",
+          "rank": 5,
+          "score": 0.2
+        }
+      ],
+      "rerank_score": 0.3775980472564697
+    },
+    {
+      "chunk_id": "chunk_e042b9323f3868f2fdf5ec89a7f01e2c",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.584656715393066
+        }
+      ],
+      "rerank_score": 0.34975481033325195
+    },
+    {
+      "chunk_id": "chunk_9e7ebb4e8a5716f64db3aa210f1590fc",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 4.929642677307129
+        }
+      ],
+      "rerank_score": 0.3274531960487366
+    },
+    {
+      "chunk_id": "chunk_22761de9415eaae3dc9344ec763b2014",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8116035461425781
+        }
+      ],
+      "rerank_score": 0.32498475909233093
+    },
+    {
+      "chunk_id": "chunk_7deb26eed58e9e3d1cc772efdbcb46ec",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 4.627706527709961
+        }
+      ],
+      "rerank_score": 0.298082560300827
+    },
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.798149585723877
+        }
+      ],
+      "rerank_score": 0.2855711579322815
+    },
+    {
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7907700538635254
+        }
+      ],
+      "rerank_score": 0.2423849254846573
+    },
+    {
+      "chunk_id": "chunk_eff9e47d69abba56a62073720f2bd77b",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7931680679321289
+        }
+      ],
+      "rerank_score": 0.2075357437133789
+    },
+    {
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.810549259185791
+        }
+      ],
+      "rerank_score": 0.20149880647659302
+    },
+    {
+      "chunk_id": "chunk_36588119f2aacd0893d97ed15e4ed276",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7985048294067383
+        }
+      ],
+      "rerank_score": 0.18922126293182373
+    },
+    {
+      "chunk_id": "chunk_7ac089f731dde3a5b09b48a00fc48587",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 4.724320888519287
+        }
+      ],
+      "rerank_score": 0.1880255937576294
+    },
+    {
+      "chunk_id": "chunk_e85b3712bb6ce3d3c098728c5c1da4e7",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 4.447057247161865
+        }
+      ],
+      "rerank_score": 0.17009404301643372
+    },
+    {
+      "chunk_id": "chunk_b5d573a408ceb1009fa63dcd9cdd6a1c",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 5.07026481628418
+        }
+      ],
+      "rerank_score": 0.15304215252399445
+    },
+    {
+      "chunk_id": "chunk_cfe4f3279c22a4cc8b3c7352fd275bb6",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.254005432128906
+        }
+      ],
+      "rerank_score": 0.1141708493232727
+    },
+    {
+      "chunk_id": "chunk_729fce1e558e36caab6046b7e5a8ca4a",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.73629093170166
+        }
+      ],
+      "rerank_score": 0.10743747651576996
+    },
+    {
+      "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.1063188686966896
+    },
+    {
+      "chunk_id": "chunk_35aaa835320ae2ebcab47d7482d603ba",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 6.210690975189209
+        }
+      ],
+      "rerank_score": 0.08647765219211578
+    },
+    {
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7918252944946289
+        }
+      ],
+      "rerank_score": 0.08240150660276413
+    },
+    {
+      "chunk_id": "chunk_ed6850570b5301d9c28d549903bb9f7b",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7976980209350586
+        }
+      ],
+      "rerank_score": 0.0754484310746193
+    },
+    {
+      "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.07068779319524765
+    },
+    {
+      "chunk_id": "chunk_0955d7e5f763e232f41cbeffa1f0b450",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.397378444671631
+        }
+      ],
+      "rerank_score": 0.04778006672859192
+    },
+    {
+      "chunk_id": "chunk_49581be104ea412de611088357015646",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 6.031009197235107
+        }
+      ],
+      "rerank_score": 0.034618835896253586
+    },
+    {
+      "chunk_id": "chunk_b78209859c4376c24c898742978604f0",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8087544441223145
+        }
+      ],
+      "rerank_score": 0.02822098508477211
+    },
+    {
+      "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 8,
+          "score": 0.125
+        }
+      ],
+      "rerank_score": 0.015306354500353336
+    }
+  ],
+  "case_id": "C07",
+  "question": "ToG-R 相对 ToG 改了什么剪枝方式，两者 LLM 调用次数公式怎样变化？这是作者的效率主张还是所有场景的已证优越性？",
+  "category": "cross",
+  "arm": "Hybrid+Graph",
+  "order": 2,
+  "generate_requested": false,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 4.0300015825778246e-05
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.02579010001500137
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 0.021565700008068234
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9533253999834415
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0008940999978221953
+    }
+  ],
+  "retrieval_compute_seconds": 1.001615600020159,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.2939320000004955,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [],
+  "metrics": {
+    "recall5": 1.0,
+    "recall8": 1.0,
+    "mrr40": 0.5,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": null
+}

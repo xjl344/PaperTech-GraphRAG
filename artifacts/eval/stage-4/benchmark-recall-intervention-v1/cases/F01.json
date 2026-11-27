@@ -1,0 +1,222 @@
+{
+  "id": "58d5c7ed-8c06-5905-acf0-99f146e932cc",
+  "inputs": {
+    "question": "HippoRAG 的 node specificity 如何计算？一个概念出现的段落越多，权重如何变化，这个权重在 PPR 前还是后使用？"
+  },
+  "outputs": {
+    "expected_answer": "节点 i 的 specificity 为 1/|Pi|，Pi 是抽取出该节点的段落集合；出现段落越多权重越低；PPR 前与查询节点概率相乘。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "F01.S01",
+        "answer_point": "节点 i 的 specificity 为 1/|Pi|，Pi 是抽取出该节点的段落集合；出现段落越多权重越低；PPR 前与查询节点概率相乘。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_3847660df4256f0bd39f8b49c7b9864e",
+        "pages": [
+          5,
+          5
+        ],
+        "known_support_chunks": [
+          "chunk_3847660df4256f0bd39f8b49c7b9864e"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "F01",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "F01.S01",
+        "required_fact": "节点 i 的 specificity 为 1/|Pi|，Pi 是抽取出该节点的段落集合；出现段落越多权重越低；PPR 前与查询节点概率相乘。",
+        "primary_chunk": "chunk_3847660df4256f0bd39f8b49c7b9864e",
+        "supporting_chunks": [
+          "chunk_3847660df4256f0bd39f8b49c7b9864e"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_3847660df4256f0bd39f8b49c7b9864e",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 5,
+        "page_end": 5,
+        "source_spans": [
+          {
+            "pdf_page": 5,
+            "start_char": 789,
+            "end_char": 2205,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1416,
+            "block_bboxes": [
+              [
+                107.641,
+                169.384,
+                504.345,
+                321.332
+              ],
+              [
+                108.0,
+                338.585,
+                227.887,
+                350.54
+              ],
+              [
+                108.0,
+                363.493,
+                166.381,
+                373.456
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "766351f6fd8de8bacfaba8094b95b7a79d6f5c409bc3ed7a6cf51c19fbbb4a02",
+        "section": "Introduction",
+        "text": "Node Specificity. We introduce node specificity as a neurobiologically plausible way to further\nimprove retrieval. It is well known that global signals for word importance, like inverse document\nfrequency (IDF), can improve information retrieval. However, in order for our brain to leverage IDF\nfor retrieval, the number of total “passages” encoded would need to be aggregated with all node\nactivations before memory retrieval is complete. While simple for normal computers, this process\nwould require activating connections between an aggregator neuron and all nodes in the hippocampal\nindex every time retrieval occurs, likely introducing prohibitive computational overhead. Given\nthese constraints, we propose node specificity as an alternative IDF signal which requires only local\nsignals and is thus more neurobiologically plausible. We define the node specificity of node i as\nsi = |Pi|−1, where Pi is the set of passages in P from which node i was extracted, information that\nis already available at each node. Node specificity is used in retrieval by multiplying each query node\nprobability #»n with si before PPR; this allows us to modulate each of their neighborhood’s probability\nas well as their own. We illustrate node specificity in Figure 2 through relative symbol size: the\nStanford logo grows larger than the Alzheimer’s symbol since it appears in fewer documents.\n3\nExperimental Setup\n3.1\nDatasets\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_45e21fe95d28e544e8b55c6a986ff63e"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "cross final necessary-source macro coverage",
+      "negative_policy": "8道反例来源诊断单列，不计主召回，不评拒答正确率",
+      "semantic_review": "not assessed; no generation",
+      "source_pools": "unchanged, non-exhaustive, pre-frozen",
+      "pairing": "case-level win/tie/loss vs declared control; individual source-stage transitions also shown",
+      "causal_limit": "development set only; source-paper inclusion is not necessary-fact support"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索与证据评估（原冻结方案）",
+      "controls": {
+        "stage": "recall_width_intervention",
+        "fulltext_top": 20,
+        "rrf_k": 60,
+        "generation": false,
+        "embedding_calls": 0,
+        "named_policy": "existing named-paper reservation, not necessary-source reservation",
+        "no_gold_in_inputs": true,
+        "model_config": {
+          "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+          "CLOUD_BGE_PROVIDER": "cloudflare",
+          "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+          "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+          "LOCAL_RERANKER_DEVICE": "cuda",
+          "LOCAL_RERANKER_DTYPE": "float16",
+          "LOCAL_RERANKER_PERSISTENT": "true"
+        },
+        "dense_values": [
+          20,
+          40
+        ],
+        "candidate_cap": 60,
+        "selection": {
+          "budget": 8000,
+          "evidence_max": 12,
+          "source_policy": "named_first"
+        },
+        "score_policy": "reuse identical original-query scores for saved candidates; score only newly admitted chunks with original question",
+        "gate": "smallest k recovering any missing cross source; fixed before new reranker calls",
+        "target_adoption": "cross regression count must not exceed improvement count; not automatic production adoption"
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Dense20 / Dense40 Experiments",
+      "fields": [
+        "候选通道完整排名与分数",
+        "全部候选原文及位置",
+        "必要来源上游/重排/预算缺口",
+        "逐题配对差异",
+        "时延/调用量与Token状态",
+        "证据原文/图路径",
+        "原始及本轮Experiment Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "F01.A01",
+        "requirement": "节点 i 的 specificity 为 1/|Pi|，Pi 是抽取出该节点的段落集合",
+        "unit_ids": [
+          "F01.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F01.S01": [
+            "chunk_3847660df4256f0bd39f8b49c7b9864e"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "F01.A02",
+        "requirement": "出现段落越多权重越低",
+        "unit_ids": [
+          "F01.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F01.S01": [
+            "chunk_3847660df4256f0bd39f8b49c7b9864e"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "F01.A03",
+        "requirement": "PPR 前与查询节点概率相乘",
+        "unit_ids": [
+          "F01.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F01.S01": [
+            "chunk_3847660df4256f0bd39f8b49c7b9864e"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "selection_bias": "这40题与来源已参与前轮诊断和本轮方案讨论；仅开发回归，不是新题泛化测试。"
+  },
+  "metadata": {
+    "case_id": "F01",
+    "category": "fact",
+    "benchmark": "benchmark-recall-intervention-v1",
+    "benchmark_sha256": "82781672b113c90648d9f1d82838d411db7a6993016df74a41855fe888ad8e4e",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; exposed development set",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

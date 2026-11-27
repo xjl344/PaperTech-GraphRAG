@@ -1,0 +1,283 @@
+{
+  "id": "1af52d685d94867e3596ba89e145894a3cbd162f0b427a409d66d24505e418db",
+  "inputs": {
+    "question": "HippoRAG 与 RoG 都做图上多跳推理，能否断言“RoG 直接继承 HippoRAG 的 PPR”？"
+  },
+  "outputs": {
+    "expected_answer": "两篇原文分别支持 PPR 检索与关系路径规划；给定来源未建立 RoG 继承 HippoRAG/PPR 的关系。",
+    "answerable": false,
+    "negative_kind": "unsupported_lineage",
+    "required_facts": [
+      "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。",
+      "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。"
+    ],
+    "source_references": [
+      {
+        "unit_id": "hippo",
+        "answer_point": "HippoRAG 抽取查询关键概念，以它们为种子在 KG 上运行 PPR，跨片段整合信息。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+        "pages": [
+          2,
+          2
+        ]
+      },
+      {
+        "unit_id": "rog",
+        "answer_point": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "pages": [
+          1,
+          1
+        ]
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 2,
+        "page_end": 2,
+        "source_spans": [
+          {
+            "pdf_page": 2,
+            "start_char": 1574,
+            "end_char": 2946,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1372,
+            "block_bboxes": [
+              [
+                108.0,
+                472.448,
+                504.004,
+                547.812
+              ],
+              [
+                107.671,
+                554.313,
+                504.351,
+                640.564
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "893cea3139210935608a61ade8a99624fb8d10cc794acde9112226e4804d1ec2",
+        "section": "Introduction",
+        "text": "In contrast, our brains are capable of solving challenging knowledge integration tasks like these with\nrelative ease. The hippocampal memory indexing theory [75], a well-established theory of human\nlong-term memory, offers one plausible explanation for this remarkable ability. Teyler and Discenna\n[75] propose that our powerful context-based, continually updating memory relies on interactions\nbetween the neocortex, which processes and stores actual memory representations, and the C-shaped\nhippocampus, which holds the hippocampal index, a set of interconnected indices which point to\nmemory units on the neocortex and stores associations between them [19, 76].\nIn this work, we propose HippoRAG, a RAG framework that serves as a long-term memory for LLMs\nby mimicking this model of human memory. Our novel design first models the neocortex’s ability to\nprocess perceptual input by using an LLM to transform a corpus into a schemaless knowledge graph\n(KG) as our artificial hippocampal index. Given a new query, HippoRAG identifies the key concepts\nin the query and runs the Personalized PageRank (PPR) algorithm [30] on the KG, using the query\nconcepts as the seeds, to integrate information across passages for retrieval. PPR enables HippoRAG\nto explore KG paths and identify relevant subgraphs, essentially performing multi-hop reasoning in a\nsingle retrieval step.\n"
+      },
+      {
+        "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 318,
+            "end_char": 1721,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1403,
+            "block_bboxes": [
+              [
+                278.288,
+                270.703,
+                333.722,
+                282.658
+              ],
+              [
+                143.866,
+                296.104,
+                468.139,
+                492.369
+              ],
+              [
+                108.299,
+                514.402,
+                205.989,
+                526.357
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "555a358e21b7a12a69fa408f252697827520cea4a7201afcf3083a96a8ef2459",
+        "section": "ABSTRACT",
+        "text": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n"
+      }
+    ],
+    "relation_outline": null,
+    "relation_review": null,
+    "must_not_claim": "不确认题干中无来源的关系或数值；说明证据边界。",
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "All required facts and citations; direction, entity roles, train/test role, evaluation setup and unsupported claims reviewed separately.",
+      "graph_coverage": "Each answerable relation case must expose a source-backed path for every required unit; negative cases must not contain their prohibited edge.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins."
+    },
+    "expected_graph_paths": [
+      [
+        {
+          "unit_id": "hippo",
+          "path_id": "hippo.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "HippoRAG"
+            },
+            {
+              "type": "Component",
+              "name": "LLM corpus transformation"
+            },
+            {
+              "type": "Component",
+              "name": "schemaless knowledge graph"
+            }
+          ],
+          "claim_ids": [
+            "92d56b5a6986adce4d849ff85ab121c8c11488e14ad1ae690416c4d1f5be8152",
+            "5da463f024983d5cb62401550ffbf440d99899507d08ed9f6d7511490478fc65"
+          ]
+        },
+        {
+          "unit_id": "hippo",
+          "path_id": "hippo.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "HippoRAG"
+            },
+            {
+              "type": "Algorithm",
+              "name": "Personalized PageRank"
+            },
+            {
+              "type": "Component",
+              "name": "query concepts as seeds"
+            }
+          ],
+          "claim_ids": [
+            "9c76166656f943f5baa9e8d26a2730e3edc3e2a5de0ebf4376e8b941d6811176",
+            "b87dcca2d5437fff56df5fa52d159a3c7bfb1b79e3a3193d77da10ff9080f532"
+          ]
+        },
+        {
+          "unit_id": "hippo",
+          "path_id": "hippo.P03",
+          "nodes": [
+            {
+              "type": "Algorithm",
+              "name": "Personalized PageRank"
+            },
+            {
+              "type": "Component",
+              "name": "cross-passage evidence"
+            }
+          ],
+          "claim_ids": [
+            "86f3986085cb0a08097bf0b999d1fc2fb421eeda608526459fc18b1567248eef"
+          ]
+        }
+      ],
+      [
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Stage",
+              "name": "planning"
+            },
+            {
+              "type": "Component",
+              "name": "KG-constrained relation path plan"
+            }
+          ],
+          "claim_ids": [
+            "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+            "ba37ea4f3a5d65124244548e425678c1e3612a8c808e09561c8c9864a161a567"
+          ]
+        },
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Stage",
+              "name": "retrieval"
+            },
+            {
+              "type": "Component",
+              "name": "valid reasoning paths"
+            }
+          ],
+          "claim_ids": [
+            "acb6f31d72d610e337bc5df70f4727915505dd0df12b05675a6e90bd6210e743",
+            "125f506f5a6592d212ab477119720e947a21ec29ab1e1bc1de63fd2e2c7926be"
+          ]
+        },
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "TrainingSignal",
+              "name": "KG knowledge distillation"
+            }
+          ],
+          "claim_ids": [
+            "aa112d0b5699cf739594b7e46893dc6141a6d99cd1c8a4e0e5427e7504de1a46"
+          ]
+        }
+      ]
+    ],
+    "result_fields": [
+      "full answer",
+      "ranked candidates and scores",
+      "evidence and citation locations",
+      "graph paths",
+      "per-fact coverage and gaps",
+      "stage timings",
+      "tokens",
+      "paired differences",
+      "trace URLs"
+    ]
+  },
+  "metadata": {
+    "case_id": "N01",
+    "category": "negative",
+    "benchmark": "benchmark-v3",
+    "benchmark_sha256": "3ffb13a824016b58fd2cb5585bab2f3dbbf9767bd38b714ce148097122f6ac87",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "curated source review; not independent human gold"
+  },
+  "split": [
+    "negative"
+  ]
+}

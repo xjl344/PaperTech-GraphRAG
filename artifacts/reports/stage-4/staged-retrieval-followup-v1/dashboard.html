@@ -1,0 +1,101 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>分阶段检索诊断</title>
+<style>body{font:15px system-ui;max-width:1300px;margin:32px auto}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5f8;padding:12px}iframe{width:100%;height:650px;border:1px solid #ccc}</style>
+<p><a href="interpretation.md">????</a> | <a href="run-notes.md">???????</a> | <a href="stage-comparison.json">???????</a></p><h1>分阶段检索诊断</h1><pre># 上游、资源与召回分阶段诊断
+
+全部使用已曝光的40道开发题，来源池与题目不变；每阶段使用新的冻结版本和LangSmith Dataset，不作为泛化验收。所有组均无生成。
+
+## 初始缺口核正
+
+24道跨论文题共49个必要来源单元：{&quot;covered&quot;: 16, &quot;C&quot;: 11, &quot;A&quot;: 20, &quot;B&quot;: 2}。
+A为未入池；B为指定的两个低排名来源；C为其余11个入池但未入上下文的来源。B/C互斥；原context_selection的12个包含R05.S02，另外R24.S03为阈值失败。
+现有策略已经优先为点名论文保留一块，且仅在已召回池内选取；同篇任意段落不能代替必要原文。
+
+## 1. 单独扩Dense候选宽度
+
+全文固定20，ANN查询范围仍为100，复用历史查询向量，只变返回量；无新Embedding、重排、生成。每题Dense20与历史索引结果完全一致。
+|组别（均含全文20）|跨论文候选覆盖|跨论文胜/平/负|A组补回来源数|
+|---|---:|---|---:|
+|Dense20|59.72%|0/24/0|0/20|
+|Dense40|65.97%|3/21/0|3/20|
+|Dense60|71.53%|6/18/0|6/20|
+
+## 2. 固定候选、固定重排分数的资源和保底消融
+
+Named为当前已有的点名论文优先；Score是取消该保底、只按分数的消融。6000/8000为UTF-8字节，8/12为最多块数。
+
+|组别|跨论文最终覆盖|全部必要来源题数|胜/平/负（对当前默认）|C组来源进入数|
+|---|---:|---:|---|---:|
+|Named-6000-8|33.33%|2/24|0/24/0|0/11|
+|Named-6000-12|33.33%|2/24|0/24/0|0/11|
+|Named-8000-8|37.50%|4/24|2/22/0|2/11|
+|Named-8000-12|37.50%|4/24|2/22/0|2/11|
+|Score-6000-8|31.25%|2/24|0/23/1|0/11|
+|Score-8000-12|37.50%|4/24|2/22/0|2/11|
+
+原Hybrid全40题实际最多选中5块，不能把所有预算损失称为8块上限。是否加字节或加块数有效，应以独立消融为准。
+
+## 3. 根据扩k结果选择的召回干预
+
+事前规则选择能补回跨论文必要来源的最小测试k。两组均使用8000字节、12块、现有Named策略，资源条件完全一致；仅增加Dense返回量及其去重候选。复用原候选的历史分数，只对新候选用原问题评分，不改模型、阈值或问题。
+|组别（均含全文20）|候选覆盖|最终覆盖|全部必要来源题数|胜/平/负|
+|---|---:|---:|---:|---|
+|Dense20|59.72%|37.50%|4/24|0/24/0|
+|Dense40|65.97%|39.58%|5/24|1/23/0|
+
+按用户停止线：改善1题，退化0题。未触发退化题数超过改善题数的停止线；这只是开发回归条件，不代表已获泛化验收或自动切换生产。
+
+## 逐来源阶段迁移
+
+|来源单元|原分组|Dense40是否入池|Dense60是否入池|8000/12是否入证据|扩召回后是否入证据|
+|---|---|---|---|---|---|
+|R01.S02|C|是|是|否|否|
+|R03.S01|C|是|是|是|是|
+|R04.S01|A|否|否|否|否|
+|R04.S02|C|是|是|否|否|
+|R05.S01|A|否|否|否|否|
+|R05.S02|B|是|是|否|否|
+|R06.S01|A|否|否|否|否|
+|R06.S02|A|否|是|否|否|
+|R07.S01|A|否|否|否|否|
+|R08.S01|A|否|否|否|否|
+|R08.S02|A|否|是|否|否|
+|R09.S02|C|是|是|否|否|
+|R10.S01|A|是|是|否|是|
+|R11.S01|C|是|是|否|否|
+|R11.S02|A|否|否|否|否|
+|R12.S01|C|是|是|否|否|
+|R12.S02|C|是|是|否|否|
+|R13.S01|C|是|是|否|否|
+|R13.S02|A|否|否|否|否|
+|R14.S01|A|否|否|否|否|
+|R15.S02|C|是|是|是|是|
+|R16.S01|C|是|是|否|否|
+|R17.S01|A|否|否|否|否|
+|R18.S01|A|否|否|否|否|
+|R18.S02|A|是|是|否|否|
+|R19.S01|C|是|是|否|否|
+|R20.S01|A|否|否|否|否|
+|R21.S01|A|否|否|否|否|
+|R21.S02|A|否|否|否|否|
+|R22.S01|A|是|是|否|否|
+|R24.S01|A|否|否|否|否|
+|R24.S02|A|否|是|否|否|
+|R24.S03|B|是|是|否|否|
+
+## 证据边界与下一步
+
+资源扩大会让更多候选有机会进入上下文，不能保证指定必要段落；候选补回也不代表最终保留。方法论文出现、必要原文出现、答案语义正确是不同指标。
+本轮没有新增按方法偏置的召回通道。原有论文保底的效应由Named/Score消融单独展示，不能宣称是本轮新加策略；也不能从某块的分数下降断言必须放弃重排。
+Top60仍未找到某来源，只能说明当前原问题+固定模型+索引范围下未命中；不足以证明必须查询改写。查询拆分可作为下一项有单独变量控制的实验，本轮不生成改写问题或调用生成模型。
+
+## 页面与远端实验
+
+- [benchmark-recall-width-v1 LangSmith](https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/922f8637-f7d1-49f9-b7dd-e049320927c7/compare?selectedSessions=13fd2252-d967-488c-9f19-6190ac394907,630fe956-0e29-4629-95a4-c7ded20eeff5,8487b924-f92b-403d-a8ce-ad6d0f834bf0)；[本地总览](E:/PaperTech-GraphRAG/artifacts/reports/stage-4/benchmark-recall-width-v1/runs/4ad575c5aace4fcd8937c54319a9cd86/dashboard.html)。
+- [benchmark-resource-selection-v1 LangSmith](https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/7c31a7f5-f273-4721-a38c-e0c3645f1ac8/compare?selectedSessions=bb8c9541-99ce-451e-9487-9cceed5aa87f,8f2d4393-e723-402e-a1b1-6c8b15848d40,f09dcff1-01cd-40e5-bd11-fe39a0706c42,8c1d5661-be9d-4d55-8f1a-f2025cff0843,cca20699-580a-4654-942e-05678f56e5cb,84b59f09-fea7-4f57-ae22-cf677b9c895f)；[本地总览](E:/PaperTech-GraphRAG/artifacts/reports/stage-4/benchmark-resource-selection-v1/runs/c76e5f49720d40f2822e15a458c6d1b6/dashboard.html)。
+- [benchmark-recall-intervention-v1 LangSmith](https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/datasets/923a34c8-612d-4e6e-a2ba-0d30abe67d9b/compare?selectedSessions=b67f80c1-f5c7-4e55-8184-6698e1b30bcf,e262fadc-91b3-4ffb-ae01-1f8793587052)；[本地总览](E:/PaperTech-GraphRAG/artifacts/reports/stage-4/benchmark-recall-intervention-v1/runs/c64b43e88c8146c2bdfa721d1a6f4158/dashboard.html)。
+
+[逐来源完整阶段记录](stage-comparison.json)。所有页面保留汇总、分类、柱状图、时延、调用量、完整原文、候选、证据与逐题配对；反例不计主分。
+</pre>
+<h2>benchmark-recall-width-v1</h2><a href="../benchmark-recall-width-v1/runs/4ad575c5aace4fcd8937c54319a9cd86/dashboard.html">打开完整总览、图表和40题详情</a><iframe src="../benchmark-recall-width-v1/runs/4ad575c5aace4fcd8937c54319a9cd86/dashboard.html" title="benchmark-recall-width-v1" loading="lazy"></iframe>
+<h2>benchmark-resource-selection-v1</h2><a href="../benchmark-resource-selection-v1/runs/c76e5f49720d40f2822e15a458c6d1b6/dashboard.html">打开完整总览、图表和40题详情</a><iframe src="../benchmark-resource-selection-v1/runs/c76e5f49720d40f2822e15a458c6d1b6/dashboard.html" title="benchmark-resource-selection-v1" loading="lazy"></iframe>
+<h2>benchmark-recall-intervention-v1</h2><a href="../benchmark-recall-intervention-v1/runs/c64b43e88c8146c2bdfa721d1a6f4158/dashboard.html">打开完整总览、图表和40题详情</a><iframe src="../benchmark-recall-intervention-v1/runs/c64b43e88c8146c2bdfa721d1a6f4158/dashboard.html" title="benchmark-recall-intervention-v1" loading="lazy"></iframe></html>

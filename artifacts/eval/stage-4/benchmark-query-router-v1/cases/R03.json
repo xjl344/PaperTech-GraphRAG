@@ -1,0 +1,271 @@
+{
+  "id": "7b0946e7-79dd-5f68-8155-1cb5ec5dc808",
+  "inputs": {
+    "question": "CuriousLLM 与 StructGPT 的迭代步骤各会产出什么供下一步使用？比较“追问”和“读取后推理”，不要把中间产物都写成最终答案。"
+  },
+  "outputs": {
+    "expected_answer": "CuriousLLM 用问题和支持证据生成后续问题来指导补充检索；充分时用特殊token。\nStructGPT 迭代接口调用、线性化与生成，接口负责读取证据，LLM负责推理。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R03.S01",
+        "answer_point": "CuriousLLM 用问题和支持证据生成后续问题来指导补充检索；充分时用特殊token。",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "primary_chunk": "chunk_43145c0748762d6b4c650c65721f826f",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      {
+        "unit_id": "R03.S02",
+        "answer_point": "StructGPT 迭代接口调用、线性化与生成，接口负责读取证据，LLM负责推理。",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+        "primary_chunk": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R03",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R03.S01",
+        "required_fact": "CuriousLLM 用问题和支持证据生成后续问题来指导补充检索；充分时用特殊token。",
+        "primary_chunk": "chunk_43145c0748762d6b4c650c65721f826f",
+        "supporting_chunks": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R03.S02",
+        "required_fact": "StructGPT 迭代接口调用、线性化与生成，接口负责读取证据，LLM负责推理。",
+        "primary_chunk": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+        "supporting_chunks": [
+          "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 252,
+            "end_char": 1774,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1522,
+            "block_bboxes": [
+              [
+                157.758,
+                221.69,
+                202.243,
+                233.645
+              ],
+              [
+                87.376,
+                245.034,
+                274.616,
+                649.442
+              ],
+              [
+                70.866,
+                661.499,
+                153.68,
+                673.454
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "393207f537cdc33090753f17ca82a444afdecce4c34ccf9f7a8d64e72b8b6e00",
+        "section": "Abstract",
+        "text": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n"
+      },
+      {
+        "chunk_id": "chunk_5e3e5be8ab828aaf3e59c9fdf0aae2ad",
+        "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+        "parse_id": "parse_0f17805b3b51899f139913f99df23591",
+        "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+        "source_relative_path": "Methods/229_StructGPT A General Framework for Large Language Model to Reason over Structured Data.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 480,
+            "end_char": 1582,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1102,
+            "block_bboxes": [
+              [
+                157.758,
+                214.382,
+                202.243,
+                226.337
+              ],
+              [
+                87.565,
+                238.04,
+                273.783,
+                523.046
+              ],
+              [
+                70.866,
+                535.569,
+                153.68,
+                547.524
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "d441f2b0957e29f2e554a3d82bc1f0ed4d0d070b56fa68274aaa5f9e5d7be9a9",
+        "section": "Abstract",
+        "text": "Abstract\nIn this paper, we aim to improve the reason-\ning ability of large language models (LLMs)\nover structured data in a unified way.\nIn-\nspired by the studies on tool augmentation for\nLLMs, we develop an Iterative Reading-then-\nReasoning (IRR) framework to solve question\nanswering tasks based on structured data, called\nStructGPT. In this framework, we construct\nthe specialized interfaces to collect relevant ev-\nidence from structured data (i.e., reading), and\nlet LLMs concentrate on the reasoning task\nbased on the collected information (i.e., rea-\nsoning). Specially, we propose an invoking-\nlinearization-generation procedure to support\nLLMs in reasoning on the structured data with\nthe help of the interfaces. By iterating this\nprocedure with provided interfaces, our ap-\nproach can gradually approach the target an-\nswers to a given query. Experiments conducted\non three types of structured data show that\nStructGPT greatly improves the performance\nof LLMs, under the few-shot and zero-shot set-\ntings. Our codes and data are publicly available\nat https://github.com/RUCAIBox/StructGPT.\n1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "paper_cedbfddc8030ded4258640a1e0a0a733"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "逐题审阅目标独立性、分流合理性、拆分是否增添事实或丢任务",
+      "automatic": "路由数、校验通过、子查询数、调用数、Token与耗时；不是语义准确率",
+      "semantic": "Codex题面审阅，非独立人工；不使用答案来赋予方法技术关系",
+      "limit": "此24题均为跨论文设计，不能评估简单题误拆率；模型分流本身每题一次调用",
+      "latency": "wall time includes loading, route and decomposition in one request",
+      "negative_policy": "not applicable"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "题面子查询拆分；不运行检索或答案生成",
+      "controls": {
+        "prompt": "你是通用检索问题分流器，只看题面，不回答问题，不用外部知识补论文内容。\n判断是否存在多个可独立查证的证据目标，而非按长度、方法名数量判断复杂度。\ndecision 四选一：no_split=一个整体检索目标；rule=输入提供的确定性规则候选足以表示各自检索目标；llm=有多个目标且需理解指代、跨句归属或隐式描述才能拆；unclear=题面不足以确定安全拆分。\n比较题常需分别查证各对象；无方法名但明确要求找两类不同材料时也可以拆成描述性子查询，不猜测论文名。\n如 rule_candidate 为空不得选择 rule；非空也须检查是否漏重要目标。rule 时 queries 留空，程序采用规则候选。\nllm 时输出2至4个能独立检索的简短子查询，每个只包含题面已给的信息，可自然改写和消解明确指代。没有明确归属时不把列举的技术词按论文知识强行配对，可保留共同问题并把未归属文字放 unresolved。\nno_split或unclear时queries为空，保留原题。quotes是支撑判断或拆分的1至4条连续题面原文，必须逐字存在；reason简短解释目标结构，不能说明论文答案。unresolved记录尚未解决的题面歧义，可为空。所有子查询仅用于补充检索，原题始终保留。只输出JSON。",
+        "schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "decision": {
+              "type": "string",
+              "enum": [
+                "no_split",
+                "rule",
+                "llm",
+                "unclear"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            },
+            "queries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "quotes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unresolved": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "decision",
+            "reason",
+            "queries",
+            "quotes",
+            "unresolved"
+          ]
+        },
+        "options": {
+          "temperature": 0,
+          "seed": 42,
+          "num_ctx": 8192,
+          "num_predict": 1400
+        },
+        "rule": "explicit_possessive_parallel_v1",
+        "runtime_input": "question + generic rule candidates only; no catalog, references or case id",
+        "baseline": "Rule label = original question retained without splitting",
+        "treatment": "Local-LLM label = generic router: no_split / rule / llm / unclear; validation failure keeps original",
+        "original_question": "always retained; subqueries auxiliary",
+        "no_anchor": "not a gate; descriptive search targets allowed",
+        "generation": false,
+        "retrieval": false,
+        "embedding": false,
+        "reranking": false
+      },
+      "models": {
+        "local_router": "qwen2.5:14b",
+        "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6"
+      }
+    },
+    "result_display": {
+      "location": "Rule=保持原题 / Local-LLM=通用分流",
+      "fields": [
+        "分流决策与理由",
+        "规则候选",
+        "补充子查询",
+        "未解析内容",
+        "机械校验",
+        "逐题审阅",
+        "Token时延Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "decomposition_rubric": {
+      "primary": "逐题审阅目标独立性、分流合理性、拆分是否增添事实或丢任务",
+      "automatic": "路由数、校验通过、子查询数、调用数、Token与耗时；不是语义准确率",
+      "semantic": "Codex题面审阅，非独立人工；不使用答案来赋予方法技术关系",
+      "limit": "此24题均为跨论文设计，不能评估简单题误拆率；模型分流本身每题一次调用",
+      "latency": "wall time includes loading, route and decomposition in one request",
+      "negative_policy": "not applicable"
+    }
+  },
+  "metadata": {
+    "case_id": "R03",
+    "category": "cross",
+    "benchmark": "benchmark-query-router-v1",
+    "benchmark_sha256": "34d3724fe4a60c135383606c64caab5880aa2fa2746ab07774168f8e5d8d9595",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

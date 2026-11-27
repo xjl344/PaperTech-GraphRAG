@@ -1,0 +1,2342 @@
+{
+  "request_id": "5d2c8de0-77be-4190-a6e2-37969bbb7041",
+  "status": "partial",
+  "answer": "HippoRAG 的流程证据较充分：它先把语料用 LLM 转成无模式知识图谱作为“海马索引”，收到新查询后识别查询中的关键概念，并以这些查询概念为种子在 KG 上运行 Personalized PageRank，从而整合跨段落信息、探索 KG 路径并识别相关子图，相当于在单次检索步骤中完成多跳推理 [E7]。其作者还把这类问题称为 path-finding multi-hop，并称 HippoRAG 利用其联想网络与图搜索算法判断某位教授与查询相关并检索其段落 [E1]。对于 PPR，作者报告用 PPR 输出替换为查询节点概率或其邻域扩展后效果更差，并认为 PPR 是更有效的关联纳入方法 [E5]；不过这些是消融结论，不能据此还原完整查询种子构造细节。RoG 一侧：作者说规划模块旨在生成“忠实的关系路径”作为回答问题的计划，并用指令模板提示 LLM 生成关系路径 [E10]；作者还称关系路径对提升 LLM 在复杂问题上的推理表现很重要，且 RoG 在多跳问题尤其是超过 3 跳的问题上优于其变体 [E2]。但所提供的 RoG 证据只描述了规划模块生成关系路径，没有给出从问题到 KG 检索、再到有效推理路径的完整执行流程；因此 RoG 从查询种子到证据检索的具体流程证据不足。两者比较也只能到此为止：HippoRAG 的种子是查询概念、传播算法是 PPR [E7]；RoG 的计划是 LLM 生成的关系路径 [E10]，但缺少 RoG 检索阶段与 HippoRAG 可对齐的流程描述。",
+  "citations": [
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1574,
+          "end_char": 2946,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1372,
+          "block_bboxes": [
+            [
+              108.0,
+              472.448,
+              504.004,
+              547.812
+            ],
+            [
+              107.671,
+              554.313,
+              504.351,
+              640.564
+            ]
+          ]
+        }
+      ],
+      "quote": "process perceptual input by using an LLM to transform a corpus into a schemaless knowledge graph\n(KG) as our artificial hippocampal index. Given a new query, HippoRAG identifies the key concepts\nin the query and runs the Personalized PageRank (PPR) algorithm [30] on the KG, using the query\nconcepts as the seeds, to integrate information across passages for retrieval. PPR enables HippoRAG\nto explore KG paths and identify relevant subgraphs, essentially performing multi-hop reasoning in a\nsingle retrieval step.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.459433555603027
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7901248931884766
+        }
+      ],
+      "rerank_score": 0.6677979230880737,
+      "context_bytes": 1728,
+      "eid": "E7"
+    },
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3734,
+          "end_char": 3752,
+          "chunk_start_char": 0,
+          "chunk_end_char": 18,
+          "block_bboxes": [
+            [
+              417.507,
+              673.663,
+              479.563,
+              702.636
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 1522,
+          "chunk_start_char": 19,
+          "chunk_end_char": 1541,
+          "block_bboxes": [
+            [
+              108.0,
+              74.317,
+              378.066,
+              84.279
+            ],
+            [
+              107.691,
+              95.377,
+              504.004,
+              149.051
+            ],
+            [
+              107.641,
+              155.401,
+              504.004,
+              274.53
+            ],
+            [
+              108.0,
+              294.015,
+              197.09,
+              305.97
+            ]
+          ]
+        }
+      ],
+      "quote": "working on the neuroscience of Alzheimer’s. It is only by associating disparate information about\nThomas Südhof that someone who knows about this professor would be able to answer this question\neasily. As seen in Table 7, both ColBERTv2 and IRCoT fail to extract the necessary passages since\nthey cannot access these associations. On the other hand, HippoRAG leverages its web of associations\nin its hippocampal index and graph search algorithm to determine that Professor Thomas is relevant\nto this query and retrieves his passages appropriately. More examples of these path-finding multi-hop\nquestions can be found in our case study in Appendix E.\n6",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.985844612121582
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8173947334289551
+        }
+      ],
+      "rerank_score": 0.7633073329925537,
+      "context_bytes": 1913,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 179,
+          "end_char": 1441,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1262,
+          "block_bboxes": [
+            [
+              108.0,
+              101.594,
+              504.004,
+              177.122
+            ],
+            [
+              107.641,
+              183.38,
+              504.344,
+              248.056
+            ],
+            [
+              108.0,
+              265.266,
+              377.707,
+              275.229
+            ]
+          ]
+        }
+      ],
+      "quote": "PPR Alternatives. As shown in Table 5 (rows 5-6), to examine how much of our results are due to\nthe strength of PPR, we replace the PPR output with the query node probability #»n multiplied by node\nspecificity values (row 5) and a version of this that also distributes a small amount of probability to the\ndirect neighbors of each query node (row 6). First, we find that PPR is a much more effective method\nfor including associations for retrieval on all three datasets compared to both simple baselines. It is\ninteresting to note that adding the neighborhood of Rq nodes without PPR leads to worse performance\nthan only using the query nodes themselves.\nAblations. As seen in Table 5 (rows 7-8), node specificity obtains considerable improvements on\nMuSiQue and HotpotQA and yields almost no change in 2WikiMultiHopQA. This is likely because",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.916822910308838
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7973928451538086
+        }
+      ],
+      "rerank_score": 0.7386690378189087,
+      "context_bytes": 1619,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1698,
+          "end_char": 3073,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1375,
+          "block_bboxes": [
+            [
+              108.0,
+              407.911,
+              504.003,
+              428.833
+            ],
+            [
+              108.0,
+              435.296,
+              504.001,
+              456.728
+            ],
+            [
+              205.424,
+              461.976,
+              284.243,
+              474.649
+            ],
+            [
+              240.108,
+              463.716,
+              301.873,
+              489.396
+            ],
+            [
+              303.533,
+              457.105,
+              332.267,
+              480.512
+            ],
+            [
+              337.696,
+              461.543,
+              352.092,
+              471.506
+            ],
+            [
+              335.12,
+              477.586,
+              354.164,
+              485.06
+            ],
+            [
+              356.323,
+              463.716,
+              402.149,
+              474.649
+            ],
+            [
+              312.942,
+              488.621,
+              402.148,
+              500.335
+            ],
+            [
+              403.808,
+              463.845,
+              504.0,
+              474.038
+            ],
+            [
+              108.0,
+              502.387,
+              504.003,
+              534.267
+            ],
+            [
+              108.249,
+              558.195,
+              218.753,
+              568.158
+            ],
+            [
+              108.0,
+              582.271,
+              504.003,
+              614.152
+            ],
+            [
+              123.59,
+              630.112,
+              484.452,
+              648.581
+            ],
+            [
+              108.0,
+              666.072,
+              504.001,
+              687.504
+            ],
+            [
+              108.0,
+              711.557,
+              504.003,
+              732.23
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 1376,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "This maximizes the probability of LLMs generating correct answers based on the retrieved reasoning\npaths.\nThe final objective function of RoG is the combination of the planning optimization and retrieval-\nreasoning optimization, which can be formulated as\nL = log Pθ(a|q, Z∗\nK, G)\n|\n{z\n}\nRetrieval-reasoning\n+\n1\n|Z∗|\nX\nz∈Z∗\nlog Pθ(z|q)\n|\n{z\n}\nPlanning\n.\n(7)\nFrom equation 7, we can see that we adopt the same LLM for both planning and reasoning, which\nare jointly trained on two instruction-tuning tasks, i.e., (planning and retrieval-reasoning). We will\ndiscuss the implementation details of these two tasks in the following subsections.\n4.3\nPLANNING MODULE\nThe planning module aims to generate faithful relation paths as plans for answering the question. To\nutilize the instruction-following ability of LLMs (Wei et al., 2021), we design a simple instruction",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7851896286010742
+        }
+      ],
+      "rerank_score": 0.18242552876472473,
+      "context_bytes": 1812,
+      "eid": "E10"
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1698,
+          "end_char": 3073,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1375,
+          "block_bboxes": [
+            [
+              108.0,
+              407.911,
+              504.003,
+              428.833
+            ],
+            [
+              108.0,
+              435.296,
+              504.001,
+              456.728
+            ],
+            [
+              205.424,
+              461.976,
+              284.243,
+              474.649
+            ],
+            [
+              240.108,
+              463.716,
+              301.873,
+              489.396
+            ],
+            [
+              303.533,
+              457.105,
+              332.267,
+              480.512
+            ],
+            [
+              337.696,
+              461.543,
+              352.092,
+              471.506
+            ],
+            [
+              335.12,
+              477.586,
+              354.164,
+              485.06
+            ],
+            [
+              356.323,
+              463.716,
+              402.149,
+              474.649
+            ],
+            [
+              312.942,
+              488.621,
+              402.148,
+              500.335
+            ],
+            [
+              403.808,
+              463.845,
+              504.0,
+              474.038
+            ],
+            [
+              108.0,
+              502.387,
+              504.003,
+              534.267
+            ],
+            [
+              108.249,
+              558.195,
+              218.753,
+              568.158
+            ],
+            [
+              108.0,
+              582.271,
+              504.003,
+              614.152
+            ],
+            [
+              123.59,
+              630.112,
+              484.452,
+              648.581
+            ],
+            [
+              108.0,
+              666.072,
+              504.001,
+              687.504
+            ],
+            [
+              108.0,
+              711.557,
+              504.003,
+              732.23
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 1376,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "template that prompts LLMs to generate relation paths:\nPlease generate a valid relation path that can be helpful for answering the following question:\n<Question>\nwhere <Question> indicates the question q. The question together with the instruction template\nis fed into LLMs to generate the relation paths, which are structurally formatted as a sentence:\n2The FiD framework assumes each z ∈Z contributes independently, where the probability Pθ(a|q, Z, G)\ncan be approximated as the product of each Pθ(a|q, z, G).\n5\n\nPublished as a conference paper at ICLR 2024",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7851896286010742
+        }
+      ],
+      "rerank_score": 0.18242552876472473,
+      "context_bytes": 1812,
+      "eid": "E10"
+    },
+    {
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 21,
+      "page_end": 21,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 21,
+          "start_char": 802,
+          "end_char": 1210,
+          "chunk_start_char": 0,
+          "chunk_end_char": 408,
+          "block_bboxes": [
+            [
+              108.249,
+              380.482,
+              296.945,
+              390.445
+            ],
+            [
+              108.0,
+              400.407,
+              504.003,
+              443.756
+            ]
+          ]
+        }
+      ],
+      "quote": "A.7.5\nPERFORMANCE ON DIFFERENT HOPS\nWe present the performance of RoG and its variants on different hops of questions in Table 17.\nFrom results, we can see that RoG achieves better performance than its variants on different hops of\nquestions, especially questions with more than 3 hops. This demonstrates the importance of relation\npaths for improving the reasoning performance of LLMs on complex questions.",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.820225715637207
+        }
+      ],
+      "rerank_score": 0.6547843813896179,
+      "context_bytes": 723,
+      "eid": "E2"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3734,
+          "end_char": 3752,
+          "chunk_start_char": 0,
+          "chunk_end_char": 18,
+          "block_bboxes": [
+            [
+              417.507,
+              673.663,
+              479.563,
+              702.636
+            ],
+            [
+              303.509,
+              742.332,
+              308.49,
+              752.295
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 1522,
+          "chunk_start_char": 19,
+          "chunk_end_char": 1541,
+          "block_bboxes": [
+            [
+              108.0,
+              74.317,
+              378.066,
+              84.279
+            ],
+            [
+              107.691,
+              95.377,
+              504.004,
+              149.051
+            ],
+            [
+              107.641,
+              155.401,
+              504.004,
+              274.53
+            ],
+            [
+              108.0,
+              294.015,
+              197.09,
+              305.97
+            ]
+          ]
+        }
+      ],
+      "quote": "3. Lisa Giocomo\n8\n\n5.3\nHippoRAG’s Potential: Path-Finding Multi-Hop Retrieval\nThe second example in Table 7, also present in Figure 1, shows a type of questions that is trivial\nfor informed humans but out of reach for current retrievers without further training. This type of\nquestions, which we call path-finding multi-hop questions, requires identifying one path between a\nset of entities when many paths exist to explore instead of following a specific path, as in standard\nmulti-hop questions.5\nMore specifically, a simple iterative process can retrieve the appropriate passages for the first\nquestion by following the one path set by Alhandra’s one place of birth, as seen by IRCoT’s perfect\nperformance. However, an iterative process would struggle to answer the second question given\nthe many possible paths to explore—either through professors at Stanford University or professors\nworking on the neuroscience of Alzheimer’s. It is only by associating disparate information about\nThomas Südhof that someone who knows about this professor would be able to answer this question\neasily. As seen in Table 7, both ColBERTv2 and IRCoT fail to extract the necessary passages since\nthey cannot access these associations. On the other hand, HippoRAG leverages its web of associations\nin its hippocampal index and graph search algorithm to determine that Professor Thomas is relevant\nto this query and retrieves his passages appropriately. More examples of these path-finding multi-hop\nquestions can be found in our case study in Appendix E.\n6\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.985844612121582
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8173947334289551
+        }
+      ],
+      "rerank_score": 0.7633073329925537,
+      "context_bytes": 1913
+    },
+    {
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 21,
+      "page_end": 21,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 21,
+          "start_char": 802,
+          "end_char": 1210,
+          "chunk_start_char": 0,
+          "chunk_end_char": 408,
+          "block_bboxes": [
+            [
+              108.249,
+              380.482,
+              296.945,
+              390.445
+            ],
+            [
+              108.0,
+              400.407,
+              504.003,
+              443.756
+            ]
+          ]
+        }
+      ],
+      "quote": "A.7.5\nPERFORMANCE ON DIFFERENT HOPS\nWe present the performance of RoG and its variants on different hops of questions in Table 17.\nFrom results, we can see that RoG achieves better performance than its variants on different hops of\nquestions, especially questions with more than 3 hops. This demonstrates the importance of relation\npaths for improving the reasoning performance of LLMs on complex questions.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.820225715637207
+        }
+      ],
+      "rerank_score": 0.6547843813896179,
+      "context_bytes": 723
+    },
+    {
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 218,
+          "end_char": 1574,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1356,
+          "block_bboxes": [
+            [
+              107.641,
+              302.258,
+              504.352,
+              399.508
+            ],
+            [
+              108.0,
+              412.411,
+              505.741,
+              465.967
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 1: Knowledge Integration & RAG. Tasks that require knowledge integration are particularly\nchallenging for current RAG systems. In the above example, we want to find a Stanford professor\nthat does Alzheimer’s research from a pool of passages describing potentially thousands Stanford\nprofessors and Alzheimer’s researchers. Since current methods encode passages in isolation, they\nwould struggle to identify Prof. Thomas unless a passage mentions both characteristics at once. In\ncontrast, most people familiar with this professor would remember him quickly due to our brain’s\nassociative memory capabilities, thought to be driven by the index structure depicted in the C-shaped\nhippocampus above (in blue). Inspired by this mechanism, HippoRAG allows LLMs to build and\nleverage a similar graph of associations to tackle knowledge integration tasks.\nstandard multi-hop question answering (QA) also requires integrating information between passages\nin a retrieval corpus. In order to solve such tasks, current RAG systems resort to using multiple\nretrieval and LLM generation steps iteratively to join disparate passages [64, 78]. Nevertheless, even\nperfectly executed multi-step RAG is still oftentimes insufficient to accomplish many scenarios of\nknowledge integration, as we illustrate in what we call path-finding multi-hop questions in Figure 1.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 4.959499835968018
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7990164756774902
+        }
+      ],
+      "rerank_score": 0.7492707371711731,
+      "context_bytes": 1715
+    },
+    {
+      "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 21,
+      "page_end": 22,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 21,
+          "start_char": 1210,
+          "end_char": 2054,
+          "chunk_start_char": 0,
+          "chunk_end_char": 844,
+          "block_bboxes": [
+            [
+              108.249,
+              460.596,
+              355.677,
+              470.559
+            ],
+            [
+              108.0,
+              480.521,
+              504.003,
+              523.87
+            ],
+            [
+              181.823,
+              671.344,
+              270.443,
+              687.074
+            ],
+            [
+              167.308,
+              663.214,
+              170.988,
+              669.955
+            ],
+            [
+              163.626,
+              645.75,
+              170.987,
+              652.492
+            ],
+            [
+              163.626,
+              628.286,
+              170.987,
+              635.028
+            ],
+            [
+              163.626,
+              610.823,
+              170.987,
+              617.564
+            ],
+            [
+              163.626,
+              593.359,
+              170.987,
+              600.101
+            ],
+            [
+              152.081,
+              586.695,
+              160.332,
+              672.458
+            ],
+            [
+              339.762,
+              671.344,
+              428.382,
+              687.074
+            ],
+            [
+              325.247,
+              663.214,
+              328.927,
+              669.955
+            ],
+            [
+              321.565,
+              648.528,
+              328.926,
+              655.269
+            ],
+            [
+              321.565,
+              633.842,
+              328.926,
+              640.584
+            ],
+            [
+              321.565,
+              619.156,
+              328.926,
+              625.898
+            ],
+            [
+              317.884,
+              604.47,
+              328.925,
+              611.212
+            ],
+            [
+              317.884,
+              589.784,
+              328.925,
+              596.526
+            ],
+            [
+              306.339,
+              586.695,
+              314.59,
+              672.458
+            ],
+            [
+              281.274,
+              655.922,
+              290.475,
+              662.663
+            ],
+            [
+              281.274,
+              632.59,
+              290.475,
+              639.332
+            ],
+            [
+              281.274,
+              609.258,
+              290.475,
+              616.0
+            ],
+            [
+              292.308,
+              602.484,
+              300.559,
+              656.647
+            ],
+            [
+              212.595,
+              581.156,
+              275.488,
+              592.224
+            ],
+            [
+              439.213,
+              645.382,
+              448.414,
+              652.124
+            ],
+            [
+              439.213,
+              627.174,
+              448.414,
+              633.916
+            ],
+            [
+              439.213,
+              608.966,
+              448.414,
+              615.708
+            ],
+            [
+              439.213,
+              590.759,
+              448.414,
+              597.5
+            ],
+            [
+              450.247,
+              602.484,
+              458.498,
+              656.647
+            ],
+            [
+              375.391,
+              581.156,
+              433.427,
+              592.224
+            ],
+            [
+              232.56,
+              553.836,
+              398.495,
+              562.087
+            ],
+            [
+              108.0,
+              708.059,
+              504.003,
+              728.981
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 22,
+          "start_char": 0,
+          "end_char": 504,
+          "chunk_start_char": 845,
+          "chunk_end_char": 1349,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              157.374,
+              81.467,
+              454.628,
+              91.94
+            ],
+            [
+              186.257,
+              106.129,
+              404.318,
+              120.092
+            ],
+            [
+              247.818,
+              120.056,
+              442.354,
+              129.389
+            ],
+            [
+              167.394,
+              134.352,
+              437.725,
+              163.639
+            ],
+            [
+              124.169,
+              179.599,
+              487.833,
+              190.072
+            ],
+            [
+              122.7,
+              203.523,
+              427.622,
+              214.404
+            ],
+            [
+              170.675,
+              214.376,
+              502.259,
+              221.649
+            ]
+          ]
+        }
+      ],
+      "quote": "A.7.6\nPERFORMANCE ON DIFFERENT ANSWER NUMBERS\nWe also present the performance of RoG and its variants on questions with different numbers of\nanswers in Table 18. From results, we can see that RoG achieves better performance than its variants\non questions with different numbers of answers. Specifically, with the number of answer increasing,\nthe performance of RoG w/o planning decreases significantly due to the lack of knowledge from\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n10\n20\n30\n40\n# Retrieved Reasoning Paths\n1\n2\n3\n4\n5\nTop-K relation paths\n0\n25\n50\n75\n100\n125\n# Retrieved Reasoning Paths\n0.5\n1.0\n1.5\nRetrieval Time (s)\n1e−3\nWebQSP\n1.0\n1.5\n2.0\n2.5\nRetrieval Time (s)\n1e−3\nCWQ\n# Retrieved Reasoning Paths\nRetrieval Time\nFigure 4: Average retrieval time and average number of retrieved reasoning paths w.r.t. the number\nof top-K relation paths.\n21\n\nPublished as a conference paper at ICLR 2024\nTable 17: F1 scores of RoG and its variants for different hops of questions.\nMethods\nWebQSP\nCWQ\n1 hop\n2 hop\n≥3 hop\n1 hop\n2 hop\n≥3 hop\nRoG\n77.03\n64.86\n-\n62.88\n58.46\n37.82\nRoG w/o reasoning\n57.06\n25.49\n-\n17.06\n34.25\n17.07\nRoG w/o planning\n50.33\n51.66\n-\n31.04\n33.93\n23.29\nTable 18: F1 scores of RoG and its variants for questions with varying numbers of answers.\nMethods\nWebQSP\nCWQ\n#Ans = 1\n2 ≥#Ans ≤4\n5 ≥#Ans ≤9\n#Ans ≥10\n#Ans = 1\n2 ≥#Ans ≤4\n5 ≥#Ans ≤9\n#Ans ≥10\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8085660934448242
+        }
+      ],
+      "rerank_score": 0.637030839920044,
+      "context_bytes": 1811
+    },
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 179,
+          "end_char": 1441,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1262,
+          "block_bboxes": [
+            [
+              108.0,
+              101.594,
+              504.004,
+              177.122
+            ],
+            [
+              107.641,
+              183.38,
+              504.344,
+              248.056
+            ],
+            [
+              108.0,
+              265.266,
+              377.707,
+              275.229
+            ]
+          ]
+        }
+      ],
+      "quote": "PPR Alternatives. As shown in Table 5 (rows 5-6), to examine how much of our results are due to\nthe strength of PPR, we replace the PPR output with the query node probability #»n multiplied by node\nspecificity values (row 5) and a version of this that also distributes a small amount of probability to the\ndirect neighbors of each query node (row 6). First, we find that PPR is a much more effective method\nfor including associations for retrieval on all three datasets compared to both simple baselines. It is\ninteresting to note that adding the neighborhood of Rq nodes without PPR leads to worse performance\nthan only using the query nodes themselves.\nAblations. As seen in Table 5 (rows 7-8), node specificity obtains considerable improvements on\nMuSiQue and HotpotQA and yields almost no change in 2WikiMultiHopQA. This is likely because\n2WikiMultiHopQA relies on named entities with little differences in terms of term weighting. In\ncontrast, synonymy edges have the largest effect on 2WikiMultiHopQA, suggesting that noisy entity\nstandardization is useful when most relevant concepts are named entities, and improvements to\nsynonymy detection could lead to stronger performance in other datasets.\n5.2\nHippoRAG’s Advantage: Single-Step Multi-Hop Retrieval\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.916822910308838
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7973928451538086
+        }
+      ],
+      "rerank_score": 0.7386690378189087,
+      "context_bytes": 1619
+    },
+    {
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 2496,
+          "end_char": 3383,
+          "chunk_start_char": 0,
+          "chunk_end_char": 887,
+          "block_bboxes": [
+            [
+              107.532,
+              486.636,
+              504.004,
+              562.306
+            ],
+            [
+              107.691,
+              575.799,
+              504.002,
+              596.685
+            ],
+            [
+              180.904,
+              608.208,
+              444.402,
+              617.424
+            ],
+            [
+              132.438,
+              633.67,
+              168.949,
+              652.599
+            ],
+            [
+              180.904,
+              623.707,
+              221.907,
+              662.561
+            ]
+          ]
+        }
+      ],
+      "quote": "We further illustrate HippoRAG’s unique single-step multi-hop retrieval ability through the first\nexample in Table 7. In this example, even though Alhandra was not mentioned in Vila de Xira’s\npassage, HippoRAG can directly leverage Vila de Xira’s connection to Alhandra as his place of\nbirth to determine its importance, something that standard RAG methods would be unable to do\ndirectly. Additionally, even though IRCoT can also solve this multi-hop retrieval problem, as shown\nin Appendix G, it is 10-30 times more expensive and 6-13 times slower than ours in terms of online\nretrieval, arguably the most important factor when it comes to serving end users.\nTable 7: Multi-hop question types. We show example results for different approaches on path-finding\nvs. path-following multi-hop questions.\nQuestion\nHippoRAG\nColBERTv2\nIRCoT\nPath-\nFollowing\nIn which\ndistrict was\nAlhandra\nborn?\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 6.129354953765869
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8062410354614258
+        }
+      ],
+      "rerank_score": 0.6686639189720154,
+      "context_bytes": 1220
+    },
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1574,
+          "end_char": 2946,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1372,
+          "block_bboxes": [
+            [
+              108.0,
+              472.448,
+              504.004,
+              547.812
+            ],
+            [
+              107.671,
+              554.313,
+              504.351,
+              640.564
+            ]
+          ]
+        }
+      ],
+      "quote": "In contrast, our brains are capable of solving challenging knowledge integration tasks like these with\nrelative ease. The hippocampal memory indexing theory [75], a well-established theory of human\nlong-term memory, offers one plausible explanation for this remarkable ability. Teyler and Discenna\n[75] propose that our powerful context-based, continually updating memory relies on interactions\nbetween the neocortex, which processes and stores actual memory representations, and the C-shaped\nhippocampus, which holds the hippocampal index, a set of interconnected indices which point to\nmemory units on the neocortex and stores associations between them [19, 76].\nIn this work, we propose HippoRAG, a RAG framework that serves as a long-term memory for LLMs\nby mimicking this model of human memory. Our novel design first models the neocortex’s ability to\nprocess perceptual input by using an LLM to transform a corpus into a schemaless knowledge graph\n(KG) as our artificial hippocampal index. Given a new query, HippoRAG identifies the key concepts\nin the query and runs the Personalized PageRank (PPR) algorithm [30] on the KG, using the query\nconcepts as the seeds, to integrate information across passages for retrieval. PPR enables HippoRAG\nto explore KG paths and identify relevant subgraphs, essentially performing multi-hop reasoning in a\nsingle retrieval step.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.459433555603027
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7901248931884766
+        }
+      ],
+      "rerank_score": 0.6677979230880737,
+      "context_bytes": 1728
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 8,
+      "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 1441,
+          "end_char": 2496,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1055,
+          "block_bboxes": [
+            [
+              107.641,
+              286.379,
+              505.618,
+              361.871
+            ],
+            [
+              107.691,
+              375.331,
+              504.001,
+              407.16
+            ],
+            [
+              212.633,
+              418.683,
+              466.822,
+              427.65
+            ],
+            [
+              199.895,
+              433.733,
+              485.54,
+              442.699
+            ],
+            [
+              126.458,
+              448.694,
+              485.544,
+              467.83
+            ]
+          ]
+        }
+      ],
+      "quote": "A major advantage of HippoRAG over conventional RAG methods in multi-hop QA is its ability\nto perform multi-hop retrieval in a single step. We demonstrate this by measuring the percentage\nof queries where all the supporting passages are retrieved successfully, a feat that can only be\naccomplished through successful multi-hop reasoning. Table 6 below shows that the gap between\nour method and ColBERTv2, using the top-5 passages, increases even more from 3% to 6% on\nMuSiQue and from 20% to 38% on 2WikiMultiHopQA, suggesting that large improvements come\nfrom obtaining all supporting documents rather than achieving partially retrieval on more questions.\nTable 6: All-Recall metric. We measure the percentage of queries for which all supporting passages\nare successfully retrieved (all-recall, denoted as AR@2 or AR@5) and find even larger performance\nimprovements for HippoRAG.\nMuSiQue\n2Wiki\nHotpotQA\nAverage\nAR@2\nAR@5\nAR@2\nAR@5\nAR@2\nAR@5\nAR@2\nAR@5\nColBERTv2 [70]\n6.8\n16.1\n25.1\n37.1\n33.3\n59.0\n21.7\n37.4\nHippoRAG\n10.2\n22.4\n45.4\n75.7\n33.8\n57.9\n29.8\n52.0\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 6.080933570861816
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7959427833557129
+        }
+      ],
+      "rerank_score": 0.4979057312011719,
+      "context_bytes": 1434
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 6,
+      "page_end": 7,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 2177,
+          "end_char": 3239,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1062,
+          "block_bboxes": [
+            [
+              108.299,
+              521.162,
+              194.182,
+              533.117
+            ],
+            [
+              108.0,
+              548.174,
+              504.003,
+              591.524
+            ],
+            [
+              108.249,
+              610.484,
+              233.456,
+              620.447
+            ],
+            [
+              108.0,
+              632.063,
+              504.003,
+              686.372
+            ],
+            [
+              108.0,
+              701.594,
+              504.004,
+              732.028
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 414,
+          "chunk_start_char": 1063,
+          "chunk_end_char": 1477,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              134.455,
+              81.977,
+              477.547,
+              91.94
+            ],
+            [
+              183.476,
+              96.864,
+              426.646,
+              107.647
+            ],
+            [
+              349.262,
+              107.871,
+              439.21,
+              114.828
+            ],
+            [
+              174.307,
+              134.322,
+              206.386,
+              141.279
+            ],
+            [
+              223.173,
+              119.016,
+              441.625,
+              156.584
+            ],
+            [
+              177.767,
+              172.252,
+              202.924,
+              179.209
+            ]
+          ]
+        }
+      ],
+      "quote": "EXPERIMENT\nIn our experiments, we aim to answer the following research questions: RQ1: Can RoG achieve\nstate-of-the-art performance on the KGQA tasks? RQ2: Can the planning module of RoG be inte-\ngrated with other LLMs to improve their performance? RQ3: Can RoG conduct faithful reasoning\nand generate interpretable reasoning results?\n5.1\nEXPERIMENT SETTINGS\nDatasets. We evaluate the reasoning ability of RoG on two benchmark KGQA datasets: WebQues-\ntionSP (WebQSP) (Yih et al., 2016) and Complex WebQuestions (CWQ) (Talmor & Berant, 2018),\nwhich contain up to 4-hop questions. Freebase (Bollacker et al., 2008) is the background knowledge\ngraph for both datasets, which contains around 88 million entities, 20 thousand relations, and 126\nmillion triples. The details of the datasets are described in Appendix A.4.\n3The relation name r∗could be split into multiple tokens. For example, “born in” could be split into\n“born” and “ in” by tokenizer. In this way, we could fully utilize the semantic information in relation names\nand generalize to different KGs.\n6\n\nPublished as a conference paper at ICLR 2024\nTable 1: Performance comparison with different baselines on the two KGQA datasets.\nType\nMethods\nWebQSP\nCWQ\nHits@1\nF1\nHits@1\nF1\nEmbedding\nKV-Mem (Miller et al., 2016)\n46.7\n34.5\n18.4\n15.7\nEmbedKGQA (Saxena et al., 2020)\n66.6\n-\n45.9\n-\nNSM (He et al., 2021)\n68.7\n62.8\n47.6\n42.4\nTransferNet (Shi et al., 2021)\n71.4\n-\n48.6\n-\nKGT5 Saxena et al. (2022)\n56.1\n-\n36.5\n-\nRetrieval\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7808914184570312
+        }
+      ],
+      "rerank_score": 0.19299523532390594,
+      "context_bytes": 1884
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 5,
+      "page_end": 6,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1698,
+          "end_char": 3073,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1375,
+          "block_bboxes": [
+            [
+              108.0,
+              407.911,
+              504.003,
+              428.833
+            ],
+            [
+              108.0,
+              435.296,
+              504.001,
+              456.728
+            ],
+            [
+              205.424,
+              461.976,
+              284.243,
+              474.649
+            ],
+            [
+              240.108,
+              463.716,
+              301.873,
+              489.396
+            ],
+            [
+              303.533,
+              457.105,
+              332.267,
+              480.512
+            ],
+            [
+              337.696,
+              461.543,
+              352.092,
+              471.506
+            ],
+            [
+              335.12,
+              477.586,
+              354.164,
+              485.06
+            ],
+            [
+              356.323,
+              463.716,
+              402.149,
+              474.649
+            ],
+            [
+              312.942,
+              488.621,
+              402.148,
+              500.335
+            ],
+            [
+              403.808,
+              463.845,
+              504.0,
+              474.038
+            ],
+            [
+              108.0,
+              502.387,
+              504.003,
+              534.267
+            ],
+            [
+              108.249,
+              558.195,
+              218.753,
+              568.158
+            ],
+            [
+              108.0,
+              582.271,
+              504.003,
+              614.152
+            ],
+            [
+              123.59,
+              630.112,
+              484.452,
+              648.581
+            ],
+            [
+              108.0,
+              666.072,
+              504.001,
+              687.504
+            ],
+            [
+              108.0,
+              711.557,
+              504.003,
+              732.23
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 6,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 1376,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "This maximizes the probability of LLMs generating correct answers based on the retrieved reasoning\npaths.\nThe final objective function of RoG is the combination of the planning optimization and retrieval-\nreasoning optimization, which can be formulated as\nL = log Pθ(a|q, Z∗\nK, G)\n|\n{z\n}\nRetrieval-reasoning\n+\n1\n|Z∗|\nX\nz∈Z∗\nlog Pθ(z|q)\n|\n{z\n}\nPlanning\n.\n(7)\nFrom equation 7, we can see that we adopt the same LLM for both planning and reasoning, which\nare jointly trained on two instruction-tuning tasks, i.e., (planning and retrieval-reasoning). We will\ndiscuss the implementation details of these two tasks in the following subsections.\n4.3\nPLANNING MODULE\nThe planning module aims to generate faithful relation paths as plans for answering the question. To\nutilize the instruction-following ability of LLMs (Wei et al., 2021), we design a simple instruction\ntemplate that prompts LLMs to generate relation paths:\nPlease generate a valid relation path that can be helpful for answering the following question:\n<Question>\nwhere <Question> indicates the question q. The question together with the instruction template\nis fed into LLMs to generate the relation paths, which are structurally formatted as a sentence:\n2The FiD framework assumes each z ∈Z contributes independently, where the probability Pθ(a|q, Z, G)\ncan be approximated as the product of each Pθ(a|q, z, G).\n5\n\nPublished as a conference paper at ICLR 2024\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7851896286010742
+        }
+      ],
+      "rerank_score": 0.18242552876472473,
+      "context_bytes": 1812
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 29,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 14.144518400018569,
+      "inference_seconds": 0.9354653999907896,
+      "elapsed_seconds": 0.94035700004315,
+      "peak_cuda_memory_bytes": 1192494080,
+      "request_count": 27,
+      "batch_size": 4
+    },
+    "evidence_count": 10,
+    "context_bytes": 15859,
+    "evidence_bytes": 15859,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 15112,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ]
+      },
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "HippoRAG",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "requested_names": [
+          "HippoRAG"
+        ],
+        "eligible_candidate_count": 24,
+        "selected_chunk_ids": [
+          "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+          "chunk_d32e1706909cc088dae124d6b0f3893c",
+          "chunk_8245d0849e8cf0df364eb6980d96843c",
+          "chunk_ac51522ee28010366179ed4733266ace",
+          "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+          "chunk_f2730b810f92d04b5307ad0780e7ace5"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ],
+        "eligible_candidate_count": 4,
+        "selected_chunk_ids": [
+          "chunk_853c2cdb088533bc71f93f42690919ae",
+          "chunk_a3b2c707435931fa6249f247cd7d79fc",
+          "chunk_229cb41ae3582cc199c9ee25c4956269",
+          "chunk_482ad8a6ae6b59dc872a9f742d9050ed"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4277,
+    "total_tokens": 4744,
+    "completion_tokens": 467,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 4277
+    },
+    "completion_tokens_details": {
+      "text_tokens": 467
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"HippoRAG 的流程证据较充分：它先把语料用 LLM 转成无模式知识图谱作为“海马索引”，收到新查询后识别查询中的关键概念，并以这些查询概念为种子在 KG 上运行 Personalized PageRank，从而整合跨段落信息、探索 KG 路径并识别相关子图，相当于在单次检索步骤中完成多跳推理 [E7]。其作者还把这类问题称为 path-finding multi-hop，并称 HippoRAG 利用其联想网络与图搜索算法判断某位教授与查询相关并检索其段落 [E1]。对于 PPR，作者报告用 PPR 输出替换为查询节点概率或其邻域扩展后效果更差，并认为 PPR 是更有效的关联纳入方法 [E5]；不过这些是消融结论，不能据此还原完整查询种子构造细节。RoG 一侧：作者说规划模块旨在生成“忠实的关系路径”作为回答问题的计划，并用指令模板提示 LLM 生成关系路径 [E10]；作者还称关系路径对提升 LLM 在复杂问题上的推理表现很重要，且 RoG 在多跳问题尤其是超过 3 跳的问题上优于其变体 [E2]。但所提供的 RoG 证据只描述了规划模块生成关系路径，没有给出从问题到 KG 检索、再到有效推理路径的完整执行流程；因此 RoG 从查询种子到证据检索的具体流程证据不足。两者比较也只能到此为止：HippoRAG 的种子是查询概念、传播算法是 PPR [E7]；RoG 的计划是 LLM 生成的关系路径 [E10]，但缺少 RoG 检索阶段与 HippoRAG 可对齐的流程描述。\",\"citations\":[{\"eid\":\"E7\",\"quote_id\":\"q2\"},{\"eid\":\"E1\",\"quote_id\":\"q2\"},{\"eid\":\"E5\",\"quote_id\":\"q1\"},{\"eid\":\"E10\",\"quote_id\":\"q1\"},{\"eid\":\"E10\",\"quote_id\":\"q2\"},{\"eid\":\"E2\",\"quote_id\":\"q1\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 0.029206349206349208,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 4.985844612121582
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8173947334289551
+        }
+      ],
+      "rerank_score": 0.7633073329925537
+    },
+    {
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "score": 0.027479766610201392,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 4.959499835968018
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7990164756774902
+        }
+      ],
+      "rerank_score": 0.7492707371711731
+    },
+    {
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "score": 0.029437229437229435,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.916822910308838
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7973928451538086
+        }
+      ],
+      "rerank_score": 0.7386690378189087
+    },
+    {
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 0.030776515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 6.129354953765869
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8062410354614258
+        }
+      ],
+      "rerank_score": 0.6686639189720154
+    },
+    {
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 0.029906956136464335,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.459433555603027
+        },
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7901248931884766
+        }
+      ],
+      "rerank_score": 0.6677979230880737
+    },
+    {
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.820225715637207
+        }
+      ],
+      "rerank_score": 0.6547843813896179
+    },
+    {
+      "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8085660934448242
+        }
+      ],
+      "rerank_score": 0.637030839920044
+    },
+    {
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.02946912242686891,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 6.080933570861816
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7959427833557129
+        }
+      ],
+      "rerank_score": 0.4979057312011719
+    },
+    {
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 0.02819138376017471,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 5.285053253173828
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.790738582611084
+        }
+      ],
+      "rerank_score": 0.46860820055007935
+    },
+    {
+      "chunk_id": "chunk_e595dc20307a9f6a2c07d16595f5ca21",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8036727905273438
+        }
+      ],
+      "rerank_score": 0.4525661766529083
+    },
+    {
+      "chunk_id": "chunk_1e1584d4ca9b0e97f6b9cf0a5fc09c19",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 7.085988521575928
+        }
+      ],
+      "rerank_score": 0.43014734983444214
+    },
+    {
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "score": 0.026709401709401708,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 5.085635662078857
+        },
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7832741737365723
+        }
+      ],
+      "rerank_score": 0.41727152466773987
+    },
+    {
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7809896469116211
+        }
+      ],
+      "rerank_score": 0.38439205288887024
+    },
+    {
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.028083267871170464,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 4.985844612121582
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8056302070617676
+        }
+      ],
+      "rerank_score": 0.37817198038101196
+    },
+    {
+      "chunk_id": "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8227663040161133
+        }
+      ],
+      "rerank_score": 0.3640989661216736
+    },
+    {
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 5.787725448608398
+        }
+      ],
+      "rerank_score": 0.314050555229187
+    },
+    {
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 5.837644577026367
+        }
+      ],
+      "rerank_score": 0.28427788615226746
+    },
+    {
+      "chunk_id": "chunk_d9f1cb9af7ebdb35209d9b574447922e",
+      "score": 0.027031963470319637,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 5.050453186035156
+        },
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7888975143432617
+        }
+      ],
+      "rerank_score": 0.22034244239330292
+    },
+    {
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 4.731936454772949
+        }
+      ],
+      "rerank_score": 0.21419788897037506
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7808914184570312
+        }
+      ],
+      "rerank_score": 0.19299523532390594
+    },
+    {
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 5.173607349395752
+        }
+      ],
+      "rerank_score": 0.18713268637657166
+    },
+    {
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7851896286010742
+        }
+      ],
+      "rerank_score": 0.18242552876472473
+    },
+    {
+      "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 5.170971870422363
+        }
+      ],
+      "rerank_score": 0.13776430487632751
+    },
+    {
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 6.223084449768066
+        }
+      ],
+      "rerank_score": 0.12064587324857712
+    },
+    {
+      "chunk_id": "chunk_5165b9cf6ecfd6eecbf447ff18649999",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 5.0252180099487305
+        }
+      ],
+      "rerank_score": 0.09009299427270889
+    },
+    {
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "score": 0.02638888888888889,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 4.721163272857666
+        },
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7907962799072266
+        }
+      ],
+      "rerank_score": 0.07949569821357727
+    },
+    {
+      "chunk_id": "chunk_4d5b9bb85c58b033807f97c51fb55e39",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 4.721163272857666
+        }
+      ],
+      "rerank_score": 0.05602938309311867
+    },
+    {
+      "chunk_id": "chunk_d3f807335721c7a0d68e16aa03976b5f",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8075156211853027
+        }
+      ],
+      "rerank_score": 0.05561760812997818
+    },
+    {
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7842917442321777
+        }
+      ],
+      "rerank_score": 0.0028118586633354425
+    }
+  ],
+  "case_id": "R02",
+  "question": "面对多跳问题，HippoRAG 与 RoG 怎样分别从问题走到证据？请区分查询种子、PPR、关系路径计划和有效推理路径。",
+  "category": "cross",
+  "arm": "P0-SingleQuery",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0005573999951593578
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.05525639996631071
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 1.2500036973506212e-05
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9420981999719515
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.002756199974101037
+    }
+  ],
+  "retrieval_compute_seconds": 1.0006806999444962,
+  "request_wall_seconds": 13.428012699994724,
+  "embedding_source": "shared frozen Q00 vector + live batch for planned subqueries",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.4554536000359803,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 8.005401199974585,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4559323000139557,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 6.0951980000245385,
+      "usage": "{\"prompt_tokens\": 4277, \"total_tokens\": 4744, \"completion_tokens\": 467}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_b67ec1b478fda1e511c8f1e33d675de2",
+      "score": 0.8227663040161133
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_853c2cdb088533bc71f93f42690919ae",
+      "score": 0.820225715637207
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 0.8173947334289551
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_a3b2c707435931fa6249f247cd7d79fc",
+      "score": 0.8085660934448242
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_d3f807335721c7a0d68e16aa03976b5f",
+      "score": 0.8075156211853027
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 0.8062410354614258
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 0.8056302070617676
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_e595dc20307a9f6a2c07d16595f5ca21",
+      "score": 0.8036727905273438
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "score": 0.7990164756774902
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "score": 0.7973928451538086
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 0.7959427833557129
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "score": 0.7907962799072266
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 0.790738582611084
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 0.7901248931884766
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_d9f1cb9af7ebdb35209d9b574447922e",
+      "score": 0.7888975143432617
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_482ad8a6ae6b59dc872a9f742d9050ed",
+      "score": 0.7851896286010742
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "score": 0.7842917442321777
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "score": 0.7832741737365723
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_b1e16d1c0cce0b7a5286e2e0f30b9821",
+      "score": 0.7809896469116211
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.7808914184570312
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_a58244558a2137d85a4b8e53d5c4ebaf",
+      "score": 7.459433555603027
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_1e1584d4ca9b0e97f6b9cf0a5fc09c19",
+      "score": 7.085988521575928
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "score": 6.223084449768066
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_ac51522ee28010366179ed4733266ace",
+      "score": 6.129354953765869
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_f2730b810f92d04b5307ad0780e7ace5",
+      "score": 6.080933570861816
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_8245d0849e8cf0df364eb6980d96843c",
+      "score": 5.916822910308838
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_331eeb89a4ccff169a4f408fd2f6d37f",
+      "score": 5.837644577026367
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_271d801be77a71a56210c9063643330b",
+      "score": 5.787725448608398
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_59677fe889f95e3e84ca00ba132a54fd",
+      "score": 5.285053253173828
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_19d8ae70b909311cb894aeddbb600ad8",
+      "score": 5.173607349395752
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_513a6dee6b9d2e8bac593f0a139f9ba4",
+      "score": 5.170971870422363
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_ef3f0ce297896adba9485311ea4d7f69",
+      "score": 5.085635662078857
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_d9f1cb9af7ebdb35209d9b574447922e",
+      "score": 5.050453186035156
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_5165b9cf6ecfd6eecbf447ff18649999",
+      "score": 5.0252180099487305
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "score": 4.985844612121582
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_ffb475af5faa17fe0fd9f25c731d61e8",
+      "score": 4.985844612121582
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_d32e1706909cc088dae124d6b0f3893c",
+      "score": 4.959499835968018
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_d374bd95d509d622be8512f20e59b674",
+      "score": 4.731936454772949
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_4d5b9bb85c58b033807f97c51fb55e39",
+      "score": 4.721163272857666
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_2b91faafba587efd8a416d2355639ee0",
+      "score": 4.721163272857666
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R02.C01",
+      "requirement": "HippoRAG 以查询概念启动 PPR 并整合跨段落信息。",
+      "selected_matches_by_unit": {
+        "hippo": [
+          "chunk_a58244558a2137d85a4b8e53d5c4ebaf"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R02.C02",
+      "requirement": "RoG 先生成 KG 约束的关系路径计划。",
+      "selected_matches_by_unit": {
+        "rog": []
+      },
+      "missing_units": [
+        "rog"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R02.C03",
+      "requirement": "RoG 根据计划检索有效推理路径，再供 LLM 推理。",
+      "selected_matches_by_unit": {
+        "rog": []
+      },
+      "missing_units": [
+        "rog"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 0.2,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/8c46f43a-5c78-4548-a04b-f84c02b0c570?poll=true"
+}

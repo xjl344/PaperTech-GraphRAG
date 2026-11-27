@@ -1,0 +1,973 @@
+{
+  "version": "benchmark-holdout-v1",
+  "created_at": "2026-11-27T08:10:37.825868+00:00",
+  "corpus_id": "a6a19e2e97b11d9c450e",
+  "dev_benchmark_checked": "benchmark-v4",
+  "dev_benchmark_sha256": "2904af152a4bffd86119cbbf030d0ac658e909cc22d1abdf2b4d398f67d02451",
+  "overlap_with_dev": 0,
+  "graph_snapshot": {
+    "version": "benchmark-v3",
+    "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+    "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+    "node_count": 198,
+    "claim_count": 204,
+    "scope": "same frozen isolated graph; no graph edits",
+    "construction": "source-curated developer graph; not an independently extracted test graph"
+  },
+  "method_cards_path": "artifacts/exports/pilot-v1/method-cards-v1.json",
+  "method_cards_sha256": "5e22f1afe215281920f37d3fa8556fd801244467d67b1da16c484b6e1898d4ee",
+  "arms": [
+    "Legacy-Hybrid",
+    "Production-Final"
+  ],
+  "arm_configs": {
+    "Legacy-Hybrid": {
+      "graph_enabled": false,
+      "graph_query_aware": false,
+      "use_method_cards": false,
+      "path_budget": 0,
+      "rerank_contextual": false,
+      "rerank_windowed": false,
+      "evidence_budget": 6000,
+      "evidence_max": 8,
+      "source_policy": "named_first",
+      "score_policy": "fixed",
+      "reservation_policy": "legacy",
+      "citation_protocol": "source-choice-v1",
+      "query_planner": false,
+      "premise_check": false
+    },
+    "Production-Final": {
+      "graph_enabled": true,
+      "graph_query_aware": true,
+      "use_method_cards": true,
+      "path_budget": 1200,
+      "rerank_contextual": true,
+      "rerank_windowed": false,
+      "evidence_budget": 18000,
+      "evidence_max": 12,
+      "source_policy": "named_first",
+      "score_policy": "relative",
+      "reservation_policy": "subquery_balanced",
+      "citation_protocol": "source-choice-v3",
+      "query_planner": true,
+      "premise_check": true
+    }
+  },
+  "models": {
+    "DEEPSEEK_MODEL": "deepseek-v4.1-flash",
+    "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+    "CLOUD_BGE_PROVIDER": "cloudflare",
+    "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+    "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+    "LOCAL_RERANKER_DEVICE": "cuda",
+    "LOCAL_RERANKER_DTYPE": "float16",
+    "LOCAL_RERANKER_PERSISTENT": "true",
+    "LOCAL_RERANKER_BATCH_SIZE": 4
+  },
+  "code_sha256": {
+    "src/papertech/entity_aliases.py": "a7f17db55fb07c94c4234138de5f2c4ba73e450bfbd3295f11cf8be79c29d4b1",
+    "src/papertech/local_models.py": "743ef42fda9364ff13395a356e45388ac1aa5d86d6d910e96fe3e22bb65f1b46",
+    "src/papertech/isolated_graph.py": "11868fb72e6f5c7e0e52be71abab05214ea21b587695a3d0053a43ed90ace056",
+    "src/papertech/method_cards.py": "d028a48ebb69a38c56e76f1a77c8cb472e46f82dfb544dea0bb7a1341ab56fd2",
+    "src/papertech/query_planner.py": "712749fc2b91e03012a5bcf03e9102e053f6e6bcfd2e6517cdb970a9b66423eb",
+    "src/papertech/rerank_runtime.py": "f7ac8056f33a1ad763d4ebca93a1f8f7c249bcdb1ac001edfde5cd802367ca22",
+    "src/papertech/rerank_service.py": "d1c74ecaf1e586ab29bb430ed0504cc47afc0557afc92eb1323e4cffff02f77a",
+    "src/papertech/retrieval.py": "717d07b91c3d0e91fcd32c79396e07722b2a7b50a743a17d7f2cfb061851a1af",
+    "src/papertech/evidence_context.py": "b9b7ff0bb10d13a7b0e6c669bb9cbe8966576eeefa7dd176c2727a814f10443b",
+    "src/papertech/citations.py": "2feab4df72a3718dad0f38c5850c71445cfa61829929b3865c985e48acad52a8",
+    "src/papertech/providers.py": "9926d93379f4ba949a68cf7e287a76c7ae055f1700298b5465e96849d43ece6a",
+    "src/papertech/workflow.py": "6fd629bbd7b6f5de6bdd24a3da0606916c6859854deef7c7acafebc8ec853573",
+    "src/papertech/graph_store.py": "4154d643c8251c78565b5d4f81e171ebd076fa0b55d8f63a85f27015c9576876",
+    "src/papertech/holdout_evaluation.py": "7f81181706a85f6330570dbfa1a169b9479cc67d8ce976a8f7f1c6df2046df98"
+  },
+  "dataset_description": "18 题全新未见泛化测试集（6 事实 + 8 跨论文 + 4 反例/伪前提，与 40 题 benchmark-v4 零重叠）：Legacy-Hybrid 基线 vs Production-Final 完整方案端到端泛化实测。",
+  "prior_exposure": "zero_exposure: 所有 18 道题在架构与参数调优完成后首次构建并冻结，用于检验真实样本外泛化能力。",
+  "scoring": {
+    "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+    "secondary": [
+      "SupportRecall@8",
+      "MRR@40",
+      "selected evidence unit coverage",
+      "all required units coverage"
+    ],
+    "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+    "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+    "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+    "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+    "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+    "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+    "critical_errors": [
+      "伪造继承/评测/全称优越性",
+      "颠倒增强方向",
+      "混淆训练与测试角色",
+      "混淆预算耗尽与正确答案",
+      "伪造数值或来源"
+    ],
+    "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+  },
+  "comparison": {
+    "mode": "unseen_holdout_end_to_end_generalization",
+    "arms": [
+      "Legacy-Hybrid",
+      "Production-Final"
+    ],
+    "generation": true
+  },
+  "controls": {
+    "arms": [
+      "Legacy-Hybrid",
+      "Production-Final"
+    ],
+    "arm_configs": {
+      "Legacy-Hybrid": {
+        "graph_enabled": false,
+        "graph_query_aware": false,
+        "use_method_cards": false,
+        "path_budget": 0,
+        "rerank_contextual": false,
+        "rerank_windowed": false,
+        "evidence_budget": 6000,
+        "evidence_max": 8,
+        "source_policy": "named_first",
+        "score_policy": "fixed",
+        "reservation_policy": "legacy",
+        "citation_protocol": "source-choice-v1",
+        "query_planner": false,
+        "premise_check": false
+      },
+      "Production-Final": {
+        "graph_enabled": true,
+        "graph_query_aware": true,
+        "use_method_cards": true,
+        "path_budget": 1200,
+        "rerank_contextual": true,
+        "rerank_windowed": false,
+        "evidence_budget": 18000,
+        "evidence_max": 12,
+        "source_policy": "named_first",
+        "score_policy": "relative",
+        "reservation_policy": "subquery_balanced",
+        "citation_protocol": "source-choice-v3",
+        "query_planner": true,
+        "premise_check": true
+      }
+    },
+    "backend": "neo4j",
+    "shared_q00_vectors": "identical Cloudflare Q00 query embeddings across both arms; Production-Final additionally embeds planned subqueries",
+    "execution_order": "alternate arm order by case index",
+    "gold_exclusion": "question text only; gold pools and reference tables isolated"
+  },
+  "units": {
+    "HF01_domains": {
+      "answer_point": "STaRK 覆盖三个领域：商品搜索（STARK-AMAZON）、学术论文检索（STARK-MAG）、精准医疗（STARK-PRIME），由模拟用户与半结构化知识库（SKB）交互的大规模合成问答对和作为真实参考的小规模人工问答对组成。",
+      "primary_chunk": "chunk_6b5383484693f6226010eab8143f80d6",
+      "known_support_chunks": [
+        "chunk_6b5383484693f6226010eab8143f80d6",
+        "chunk_2c06f903c181ffbdb1246026daa909b0"
+      ],
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+      "page_start": 1,
+      "page_end": 1
+    },
+    "HF01_reranker_eval": {
+      "answer_point": "LLM Reranker（GPT-4-turbo 与 Claude3）对 ada-002 的 top-k 候选重排：合成查询 k=20、人工查询 k=10；因计算开销高仅在随机 10% 测试查询样本上评测。",
+      "primary_chunk": "chunk_bb730573725b148aa7913e7f17bb9261",
+      "known_support_chunks": [
+        "chunk_bb730573725b148aa7913e7f17bb9261"
+      ],
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+      "page_start": 7,
+      "page_end": 7
+    },
+    "HF02_setup": {
+      "answer_point": "StructGPT 错误分析选取三个不同结构化数据类型数据集（正文列 WebQSP、WTQ、Spider；图 3 统计 WebQSP、WikiSQL、Spider），每集随机抽样 100 条错误分为五类（Selection Error、Reasoning Error、Generation Format Error、Hallucination、Other Errors）。",
+      "primary_chunk": "chunk_b21e952cc42e9ffedbde26c85006586c",
+      "known_support_chunks": [
+        "chunk_b21e952cc42e9ffedbde26c85006586c"
+      ],
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+      "page_start": 8,
+      "page_end": 9
+    },
+    "HF02_dist": {
+      "answer_point": "图 3 显示 WebQSP（KGQA）中 Selection Error 占主导（74%）；Spider（Text-to-SQL）中 Reasoning Error 占主导（63%，Selection Error 占 21%）。",
+      "primary_chunk": "chunk_c9e4e94b591dab5929ea0ee5c7f0817b",
+      "known_support_chunks": [
+        "chunk_c9e4e94b591dab5929ea0ee5c7f0817b"
+      ],
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+      "page_start": 9,
+      "page_end": 9
+    },
+    "HF03_variants": {
+      "answer_point": "MindMap 消融比较了 Neighbor-only 与 Path-only 两种变体；合并两者后 GenMedGPT-5k 的 BERTScore F1（0.7960 vs 0.7072/0.7002）与幻觉量化（0.5890 vs 0.3894/0.3854）显著提升；Neighbor-only 更利于事实准确度，Path-only 更擅长寻找外部相关信息。",
+      "primary_chunk": "chunk_f91f666883d4d6df7614b58321f41800",
+      "known_support_chunks": [
+        "chunk_f91f666883d4d6df7614b58321f41800",
+        "chunk_070763ffa4f4fcab7e4a133c464907f3"
+      ],
+      "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+      "title": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+      "page_start": 7,
+      "page_end": 8
+    },
+    "HF03_p1": {
+      "answer_point": "在 ExplainCPE 指令提示消融中，加入要求 LLM 结合自身已有知识的提示模板 p1（\"combine with the knowledge you already have\"）将准确率提升了 8.2%（61.7% vs w/o p1 的 53.5%）。",
+      "primary_chunk": "chunk_070763ffa4f4fcab7e4a133c464907f3",
+      "known_support_chunks": [
+        "chunk_070763ffa4f4fcab7e4a133c464907f3"
+      ],
+      "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+      "title": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+      "page_start": 7,
+      "page_end": 7
+    },
+    "HF04_qlora": {
+      "answer_point": "CuriousLLM（KGP-Mistral）以 Mistral-7B-Instruct-v0.2 为底座，用 next-token prediction 与 QLoRA（8-bit、LoRA rank=32、lr=1e-5、batch size=12、90%-5%-5% 划分）在 Follow-upQA 上微调，同等算力下相比原 KGP 训练 T5 减少 85% 训练时间。",
+      "primary_chunk": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "known_support_chunks": [
+        "chunk_fb24ed864a9886ec8722f831391af3b7"
+      ],
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4
+    },
+    "HF04_mdr": {
+      "answer_point": "MDR-KG 的 BERT 段落编码器在 HotpotQA 上按 MDR 方法训练：给定初始检索段落预测后续支持段落，缩小共同回答问题的段落对距离并用负采样拉大无关段落距离。",
+      "primary_chunk": "chunk_69407b618c1969f701e74bd3cf523c95",
+      "known_support_chunks": [
+        "chunk_69407b618c1969f701e74bd3cf523c95"
+      ],
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 3,
+      "page_end": 4
+    },
+    "HF05_ablation": {
+      "answer_point": "RoG 去掉 planning 后退化为仅靠问题作答的常规 LLM，因缺乏知识 F1 大幅下滑（WebQSP 70.81→49.69，CWQ 56.17→33.76）；去掉 reasoning 后虽因返回更多答案提高 Recall（79.85 / 67.89），但受检索路径噪声影响 Precision 骤降（46.90 / 18.88）。",
+      "primary_chunk": "chunk_41f164dcc97380b68b515cce682cba4b",
+      "known_support_chunks": [
+        "chunk_41f164dcc97380b68b515cce682cba4b",
+        "chunk_8ff52490cf78a4324c98eaf422d29221"
+      ],
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 8,
+      "page_end": 8
+    },
+    "HF05_top3": {
+      "answer_point": "RoG 使用指令微调后的 LLaMA2-Chat-7B 经 beam-search 生成 top-3（K=3）关系路径；继续增加 K 会引入更多噪声路径和检索开销，对最终效果增益甚微。",
+      "primary_chunk": "chunk_2a54af5657f5157d4c806c5daace0980",
+      "known_support_chunks": [
+        "chunk_2a54af5657f5157d4c806c5daace0980",
+        "chunk_a3b2c707435931fa6249f247cd7d79fc"
+      ],
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 7,
+      "page_end": 7
+    },
+    "HF06_finqa": {
+      "answer_point": "因 Wikipedia 常在 LLM 预训练中曝光，ToG-2 收集 2023 年中国上市公司财报（17,013 篇文档）构建含 7 类关系（subsidiary company、main business、supplier、sibling company、bulk transaction、subsidiary、customer）的金融 KG，并人工设计 97 道多跳问题（ToG-FinQA）。",
+      "primary_chunk": "chunk_8eeb2944a7ceb3bfebc67f8259978867",
+      "known_support_chunks": [
+        "chunk_8eeb2944a7ceb3bfebc67f8259978867",
+        "chunk_c3c4750bf9f19cd0c1822ea01143d334"
+      ],
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 6,
+      "page_end": 7
+    },
+    "HF06_graphrag": {
+      "answer_point": "GraphRAG 在大规模语料上的建图索引计算成本难以承受，因此论文仅在 ToG-FinQA 上评测了 GraphRAG。",
+      "primary_chunk": "chunk_03f04d6779a13e52c52c60284bd82092",
+      "known_support_chunks": [
+        "chunk_03f04d6779a13e52c52c60284bd82092"
+      ],
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 7,
+      "page_end": 7
+    },
+    "HR01_tog": {
+      "answer_point": "ToG 默认设置宽度 N=3、深度 Dmax=3（开销随深度线性增长且超过 3 跳后仅少数问题需要、增益递减）；其纯 KG 剪枝中 LLM 剪枝优于 BM25 与 SentenceBERT。",
+      "primary_chunk": "chunk_8b9e861ea949a3eb2fc9ed5a97b24644",
+      "known_support_chunks": [
+        "chunk_8b9e861ea949a3eb2fc9ed5a97b24644",
+        "chunk_270d9350248b566ed224ba5147a295a2"
+      ],
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 7,
+      "page_end": 8
+    },
+    "HR01_tog2": {
+      "answer_point": "ToG-2 在 AdvHotpotQA 实体上下文剪枝实验中对比 BGE-Reranker、MiniLM、BGE-Embedding、BM25 与 LLM：BGE-Reranker（DRM）在更长上下文与更多候选 K 下表现最佳且性价比与泛化性更高，而 LLM 受输入长度制约表现下降。",
+      "primary_chunk": "chunk_d4f6a4a037b6e147680603d67ba56fc0",
+      "known_support_chunks": [
+        "chunk_5d7ff60c6e6d8ed3d35fddd69c75e903",
+        "chunk_d4f6a4a037b6e147680603d67ba56fc0"
+      ],
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 9,
+      "page_end": 9
+    },
+    "HR02_gret": {
+      "answer_point": "G-Retriever 在 soft prompt tuning 中冻结 LLM 参数 θ、仅通过反向传播更新软提示参数 Pe（另设 Tuned LLM 用 LoRA 微调 Llama2-7b）；其局限在于当前检索组件是静态不可训练的（static retrieval component）。",
+      "primary_chunk": "chunk_169332db0b56d09ba086374fa84a2040",
+      "known_support_chunks": [
+        "chunk_169332db0b56d09ba086374fa84a2040",
+        "chunk_255b9d4a6fbbac0cf6621acf84251f72",
+        "chunk_f800cd4e8fa59900491c3efa5f890329"
+      ],
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 4,
+      "page_end": 5
+    },
+    "HR02_lpkg": {
+      "answer_point": "LPKG 将规划与 QA 解耦：仅用 KG 规划数据对规划 LLM（CodeQwen1.5-7B-Chat、Llama3-8B-Instruct）做 LoRA 微调，固定 QA LLM（GPT-3.5）以消除 QA 能力差异；40 条错例分析表明检索模型错误影响最大。",
+      "primary_chunk": "chunk_8b27c0cb47d598cdda2eb2204b132786",
+      "known_support_chunks": [
+        "chunk_8b27c0cb47d598cdda2eb2204b132786",
+        "chunk_231843bdac931319ba29f46e6be14d6d"
+      ],
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 6,
+      "page_end": 6
+    },
+    "HR03_kgp": {
+      "answer_point": "KGP 在固定总检索段落预算下，增大 branching factor 初期会增加通往答案的推理路径使性能上升，但继续增大会挤占初始种子节点数量、降低对文档 KG 的覆盖率，导致性能下降。",
+      "primary_chunk": "chunk_e1a39884458dd5c4e4ae63ae1126a5d5",
+      "known_support_chunks": [
+        "chunk_e1a39884458dd5c4e4ae63ae1126a5d5",
+        "chunk_0498eae1a386ebf0d6d488dedfd6381d"
+      ],
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 7,
+      "page_end": 7
+    },
+    "HR03_curious": {
+      "answer_point": "CuriousLLM 在 Table 3 中显示提前终止变体 KGP_Mistral_ET 在四个 MD-QA 数据集上的 Acc/EM 略低于完整版 KGP_Mistral（如 HotpotQA Acc 72.20 vs 73.80、2WikiMQA 46.00 vs 49.40、IIRC 34.80 vs 36.69、MuSiQue 34.80 vs 36.50），但在 HotpotQA/IIRC/MuSiQue 上仍高于 KGP_T5。",
+      "primary_chunk": "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+      "known_support_chunks": [
+        "chunk_9c4ed8fb017cd0f15b601822cb9b8718"
+      ],
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 6,
+      "page_end": 6
+    },
+    "HR04_kggpt": {
+      "answer_point": "KG-GPT 在 FACTKG 与 MetaQA 上测试 12-shot / 8-shot / 4-shot（MetaQA 3-hop 从 94.0 降至 46.6）；每集抽 100 条错例分析显示图检索阶段错误最少，而跳数增加会显著推高句子分割错误。",
+      "primary_chunk": "chunk_13719303fa087942493eb1fb55fd4c52",
+      "known_support_chunks": [
+        "chunk_3f7eb65828761447433c66c28ad111a4",
+        "chunk_13719303fa087942493eb1fb55fd4c52"
+      ],
+      "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+      "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+      "page_start": 4,
+      "page_end": 4
+    },
+    "HR04_structgpt": {
+      "answer_point": "StructGPT 在 TableQA 与 Text-to-SQL 中使用 32 个 in-context exemplars；每集抽 100 条错例分析显示 WebQSP（KGQA）以 Selection Error 占主导（74%），Spider（Text-to-SQL）以 Reasoning Error 占主导（63%）。",
+      "primary_chunk": "chunk_c9e4e94b591dab5929ea0ee5c7f0817b",
+      "known_support_chunks": [
+        "chunk_c11d51b003e670a9b0426a34b4b70425",
+        "chunk_1efd4680d043944e45eb1947af46faa9",
+        "chunk_b21e952cc42e9ffedbde26c85006586c",
+        "chunk_c9e4e94b591dab5929ea0ee5c7f0817b"
+      ],
+      "paper_id": "paper_cedbfddc8030ded4258640a1e0a0a733",
+      "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+      "page_start": 9,
+      "page_end": 9
+    },
+    "HR05_graphqa": {
+      "answer_point": "G-Retriever 的 GraphQA 标准化整合 ExplaGraphs（常识推理）、SceneGraphs（视觉 QA）、WebQSP（多跳 KGQA）三个现有数据集为统一文本属性图问答格式。",
+      "primary_chunk": "chunk_e3039cc70fdc7caf88ff60d3a386ed29",
+      "known_support_chunks": [
+        "chunk_e3039cc70fdc7caf88ff60d3a386ed29",
+        "chunk_255b9d4a6fbbac0cf6621acf84251f72"
+      ],
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 5,
+      "page_end": 5
+    },
+    "HR05_stark": {
+      "answer_point": "STaRK 覆盖商品、学术论文、精准医疗三个半结构化知识库（SKB）；微调小型稠密模型 DPR/QAGNN 因参数量小且易过拟合表现不佳，而 GPT-4 / Claude3 Reranker 在语言更丰富细腻的人工查询上尤为突出。",
+      "primary_chunk": "chunk_a407e76d3edfaf1a9413559721b56299",
+      "known_support_chunks": [
+        "chunk_6b5383484693f6226010eab8143f80d6",
+        "chunk_a407e76d3edfaf1a9413559721b56299",
+        "chunk_a58abbb14497e4834ba62385406a1d89"
+      ],
+      "paper_id": "paper_0d99e8c368a360985899fcc4ff0ba156",
+      "title": "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases",
+      "page_start": 8,
+      "page_end": 8
+    },
+    "HR06_hippo": {
+      "answer_point": "HippoRAG 使用现成 GPT-3.5-turbo-1106 与 Contriever/ColBERTv2（不微调），仅用 100 条 MuSiQue 训练样本调两个超参（同义词阈值 τ=0.8、PPR 阻尼系数 0.5）；从 MuSiQue、2WikiMultiHopQA、HotpotQA 验证集各抽 1000 题并汇集候选段落作为语料。",
+      "primary_chunk": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "known_support_chunks": [
+        "chunk_fe5363c7abef240f62c37ad4ab224530",
+        "chunk_3fa28005a4df0de5249826585cf9d713"
+      ],
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 6,
+      "page_end": 6
+    },
+    "HR06_lpkg": {
+      "answer_point": "LPKG 使用 Wikipedia 语料 + Contriever-MS 取 Top 5，评测 HotPotQA/2WikiMQA/MuSiQue/Bamboogle/CLQA-Wiki；为对比常规蒸馏，从三集训练集各抽 3000 题（共 9000 题）让 GPT-3.5 蒸馏规划微调 CodeQwen（DLPKG），在未见集 Bamboogle 上验证 KG 派生数据更优。",
+      "primary_chunk": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "known_support_chunks": [
+        "chunk_8b27c0cb47d598cdda2eb2204b132786",
+        "chunk_b5d503a2d2586e2d55d4e0841114a942",
+        "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+        "chunk_231843bdac931319ba29f46e6be14d6d"
+      ],
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 7,
+      "page_end": 8
+    },
+    "HR07_roadmap": {
+      "answer_point": "Roadmap 综述中 KEPLER 用 LLM 编码实体文本描述并联合优化知识嵌入与语言建模目标；DRAGON 双向融合文本片段与 KG 子图，用 MLM 与 KG 链接预测两项自监督任务联合预训练。",
+      "primary_chunk": "chunk_3ca88dd0b19ec139e7b11b5359f2dbc2",
+      "known_support_chunks": [
+        "chunk_3ca88dd0b19ec139e7b11b5359f2dbc2"
+      ],
+      "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+      "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+      "page_start": 19,
+      "page_end": 19
+    },
+    "HR07_tot": {
+      "answer_point": "Tree-of-Traversals 是零样本算法，不微调黑盒 LLM 且不依赖固定 schema，通过 KG 接口（SPARQL / API）与动作状态机（ASM）经树搜索动态扩展局部子图。",
+      "primary_chunk": "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+      "known_support_chunks": [
+        "chunk_0cb3c2dcbacf18237a13b232366d2be8",
+        "chunk_622fbe3ed4198464c25fb8d606b691dd"
+      ],
+      "paper_id": "paper_e2cb804d3936bd9c7f81e9d138aa8738",
+      "title": "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+      "page_start": 2,
+      "page_end": 2
+    },
+    "HR07_mindmap": {
+      "answer_point": "MindMap 是即插即用提示流水线，通过路径与邻居探索从外部 KG 检索证据子图，再用提示引导 LLM 将外部事实与自身隐式知识融合推理，无需微调。",
+      "primary_chunk": "chunk_c36c0155590c0da356beed7403c524ae",
+      "known_support_chunks": [
+        "chunk_c36c0155590c0da356beed7403c524ae",
+        "chunk_070763ffa4f4fcab7e4a133c464907f3",
+        "chunk_f91f666883d4d6df7614b58321f41800"
+      ],
+      "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+      "title": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+      "page_start": 5,
+      "page_end": 5
+    },
+    "HR08_kgp": {
+      "answer_point": "KGP 先由 LLM 分类问题关注文档结构还是内容：结构类提取 Page/Table 等关键词直接检索结构节点；内容类以 TF-IDF 初始化种子段落后由微调遍历代理迭代扩展邻居。",
+      "primary_chunk": "chunk_84038d4c6f7949959af0974d04ee2379",
+      "known_support_chunks": [
+        "chunk_84038d4c6f7949959af0974d04ee2379"
+      ],
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 5,
+      "page_end": 5
+    },
+    "HR08_hippo": {
+      "answer_point": "HippoRAG 指出 path-finding multi-hop 问题在多个候选路径并存时需要找到连接多个实体的特定关联路径，简单迭代检索容易因分支过多而迷失。",
+      "primary_chunk": "chunk_900d1ff5b080ca47760a93ddc7d9e173",
+      "known_support_chunks": [
+        "chunk_900d1ff5b080ca47760a93ddc7d9e173"
+      ],
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 8,
+      "page_end": 9
+    },
+    "HR08_tog2": {
+      "answer_point": "ToG-2 在 AdvHotpotQA 案例中区分 Both-enhanced（三元组链接推导中间实体 + 该实体文档上下文确认答案）与 Doc-enhanced（三元组链接引导，最终从目标实体文档上下文找到答案）。",
+      "primary_chunk": "chunk_a5be5bd1049658e91cbad5ab416957de",
+      "known_support_chunks": [
+        "chunk_a5be5bd1049658e91cbad5ab416957de"
+      ],
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 10,
+      "page_end": 10
+    },
+    "HN01_hippo_not_ft": {
+      "answer_point": "HippoRAG 并未用 LoRA 微调 GPT-3.5 或 Contriever；原文使用现成 GPT-3.5-turbo-1106 与 Contriever/ColBERTv2，100 条 MuSiQue 训练样本仅用于调节同义词阈值 τ=0.8 和 PPR 阻尼系数 0.5 两个超参。",
+      "primary_chunk": "chunk_fe5363c7abef240f62c37ad4ab224530",
+      "known_support_chunks": [
+        "chunk_fe5363c7abef240f62c37ad4ab224530"
+      ],
+      "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+      "page_start": 6,
+      "page_end": 6
+    },
+    "HN02_lpkg_decoupled": {
+      "answer_point": "LPKG 将规划 LLM 与 QA LLM 解耦：仅用 KG 派生规划数据对规划 LLM（CodeQwen1.5-7B-Chat、Llama3-8B-Instruct）做 LoRA 微调，QA LLM 固定为 GPT-3.5 保持不变，并非全参联合微调或替换 QA LLM。",
+      "primary_chunk": "chunk_8b27c0cb47d598cdda2eb2204b132786",
+      "known_support_chunks": [
+        "chunk_8b27c0cb47d598cdda2eb2204b132786",
+        "chunk_36fd3f5ddb484701ba81edeecc069767"
+      ],
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 6,
+      "page_end": 6
+    },
+    "HN03_gret_frozen_static": {
+      "answer_point": "G-Retriever 在 Soft Prompt Tuning 中冻结 LLM 权重 θ、仅更新软提示 Pe（LoRA 属于单独的 Tuned LLM 设置），且论文明确指出当前检索组件是静态不可训练的（static retrieval component）。",
+      "primary_chunk": "chunk_169332db0b56d09ba086374fa84a2040",
+      "known_support_chunks": [
+        "chunk_169332db0b56d09ba086374fa84a2040",
+        "chunk_255b9d4a6fbbac0cf6621acf84251f72",
+        "chunk_f800cd4e8fa59900491c3efa5f890329"
+      ],
+      "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+      "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+      "page_start": 4,
+      "page_end": 5
+    },
+    "HN04_ooc_fabricated": {
+      "answer_point": "当前 14 篇语料中不存在 GraphOmni-2099 方法或 BioSTaRK-XL 基准，无法报告对比 F1 或继承章节；语料中仅有 MindMap（评测 GenMedGPT-5k/CMCQA/ExplainCPE）与 STaRK（含 STARK-PRIME）。",
+      "primary_chunk": "chunk_c36c0155590c0da356beed7403c524ae",
+      "known_support_chunks": [
+        "chunk_c36c0155590c0da356beed7403c524ae",
+        "chunk_6b5383484693f6226010eab8143f80d6"
+      ],
+      "paper_id": "paper_6aa86f36b9065b681e42b243e182ad54",
+      "title": "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+      "page_start": 5,
+      "page_end": 5
+    }
+  },
+  "cases": [
+    {
+      "id": "H-F01",
+      "category": "fact",
+      "generate": true,
+      "question": "STaRK 基准覆盖哪三个应用领域？它如何把合成问答对与人工生成问答对结合，并对 LLM Reranker 采用怎样的评测候选数 k 和抽样比例？",
+      "units": [
+        "HF01_domains",
+        "HF01_reranker_eval"
+      ],
+      "expected_answer": "STaRK 覆盖商品搜索（STARK-AMAZON）、学术论文检索（STARK-MAG）、精准医疗（STARK-PRIME）三个领域，由大规模合成问答对与小规模人工参考问答对组成；LLM Reranker（GPT-4-turbo、Claude3）重排 ada-002 候选，合成查询 k=20、人工查询 k=10，并在随机 10% 测试样本上评测。",
+      "source_papers": [
+        "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases"
+      ],
+      "min_source_papers": 1,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-F02",
+      "category": "fact",
+      "generate": true,
+      "question": "StructGPT 的错误分析选取了哪三个代表不同结构化数据类型的基准、各自抽样多少条失败案例？在 WebQSP（KGQA）与 Spider（Text-to-SQL）上占主导的错误类型和比例分别是多少？",
+      "units": [
+        "HF02_setup",
+        "HF02_dist"
+      ],
+      "expected_answer": "StructGPT 错误分析按三种结构化数据各随机抽样 100 条失败案例并分为 5 类（正文列 WebQSP、WTQ、Spider，图 3 统计 WebQSP、WikiSQL、Spider）；图 3 中 WebQSP（KGQA）以 Selection Error 为主（74%），Spider（Text-to-SQL）以 Reasoning Error 为主（63%，Selection Error 21%）。",
+      "source_papers": [
+        "StructGPT: A General Framework for Large Language Model to Reason over Structured Data"
+      ],
+      "min_source_papers": 1,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-F03",
+      "category": "fact",
+      "generate": true,
+      "question": "MindMap 在消融实验中比较了哪两种证据探索变体？结合 Table 8 与 ExplainCPE 上的指令提示消融，说明合并两种探索和加入提示模板 p1 分别带来了什么影响。",
+      "units": [
+        "HF03_variants",
+        "HF03_p1"
+      ],
+      "expected_answer": "MindMap 比较了 Neighbor-only 与 Path-only 变体；合并两者在 GenMedGPT-5k 的 BERTScore F1（0.7960）和幻觉量化（0.5890）上显著优于任一单一变体，其中 Neighbor-only 更利于事实准确度而 Path-only 更利于寻找外部信息；提示模板 p1（结合自身已有知识）使准确率提升 8.2%（61.7% vs 53.5%）。",
+      "source_papers": [
+        "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models"
+      ],
+      "min_source_papers": 1,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-F04",
+      "category": "fact",
+      "generate": true,
+      "question": "CuriousLLM（KGP-Mistral）采用什么底座模型与微调配置在 Follow-upQA 上训练？它在训练时间上相对原 KGP 的 T5 模型有何变化，并说明其 MDR-KG 段落编码器的训练思路。",
+      "units": [
+        "HF04_qlora",
+        "HF04_mdr"
+      ],
+      "expected_answer": "CuriousLLM 以 Mistral-7B-Instruct-v0.2 为底座，用 next-token prediction 与 QLoRA（8-bit、rank=32、lr=1e-5、batch size=12，90%-5%-5% 划分）微调，在相同算力下较原 KGP 的 T5 减少 85% 训练时间；MDR-KG 用 BERT 段落编码器在 HotpotQA 上按 MDR 训练，给定初始段落预测后续支持段落，拉近共同支持段落距离并用负采样推远无关段落。",
+      "source_papers": [
+        "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting"
+      ],
+      "min_source_papers": 1,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-F05",
+      "category": "fact",
+      "generate": true,
+      "question": "RoG 消融实验去掉 planning 模块（w/o planning）或去掉 reasoning 模块（w/o reasoning）分别会导致什么现象？论文为什么最终只用 beam-search 生成 top-3 关系路径？",
+      "units": [
+        "HF05_ablation",
+        "HF05_top3"
+      ],
+      "expected_answer": "去掉 planning 后 RoG 退化为常规 LLM，缺乏 KG 知识导致 WebQSP/CWQ F1 大降（70.81→49.69、56.17→33.76）；去掉 reasoning 虽提高 Recall 但因路径噪声导致 Precision 骤降（46.90 / 18.88）。RoG 采用 beam-search 生成 top-3（K=3）关系路径，因为更多路径会增加检索噪声与耗时而对最终效果增益甚微。",
+      "source_papers": [
+        "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning"
+      ],
+      "min_source_papers": 1,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-F06",
+      "category": "fact",
+      "generate": true,
+      "question": "ToG-2 为什么专门构建了 ToG-FinQA 数据集？它的语料来源、图谱关系类型数量与问答规模分别是多少，为什么 GraphRAG 只在 ToG-FinQA 上参与了评测？",
+      "units": [
+        "HF06_finqa",
+        "HF06_graphrag"
+      ],
+      "expected_answer": "因 Wikipedia 常出现在 LLM 预训练语料中，ToG-2 收集 2023 年中国上市公司财报（17,013 篇文档）构建含 7 类关系的金融 KG 与 97 道人工多跳问题（ToG-FinQA）；因 GraphRAG 在大语料上的索引建图成本难以承受，仅在 ToG-FinQA 上对其进行评测。",
+      "source_papers": [
+        "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval"
+      ],
+      "min_source_papers": 1,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-R01",
+      "category": "cross",
+      "generate": true,
+      "question": "对比 ToG 与 ToG-2 的剪枝与深度宽度设置：ToG 在默认宽度与深度上为何选 N=3、Dmax=3 且 LLM 剪枝优于 BM25/SentenceBERT？而 ToG-2 在基于上下文的实体剪枝实验中为何转而选用 BGE-Reranker（DRM）而不是 LLM 剪枝？",
+      "units": [
+        "HR01_tog",
+        "HR01_tog2"
+      ],
+      "expected_answer": "ToG 默认 N=3、Dmax=3（计算开销随深度线性增长且超过 3 跳增益递减），其纯三元组剪枝中 LLM 优于 BM25/SentenceBERT；ToG-2 融入长文档上下文后，在 AdvHotpotQA 剪枝对比中 BGE-Reranker（DRM）对长上下文与大候选集 K 容忍度更好、性价比与泛化性更高，而 LLM 受输入长度制约表现下降。",
+      "source_papers": [
+        "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+        "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval"
+      ],
+      "min_source_papers": 2,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-R02",
+      "category": "cross",
+      "generate": true,
+      "question": "比较 G-Retriever 与 LPKG 的参数高效训练设计：各自冻结了哪些模块、微调了哪些参数或模型？G-Retriever 当前的检索组件有何局限，LPKG 在错误分析中又指出哪一环影响最大？",
+      "units": [
+        "HR02_gret",
+        "HR02_lpkg"
+      ],
+      "expected_answer": "G-Retriever 在 soft prompt tuning 中冻结 LLM 权重 θ 仅训练软提示 Pe（另有 LoRA 微调配置），局限是当前检索组件静态不可训练；LPKG 解耦规划与 QA，仅对规划 LLM（CodeQwen1.5-7B-Chat、Llama3-8B-Instruct）做 LoRA 微调而固定 QA LLM（GPT-3.5），错例分析显示检索模型错误影响最大。",
+      "source_papers": [
+        "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs"
+      ],
+      "min_source_papers": 2,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-R03",
+      "category": "cross",
+      "generate": true,
+      "question": "对比 KGP 与 CuriousLLM 在遍历开销控制上的发现：KGP 固定上下文预算时增大 branching factor 为何性能先升后降？CuriousLLM 引入提前终止变体（KGP_Mistral_ET）后，在四个 MD-QA 数据集上的表现相对完整版 KGP_Mistral 有何变化？",
+      "units": [
+        "HR03_kgp",
+        "HR03_curious"
+      ],
+      "expected_answer": "KGP 在固定总检索段落预算下，增大 branching factor 初期可提供更多候选路径提升效果，但过大会挤压初始种子节点数、降低 KG 覆盖率从而使效果下滑；CuriousLLM 的提前终止版 KGP_Mistral_ET 在四个 MD-QA 集上 Acc/EM 略低于完整版 KGP_Mistral，但在 HotpotQA/IIRC/MuSiQue 上仍高于 KGP_T5。",
+      "source_papers": [
+        "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting"
+      ],
+      "min_source_papers": 2,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-R04",
+      "category": "cross",
+      "generate": true,
+      "question": "对比 KG-GPT 与 StructGPT 在少样本示例与错误瓶颈上的发现：两篇论文分别在什么任务上使用了多少 in-context exemplars？各自抽样 100 条错例分析后，哪个环节的错误最突出或最少？",
+      "units": [
+        "HR04_kggpt",
+        "HR04_structgpt"
+      ],
+      "expected_answer": "KG-GPT 在 FACTKG 与 MetaQA 上测试 12/8/4-shot，每集 100 条错例分析显示图检索阶段错误最少、而跳数增加会显著加剧句子分割错误；StructGPT 在 TableQA 与 Text-to-SQL 上使用 32 个 in-context exemplars，每集 100 条错例显示 WebQSP（KGQA）以 Selection Error 为主（74%）、Spider（Text-to-SQL）以 Reasoning Error 为主（63%）。",
+      "source_papers": [
+        "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "StructGPT: A General Framework for Large Language Model to Reason over Structured Data"
+      ],
+      "min_source_papers": 2,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-R05",
+      "category": "cross",
+      "generate": true,
+      "question": "对比 G-Retriever 提出的 GraphQA 基准与 STaRK 基准：二者分别整合或构建了哪三个数据集/领域，查询与知识表示形态有何不同？STaRK 中小型微调稠密检索器（DPR、QAGNN）为何表现不佳，而 LLM Reranker 又在什么类型的查询上尤为突出？",
+      "units": [
+        "HR05_graphqa",
+        "HR05_stark"
+      ],
+      "expected_answer": "GraphQA 整合 ExplaGraphs（常识推理）、SceneGraphs（视觉 QA）与 WebQSP（KGQA）为统一文本属性图问答格式；STaRK 覆盖商品（STARK-AMAZON）、学术（STARK-MAG）和精准医疗（STARK-PRIME）三个半结构化知识库（含合成与人工查询）。STaRK 中微调小型模型 DPR/QAGNN 因参数量小、易过拟合而表现不佳；GPT-4/Claude3 Reranker 在语言更细腻多样的人工查询上表现尤为突出。",
+      "source_papers": [
+        "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases"
+      ],
+      "min_source_papers": 2,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-R06",
+      "category": "cross",
+      "generate": true,
+      "question": "比较 HippoRAG 与 LPKG 在检索器、评测子集与训练方式上的差异：二者各使用什么检索器，各自如何从 MuSiQue / 2WikiMultiHopQA / HotpotQA 构造评测集？为什么 LPKG 额外与 GPT-3.5 蒸馏规划数据（DLPKG）做了对比，而 HippoRAG 只调了哪两个超参数？",
+      "units": [
+        "HR06_hippo",
+        "HR06_lpkg"
+      ],
+      "expected_answer": "HippoRAG 使用现成 GPT-3.5-turbo-1106 与 Contriever/ColBERTv2，不微调模型、仅在 100 条 MuSiQue 训练样本上调同义词阈值 τ=0.8 与 PPR 阻尼系数 0.5，并从三集验证集各抽 1000 题汇集候选段落建语料；LPKG 用 Wikipedia + Contriever-MS Top 5 评测四常规集与 CLQA-Wiki，另从三集训练集各抽 3000 题（共 9000 题）用 GPT-3.5 蒸馏规划训练 DLPKG，在未见集 Bamboogle 上证明 KG 派生数据优于常规教师蒸馏。",
+      "source_papers": [
+        "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs"
+      ],
+      "min_source_papers": 2,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-R07",
+      "category": "cross",
+      "generate": true,
+      "question": "对比 Roadmap 综述中的预训练融合模型（如 KEPLER、DRAGON）与 Tree-of-Traversals、MindMap 这类推理期即插即用方法：前者通过什么联合目标在预训练期融合 KG，后两者又分别怎样在不微调黑盒 LLM 的前提下接入外部 KG？",
+      "units": [
+        "HR07_roadmap",
+        "HR07_tot",
+        "HR07_mindmap"
+      ],
+      "expected_answer": "Roadmap 综述中 KEPLER 联合优化知识嵌入与语言建模目标，DRAGON 双向融合文本与 KG 子图并以 MLM 与 KG 链接预测自监督预训练；Tree-of-Traversals 零样本不微调黑盒 LLM，靠 KG 接口（SPARQL/API）与动作状态机经树搜索扩展局部子图；MindMap 即插即用不微调，通过路径与邻居探索检索 KG 子图并提示 LLM 融合外部事实与隐式知识。",
+      "source_papers": [
+        "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+        "Tree-of-Traversals: A Zero-Shot Reasoning Algorithm for Augmenting Black-box Language Models with Knowledge Graphs",
+        "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models"
+      ],
+      "min_source_papers": 3,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-R08",
+      "category": "cross",
+      "generate": true,
+      "question": "KGP、HippoRAG 与 ToG-2 各自强调了一类常规检索难以处理的问题场景：请分别说明 KGP 如何区分文档结构类与内容类问题、HippoRAG 定义的 \"path-finding multi-hop\" 问题难在哪里，以及 ToG-2 的 Both-enhanced 与 Doc-enhanced 案例如何体现图与文档的协作。",
+      "units": [
+        "HR08_kgp",
+        "HR08_hippo",
+        "HR08_tog2"
+      ],
+      "expected_answer": "KGP 先由 LLM 判别结构类（提取 Page/Table 关键词直取结构节点）或内容类（TF-IDF 种子段落 + 微调代理遍历邻居）；HippoRAG 的 path-finding multi-hop 难在多条候选路径并存时需锁定连接多个实体的特定路径，简单迭代易迷失；ToG-2 的 Both-enhanced 同时靠三元组推导中间实体并用其文档定位答案，Doc-enhanced 则以三元组引导并从目标实体文档提取最终答案。",
+      "source_papers": [
+        "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval"
+      ],
+      "min_source_papers": 3,
+      "answerable": true,
+      "negative_kind": null,
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-N01",
+      "category": "negative",
+      "generate": true,
+      "question": "有人总结说：HippoRAG 在 MuSiQue 的 100 条训练样本上用 LoRA 微调了 GPT-3.5 和 Contriever，所以才能在多跳问答上超越 IRCoT。这种说法符合原文吗？请指出原文实际做法。",
+      "units": [
+        "HN01_hippo_not_ft"
+      ],
+      "expected_answer": "不符合原文。HippoRAG 并未对 GPT-3.5 或 Contriever 进行微调（更无 LoRA）；原文使用现成的 GPT-3.5-turbo-1106 和 Contriever/ColBERTv2，100 条 MuSiQue 训练样本仅用于调节同义词阈值 τ=0.8 和 PPR 阻尼系数 0.5 两个超参数。",
+      "source_papers": [
+        "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models"
+      ],
+      "min_source_papers": 0,
+      "answerable": false,
+      "negative_kind": "false_premise",
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-N02",
+      "category": "negative",
+      "generate": true,
+      "question": "LPKG 之所以在 HotPotQA 和 CLQA-Wiki 上击败 ReAct 和 Self-Ask，是因为它把规划 LLM 和回答用的 QA LLM 一起在 Wikidata15k 上做了全参数微调并统一换成了 Llama3-8B，对吗？",
+      "units": [
+        "HN02_lpkg_decoupled"
+      ],
+      "expected_answer": "不对。LPKG 将规划与 RAG/QA 解耦为两个独立模型：仅用 Wikidata15k 派生的规划数据对规划 LLM（CodeQwen1.5-7B-Chat 或 Llama3-8B-Instruct）做 LoRA 微调，而 QA LLM 固定为 GPT-3.5 不变以对齐基线、消除 QA 模型差异。",
+      "source_papers": [
+        "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs"
+      ],
+      "min_source_papers": 0,
+      "answerable": false,
+      "negative_kind": "false_premise",
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-N03",
+      "category": "negative",
+      "generate": true,
+      "question": "根据 G-Retriever 论文，它在 Soft Prompt Tuning 阶段同时端到端更新了 Llama2-7b 全部权重以及可训练的 PCST 检索模块，从而消除了检索误差，这一描述准确吗？",
+      "units": [
+        "HN03_gret_frozen_static"
+      ],
+      "expected_answer": "不准确。第一，Soft Prompt Tuning 期间 LLM 参数 θ 冻结，梯度仅更新软提示 Pe（LoRA 属于单独的 Tuned LLM 配置）；第二，论文结论的局限性明确指出当前 G-Retriever 采用静态检索组件（static retrieval component），检索模块尚未可训练。",
+      "source_papers": [
+        "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering"
+      ],
+      "min_source_papers": 0,
+      "answerable": false,
+      "negative_kind": "false_premise",
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    },
+    {
+      "id": "H-N04",
+      "category": "negative",
+      "generate": true,
+      "question": "请对比 GraphOmni-2099 与 MindMap 在 BioSTaRK-XL 医疗基准上的 F1 分数，并说明 GraphOmni-2099 在哪一章继承了 STaRK-PRIME 的检索协议。",
+      "units": [
+        "HN04_ooc_fabricated"
+      ],
+      "expected_answer": "无法回答该对比，必须拒答或明确指出越界：当前 14 篇语料中不存在 GraphOmni-2099 方法或 BioSTaRK-XL 基准；语料中仅有 MindMap（评测 GenMedGPT-5k、CMCQA、ExplainCPE）与 STaRK（含 STARK-PRIME），二者间亦无该跨基准评测记录。",
+      "source_papers": [
+        "MindMap: Knowledge Graph Prompting Sparks Graph of Thoughts in Large Language Models",
+        "STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases"
+      ],
+      "min_source_papers": 0,
+      "answerable": false,
+      "negative_kind": "out_of_corpus",
+      "relation_review": {
+        "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+        "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+        "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+      }
+    }
+  ]
+}

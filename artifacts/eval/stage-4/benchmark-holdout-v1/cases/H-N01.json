@@ -1,0 +1,210 @@
+{
+  "id": "df4977aa-11bf-5955-9776-743238e776f8",
+  "inputs": {
+    "question": "有人总结说：HippoRAG 在 MuSiQue 的 100 条训练样本上用 LoRA 微调了 GPT-3.5 和 Contriever，所以才能在多跳问答上超越 IRCoT。这种说法符合原文吗？请指出原文实际做法。"
+  },
+  "outputs": {
+    "expected_answer": "不符合原文。HippoRAG 并未对 GPT-3.5 或 Contriever 进行微调（更无 LoRA）；原文使用现成的 GPT-3.5-turbo-1106 和 Contriever/ColBERTv2，100 条 MuSiQue 训练样本仅用于调节同义词阈值 τ=0.8 和 PPR 阻尼系数 0.5 两个超参数。",
+    "answerable": false,
+    "negative_kind": "false_premise",
+    "source_references": [
+      {
+        "unit_id": "HN01_hippo_not_ft",
+        "answer_point": "HippoRAG 并未用 LoRA 微调 GPT-3.5 或 Contriever；原文使用现成 GPT-3.5-turbo-1106 与 Contriever/ColBERTv2，100 条 MuSiQue 训练样本仅用于调节同义词阈值 τ=0.8 和 PPR 阻尼系数 0.5 两个超参。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_fe5363c7abef240f62c37ad4ab224530",
+        "pages": [
+          6,
+          6
+        ],
+        "known_support_chunks": [
+          "chunk_fe5363c7abef240f62c37ad4ab224530"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "H-N01",
+    "category": "negative",
+    "required_facts": [
+      {
+        "unit_id": "HN01_hippo_not_ft",
+        "required_fact": "HippoRAG 并未用 LoRA 微调 GPT-3.5 或 Contriever；原文使用现成 GPT-3.5-turbo-1106 与 Contriever/ColBERTv2，100 条 MuSiQue 训练样本仅用于调节同义词阈值 τ=0.8 和 PPR 阻尼系数 0.5 两个超参。",
+        "primary_chunk": "chunk_fe5363c7abef240f62c37ad4ab224530",
+        "supporting_chunks": [
+          "chunk_fe5363c7abef240f62c37ad4ab224530"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_fe5363c7abef240f62c37ad4ab224530",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 6,
+        "page_end": 6,
+        "source_spans": [
+          {
+            "pdf_page": 6,
+            "start_char": 1243,
+            "end_char": 1981,
+            "chunk_start_char": 0,
+            "chunk_end_char": 738,
+            "block_bboxes": [
+              [
+                117.998,
+                357.106,
+                491.64,
+                376.243
+              ],
+              [
+                108.0,
+                401.475,
+                230.311,
+                411.437
+              ],
+              [
+                108.0,
+                423.361,
+                504.345,
+                488.1
+              ],
+              [
+                108.0,
+                510.039,
+                163.125,
+                521.994
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "7c357b448e5680712a09e43acea7708d22e67cc997b09b517737f7b0694e07e6",
+        "section": "Introduction",
+        "text": "IRCoT + HippoRAG (Contriever)\n43.9\n56.6\n75.3\n93.4\n65.8\n82.3\n61.7\n77.4\nIRCoT + HippoRAG (ColBERTv2)\n45.3\n57.6\n75.8\n93.9\n67.0\n83.0\n62.7\n78.2\n3.4\nImplementation Details\nBy default, we use GPT-3.5-turbo-1106 [55] with temperature of 0 as our LLM L and Contriever\n[35] or ColBERTv2 [70] as our retriever M. We use 100 examples from MuSiQue’s training data\nto tune HippoRAG’s two hyperparameters: the synonymy threshold τ at 0.8 and the PPR damping\nfactor at 0.5, which determines the probability that PPR will restart a random walk from the query\nnodes instead of continuing to explore the graph. Generally, we find that HippoRAG’s performance\nis rather robust to its hyperparameters. More implementation details can be found in Appendix H.\n4\n"
+      }
+    ],
+    "required_source_papers": [
+      "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models"
+    ],
+    "min_source_papers": 0,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+      "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": true,
+      "planned_output": "完整模型回答与引用",
+      "controls": {
+        "arms": [
+          "Legacy-Hybrid",
+          "Production-Final"
+        ],
+        "arm_configs": {
+          "Legacy-Hybrid": {
+            "graph_enabled": false,
+            "graph_query_aware": false,
+            "use_method_cards": false,
+            "path_budget": 0,
+            "rerank_contextual": false,
+            "rerank_windowed": false,
+            "evidence_budget": 6000,
+            "evidence_max": 8,
+            "source_policy": "named_first",
+            "score_policy": "fixed",
+            "reservation_policy": "legacy",
+            "citation_protocol": "source-choice-v1",
+            "query_planner": false,
+            "premise_check": false
+          },
+          "Production-Final": {
+            "graph_enabled": true,
+            "graph_query_aware": true,
+            "use_method_cards": true,
+            "path_budget": 1200,
+            "rerank_contextual": true,
+            "rerank_windowed": false,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "subquery_balanced",
+            "citation_protocol": "source-choice-v3",
+            "query_planner": true,
+            "premise_check": true
+          }
+        },
+        "backend": "neo4j",
+        "shared_q00_vectors": "identical Cloudflare Q00 query embeddings across both arms; Production-Final additionally embeds planned subqueries",
+        "execution_order": "alternate arm order by case index",
+        "gold_exclusion": "question text only; gold pools and reference tables isolated"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Legacy-Hybrid / Production-Final Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "H-N01",
+    "category": "negative",
+    "benchmark": "benchmark-holdout-v1",
+    "benchmark_sha256": "3b871c53c664e26d9190ec6c102290b4991ce068960ce8572ee5a9305c85dfe6",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "negative"
+  ]
+}

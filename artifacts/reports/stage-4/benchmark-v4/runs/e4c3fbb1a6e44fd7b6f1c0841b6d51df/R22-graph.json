@@ -1,0 +1,3212 @@
+{
+  "request_id": "5e22de1e-273c-491f-8da6-fe1084fc5647",
+  "status": "ok",
+  "answer": "LPKG：作者称其“utilizes the rich patterns in the KGs to construct planning data, then fine-tune planning LLMs based on such data”，训练目标是增强“planning ability”，最终“get the final answer through parsing and execution”[chunk_cea61ca4533fd32e6f63ea730fb194ab]。CuriousLLM：作者提出“curiosity-driven reasoning mechanism”，使代理“generate relevant follow-up questions, thereby guiding the information retrieval process”，并以追问作“ground truths”构建Follow-upQA；这些追问“inquire about what is still missing”或用特殊token表示证据已足够[chunk_43145c0748762d6b4c650c65721f826f]。RoG：先“generates relation paths grounded by KGs as faithful plans”，再用这些计划“retrieve valid reasoning paths from the KGs for LLMs to conduct faithful reasoning”；训练上“distills knowledge from KGs to improve the reasoning ability of LLMs”，并可“seamless integration with any arbitrary LLMs during inference”[chunk_58e7ae48fdb49536bc066f6e74ccd2a0]。区分：LPKG是KG模式构造规划数据并微调规划器；CuriousLLM是追问监督引导检索；RoG是KG知识蒸馏提升推理并以生成计划加检索路径作答。",
+  "citations": [
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3661,
+          "end_char": 4405,
+          "chunk_start_char": 0,
+          "chunk_end_char": 744,
+          "block_bboxes": [
+            [
+              306.142,
+              552.544,
+              381.209,
+              564.499
+            ],
+            [
+              305.804,
+              574.956,
+              526.318,
+              775.47
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 754,
+          "chunk_start_char": 745,
+          "chunk_end_char": 1499,
+          "block_bboxes": [
+            [
+              180.817,
+              292.104,
+              414.46,
+              302.067
+            ],
+            [
+              70.866,
+              324.955,
+              125.334,
+              336.91
+            ],
+            [
+              70.866,
+              346.852,
+              290.946,
+              371.348
+            ],
+            [
+              70.593,
+              373.953,
+              290.947,
+              452.691
+            ],
+            [
+              70.473,
+              455.399,
+              289.317,
+              547.583
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nIn this paper, we try to enhance the planning ability\nin retrieval-augmented LLMs using KGs. Specifi-\ncally, we design a framework for Learning to Plan\nfrom KG (LPKG). The proposed LPKG framework\nfirst utilizes the rich patterns in the KGs to con-\nstruct planning data, then fine-tune planning LLMs\nbased on such data to enable them to conduct plan-\nning on downstream datasets, and ultimately get\nthe final answer through parsing and execution.\nThe experimental results reveal the excellent per-\nformance of the LPKG framework and also demon-\nstrate the effectiveness of using KG-sourced data to\nenhance LLMs’ planning ability. Finally, we con-\nstruct CLQA-Wiki, providing a more challenging\ncomplex QA benchmark for the community.\n\nFigure 4: Fine-grained evaluation based on question types.\nLimitation\nIn our view, the limitations of our work at the cur-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.4195690155029297
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8162651062011719
+        }
+      ],
+      "rerank_score": 0.7799928784370422,
+      "context_bytes": 1879
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 4.575524806976318
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8114862442016602
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.3921622633934021,
+      "context_bytes": 1908
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "is the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 4.575524806976318
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8114862442016602
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.3921622633934021,
+      "context_bytes": 1908
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 318,
+          "end_char": 1721,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1403,
+          "block_bboxes": [
+            [
+              278.288,
+              270.703,
+              333.722,
+              282.658
+            ],
+            [
+              143.866,
+              296.104,
+              468.139,
+              492.369
+            ],
+            [
+              108.299,
+              514.402,
+              205.989,
+              526.357
+            ]
+          ]
+        }
+      ],
+      "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 3.251981735229492
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8097739219665527
+        },
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.7643643021583557,
+      "context_bytes": 1762
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 318,
+          "end_char": 1721,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1403,
+          "block_bboxes": [
+            [
+              278.288,
+              270.703,
+              333.722,
+              282.658
+            ],
+            [
+              143.866,
+              296.104,
+              468.139,
+              492.369
+            ],
+            [
+              108.299,
+              514.402,
+              205.989,
+              526.357
+            ]
+          ]
+        }
+      ],
+      "quote": "These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 3.251981735229492
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8097739219665527
+        },
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.7643643021583557,
+      "context_bytes": 1762
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+      "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+      "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 318,
+          "end_char": 1721,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1403,
+          "block_bboxes": [
+            [
+              278.288,
+              270.703,
+              333.722,
+              282.658
+            ],
+            [
+              143.866,
+              296.104,
+              468.139,
+              492.369
+            ],
+            [
+              108.299,
+              514.402,
+              205.989,
+              526.357
+            ]
+          ]
+        }
+      ],
+      "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 3.251981735229492
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8097739219665527
+        },
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.7643643021583557,
+      "context_bytes": 1762
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 4.575524806976318
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8114862442016602
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.3921622633934021,
+      "context_bytes": 1908
+    },
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3661,
+          "end_char": 4405,
+          "chunk_start_char": 0,
+          "chunk_end_char": 744,
+          "block_bboxes": [
+            [
+              306.142,
+              552.544,
+              381.209,
+              564.499
+            ],
+            [
+              305.804,
+              574.956,
+              526.318,
+              775.47
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 754,
+          "chunk_start_char": 745,
+          "chunk_end_char": 1499,
+          "block_bboxes": [
+            [
+              180.817,
+              292.104,
+              414.46,
+              302.067
+            ],
+            [
+              70.866,
+              324.955,
+              125.334,
+              336.91
+            ],
+            [
+              70.866,
+              346.852,
+              290.946,
+              371.348
+            ],
+            [
+              70.593,
+              373.953,
+              290.947,
+              452.691
+            ],
+            [
+              70.473,
+              455.399,
+              289.317,
+              547.583
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nIn this paper, we try to enhance the planning ability\nin retrieval-augmented LLMs using KGs. Specifi-\ncally, we design a framework for Learning to Plan\nfrom KG (LPKG). The proposed LPKG framework\nfirst utilizes the rich patterns in the KGs to con-\nstruct planning data, then fine-tune planning LLMs\nbased on such data to enable them to conduct plan-\nning on downstream datasets, and ultimately get\nthe final answer through parsing and execution.\nThe experimental results reveal the excellent per-\nformance of the LPKG framework and also demon-\nstrate the effectiveness of using KG-sourced data to\nenhance LLMs’ planning ability. Finally, we con-\nstruct CLQA-Wiki, providing a more challenging\ncomplex QA benchmark for the community.\n\nFigure 4: Fine-grained evaluation based on question types.\nLimitation\nIn our view, the limitations of our work at the cur-\nrent stage mainly stem from two aspects:\n(1) During the fine-tuning phase of planning\nLLMs, we simply mixed various types of ques-\ntions together uniformly for training. We have not\nyet explored the impact of question type distribu-\ntion on the experimental results, which could be\nthe focus of future work.\n(2) At present, the datasets we test have explicit\ntypes of questions (multi-hop, comparison, and\nunion/intersection), but in reality, some question\ntypes may be implicit or even not be included in\nthe types we define. The future direction of our\nwork can be to study planning methods for these\ntypes of unclear questions.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.4195690155029297
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8162651062011719
+        }
+      ],
+      "rerank_score": 0.7799928784370422,
+      "context_bytes": 1879
+    }
+  ],
+  "graph_paths": [
+    {
+      "nodes": [
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method",
+          "canonical": "curiousllm"
+        },
+        {
+          "id": "cf0685de9fbd033e3f0f0da445c23726226f3796d80713e08e6c53944d0c39f1",
+          "name": "follow-up question",
+          "type": "EvidenceSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "GENERATES",
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "subject": "CuriousLLM",
+          "object": "follow-up question"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "GENERATES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "ef42239ea8e653696f407ba6d17839a46ae7b5218ae7b857107396b74a3dedcd",
+          "name": "complex QA planning",
+          "type": "Stage"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STAGE",
+          "claim_id": "62ca6febeb59a93847d60507becd0818860eb30f6ceaa2bd29b5d4b9caa4ad70",
+          "subject": "LPKG",
+          "object": "complex QA planning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "62ca6febeb59a93847d60507becd0818860eb30f6ceaa2bd29b5d4b9caa4ad70",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "HAS_STAGE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "e2541399e62f2362b1dac9c92f90209f329434187ba21d51392fb3b79f810a3f",
+          "name": "planning",
+          "type": "Stage"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STAGE",
+          "claim_id": "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+          "subject": "RoG",
+          "object": "planning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+          "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+          "predicate": "HAS_STAGE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method",
+          "canonical": "curiousllm"
+        },
+        {
+          "id": "b342601a4816f4dbf53effb174966e4c0f97821212b18ec1b6330c2f6f3dfba2",
+          "name": "evidence-sufficient special token",
+          "type": "EvidenceSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "GENERATES",
+          "claim_id": "5b6c894f09bc96f8ff29da027764b48c7973f7aa95ba0623326eab1789d6c39c",
+          "subject": "CuriousLLM",
+          "object": "evidence-sufficient special token"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "5b6c894f09bc96f8ff29da027764b48c7973f7aa95ba0623326eab1789d6c39c",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "GENERATES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "58acc49f755f5540469576e3f618ef50ef60c1312991b593630b11d11a0ff567",
+          "name": "KG knowledge distillation",
+          "type": "TrainingSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "TRAINED_WITH",
+          "claim_id": "aa112d0b5699cf739594b7e46893dc6141a6d99cd1c8a4e0e5427e7504de1a46",
+          "subject": "RoG",
+          "object": "KG knowledge distillation"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "aa112d0b5699cf739594b7e46893dc6141a6d99cd1c8a4e0e5427e7504de1a46",
+          "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+          "predicate": "TRAINED_WITH"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method",
+          "canonical": "curiousllm"
+        },
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ENHANCES",
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "subject": "CuriousLLM",
+          "object": "KGP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "ENHANCES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "86cec55f1d9a9014f91b93edb3d28fa922c44344100f5e890da04ea9e55a0bf7",
+          "name": "planning data",
+          "type": "TrainingSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_TRAINING_SIGNAL",
+          "claim_id": "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+          "subject": "LPKG",
+          "object": "planning data"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "USES_TRAINING_SIGNAL"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "30806d4d71ef7e25fd3c7e1a99450c611fa17ac35df2c4a1549cace48d9be123",
+          "name": "retrieval",
+          "type": "Stage"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STAGE",
+          "claim_id": "acb6f31d72d610e337bc5df70f4727915505dd0df12b05675a6e90bd6210e743",
+          "subject": "RoG",
+          "object": "retrieval"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "acb6f31d72d610e337bc5df70f4727915505dd0df12b05675a6e90bd6210e743",
+          "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+          "predicate": "HAS_STAGE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "ad06d1f3583b3f7c491c8d8ddd4ebed86ae5a3fce483cd2c07a307c0316743c3",
+          "name": "knowledge graph",
+          "type": "KnowledgeBase"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "DERIVES_TRAINING_DATA_FROM",
+          "claim_id": "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d",
+          "subject": "LPKG",
+          "object": "knowledge graph"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "DERIVES_TRAINING_DATA_FROM"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "a2f0da3d0ff6750ccf987d66db22665e482b95273393d5d7b7c78f85f416b2cc",
+          "name": "RoG transfer experiment",
+          "type": "EvaluationSetting"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "2c7227e0cbf89354df1f731ee1e2cfea2e89c7584399ff3672905bb7a4602bba",
+          "subject": "RoG",
+          "object": "RoG transfer experiment"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2c7227e0cbf89354df1f731ee1e2cfea2e89c7584399ff3672905bb7a4602bba",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "ff7549db8922ba2bf91ff2b7c3463e0a740da3539fd8ab56dcf377c47e943a28",
+          "name": "MetaQA-3hop dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4ec95a19a79311c58a68e54e1b0f54a2968e6afc51da1c48e4b15bfe9071a7bd",
+          "subject": "RoG",
+          "object": "MetaQA-3hop dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "4ec95a19a79311c58a68e54e1b0f54a2968e6afc51da1c48e4b15bfe9071a7bd",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "367133c7c6912f99f5257a63fef924623d90f3bda3bcd62e122d0b60094c18c6",
+          "name": "Freebase",
+          "type": "KnowledgeBase"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "DERIVES_TRAINING_DATA_FROM",
+          "claim_id": "98039030b934fa4921d02be4929960c3041ade8f0376fd7c642dffdeb169bddb",
+          "subject": "RoG",
+          "object": "Freebase"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "98039030b934fa4921d02be4929960c3041ade8f0376fd7c642dffdeb169bddb",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+          "predicate": "DERIVES_TRAINING_DATA_FROM"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "abe86523d5adecaf0e6dc8d03481a762e19c5615937a4eef01efb8b850ef0148",
+          "name": "MetaQA-3hop",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "b1c138b999ae92f5053a5da572e4283b9464881e435936ac0993e8283fef5df8",
+          "subject": "RoG",
+          "object": "MetaQA-3hop"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "b1c138b999ae92f5053a5da572e4283b9464881e435936ac0993e8283fef5df8",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "ff325831775637f3324b04c9961034681ab98ddcc18438effcc8df7385c149f8",
+          "name": "1000 MetaQA-3hop training samples",
+          "type": "TrainingSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_TRAINING_SIGNAL",
+          "claim_id": "ecdf91c055e1b59ba4da98f60d2084f20b759663a139b1e29a98c4efcbca1c4e",
+          "subject": "RoG",
+          "object": "1000 MetaQA-3hop training samples"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ecdf91c055e1b59ba4da98f60d2084f20b759663a139b1e29a98c4efcbca1c4e",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+          "predicate": "USES_TRAINING_SIGNAL"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method",
+          "canonical": "curiousllm"
+        },
+        {
+          "id": "cf0685de9fbd033e3f0f0da445c23726226f3796d80713e08e6c53944d0c39f1",
+          "name": "follow-up question",
+          "type": "EvidenceSignal"
+        },
+        {
+          "id": "6a31f47dd3758273b553062b9f62c59d1abde0956662ead6e179599ef969cd00",
+          "name": "question and evidence",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "GENERATES",
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "subject": "CuriousLLM",
+          "object": "follow-up question"
+        },
+        {
+          "predicate": "USES_INPUT",
+          "claim_id": "58c5de15bb15316dff97a52051193487b9a8269606ee902d123a90d6e5b02f0c",
+          "subject": "follow-up question",
+          "object": "question and evidence"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "GENERATES"
+        },
+        {
+          "claim_id": "58c5de15bb15316dff97a52051193487b9a8269606ee902d123a90d6e5b02f0c",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "USES_INPUT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "69450b089ebadaf174d244738748fa9676e727c7f3635685a62b06546bc84c0f",
+          "name": "union",
+          "type": "QuestionType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "HAS_QUESTION_TYPE",
+          "claim_id": "0894771ec2fe1521d76a908ad04a6bc16f2a8f20bff410c23cadcbd30542027e",
+          "subject": "CLQA-Wiki",
+          "object": "union"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "0894771ec2fe1521d76a908ad04a6bc16f2a8f20bff410c23cadcbd30542027e",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "HAS_QUESTION_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "e2541399e62f2362b1dac9c92f90209f329434187ba21d51392fb3b79f810a3f",
+          "name": "planning",
+          "type": "Stage"
+        },
+        {
+          "id": "a91e26b8967eb995f5a1697ec1f306fb5007afbfb18d3f983ee3fa874e945e25",
+          "name": "KG-constrained relation path plan",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STAGE",
+          "claim_id": "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+          "subject": "RoG",
+          "object": "planning"
+        },
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "ba37ea4f3a5d65124244548e425678c1e3612a8c808e09561c8c9864a161a567",
+          "subject": "planning",
+          "object": "KG-constrained relation path plan"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+          "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+          "predicate": "HAS_STAGE"
+        },
+        {
+          "claim_id": "ba37ea4f3a5d65124244548e425678c1e3612a8c808e09561c8c9864a161a567",
+          "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method",
+          "canonical": "curiousllm"
+        },
+        {
+          "id": "cf0685de9fbd033e3f0f0da445c23726226f3796d80713e08e6c53944d0c39f1",
+          "name": "follow-up question",
+          "type": "EvidenceSignal"
+        },
+        {
+          "id": "a537f99997f82198328c3c6660d0470319c79bea42395cd6c1a3a1aec5396843",
+          "name": "next question",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "GENERATES",
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "subject": "CuriousLLM",
+          "object": "follow-up question"
+        },
+        {
+          "predicate": "HAS_TARGET",
+          "claim_id": "90d8884b3f58f99ab73a0310c76e68c68677de7268a466e48c6ec95c344e80cf",
+          "subject": "follow-up question",
+          "object": "next question"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "GENERATES"
+        },
+        {
+          "claim_id": "90d8884b3f58f99ab73a0310c76e68c68677de7268a466e48c6ec95c344e80cf",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "HAS_TARGET"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "18670bf3d59dde015c4071b171ae64ddab44a4d94a892ee22e1e1ed737459059",
+          "name": "comparison",
+          "type": "QuestionType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "HAS_QUESTION_TYPE",
+          "claim_id": "47ac7877c4daf9c8b37d2cb00870e20a7084b0c709dfc3cec63c9ec61f746823",
+          "subject": "CLQA-Wiki",
+          "object": "comparison"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "47ac7877c4daf9c8b37d2cb00870e20a7084b0c709dfc3cec63c9ec61f746823",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "HAS_QUESTION_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "30806d4d71ef7e25fd3c7e1a99450c611fa17ac35df2c4a1549cace48d9be123",
+          "name": "retrieval",
+          "type": "Stage"
+        },
+        {
+          "id": "b1a70f5cfb039821f7e0fceca79e7b1f413cc6af6a07f3f6fad484c848b35466",
+          "name": "valid reasoning paths",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STAGE",
+          "claim_id": "acb6f31d72d610e337bc5df70f4727915505dd0df12b05675a6e90bd6210e743",
+          "subject": "RoG",
+          "object": "retrieval"
+        },
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "125f506f5a6592d212ab477119720e947a21ec29ab1e1bc1de63fd2e2c7926be",
+          "subject": "retrieval",
+          "object": "valid reasoning paths"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "acb6f31d72d610e337bc5df70f4727915505dd0df12b05675a6e90bd6210e743",
+          "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+          "predicate": "HAS_STAGE"
+        },
+        {
+          "claim_id": "125f506f5a6592d212ab477119720e947a21ec29ab1e1bc1de63fd2e2c7926be",
+          "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method",
+          "canonical": "curiousllm"
+        },
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method"
+        },
+        {
+          "id": "7a8f6a1dc43aca90db705c4ccd7ea562b3d6616de599862afe9659bb0cb1e775",
+          "name": "LLM graph traversal agent",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ENHANCES",
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "subject": "CuriousLLM",
+          "object": "KGP"
+        },
+        {
+          "predicate": "USES_AGENT",
+          "claim_id": "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+          "subject": "KGP",
+          "object": "LLM graph traversal agent"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "ENHANCES"
+        },
+        {
+          "claim_id": "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "USES_AGENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "70d7c473f525fca92a276c7d8ea2550f002ea942a8c2f5b4b71ff0d085514c98",
+          "name": "Wikidata subset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "DERIVED_FROM",
+          "claim_id": "814bd7b0e4fc58587c2de6b50c1020f34e1a7f7ed2a8818571670bcafee3727f",
+          "subject": "CLQA-Wiki",
+          "object": "Wikidata subset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "814bd7b0e4fc58587c2de6b50c1020f34e1a7f7ed2a8818571670bcafee3727f",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "DERIVED_FROM"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "a2f0da3d0ff6750ccf987d66db22665e482b95273393d5d7b7c78f85f416b2cc",
+          "name": "RoG transfer experiment",
+          "type": "EvaluationSetting"
+        },
+        {
+          "id": "8d5f9ca6d9311c73cebec36a8340baaa5aa4dbf17e998065f2b7f64b416d66d7",
+          "name": "Freebase to Wiki-Movies transfer",
+          "type": "KnowledgeBase"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_EVALUATION_SETTING",
+          "claim_id": "2c7227e0cbf89354df1f731ee1e2cfea2e89c7584399ff3672905bb7a4602bba",
+          "subject": "RoG",
+          "object": "RoG transfer experiment"
+        },
+        {
+          "predicate": "USES_KNOWLEDGE_BASE",
+          "claim_id": "90cf67d18bf478de9927c1478589a235e0a116b47f8c6c0ab0cb7d04b5b8fd71",
+          "subject": "RoG transfer experiment",
+          "object": "Freebase to Wiki-Movies transfer"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2c7227e0cbf89354df1f731ee1e2cfea2e89c7584399ff3672905bb7a4602bba",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+          "predicate": "USES_EVALUATION_SETTING"
+        },
+        {
+          "claim_id": "90cf67d18bf478de9927c1478589a235e0a116b47f8c6c0ab0cb7d04b5b8fd71",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+          "predicate": "USES_KNOWLEDGE_BASE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method",
+          "canonical": "curiousllm"
+        },
+        {
+          "id": "97786b4075918e69e502df562df94ada74cdaefd9b98422a05bfdbb2b4a2c794",
+          "name": "KGP",
+          "type": "Method"
+        },
+        {
+          "id": "46a5e58ba1d557b058aff256236403d4d941e23f3603d3dab39a4947d9bf484a",
+          "name": "document knowledge graph",
+          "type": "GraphRepresentation"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "ENHANCES",
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "subject": "CuriousLLM",
+          "object": "KGP"
+        },
+        {
+          "predicate": "HAS_GRAPH_REPRESENTATION",
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "subject": "KGP",
+          "object": "document knowledge graph"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "f8cf18ff42b26b3a4562d0954ff14efae766a846490cd9bb24acdd332e72afae",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "ENHANCES"
+        },
+        {
+          "claim_id": "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+          "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n",
+          "predicate": "HAS_GRAPH_REPRESENTATION"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "7c704ab0d736206fa2a251bf7b61909b0e36bf55ee7f9bfa90b547a0083bc240",
+          "name": "intersection",
+          "type": "QuestionType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "HAS_QUESTION_TYPE",
+          "claim_id": "8c690228dbfe146179535a777e52ecc2c27e6990fe633b3ddec8133ca82fbf9a",
+          "subject": "CLQA-Wiki",
+          "object": "intersection"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "8c690228dbfe146179535a777e52ecc2c27e6990fe633b3ddec8133ca82fbf9a",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "HAS_QUESTION_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "ff7549db8922ba2bf91ff2b7c3463e0a740da3539fd8ab56dcf377c47e943a28",
+          "name": "MetaQA-3hop dataset",
+          "type": "Dataset"
+        },
+        {
+          "id": "7e0d3df1b72ba8643700b2e1089b612530febafa4836e720be35e9da6e3e3331",
+          "name": "RoG finetuned from scratch",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4ec95a19a79311c58a68e54e1b0f54a2968e6afc51da1c48e4b15bfe9071a7bd",
+          "subject": "RoG",
+          "object": "MetaQA-3hop dataset"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ce888380eb20f5e0bf5f6e329ed627b6bfb745179495a69492c9c345b23ef981",
+          "subject": "RoG finetuned from scratch",
+          "object": "MetaQA-3hop dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "4ec95a19a79311c58a68e54e1b0f54a2968e6afc51da1c48e4b15bfe9071a7bd",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "ce888380eb20f5e0bf5f6e329ed627b6bfb745179495a69492c9c345b23ef981",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "e75951b3d7fc12d6012298ddd888ba03770686b3779a3fa07e17d60cdb2a6fe1",
+          "name": "CLQA-Wiki",
+          "type": "Dataset"
+        },
+        {
+          "id": "d44bdb53e23958308492616556fd366a24bb0d26f9c4400581b90c8511bbf2f2",
+          "name": "multi-hop",
+          "type": "QuestionType"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "subject": "LPKG",
+          "object": "CLQA-Wiki"
+        },
+        {
+          "predicate": "HAS_QUESTION_TYPE",
+          "claim_id": "d8ade555f6e62919f9c1e1b8549c44b14ebf0be76e917b4d232f47bb56b1a01d",
+          "subject": "CLQA-Wiki",
+          "object": "multi-hop"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ae6b2ff89cf717ddddf3a09c55a16e63d688c17e1b355475f090d3dec950caa8",
+          "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+          "page_start": 5,
+          "page_end": 6,
+          "quote": "Finally, we conduct\ntesting on our benchmark CLQA-Wiki.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "d8ade555f6e62919f9c1e1b8549c44b14ebf0be76e917b4d232f47bb56b1a01d",
+          "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+          "page_start": 2,
+          "page_end": 2,
+          "quote": "Additionally, we construct a Comprehensive\nLogical QA benchmark, CLQA-Wiki, from a sub-\nset of Wikidata (Vrandecic and Krötzsch, 2014) via\ngrounding rich patterns as aforementioned. Exist-\ning complex QA benchmarks (Yang et al., 2018; Ho\net al., 2020; Press et al., 2023; Trivedi et al., 2022)\nprimarily focus on multi-hop and comparison-type\nquestions and lack logical operations. Furthermore,\nmost questions are labeled with only one answer,\nwhereas in reality, they often have multiple correct\nanswers. The CLQA-Wiki benchmark evenly cov-\ners multi-hop, comparison, intersection, and union\ntypes of questions, which is more comprehensive\nand challenging for complex QA evaluation.\nOur contributions can be summarized as follows:\n(1) We introduce a novel framework LPKG that\nenhances the planning ability of LLMs using data\nconstructed from KG patterns; (2) We develop a\ncomprehensive and challenging evaluation bench-\nmark, named CLQA-Wiki, to more effectively as-\nsess the performance of LLMs on complex QA\ntasks; (3) Our proposed framework LPKG achieves\nbetter results than popular baselines on multiple\nconventional complex QA benchmarks, and we\nverify the effectiveness of the introduction of KG-\nsourced planning data.\n2\n",
+          "predicate": "HAS_QUESTION_TYPE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "ff7549db8922ba2bf91ff2b7c3463e0a740da3539fd8ab56dcf377c47e943a28",
+          "name": "MetaQA-3hop dataset",
+          "type": "Dataset"
+        },
+        {
+          "id": "f863ea04471ae951c8cd4d990536a7fb9229540c21daaf862b1bf7f71c73ee81",
+          "name": "RoG transfer from Freebase",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4ec95a19a79311c58a68e54e1b0f54a2968e6afc51da1c48e4b15bfe9071a7bd",
+          "subject": "RoG",
+          "object": "MetaQA-3hop dataset"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "eb5cdb983e1d4d9e7a0b882a26ae5bbf41d5690fc1360b4a068f952341f131ad",
+          "subject": "RoG transfer from Freebase",
+          "object": "MetaQA-3hop dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "4ec95a19a79311c58a68e54e1b0f54a2968e6afc51da1c48e4b15bfe9071a7bd",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "eb5cdb983e1d4d9e7a0b882a26ae5bbf41d5690fc1360b4a068f952341f131ad",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "86cec55f1d9a9014f91b93edb3d28fa922c44344100f5e890da04ea9e55a0bf7",
+          "name": "planning data",
+          "type": "TrainingSignal"
+        },
+        {
+          "id": "3c0e7d1b31c4bca4136a62de1b401ce336d09e62bcef620566d026afc315dc78",
+          "name": "small model fine-tuning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_TRAINING_SIGNAL",
+          "claim_id": "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+          "subject": "LPKG",
+          "object": "planning data"
+        },
+        {
+          "predicate": "CONNECTS",
+          "claim_id": "538bb8538d113afca1278ba72afac0de20240d749f461139f8cbfb3fb4f3a11c",
+          "subject": "planning data",
+          "object": "small model fine-tuning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "cc0aa92add8a8c4d64713dd9b6d9c5ef41038ce2922fe91c5880d2b0410bfd23",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "USES_TRAINING_SIGNAL"
+        },
+        {
+          "claim_id": "538bb8538d113afca1278ba72afac0de20240d749f461139f8cbfb3fb4f3a11c",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "CONNECTS"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        },
+        {
+          "id": "abe86523d5adecaf0e6dc8d03481a762e19c5615937a4eef01efb8b850ef0148",
+          "name": "MetaQA-3hop",
+          "type": "Dataset"
+        },
+        {
+          "id": "83b4e9f3e45eb27d1cfb756ff46412108d489a6d763ed76d5e7b7ef1f4d12405",
+          "name": "Wiki-Movies",
+          "type": "KnowledgeBase"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "b1c138b999ae92f5053a5da572e4283b9464881e435936ac0993e8283fef5df8",
+          "subject": "RoG",
+          "object": "MetaQA-3hop"
+        },
+        {
+          "predicate": "USES_KNOWLEDGE_BASE",
+          "claim_id": "78d906b36f9dbdab56bebfa4997c9fdafe8756c82efe3f4704fc0486e160a477",
+          "subject": "MetaQA-3hop",
+          "object": "Wiki-Movies"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "b1c138b999ae92f5053a5da572e4283b9464881e435936ac0993e8283fef5df8",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "78d906b36f9dbdab56bebfa4997c9fdafe8756c82efe3f4704fc0486e160a477",
+          "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+          "page_start": 20,
+          "page_end": 20,
+          "quote": "A.7.1\nTRANSFERABILITY TO OTHER KGS\nWe evaluate the transferability of RoG to other KGs. We select the MetaQA-3hop dataset (Zhang\net al., 2018) which is based on Wiki-Movies KGs. We select 1000 samples from the training split\nand utilize two training strategies to finetune RoG: 1) training from scratch, where we directly train\nRoG from LLaMA2-Chat with 1000 samples; 2) transfer from Freebase, where we conduct a further\nfinetuning based on RoG trained for Freebase. The results are shown in Table 12. From results, we\ncan see that transfer from Freebase achieves better performance than training from scratch, which\ndemonstrates the transferability of RoG to other KGs.\nWe also compare the training time on Freebase and transferring to Wiki-Movies KGs. From results\nshown in Table 13, we can see that the training time on Freebase is 38 hours, while the transferring\ntime is only 2 hours. This demonstrates the efficiency of transferring RoG to other KGs.\n",
+          "predicate": "USES_KNOWLEDGE_BASE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "ad06d1f3583b3f7c491c8d8ddd4ebed86ae5a3fce483cd2c07a307c0316743c3",
+          "name": "knowledge graph",
+          "type": "KnowledgeBase"
+        },
+        {
+          "id": "8d38eed418b4cbadd754671f98af91203bd28eca3b2db82c9618cd79c35dd3c5",
+          "name": "iterative beam search",
+          "type": "Algorithm"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "DERIVES_TRAINING_DATA_FROM",
+          "claim_id": "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d",
+          "subject": "LPKG",
+          "object": "knowledge graph"
+        },
+        {
+          "predicate": "RETRIEVES_FROM",
+          "claim_id": "cabe3e209774466c672401ebe30de4ce0094ddcdf574b2d39f061bff7f5e6a37",
+          "subject": "iterative beam search",
+          "object": "knowledge graph"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ecc25e43e85ccf123fea0580fa2700a08be0a3ee7036bfb26a9e3f6f6758043d",
+          "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nImproving the performance of large language\nmodels (LLMs) in complex question-answering\n(QA) scenarios has always been a research fo-\ncal point. Recent studies have attempted to en-\nhance LLMs’ performance by combining step-\nwise planning with external retrieval. While\neffective for advanced models like GPT-3.5,\nsmaller LLMs face challenges in decomposing\ncomplex questions, necessitating supervised\nfine-tuning. Previous work has relied on man-\nual annotation and knowledge distillation from\nteacher LLMs, which are time-consuming and\nnot accurate enough. In this paper, we intro-\nduce a novel framework for enhancing LLMs’\nplanning capabilities by using planning data\nderived from knowledge graphs (KGs). LLMs\nfine-tuned with this data have improved plan-\nning capabilities, better equipping them to han-\ndle complex QA tasks that involve retrieval.\nEvaluations on multiple datasets, including our\nnewly proposed benchmark, highlight the ef-\nfectiveness of our framework and the benefits\nof KG-derived planning data.\n1\n",
+          "predicate": "DERIVES_TRAINING_DATA_FROM"
+        },
+        {
+          "claim_id": "cabe3e209774466c672401ebe30de4ce0094ddcdf574b2d39f061bff7f5e6a37",
+          "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following\nadvantages of ToG: 1) compared with LLMs, ToG has better deep reasoning power;\n2) ToG has the ability of knowledge traceability and knowledge correctability by\nleveraging LLMs reasoning and expert feedback; 3) ToG provides a flexible plug-\nand-play framework for different LLMs, KGs and prompting strategies without\nany additional training cost; 4) the performance of ToG with small LLM models\ncould exceed large LLM such as GPT-4 in certain scenarios and this reduces the\ncost of LLM deployment and application. As a training-free method with lower\ncomputational cost and better generality, ToG achieves overall SOTA in 6 out of\n9 datasets where most previous SOTAs rely on additional training. Our code is\npublicly available at https://github.com/IDEA-FinAI/ToG.\n1\n",
+          "predicate": "RETRIEVES_FROM"
+        }
+      ]
+    }
+  ],
+  "generation_paths": [
+    {
+      "nodes": [
+        {
+          "name": "CuriousLLM",
+          "type": "Method"
+        },
+        {
+          "name": "follow-up question",
+          "type": "EvidenceSignal"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "GENERATES",
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "subject": "CuriousLLM",
+          "object": "follow-up question"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+          "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+          "predicate": "GENERATES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "name": "RoG",
+          "type": "Method"
+        },
+        {
+          "name": "planning",
+          "type": "Stage"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_STAGE",
+          "claim_id": "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+          "subject": "RoG",
+          "object": "planning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+          "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n",
+          "predicate": "HAS_STAGE"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 39,
+    "graph_executed": true,
+    "graph_hits": 8,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_paths": 32,
+    "graph_audit": {
+      "backend": "isolated_sqlite",
+      "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "anchors": [
+        {
+          "id": "e76abe3e9319511ec784d28b5a9b6719ac2d9fb548a9efc74c409ee90a1e3254",
+          "name": "CuriousLLM",
+          "type": "Method",
+          "canonical": "curiousllm"
+        },
+        {
+          "id": "d1ef7d8efe66b17b0b6a50784f65e360dc96f50ce5a911cafa2c34d105581fa0",
+          "name": "LPKG",
+          "type": "Method",
+          "canonical": "lpkg"
+        },
+        {
+          "id": "f88d9d377d6d97b8463438f59354d951e3c350bc70ea57bae25f2264307e34ab",
+          "name": "RoG",
+          "type": "Method",
+          "canonical": "rog"
+        }
+      ],
+      "seed_count": 3,
+      "max_hops": 2,
+      "max_paths": 40,
+      "per_node": 8,
+      "deadline_seconds": 10,
+      "degree_truncated": [],
+      "reference_tables_access": "denied by SQLite authorizer",
+      "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+      "returned_paths": 32,
+      "expanded_nodes": 18,
+      "elapsed_seconds": 0.010193699999945238
+    },
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 4.804802499998914,
+      "inference_seconds": 0.8413995999999315,
+      "elapsed_seconds": 0.8440608000000793,
+      "peak_cuda_memory_bytes": 1155262464,
+      "request_count": 60
+    },
+    "evidence_count": 3,
+    "context_bytes": 6490,
+    "evidence_bytes": 5549,
+    "graph_context_bytes": 941,
+    "serialized_content_bytes": 6287,
+    "prompt_graph_paths": [
+      {
+        "nodes": [
+          {
+            "name": "CuriousLLM",
+            "type": "Method"
+          },
+          {
+            "name": "follow-up question",
+            "type": "EvidenceSignal"
+          }
+        ],
+        "edges": [
+          {
+            "predicate": "GENERATES",
+            "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567",
+            "subject": "CuriousLLM",
+            "object": "follow-up question"
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+            "quote_ids": [
+              "q1",
+              "q2"
+            ],
+            "source_span": [
+              0,
+              1522
+            ],
+            "claim_id": "54cbaa0311e6323484be74c735a31a594e2ad83dc6630504092559f610c83567"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          {
+            "name": "RoG",
+            "type": "Method"
+          },
+          {
+            "name": "planning",
+            "type": "Stage"
+          }
+        ],
+        "edges": [
+          {
+            "predicate": "HAS_STAGE",
+            "claim_id": "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+            "subject": "RoG",
+            "object": "planning"
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+            "quote_ids": [
+              "q1",
+              "q2"
+            ],
+            "source_span": [
+              0,
+              1403
+            ],
+            "claim_id": "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a"
+          }
+        ]
+      }
+    ],
+    "path_policy": "additional_path_budget",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ]
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ]
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "RoG",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "requested_names": [
+          "RoG"
+        ],
+        "eligible_candidate_count": 4,
+        "selected_chunk_ids": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ],
+        "eligible_candidate_count": 9,
+        "selected_chunk_ids": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ],
+        "eligible_candidate_count": 11,
+        "selected_chunk_ids": [
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "evidence_budget_bytes": 6000,
+    "path_budget_bytes": 1200,
+    "total_budget_bytes": 7200,
+    "context_budget_bytes": 7200,
+    "generation_path_count": 2,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 2019,
+    "total_tokens": 2490,
+    "completion_tokens": 471,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 2019
+    },
+    "completion_tokens_details": {
+      "text_tokens": 471
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"LPKG：作者称其“utilizes the rich patterns in the KGs to construct planning data, then fine-tune planning LLMs based on such data”，训练目标是增强“planning ability”，最终“get the final answer through parsing and execution”[chunk_cea61ca4533fd32e6f63ea730fb194ab]。CuriousLLM：作者提出“curiosity-driven reasoning mechanism”，使代理“generate relevant follow-up questions, thereby guiding the information retrieval process”，并以追问作“ground truths”构建Follow-upQA；这些追问“inquire about what is still missing”或用特殊token表示证据已足够[chunk_43145c0748762d6b4c650c65721f826f]。RoG：先“generates relation paths grounded by KGs as faithful plans”，再用这些计划“retrieve valid reasoning paths from the KGs for LLMs to conduct faithful reasoning”；训练上“distills knowledge from KGs to improve the reasoning ability of LLMs”，并可“seamless integration with any arbitrary LLMs during inference”[chunk_58e7ae48fdb49536bc066f6e74ccd2a0]。区分：LPKG是KG模式构造规划数据并微调规划器；CuriousLLM是追问监督引导检索；RoG是KG知识蒸馏提升推理并以生成计划加检索路径作答。\",\"citations\":[{\"chunk_id\":\"chunk_cea61ca4533fd32e6f63ea730fb194ab\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_43145c0748762d6b4c650c65721f826f\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_43145c0748762d6b4c650c65721f826f\",\"quote_id\":\"q2\"},{\"chunk_id\":\"chunk_58e7ae48fdb49536bc066f6e74ccd2a0\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_58e7ae48fdb49536bc066f6e74ccd2a0\",\"quote_id\":\"q2\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 0.029551337359792925,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.4195690155029297
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8162651062011719
+        }
+      ],
+      "rerank_score": 0.7799928784370422
+    },
+    {
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "score": 0.043757631257631255,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 3.251981735229492
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8097739219665527
+        },
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.7643643021583557
+    },
+    {
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7996768951416016
+        }
+      ],
+      "rerank_score": 0.706899106502533
+    },
+    {
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8054919242858887
+        }
+      ],
+      "rerank_score": 0.6693127155303955
+    },
+    {
+      "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.6451199054718018
+    },
+    {
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7955985069274902
+        }
+      ],
+      "rerank_score": 0.4463137090206146
+    },
+    {
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8119783401489258
+        }
+      ],
+      "rerank_score": 0.4179246127605438
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.047891458495966696,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 4.575524806976318
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8114862442016602
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.3921622633934021
+    },
+    {
+      "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 4,
+          "score": 0.25
+        }
+      ],
+      "rerank_score": 0.3487560451030731
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 4.004562854766846
+        }
+      ],
+      "rerank_score": 0.33415475487709045
+    },
+    {
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 3.607489585876465
+        }
+      ],
+      "rerank_score": 0.30239108204841614
+    },
+    {
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 3.3771655559539795
+        }
+      ],
+      "rerank_score": 0.3007456064224243
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.029850746268656716,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 4.174210071563721
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.802299976348877
+        }
+      ],
+      "rerank_score": 0.2756168842315674
+    },
+    {
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8119935989379883
+        }
+      ],
+      "rerank_score": 0.2756168842315674
+    },
+    {
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 0.027598020555767037,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 3.484480619430542
+        },
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7987957000732422
+        }
+      ],
+      "rerank_score": 0.2581389248371124
+    },
+    {
+      "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+      "score": 0.027809742999616416,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 3.332981586456299
+        },
+        {
+          "channel": "graph",
+          "rank": 6,
+          "score": 0.16666666666666666
+        }
+      ],
+      "rerank_score": 0.15752527117729187
+    },
+    {
+      "chunk_id": "chunk_0802e0680bb22a20ca92d602db68f734",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7957377433776855
+        }
+      ],
+      "rerank_score": 0.15002880990505219
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 3.3392996788024902
+        }
+      ],
+      "rerank_score": 0.147801011800766
+    },
+    {
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 4.203124523162842
+        }
+      ],
+      "rerank_score": 0.14342747628688812
+    },
+    {
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 4.35463809967041
+        }
+      ],
+      "rerank_score": 0.10932482779026031
+    },
+    {
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 3.8041303157806396
+        }
+      ],
+      "rerank_score": 0.10613343119621277
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.0259915611814346,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 3.4648287296295166
+        },
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7934432029724121
+        }
+      ],
+      "rerank_score": 0.10052486509084702
+    },
+    {
+      "chunk_id": "chunk_85cf026687ef7fad0688db2c4af1d3a9",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7980074882507324
+        }
+      ],
+      "rerank_score": 0.09318171441555023
+    },
+    {
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 3.5221259593963623
+        }
+      ],
+      "rerank_score": 0.08756384253501892
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 4.3864336013793945
+        }
+      ],
+      "rerank_score": 0.08035746961832047
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 4.029383659362793
+        }
+      ],
+      "rerank_score": 0.07356304675340652
+    },
+    {
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7964944839477539
+        }
+      ],
+      "rerank_score": 0.07185126841068268
+    },
+    {
+      "chunk_id": "chunk_d4417adcf5fa74f507b8d4e876d17fce",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.798823356628418
+        }
+      ],
+      "rerank_score": 0.04867657274007797
+    },
+    {
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 4.589354515075684
+        }
+      ],
+      "rerank_score": 0.04328484088182449
+    },
+    {
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8018841743469238
+        }
+      ],
+      "rerank_score": 0.0364251546561718
+    },
+    {
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7937459945678711
+        }
+      ],
+      "rerank_score": 0.03422932326793671
+    },
+    {
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 4.102086544036865
+        }
+      ],
+      "rerank_score": 0.02433018945157528
+    },
+    {
+      "chunk_id": "chunk_81f9b590314ead5a660cbb63b0a79d80",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7950263023376465
+        }
+      ],
+      "rerank_score": 0.022672437131404877
+    },
+    {
+      "chunk_id": "chunk_27b6486b825caa61f6f8fd333d2d11b2",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 4.689962863922119
+        }
+      ],
+      "rerank_score": 0.019756916910409927
+    },
+    {
+      "chunk_id": "chunk_b1bd739c57f6cdf536000af5bc1af59a",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7935981750488281
+        }
+      ],
+      "rerank_score": 0.014227046631276608
+    },
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 8,
+          "score": 0.125
+        }
+      ],
+      "rerank_score": 0.013325147330760956
+    },
+    {
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 7,
+          "score": 0.14285714285714285
+        }
+      ],
+      "rerank_score": 0.010408313944935799
+    },
+    {
+      "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 5,
+          "score": 0.2
+        }
+      ],
+      "rerank_score": 0.008315778337419033
+    },
+    {
+      "chunk_id": "chunk_3e6e9684fba4b44fe201725df8351c03",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7932286262512207
+        }
+      ],
+      "rerank_score": 0.007725534029304981
+    }
+  ],
+  "case_id": "R22",
+  "question": "LPKG、CuriousLLM、RoG 分别学习什么，训练出的能力在问答时怎样使用？请区分规划数据、追问监督与 KG 知识蒸馏。",
+  "category": "cross",
+  "arm": "Hybrid+Graph",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0003121999998256797
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.02925640000103158
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 0.017903100000694394
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.8445879999999306
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.001727799999571289
+    }
+  ],
+  "retrieval_compute_seconds": 0.8937875000010536,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.1817948999996588,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 4.270993699999963,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.2918540999999095,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 3.6572748999988107,
+      "usage": "{\"prompt_tokens\": 2019, \"total_tokens\": 2490, \"completion_tokens\": 471}"
+    }
+  ],
+  "metrics": {
+    "recall5": 0.6666666666666666,
+    "recall8": 1.0,
+    "mrr40": 1.0,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "execution_config": {
+    "benchmark": "benchmark-v4",
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    },
+    "models": {
+      "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+      "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+      "CLOUD_BGE_PROVIDER": "cloudflare",
+      "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+      "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+      "LOCAL_RERANKER_DEVICE": "cuda",
+      "LOCAL_RERANKER_DTYPE": "float16",
+      "LOCAL_RERANKER_PERSISTENT": "true"
+    },
+    "endpoint_fingerprints": {
+      "DEEPSEEK_BASE_URL": "aebde9d32c41ca5aff41444d1ef2feaa0f3574a19195d60c588f826a6ea88c01",
+      "CLOUD_BGE_BASE_URL": "73dd98c51038dadb140c44d42e350a9ae3c52013d53336b34e055aa1bf12087d",
+      "CLOUDFLARE_ACCOUNT_ID": "8157dbe7227fcba3fcada3a5c46dc0a3a12f71bebb5b653de5256c0ae456e407",
+      "NEO4J_URI": "b1d4217b5d8c41b8b641a146d7facd744b01a415fe2ac0d943188a78e5f007f0"
+    },
+    "dependencies": {
+      "neo4j": "6.4.1",
+      "langsmith": "0.14.17",
+      "langgraph": "1.2.21",
+      "httpx": "0.28.1"
+    },
+    "code_sha256": {
+      "scripts/eval-stage4.py": "3fda792fb4ceea527961fa1f6eca2fc335412b64ff087bd5120f2f6c26dcf60b",
+      "src/papertech/evaluation_runtime.py": "d433b2ce3a6f189f698f4775275430e82cd8898df8c0fa8a015095506d3c1ccc",
+      "src/papertech/isolated_graph.py": "039d27009ec94003cfc6f25024ae2015ab7c12b27f9f7cfe5dc21979f1c41586",
+      "src/papertech/workflow.py": "6fe7b530e355f19886c34bd61c98046b6cd10598b74f94220dae63d64130964a",
+      "src/papertech/graph_store.py": "485c50edfbc99e26554d903b0f637ae4893ecf06168be34a767cd986c4d07476",
+      "src/papertech/retrieval.py": "ef2480079acc98095c86394ce6ae5bf894a7034a47d0d394cf584f871e41ae65",
+      "src/papertech/evidence_context.py": "b9bfe29885ffe4b82086a78572ffe4d031d3de9c497b0681aa732525a46f89f6",
+      "src/papertech/entity_aliases.py": "2725c08d7ca72f46c3bf7adbb3207eb75331f963a1998826bc6397e375699ea6",
+      "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+      "src/papertech/citations.py": "6465c41be136683a5ec723720820fca5c246c9365836914ca8967e5805175372",
+      "src/papertech/evaluation.py": "cb3714275490177d79bf755ef156e14f485748dbea590a95b54ab769fde96e31",
+      "src/papertech/evaluation_details.py": "a88e734e7fbe7a0b1f977dfdbd88aeed27da5a952431da94e4a66bc74a9a2090",
+      "src/papertech/evaluation_datasets.py": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+      "src/papertech/local_models.py": "62f465e7615a7208a8f4bfda6c9f4b545843e3115ef91768d47f5a7e787edddb",
+      "src/papertech/rerank_service.py": "156293246350d8b4a8c7bd23d45edb26f471d1bfe690480412edcf942617d693",
+      "scripts/rerank-service.py": "562927f8ebd62834e8aca53ae55a436eac4d82f39b66e1ad92b017f1b73facf5"
+    },
+    "controls": {
+      "arms": [
+        "Hybrid",
+        "Hybrid+Graph"
+      ],
+      "backend": "neo4j",
+      "graph_backend": "isolated_sqlite",
+      "fulltext_top": 20,
+      "dense_top": 20,
+      "fusion_max": 40,
+      "graph_candidates_max": 20,
+      "graph_seed_chunks": 12,
+      "graph_seed_entities": 40,
+      "graph_max_paths": 40,
+      "graph_hops": 2,
+      "graph_per_node": 8,
+      "evidence_max": 8,
+      "evidence_bytes": 6000,
+      "path_bytes": 1200,
+      "context_bytes": 7200,
+      "path_budget_mode": "additional",
+      "generation_max_tokens": 2048,
+      "thinking": "disabled",
+      "generation_requests_max": 80,
+      "sampling": "provider default; one sample per arm",
+      "treatment_scope": "graph candidates plus up to 1200 additional path bytes; not an equal actual input-token ablation",
+      "execution_order": "alternate which arm goes first",
+      "query_vector": "one shared Cloudflare batch",
+      "gold_exclusion": "question text only; reference tables and claim unit/path IDs denied by SQLite authorizer"
+    },
+    "latency": "retrieval compute excludes audit upload, generation, and shared embedding batch; request wall time reported separately",
+    "status": "frozen_before_execution"
+  },
+  "request_wall_seconds": 6.996565600000395,
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 0.8162651062011719
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.8119935989379883
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_229cb41ae3582cc199c9ee25c4956269",
+      "score": 0.8119783401489258
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.8114862442016602
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "score": 0.8097739219665527
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_072d1d7f534ffdbb7644a330aeea94fa",
+      "score": 0.8054919242858887
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.802299976348877
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.8018841743469238
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_80af5b3aa25d71d17409ebe2b757ab19",
+      "score": 0.7996768951416016
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_d4417adcf5fa74f507b8d4e876d17fce",
+      "score": 0.798823356628418
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 0.7987957000732422
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_85cf026687ef7fad0688db2c4af1d3a9",
+      "score": 0.7980074882507324
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 0.7964944839477539
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_0802e0680bb22a20ca92d602db68f734",
+      "score": 0.7957377433776855
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_75e927b201e488543d00046d05b35db7",
+      "score": 0.7955985069274902
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_81f9b590314ead5a660cbb63b0a79d80",
+      "score": 0.7950263023376465
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.7937459945678711
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_b1bd739c57f6cdf536000af5bc1af59a",
+      "score": 0.7935981750488281
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.7934432029724121
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_3e6e9684fba4b44fe201725df8351c03",
+      "score": 0.7932286262512207
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_27b6486b825caa61f6f8fd333d2d11b2",
+      "score": 4.689962863922119
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "score": 4.589354515075684
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 4.575524806976318
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 4.3864336013793945
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 4.35463809967041
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 4.203124523162842
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 4.174210071563721
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 4.102086544036865
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 4.029383659362793
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 4.004562854766846
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "score": 3.8041303157806396
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "score": 3.607489585876465
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "score": 3.5221259593963623
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_231843bdac931319ba29f46e6be14d6d",
+      "score": 3.484480619430542
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 3.4648287296295166
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 3.4195690155029297
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_8d1de153f62070216bf23df5989bda21",
+      "score": 3.3771655559539795
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 3.3392996788024902
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+      "score": 3.332981586456299
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "score": 3.251981735229492
+    },
+    {
+      "channel": "graph",
+      "rank": 1,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 1.0
+    },
+    {
+      "channel": "graph",
+      "rank": 2,
+      "chunk_id": "chunk_e07b345ba2a42d01f295e47f196061d5",
+      "score": 0.5
+    },
+    {
+      "channel": "graph",
+      "rank": 3,
+      "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+      "score": 0.3333333333333333
+    },
+    {
+      "channel": "graph",
+      "rank": 4,
+      "chunk_id": "chunk_b5d503a2d2586e2d55d4e0841114a942",
+      "score": 0.25
+    },
+    {
+      "channel": "graph",
+      "rank": 5,
+      "chunk_id": "chunk_f5c88d605f651f26c093f30b836a98aa",
+      "score": 0.2
+    },
+    {
+      "channel": "graph",
+      "rank": 6,
+      "chunk_id": "chunk_ab66789d9bc91de68948962d6c3f0011",
+      "score": 0.16666666666666666
+    },
+    {
+      "channel": "graph",
+      "rank": 7,
+      "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+      "score": 0.14285714285714285
+    },
+    {
+      "channel": "graph",
+      "rank": 8,
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.125
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R22.C01",
+      "requirement": "LPKG 用 KG 派生规划数据提升复杂问答规划能力。",
+      "selected_matches_by_unit": {
+        "lpdata": [
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R22.C02",
+      "requirement": "CuriousLLM 以问题/证据为输入，学习后续问题以指导检索。",
+      "selected_matches_by_unit": {
+        "curious": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R22.C03",
+      "requirement": "RoG 通过 KG 知识蒸馏训练。",
+      "selected_matches_by_unit": {
+        "rog": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R22.C04",
+      "requirement": "RoG 推理时做关系计划与有效路径检索。",
+      "selected_matches_by_unit": {
+        "rog": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/a09892c5-0165-4fc7-b2c8-20f00c334ba6?poll=true"
+}

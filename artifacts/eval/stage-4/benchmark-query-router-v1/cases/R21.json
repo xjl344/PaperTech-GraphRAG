@@ -1,0 +1,373 @@
+{
+  "id": "fa02c7d1-19f3-5f3c-9a7e-111b6e8c4cc1",
+  "inputs": {
+    "question": "KGP 预测下一段证据与 RoG 生成关系路径后，分别怎样约束实际检索？比较邻居段落的相似匹配与沿关系序列的图搜索。"
+  },
+  "outputs": {
+    "expected_answer": "KGP 将预测证据与真实邻居匹配，选择相似的文档段落。\nRoG 从问题实体沿关系序列进行受约束BFS。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R21.S01",
+        "answer_point": "KGP 将预测证据与真实邻居匹配，选择相似的文档段落。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "pages": [
+          5,
+          5
+        ],
+        "known_support_chunks": [
+          "chunk_adcc17b94d9058357729c73998e78ba9"
+        ]
+      },
+      {
+        "unit_id": "R21.S02",
+        "answer_point": "RoG 从问题实体沿关系序列进行受约束BFS。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_3e71dc58ca336959686a576311cb5e3a",
+        "pages": [
+          6,
+          6
+        ],
+        "known_support_chunks": [
+          "chunk_3e71dc58ca336959686a576311cb5e3a"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R21",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R21.S01",
+        "required_fact": "KGP 将预测证据与真实邻居匹配，选择相似的文档段落。",
+        "primary_chunk": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "supporting_chunks": [
+          "chunk_adcc17b94d9058357729c73998e78ba9"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R21.S02",
+        "required_fact": "RoG 从问题实体沿关系序列进行受约束BFS。",
+        "primary_chunk": "chunk_3e71dc58ca336959686a576311cb5e3a",
+        "supporting_chunks": [
+          "chunk_3e71dc58ca336959686a576311cb5e3a"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_adcc17b94d9058357729c73998e78ba9",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 5,
+        "page_end": 5,
+        "source_spans": [
+          {
+            "pdf_page": 5,
+            "start_char": 1622,
+            "end_char": 3271,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1649,
+            "block_bboxes": [
+              [
+                54.0,
+                387.595,
+                292.505,
+                638.654
+              ],
+              [
+                54.0,
+                639.649,
+                292.505,
+                704.406
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "e46970d6da9bd03b8cfb2aa52e235fd83ac47f4e2d72da93feb53ed6044efd26",
+        "section": "Introduction",
+        "text": "Figure 4 presents the content-based question asking ‘In\nwhat year was the creator of the current arrangement of\nSimpson’s Theme born?’. We use TF-IDF search to initial-\nize the seeding passage Node 1, which reads: ‘Alf Heiberg\nClausen (born March 28, 1941) is an American film com-\nposer’. Subsequently, we prefix the currently retrieved-\ncontext (Node 1) with the question and prompt the LLM to\ngenerate the next evidence required to approach the question\none step closer. Because we augment the reasoning capabil-\nity of the LLM by instruction fine-tuning, it is expected to\nrecognize the logical association between the question and\nthe currently retrieved context. Consequently, it can predict\nthe subsequent passage that maintains logical coherence, al-\nbeit may contain factual mistakes, i.e., ‘Alf Clausen (born\nApril 16, 1941) is an American composer of film and tele-\nvision scores.’ To rectify this potential factual mistake, we\nselect nodes from the candidate neighbors that match the\nmost with the LLM-generated passage, in this case, Node\n4 ‘Alf Heiberg Clausen (born March 28, 1941) is an Ameri-\ncan film composer’. Since this passage sources directly from\ndocuments, it inherently ensures the validity of the informa-\ntion. Then we prompt LLMs along with the retrieved context\nNode 1 and 4 for the answer.\nAdditionally, for questions asking about document struc-\ntures, we extract the document structure names and locate\ntheir corresponding structural nodes in the KG. For the table\nnode, we retrieve its markdown formatted content while for\nthe page node, we traverse its one-hop neighbor and obtain\npassages belonging to that page.\n"
+      },
+      {
+        "chunk_id": "chunk_3e71dc58ca336959686a576311cb5e3a",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 6,
+        "page_end": 6,
+        "source_spans": [
+          {
+            "pdf_page": 6,
+            "start_char": 45,
+            "end_char": 1138,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1093,
+            "block_bboxes": [
+              [
+                108.0,
+                82.256,
+                503.997,
+                116.149
+              ],
+              [
+                108.0,
+                122.764,
+                326.45,
+                134.58
+              ],
+              [
+                172.564,
+                147.427,
+                206.776,
+                157.39
+              ],
+              [
+                187.662,
+                158.204,
+                191.456,
+                165.178
+              ],
+              [
+                209.625,
+                140.687,
+                227.754,
+                164.094
+              ],
+              [
+                233.376,
+                145.126,
+                247.772,
+                155.089
+              ],
+              [
+                230.607,
+                161.168,
+                250.037,
+                168.643
+              ],
+              [
+                252.196,
+                140.687,
+                330.629,
+                164.094
+              ],
+              [
+                336.252,
+                145.126,
+                350.648,
+                155.089
+              ],
+              [
+                333.482,
+                161.168,
+                352.912,
+                168.643
+              ],
+              [
+                355.072,
+                147.427,
+                367.804,
+                157.39
+              ],
+              [
+                369.688,
+                136.361,
+                382.42,
+                155.089
+              ],
+              [
+                369.6,
+                161.518,
+                382.51,
+                168.492
+              ],
+              [
+                384.167,
+                147.298,
+                504.0,
+                158.232
+              ],
+              [
+                108.0,
+                170.192,
+                504.001,
+                191.473
+              ],
+              [
+                108.249,
+                210.433,
+                277.552,
+                220.396
+              ],
+              [
+                108.0,
+                232.292,
+                504.0,
+                265.898
+              ],
+              [
+                152.592,
+                268.742,
+                293.946,
+                280.328
+              ],
+              [
+                297.459,
+                265.449,
+                322.777,
+                279.675
+              ],
+              [
+                326.039,
+                265.449,
+                354.369,
+                278.833
+              ],
+              [
+                108.0,
+                265.388,
+                504.003,
+                312.937
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "cd1e3a369b6cd1a6916d811ae5e897c155465f68cc328b7a21cc09fb933d5c5e",
+        "section": "RELATED WORK",
+        "text": "z = <PATH> r1 <SEP> r2 <SEP> . . . <SEP> rl </PATH>\nwhere <PATH>, <SEP>, </PATH> are special tokens indicating the start, separator, and end of the\nrelation path, respectively3.\nTherefore, the optimization of Lplan can be achieved as\narg max\nθ\n1\n|Z∗|\nX\nz∈Z∗\nlog Pθ(z|q) =\n1\n|Z∗|\nX\nz∈Z∗\nlog\n|z|\nY\ni=1\nPθ(ri|r<i, q),\n(8)\nwhere Pθ(z|q) denotes the prior distribution of generating faithful relation path z, and Pθ(ri|r<i, q)\ndenotes the probability of each token in z generated by LLMs.\n4.4\nRETRIEVAL-REASONING MODULE\nRetrieval. Given a question q and a relation path as plan z, the retrieval module aims to retrieve the\nreasoning paths wz from KG G. The retrieval process can be conducted by finding paths in G that\nstart from the question entities eq and follow the relation paths z, formulated as\nWz = {wz(eq, e∗)|wz(eq, e∗) = eq\nr1\n−→e1\nr2\n−→. . .\nrl\n−→ea∗, wz(eq, e∗) ∈G}.\n(9)\nWe adopt a constrained breadth-first search to retrieve the reasoning paths wz from KGs. In exper-\niments, all retrieved paths are used for reasoning. The detailed retrieval algorithm can be found in\nAppendix A.3.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "paper_b2e26390ad4eb43ff4d03b5eb4e49037"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "逐题审阅目标独立性、分流合理性、拆分是否增添事实或丢任务",
+      "automatic": "路由数、校验通过、子查询数、调用数、Token与耗时；不是语义准确率",
+      "semantic": "Codex题面审阅，非独立人工；不使用答案来赋予方法技术关系",
+      "limit": "此24题均为跨论文设计，不能评估简单题误拆率；模型分流本身每题一次调用",
+      "latency": "wall time includes loading, route and decomposition in one request",
+      "negative_policy": "not applicable"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "题面子查询拆分；不运行检索或答案生成",
+      "controls": {
+        "prompt": "你是通用检索问题分流器，只看题面，不回答问题，不用外部知识补论文内容。\n判断是否存在多个可独立查证的证据目标，而非按长度、方法名数量判断复杂度。\ndecision 四选一：no_split=一个整体检索目标；rule=输入提供的确定性规则候选足以表示各自检索目标；llm=有多个目标且需理解指代、跨句归属或隐式描述才能拆；unclear=题面不足以确定安全拆分。\n比较题常需分别查证各对象；无方法名但明确要求找两类不同材料时也可以拆成描述性子查询，不猜测论文名。\n如 rule_candidate 为空不得选择 rule；非空也须检查是否漏重要目标。rule 时 queries 留空，程序采用规则候选。\nllm 时输出2至4个能独立检索的简短子查询，每个只包含题面已给的信息，可自然改写和消解明确指代。没有明确归属时不把列举的技术词按论文知识强行配对，可保留共同问题并把未归属文字放 unresolved。\nno_split或unclear时queries为空，保留原题。quotes是支撑判断或拆分的1至4条连续题面原文，必须逐字存在；reason简短解释目标结构，不能说明论文答案。unresolved记录尚未解决的题面歧义，可为空。所有子查询仅用于补充检索，原题始终保留。只输出JSON。",
+        "schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "decision": {
+              "type": "string",
+              "enum": [
+                "no_split",
+                "rule",
+                "llm",
+                "unclear"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            },
+            "queries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "quotes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unresolved": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "decision",
+            "reason",
+            "queries",
+            "quotes",
+            "unresolved"
+          ]
+        },
+        "options": {
+          "temperature": 0,
+          "seed": 42,
+          "num_ctx": 8192,
+          "num_predict": 1400
+        },
+        "rule": "explicit_possessive_parallel_v1",
+        "runtime_input": "question + generic rule candidates only; no catalog, references or case id",
+        "baseline": "Rule label = original question retained without splitting",
+        "treatment": "Local-LLM label = generic router: no_split / rule / llm / unclear; validation failure keeps original",
+        "original_question": "always retained; subqueries auxiliary",
+        "no_anchor": "not a gate; descriptive search targets allowed",
+        "generation": false,
+        "retrieval": false,
+        "embedding": false,
+        "reranking": false
+      },
+      "models": {
+        "local_router": "qwen2.5:14b",
+        "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6"
+      }
+    },
+    "result_display": {
+      "location": "Rule=保持原题 / Local-LLM=通用分流",
+      "fields": [
+        "分流决策与理由",
+        "规则候选",
+        "补充子查询",
+        "未解析内容",
+        "机械校验",
+        "逐题审阅",
+        "Token时延Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "decomposition_rubric": {
+      "primary": "逐题审阅目标独立性、分流合理性、拆分是否增添事实或丢任务",
+      "automatic": "路由数、校验通过、子查询数、调用数、Token与耗时；不是语义准确率",
+      "semantic": "Codex题面审阅，非独立人工；不使用答案来赋予方法技术关系",
+      "limit": "此24题均为跨论文设计，不能评估简单题误拆率；模型分流本身每题一次调用",
+      "latency": "wall time includes loading, route and decomposition in one request",
+      "negative_policy": "not applicable"
+    }
+  },
+  "metadata": {
+    "case_id": "R21",
+    "category": "cross",
+    "benchmark": "benchmark-query-router-v1",
+    "benchmark_sha256": "34d3724fe4a60c135383606c64caab5880aa2fa2746ab07774168f8e5d8d9595",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

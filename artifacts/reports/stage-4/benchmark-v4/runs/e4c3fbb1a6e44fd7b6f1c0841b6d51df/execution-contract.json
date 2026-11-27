@@ -1,0 +1,110 @@
+{
+  "benchmark_sha256": "2904af152a4bffd86119cbbf030d0ac658e909cc22d1abdf2b4d398f67d02451",
+  "script_sha256": "3fda792fb4ceea527961fa1f6eca2fc335412b64ff087bd5120f2f6c26dcf60b",
+  "evaluation_sha256": "cb3714275490177d79bf755ef156e14f485748dbea590a95b54ab769fde96e31",
+  "dataset_export_sha256": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+  "detail_export_sha256": "a88e734e7fbe7a0b1f977dfdbd88aeed27da5a952431da94e4a66bc74a9a2090",
+  "dataset_policy": {
+    "required_for_comparisons": true,
+    "platform": "LangSmith",
+    "answer_mode": "full",
+    "detail_profile": "per-question-details-v1",
+    "version_overrides": {
+      "benchmark-v1": {
+        "answer_mode": "summary",
+        "preserve_existing_exports": true
+      }
+    },
+    "dataset_versioning": "Freeze questions and reference outputs before each comparison; reuse a version only when its hash is unchanged.",
+    "experiments": "One experiment per arm per local run; link every output to its reference example; retain original trace URLs.",
+    "failure_policy": "Persist local dataset/results and pending sync status; retry upload without replaying model calls.",
+    "source_uploads": "For benchmark-v2 and later, display per-question source excerpts and locations, full answers, all ranked candidates, citations, graph paths, fact coverage, timings, usage and paired differences. Do not upload PDF binaries, embeddings, credentials or raw provider payloads.",
+    "authorization": "2026-11-15 用户要求本轮 40 道题的每题详细信息均显示在数据集中；旧 v1 保留原展示。"
+  },
+  "latency_boundary": "retrieval compute excludes audit upload, generation, and shared embedding batch; request wall time reported separately",
+  "runtime": {
+    "benchmark": "benchmark-v4",
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    },
+    "models": {
+      "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+      "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+      "CLOUD_BGE_PROVIDER": "cloudflare",
+      "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+      "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+      "LOCAL_RERANKER_DEVICE": "cuda",
+      "LOCAL_RERANKER_DTYPE": "float16",
+      "LOCAL_RERANKER_PERSISTENT": "true"
+    },
+    "endpoint_fingerprints": {
+      "DEEPSEEK_BASE_URL": "aebde9d32c41ca5aff41444d1ef2feaa0f3574a19195d60c588f826a6ea88c01",
+      "CLOUD_BGE_BASE_URL": "73dd98c51038dadb140c44d42e350a9ae3c52013d53336b34e055aa1bf12087d",
+      "CLOUDFLARE_ACCOUNT_ID": "8157dbe7227fcba3fcada3a5c46dc0a3a12f71bebb5b653de5256c0ae456e407",
+      "NEO4J_URI": "b1d4217b5d8c41b8b641a146d7facd744b01a415fe2ac0d943188a78e5f007f0"
+    },
+    "dependencies": {
+      "neo4j": "6.4.1",
+      "langsmith": "0.14.17",
+      "langgraph": "1.2.21",
+      "httpx": "0.28.1"
+    },
+    "code_sha256": {
+      "scripts/eval-stage4.py": "3fda792fb4ceea527961fa1f6eca2fc335412b64ff087bd5120f2f6c26dcf60b",
+      "src/papertech/evaluation_runtime.py": "d433b2ce3a6f189f698f4775275430e82cd8898df8c0fa8a015095506d3c1ccc",
+      "src/papertech/isolated_graph.py": "039d27009ec94003cfc6f25024ae2015ab7c12b27f9f7cfe5dc21979f1c41586",
+      "src/papertech/workflow.py": "6fe7b530e355f19886c34bd61c98046b6cd10598b74f94220dae63d64130964a",
+      "src/papertech/graph_store.py": "485c50edfbc99e26554d903b0f637ae4893ecf06168be34a767cd986c4d07476",
+      "src/papertech/retrieval.py": "ef2480079acc98095c86394ce6ae5bf894a7034a47d0d394cf584f871e41ae65",
+      "src/papertech/evidence_context.py": "b9bfe29885ffe4b82086a78572ffe4d031d3de9c497b0681aa732525a46f89f6",
+      "src/papertech/entity_aliases.py": "2725c08d7ca72f46c3bf7adbb3207eb75331f963a1998826bc6397e375699ea6",
+      "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+      "src/papertech/citations.py": "6465c41be136683a5ec723720820fca5c246c9365836914ca8967e5805175372",
+      "src/papertech/evaluation.py": "cb3714275490177d79bf755ef156e14f485748dbea590a95b54ab769fde96e31",
+      "src/papertech/evaluation_details.py": "a88e734e7fbe7a0b1f977dfdbd88aeed27da5a952431da94e4a66bc74a9a2090",
+      "src/papertech/evaluation_datasets.py": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+      "src/papertech/local_models.py": "62f465e7615a7208a8f4bfda6c9f4b545843e3115ef91768d47f5a7e787edddb",
+      "src/papertech/rerank_service.py": "156293246350d8b4a8c7bd23d45edb26f471d1bfe690480412edcf942617d693",
+      "scripts/rerank-service.py": "562927f8ebd62834e8aca53ae55a436eac4d82f39b66e1ad92b017f1b73facf5"
+    },
+    "controls": {
+      "arms": [
+        "Hybrid",
+        "Hybrid+Graph"
+      ],
+      "backend": "neo4j",
+      "graph_backend": "isolated_sqlite",
+      "fulltext_top": 20,
+      "dense_top": 20,
+      "fusion_max": 40,
+      "graph_candidates_max": 20,
+      "graph_seed_chunks": 12,
+      "graph_seed_entities": 40,
+      "graph_max_paths": 40,
+      "graph_hops": 2,
+      "graph_per_node": 8,
+      "evidence_max": 8,
+      "evidence_bytes": 6000,
+      "path_bytes": 1200,
+      "context_bytes": 7200,
+      "path_budget_mode": "additional",
+      "generation_max_tokens": 2048,
+      "thinking": "disabled",
+      "generation_requests_max": 80,
+      "sampling": "provider default; one sample per arm",
+      "treatment_scope": "graph candidates plus up to 1200 additional path bytes; not an equal actual input-token ablation",
+      "execution_order": "alternate which arm goes first",
+      "query_vector": "one shared Cloudflare batch",
+      "gold_exclusion": "question text only; reference tables and claim unit/path IDs denied by SQLite authorizer"
+    },
+    "latency": "retrieval compute excludes audit upload, generation, and shared embedding batch; request wall time reported separately",
+    "status": "frozen_before_execution"
+  },
+  "generation_sampling": "provider default, same payload configuration in both arms; one sample each; stochastic variance not estimated"
+}

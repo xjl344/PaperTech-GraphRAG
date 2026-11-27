@@ -1,0 +1,301 @@
+{
+  "id": "b8b6ba38-7bf9-56c7-877e-6c57e6d92e55",
+  "inputs": {
+    "question": "CuriousLLM（KGP-Mistral）采用什么底座模型与微调配置在 Follow-upQA 上训练？它在训练时间上相对原 KGP 的 T5 模型有何变化，并说明其 MDR-KG 段落编码器的训练思路。"
+  },
+  "outputs": {
+    "expected_answer": "CuriousLLM 以 Mistral-7B-Instruct-v0.2 为底座，用 next-token prediction 与 QLoRA（8-bit、rank=32、lr=1e-5、batch size=12，90%-5%-5% 划分）微调，在相同算力下较原 KGP 的 T5 减少 85% 训练时间；MDR-KG 用 BERT 段落编码器在 HotpotQA 上按 MDR 训练，给定初始段落预测后续支持段落，拉近共同支持段落距离并用负采样推远无关段落。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "HF04_qlora",
+        "answer_point": "CuriousLLM（KGP-Mistral）以 Mistral-7B-Instruct-v0.2 为底座，用 next-token prediction 与 QLoRA（8-bit、LoRA rank=32、lr=1e-5、batch size=12、90%-5%-5% 划分）在 Follow-upQA 上微调，同等算力下相比原 KGP 训练 T5 减少 85% 训练时间。",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "primary_chunk": "chunk_fb24ed864a9886ec8722f831391af3b7",
+        "pages": [
+          4,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_fb24ed864a9886ec8722f831391af3b7"
+        ]
+      },
+      {
+        "unit_id": "HF04_mdr",
+        "answer_point": "MDR-KG 的 BERT 段落编码器在 HotpotQA 上按 MDR 方法训练：给定初始检索段落预测后续支持段落，缩小共同回答问题的段落对距离并用负采样拉大无关段落距离。",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "primary_chunk": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "pages": [
+          3,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_69407b618c1969f701e74bd3cf523c95"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "H-F04",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "HF04_qlora",
+        "required_fact": "CuriousLLM（KGP-Mistral）以 Mistral-7B-Instruct-v0.2 为底座，用 next-token prediction 与 QLoRA（8-bit、LoRA rank=32、lr=1e-5、batch size=12、90%-5%-5% 划分）在 Follow-upQA 上微调，同等算力下相比原 KGP 训练 T5 减少 85% 训练时间。",
+        "primary_chunk": "chunk_fb24ed864a9886ec8722f831391af3b7",
+        "supporting_chunks": [
+          "chunk_fb24ed864a9886ec8722f831391af3b7"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "HF04_mdr",
+        "required_fact": "MDR-KG 的 BERT 段落编码器在 HotpotQA 上按 MDR 方法训练：给定初始检索段落预测后续支持段落，缩小共同回答问题的段落对距离并用负采样拉大无关段落距离。",
+        "primary_chunk": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "supporting_chunks": [
+          "chunk_69407b618c1969f701e74bd3cf523c95"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 1961,
+            "end_char": 3377,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1416,
+            "block_bboxes": [
+              [
+                70.593,
+                612.118,
+                291.043,
+                744.903
+              ],
+              [
+                70.866,
+                754.53,
+                234.952,
+                774.709
+              ],
+              [
+                305.804,
+                271.699,
+                526.22,
+                350.437
+              ],
+              [
+                305.804,
+                353.123,
+                526.318,
+                513.028
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "2d2f0a9bc4b1caf19c15836c37e4c11f1f8694580ba65190e9c97ff81ba1953a",
+        "section": "Methodology",
+        "text": "We use the Mistral-7B model (Jiang et al., 2023)\n2 as the backbone and fine-tune it on the Follow-\nupQA dataset with the objective of next-token pre-\ndiction. Specifically, for each sample in the dataset,\nas shown in Table 2, we concatenate the question,\nthe given passage, and the follow-up question. We\nemploy QLoRA (Dettmers et al., 2023) to train the\nmodel: we load the model at 8 bit precision and\nthen train a LoRA adapter using a LoRA rank of\n32, a learning rate of 10−5, and a batch size of 12.\n2https://huggingface.co/mistralai/\nMistral-7B-Instruct-v0.2\nThe training is implemented with a split between\nthe training validation test of 90% - 5% - 5%. Com-\npared to the time required to train an identical T5\nmodel in the original KGP framework, we reduce\nthe training time of our model by 85% using the\nsame computing resources.\nAfter generating a follow-up question at the cur-\nrent node in the KG, the question is compared\nagainst the neighboring passages of the node. We\nalso employ a pre-trained Multi-QA sentence trans-\nformer 3, which produces dense representations to\nminimize the semantic distance between the follow-\nup question and relevant passages. The search\nthrough KG is carried out using a breadth-first\nsearch strategy (BFS), as shown in Algorithm 1.\nThis iterative process continues until reaching a\npredefined budget or the model deems it has suffi-\ncient information to answer the query.\n"
+      },
+      {
+        "chunk_id": "chunk_69407b618c1969f701e74bd3cf523c95",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+        "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+        "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+        "page_start": 3,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 3,
+            "start_char": 2170,
+            "end_char": 3088,
+            "chunk_start_char": 0,
+            "chunk_end_char": 918,
+            "block_bboxes": [
+              [
+                305.782,
+                520.593,
+                526.225,
+                775.496
+              ],
+              [
+                294.911,
+                794.449,
+                300.366,
+                805.358
+              ]
+            ]
+          },
+          {
+            "pdf_page": 4,
+            "start_char": 0,
+            "end_char": 706,
+            "chunk_start_char": 919,
+            "chunk_end_char": 1625,
+            "block_bboxes": [
+              [
+                101.172,
+                72.192,
+                374.599,
+                117.873
+              ],
+              [
+                100.934,
+                96.461,
+                494.102,
+                189.564
+              ],
+              [
+                303.058,
+                144.327,
+                494.104,
+                177.674
+              ],
+              [
+                101.172,
+                192.143,
+                453.704,
+                213.694
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "9a63eb00322c9aa8cfdce79dd0439adaddd74d092e5a143a308220b4e1e3577b",
+        "section": "Methodology",
+        "text": "In the original KGP experiments, construct-\ning KG by multi-hop dense retriever (MDR-KG)\n(Wang et al., 2023) outperforms other KG con-\nstruction approaches, such as k-nearest neigh-\nbors (KNN) (Cunningham and Delany, 2021) and\nTF-IDF. Following the methodology for building\nMDR-KG , we employ the MDR training technique\n(Xiong et al., 2021) to develop a BERT-based pas-\nsage encoder using the HotpotQA dataset. This\nencoder is trained to predict subsequent supporting\npassages given an initial retrieved passage. The\ngoal is to minimize the distances between passage\npairs that are used together to answer questions\nin HotpotQA while simultaneously increasing the\ndistances between unrelated passages through neg-\native sampling. This training technique equips the\nencoder with reasoning capabilities, enabling it to\nunderstand the logical associations between differ-\nent passages. Finally, we construct our KGs by\n3\n\nExample 1\nExample 2\n(Input) Question:\n(Input) Question:\nIn what city is the university, for which Kim En-\nglish played college basketball, located?\nTina Charles and Maya Moore were teammates on\nthe UConn women’s team that won championships\nin what years?\n(Input) Given:\n(Input) Given:\nKim English played college basketball for the Uni-\nversity of Missouri before being selected by the\nDetroit Pistons with the 44th overall pick in the\n2012 NBA draft.\nIn 2009 and 2010, Tina Charles and her teammate\nMaya Moore led the Connecticut Huskies to two\nundefeated national championships.\n(Ground Truth) Follow-up Question:\n(Ground Truth) Follow-up Question:\nIn which city is the University of Missouri located?\nNA\n"
+      }
+    ],
+    "required_source_papers": [
+      "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对方法归属、实体角色、实验设置与方向；未见题集须独立人工/代理语义判读。",
+      "uncertainty": "反例题必须直接纠正错误前提或拒答越界实体，不得迎合题干伪前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": true,
+      "planned_output": "完整模型回答与引用",
+      "controls": {
+        "arms": [
+          "Legacy-Hybrid",
+          "Production-Final"
+        ],
+        "arm_configs": {
+          "Legacy-Hybrid": {
+            "graph_enabled": false,
+            "graph_query_aware": false,
+            "use_method_cards": false,
+            "path_budget": 0,
+            "rerank_contextual": false,
+            "rerank_windowed": false,
+            "evidence_budget": 6000,
+            "evidence_max": 8,
+            "source_policy": "named_first",
+            "score_policy": "fixed",
+            "reservation_policy": "legacy",
+            "citation_protocol": "source-choice-v1",
+            "query_planner": false,
+            "premise_check": false
+          },
+          "Production-Final": {
+            "graph_enabled": true,
+            "graph_query_aware": true,
+            "use_method_cards": true,
+            "path_budget": 1200,
+            "rerank_contextual": true,
+            "rerank_windowed": false,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "subquery_balanced",
+            "citation_protocol": "source-choice-v3",
+            "query_planner": true,
+            "premise_check": true
+          }
+        },
+        "backend": "neo4j",
+        "shared_q00_vectors": "identical Cloudflare Q00 query embeddings across both arms; Production-Final additionally embeds planned subqueries",
+        "execution_order": "alternate arm order by case index",
+        "gold_exclusion": "question text only; gold pools and reference tables isolated"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Legacy-Hybrid / Production-Final Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "H-F04",
+    "category": "fact",
+    "benchmark": "benchmark-holdout-v1",
+    "benchmark_sha256": "3b871c53c664e26d9190ec6c102290b4991ce068960ce8572ee5a9305c85dfe6",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

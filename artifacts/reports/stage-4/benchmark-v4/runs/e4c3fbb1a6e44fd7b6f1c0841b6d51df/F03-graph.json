@@ -1,0 +1,3151 @@
+{
+  "request_id": "6598f59e-942e-4fa2-b269-b104da94c1e4",
+  "status": "ok",
+  "answer": "ToG-R 是 ToG 的变体，证据为『its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning instead of LLM-based entity pruning』[chunk_91a4a2e6943ad6a8074492d3f7229692]；另一处说明『we use the random beam search instead of the LLM-constrained beam search in ToG for entity prune, referred to as random prune』[chunk_aa272a627cf75d5bf907fe3a860356c4]。因此替换的是基于 LLM 的实体剪枝（LLM-based entity pruning / LLM-constrained beam search），改为随机实体剪枝（random prune / random beam search）[chunk_91a4a2e6943ad6a8074492d3f7229692][chunk_aa272a627cf75d5bf907fe3a860356c4]。在问题所述的 ToG 与 ToG-R 公式上，原文分别给出 ToG『requires 2ND + D + 1 LLM calls in total』与 ToG-R『only calls LLM for ND + D + 1 times』[chunk_91a4a2e6943ad6a8074492d3f7229692]；另有表述为 ToG『needs at most 2ND+D+1 times』、ToG-R『needs at most ND + D + 1 times』[chunk_2a773898d4837d44bc3ec29b329f1825]。两者在相同 N、D 下的差为 (2ND+D+1) − (ND+D+1) = ND 次 LLM 调用[chunk_91a4a2e6943ad6a8074492d3f7229692][chunk_2a773898d4837d44bc3ec29b329f1825]。",
+  "citations": [
+    {
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 22,
+      "page_end": 22,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 22,
+          "start_char": 662,
+          "end_char": 2113,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1451,
+          "block_bboxes": [
+            [
+              107.641,
+              238.664,
+              505.247,
+              402.282
+            ]
+          ]
+        }
+      ],
+      "quote": "ToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.95828914642334
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.799933910369873
+        },
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.9555686116218567,
+      "context_bytes": 1827
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1493,
+          "end_char": 2914,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              107.691,
+              291.768,
+              505.746,
+              323.653
+            ],
+            [
+              108.0,
+              318.617,
+              504.003,
+              356.541
+            ],
+            [
+              108.0,
+              346.529,
+              503.999,
+              368.751
+            ],
+            [
+              108.0,
+              358.694,
+              505.246,
+              382.28
+            ],
+            [
+              260.981,
+              370.81,
+              297.016,
+              384.221
+            ],
+            [
+              107.691,
+              372.327,
+              504.004,
+              415.159
+            ],
+            [
+              108.0,
+              422.208,
+              504.343,
+              464.972
+            ],
+            [
+              108.299,
+              482.573,
+              200.083,
+              494.529
+            ]
+          ]
+        }
+      ],
+      "quote": "n=1 instead of triple-based reasoning paths. ToG-R sequentially\nperforms relation search, relation prune and entity search in each iteration, which is the same as ToG.\nThen ToG-R performs the reasoning step based on all candidate reasoning paths ending with ED\ncand\nobtained by entity search. If the LLM determines that the retrieved candidate reasoning paths do not\ncontain enough information for the LLM to answer the question, we randomly sample N entities\nfrom the candidate entities ED\ncand and continue to the next iteration. Assuming that entities in each\nentity set ED\ncand,n probably belong to the same entity class and have similar neighboring relations,\nthe results of pruning the entity set {ED\ncand,n}N\nn=1 might have little impact on the following relation\nexploration. Thus, we use the random beam search instead of the LLM-constrained beam search in",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.108687400817871
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8031730651855469
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.8618873357772827,
+      "context_bytes": 1793
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1493,
+          "end_char": 2914,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              107.691,
+              291.768,
+              505.746,
+              323.653
+            ],
+            [
+              108.0,
+              318.617,
+              504.003,
+              356.541
+            ],
+            [
+              108.0,
+              346.529,
+              503.999,
+              368.751
+            ],
+            [
+              108.0,
+              358.694,
+              505.246,
+              382.28
+            ],
+            [
+              260.981,
+              370.81,
+              297.016,
+              384.221
+            ],
+            [
+              107.691,
+              372.327,
+              504.004,
+              415.159
+            ],
+            [
+              108.0,
+              422.208,
+              504.343,
+              464.972
+            ],
+            [
+              108.299,
+              482.573,
+              200.083,
+              494.529
+            ]
+          ]
+        }
+      ],
+      "quote": "ToG for entity prune, referred to as random prune. Algorithm 1 and 2 show the implementation\ndetails of the ToG and ToG-R. ToG-R needs at most ND + D + 1 calls to the LLM.\nCompared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.\n3",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.108687400817871
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8031730651855469
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.8618873357772827,
+      "context_bytes": 1793
+    },
+    {
+      "chunk_id": "chunk_2a773898d4837d44bc3ec29b329f1825",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 21,
+      "page_end": 22,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 21,
+          "start_char": 2500,
+          "end_char": 3730,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1230,
+          "block_bboxes": [
+            [
+              108.0,
+              571.89,
+              504.001,
+              636.878
+            ],
+            [
+              108.0,
+              650.561,
+              505.0,
+              704.373
+            ],
+            [
+              108.0,
+              711.117,
+              505.249,
+              732.269
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 22,
+          "start_char": 0,
+          "end_char": 337,
+          "chunk_start_char": 1231,
+          "chunk_end_char": 1568,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              129.03,
+              82.376,
+              482.971,
+              103.297
+            ],
+            [
+              182.509,
+              114.654,
+              429.183,
+              124.617
+            ],
+            [
+              161.817,
+              137.967,
+              450.184,
+              158.889
+            ],
+            [
+              182.509,
+              170.246,
+              429.183,
+              180.209
+            ]
+          ]
+        }
+      ],
+      "quote": "mainly depends on how many times calling LLM. For each question, ToG needs at most 2ND+D+1\ntimes. Meanwhile, ToG-R needs at most ND + D + 1 times as mentioned in Section 2.\nGiven the beam search width N and maximal reasoning depth D, ToG’s initialize the search from\nthe entity mostly aligning with the keyword in question. In each iterative step of the reasoning path,\n21\n\nPublished as a conference paper at ICLR 2024\nDataset\nCWQ\nWebQSP\nGrailQA\nQALD10-EN\nSimpleQuestion\nAverage LLM Calls\n14.3\n11.2\n10.4\n11.4\n8.7\nTable 7: Average Number of LLM Calls per Question (Part 1)\nDataset\nWebQuestion\nT-REx\nZero-Shot RE\nCreak\nAverage LLM Calls\n10.5\n7.7\n7.6\n8.0\nTable 8: Average Number of LLM Calls per Question (Part 2)",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.633162498474121
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.796663761138916
+        }
+      ],
+      "rerank_score": 0.5723044872283936,
+      "context_bytes": 1965
+    }
+  ],
+  "evidence": [
+    {
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 22,
+      "page_end": 22,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 22,
+          "start_char": 662,
+          "end_char": 2113,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1451,
+          "block_bboxes": [
+            [
+              107.641,
+              238.664,
+              505.247,
+              402.282
+            ]
+          ]
+        }
+      ],
+      "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.95828914642334
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.799933910369873
+        },
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.9555686116218567,
+      "context_bytes": 1827
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 1493,
+          "end_char": 2914,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1421,
+          "block_bboxes": [
+            [
+              107.691,
+              291.768,
+              505.746,
+              323.653
+            ],
+            [
+              108.0,
+              318.617,
+              504.003,
+              356.541
+            ],
+            [
+              108.0,
+              346.529,
+              503.999,
+              368.751
+            ],
+            [
+              108.0,
+              358.694,
+              505.246,
+              382.28
+            ],
+            [
+              260.981,
+              370.81,
+              297.016,
+              384.221
+            ],
+            [
+              107.691,
+              372.327,
+              504.004,
+              415.159
+            ],
+            [
+              108.0,
+              422.208,
+              504.343,
+              464.972
+            ],
+            [
+              108.299,
+              482.573,
+              200.083,
+              494.529
+            ]
+          ]
+        }
+      ],
+      "quote": "n=1 instead of triple-based reasoning paths. ToG-R sequentially\nperforms relation search, relation prune and entity search in each iteration, which is the same as ToG.\nThen ToG-R performs the reasoning step based on all candidate reasoning paths ending with ED\ncand\nobtained by entity search. If the LLM determines that the retrieved candidate reasoning paths do not\ncontain enough information for the LLM to answer the question, we randomly sample N entities\nfrom the candidate entities ED\ncand and continue to the next iteration. Assuming that entities in each\nentity set ED\ncand,n probably belong to the same entity class and have similar neighboring relations,\nthe results of pruning the entity set {ED\ncand,n}N\nn=1 might have little impact on the following relation\nexploration. Thus, we use the random beam search instead of the LLM-constrained beam search in\nToG for entity prune, referred to as random prune. Algorithm 1 and 2 show the implementation\ndetails of the ToG and ToG-R. ToG-R needs at most ND + D + 1 calls to the LLM.\nCompared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.\n3\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.108687400817871
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8031730651855469
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.8618873357772827,
+      "context_bytes": 1793
+    },
+    {
+      "chunk_id": "chunk_2a773898d4837d44bc3ec29b329f1825",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 21,
+      "page_end": 22,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 21,
+          "start_char": 2500,
+          "end_char": 3730,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1230,
+          "block_bboxes": [
+            [
+              108.0,
+              571.89,
+              504.001,
+              636.878
+            ],
+            [
+              108.0,
+              650.561,
+              505.0,
+              704.373
+            ],
+            [
+              108.0,
+              711.117,
+              505.249,
+              732.269
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 22,
+          "start_char": 0,
+          "end_char": 337,
+          "chunk_start_char": 1231,
+          "chunk_end_char": 1568,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              129.03,
+              82.376,
+              482.971,
+              103.297
+            ],
+            [
+              182.509,
+              114.654,
+              429.183,
+              124.617
+            ],
+            [
+              161.817,
+              137.967,
+              450.184,
+              158.889
+            ],
+            [
+              182.509,
+              170.246,
+              429.183,
+              180.209
+            ]
+          ]
+        }
+      ],
+      "quote": "Solution 2\nReducing computational complexity from O(ND) to O(D) by unifying the prompts in\nthe same pruning step. Another solution on speeding up the pruning step is to employ the LLM at\nonce to score all components of N candidate sets for obtaining top-N candidates, instead of calling\nthe LLM N times to score N candidate sets separately. Through this solution, either entity pruning\nstep or relation pruning step only need 1 LLM call for each iteration. Thus, the maximum number of\nLLM calls per question needed for ToG and ToG-R would drop to 2D + D + 1 and D + D + 1.\nSolution 3\nOptimizing pruning step to make the actual calls of LLMs much less than the previously\nestimated 2ND + D + 1 and closer to some common prompting methods such as CoT-SC. For ToG\nand other LLM-based methods, the computational time (cost or complexity) in the inference phase\nmainly depends on how many times calling LLM. For each question, ToG needs at most 2ND+D+1\ntimes. Meanwhile, ToG-R needs at most ND + D + 1 times as mentioned in Section 2.\nGiven the beam search width N and maximal reasoning depth D, ToG’s initialize the search from\nthe entity mostly aligning with the keyword in question. In each iterative step of the reasoning path,\n21\n\nPublished as a conference paper at ICLR 2024\nDataset\nCWQ\nWebQSP\nGrailQA\nQALD10-EN\nSimpleQuestion\nAverage LLM Calls\n14.3\n11.2\n10.4\n11.4\n8.7\nTable 7: Average Number of LLM Calls per Question (Part 1)\nDataset\nWebQuestion\nT-REx\nZero-Shot RE\nCreak\nAverage LLM Calls\n10.5\n7.7\n7.6\n8.0\nTable 8: Average Number of LLM Calls per Question (Part 2)\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.633162498474121
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.796663761138916
+        }
+      ],
+      "rerank_score": 0.5723044872283936,
+      "context_bytes": 1965
+    },
+    {
+      "chunk_id": "chunk_0955d7e5f763e232f41cbeffa1f0b450",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 30,
+      "page_end": 30,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 30,
+          "start_char": 358,
+          "end_char": 368,
+          "chunk_start_char": 0,
+          "chunk_end_char": 10,
+          "block_bboxes": [
+            [
+              108.249,
+              273.075,
+              164.09,
+              283.038
+            ]
+          ]
+        }
+      ],
+      "quote": "E.4\nTOG-R\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 3.502728223800659
+        }
+      ],
+      "rerank_score": 0.10338596254587173,
+      "context_bytes": 293
+    }
+  ],
+  "graph_paths": [
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "subject": "ToG-R",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "48ef57a19007c1fa2342a8966526bef9e3044108e115ac4580a9d51189da2663",
+          "name": "random entity pruning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "9e5fb4131bd7d344d6a550f2503f5648d59e57aedff63b70be98d69330bd1915",
+          "subject": "ToG-R",
+          "object": "random entity pruning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "9e5fb4131bd7d344d6a550f2503f5648d59e57aedff63b70be98d69330bd1915",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "f8f9e32d61978878186cc05876e9ab73c5f296307cf450407657c6a03ad7fa3c",
+          "name": "ND + D + 1 LLM calls",
+          "type": "Formula"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "HAS_CALL_BOUND",
+          "claim_id": "ad58dff47dc5390fa52aeea64422049635c0b90a49e843835cef72480ab21e46",
+          "subject": "ToG-R",
+          "object": "ND + D + 1 LLM calls"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ad58dff47dc5390fa52aeea64422049635c0b90a49e843835cef72480ab21e46",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "HAS_CALL_BOUND"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "d4b8d1bd345d2cac62909fcdcf9098f75f98b5638b32682bd60bc53d0147d6ed",
+          "name": "reduced risk with unfamiliar intermediate entities",
+          "type": "Benefit"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "CLAIMS_BENEFIT",
+          "claim_id": "b4bcd8105b5a3b01cf1a7dde8033862bbe057c0f21354fec3cd2530927c41b4e",
+          "subject": "ToG-R",
+          "object": "reduced risk with unfamiliar intermediate entities"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "b4bcd8105b5a3b01cf1a7dde8033862bbe057c0f21354fec3cd2530927c41b4e",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "CLAIMS_BENEFIT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "subject": "ToG-R",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "c3d53de4d956ea8f23236ad58b26795e2989cde2e5d5e3d3e4de53806a60e613",
+          "name": "lower LLM-call cost and reasoning time",
+          "type": "Benefit"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "CLAIMS_BENEFIT",
+          "claim_id": "f3ab4e60b750841f890f3b19b01d437195e87c3e9eb18d27ed53c88a0c61da2f",
+          "subject": "ToG-R",
+          "object": "lower LLM-call cost and reasoning time"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "f3ab4e60b750841f890f3b19b01d437195e87c3e9eb18d27ed53c88a0c61da2f",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "CLAIMS_BENEFIT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "ea9998a8062ab427a29661d1fbecb7c54fd39fab9f9a0a43faf08f3d47d0f170",
+          "name": "WebQSP",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "subject": "ToG-R",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "161fe1e866f5ec96fd901c1f287aa00a0a7cce993204a722393c9ebe84e74889",
+          "name": "2ND + D + 1 LLM calls",
+          "type": "Formula"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "HAS_CALL_BOUND",
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "subject": "ToG",
+          "object": "2ND + D + 1 LLM calls"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON"
+        },
+        {
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "HAS_CALL_BOUND"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "31f23346ac35023be1b02a4b68e497e9bcba2826c8ba4fb65a3afa748cb96178",
+          "name": "LLM-based entity pruning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "subject": "ToG",
+          "object": "LLM-based entity pruning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON"
+        },
+        {
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "75eba7e5705a90cbe1dbfb64c7fe3f1003919a7e66f826dd0eb5acc11c2b9805",
+          "name": "errors or uncertainties in ToG answers",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "subject": "ToG",
+          "object": "errors or uncertainties in ToG answers"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON"
+        },
+        {
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+          "page_start": 9,
+          "page_end": 9,
+          "quote": "errors or uncertainties in ToG answers are discovered by human users/experts or other LLMs, ToG\nhas the ability to trace back and examine the reasoning path, find suspicious triples with errors, and\ncorrect them.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "f8202af81480878a83f00728cd7e5a52679353c2710b30f364ce05c08071e761",
+          "name": "CWQ dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "subject": "ToG",
+          "object": "CWQ dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON"
+        },
+        {
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+          "page_start": 25,
+          "page_end": 25,
+          "quote": "In this section, we present a case analysis of the CWQ dataset to evaluate the utility and limitations\nof the ToG.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "12b4b024220782fe0738eeb63983706d165263ad9cb3caba31f3fde30c55a7a5",
+          "name": "training-free",
+          "type": "TrainingMode"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "USES_TRAINING_MODE",
+          "claim_id": "216d292d82e3ca363fc4cebe10d5f645ad370d0db6bb931db424fb595d83dc4a",
+          "subject": "ToG",
+          "object": "training-free"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON"
+        },
+        {
+          "claim_id": "216d292d82e3ca363fc4cebe10d5f645ad370d0db6bb931db424fb595d83dc4a",
+          "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following\nadvantages of ToG: 1) compared with LLMs, ToG has better deep reasoning power;\n2) ToG has the ability of knowledge traceability and knowledge correctability by\nleveraging LLMs reasoning and expert feedback; 3) ToG provides a flexible plug-\nand-play framework for different LLMs, KGs and prompting strategies without\nany additional training cost; 4) the performance of ToG with small LLM models\ncould exceed large LLM such as GPT-4 in certain scenarios and this reduces the\ncost of LLM deployment and application. As a training-free method with lower\ncomputational cost and better generality, ToG achieves overall SOTA in 6 out of\n9 datasets where most previous SOTAs rely on additional training. Our code is\npublicly available at https://github.com/IDEA-FinAI/ToG.\n1\n",
+          "predicate": "USES_TRAINING_MODE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "161fe1e866f5ec96fd901c1f287aa00a0a7cce993204a722393c9ebe84e74889",
+          "name": "2ND + D + 1 LLM calls",
+          "type": "Formula"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "HAS_CALL_BOUND",
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "subject": "ToG",
+          "object": "2ND + D + 1 LLM calls"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "HAS_CALL_BOUND"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "31f23346ac35023be1b02a4b68e497e9bcba2826c8ba4fb65a3afa748cb96178",
+          "name": "LLM-based entity pruning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "subject": "ToG",
+          "object": "LLM-based entity pruning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "75eba7e5705a90cbe1dbfb64c7fe3f1003919a7e66f826dd0eb5acc11c2b9805",
+          "name": "errors or uncertainties in ToG answers",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "subject": "ToG",
+          "object": "errors or uncertainties in ToG answers"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+          "page_start": 9,
+          "page_end": 9,
+          "quote": "errors or uncertainties in ToG answers are discovered by human users/experts or other LLMs, ToG\nhas the ability to trace back and examine the reasoning path, find suspicious triples with errors, and\ncorrect them.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "f8202af81480878a83f00728cd7e5a52679353c2710b30f364ce05c08071e761",
+          "name": "CWQ dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "subject": "ToG",
+          "object": "CWQ dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+          "page_start": 25,
+          "page_end": 25,
+          "quote": "In this section, we present a case analysis of the CWQ dataset to evaluate the utility and limitations\nof the ToG.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "12b4b024220782fe0738eeb63983706d165263ad9cb3caba31f3fde30c55a7a5",
+          "name": "training-free",
+          "type": "TrainingMode"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "USES_TRAINING_MODE",
+          "claim_id": "216d292d82e3ca363fc4cebe10d5f645ad370d0db6bb931db424fb595d83dc4a",
+          "subject": "ToG",
+          "object": "training-free"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        },
+        {
+          "claim_id": "216d292d82e3ca363fc4cebe10d5f645ad370d0db6bb931db424fb595d83dc4a",
+          "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following\nadvantages of ToG: 1) compared with LLMs, ToG has better deep reasoning power;\n2) ToG has the ability of knowledge traceability and knowledge correctability by\nleveraging LLMs reasoning and expert feedback; 3) ToG provides a flexible plug-\nand-play framework for different LLMs, KGs and prompting strategies without\nany additional training cost; 4) the performance of ToG with small LLM models\ncould exceed large LLM such as GPT-4 in certain scenarios and this reduces the\ncost of LLM deployment and application. As a training-free method with lower\ncomputational cost and better generality, ToG achieves overall SOTA in 6 out of\n9 datasets where most previous SOTAs rely on additional training. Our code is\npublicly available at https://github.com/IDEA-FinAI/ToG.\n1\n",
+          "predicate": "USES_TRAINING_MODE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "161fe1e866f5ec96fd901c1f287aa00a0a7cce993204a722393c9ebe84e74889",
+          "name": "2ND + D + 1 LLM calls",
+          "type": "Formula"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "HAS_CALL_BOUND",
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "subject": "ToG",
+          "object": "2ND + D + 1 LLM calls"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH"
+        },
+        {
+          "claim_id": "7b9ff96b33c2d4cb18e46efae0f396b49a5fccced25dcf0f17668bebd85c96a3",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "HAS_CALL_BOUND"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "31f23346ac35023be1b02a4b68e497e9bcba2826c8ba4fb65a3afa748cb96178",
+          "name": "LLM-based entity pruning",
+          "type": "Component"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "USES_COMPONENT",
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "subject": "ToG",
+          "object": "LLM-based entity pruning"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH"
+        },
+        {
+          "claim_id": "c76e829ddd99a0d334dc2e14ffdc90ae3b2ac84c8533573796cdcdef30e3f21c",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "USES_COMPONENT"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "75eba7e5705a90cbe1dbfb64c7fe3f1003919a7e66f826dd0eb5acc11c2b9805",
+          "name": "errors or uncertainties in ToG answers",
+          "type": "Problem"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "ADDRESSES",
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "subject": "ToG",
+          "object": "errors or uncertainties in ToG answers"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH"
+        },
+        {
+          "claim_id": "026b4ef21c1070fa44cd9c7c1e47b1ddc64d13f322ad566651a2c5255e44d716",
+          "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+          "page_start": 9,
+          "page_end": 9,
+          "quote": "errors or uncertainties in ToG answers are discovered by human users/experts or other LLMs, ToG\nhas the ability to trace back and examine the reasoning path, find suspicious triples with errors, and\ncorrect them.",
+          "predicate": "ADDRESSES"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "f8202af81480878a83f00728cd7e5a52679353c2710b30f364ce05c08071e761",
+          "name": "CWQ dataset",
+          "type": "Dataset"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "subject": "ToG",
+          "object": "CWQ dataset"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH"
+        },
+        {
+          "claim_id": "06d95b0daee0dad62500c382fef2a64e4af88e1a378573f19ca4a18914ceaeaf",
+          "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+          "page_start": 25,
+          "page_end": 25,
+          "quote": "In this section, we present a case analysis of the CWQ dataset to evaluate the utility and limitations\nof the ToG.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        },
+        {
+          "id": "12b4b024220782fe0738eeb63983706d165263ad9cb3caba31f3fde30c55a7a5",
+          "name": "training-free",
+          "type": "TrainingMode"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "COMPARES_WITH",
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "subject": "ToG-R",
+          "object": "ToG"
+        },
+        {
+          "predicate": "USES_TRAINING_MODE",
+          "claim_id": "216d292d82e3ca363fc4cebe10d5f645ad370d0db6bb931db424fb595d83dc4a",
+          "subject": "ToG",
+          "object": "training-free"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ee3feee413c8af4edb8441c34697318a8caa62eddabc16094b5b4b0acae18e60",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.",
+          "predicate": "COMPARES_WITH"
+        },
+        {
+          "claim_id": "216d292d82e3ca363fc4cebe10d5f645ad370d0db6bb931db424fb595d83dc4a",
+          "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+          "page_start": 1,
+          "page_end": 1,
+          "quote": "ABSTRACT\nAlthough large language models (LLMs) have achieved significant success in vari-\nous tasks, they often struggle with hallucination problems, especially in scenarios\nrequiring deep and responsible reasoning. These issues could be partially addressed\nby introducing external knowledge graphs (KG) in LLM reasoning. In this paper,\nwe propose a new LLM-KG integrating paradigm “LLM ⊗KG” which treats the\nLLM as an agent to interactively explore related entities and relations on KGs\nand perform reasoning based on the retrieved knowledge. We further implement\nthis paradigm by introducing a new approach called Think-on-Graph (ToG), in\nwhich the LLM agent iteratively executes beam search on KG, discovers the most\npromising reasoning paths, and returns the most likely reasoning results. We use\na number of well-designed experiments to examine and illustrate the following\nadvantages of ToG: 1) compared with LLMs, ToG has better deep reasoning power;\n2) ToG has the ability of knowledge traceability and knowledge correctability by\nleveraging LLMs reasoning and expert feedback; 3) ToG provides a flexible plug-\nand-play framework for different LLMs, KGs and prompting strategies without\nany additional training cost; 4) the performance of ToG with small LLM models\ncould exceed large LLM such as GPT-4 in certain scenarios and this reduces the\ncost of LLM deployment and application. As a training-free method with lower\ncomputational cost and better generality, ToG achieves overall SOTA in 6 out of\n9 datasets where most previous SOTAs rely on additional training. Our code is\npublicly available at https://github.com/IDEA-FinAI/ToG.\n1\n",
+          "predicate": "USES_TRAINING_MODE"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "ea9998a8062ab427a29661d1fbecb7c54fd39fab9f9a0a43faf08f3d47d0f170",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "fc2c2aae9edc49b2a8cb8d1de2e71db25e87711eb7fc8ec4e76ad873fc1507d9",
+          "name": "ToG-2",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "subject": "ToG-R",
+          "object": "WebQSP"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "29ee4b1fd76d8a815dbe72c3fa8907e8c419844e86a810e5ecbefc50c0e9cd74",
+          "subject": "ToG-2",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "29ee4b1fd76d8a815dbe72c3fa8907e8c419844e86a810e5ecbefc50c0e9cd74",
+          "chunk_id": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+          "page_start": 6,
+          "page_end": 6,
+          "quote": "EXPERIMENTS\n4.1\nDATASETS AND METRICS\nWe evaluated our method on different knowledge-intensive reasoning benchmark datasets, including\ntwo multi-hop KBQA datasets WebQSP (Yih et al., 2016) and QALD10-en (Usbeck et al., 2023), a\nmulti-hop complex document QA dataset AdvHotpotQA (Ye & Durrett, 2022) which is a challeng-\ning subset of HotpotQA (Yang et al., 2018), a slot filling dataset Zero-Shot RE(Petroni et al., 2021),\nand two fact verification dataset FEVER (Thorne et al., 2018) and Creak (Onoe et al., 2021). The\nevaluation metric for FEVER and Creak is Accuracy (Acc.), while the metric for other datasets is\nExact Match (EM). Recall and F1 scores are not used since knowledge sources are not limited to\ndocument databases. Following previous work (Li et al., 2024c), full Wikipedia and Wikidata are\nused as unstructured and structured knowledge sources for all of these datasets. Compared to the\ndistractor setting, this full Wiki setting makes the retrieval process more challenging and can better\nevaluate the effectiveness of various methods on knowledge reasoning tasks.\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "ea9998a8062ab427a29661d1fbecb7c54fd39fab9f9a0a43faf08f3d47d0f170",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "subject": "ToG-R",
+          "object": "WebQSP"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "subject": "ToG",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "4837f8b33dc40cbba3075a547257d53a9a3f9913cfd8fefda5098df061b40ad1",
+          "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+          "page_start": 7,
+          "page_end": 7,
+          "quote": "we evaluate how different backbone models affect its\nperformance on two datasets CWQ and WebQSP.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "ea9998a8062ab427a29661d1fbecb7c54fd39fab9f9a0a43faf08f3d47d0f170",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "fc2c2aae9edc49b2a8cb8d1de2e71db25e87711eb7fc8ec4e76ad873fc1507d9",
+          "name": "ToG-2",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "subject": "ToG-R",
+          "object": "WebQSP"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "6d41bdfd306a5ad206fa261fc38937de56ad991460c89da2593c04671c59d77b",
+          "subject": "ToG-2",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "6d41bdfd306a5ad206fa261fc38937de56ad991460c89da2593c04671c59d77b",
+          "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9",
+          "page_start": 19,
+          "page_end": 19,
+          "quote": "For the WebQSP, Zero-Shot-RE, QALD-10-en, and Creak datasets, we computed pairwise t-tests\ncomparing ToG-2 with CoK and ToG as in Table 12.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "ea9998a8062ab427a29661d1fbecb7c54fd39fab9f9a0a43faf08f3d47d0f170",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "subject": "ToG-R",
+          "object": "WebQSP"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "b8e7abb632be1f36528622b4ba13dab725e432e87e6d6c8f7f25ed355871fe02",
+          "subject": "ToG",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "b8e7abb632be1f36528622b4ba13dab725e432e87e6d6c8f7f25ed355871fe02",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 10: The explored path overlap ratio of ToG on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        },
+        {
+          "id": "ea9998a8062ab427a29661d1fbecb7c54fd39fab9f9a0a43faf08f3d47d0f170",
+          "name": "WebQSP",
+          "type": "Dataset"
+        },
+        {
+          "id": "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10",
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "subject": "ToG-R",
+          "object": "WebQSP"
+        },
+        {
+          "predicate": "EVALUATED_ON",
+          "claim_id": "d1893af0d70297959164c25ed4351fd379785f8d18ca3d90b3e471faf5369f2b",
+          "subject": "ToG",
+          "object": "WebQSP"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "2fb09a10eeab06b24df6e5a1436e2d5177a304b5822f4c8f37955590e25217f0",
+          "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+          "page_start": 19,
+          "page_end": 20,
+          "quote": "Figure 11: The path overlap ratio of ToG-R on CWQ, WebQSP, and GrailQA datasets.",
+          "predicate": "EVALUATED_ON"
+        },
+        {
+          "claim_id": "d1893af0d70297959164c25ed4351fd379785f8d18ca3d90b3e471faf5369f2b",
+          "chunk_id": "chunk_deb9eea46e529705dffdd1103729c44c",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "EXPERIMENTS\n3.1\nEXPERIMENTAL DESIGN\n3.1.1\nDATASETS AND EVALUATION METRICS\nIn order to test ToG’s ability on multi-hop knowledge-intensive reasoning tasks, we evaluate ToG\non five KBQA datasets (4 Multi-hop and 1 Single-hop): CWQ (Talmor & Berant, 2018), WebQSP\n(Yih et al., 2016), GrailQA (Gu et al., 2021), QALD10-en (Perevalov et al., 2022), Simple Questions\n(Bordes et al., 2015). Moreover, in order to examine ToG on more generic tasks, we also prepare\none open-domain QA dataset: WebQuestions (Berant et al., 2013); two slot filling datasets: T-REx\n(ElSahar et al., 2018) and Zero-Shot RE (Petroni et al., 2021); and one fact-checking dataset: Creak\n(Onoe et al., 2021). Note that, for two big datasets GrailQA and Simple Questions, we only randomly\nselected 1,000 samples each for testing in order to save computational cost. For all datasets, exact\nmatch accuracy (Hits@1) is used as our evaluation metric following previous works (Li et al., 2023c;\nBaek et al., 2023b; Jiang et al., 2023; Li et al., 2023a).\n3.1.2\nMETHODS SELECTED FOR COMPARISON\nWe compare with standard prompting (IO prompt) (Brown et al., 2020b), Chain-of-Thought prompting\n(CoT prompt) (Wei et al., 2022), and Self-Consistency (Wang et al., 2023c) with 6 in-context\nexemplars and \"step-by-step\" reasoning chains. Moreover, for each dataset, we pick previous state-of-\nthe-art (SOTA) works for comparison. We notice that fine-tuning methods trained specifically on\n5\n",
+          "predicate": "EVALUATED_ON"
+        }
+      ]
+    }
+  ],
+  "generation_paths": [
+    {
+      "nodes": [
+        {
+          "name": "ToG-R",
+          "type": "Method"
+        },
+        {
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "IMPROVES_UPON",
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "subject": "ToG-R",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+          "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+          "page_start": 5,
+          "page_end": 5,
+          "quote": "Compared to ToG, ToG-R offers two key benefits: 1) It eliminates the need for the process of pruning\nentities using the LLM, thereby reducing the overall cost and reasoning time. 2) ToG-R primarily\nemphasizes the literal information of relations, mitigating the risk of misguided reasoning when the\nliteral information of intermediate entities is missing or unfamiliar to the LLM.",
+          "predicate": "IMPROVES_UPON"
+        }
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "name": "ToG-R",
+          "type": "Method"
+        },
+        {
+          "name": "ToG",
+          "type": "Method"
+        }
+      ],
+      "edges": [
+        {
+          "predicate": "VARIANT_OF",
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "subject": "ToG-R",
+          "object": "ToG"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+          "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+          "page_start": 22,
+          "page_end": 22,
+          "quote": "cand,n. Consequently, it needs N LLM calls for entity pruning and N\ncalls for relation pruning, respectively, as well as one additional LLM call for reasoning (evaluating if\nthe information from the current candidate paths are enough or not). We have to point it out that, for\neach of the N starting entities, all its neighbor entities/relations are NOT scored one by one. On the\ncontrary, all its neighbor entities/relations are \"translated\" into \"one\" prompt altogether and are sent to\nLLM, which output the top-N candidates at one-time. Therefore, each starting entity only calls LLM\nonce for pruning and so N starting entities calls LLM N times in one iterative step. Consequently,\nthere are totally 2ND + D times calling after reasoning D steps. In the end, there is an additional\ncalling that \"translate\" the final path to user-understandable language and answer the user. Therefore,\nToG requires 2ND + D + 1 LLM calls in total. Since most questions can be answered within 3 hops\n(means depth of reasoning path is 3), and the performance is usually good enough when the search\nwidth N=3 as we tested in Figure 3, the total number of LLM calling is 2 × 3 × 3 + 3 + 1 = 22. So\nthe computational time is about 21 times longer than that of LLM-only. With a similar performance\nto ToG, its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning\ninstead of LLM-based entity pruning, saving nearly half of computational time.\n",
+          "predicate": "VARIANT_OF"
+        }
+      ]
+    }
+  ],
+  "limitations": [],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 40,
+    "graph_executed": true,
+    "graph_hits": 10,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_paths": 28,
+    "graph_audit": {
+      "backend": "isolated_sqlite",
+      "graph_sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "anchors": [
+        {
+          "id": "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+          "name": "ToG-R",
+          "type": "Method",
+          "canonical": "tog-r"
+        }
+      ],
+      "seed_count": 1,
+      "max_hops": 2,
+      "max_paths": 40,
+      "per_node": 8,
+      "deadline_seconds": 10,
+      "degree_truncated": [
+        "f32fed3421761a0253fff2f39c85f6e16091a1b31d83e59cfff7e72c1612e612",
+        "8d977cf359751f72859f5da4c5b89c1c8290ab5fe3f5e5fff5ed00c928541e10"
+      ],
+      "reference_tables_access": "denied by SQLite authorizer",
+      "direction_policy": "traversal may be reverse; each edge preserves original subject/object",
+      "returned_paths": 28,
+      "expanded_nodes": 7,
+      "elapsed_seconds": 0.007949599999847123
+    },
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 4.804802499998914,
+      "inference_seconds": 1.1540461999993568,
+      "elapsed_seconds": 1.1571444000001065,
+      "peak_cuda_memory_bytes": 1158044672,
+      "request_count": 7
+    },
+    "evidence_count": 4,
+    "context_bytes": 6768,
+    "evidence_bytes": 5878,
+    "graph_context_bytes": 890,
+    "serialized_content_bytes": 6487,
+    "prompt_graph_paths": [
+      {
+        "nodes": [
+          {
+            "name": "ToG-R",
+            "type": "Method"
+          },
+          {
+            "name": "ToG",
+            "type": "Method"
+          }
+        ],
+        "edges": [
+          {
+            "predicate": "IMPROVES_UPON",
+            "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728",
+            "subject": "ToG-R",
+            "object": "ToG"
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+            "quote_ids": [
+              "q2"
+            ],
+            "source_span": [
+              1038,
+              1418
+            ],
+            "claim_id": "6703b0be7841bd99d2a31ecde0835217a83da15af824a56c597b444510f4f728"
+          }
+        ]
+      },
+      {
+        "nodes": [
+          {
+            "name": "ToG-R",
+            "type": "Method"
+          },
+          {
+            "name": "ToG",
+            "type": "Method"
+          }
+        ],
+        "edges": [
+          {
+            "predicate": "VARIANT_OF",
+            "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355",
+            "subject": "ToG-R",
+            "object": "ToG"
+          }
+        ],
+        "evidence": [
+          {
+            "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+            "quote_ids": [
+              "q1",
+              "q2"
+            ],
+            "source_span": [
+              0,
+              1451
+            ],
+            "claim_id": "33dafbc196ab1186fe45b605952bfeb54591201409e3a16a0e83ab59e9384355"
+          }
+        ]
+      }
+    ],
+    "path_policy": "additional_path_budget",
+    "path_format": "references",
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "source_coverage": [],
+    "limitations": [],
+    "evidence_budget_bytes": 6000,
+    "path_budget_bytes": 1200,
+    "total_budget_bytes": 7200,
+    "context_budget_bytes": 7200,
+    "generation_path_count": 2,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 2211,
+    "total_tokens": 2781,
+    "completion_tokens": 570,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792,
+      "image_tokens": 0,
+      "text_tokens": 2211
+    },
+    "completion_tokens_details": {
+      "text_tokens": 570
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"ToG-R 是 ToG 的变体，证据为『its variant ToG-R only calls LLM for ND + D + 1 times by using random entity pruning instead of LLM-based entity pruning』[chunk_91a4a2e6943ad6a8074492d3f7229692]；另一处说明『we use the random beam search instead of the LLM-constrained beam search in ToG for entity prune, referred to as random prune』[chunk_aa272a627cf75d5bf907fe3a860356c4]。因此替换的是基于 LLM 的实体剪枝（LLM-based entity pruning / LLM-constrained beam search），改为随机实体剪枝（random prune / random beam search）[chunk_91a4a2e6943ad6a8074492d3f7229692][chunk_aa272a627cf75d5bf907fe3a860356c4]。在问题所述的 ToG 与 ToG-R 公式上，原文分别给出 ToG『requires 2ND + D + 1 LLM calls in total』与 ToG-R『only calls LLM for ND + D + 1 times』[chunk_91a4a2e6943ad6a8074492d3f7229692]；另有表述为 ToG『needs at most 2ND+D+1 times』、ToG-R『needs at most ND + D + 1 times』[chunk_2a773898d4837d44bc3ec29b329f1825]。两者在相同 N、D 下的差为 (2ND+D+1) − (ND+D+1) = ND 次 LLM 调用[chunk_91a4a2e6943ad6a8074492d3f7229692][chunk_2a773898d4837d44bc3ec29b329f1825]。\",\"citations\":[{\"chunk_id\":\"chunk_91a4a2e6943ad6a8074492d3f7229692\",\"quote_id\":\"q2\"},{\"chunk_id\":\"chunk_aa272a627cf75d5bf907fe3a860356c4\",\"quote_id\":\"q1\"},{\"chunk_id\":\"chunk_aa272a627cf75d5bf907fe3a860356c4\",\"quote_id\":\"q2\"},{\"chunk_id\":\"chunk_2a773898d4837d44bc3ec29b329f1825\",\"quote_id\":\"q2\"}],\"status\":\"ok\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.04788306451612903,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 5.95828914642334
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.799933910369873
+        },
+        {
+          "channel": "graph",
+          "rank": 2,
+          "score": 0.5
+        }
+      ],
+      "rerank_score": 0.9555686116218567
+    },
+    {
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 0.04918032786885246,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 7.108687400817871
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8031730651855469
+        },
+        {
+          "channel": "graph",
+          "rank": 1,
+          "score": 1.0
+        }
+      ],
+      "rerank_score": 0.8618873357772827
+    },
+    {
+      "chunk_id": "chunk_2a773898d4837d44bc3ec29b329f1825",
+      "score": 0.0315136476426799,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 6.633162498474121
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.796663761138916
+        }
+      ],
+      "rerank_score": 0.5723044872283936
+    },
+    {
+      "chunk_id": "chunk_9eadf098f08b0e28d9965aeb46062d4e",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 6.347695350646973
+        }
+      ],
+      "rerank_score": 0.5453159809112549
+    },
+    {
+      "chunk_id": "chunk_bdd2301d529922318ec27681c94f593a",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.799227237701416
+        }
+      ],
+      "rerank_score": 0.45837900042533875
+    },
+    {
+      "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 3,
+          "score": 0.3333333333333333
+        }
+      ],
+      "rerank_score": 0.4486979842185974
+    },
+    {
+      "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+      "score": 0.02821939586645469,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7718839645385742
+        },
+        {
+          "channel": "graph",
+          "rank": 8,
+          "score": 0.125
+        }
+      ],
+      "rerank_score": 0.4056253135204315
+    },
+    {
+      "chunk_id": "chunk_beb4580eff94eef584b0b4d58d070c2c",
+      "score": 0.027972027972027972,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 3.278323173522949
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.7889156341552734
+        }
+      ],
+      "rerank_score": 0.34886693954467773
+    },
+    {
+      "chunk_id": "chunk_f99077c01e2b49914150ff933b0cf783",
+      "score": 0.029083245521601686,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 5.8919572830200195
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7726974487304688
+        }
+      ],
+      "rerank_score": 0.34268149733543396
+    },
+    {
+      "chunk_id": "chunk_270d9350248b566ed224ba5147a295a2",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.775968074798584
+        }
+      ],
+      "rerank_score": 0.3153141736984253
+    },
+    {
+      "chunk_id": "chunk_7ac089f731dde3a5b09b48a00fc48587",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 5.806733131408691
+        }
+      ],
+      "rerank_score": 0.2963487207889557
+    },
+    {
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.7967381477355957
+        }
+      ],
+      "rerank_score": 0.26416850090026855
+    },
+    {
+      "chunk_id": "chunk_224440ff01e03eed7ed7e310aac3c69e",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7667880058288574
+        }
+      ],
+      "rerank_score": 0.2581389248371124
+    },
+    {
+      "chunk_id": "chunk_33acc1cfbeb25edf68de2f951e8b69ca",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 3.7248544692993164
+        }
+      ],
+      "rerank_score": 0.13318955898284912
+    },
+    {
+      "chunk_id": "chunk_cfe4f3279c22a4cc8b3c7352fd275bb6",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 3.9498653411865234
+        }
+      ],
+      "rerank_score": 0.12262823432683945
+    },
+    {
+      "chunk_id": "chunk_35aaa835320ae2ebcab47d7482d603ba",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 3.916945695877075
+        }
+      ],
+      "rerank_score": 0.11596072465181351
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 4.157761573791504
+        }
+      ],
+      "rerank_score": 0.1037486344575882
+    },
+    {
+      "chunk_id": "chunk_e042b9323f3868f2fdf5ec89a7f01e2c",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 3.4481468200683594
+        }
+      ],
+      "rerank_score": 0.10356715321540833
+    },
+    {
+      "chunk_id": "chunk_0955d7e5f763e232f41cbeffa1f0b450",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 3.502728223800659
+        }
+      ],
+      "rerank_score": 0.10338596254587173
+    },
+    {
+      "chunk_id": "chunk_87176a877d810cf3e38e4f5280725679",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 3.5594005584716797
+        }
+      ],
+      "rerank_score": 0.09170696139335632
+    },
+    {
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7743563652038574
+        }
+      ],
+      "rerank_score": 0.08434179425239563
+    },
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7730827331542969
+        }
+      ],
+      "rerank_score": 0.08050192147493362
+    },
+    {
+      "chunk_id": "chunk_031b7aaba8f20d011a94bb6a15b0f3b1",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7703285217285156
+        }
+      ],
+      "rerank_score": 0.06791667640209198
+    },
+    {
+      "chunk_id": "chunk_729fce1e558e36caab6046b7e5a8ca4a",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 3.529057264328003
+        }
+      ],
+      "rerank_score": 0.04795810207724571
+    },
+    {
+      "chunk_id": "chunk_49581be104ea412de611088357015646",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 3.781040668487549
+        }
+      ],
+      "rerank_score": 0.042166538536548615
+    },
+    {
+      "chunk_id": "chunk_36588119f2aacd0893d97ed15e4ed276",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7699408531188965
+        }
+      ],
+      "rerank_score": 0.0350126251578331
+    },
+    {
+      "chunk_id": "chunk_22761de9415eaae3dc9344ec763b2014",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7665114402770996
+        }
+      ],
+      "rerank_score": 0.03090895712375641
+    },
+    {
+      "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 5,
+          "score": 0.2
+        }
+      ],
+      "rerank_score": 0.028007520362734795
+    },
+    {
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.7881259918212891
+        }
+      ],
+      "rerank_score": 0.023153411224484444
+    },
+    {
+      "chunk_id": "chunk_eff9e47d69abba56a62073720f2bd77b",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.7789206504821777
+        }
+      ],
+      "rerank_score": 0.02076473832130432
+    },
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.015151515151515152,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 6,
+          "score": 0.16666666666666666
+        }
+      ],
+      "rerank_score": 0.016593176871538162
+    },
+    {
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7661685943603516
+        }
+      ],
+      "rerank_score": 0.011508148163557053
+    },
+    {
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7745122909545898
+        }
+      ],
+      "rerank_score": 0.005797401536256075
+    },
+    {
+      "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 9,
+          "score": 0.1111111111111111
+        }
+      ],
+      "rerank_score": 0.005040702875703573
+    },
+    {
+      "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 4,
+          "score": 0.25
+        }
+      ],
+      "rerank_score": 0.004700060468167067
+    },
+    {
+      "chunk_id": "chunk_f65808b094e1c98379af21287bbcf83d",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 3.780275821685791
+        }
+      ],
+      "rerank_score": 0.004556113854050636
+    },
+    {
+      "chunk_id": "chunk_deb9eea46e529705dffdd1103729c44c",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 10,
+          "score": 0.1
+        }
+      ],
+      "rerank_score": 0.003635808825492859
+    },
+    {
+      "chunk_id": "chunk_8de1e06d1827ae3f8e7d83e7e454573b",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 3.4193811416625977
+        }
+      ],
+      "rerank_score": 0.0002802109520416707
+    },
+    {
+      "chunk_id": "chunk_1d9a27f8155c26cc2e3cb1114fa97c45",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 3.1947760581970215
+        }
+      ],
+      "rerank_score": 6.108854722697288e-05
+    },
+    {
+      "chunk_id": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "graph",
+          "rank": 7,
+          "score": 0.14285714285714285
+        }
+      ],
+      "rerank_score": 3.071818719035946e-05
+    }
+  ],
+  "case_id": "F03",
+  "question": "ToG-R 是谁的变体，替换了哪种实体剪枝？在相同 N、D 下，论文给出的两种 LLM 调用公式相差多少？",
+  "category": "fact",
+  "arm": "Hybrid+Graph",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0005335000005288748
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.04231340000114869
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 0.016091100000267033
+    },
+    {
+      "name": "rerank",
+      "seconds": 1.1579443000009633
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0013110999989294214
+    }
+  ],
+  "retrieval_compute_seconds": 1.2181934000018373,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.5182258000004367,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 3.4667038999996294,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.2964214000003267,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 2.8357675000006566,
+      "usage": "{\"prompt_tokens\": 2211, \"total_tokens\": 2781, \"completion_tokens\": 570}"
+    }
+  ],
+  "metrics": {
+    "recall5": 1.0,
+    "recall8": 1.0,
+    "mrr40": 1.0,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "execution_config": {
+    "benchmark": "benchmark-v4",
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    },
+    "models": {
+      "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+      "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+      "CLOUD_BGE_PROVIDER": "cloudflare",
+      "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+      "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+      "LOCAL_RERANKER_DEVICE": "cuda",
+      "LOCAL_RERANKER_DTYPE": "float16",
+      "LOCAL_RERANKER_PERSISTENT": "true"
+    },
+    "endpoint_fingerprints": {
+      "DEEPSEEK_BASE_URL": "aebde9d32c41ca5aff41444d1ef2feaa0f3574a19195d60c588f826a6ea88c01",
+      "CLOUD_BGE_BASE_URL": "73dd98c51038dadb140c44d42e350a9ae3c52013d53336b34e055aa1bf12087d",
+      "CLOUDFLARE_ACCOUNT_ID": "8157dbe7227fcba3fcada3a5c46dc0a3a12f71bebb5b653de5256c0ae456e407",
+      "NEO4J_URI": "b1d4217b5d8c41b8b641a146d7facd744b01a415fe2ac0d943188a78e5f007f0"
+    },
+    "dependencies": {
+      "neo4j": "6.4.1",
+      "langsmith": "0.14.17",
+      "langgraph": "1.2.21",
+      "httpx": "0.28.1"
+    },
+    "code_sha256": {
+      "scripts/eval-stage4.py": "3fda792fb4ceea527961fa1f6eca2fc335412b64ff087bd5120f2f6c26dcf60b",
+      "src/papertech/evaluation_runtime.py": "d433b2ce3a6f189f698f4775275430e82cd8898df8c0fa8a015095506d3c1ccc",
+      "src/papertech/isolated_graph.py": "039d27009ec94003cfc6f25024ae2015ab7c12b27f9f7cfe5dc21979f1c41586",
+      "src/papertech/workflow.py": "6fe7b530e355f19886c34bd61c98046b6cd10598b74f94220dae63d64130964a",
+      "src/papertech/graph_store.py": "485c50edfbc99e26554d903b0f637ae4893ecf06168be34a767cd986c4d07476",
+      "src/papertech/retrieval.py": "ef2480079acc98095c86394ce6ae5bf894a7034a47d0d394cf584f871e41ae65",
+      "src/papertech/evidence_context.py": "b9bfe29885ffe4b82086a78572ffe4d031d3de9c497b0681aa732525a46f89f6",
+      "src/papertech/entity_aliases.py": "2725c08d7ca72f46c3bf7adbb3207eb75331f963a1998826bc6397e375699ea6",
+      "src/papertech/providers.py": "c166d39f972ad39187460ca5da089ba88801522f241f836b2ae3ac4cc4db6c29",
+      "src/papertech/citations.py": "6465c41be136683a5ec723720820fca5c246c9365836914ca8967e5805175372",
+      "src/papertech/evaluation.py": "cb3714275490177d79bf755ef156e14f485748dbea590a95b54ab769fde96e31",
+      "src/papertech/evaluation_details.py": "a88e734e7fbe7a0b1f977dfdbd88aeed27da5a952431da94e4a66bc74a9a2090",
+      "src/papertech/evaluation_datasets.py": "81da3edf566e747e70ade80922014c1f1b823169705a7e5070400e7e0c8e4e46",
+      "src/papertech/local_models.py": "62f465e7615a7208a8f4bfda6c9f4b545843e3115ef91768d47f5a7e787edddb",
+      "src/papertech/rerank_service.py": "156293246350d8b4a8c7bd23d45edb26f471d1bfe690480412edcf942617d693",
+      "scripts/rerank-service.py": "562927f8ebd62834e8aca53ae55a436eac4d82f39b66e1ad92b017f1b73facf5"
+    },
+    "controls": {
+      "arms": [
+        "Hybrid",
+        "Hybrid+Graph"
+      ],
+      "backend": "neo4j",
+      "graph_backend": "isolated_sqlite",
+      "fulltext_top": 20,
+      "dense_top": 20,
+      "fusion_max": 40,
+      "graph_candidates_max": 20,
+      "graph_seed_chunks": 12,
+      "graph_seed_entities": 40,
+      "graph_max_paths": 40,
+      "graph_hops": 2,
+      "graph_per_node": 8,
+      "evidence_max": 8,
+      "evidence_bytes": 6000,
+      "path_bytes": 1200,
+      "context_bytes": 7200,
+      "path_budget_mode": "additional",
+      "generation_max_tokens": 2048,
+      "thinking": "disabled",
+      "generation_requests_max": 80,
+      "sampling": "provider default; one sample per arm",
+      "treatment_scope": "graph candidates plus up to 1200 additional path bytes; not an equal actual input-token ablation",
+      "execution_order": "alternate which arm goes first",
+      "query_vector": "one shared Cloudflare batch",
+      "gold_exclusion": "question text only; reference tables and claim unit/path IDs denied by SQLite authorizer"
+    },
+    "latency": "retrieval compute excludes audit upload, generation, and shared embedding batch; request wall time reported separately",
+    "status": "frozen_before_execution"
+  },
+  "request_wall_seconds": 6.801407400000244,
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 0.8031730651855469
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.799933910369873
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_bdd2301d529922318ec27681c94f593a",
+      "score": 0.799227237701416
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.7967381477355957
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_2a773898d4837d44bc3ec29b329f1825",
+      "score": 0.796663761138916
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_beb4580eff94eef584b0b4d58d070c2c",
+      "score": 0.7889156341552734
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.7881259918212891
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_eff9e47d69abba56a62073720f2bd77b",
+      "score": 0.7789206504821777
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_270d9350248b566ed224ba5147a295a2",
+      "score": 0.775968074798584
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 0.7745122909545898
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.7743563652038574
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.7730827331542969
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_f99077c01e2b49914150ff933b0cf783",
+      "score": 0.7726974487304688
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+      "score": 0.7718839645385742
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_031b7aaba8f20d011a94bb6a15b0f3b1",
+      "score": 0.7703285217285156
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_36588119f2aacd0893d97ed15e4ed276",
+      "score": 0.7699408531188965
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_224440ff01e03eed7ed7e310aac3c69e",
+      "score": 0.7667880058288574
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_22761de9415eaae3dc9344ec763b2014",
+      "score": 0.7665114402770996
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.7661685943603516
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_9ee361c20d04e83b0eff8922a814fba1",
+      "score": 0.7652044296264648
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 7.108687400817871
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_2a773898d4837d44bc3ec29b329f1825",
+      "score": 6.633162498474121
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_9eadf098f08b0e28d9965aeb46062d4e",
+      "score": 6.347695350646973
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 5.95828914642334
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_f99077c01e2b49914150ff933b0cf783",
+      "score": 5.8919572830200195
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_7ac089f731dde3a5b09b48a00fc48587",
+      "score": 5.806733131408691
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 4.157761573791504
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_cfe4f3279c22a4cc8b3c7352fd275bb6",
+      "score": 3.9498653411865234
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_35aaa835320ae2ebcab47d7482d603ba",
+      "score": 3.916945695877075
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_49581be104ea412de611088357015646",
+      "score": 3.781040668487549
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_f65808b094e1c98379af21287bbcf83d",
+      "score": 3.780275821685791
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_33acc1cfbeb25edf68de2f951e8b69ca",
+      "score": 3.7248544692993164
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_87176a877d810cf3e38e4f5280725679",
+      "score": 3.5594005584716797
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_729fce1e558e36caab6046b7e5a8ca4a",
+      "score": 3.529057264328003
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_0955d7e5f763e232f41cbeffa1f0b450",
+      "score": 3.502728223800659
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_e042b9323f3868f2fdf5ec89a7f01e2c",
+      "score": 3.4481468200683594
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_8de1e06d1827ae3f8e7d83e7e454573b",
+      "score": 3.4193811416625977
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_beb4580eff94eef584b0b4d58d070c2c",
+      "score": 3.278323173522949
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_1d9a27f8155c26cc2e3cb1114fa97c45",
+      "score": 3.1947760581970215
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_431ea83d709d633f100fd9a28a4fdca7",
+      "score": 3.1640772819519043
+    },
+    {
+      "channel": "graph",
+      "rank": 1,
+      "chunk_id": "chunk_aa272a627cf75d5bf907fe3a860356c4",
+      "score": 1.0
+    },
+    {
+      "channel": "graph",
+      "rank": 2,
+      "chunk_id": "chunk_91a4a2e6943ad6a8074492d3f7229692",
+      "score": 0.5
+    },
+    {
+      "channel": "graph",
+      "rank": 3,
+      "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+      "score": 0.3333333333333333
+    },
+    {
+      "channel": "graph",
+      "rank": 4,
+      "chunk_id": "chunk_52ee1f45e2c1f12a8b5f07f236964ded",
+      "score": 0.25
+    },
+    {
+      "channel": "graph",
+      "rank": 5,
+      "chunk_id": "chunk_b631364a3a51eca4618b8e3fbe13f7b8",
+      "score": 0.2
+    },
+    {
+      "channel": "graph",
+      "rank": 6,
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.16666666666666666
+    },
+    {
+      "channel": "graph",
+      "rank": 7,
+      "chunk_id": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+      "score": 0.14285714285714285
+    },
+    {
+      "channel": "graph",
+      "rank": 8,
+      "chunk_id": "chunk_eeb7d164f0b4a2603ef9be122083c59b",
+      "score": 0.125
+    },
+    {
+      "channel": "graph",
+      "rank": 9,
+      "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9",
+      "score": 0.1111111111111111
+    },
+    {
+      "channel": "graph",
+      "rank": 10,
+      "chunk_id": "chunk_deb9eea46e529705dffdd1103729c44c",
+      "score": 0.1
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "F03.C01",
+      "requirement": "变体方向为 ToG-R 指向 ToG。",
+      "selected_matches_by_unit": {
+        "togr": [
+          "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "F03.C02",
+      "requirement": "随机实体剪枝替代 LLM 实体剪枝。",
+      "selected_matches_by_unit": {
+        "togr": [
+          "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "F03.C03",
+      "requirement": "ToG 和 ToG-R 的公式依次为 2ND+D+1 和 ND+D+1。",
+      "selected_matches_by_unit": {
+        "togr": [
+          "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "F03.C04",
+      "requirement": "相同 N、D 下公式差为 ND，不能把它当成墙钟时延差。",
+      "selected_matches_by_unit": {
+        "togr": [
+          "chunk_91a4a2e6943ad6a8074492d3f7229692"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/b9482bdc-c889-4812-9222-c69cdb401372?poll=true"
+}

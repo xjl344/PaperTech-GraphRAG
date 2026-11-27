@@ -1,0 +1,453 @@
+{
+  "id": "b951d5db-a846-55d7-b6e6-f05ba403552f",
+  "inputs": {
+    "question": "把 KG-GPT 与 RoG 从问题处理到推理的步骤分别排好：句子分割属于谁，关系路径规划属于谁，检索对象又是什么？"
+  },
+  "outputs": {
+    "expected_answer": "KG-GPT 为句子分割→图检索→推理，检索相关图组件；RoG 为规划→检索→推理，先生成 KG 约束的关系路径计划，再检索有效推理路径。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "kggpt",
+        "answer_point": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "primary_chunk": "chunk_61e96cb10e247f7d002b4163920cc737",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_61e96cb10e247f7d002b4163920cc737"
+        ]
+      },
+      {
+        "unit_id": "rog",
+        "answer_point": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ]
+      }
+    ],
+    "relation_outline": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。；RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+    "must_not_claim": "共有“检索/推理”步骤不代表流程相同或存在继承。",
+    "case_id": "R18",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "kggpt",
+        "required_fact": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+        "primary_chunk": "chunk_61e96cb10e247f7d002b4163920cc737",
+        "supporting_chunks": [
+          "chunk_61e96cb10e247f7d002b4163920cc737"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "rog",
+        "required_fact": "RoG 先生成 KG 约束的关系路径计划，再检索有效推理路径供 LLM 推理。包含 KG 知识蒸馏训练；推理时可接入其他 LLM 不表示整套方法免训练。",
+        "primary_chunk": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "supporting_chunks": [
+          "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 237,
+            "end_char": 1173,
+            "chunk_start_char": 0,
+            "chunk_end_char": 936,
+            "block_bboxes": [
+              [
+                157.758,
+                214.382,
+                202.243,
+                226.337
+              ],
+              [
+                87.516,
+                240.528,
+                273.87,
+                489.67
+              ],
+              [
+                70.866,
+                504.681,
+                153.68,
+                516.636
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "ffadad8a24b98afff5373c3d1a13f932f8b1ebfa0fc1da41a2a7f203f2283e40",
+        "section": "Abstract",
+        "text": "Abstract\nWhile large language models (LLMs) have\nmade considerable advancements in under-\nstanding and generating unstructured text, their\napplication in structured data remains underex-\nplored. Particularly, using LLMs for complex\nreasoning tasks on knowledge graphs (KGs)\nremains largely untouched. To address this,\nwe propose KG-GPT, a multi-purpose frame-\nwork leveraging LLMs for tasks employing\nKGs. KG-GPT comprises three steps: Sentence\nSegmentation, Graph Retrieval, and Inference,\neach aimed at partitioning sentences, retriev-\ning relevant graph components, and deriving\nlogical conclusions, respectively. We evalu-\nate KG-GPT using KG-based fact verification\nand KGQA benchmarks, with the model show-\ning competitive and robust performance, even\noutperforming several fully-supervised models.\nOur work, therefore, marks a significant step\nin unifying structured and unstructured data\nprocessing within the realm of LLMs.1\n1\n"
+      },
+      {
+        "chunk_id": "chunk_58e7ae48fdb49536bc066f6e74ccd2a0",
+        "paper_id": "paper_b2e26390ad4eb43ff4d03b5eb4e49037",
+        "parse_id": "parse_812f4632a5e55f54711742cc1a3a8d45",
+        "title": "Reasoning on Graphs: Faithful and Interpretable Large Language Model Reasoning",
+        "source_relative_path": "Methods/191_Reasoning on Graphs Faithful and Interpretable Large Language Model Reasoning.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 318,
+            "end_char": 1721,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1403,
+            "block_bboxes": [
+              [
+                278.288,
+                270.703,
+                333.722,
+                282.658
+              ],
+              [
+                143.866,
+                296.104,
+                468.139,
+                492.369
+              ],
+              [
+                108.299,
+                514.402,
+                205.989,
+                526.357
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "555a358e21b7a12a69fa408f252697827520cea4a7201afcf3083a96a8ef2459",
+        "section": "ABSTRACT",
+        "text": "ABSTRACT\nLarge language models (LLMs) have demonstrated impressive reasoning abili-\nties in complex tasks. However, they lack up-to-date knowledge and experience\nhallucinations during reasoning, which can lead to incorrect reasoning processes\nand diminish their performance and trustworthiness. Knowledge graphs (KGs),\nwhich capture vast amounts of facts in a structured format, offer a reliable source\nof knowledge for reasoning. Nevertheless, existing KG-based LLM reasoning\nmethods only treat KGs as factual knowledge bases and overlook the importance\nof their structural information for reasoning. In this paper, we propose a novel\nmethod called reasoning on graphs (RoG) that synergizes LLMs with KGs to\nenable faithful and interpretable reasoning. Specifically, we present a planning-\nretrieval-reasoning framework, where RoG first generates relation paths grounded\nby KGs as faithful plans. These plans are then used to retrieve valid reasoning\npaths from the KGs for LLMs to conduct faithful reasoning. Furthermore, RoG\nnot only distills knowledge from KGs to improve the reasoning ability of LLMs\nthrough training but also allows seamless integration with any arbitrary LLMs dur-\ning inference. Extensive experiments on two benchmark KGQA datasets demon-\nstrate that RoG achieves state-of-the-art performance on KG reasoning tasks and\ngenerates faithful and interpretable reasoning results1.\n1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_251b66908d758ab4453ca76d45b64fca",
+      "paper_b2e26390ad4eb43ff4d03b5eb4e49037"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "覆盖每个必要事实并逐条引用其来源原文。",
+      "semantics": "核对关系方向、实体角色、训练/测试角色、数据集设置和指标。",
+      "synthesis": "区分论文直接主张与跨来源分析；共享实体不自动构成因果或方法继承。",
+      "uncertainty": "来源没有说明的条件须标为未知，不可补造。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": true,
+      "planned_output": "完整模型回答与引用",
+      "controls": {
+        "arms": [
+          "Baseline-Legacy",
+          "P0-Optimized"
+        ],
+        "arm_configs": {
+          "Baseline-Legacy": {
+            "graph_enabled": false,
+            "rerank_contextual": false,
+            "evidence_budget": 6000,
+            "evidence_max": 8,
+            "source_policy": "named_first",
+            "score_policy": "fixed",
+            "reservation_policy": "legacy",
+            "citation_protocol": "source-choice-v1"
+          },
+          "P0-Optimized": {
+            "graph_enabled": false,
+            "rerank_contextual": true,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "round_robin",
+            "citation_protocol": "source-choice-v2"
+          }
+        },
+        "backend": "neo4j",
+        "graph_enabled": false,
+        "fulltext_top": 20,
+        "dense_top": 20,
+        "fusion_max": 40,
+        "reranker_batch_size": 4,
+        "generation_max_tokens": 2048,
+        "thinking": "disabled",
+        "generation_requests_max": 80,
+        "execution_order": "alternate arm order by case index",
+        "query_vector": "one shared Cloudflare BGE-M3 batch across both arms",
+        "gold_exclusion": "question text only; reference facts and source pools never passed to retrieval or generation"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Baseline-Legacy / P0-Optimized Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "assessment": {
+      "axis": "跨方法阶段对齐",
+      "criteria": [
+        {
+          "id": "R18.C01",
+          "requirement": "KG-GPT 顺序为句子分割、图检索、推理。",
+          "unit_ids": [
+            "kggpt"
+          ],
+          "supporting_chunks_by_unit": {
+            "kggpt": [
+              "chunk_61e96cb10e247f7d002b4163920cc737"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R18.C02",
+          "requirement": "KG-GPT 检索相关图组件。",
+          "unit_ids": [
+            "kggpt"
+          ],
+          "supporting_chunks_by_unit": {
+            "kggpt": [
+              "chunk_61e96cb10e247f7d002b4163920cc737"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R18.C03",
+          "requirement": "RoG 顺序为规划、检索、推理。",
+          "unit_ids": [
+            "rog"
+          ],
+          "supporting_chunks_by_unit": {
+            "rog": [
+              "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "R18.C04",
+          "requirement": "RoG 用关系路径计划检索有效推理路径。",
+          "unit_ids": [
+            "rog"
+          ],
+          "supporting_chunks_by_unit": {
+            "rog": [
+              "chunk_58e7ae48fdb49536bc066f6e74ccd2a0"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        }
+      ],
+      "max_score": 4,
+      "focus_predicates": [
+        "CONNECTS",
+        "HAS_STAGE",
+        "PRECEDES",
+        "TRAINED_WITH"
+      ],
+      "reference_path_scope": "本题各来源单元的预期子图；可能是多条分支或互不相连的跨论文子图。",
+      "critical_error_rule": "触发全局 critical_errors 时本题不判全对，并保留逐项分数与错误说明。",
+      "reviewer_status": "not_reviewed",
+      "model_result_status": "not_run"
+    },
+    "expected_graph_paths": {
+      "kggpt": [
+        {
+          "unit_id": "kggpt",
+          "path_id": "kggpt.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KG-GPT"
+            },
+            {
+              "type": "Stage",
+              "name": "Sentence Segmentation"
+            },
+            {
+              "type": "Stage",
+              "name": "Graph Retrieval"
+            },
+            {
+              "type": "Stage",
+              "name": "Inference"
+            }
+          ],
+          "claim_ids": [
+            "00c9daa7ef8ecce3638e2dfd66df2fb08c7d79fded451fc354a1b486e52b09bd",
+            "b2aebe7fe5bd0b94dd11868f23c216fc9fff8dc34d847b09ab3468359c5bf5a5",
+            "f225ee2831703881de29306bd51dc744ed9156379a9b0f1eb2e1bf74f824ab1a"
+          ]
+        }
+      ],
+      "rog": [
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Stage",
+              "name": "planning"
+            },
+            {
+              "type": "Component",
+              "name": "KG-constrained relation path plan"
+            }
+          ],
+          "claim_ids": [
+            "9c1ce605932e6a1c7add6e4a236494ae409e78694f02abbe41bc48ad5d48642a",
+            "ba37ea4f3a5d65124244548e425678c1e3612a8c808e09561c8c9864a161a567"
+          ]
+        },
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "Stage",
+              "name": "retrieval"
+            },
+            {
+              "type": "Component",
+              "name": "valid reasoning paths"
+            }
+          ],
+          "claim_ids": [
+            "acb6f31d72d610e337bc5df70f4727915505dd0df12b05675a6e90bd6210e743",
+            "125f506f5a6592d212ab477119720e947a21ec29ab1e1bc1de63fd2e2c7926be"
+          ]
+        },
+        {
+          "unit_id": "rog",
+          "path_id": "rog.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "RoG"
+            },
+            {
+              "type": "TrainingSignal",
+              "name": "KG knowledge distillation"
+            }
+          ],
+          "claim_ids": [
+            "aa112d0b5699cf739594b7e46893dc6141a6d99cd1c8a4e0e5427e7504de1a46"
+          ]
+        }
+      ]
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    }
+  },
+  "metadata": {
+    "case_id": "R18",
+    "category": "cross",
+    "benchmark": "benchmark-v4-p0-v2",
+    "benchmark_sha256": "f5135e2751c2efcc083b6b5bdd1ffc973e2caf8e5dac66b7ef4ea9b3179683f8",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}

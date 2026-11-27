@@ -1,0 +1,207 @@
+{
+  "id": "b077626b288b9fc8686f88b2dfdfc95f3a179750aa17482d59648faa4e52fa69",
+  "inputs": {
+    "question": "KGP 图中的节点和边分别可以表示什么？遍历代理负责什么？"
+  },
+  "outputs": {
+    "expected_answer": "节点可表示段落或文档结构；边可表示词法/语义相似或文档内结构；LLM 遍历代理选择邻居并收集支持段落。",
+    "answerable": true,
+    "negative_kind": null,
+    "required_facts": [
+      "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。"
+    ],
+    "source_references": [
+      {
+        "unit_id": "kgp",
+        "answer_point": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_b959214e888053dae53b16a5259d7ea9",
+        "pages": [
+          1,
+          1
+        ]
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_b959214e888053dae53b16a5259d7ea9",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 310,
+            "end_char": 1851,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1541,
+            "block_bboxes": [
+              [
+                154.715,
+                218.316,
+                191.786,
+                228.279
+              ],
+              [
+                63.963,
+                235.864,
+                282.537,
+                493.897
+              ],
+              [
+                54.0,
+                509.791,
+                292.505,
+                677.594
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "0e322000b7328f184512788b9a3673e33daf048e076992ed152feb0614cda55f",
+        "section": "Abstract",
+        "text": "Abstract\nThe ‘pre-train, prompt, predict’ paradigm of large language\nmodels (LLMs) has achieved remarkable success in open-\ndomain question answering (OD-QA). However, few works\nexplore this paradigm in multi-document question answer-\ning (MD-QA), a task demanding a thorough understanding\nof the logical associations among the contents and structures\nof documents. To fill this crucial gap, we propose a Knowl-\nedge Graph Prompting (KGP) method to formulate the right\ncontext in prompting LLMs for MD-QA, which consists of\na graph construction module and a graph traversal module.\nFor graph construction, we create a knowledge graph (KG)\nover multiple documents with nodes symbolizing passages or\ndocument structures (e.g., pages/tables), and edges denoting\nthe semantic/lexical similarity between passages or document\nstructural relations. For graph traversal, we design an LLM-\nbased graph traversal agent that navigates across nodes and\ngathers supporting passages assisting LLMs in MD-QA. The\nconstructed graph serves as the global ruler that regulates the\ntransitional space among passages and reduces retrieval la-\ntency. Concurrently, the graph traversal agent acts as a local\nnavigator that gathers pertinent context to progressively ap-\nproach the question and guarantee retrieval quality. Extensive\nexperiments underscore the efficacy of KGP for MD-QA, sig-\nnifying the potential of leveraging graphs in enhancing the\nprompt design and retrieval augmented generation for LLMs.\nOur code: https://github.com/YuWVandy/KG-LLM-MDQA.\n1\n"
+      }
+    ],
+    "relation_outline": "KGP 的节点为段落或文档结构，边为语义/词法相似或结构关系，LLM 遍历代理收集支持段落。",
+    "relation_review": null,
+    "must_not_claim": null,
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "All required facts and citations; direction, entity roles, train/test role, evaluation setup and unsupported claims reviewed separately.",
+      "graph_coverage": "Each answerable relation case must expose a source-backed path for every required unit; negative cases must not contain their prohibited edge.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins."
+    },
+    "expected_graph_paths": [
+      [
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KGP"
+            },
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "NodeType",
+              "name": "passage"
+            }
+          ],
+          "claim_ids": [
+            "9ae0b75a02959a74240005095627f032ff8f83d9036bf4c44fcd1d6b23d2d4ce",
+            "eb5171accf1be44d16790280d8bd57cdd379fa7597d3523f320aac52ad59cb71"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P02",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "NodeType",
+              "name": "document structure"
+            }
+          ],
+          "claim_ids": [
+            "1e3957d6e1180c018346c68fe2539a2672cb9050c21e505f439850d189ce6350"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P03",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "EdgeType",
+              "name": "lexical or semantic similarity"
+            }
+          ],
+          "claim_ids": [
+            "6907499f10078dae84bea86a35d8cf49d88827d0e6797631d8c127508e0ed51d"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P04",
+          "nodes": [
+            {
+              "type": "GraphRepresentation",
+              "name": "document knowledge graph"
+            },
+            {
+              "type": "EdgeType",
+              "name": "intra-document structure"
+            }
+          ],
+          "claim_ids": [
+            "2b82744a57f83f7c8ec618da410cd5c6666e804df78bcf15249b6cb7196fa356"
+          ]
+        },
+        {
+          "unit_id": "kgp",
+          "path_id": "kgp.P05",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KGP"
+            },
+            {
+              "type": "Component",
+              "name": "LLM graph traversal agent"
+            },
+            {
+              "type": "Component",
+              "name": "supporting passages"
+            }
+          ],
+          "claim_ids": [
+            "02367d117aa9554798d56234190b7c34b2a32801223dbf2e20fea01854bd5d29",
+            "5b83b7227eb362c7813c6c2eaec2395b28c4b2f2057ed4eb12387f55490367fb"
+          ]
+        }
+      ]
+    ],
+    "result_fields": [
+      "full answer",
+      "ranked candidates and scores",
+      "evidence and citation locations",
+      "graph paths",
+      "per-fact coverage and gaps",
+      "stage timings",
+      "tokens",
+      "paired differences",
+      "trace URLs"
+    ]
+  },
+  "metadata": {
+    "case_id": "F05",
+    "category": "fact",
+    "benchmark": "benchmark-v3",
+    "benchmark_sha256": "3ffb13a824016b58fd2cb5585bab2f3dbbf9767bd38b714ce148097122f6ac87",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "curated source review; not independent human gold"
+  },
+  "split": [
+    "fact"
+  ]
+}

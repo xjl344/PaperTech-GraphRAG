@@ -1,0 +1,442 @@
+{
+  "id": "24fd05db5ee133154e89c6128494bd1a41e98ed3887fda8632775b5caee60567",
+  "inputs": {
+    "question": "G-Retriever 与 ToG-2 怎样选择或组织用于生成的证据？"
+  },
+  "outputs": {
+    "expected_answer": "G-Retriever 用 PCST 选择相关子图以控制大图上下文；ToG-2 通过实体连接文档并交替检索图与上下文。",
+    "answerable": true,
+    "negative_kind": null,
+    "required_facts": [
+      "整图文本化会超过上下文窗口，直接截断丢信息；G-Retriever 选择相关子图以扩展到大图。",
+      "G-Retriever 将图检索表述为 Prize-Collecting Steiner Tree 优化。",
+      "ToG-2 通过实体连接文档，用文档作为实体上下文，交替进行图检索与上下文检索。"
+    ],
+    "source_references": [
+      {
+        "unit_id": "grscale",
+        "answer_point": "整图文本化会超过上下文窗口，直接截断丢信息；G-Retriever 选择相关子图以扩展到大图。",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "primary_chunk": "chunk_5c9e14854565607ec53c355da481c451",
+        "pages": [
+          2,
+          3
+        ]
+      },
+      {
+        "unit_id": "pcst",
+        "answer_point": "G-Retriever 将图检索表述为 Prize-Collecting Steiner Tree 优化。",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "primary_chunk": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+        "pages": [
+          1,
+          1
+        ]
+      },
+      {
+        "unit_id": "tog2",
+        "answer_point": "ToG-2 通过实体连接文档，用文档作为实体上下文，交替进行图检索与上下文检索。",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "primary_chunk": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+        "pages": [
+          1,
+          1
+        ]
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_5c9e14854565607ec53c355da481c451",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+        "page_start": 2,
+        "page_end": 3,
+        "source_spans": [
+          {
+            "pdf_page": 2,
+            "start_char": 5377,
+            "end_char": 6545,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1168,
+            "block_bboxes": [
+              [
+                108.0,
+                586.878,
+                505.247,
+                673.291
+              ],
+              [
+                107.671,
+                679.55,
+                504.666,
+                722.414
+              ],
+              [
+                303.509,
+                742.332,
+                308.49,
+                752.295
+              ]
+            ]
+          },
+          {
+            "pdf_page": 3,
+            "start_char": 0,
+            "end_char": 302,
+            "chunk_start_char": 1169,
+            "chunk_end_char": 1471,
+            "block_bboxes": [
+              [
+                168.567,
+                79.054,
+                443.126,
+                89.017
+              ],
+              [
+                115.77,
+                114.927,
+                128.937,
+                121.901
+              ],
+              [
+                249.671,
+                108.103,
+                269.888,
+                112.519
+              ],
+              [
+                254.373,
+                133.834,
+                265.179,
+                138.25
+              ],
+              [
+                253.452,
+                120.655,
+                299.773,
+                127.581
+              ],
+              [
+                276.078,
+                115.32,
+                279.876,
+                119.736
+              ],
+              [
+                275.608,
+                135.402,
+                324.86,
+                141.388
+              ],
+              [
+                307.236,
+                120.968,
+                330.932,
+                125.385
+              ],
+              [
+                309.393,
+                108.103,
+                327.516,
+                112.519
+              ],
+              [
+                240.86,
+                148.186,
+                489.169,
+                163.13
+              ],
+              [
+                115.77,
+                201.212,
+                202.238,
+                208.186
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "17e686ca305ed342a6e4b876ac96da8f37e68e06319f70c04017865cd2c65d1a",
+        "section": "Introduction",
+        "text": "Enhancing Scalability and Efficiency in Graph LLMs. Recent research endeavors have explored\ntranslating graphs into natural language, such as by flattening nodes and edges into a text sequence,\nenabling their processing by LLMs for graph-based tasks [56, 6]. However, this method faces critical\nscalability issues. Converting a graph with thousands of nodes and edges into a text sequence results\nin an excessive number of tokens, surpassing the input capacity of many LLMs. An alternative of\ntruncating the graph text sequence to fit the LLM’s input token limit leads to loss of information and\nresponse quality. G-Retriever overcomes these issues with its RAG component, which allows for\neffective scaling to larger graphs by selectively retrieving only relevant parts of the graph.\nTailoring the RAG Approach to Graphs. Existing RAG methodologies are primarily designed\nfor simpler data types or knowledge graphs, where information is retrieved in a manner isolated\nfrom the graph structure [7, 1, 36, 16]. Hence, we introduce a new retrieval approach for general\ntextual graphs. Notably, we formulate subgraph retrieval as a Prize-Collecting Steiner Tree (PCST)\n2\n\nTable 1: Observation and mitigation of hallucination in graph LLMs.\nUser\nelephants\ngrass\neating\nbushes\nin\nriver\non the side of\nstanding by\nelephant\nWhat kind of animal is in the bushes?\nAnswer the question and list the nodes or edges from the graph that support your answer.\nLLM w/ Graph Prompt Tuning\n"
+      },
+      {
+        "chunk_id": "chunk_3a7f7a1f47b2586d9d9877afb9110567",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 446,
+            "end_char": 1988,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1542,
+            "block_bboxes": [
+              [
+                283.758,
+                307.967,
+                328.243,
+                319.922
+              ],
+              [
+                143.507,
+                333.439,
+                469.787,
+                539.841
+              ],
+              [
+                108.0,
+                562.422,
+                190.814,
+                574.377
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "b19a2d053faea5a2dddcb08f15db46e39ca91c20626782da7eb4bd762a2963c5",
+        "section": "Abstract",
+        "text": "Abstract\nGiven a graph with textual attributes, we enable users to ‘chat with their graph’:\nthat is, to ask questions about the graph using a conversational interface. In re-\nsponse to a user’s questions, our method provides textual replies and highlights the\nrelevant parts of the graph. While existing works integrate large language models\n(LLMs) and graph neural networks (GNNs) in various ways, they mostly focus\non either conventional graph tasks (such as node, edge, and graph classification),\nor on answering simple graph queries on small or synthetic graphs. In contrast,\nwe develop a flexible question-answering framework targeting real-world textual\ngraphs, applicable to multiple applications including scene graph understanding,\ncommon sense reasoning, and knowledge graph reasoning. Toward this goal, we\nfirst develop a Graph Question Answering (GraphQA) benchmark with data col-\nlected from different tasks. Then, we propose our G-Retriever method, introducing\nthe first retrieval-augmented generation (RAG) approach for general textual graphs,\nwhich can be fine-tuned to enhance graph understanding via soft prompting. To\nresist hallucination and to allow for textual graphs that greatly exceed the LLM’s\ncontext window size, G-Retriever performs RAG over a graph by formulating this\ntask as a Prize-Collecting Steiner Tree optimization problem. Empirical evaluations\nshow that our method outperforms baselines on textual graph tasks from multiple\ndomains, scales well with larger graph sizes, and mitigates hallucination. 1\n1\n"
+      },
+      {
+        "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 621,
+            "end_char": 2250,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1629,
+            "block_bboxes": [
+              [
+                143.866,
+                279.608,
+                468.139,
+                530.667
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "0dceb4872331a3782598f7d0abcd6b29f375efcf602324a1a55595d0b55c8ed4",
+        "section": "ABSTRACT",
+        "text": "Retrieval-augmented generation (RAG) has improved large language models\n(LLMs) by using knowledge retrieval to overcome knowledge deficiencies. How-\never, current RAG methods often fall short of ensuring the depth and complete-\nness of retrieved information, which is necessary for complex reasoning tasks.\nIn this work, we introduce Think-on-Graph 2.0 (ToG-2), a hybrid RAG frame-\nwork that iteratively retrieves information from both unstructured and structured\nknowledge sources in a tight-coupling manner.\nSpecifically, ToG-2 leverages\nknowledge graphs (KGs) to link documents via entities, facilitating deep and\nknowledge-guided context retrieval. Simultaneously, it utilizes documents as en-\ntity contexts to achieve precise and efficient graph retrieval. ToG-2 alternates\nbetween graph retrieval and context retrieval to search for in-depth clues rele-\nvant to the question, enabling LLMs to generate answers. We conduct a series\nof well-designed experiments to highlight the following advantages of ToG-2:\n1) ToG-2 tightly couples the processes of context retrieval and graph retrieval,\ndeepening context retrieval via the KG while enabling reliable graph retrieval\nbased on contexts; 2) it achieves deep and faithful reasoning in LLMs through\nan iterative knowledge retrieval process of collaboration between contexts and\nthe KG; and 3) ToG-2 is training-free and plug-and-play compatible with vari-\nous LLMs. Extensive experiments demonstrate that ToG-2 achieves overall state-\nof-the-art (SOTA) performance on 6 out of 7 knowledge-intensive datasets with\nGPT-3.5, and can elevate the performance of smaller models (e.g"
+      },
+      {
+        "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+        "page_start": 3,
+        "page_end": 3,
+        "source_spans": [
+          {
+            "pdf_page": 3,
+            "start_char": 223,
+            "end_char": 1439,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1216,
+            "block_bboxes": [
+              [
+                108.0,
+                112.073,
+                504.003,
+                253.634
+              ],
+              [
+                108.299,
+                272.586,
+                217.097,
+                284.541
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "aaec1452ac4c24ca48361f19c752436e28aec78b016cd5299969f5e5422b63a0",
+        "section": "INTRODUCTION",
+        "text": "The advantage of ToG-2 can be summarized as: (1) In-depth retrieval: ToG-2 achieves in-depth\nand reliable context retrieval through the guide of KGs and performs precise graph retrieval by\ntreating documents as node contexts, achieving a tight-coupling combination of KG and text RAG,\nenabling deep and comprehensive retrieval processes. (2) Faithful reasoning: ToG-2 iteratively\nperforms a collaborative retrieval process based on KG and text, using retrieved heterogeneous\nknowledge as the basis for LLM reasoning and enhancing the faithfulness of LLM-generated con-\ntent (3) Efficiency and Effectiveness: a) ToG-2 is a training-free and plug-and-play framework that\ncan be applied to various LLMs; b) ToG-2 can be executed between any associated KG and docu-\nment database, while for purely document database, entities can be extracted from the documents\nfirst, and then a graph can be constructed through relation extraction or entity co-occurrence (Edge\net al., 2024); c) ToG-2 achieves new SOTA performances on various complex knowledge reasoning\ndatasets and can elevate the reasoning capabilities of smaller LLMs, e.g., Llama2-13B to a level\ncomparable to direct reasoning with powerful LLMs like GPT-3.5.\n2\n"
+      }
+    ],
+    "relation_outline": "整图文本化会超过上下文窗口，直接截断丢信息；G-Retriever 选择相关子图以扩展到大图。；G-Retriever 将图检索表述为 Prize-Collecting Steiner Tree 优化。；ToG-2 通过实体连接文档，用文档作为实体上下文，交替进行图检索与上下文检索。",
+    "relation_review": {
+      "evidence": "覆盖每个必要事实并逐条引用其来源原文。",
+      "semantics": "核对关系方向、实体角色、训练/测试角色、数据集设置和指标。",
+      "synthesis": "区分论文直接主张与跨来源分析；共享实体不自动构成因果或方法继承。",
+      "uncertainty": "来源没有说明的条件须标为未知，不可补造。"
+    },
+    "must_not_claim": "不能声称 ToG-2 使用 PCST，也不能从机制描述推出两者资源实测相同。",
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "All required facts and citations; direction, entity roles, train/test role, evaluation setup and unsupported claims reviewed separately.",
+      "graph_coverage": "Each answerable relation case must expose a source-backed path for every required unit; negative cases must not contain their prohibited edge.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins."
+    },
+    "expected_graph_paths": [
+      [
+        {
+          "unit_id": "grscale",
+          "path_id": "grscale.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "G-Retriever"
+            },
+            {
+              "type": "Optimization",
+              "name": "Prize-Collecting Steiner Tree"
+            },
+            {
+              "type": "GraphComponent",
+              "name": "relevant subgraph"
+            },
+            {
+              "type": "Component",
+              "name": "bounded LLM context"
+            }
+          ],
+          "claim_ids": [
+            "eb612a86bd22077763f4da3bdf61881bb8292020837a36a502dce73e4cd3ee20",
+            "c72e3f6e63da1bb718f39530de6ea069d2ad24f0574b08adb0c8acc92544cd61",
+            "9c59c8f280da7e204c49f016afa9fa6e970c3a7d9f8848c4e1a5bc265416c2bf"
+          ]
+        }
+      ],
+      [
+        {
+          "unit_id": "pcst",
+          "path_id": "pcst.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "G-Retriever"
+            },
+            {
+              "type": "Optimization",
+              "name": "Prize-Collecting Steiner Tree"
+            },
+            {
+              "type": "GraphComponent",
+              "name": "relevant subgraph"
+            }
+          ],
+          "claim_ids": [
+            "0557c5564c9196bb82bcc13ed69fd32a8680986d5e1ab904e992b16f31e196d3",
+            "63bfd522465c0dca25101efb0f914e9ffd8a621cf538b36aee4e9dceb7b89f73"
+          ]
+        }
+      ],
+      [
+        {
+          "unit_id": "tog2",
+          "path_id": "tog2.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "Component",
+              "name": "entities linked to documents"
+            }
+          ],
+          "claim_ids": [
+            "974930a1b13429fb586f58552fb61d99deae6271164997cdd259dea045e5c12c"
+          ]
+        },
+        {
+          "unit_id": "tog2",
+          "path_id": "tog2.P02",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "Component",
+              "name": "graph retrieval"
+            }
+          ],
+          "claim_ids": [
+            "0d89b3bdbccffcc0f49f2f7b0321d3372f26c36bd772676434f1318e0cf4c13e"
+          ]
+        },
+        {
+          "unit_id": "tog2",
+          "path_id": "tog2.P03",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "ToG-2"
+            },
+            {
+              "type": "Component",
+              "name": "context retrieval"
+            }
+          ],
+          "claim_ids": [
+            "1ec004fb0a9d30c6da472c737bcad209622879d24980839c2a9e74ddc6e3da36"
+          ]
+        },
+        {
+          "unit_id": "tog2",
+          "path_id": "tog2.P04",
+          "nodes": [
+            {
+              "type": "Component",
+              "name": "graph retrieval"
+            },
+            {
+              "type": "Component",
+              "name": "context retrieval"
+            }
+          ],
+          "claim_ids": [
+            "bbec40ba75ec148a481ae42f9092ec69f7da4f31b97282f4090fe492dcd29ec3"
+          ]
+        }
+      ]
+    ],
+    "result_fields": [
+      "full answer",
+      "ranked candidates and scores",
+      "evidence and citation locations",
+      "graph paths",
+      "per-fact coverage and gaps",
+      "stage timings",
+      "tokens",
+      "paired differences",
+      "trace URLs"
+    ]
+  },
+  "metadata": {
+    "case_id": "R08",
+    "category": "cross",
+    "benchmark": "benchmark-v3",
+    "benchmark_sha256": "3ffb13a824016b58fd2cb5585bab2f3dbbf9767bd38b714ce148097122f6ac87",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "curated source review; not independent human gold"
+  },
+  "split": [
+    "cross"
+  ]
+}

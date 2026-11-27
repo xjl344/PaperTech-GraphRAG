@@ -1,0 +1,306 @@
+{
+  "id": "0bddf756-87d9-5dd1-8711-02dce358bf1f",
+  "inputs": {
+    "question": "HippoRAG 的 HotpotQA 与 ToG-2 的 AdvHotpotQA 是什么关系？引用两篇的设置说明，判断能否直接用结果数字比较两种检索方法。"
+  },
+  "outputs": {
+    "expected_answer": "ToG-2 将 AdvHotpotQA 描述为 HotpotQA 的挑战子集；HippoRAG 抽取验证集并组成候选语料，ToG-2 使用 full Wiki，不能直接横比。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "hippods",
+        "answer_point": "HippoRAG 主要评估 MuSiQue(answerable)、2WikiMultiHopQA，也纳入 HotpotQA。每个验证集取 1000 题，将对应支持和干扰段落组成检索语料。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_3fa28005a4df0de5249826585cf9d713",
+        "pages": [
+          5,
+          5
+        ],
+        "known_support_chunks": [
+          "chunk_3fa28005a4df0de5249826585cf9d713"
+        ]
+      },
+      {
+        "unit_id": "tog2ds",
+        "answer_point": "ToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。AdvHotpotQA 是 HotpotQA 挑战子集；FEVER/Creak 用 Acc.，其他用 EM；知识来源为 full Wikipedia/Wikidata。",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "primary_chunk": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+        "pages": [
+          6,
+          6
+        ],
+        "known_support_chunks": [
+          "chunk_16f86a00cebdf5e10d83c3a540fbc7f7"
+        ]
+      }
+    ],
+    "relation_outline": "HippoRAG → HotpotQA；ToG-2 → AdvHotpotQA → HotpotQA 挑战子集",
+    "must_not_claim": "不能把父数据集与子集视为相同测试协议。",
+    "case_id": "R13",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "hippods",
+        "required_fact": "HippoRAG 主要评估 MuSiQue(answerable)、2WikiMultiHopQA，也纳入 HotpotQA。每个验证集取 1000 题，将对应支持和干扰段落组成检索语料。",
+        "primary_chunk": "chunk_3fa28005a4df0de5249826585cf9d713",
+        "supporting_chunks": [
+          "chunk_3fa28005a4df0de5249826585cf9d713"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "tog2ds",
+        "required_fact": "ToG-2 实验包含 WebQSP、QALD10-en、AdvHotpotQA 等，不能仅据数据集名称判定胜负。AdvHotpotQA 是 HotpotQA 挑战子集；FEVER/Creak 用 Acc.，其他用 EM；知识来源为 full Wikipedia/Wikidata。",
+        "primary_chunk": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+        "supporting_chunks": [
+          "chunk_16f86a00cebdf5e10d83c3a540fbc7f7"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_3fa28005a4df0de5249826585cf9d713",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 5,
+        "page_end": 5,
+        "source_spans": [
+          {
+            "pdf_page": 5,
+            "start_char": 2205,
+            "end_char": 3400,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1195,
+            "block_bboxes": [
+              [
+                107.532,
+                383.68,
+                505.653,
+                470.063
+              ],
+              [
+                119.512,
+                481.129,
+                492.488,
+                491.322
+              ],
+              [
+                314.205,
+                502.845,
+                447.078,
+                511.811
+              ],
+              [
+                162.683,
+                517.888,
+                447.078,
+                577.187
+              ],
+              [
+                108.0,
+                592.604,
+                169.718,
+                602.566
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "553d9e14213d1ee4396bb21093e7656f5e40cd8ea92189cb7be5098760a44461",
+        "section": "Introduction",
+        "text": "We evaluate our method’s retrieval capabilities primarily on two challenging multi-hop QA bench-\nmarks, MuSiQue (answerable) [77] and 2WikiMultiHopQA [33]. For completeness, we also\ninclude the HotpotQA [89] dataset even though it has been found to be a much weaker test for\nmulti-hop reasoning due to many spurious signals [77], as we also show in Appendix B. To limit\nthe experimental cost, we extract 1,000 questions from each validation set as done in previous work\n[63, 78]. In order to create a more realistic retrieval setting, we follow IRCoT [78] and collect all\ncandidate passages (including supporting and distractor passages) from our selected questions and\nform a retrieval corpus for each dataset. The details of these datasets are shown in Table 1.\nTable 1: Retrieval corpora and extracted KG statistics for each of our 1,000 question dev sets.\nMuSiQue\n2Wiki\nHotpotQA\n# of Passages (P)\n11, 656\n6, 119\n9, 221\n# of Unique Nodes (N)\n91, 729\n42, 694\n82, 157\n# of Unique Edges (E)\n21, 714\n7, 867\n17, 523\n# of Unique Triples\n107, 448\n50, 671\n98, 709\n# of Contriever Synonym Edges (E′)\n145, 990\n146, 020\n159, 112\n# of ColBERTv2 Synonym Edges (E′)\n191, 636\n82, 526\n171, 856\n3.2\nBaselines\n"
+      },
+      {
+        "chunk_id": "chunk_16f86a00cebdf5e10d83c3a540fbc7f7",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+        "page_start": 6,
+        "page_end": 6,
+        "source_spans": [
+          {
+            "pdf_page": 6,
+            "start_char": 1827,
+            "end_char": 2910,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1083,
+            "block_bboxes": [
+              [
+                108.299,
+                418.062,
+                200.083,
+                430.017
+              ],
+              [
+                108.249,
+                442.645,
+                239.271,
+                452.608
+              ],
+              [
+                108.0,
+                463.168,
+                504.003,
+                582.72
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "7a280ebe4f0f92691ef9d72ff9376b74cbab58ff051c88d66a0a6c791bdd2931",
+        "section": "EXPERIMENTS",
+        "text": "EXPERIMENTS\n4.1\nDATASETS AND METRICS\nWe evaluated our method on different knowledge-intensive reasoning benchmark datasets, including\ntwo multi-hop KBQA datasets WebQSP (Yih et al., 2016) and QALD10-en (Usbeck et al., 2023), a\nmulti-hop complex document QA dataset AdvHotpotQA (Ye & Durrett, 2022) which is a challeng-\ning subset of HotpotQA (Yang et al., 2018), a slot filling dataset Zero-Shot RE(Petroni et al., 2021),\nand two fact verification dataset FEVER (Thorne et al., 2018) and Creak (Onoe et al., 2021). The\nevaluation metric for FEVER and Creak is Accuracy (Acc.), while the metric for other datasets is\nExact Match (EM). Recall and F1 scores are not used since knowledge sources are not limited to\ndocument databases. Following previous work (Li et al., 2024c), full Wikipedia and Wikidata are\nused as unstructured and structured knowledge sources for all of these datasets. Compared to the\ndistractor setting, this full Wiki setting makes the retrieval process more challenging and can better\nevaluate the effectiveness of various methods on knowledge reasoning tasks.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_1f0f648a6595c842e4881196687e103c",
+      "paper_45e21fe95d28e544e8b55c6a986ff63e"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "必须覆盖全部必要事实并引用每篇所需原文",
+      "semantics": "逐项检查关系方向、实体角色、任务/实验条件",
+      "synthesis": "区分原文直接关系与跨来源分析，不将分析链冒充已入图事实",
+      "uncertainty": "缺任何必要环节须部分回答/说明缺口，不补写关系"
+    },
+    "scoring_rules": {
+      "primary": "All required source papers retained; measured using inherited references only after assembly.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40: reciprocal first rank containing any known supporting unit",
+        "selected evidence unit coverage",
+        "all-units coverage"
+      ],
+      "denominator": "16 failure-selected cross-text cases; before/after paired evidence replay. Not comparable to full v2 averages.",
+      "relevance": "仅原文核查后的有限支持池；没有穷举所有等价来源，池外不等于不相关。",
+      "latency": "Evidence assembly only, excluding retrieval, reranking and generation. Historical timings are separate.",
+      "p95": "按各类别及全部可回答题分别计算，单次小样本不表示 SLA。",
+      "answer_review": "No new answers generated. No answer accuracy or citation success change is claimed.",
+      "relation_gold": "reasoning_chain 为人工可审阅的分析提纲，不是生产图路径金标；共享基准、分析比较不自动对应图谱 Schema 边。",
+      "interpretation": "分别报告基础、跨文本、反例表现；新旧题集分布不同，不能由总分变化推导系统改善或 Graph 胜出。"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "固定旧候选的证据选择回放；不生成新回答。",
+      "controls": {
+        "fulltext_top": 20,
+        "dense_top": 20,
+        "candidates": 40,
+        "evidence_max": 8,
+        "context_bytes": 6000,
+        "hops": 2,
+        "degree": 8,
+        "graph_paths": 40,
+        "rerank_threshold": 0.05,
+        "max_pair_tokens": 1024,
+        "rrf_k": 60,
+        "query_vectors": "one batched cloud call, reused unchanged across paired arms",
+        "order": "odd numbered case Hybrid first, even Graph first; one warmup; no response retries",
+        "generation_subset": [
+          "R01",
+          "R02",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R08",
+          "R09",
+          "R10",
+          "R11",
+          "R12",
+          "R13",
+          "R14",
+          "R15",
+          "R16",
+          "R17",
+          "R18",
+          "R19",
+          "R20",
+          "R21",
+          "R22",
+          "R23",
+          "R24",
+          "N01",
+          "N02",
+          "N03",
+          "N04",
+          "N05",
+          "N06",
+          "N07",
+          "N08"
+        ],
+        "generation_policy": "基础 8 题仅检索；24 道关系题与 8 道反例按证据门控生成，最多 64 次配对生成调用。"
+      },
+      "models": {
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16"
+      },
+      "parent_generate": true,
+      "comparison": {
+        "arms": [
+          "Graph-before",
+          "Graph-after"
+        ],
+        "mode": "frozen_candidate_evidence_replay",
+        "changed": "question-driven source recognition and evidence reservation",
+        "fixed": [
+          "question",
+          "reference facts",
+          "ranked candidates and scores",
+          "retrieved graph paths",
+          "6000-byte budget",
+          "rerank threshold",
+          "path assembly policy"
+        ],
+        "generation": "No generation replayed; parent answers remain historical context only."
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 Graph-before / Graph-after Experiment runs",
+      "fields": [
+        "全部冻结候选与分数",
+        "入选原文与位置",
+        "来源保留与缺口",
+        "逐事实覆盖",
+        "图路径",
+        "证据组装耗时",
+        "历史回答、引用、Token 与 Trace（明确为父运行）"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    }
+  },
+  "metadata": {
+    "case_id": "R13",
+    "category": "cross",
+    "benchmark": "benchmark-source-coverage-v1",
+    "benchmark_sha256": "fcbffc2cd3012d7e49daa8361e202f2b6211095974236c48dc8bfe057f7fb7f6",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。",
+    "selection_reason": {
+      "required_papers": [
+        "paper_1f0f648a6595c842e4881196687e103c",
+        "paper_45e21fe95d28e544e8b55c6a986ff63e"
+      ],
+      "baseline_selected_papers": [
+        "paper_1f0f648a6595c842e4881196687e103c"
+      ],
+      "missing_papers": [
+        "paper_45e21fe95d28e544e8b55c6a986ff63e"
+      ]
+    }
+  },
+  "split": [
+    "cross"
+  ]
+}

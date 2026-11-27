@@ -1,0 +1,199 @@
+{
+  "id": "3102f787-d278-5f69-8c69-f7dbfbc3f656",
+  "inputs": {
+    "question": "KGP 的 TF-IDF 建图什么时候连接两个段落？为什么把文档标题也加入关键词集合？"
+  },
+  "outputs": {
+    "expected_answer": "先做TF-IDF关键词提取，加入文档标题因为部分问题关注标题实体；共享任一关键词的两个段落连接。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "F08.S01",
+        "answer_point": "先做TF-IDF关键词提取，加入文档标题因为部分问题关注标题实体；共享任一关键词的两个段落连接。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_1da329a96f21568de531f98b40b330e7",
+        "pages": [
+          3,
+          3
+        ],
+        "known_support_chunks": [
+          "chunk_1da329a96f21568de531f98b40b330e7"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "F08",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "F08.S01",
+        "required_fact": "先做TF-IDF关键词提取，加入文档标题因为部分问题关注标题实体；共享任一关键词的两个段落连接。",
+        "primary_chunk": "chunk_1da329a96f21568de531f98b40b330e7",
+        "supporting_chunks": [
+          "chunk_1da329a96f21568de531f98b40b330e7"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_1da329a96f21568de531f98b40b330e7",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 3,
+        "page_end": 3,
+        "source_spans": [
+          {
+            "pdf_page": 3,
+            "start_char": 2234,
+            "end_char": 3823,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1589,
+            "block_bboxes": [
+              [
+                54.0,
+                584.764,
+                292.505,
+                704.407
+              ],
+              [
+                319.5,
+                284.592,
+                558.005,
+                469.988
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "df47e2b4a63562674f3ee0f9b73bca9f73e45f37a56e7ea614e8b02bb39c901b",
+        "section": "Introduction",
+        "text": "TF-IDF KG Construction\nFor adding edges according to\nlexical similarity, we first apply TF-IDF keyword extrac-\ntion (Ramos et al. 2003) over each document to filter out\nmeaningless words such as supporting verbs and articles,\nwhich also reduces the dimension of bag-of-word (BOW)\nfeatures, sparsifies the constructed graph and increases the\ngraph traversal efficiency. In addition, we add the document\ntitle into the extracted keyword set since some questions fo-\ncus on title entities. We collect the extracted keywords from\nall documents to form the keyword space W and then con-\nnect two passages if they share any common keyword in W.\nKNN-ST/MDR KG Construction\nFor adding edges ac-\ncording to semantic similarity, we can readily employ pre-\nexisting models such as sentence transformers to gener-\nate passage embedding Xi for each node vi and subse-\nquently compute pairwise similarity matrix to construct the\nK-nearest neighbor (KNN) graph. However, these off-the-\nshelf models, typically trained on tasks not so-related to\nMD-QA, may not adequately encapsulate necessary logical\nassociations in their embedding similarity demanded by the\nquestion. To overcome this problem, we follow the train-\ning strategy of MDR (Xiong et al. 2020) and train a sen-\ntence encoder by predicting the subsequent supporting facts\nbased on previously supporting facts, thereby endowing the\nencoder with reasoning capability. Consequently, the em-\nbedding similarity and the corresponding constructed KNN\ngraph fundamentally encapsulate the necessary logical asso-\nciations between different passages.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_57e4088ab0410527356a07d8b6f88f3b"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "cross final necessary-source macro coverage",
+      "negative_policy": "8道反例来源诊断单列，不计主召回，不评拒答正确率",
+      "semantic_review": "not assessed; no generation",
+      "source_pools": "unchanged, non-exhaustive, pre-frozen",
+      "pairing": "case-level win/tie/loss vs declared control; individual source-stage transitions also shown",
+      "causal_limit": "development set only; source-paper inclusion is not necessary-fact support"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索与证据评估（原冻结方案）",
+      "controls": {
+        "stage": "recall_width_intervention",
+        "fulltext_top": 20,
+        "rrf_k": 60,
+        "generation": false,
+        "embedding_calls": 0,
+        "named_policy": "existing named-paper reservation, not necessary-source reservation",
+        "no_gold_in_inputs": true,
+        "model_config": {
+          "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+          "CLOUD_BGE_PROVIDER": "cloudflare",
+          "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+          "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+          "LOCAL_RERANKER_DEVICE": "cuda",
+          "LOCAL_RERANKER_DTYPE": "float16",
+          "LOCAL_RERANKER_PERSISTENT": "true"
+        },
+        "dense_values": [
+          20,
+          40
+        ],
+        "candidate_cap": 60,
+        "selection": {
+          "budget": 8000,
+          "evidence_max": 12,
+          "source_policy": "named_first"
+        },
+        "score_policy": "reuse identical original-query scores for saved candidates; score only newly admitted chunks with original question",
+        "gate": "smallest k recovering any missing cross source; fixed before new reranker calls",
+        "target_adoption": "cross regression count must not exceed improvement count; not automatic production adoption"
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Dense20 / Dense40 Experiments",
+      "fields": [
+        "候选通道完整排名与分数",
+        "全部候选原文及位置",
+        "必要来源上游/重排/预算缺口",
+        "逐题配对差异",
+        "时延/调用量与Token状态",
+        "证据原文/图路径",
+        "原始及本轮Experiment Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "F08.A01",
+        "requirement": "先做TF-IDF关键词提取，加入文档标题因为部分问题关注标题实体",
+        "unit_ids": [
+          "F08.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F08.S01": [
+            "chunk_1da329a96f21568de531f98b40b330e7"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "F08.A02",
+        "requirement": "共享任一关键词的两个段落连接",
+        "unit_ids": [
+          "F08.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F08.S01": [
+            "chunk_1da329a96f21568de531f98b40b330e7"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "selection_bias": "这40题与来源已参与前轮诊断和本轮方案讨论；仅开发回归，不是新题泛化测试。"
+  },
+  "metadata": {
+    "case_id": "F08",
+    "category": "fact",
+    "benchmark": "benchmark-recall-intervention-v1",
+    "benchmark_sha256": "82781672b113c90648d9f1d82838d411db7a6993016df74a41855fe888ad8e4e",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; exposed development set",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

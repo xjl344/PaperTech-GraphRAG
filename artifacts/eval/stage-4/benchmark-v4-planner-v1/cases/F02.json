@@ -1,0 +1,292 @@
+{
+  "id": "902982eb-3b9b-5932-88a6-e6548ca37b55",
+  "inputs": {
+    "question": "按 KG-GPT 论文，把句子分割、图检索和推理按执行顺序排列，并分别说明它们做什么。"
+  },
+  "outputs": {
+    "expected_answer": "先 Sentence Segmentation 划分句子，再 Graph Retrieval 检索相关图组件，最后 Inference 得出逻辑结论。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "kggpt",
+        "answer_point": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "primary_chunk": "chunk_61e96cb10e247f7d002b4163920cc737",
+        "pages": [
+          1,
+          1
+        ],
+        "known_support_chunks": [
+          "chunk_61e96cb10e247f7d002b4163920cc737"
+        ]
+      }
+    ],
+    "relation_outline": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+    "must_not_claim": null,
+    "case_id": "F02",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "kggpt",
+        "required_fact": "KG-GPT 三步为 Sentence Segmentation、Graph Retrieval、Inference。",
+        "primary_chunk": "chunk_61e96cb10e247f7d002b4163920cc737",
+        "supporting_chunks": [
+          "chunk_61e96cb10e247f7d002b4163920cc737"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_61e96cb10e247f7d002b4163920cc737",
+        "paper_id": "paper_251b66908d758ab4453ca76d45b64fca",
+        "parse_id": "parse_12e269ba2c812d12d1add49e394558e3",
+        "title": "KG-GPT: A General Framework for Reasoning on Knowledge Graphs Using Large Language Models",
+        "source_relative_path": "Methods/181_KG-GPT A General Framework for Reasoning on Knowledge Graphs Using Large Language Models.pdf",
+        "page_start": 1,
+        "page_end": 1,
+        "source_spans": [
+          {
+            "pdf_page": 1,
+            "start_char": 237,
+            "end_char": 1173,
+            "chunk_start_char": 0,
+            "chunk_end_char": 936,
+            "block_bboxes": [
+              [
+                157.758,
+                214.382,
+                202.243,
+                226.337
+              ],
+              [
+                87.516,
+                240.528,
+                273.87,
+                489.67
+              ],
+              [
+                70.866,
+                504.681,
+                153.68,
+                516.636
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "ffadad8a24b98afff5373c3d1a13f932f8b1ebfa0fc1da41a2a7f203f2283e40",
+        "section": "Abstract",
+        "text": "Abstract\nWhile large language models (LLMs) have\nmade considerable advancements in under-\nstanding and generating unstructured text, their\napplication in structured data remains underex-\nplored. Particularly, using LLMs for complex\nreasoning tasks on knowledge graphs (KGs)\nremains largely untouched. To address this,\nwe propose KG-GPT, a multi-purpose frame-\nwork leveraging LLMs for tasks employing\nKGs. KG-GPT comprises three steps: Sentence\nSegmentation, Graph Retrieval, and Inference,\neach aimed at partitioning sentences, retriev-\ning relevant graph components, and deriving\nlogical conclusions, respectively. We evalu-\nate KG-GPT using KG-based fact verification\nand KGQA benchmarks, with the model show-\ning competitive and robust performance, even\noutperforming several fully-supervised models.\nOur work, therefore, marks a significant step\nin unifying structured and unstructured data\nprocessing within the realm of LLMs.1\n1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_251b66908d758ab4453ca76d45b64fca"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "SupportRecall@5; within one fact unit supporting sources are OR, required fact units are AND.",
+      "secondary": [
+        "SupportRecall@8",
+        "MRR@40",
+        "selected evidence unit coverage",
+        "all required units coverage"
+      ],
+      "answer_review": "Per-case atomic reference criteria, scored 0/1 each by a named reviewer; evidence support and citation location checked separately.",
+      "graph_coverage": "Source-backed expected subgraphs are a reference check, not measured retrieval success or answer correctness.",
+      "denominator": "32 answerable questions; 24 cross-paper relation questions reported separately; 8 negative cases reported separately.",
+      "interpretation": "retrieval coverage, citation validity, graph-path coverage and semantic answer correctness are separate results; no assumption that graph wins.",
+      "semantic_score": "Number of supported satisfied atomic criteria / all criteria. This is not calculated by source ID recall.",
+      "semantic_pass": "All criteria satisfied with supporting citations; no critical unsupported claim. Negatives must correct/reject the premise within the evidence boundary.",
+      "critical_errors": [
+        "伪造继承/评测/全称优越性",
+        "颠倒增强方向",
+        "混淆训练与测试角色",
+        "混淆预算耗尽与正确答案",
+        "伪造数值或来源"
+      ],
+      "reporting": "Overview, per-category metrics, charts, latency, tokens and full paired details must coexist after real execution."
+    },
+    "evaluation_config": {
+      "generate": true,
+      "planned_output": "完整模型回答与引用",
+      "controls": {
+        "arms": [
+          "P0-SingleQuery",
+          "P2-Planner-OwnerRerank"
+        ],
+        "arm_configs": {
+          "P0-SingleQuery": {
+            "graph_enabled": false,
+            "rerank_contextual": true,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "round_robin",
+            "citation_protocol": "source-choice-v2",
+            "query_planner": false,
+            "premise_check": false
+          },
+          "P2-Planner-OwnerRerank": {
+            "graph_enabled": false,
+            "rerank_contextual": true,
+            "evidence_budget": 18000,
+            "evidence_max": 12,
+            "source_policy": "named_first",
+            "score_policy": "relative",
+            "reservation_policy": "round_robin",
+            "citation_protocol": "source-choice-v2",
+            "query_planner": true,
+            "premise_check": true
+          }
+        },
+        "backend": "neo4j",
+        "graph_enabled": false,
+        "fulltext_top": 20,
+        "dense_top": 20,
+        "multi_query_cap": 64,
+        "reranker_batch_size": 4,
+        "generation_max_tokens": 2048,
+        "planner_max_tokens": 600,
+        "thinking": "disabled",
+        "execution_order": "alternate arm order by case index",
+        "query_vector": "shared frozen Cloudflare batch for Q00; single live Cloudflare batch for generated subqueries",
+        "gold_exclusion": "question text only; planner and generator never see gold facts, source pools, or reference answers"
+      },
+      "models": {
+        "DEEPSEEK_MODEL": "deepseek-v4.1-flash-1017",
+        "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+        "CLOUD_BGE_PROVIDER": "cloudflare",
+        "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+        "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+        "LOCAL_RERANKER_DEVICE": "cuda",
+        "LOCAL_RERANKER_DTYPE": "float16",
+        "LOCAL_RERANKER_PERSISTENT": "true",
+        "LOCAL_RERANKER_BATCH_SIZE": 4
+      }
+    },
+    "result_display": {
+      "location": "本题关联的 P0-SingleQuery / P2-Planner-OwnerRerank Experiment runs",
+      "fields": [
+        "完整回答",
+        "全部重排候选与分数",
+        "入选原文与引用位置",
+        "全部图路径与生成采用路径",
+        "逐事实覆盖/缺口",
+        "逐阶段耗时",
+        "Token 与调用状态",
+        "两组证据及指标差异",
+        "原始 Trace 链接"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "assessment": {
+      "axis": "阶段顺序",
+      "criteria": [
+        {
+          "id": "F02.C01",
+          "requirement": "句子分割先于图检索，图检索先于推理。",
+          "unit_ids": [
+            "kggpt"
+          ],
+          "supporting_chunks_by_unit": {
+            "kggpt": [
+              "chunk_61e96cb10e247f7d002b4163920cc737"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "F02.C02",
+          "requirement": "三个阶段分别负责划分句子、检索相关图组件和得出逻辑结论。",
+          "unit_ids": [
+            "kggpt"
+          ],
+          "supporting_chunks_by_unit": {
+            "kggpt": [
+              "chunk_61e96cb10e247f7d002b4163920cc737"
+            ]
+          },
+          "source_rule": "每个列出的 unit 均须有来源支持；同一 unit 内替代来源按 OR。",
+          "score_values": [
+            0,
+            1
+          ]
+        }
+      ],
+      "max_score": 2,
+      "focus_predicates": [
+        "HAS_STAGE",
+        "PRECEDES"
+      ],
+      "reference_path_scope": "本题各来源单元的预期子图；可能是多条分支或互不相连的跨论文子图。",
+      "critical_error_rule": "触发全局 critical_errors 时本题不判全对，并保留逐项分数与错误说明。",
+      "reviewer_status": "not_reviewed",
+      "model_result_status": "not_run"
+    },
+    "expected_graph_paths": {
+      "kggpt": [
+        {
+          "unit_id": "kggpt",
+          "path_id": "kggpt.P01",
+          "nodes": [
+            {
+              "type": "Method",
+              "name": "KG-GPT"
+            },
+            {
+              "type": "Stage",
+              "name": "Sentence Segmentation"
+            },
+            {
+              "type": "Stage",
+              "name": "Graph Retrieval"
+            },
+            {
+              "type": "Stage",
+              "name": "Inference"
+            }
+          ],
+          "claim_ids": [
+            "00c9daa7ef8ecce3638e2dfd66df2fb08c7d79fded451fc354a1b486e52b09bd",
+            "b2aebe7fe5bd0b94dd11868f23c216fc9fff8dc34d847b09ab3468359c5bf5a5",
+            "f225ee2831703881de29306bd51dc744ed9156379a9b0f1eb2e1bf74f824ab1a"
+          ]
+        }
+      ]
+    },
+    "graph_snapshot": {
+      "version": "benchmark-v3",
+      "database": "artifacts/eval/stage-4/benchmark-v3/isolated-graph.sqlite3",
+      "sha256": "f2eaae0c534dfa501b66ed80b5cd94c2140163d7a760acb56babd0218bab5d73",
+      "node_count": 198,
+      "claim_count": 204,
+      "scope": "same frozen isolated graph; no graph edits",
+      "construction": "source-curated developer graph; not an independently extracted test graph"
+    }
+  },
+  "metadata": {
+    "case_id": "F02",
+    "category": "fact",
+    "benchmark": "benchmark-v4-planner-v1",
+    "benchmark_sha256": "5e50acf752ca88bb0adfe9b64176f71728288a175767ebdea52f4aaf12ad8aa9",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

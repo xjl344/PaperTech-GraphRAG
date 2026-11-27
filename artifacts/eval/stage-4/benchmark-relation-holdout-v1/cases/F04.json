@@ -1,0 +1,284 @@
+{
+  "id": "43c0b88b-255d-5995-91ae-f2c67315adcc",
+  "inputs": {
+    "question": "ToG-2 在第一次图检索前做了哪些准备？如果初始文档已经足够回答，还必须进入图搜索吗？"
+  },
+  "outputs": {
+    "expected_answer": "先实体链接、Topic Prune，再从初始主题实体关联文档中用稠密模型取 top-k 块；LLM 判断证据充分即可停止，无需进一步检索。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "F04.S01",
+        "answer_point": "先实体链接、Topic Prune，再从初始主题实体关联文档中用稠密模型取 top-k 块；LLM 判断证据充分即可停止，无需进一步检索。",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "primary_chunk": "chunk_362a4aa0f89367fe96563183423db354",
+        "pages": [
+          4,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_362a4aa0f89367fe96563183423db354"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "F04",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "F04.S01",
+        "required_fact": "先实体链接、Topic Prune，再从初始主题实体关联文档中用稠密模型取 top-k 块；LLM 判断证据充分即可停止，无需进一步检索。",
+        "primary_chunk": "chunk_362a4aa0f89367fe96563183423db354",
+        "supporting_chunks": [
+          "chunk_362a4aa0f89367fe96563183423db354"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+        "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+        "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 1380,
+            "end_char": 2784,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1404,
+            "block_bboxes": [
+              [
+                108.0,
+                471.527,
+                504.004,
+                525.556
+              ],
+              [
+                144.53,
+                515.234,
+                366.053,
+                527.918
+              ],
+              [
+                108.0,
+                532.529,
+                504.004,
+                564.41
+              ],
+              [
+                108.0,
+                554.447,
+                504.003,
+                586.328
+              ],
+              [
+                108.249,
+                600.998,
+                289.634,
+                610.961
+              ],
+              [
+                108.0,
+                621.291,
+                504.002,
+                664.361
+              ],
+              [
+                211.214,
+                652.888,
+                261.535,
+                666.723
+              ],
+              [
+                108.0,
+                650.552,
+                504.002,
+                677.951
+              ],
+              [
+                119.378,
+                665.973,
+                159.504,
+                679.955
+              ],
+              [
+                145.1,
+                665.973,
+                202.938,
+                679.955
+              ],
+              [
+                188.534,
+                665.973,
+                235.681,
+                680.075
+              ],
+              [
+                221.277,
+                666.71,
+                267.832,
+                680.075
+              ],
+              [
+                263.857,
+                666.71,
+                281.741,
+                679.892
+              ],
+              [
+                277.766,
+                665.973,
+                322.408,
+                679.892
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "4518cdbcb58abe2291eb53e05b5f1a6687e1a26566e9f8cffdce1a2f8c17a249",
+        "section": "METHODOLOGY",
+        "text": "Given a question q, ToG-2 first identifies the entities present in q and links them to entities in the\nKG. This step can be done by different entity linking (EL) methods, such as LLMs or specialized EL\ntools 1. Then, ToG-2 performs a Topic Prune (TP) step to select suitable entities as starting points\nof exploring in a KG, which prompts the LLM to evaluate q and appearing entities, selecting topic\nentities E0\ntopic = {e1, e2, . . . , eN} and N is determined by LLM.\nPrior to the 1st-round graph retrieval, ToG-2 uses dense retrieval models (DRMs, including dual-\ntower and single-tower models) to extract the top-k chunks from the documents associated with\nthe initial topic entities E0\ntopic. The LLM then evaluates whether this information is sufficient to\nanswer the question, drawing on its own knowledge. If it concludes that the available information is\nadequate, no further steps will be required.\n3.2\nHYBRID KNOWLEDGE EXPLORATION\nThe following will illustrate how ToG-2 iteratively harmonizes and tightly couples heterogeneous\nknowledge. The iterative process will be explained in two main parts, Context-enhanced Graph\nSearch and Knowledge-guided Context Retrieval.\nFormally, in the i-th iteration, the topic\nentities are denoted as Ei\ntopic = {ei\n1, ei\n2, . . . , ei\nj} and their preceding triple paths are Pi−1 =\n{P i−1\n1\n, P i−1\n2\n, . . . , P i−1\nj\n}, P i−1\nj\n= {p0\nj, p1\nj, . . . , pi−1\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_1f0f648a6595c842e4881196687e103c"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "24道cross题最终必要来源覆盖率的逐题宏平均；Graph-only minus Hybrid配对差。",
+      "unit": "每项参考来源要求一个单元；同单元已核查等价块OR，必要来源单元AND；不是逐字事实正确率。",
+      "secondary": [
+        "candidate pool coverage@40",
+        "Recall@5",
+        "Recall@8",
+        "MRR@40",
+        "all source units covered",
+        "required paper coverage"
+      ],
+      "denominator": "32道正例；24道cross单列；8道negative只展示纠错来源诊断，不计主召回与拒答准确率。",
+      "retrieval_only": true,
+      "semantic_review": "not applicable: no answer generation",
+      "bootstrap": {
+        "seed": 20261122,
+        "paired_resamples": 10000,
+        "interval": "percentile 95%, case-level paired macro coverage",
+        "scope": "fixed 24-question diagnostic set; not a population guarantee; subgroups descriptive"
+      },
+      "failure_attribution": "post-hoc frozen support-pool IDs; no support IDs enter candidate production",
+      "source_pool_limit": "完整包含原文的同论文等价块已审计；其他语义等价段落可能未列入。另报论文覆盖但不当作事实覆盖。",
+      "negative_policy": "source diagnostics only; exclude from aggregate recall; no refusal correctness",
+      "reporting": "aggregate, categories, graph-source-link strata, named/discovery, paired deltas and CI, charts, latency, usage, all 40 details and traces"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索对照；无模型答案、无答案准确率",
+      "controls": {
+        "arms": [
+          "Graph-only",
+          "Hybrid"
+        ],
+        "candidate_max": 40,
+        "hybrid_fulltext_top": 20,
+        "hybrid_dense_top": 20,
+        "graph_candidate_max": 40,
+        "graph_hops": 2,
+        "graph_paths_max": 40,
+        "graph_seed_entities_max": 40,
+        "graph_per_node": 8,
+        "graph_seed_chunks": 0,
+        "graph_text_fallback": false,
+        "graph_source_rank_hint": false,
+        "evidence_max": 8,
+        "evidence_budget_bytes": 6000,
+        "path_prompt_bytes": 0,
+        "reranker": "same GPU FP16 model; threshold 0.05; max_pair_tokens 1024",
+        "candidate_note": "same total cap, not forced equal returned counts; Hybrid has two channels of 20",
+        "order": "alternate two arms by case index",
+        "generation_requests_max": 0
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Graph-only / Hybrid 两组 Experiment",
+      "fields": [
+        "全部候选原文及分数",
+        "最终证据与位置",
+        "实体/路径/截断",
+        "逐事实失败归因",
+        "两组差异",
+        "时延与上下文字节",
+        "零生成与Token未报告说明",
+        "原始Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "F04.A01",
+        "requirement": "先实体链接、Topic Prune，再从初始主题实体关联文档中用稠密模型取 top-k 块",
+        "unit_ids": [
+          "F04.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F04.S01": [
+            "chunk_362a4aa0f89367fe96563183423db354"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "F04.A02",
+        "requirement": "LLM 判断证据充分即可停止，无需进一步检索",
+        "unit_ids": [
+          "F04.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F04.S01": [
+            "chunk_362a4aa0f89367fe96563183423db354"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "novelty": "新增首次图检索前的早停顺序",
+    "query_form": "named",
+    "graph_source_link_stratum": "no_source_blocks_linked"
+  },
+  "metadata": {
+    "case_id": "F04",
+    "category": "fact",
+    "benchmark": "benchmark-relation-holdout-v1",
+    "benchmark_sha256": "6f0b9710ce0a265304b63fee8e8bd91e1a18f2cf0337e13753b211cdcbe6ceba",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; not independent human annotation",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

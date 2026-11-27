@@ -1,0 +1,85 @@
+<!doctype html><meta charset="utf-8"><title>R08.S02 原文语义审计</title><style>body{max-width:1100px;margin:30px auto;font:16px system-ui;line-height:1.65}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f6f8;padding:14px}</style><h1>R08.S02：STaRK 重排设置为何持续低分</h1><p>原文块确实包含STaRK重排设置和成本信息，但没有直接陈述输入长度限制；题面把两个不同维度绑在一个子查询中。</p><h2>题面与子查询</h2><pre>{
+  &quot;question&quot;: &quot;ToG-2 和 STaRK 都使用重排模型。前者对实体上下文数量的分析与后者的候选重排设置，分别暴露了哪些成本或输入长度限制？&quot;,
+  &quot;subqueries&quot;: [
+    {
+      &quot;arm&quot;: &quot;Owner-Clean&quot;,
+      &quot;query&quot;: &quot;STaRK 的候选重排设置暴露了哪些成本或输入长度限制？&quot;,
+      &quot;original_query&quot;: &quot;STaRK 的候选重排设置暴露了哪些成本或输入长度限制？&quot;,
+      &quot;removed&quot;: []
+    },
+    {
+      &quot;arm&quot;: &quot;Original-Reused&quot;,
+      &quot;query&quot;: &quot;STaRK 的候选重排设置暴露了哪些成本或输入长度限制？&quot;,
+      &quot;original_query&quot;: &quot;STaRK 的候选重排设置暴露了哪些成本或输入长度限制？&quot;,
+      &quot;removed&quot;: []
+    },
+    {
+      &quot;arm&quot;: &quot;Max-Original-Owner&quot;,
+      &quot;query&quot;: &quot;STaRK 的候选重排设置暴露了哪些成本或输入长度限制？&quot;,
+      &quot;original_query&quot;: &quot;STaRK 的候选重排设置暴露了哪些成本或输入长度限制？&quot;,
+      &quot;removed&quot;: []
+    }
+  ]
+}</pre><h2>支持原文与位置</h2><h3>STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases，第7页</h3><pre>{
+  &quot;chunk_id&quot;: &quot;chunk_bb730573725b148aa7913e7f17bb9261&quot;,
+  &quot;title&quot;: &quot;STaRK: Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases&quot;,
+  &quot;page_start&quot;: 7,
+  &quot;page_end&quot;: 7,
+  &quot;section&quot;: &quot;Experiments&quot;,
+  &quot;source_relative_path&quot;: &quot;Resources/002_STaRK Benchmarking LLM Retrieval on Textual and Relational Knowledge Bases.pdf&quot;,
+  &quot;text&quot;: &quot;• LLM Rerankers: Claude3 and GPT-4 rerankers [11, 62]. These models improve the precision of\ntop-k ada-002 results by reranking them using large language models. We employ GPT-4-turbo\n(gpt-4-1106-preview) and Claude3 (claude-3-opus), setting k = 20 for synthesized\nqueries and k = 10 for human-generated queries. Given a query, the LLMs assign a satisfaction\nscore from 0 to 1 to each candidate entity based on textual and relational information. Due to high\ncomputational costs, we evaluate these rerankers on a random 10% sample of test queries.\nThe performance of these models are measured using standard retrieval metrics below.\n• Hit@k assesses whether the correct item is among the top-k results from the model. We used\nk = 1 and k = 5 for evaluation. At k = 1, it evaluates the accuracy of the top recommendation; at\nk = 5, it examines the model’s precision in a wider recommendation set.\n• Recall@k measures the proportion of relevant items in the top-k results. For synthesized queries,\nk = 20 is used, as the answer length of all of the queries in our benchmarks are equal or smaller\nthen 20. This metric offers insight into the model’s ability to identify all relevant items, particularly\nin scenarios where missing any could be critical.\n&quot;,
+  &quot;source_spans&quot;: [
+    {
+      &quot;pdf_page&quot;: 7,
+      &quot;start_char&quot;: 2413,
+      &quot;end_char&quot;: 3663,
+      &quot;chunk_start_char&quot;: 0,
+      &quot;chunk_end_char&quot;: 1250,
+      &quot;block_bboxes&quot;: [
+        [
+          108.0,
+          494.427,
+          504.004,
+          558.972
+        ],
+        [
+          107.691,
+          571.321,
+          452.128,
+          581.284
+        ],
+        [
+          108.0,
+          589.391,
+          504.004,
+          621.402
+        ],
+        [
+          108.0,
+          628.984,
+          505.247,
+          671.905
+        ]
+      ]
+    }
+  ],
+  &quot;owner_clean_score&quot;: 0.0014437558129429817,
+  &quot;owner_clean_rank&quot;: 50,
+  &quot;original_score&quot;: 0.0031115086749196053,
+  &quot;original_rank&quot;: 53,
+  &quot;lexical_overlap&quot;: []
+}</pre><h2>判读</h2><pre>{
+  &quot;summary&quot;: &quot;原文块确实包含STaRK重排设置和成本信息，但没有直接陈述输入长度限制；题面把两个不同维度绑在一个子查询中。&quot;,
+  &quot;supported_details&quot;: [
+    &quot;使用GPT-4-turbo和Claude3做LLM rerank&quot;,
+    &quot;合成问题k=20、人工问题k=10&quot;,
+    &quot;每个候选由LLM按文本和关系信息给0到1满意度分&quot;,
+    &quot;由于计算成本高，只在测试问题随机10%上评估&quot;,
+    &quot;Recall@20用于合成问题&quot;
+  ],
+  &quot;absent_or_mismatched&quot;: [
+    &quot;原文没有明确的输入token/上下文长度上限&quot;,
+    &quot;题面中的“输入长度限制”更接近ToG-2侧要求，混入STaRK子查询后增加了未被该块支撑的语义条件&quot;
+  ],
+  &quot;interpretation&quot;: &quot;低分不能单独证明候选来源错误；更可能是查询要求包含原文没有的输入长度维度，且块中关键事实以k=20/k=10、random 10%和computational costs表达。应将STaRK检索目标拆成“候选数/评估采样/成本”，把输入长度限制留给ToG-2子查询。&quot;
+}</pre>

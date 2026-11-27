@@ -1,0 +1,210 @@
+{
+  "id": "366b475c-c9bf-5e95-97b1-43e99e028b77",
+  "inputs": {
+    "question": "G-Retriever 怎样处理边奖励大于边成本、从而产生负边成本的情况？虚拟节点的奖励和新边成本如何设置？"
+  },
+  "outputs": {
+    "expected_answer": "Pe>Ce 时用虚拟节点替代原边，虚拟节点奖励 Pe-Ce，连接两个端点的新边成本为0。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "F02.S01",
+        "answer_point": "Pe>Ce 时用虚拟节点替代原边，虚拟节点奖励 Pe-Ce，连接两个端点的新边成本为0。",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "primary_chunk": "chunk_5832b6bfb3218fc28548dbb991a42540",
+        "pages": [
+          7,
+          7
+        ],
+        "known_support_chunks": [
+          "chunk_5832b6bfb3218fc28548dbb991a42540"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "F02",
+    "category": "fact",
+    "required_facts": [
+      {
+        "unit_id": "F02.S01",
+        "required_fact": "Pe>Ce 时用虚拟节点替代原边，虚拟节点奖励 Pe-Ce，连接两个端点的新边成本为0。",
+        "primary_chunk": "chunk_5832b6bfb3218fc28548dbb991a42540",
+        "supporting_chunks": [
+          "chunk_5832b6bfb3218fc28548dbb991a42540"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_5832b6bfb3218fc28548dbb991a42540",
+        "paper_id": "paper_42a876c95c3fe85af679c0dbc03a8a7d",
+        "parse_id": "parse_7fe0408b3ffa33102e8edc4a4986dd24",
+        "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+        "source_relative_path": "Methods/112_G-Retriever Retrieval-Augmented Generation for Textual Graph Understanding and Question An.pdf",
+        "page_start": 7,
+        "page_end": 7,
+        "source_spans": [
+          {
+            "pdf_page": 7,
+            "start_char": 2023,
+            "end_char": 3540,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1517,
+            "block_bboxes": [
+              [
+                108.0,
+                410.428,
+                504.667,
+                436.729
+              ],
+              [
+                107.691,
+                441.585,
+                505.389,
+                538.896
+              ],
+              [
+                108.0,
+                553.177,
+                213.703,
+                563.14
+              ],
+              [
+                108.0,
+                571.643,
+                505.744,
+                605.024
+              ],
+              [
+                236.931,
+                611.056,
+                504.667,
+                624.69
+              ],
+              [
+                108.0,
+                630.433,
+                489.146,
+                642.121
+              ],
+              [
+                107.751,
+                646.942,
+                504.003,
+                667.924
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "5296e092b76168dc20a8da94b1042555c734b337134a82b9a13bc184fef87e8f",
+        "section": "Related Work",
+        "text": "cost(S) = |ES| × Ce,\n(8)\nand Ce denotes a predefined cost per edge, which is adjustable to control the subgraph size.\nThe original PCST algorithm is designed for node prizes only. However, given the significance of\nedge semantics in certain scenarios, we adapt the algorithm to accommodate edge prizes as follows:\nConsider an edge e with a cost Ce and a prize Pe. If Ce > Pe, it can be treated as a reduced edge cost\nof Ce −Pe. However, if Pe > Ce, negative edge costs are not allowed in the original algorithm. Our\nsolution involves replacing edge e with a ‘virtual node’ ve, connected to both endpoints of e. This\nvirtual node is assigned a prize of Pe −Ce, and the cost of the two new edges leading to the virtual\nnode is set to zero. This modification effectively mirrors the original problem, as including edge e\nin the original graph is analogous to including the virtual node in the modified graph. Finally, we\noptimize the PCST problem using a near-linear time approach [9].\n5.4\nAnswer Generation\nGraph Encoder. Let S∗= (V ∗, E∗) represent the retrieved subgraph. We use a graph encoder to\nmodel the structure of this graph, specifically using a standard Graph Attention Network (GAT) [43].\nOur approach for encoding the retrieved subgraph is defined as follows:\nhg = POOL(GNNϕ1(S∗)) ∈Rdg,\n(9)\nHere, POOL denotes the mean pooling operation, and dg is the dimension of the graph encoder.\nProjection Layer. We incorporate a multilayer perceptron (MLP) to align the graph token with the\nvector space of the LLM:\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_42a876c95c3fe85af679c0dbc03a8a7d"
+    ],
+    "min_source_papers": 1,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "primary": "cross candidate_pool_coverage",
+      "negative_policy": "8道反例来源诊断单列，不计主召回，不评拒答正确率",
+      "semantic_review": "not assessed; no generation",
+      "source_pools": "unchanged, non-exhaustive, pre-frozen",
+      "pairing": "case-level win/tie/loss vs declared control; individual source-stage transitions also shown",
+      "causal_limit": "development set only; source-paper inclusion is not necessary-fact support"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "仅检索与证据评估（原冻结方案）",
+      "controls": {
+        "stage": "upstream_recall_width",
+        "fulltext_top": 20,
+        "rrf_k": 60,
+        "generation": false,
+        "embedding_calls": 0,
+        "named_policy": "existing named-paper reservation, not necessary-source reservation",
+        "no_gold_in_inputs": true,
+        "model_config": {
+          "CLOUD_BGE_MODEL": "@cf/baai/bge-m3",
+          "CLOUD_BGE_PROVIDER": "cloudflare",
+          "LOCAL_RERANKER_PATH": "E:/AI-Infra/models/reranker/bge-reranker",
+          "LOCAL_RERANKER_PYTHON": "E:/PaperTech-GraphRAG/.runtime/gpu-reranker/Scripts/python.exe",
+          "LOCAL_RERANKER_DEVICE": "cuda",
+          "LOCAL_RERANKER_DTYPE": "float16",
+          "LOCAL_RERANKER_PERSISTENT": "true"
+        },
+        "dense_values": [
+          20,
+          40,
+          60
+        ],
+        "ann_query_k": 100,
+        "fusion_cap": "20+dense_k, no truncation",
+        "rerank_calls": 0,
+        "evidence_selection": false,
+        "query_vectors_sha256": "2397b125e1786d460e1facc84e62370c1f65ac49887636836dc1f9e58277faa6",
+        "index_requirement": "current corpus/model and top20 prefix identical to parent"
+      },
+      "models": {
+        "embedding": "BGE-M3 (configured provider)",
+        "reranker": "bge-reranker (configured local model)",
+        "generation": "not run"
+      }
+    },
+    "result_display": {
+      "location": "Dense20 / Dense40 / Dense60 Experiments",
+      "fields": [
+        "候选通道完整排名与分数",
+        "全部候选原文及位置",
+        "必要来源上游/重排/预算缺口",
+        "逐题配对差异",
+        "时延/调用量与Token状态",
+        "证据原文/图路径",
+        "原始及本轮Experiment Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "reference_criteria": [
+      {
+        "id": "F02.A01",
+        "requirement": "Pe>Ce 时用虚拟节点替代原边，虚拟节点奖励 Pe-Ce，连接两个端点的新边成本为0",
+        "unit_ids": [
+          "F02.S01"
+        ],
+        "supporting_chunks_by_unit": {
+          "F02.S01": [
+            "chunk_5832b6bfb3218fc28548dbb991a42540"
+          ]
+        },
+        "source_rule": "仅判该条件的必要来源是否可用；语义正确性本轮不评分。",
+        "score_values": [
+          0,
+          1
+        ]
+      }
+    ],
+    "selection_bias": "这40题与来源已参与前轮诊断和本轮方案讨论；仅开发回归，不是新题泛化测试。"
+  },
+  "metadata": {
+    "case_id": "F02",
+    "category": "fact",
+    "benchmark": "benchmark-recall-width-v1",
+    "benchmark_sha256": "887b9fef53e0bbceaaf4db4e320af9650880e837f7dbc5d609f74dac7b4d56d4",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex source review; exposed development set",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "fact"
+  ]
+}

@@ -1,0 +1,745 @@
+{
+  "request_id": "1a708d2e-ce89-4e22-b1e1-0673d2e52ee3",
+  "status": "evidence_only",
+  "answer": "本题按预先冻结口径仅比较检索证据。",
+  "citations": [],
+  "evidence": [
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 14.430436134338379
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8701534271240234
+        }
+      ],
+      "rerank_score": 0.995566189289093,
+      "context_bytes": 1908
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 2,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 3780,
+          "end_char": 4175,
+          "chunk_start_char": 0,
+          "chunk_end_char": 395,
+          "block_bboxes": [
+            [
+              305.324,
+              574.956,
+              526.313,
+              775.443
+            ],
+            [
+              294.911,
+              794.449,
+              300.366,
+              805.358
+            ],
+            [
+              10.94,
+              263.25,
+              37.62,
+              609.89
+            ]
+          ]
+        },
+        {
+          "pdf_page": 2,
+          "start_char": 0,
+          "end_char": 1099,
+          "chunk_start_char": 396,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              70.866,
+              251.641,
+              524.41,
+              273.634
+            ],
+            [
+              70.866,
+              297.425,
+              220.997,
+              308.334
+            ],
+            [
+              70.866,
+              311.036,
+              290.949,
+              470.924
+            ],
+            [
+              83.885,
+              480.711,
+              289.527,
+              573.069
+            ]
+          ]
+        }
+      ],
+      "quote": "1. Additionally, this technique tends to exhaust its\npreset search budget because it lacks a mechanism\nto determine when to stop the search, even when\nthe retrieved documents are sufficient to answer the\nquestion. The more passages supplied to the LLM\nfor response generation, the higher the latency of\nthe QA system, since the LLM must reason through\n1\narXiv:2404.09077v3  [cs.CL]  18 Feb 2025\n\nFigure 1: Two common types of questions in HotpotQA (Yang et al., 2018): (1) Comparison questions require\nparallel reasoning over different documents. (2) Bridging questions require sequential reasoning.\nall passages to arrive at an answer.\nTo address these challenges, we propose a novel\nframework by fine-tuning an LLM agent to emulate\nthe curious nature of a human researcher. Instead of\npredicting missing evidence, our agent asks follow-\nup questions to more efficiently guide the search\ntoward missing evidence. Compared to the orig-\ninal approach, our CuriousLLM: 1) requires sig-\nnificantly fewer training samples for fine-tuning,\n2) markedly improves MD-QA performance, and\n3) can terminate the search before exhausting the\npreset search budget, thereby reducing latency. Our\ncontributions are as follows.\n• Follow-upQA Dataset: We introduce a new\ndataset specifically designed to train LLMs\nto generate pertinent follow-up questions that\nenhance the retrieval process within the KGP\nframework for MD-QA tasks. In addition, we\noffer this dataset as a benchmark to inspire\nfurther research.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 9.578046798706055
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8136749267578125
+        }
+      ],
+      "rerank_score": 0.9909447431564331,
+      "context_bytes": 1877
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Follow-upQA examples of input questions, given information, and the corresponding follow-up questions\ngenerated.\nencoding passages and connecting them based on\ncosine similarity.\n2.3\nCurious LLM Traversal Agent\nWe introduce CuriousLLM as our graph traversal\nagent to enhance the KGP framework. This ap-\nproach is rooted in intuitive reasoning. For ex-\nample, when asked to determine who is older, Bob\nBryan or Mariaan de Swardt, and given information\nabout Bob’s age, one would intuitively ask a follow-\nup question about Mariaan’s age. This follow-up\nquestion guides the search for relevant informa-\ntion. This intuition forms the basis of Follow-upQA\nand our model’s training objective. The advan-\ntage of this approach is that, although the passages\nabout Bob’s and Mariaan’s ages are unrelated, or,\nin other words, not semantically similar, the follow-\nup question about Mariaan’s age creates a logical\nlink between them. As a result, instead of matching\ntwo unrelated passages, once we find one passage,\nwe can identify the other through follow-up ques-\ntions. Furthermore, we train the LLM agent to\nknow when to end the search, and this early termi-\nnation mechanism significantly reduces the latency\nassociated with the original T5 agent.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.02891731262207
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8179383277893066
+        }
+      ],
+      "rerank_score": 0.9893885254859924,
+      "context_bytes": 1642
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 32,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_paths": 0,
+    "graph_audit": {
+      "alias_version": "query-alias-v1",
+      "anchors": [],
+      "seed_count": 0,
+      "max_hops": 2,
+      "per_node": 8,
+      "max_paths": 40,
+      "deadline_seconds": 10,
+      "alias_policy": "query equivalence only; original entities retained",
+      "degree_truncated": []
+    },
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 5.444340000016382,
+      "inference_seconds": 0.959758699988015,
+      "elapsed_seconds": 0.962054600007832,
+      "peak_cuda_memory_bytes": 1155233792,
+      "request_count": 44
+    },
+    "evidence_count": 3,
+    "context_bytes": 5427,
+    "evidence_bytes": 5427,
+    "graph_context_bytes": 0,
+    "comparison_groups": [],
+    "missing_comparison_groups": [],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "context_budget_bytes": 6000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": null,
+  "model_name": null,
+  "errors": [],
+  "raw": null,
+  "ranked": [
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.03278688524590164,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 14.430436134338379
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8701534271240234
+        }
+      ],
+      "rerank_score": 0.995566189289093
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.03007688828584351,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 9.578046798706055
+        },
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8136749267578125
+        }
+      ],
+      "rerank_score": 0.9909447431564331
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.03076923076923077,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 10.02891731262207
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8179383277893066
+        }
+      ],
+      "rerank_score": 0.9893885254859924
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.03200204813108039,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 13.642356872558594
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8321442604064941
+        }
+      ],
+      "rerank_score": 0.9761291742324829
+    },
+    {
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 0.031024531024531024,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 12.507634162902832
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8149785995483398
+        }
+      ],
+      "rerank_score": 0.9676556587219238
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.027212143650499815,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 6.564830303192139
+        },
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7906332015991211
+        }
+      ],
+      "rerank_score": 0.9564718008041382
+    },
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8238539695739746
+        }
+      ],
+      "rerank_score": 0.9411153197288513
+    },
+    {
+      "chunk_id": "chunk_84038d4c6f7949959af0974d04ee2379",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7972807884216309
+        }
+      ],
+      "rerank_score": 0.9197867512702942
+    },
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 5.844435691833496
+        }
+      ],
+      "rerank_score": 0.9017477631568909
+    },
+    {
+      "chunk_id": "chunk_30d979161517d3f1d0c20edfcfcd1896",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.789339542388916
+        }
+      ],
+      "rerank_score": 0.9001793265342712
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.031754032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 12.16911506652832
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8458900451660156
+        }
+      ],
+      "rerank_score": 0.8949732184410095
+    },
+    {
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 0.028381642512077296,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 7.057193756103516
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8027267456054688
+        }
+      ],
+      "rerank_score": 0.8934953808784485
+    },
+    {
+      "chunk_id": "chunk_27b6486b825caa61f6f8fd333d2d11b2",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 9.379925727844238
+        }
+      ],
+      "rerank_score": 0.843508780002594
+    },
+    {
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8048095703125
+        }
+      ],
+      "rerank_score": 0.8262916803359985
+    },
+    {
+      "chunk_id": "chunk_f46ac2b9c96b3169b250df92b61e528f",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 9.233945846557617
+        }
+      ],
+      "rerank_score": 0.818156361579895
+    },
+    {
+      "chunk_id": "chunk_e1a39884458dd5c4e4ae63ae1126a5d5",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 5.2457051277160645
+        }
+      ],
+      "rerank_score": 0.807612419128418
+    },
+    {
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 6.564830303192139
+        }
+      ],
+      "rerank_score": 0.7329742908477783
+    },
+    {
+      "chunk_id": "chunk_f58319afb1c636475f807715f48a7a93",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 7.418497085571289
+        }
+      ],
+      "rerank_score": 0.7320175170898438
+    },
+    {
+      "chunk_id": "chunk_a4963bc9a949cc8fa87d1c46b7c95760",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7863578796386719
+        }
+      ],
+      "rerank_score": 0.7299049496650696
+    },
+    {
+      "chunk_id": "chunk_69407b618c1969f701e74bd3cf523c95",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 5.844435691833496
+        }
+      ],
+      "rerank_score": 0.710427463054657
+    },
+    {
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 8.20417308807373
+        }
+      ],
+      "rerank_score": 0.7051762938499451
+    },
+    {
+      "chunk_id": "chunk_8e19a73abbe8d3148f9bd5614582a314",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7916707992553711
+        }
+      ],
+      "rerank_score": 0.6170512437820435
+    },
+    {
+      "chunk_id": "chunk_ba08d3e55b962d6032077a51bafe9eca",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 6.13479471206665
+        }
+      ],
+      "rerank_score": 0.5760054588317871
+    },
+    {
+      "chunk_id": "chunk_b926195b594b5226494ac67d3237e329",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 4.8975830078125
+        }
+      ],
+      "rerank_score": 0.571647047996521
+    },
+    {
+      "chunk_id": "chunk_85cf026687ef7fad0688db2c4af1d3a9",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7878932952880859
+        }
+      ],
+      "rerank_score": 0.5539577603340149
+    },
+    {
+      "chunk_id": "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 6.245396614074707
+        }
+      ],
+      "rerank_score": 0.397236704826355
+    },
+    {
+      "chunk_id": "chunk_bc9ed8631ab11d128d0b5ab7bef1007f",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.787665843963623
+        }
+      ],
+      "rerank_score": 0.3338289260864258
+    },
+    {
+      "chunk_id": "chunk_a576186c8dc7a386a340b831af3d0300",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.791748046875
+        }
+      ],
+      "rerank_score": 0.2423849254846573
+    },
+    {
+      "chunk_id": "chunk_0c0a6b4ee208b97385706ce3d210d6d1",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7871232032775879
+        }
+      ],
+      "rerank_score": 0.2351083904504776
+    },
+    {
+      "chunk_id": "chunk_ebe1671c8c71b3df2be532362d2ecf84",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7892951965332031
+        }
+      ],
+      "rerank_score": 0.0905744731426239
+    },
+    {
+      "chunk_id": "chunk_548731a8368163ec93f6096d6baa9c0e",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7841434478759766
+        }
+      ],
+      "rerank_score": 0.08882029354572296
+    },
+    {
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.178709030151367
+        }
+      ],
+      "rerank_score": 0.06313490122556686
+    }
+  ],
+  "case_id": "C06",
+  "question": "比较 KGP 和 CuriousLLM 的下一步证据搜索：KGP 的图遍历代理怎样收集段落，CuriousLLM 怎样利用后续问题？",
+  "category": "cross",
+  "arm": "Hybrid+Graph",
+  "order": 1,
+  "generate_requested": false,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 3.840000135824084e-05
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.028952799999387935
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 0.011701100011123344
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9627472000138368
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.0008084999863058329
+    }
+  ],
+  "retrieval_compute_seconds": 1.0042480000120122,
+  "embedding_source": "shared frozen cloud vector; network batch time reported separately",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.2883575999876484,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 1.0,
+    "mrr40": 1.0,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": null
+}

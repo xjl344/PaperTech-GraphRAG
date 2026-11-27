@@ -1,0 +1,1959 @@
+{
+  "request_id": "03dbd478-bdde-4315-a06f-ab06603d3e8a",
+  "status": "partial",
+  "answer": "原文的方向是 CuriousLLM 增强 KGP，而不是 KGP 反过来使用 CuriousLLM 的 Follow-upQA 训练。CuriousLLM 被定位为融入 KGP 的 LLM 图遍历智能体，用来提升 KGP 框架的检索效率与精度 [E5, E8]。Follow-upQA 是新构建的数据集，用于训练 LLM 生成后续问题，并作为基准 [E6]；其输入是问题与支持证据，后续问题作为真实标签 [E2]。因此可见职责是：KGP 负责构建知识图并进行图遍历 [E1]；CuriousLLM 作为遍历智能体，通过生成后续问题引导检索，并在证据足够时终止搜索 [E5]；Follow-upQA 用于训练该智能体 [E6, E8]。关于“KGP 使用 CuriousLLM 的 Follow-upQA 训练”这一反向训练关系，原文证据不足，未见支持。",
+  "citations": [
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1783,
+          "end_char": 2945,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1162,
+          "block_bboxes": [
+            [
+              54.0,
+              530.06,
+              292.505,
+              704.407
+            ],
+            [
+              319.5,
+              253.181,
+              558.005,
+              296.021
+            ]
+          ]
+        }
+      ],
+      "quote": "Given the above challenges, we propose a knowledge\ngraph prompting (KGP) method for enhancing LLMs in\nMD-QA. Specifically, we construct a KG over the given doc-\numents with nodes symbolizing passages or document struc-\ntures and edges denoting their lexical/semantic similarity be-\ntween passages or intra-document structural relations. Then\nfor the first challenge of alternative reasoning and retrieving\nknowledge across different documents, we design an LLM-\nbased KG traversal agent, which can alternatively generate\nthe next evidence to approach the question, i.e., reasoning,\nand select the most promising neighbor to visit from the con-\nstructed KG based on the generated evidence, i.e., retrieval.\nMoreover, we apply the instruction fine-tuning strategy to\naugment the reasoning capability of the LLM-based KG\ntraversal agent and hence refrain from repeatedly prompting",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8098268508911133
+        }
+      ],
+      "rerank_score": 0.6441131830215454,
+      "context_bytes": 1505,
+      "eid": "E1"
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "is the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 17.59869384765625
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.870084285736084
+        }
+      ],
+      "rerank_score": 0.9880388379096985,
+      "context_bytes": 1908,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Follow-upQA examples of input questions, given information, and the corresponding follow-up questions\ngenerated.\nencoding passages and connecting them based on\ncosine similarity.\n2.3\nCurious LLM Traversal Agent\nWe introduce CuriousLLM as our graph traversal\nagent to enhance the KGP framework. This ap-\nproach is rooted in intuitive reasoning. For ex-\nample, when asked to determine who is older, Bob\nBryan or Mariaan de Swardt, and given information\nabout Bob’s age, one would intuitively ask a follow-\nup question about Mariaan’s age. This follow-up\nquestion guides the search for relevant informa-\ntion. This intuition forms the basis of Follow-upQA\nand our model’s training objective. The advan-\ntage of this approach is that, although the passages\nabout Bob’s and Mariaan’s ages are unrelated, or,\nin other words, not semantically similar, the follow-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 14.587503433227539
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8377180099487305
+        }
+      ],
+      "rerank_score": 0.9603611826896667,
+      "context_bytes": 1642,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "up question about Mariaan’s age creates a logical\nlink between them. As a result, instead of matching\ntwo unrelated passages, once we find one passage,\nwe can identify the other through follow-up ques-\ntions. Furthermore, we train the LLM agent to\nknow when to end the search, and this early termi-\nnation mechanism significantly reduces the latency\nassociated with the original T5 agent.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 14.587503433227539
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8377180099487305
+        }
+      ],
+      "rerank_score": 0.9603611826896667,
+      "context_bytes": 1642,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 2,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 3780,
+          "end_char": 4175,
+          "chunk_start_char": 0,
+          "chunk_end_char": 395,
+          "block_bboxes": [
+            [
+              305.324,
+              574.956,
+              526.313,
+              775.443
+            ],
+            [
+              294.911,
+              794.449,
+              300.366,
+              805.358
+            ],
+            [
+              10.94,
+              263.25,
+              37.62,
+              609.89
+            ]
+          ]
+        },
+        {
+          "pdf_page": 2,
+          "start_char": 0,
+          "end_char": 1099,
+          "chunk_start_char": 396,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              70.866,
+              251.641,
+              524.41,
+              273.634
+            ],
+            [
+              70.866,
+              297.425,
+              220.997,
+              308.334
+            ],
+            [
+              70.866,
+              311.036,
+              290.949,
+              470.924
+            ],
+            [
+              83.885,
+              480.711,
+              289.527,
+              573.069
+            ]
+          ]
+        }
+      ],
+      "quote": "toward missing evidence. Compared to the orig-\ninal approach, our CuriousLLM: 1) requires sig-\nnificantly fewer training samples for fine-tuning,\n2) markedly improves MD-QA performance, and\n3) can terminate the search before exhausting the\npreset search budget, thereby reducing latency. Our\ncontributions are as follows.\n• Follow-upQA Dataset: We introduce a new\ndataset specifically designed to train LLMs\nto generate pertinent follow-up questions that\nenhance the retrieval process within the KGP\nframework for MD-QA tasks. In addition, we\noffer this dataset as a benchmark to inspire\nfurther research.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 12.644172668457031
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8252158164978027
+        }
+      ],
+      "rerank_score": 0.9468920826911926,
+      "context_bytes": 1877,
+      "eid": "E6"
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1099,
+          "end_char": 1639,
+          "chunk_start_char": 0,
+          "chunk_end_char": 540,
+          "block_bboxes": [
+            [
+              83.885,
+              583.826,
+              290.95,
+              649.115
+            ],
+            [
+              83.885,
+              659.884,
+              291.047,
+              765.8
+            ],
+            [
+              306.142,
+              296.522,
+              391.155,
+              308.477
+            ]
+          ]
+        }
+      ],
+      "quote": "• CuriousLLM Agent: We design an LLM\nagent to ask follow-up questions, thus improv-\ning the efficiency and precision of the KGP\nframework without requiring extensive fine-\ntuning.\n• Experimental Validation: We present com-\nprehensive experimental results that demon-\nstrate significant improvements in both the\nperformance and efficiency of the KGP frame-\nwork using our approach. Furthermore, an\nablation study highlights the enhanced reason-\ning capabilities of our LLM agent, particularly\nafter fine-tuning on the Follow-upQA dataset.\n2",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 18.113861083984375
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8590707778930664
+        }
+      ],
+      "rerank_score": 0.9145963191986084,
+      "context_bytes": 875,
+      "eid": "E8"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1783,
+          "end_char": 2945,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1162,
+          "block_bboxes": [
+            [
+              54.0,
+              530.06,
+              292.505,
+              704.407
+            ],
+            [
+              319.5,
+              253.181,
+              558.005,
+              296.021
+            ]
+          ]
+        }
+      ],
+      "quote": "Given the above challenges, we propose a knowledge\ngraph prompting (KGP) method for enhancing LLMs in\nMD-QA. Specifically, we construct a KG over the given doc-\numents with nodes symbolizing passages or document struc-\ntures and edges denoting their lexical/semantic similarity be-\ntween passages or intra-document structural relations. Then\nfor the first challenge of alternative reasoning and retrieving\nknowledge across different documents, we design an LLM-\nbased KG traversal agent, which can alternatively generate\nthe next evidence to approach the question, i.e., reasoning,\nand select the most promising neighbor to visit from the con-\nstructed KG based on the generated evidence, i.e., retrieval.\nMoreover, we apply the instruction fine-tuning strategy to\naugment the reasoning capability of the LLM-based KG\ntraversal agent and hence refrain from repeatedly prompting\nnon-open-sourced LLMs for evidence generation. For the\nmulti-modality challenge, we add different types of nodes\nto the KG characterizing different document structures and\nhence enabling content retrieval within those specific struc-\ntures. We highlight our contributions as follows:\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8098268508911133
+        }
+      ],
+      "rerank_score": 0.6441131830215454,
+      "context_bytes": 1505
+    },
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 252,
+          "end_char": 1774,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1522,
+          "block_bboxes": [
+            [
+              157.758,
+              221.69,
+              202.243,
+              233.645
+            ],
+            [
+              87.376,
+              245.034,
+              274.616,
+              649.442
+            ],
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ]
+          ]
+        }
+      ],
+      "quote": "Abstract\nLarge Language Models (LLMs) have achieved\nsignificant success in open-domain question an-\nswering. However, they continue to face chal-\nlenges such as hallucinations and knowledge\ncutoffs. These issues can be mitigated through\nin-context learning by providing LLMs with\nrelevant context before generating answers.\nRecent literature proposes Knowledge Graph\nPrompting (KGP) which integrates knowledge\ngraphs with an LLM-based traversal agent\nto substantially enhance document retrieval\nquality. However, KGP requires costly fine-\ntuning with large datasets and remains prone\nto hallucination. In this paper, we propose\nCuriousLLM, an enhancement that integrates\na curiosity-driven reasoning mechanism into\nan LLM agent. This mechanism enables the\nagent to generate relevant follow-up questions,\nthereby guiding the information retrieval pro-\ncess more efficiently. Central to our approach\nis the development of the new Follow-upQA\ndataset, which includes questions and support-\ning evidence as input, with follow-up ques-\ntions serving as ground truths. These follow-\nup questions either inquire about what is still\nmissing to fully answer the user’s query or\nuse special tokens to signify that the retrieved\nevidence is sufficient. Our experiments show\nthat CuriousLLM significantly boosts LLM per-\nformance in multi-document question answer-\ning (MD-QA), circumventing the substantial\ncomputational costs and latency from the orig-\ninal KGP framework. Source code: https:\n//github.com/zukangy/KGP-CuriousLLM.\n1\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 17.59869384765625
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.870084285736084
+        }
+      ],
+      "rerank_score": 0.9880388379096985,
+      "context_bytes": 1908
+    },
+    {
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+      "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+      "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+      "page_start": 7,
+      "page_end": 7,
+      "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 7,
+          "start_char": 4081,
+          "end_char": 5057,
+          "chunk_start_char": 0,
+          "chunk_end_char": 976,
+          "block_bboxes": [
+            [
+              319.5,
+              502.637,
+              558.005,
+              704.406
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nAnswering multi-document questions demands knowledge\nreasoning and retrieving from different documents across\nvarious modalities, presenting challenges for applying the\nparadigm of ‘pre-train, prompt and predict’ with LLMs.\nRecognizing the logical associations among passages and\nstructural relations within documents, we propose a Knowl-\nedge Graph Prompting method (KGP) for aiding LLMs in\nMD-QA. The KGP constructs KGs from documents with\nnodes as sentences or document structures, and edges as\ntheir lexical/semantic similarity/structural relations. Since\nconstructed KGs may contain irrelevant neighbor informa-\ntion, we further design an LLM-based graph traversal agent\nthat selectively visits the most promising node in approach-\ning the question. In the future, we plan to investigate the\ncapability of LLMs in understanding graph topology and ex-\nplore the potential of fine-tuning/prompting LLMs to encode\ncomplex topological signals hidden in the graph.\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7955460548400879
+        }
+      ],
+      "rerank_score": 0.3319854736328125,
+      "context_bytes": 1321
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 6,
+      "page_end": 7,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 3123,
+          "end_char": 3915,
+          "chunk_start_char": 0,
+          "chunk_end_char": 792,
+          "block_bboxes": [
+            [
+              306.142,
+              510.188,
+              381.209,
+              522.143
+            ],
+            [
+              306.142,
+              547.753,
+              526.318,
+              761.921
+            ],
+            [
+              294.911,
+              794.449,
+              300.366,
+              805.358
+            ]
+          ]
+        },
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 217,
+          "chunk_start_char": 793,
+          "chunk_end_char": 1010,
+          "block_bboxes": [
+            [
+              70.866,
+              379.203,
+              524.41,
+              401.196
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nOur new CuriousLLM-enhanced KGP framework\nrepresents a significant advance in the field of MD-\nQA by integrating an LLM-guided prompt refor-\nmulation mechanism into the KG traversal process.\nBy introducing the Follow-upQA dataset and a\ncuriosity-driven LLM traversal agent, the system\neffectively addresses challenges like hallucination,\ninefficient retrieval, and the limitations of the origi-\nnal KGP framework. Extensive experiments show\nthat this approach enhances MD-QA accuracy and\nefficiency while reducing computational overhead,\nmaking it a practical solution for real-world applica-\ntions. This work paves the way for future research\ninto optimizing LLM-guided retrieval processes by\noffering a scalable, robust framework balancing\nperformance and resource efficiency.\n6\n\nFigure 3: Benchmark Mistral-7B for Follow-upQA. First row: distribution plots for ROUGE-1, ROUGE-L, and\ncosine similarity across hyper-parameters. Second row: Mistral-7B performance at different training checkpoints.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 17.145036697387695
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8689846992492676
+        }
+      ],
+      "rerank_score": 0.9748690724372864,
+      "context_bytes": 1379
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 706,
+          "end_char": 1961,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1255,
+          "block_bboxes": [
+            [
+              70.557,
+              226.092,
+              524.404,
+              247.992
+            ],
+            [
+              70.866,
+              271.728,
+              289.133,
+              296.241
+            ],
+            [
+              70.866,
+              308.857,
+              238.157,
+              319.766
+            ],
+            [
+              70.353,
+              327.065,
+              289.134,
+              338.078
+            ],
+            [
+              70.473,
+              340.61,
+              290.95,
+              609.037
+            ]
+          ]
+        }
+      ],
+      "quote": "Table 2: Follow-upQA examples of input questions, given information, and the corresponding follow-up questions\ngenerated.\nencoding passages and connecting them based on\ncosine similarity.\n2.3\nCurious LLM Traversal Agent\nWe introduce CuriousLLM as our graph traversal\nagent to enhance the KGP framework. This ap-\nproach is rooted in intuitive reasoning. For ex-\nample, when asked to determine who is older, Bob\nBryan or Mariaan de Swardt, and given information\nabout Bob’s age, one would intuitively ask a follow-\nup question about Mariaan’s age. This follow-up\nquestion guides the search for relevant informa-\ntion. This intuition forms the basis of Follow-upQA\nand our model’s training objective. The advan-\ntage of this approach is that, although the passages\nabout Bob’s and Mariaan’s ages are unrelated, or,\nin other words, not semantically similar, the follow-\nup question about Mariaan’s age creates a logical\nlink between them. As a result, instead of matching\ntwo unrelated passages, once we find one passage,\nwe can identify the other through follow-up ques-\ntions. Furthermore, we train the LLM agent to\nknow when to end the search, and this early termi-\nnation mechanism significantly reduces the latency\nassociated with the original T5 agent.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 14.587503433227539
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8377180099487305
+        }
+      ],
+      "rerank_score": 0.9603611826896667,
+      "context_bytes": 1642
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 2,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 3780,
+          "end_char": 4175,
+          "chunk_start_char": 0,
+          "chunk_end_char": 395,
+          "block_bboxes": [
+            [
+              305.324,
+              574.956,
+              526.313,
+              775.443
+            ],
+            [
+              294.911,
+              794.449,
+              300.366,
+              805.358
+            ],
+            [
+              10.94,
+              263.25,
+              37.62,
+              609.89
+            ]
+          ]
+        },
+        {
+          "pdf_page": 2,
+          "start_char": 0,
+          "end_char": 1099,
+          "chunk_start_char": 396,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              70.866,
+              251.641,
+              524.41,
+              273.634
+            ],
+            [
+              70.866,
+              297.425,
+              220.997,
+              308.334
+            ],
+            [
+              70.866,
+              311.036,
+              290.949,
+              470.924
+            ],
+            [
+              83.885,
+              480.711,
+              289.527,
+              573.069
+            ]
+          ]
+        }
+      ],
+      "quote": "1. Additionally, this technique tends to exhaust its\npreset search budget because it lacks a mechanism\nto determine when to stop the search, even when\nthe retrieved documents are sufficient to answer the\nquestion. The more passages supplied to the LLM\nfor response generation, the higher the latency of\nthe QA system, since the LLM must reason through\n1\narXiv:2404.09077v3  [cs.CL]  18 Feb 2025\n\nFigure 1: Two common types of questions in HotpotQA (Yang et al., 2018): (1) Comparison questions require\nparallel reasoning over different documents. (2) Bridging questions require sequential reasoning.\nall passages to arrive at an answer.\nTo address these challenges, we propose a novel\nframework by fine-tuning an LLM agent to emulate\nthe curious nature of a human researcher. Instead of\npredicting missing evidence, our agent asks follow-\nup questions to more efficiently guide the search\ntoward missing evidence. Compared to the orig-\ninal approach, our CuriousLLM: 1) requires sig-\nnificantly fewer training samples for fine-tuning,\n2) markedly improves MD-QA performance, and\n3) can terminate the search before exhausting the\npreset search budget, thereby reducing latency. Our\ncontributions are as follows.\n• Follow-upQA Dataset: We introduce a new\ndataset specifically designed to train LLMs\nto generate pertinent follow-up questions that\nenhance the retrieval process within the KGP\nframework for MD-QA tasks. In addition, we\noffer this dataset as a benchmark to inspire\nfurther research.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 12.644172668457031
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8252158164978027
+        }
+      ],
+      "rerank_score": 0.9468920826911926,
+      "context_bytes": 1877
+    },
+    {
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 1774,
+          "end_char": 3374,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1600,
+          "block_bboxes": [
+            [
+              70.866,
+              661.499,
+              153.68,
+              673.454
+            ],
+            [
+              70.866,
+              683.183,
+              290.941,
+              775.496
+            ],
+            [
+              305.749,
+              222.63,
+              526.217,
+              436.74
+            ],
+            [
+              306.142,
+              439.298,
+              526.226,
+              572.232
+            ]
+          ]
+        }
+      ],
+      "quote": "Introduction\nLarge Language Models (LLMs) have demon-\nstrated remarkable success in open-domain ques-\ntion answering. However, they continue to face\nchallenges such as hallucinations and knowledge\ncutoffs (Ji et al., 2023a,b; Yao et al., 2023; Xu et al.,\n2024; Wei et al., 2024). To address these issues,\nrecent research has explored in-context learning\nwith LLM, using external knowledge sources such\nas retrieved documents or knowledge graphs (KG)\nto improve their accuracy and reasoning ability\n(Hogan et al., 2021; Pan et al., 2024; Agrawal et al.,\n2024; Shen et al., 2020; Zhang et al., 2019; Rosset\net al., 2021; Zhang et al., 2020; Kumar et al., 2020a;\nZhu et al., 2023a). Among the popular approaches\nare RAG (Lewis et al., 2020) and KAPING (Baek\net al., 2023), which provide context by retrieving\nrelevant documents or KG triplets to support the\nLLM reasoning process. Although these methods\nhave proven effective, few approaches have fully\nintegrated LLMs into the retrieval process, leav-\ning a gap in the ability to efficiently navigate and\nextract relevant information from vast knowledge\nsources.\nRecently, Wang et al. (2023) propose Knowl-\nedge Graph Prompting (KGP), which incorporates\na fine-tuned LLM agent into the KG traversal pro-\ncess. This agent predicts missing evidence based on\nthe initial query and the retrieved documents. The\npredictions are then used to identify relevant pas-\nsages from neighboring nodes in the KG through\nsimilarity ranking. With this prompt reformulation\napproach, KGP achieves state-of-the-art results in\nseveral benchmarks for factual consistency.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.057193756103516
+        }
+      ],
+      "rerank_score": 0.9272316098213196,
+      "context_bytes": 1983
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+      "parse_id": "parse_217ebb369e3e37f49880d5140e30b94c",
+      "title": "CuriousLLM: Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Methods/059_CuriousLLM Elevating Multi-Document QA with Reasoning-Infused Knowledge Graph Prompting.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 1099,
+          "end_char": 1639,
+          "chunk_start_char": 0,
+          "chunk_end_char": 540,
+          "block_bboxes": [
+            [
+              83.885,
+              583.826,
+              290.95,
+              649.115
+            ],
+            [
+              83.885,
+              659.884,
+              291.047,
+              765.8
+            ],
+            [
+              306.142,
+              296.522,
+              391.155,
+              308.477
+            ]
+          ]
+        }
+      ],
+      "quote": "• CuriousLLM Agent: We design an LLM\nagent to ask follow-up questions, thus improv-\ning the efficiency and precision of the KGP\nframework without requiring extensive fine-\ntuning.\n• Experimental Validation: We present com-\nprehensive experimental results that demon-\nstrate significant improvements in both the\nperformance and efficiency of the KGP frame-\nwork using our approach. Furthermore, an\nablation study highlights the enhanced reason-\ning capabilities of our LLM agent, particularly\nafter fine-tuning on the Follow-upQA dataset.\n2\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 18.113861083984375
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8590707778930664
+        }
+      ],
+      "rerank_score": 0.9145963191986084,
+      "context_bytes": 875
+    },
+    {
+      "chunk_id": "chunk_c2920b251352513dcecfea08afddafa9",
+      "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+      "parse_id": "parse_ac25f303898d80df63f3fc436bb321a5",
+      "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+      "page_start": 2,
+      "page_end": 2,
+      "source_relative_path": "Surveys/010_Unifying Large Language Models and Knowledge Graphs A Roadmap.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2804,
+          "end_char": 4291,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1487,
+          "block_bboxes": [
+            [
+              48.0,
+              598.883,
+              300.004,
+              746.863
+            ],
+            [
+              312.0,
+              44.963,
+              563.997,
+              123.703
+            ],
+            [
+              312.0,
+              125.641,
+              563.997,
+              204.38
+            ]
+          ]
+        }
+      ],
+      "quote": "Recently, the possibility of unifying LLMs with KGs has\nattracted increasing attention from researchers and practi-\ntioners. LLMs and KGs are inherently interconnected and\ncan mutually enhance each other. In KG-enhanced LLMs,\nKGs can not only be incorporated into the pre-training and\ninference stages of LLMs to provide external knowledge\n[35]–[37], but also used for analyzing LLMs and provid-\ning interpretability [14], [38], [39]. In LLM-augmented KGs,\nLLMs have been used in various KG-related tasks, e.g., KG\nembedding [40], KG completion [26], KG construction [41],\nKG-to-text generation [42], and KGQA [43], to improve the\nperformance and facilitate the application of KGs. In Syn-\nergized LLM + KG, researchers marries the merits of LLMs\nand KGs to mutually enhance performance in knowledge\nrepresentation [44] and reasoning [45], [46]. Although there\nare some surveys on knowledge-enhanced LLMs [47]–[49],\nwhich mainly focus on using KGs as an external knowledge\nto enhance LLMs, they ignore other possibilities of integrat-\ning KGs for LLMs and the potential role of LLMs in KG\napplications.\nIn this article, we present a forward-looking roadmap for\nunifying both LLMs and KGs, to leverage their respective\nstrengths and overcome the limitations of each approach,\nfor various downstream tasks. We propose detailed cate-\ngorization, conduct comprehensive reviews, and pinpoint\nemerging directions in these fast-growing fields. Our main\ncontributions are summarized as follows:\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7961916923522949
+        }
+      ],
+      "rerank_score": 0.5181956887245178,
+      "context_bytes": 1840
+    },
+    {
+      "chunk_id": "chunk_9b7abacf7f2b491b3d96cb2f09e81d67",
+      "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+      "parse_id": "parse_ac25f303898d80df63f3fc436bb321a5",
+      "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+      "page_start": 5,
+      "page_end": 5,
+      "source_relative_path": "Surveys/010_Unifying Large Language Models and Knowledge Graphs A Roadmap.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 5,
+          "start_char": 173,
+          "end_char": 1186,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1013,
+          "block_bboxes": [
+            [
+              236.199,
+              125.63,
+              255.634,
+              133.233
+            ],
+            [
+              279.79,
+              80.381,
+              339.961,
+              109.413
+            ],
+            [
+              355.47,
+              118.717,
+              378.296,
+              126.321
+            ],
+            [
+              420.889,
+              96.598,
+              513.984,
+              104.892
+            ],
+            [
+              94.334,
+              150.673,
+              517.048,
+              160.883
+            ],
+            [
+              435.124,
+              61.345,
+              499.785,
+              68.948
+            ],
+            [
+              421.807,
+              132.542,
+              513.096,
+              140.145
+            ],
+            [
+              48.0,
+              182.835,
+              533.2,
+              190.835
+            ],
+            [
+              81.229,
+              214.042,
+              266.773,
+              231.042
+            ],
+            [
+              62.886,
+              247.427,
+              267.374,
+              253.671
+            ],
+            [
+              48.002,
+              256.707,
+              300.0,
+              341.982
+            ]
+          ]
+        }
+      ],
+      "quote": "Tasks\nGeneral Knowledge\nLanguage Processing\nGeneralizability\n....\nOutput\nKGs\nLLMs\na. KG-enhanced LLMs \nb. LLM-augmented KGs \nc. Synergized LLMs + KGs\nFactual Knowledge\nKnowledge Representation\nFig. 6. The general roadmap of unifying KGs and LLMs. (a.) KG-enhanced LLMs. (b.) LLM-augmented KGs. (c.) Synergized LLMs + KGs.\nTABLE 1\nRepresentative applications of using LLMs and KGs.\nName\nCategory\nLLMs\nKGs\nURL\nChatGPT/GPT-4\nChat Bot\n✓\nhttps://shorturl.at/cmsE0\nERNIE 3.0\nChat Bot\n✓\n✓\nhttps://shorturl.at/sCLV9\nBard\nChat Bot\n✓\n✓\nhttps://shorturl.at/pDLY6\nFirefly\nPhoto Editing\n✓\nhttps://shorturl.at/fkzJV\nAutoGPT\nAI Assistant\n✓\nhttps://shorturl.at/bkoSY\nCopilot\nCoding Assistant\n✓\nhttps://shorturl.at/lKLUV\nNew Bing\nWeb Search\n✓\nhttps://shorturl.at/bimps\nShop.ai\nRecommendation\n✓\nhttps://shorturl.at/alCY7\nWikidata\nKnowledge Base\n✓\nhttps://shorturl.at/lyMY5\nKO\nKnowledge Base\n✓\nhttps://shorturl.at/sx238\nOpenBG\nRecommendation\n✓\nhttps://shorturl.at/pDMV9\nDoctor.ai\nHealth Care Assistant\n✓\n✓\nhttps://shorturl.at/dhlK0\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7910847663879395
+        }
+      ],
+      "rerank_score": 0.3170032203197479,
+      "context_bytes": 1441
+    },
+    {
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "paper_id": "paper_07cfe56eaec74f7a0ade6759c3cde069",
+      "parse_id": "parse_ac25f303898d80df63f3fc436bb321a5",
+      "title": "Unifying Large Language Models and Knowledge Graphs: A Roadmap",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Surveys/010_Unifying Large Language Models and Knowledge Graphs A Roadmap.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 4423,
+          "end_char": 5640,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1217,
+          "block_bboxes": [
+            [
+              312.0,
+              506.563,
+              563.997,
+              746.863
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 386,
+          "chunk_start_char": 1218,
+          "chunk_end_char": 1604,
+          "block_bboxes": [
+            [
+              48.0,
+              28.175,
+              564.0,
+              37.006
+            ],
+            [
+              48.0,
+              44.963,
+              299.997,
+              66.003
+            ],
+            [
+              48.0,
+              68.065,
+              299.997,
+              112.185
+            ],
+            [
+              48.0,
+              129.517,
+              199.411,
+              139.017
+            ]
+          ]
+        }
+      ],
+      "quote": "Instead of injecting factual knowledge into LLMs, the KGs\nInstruction-tuning aims to fine-tune LLMs to better com-\nprehend the structure of KGs and effectively follow user\ninstructions to conduct complex tasks. KGs Instruction-\ntuning utilizes both facts and the structure of KGs to cre-\nate instruction-tuning datasets. LLMs finetuned on these\ndatasets can extract both factual and structural knowledge\nfrom KGs, enhancing the reasoning ability of LLMs. KP-\nPLM [109] first designs several prompt templates to transfer\nstructural graphs into natural language text. Then, two self-\nsupervised tasks are proposed to finetune LLMs to further\nleverage the knowledge from these prompts. OntoPrompt\n[110] proposes an ontology-enhanced prompt-tuning that\ncan place knowledge of entities into the context of LLMs,\nwhich are further finetuned on several downstream tasks.\nChatKBQA [111] finetunes LLMs on KG structure to gener-\nate logical queries, which can be executed on KGs to obtain\nanswers. To better reason on graphs, RoG [112] presents a\nplanning-retrieval-reasoning framework. RoG is finetuned\non KG structure to generate relation paths grounded by KGs\nas faithful plans. These plans are then used to retrieve valid\n\nJOURNAL OF LATEX CLASS FILES, VOL. ??, NO. ??, MONTH 20YY\n9\nreasoning paths from the KGs for LLMs to conduct faithful\nreasoning and generate interpretable results.\nKGs Instruction-tuning can better leverage the knowl-\nedge from KGs for downstream tasks. However, it requires\nretraining the models, which is time-consuming and re-\nquires lots of resources.\n4.2\nKG-enhanced LLM Inference\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7950582504272461
+        }
+      ],
+      "rerank_score": 0.22953522205352783,
+      "context_bytes": 1958
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 32,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 14.144518400018569,
+      "inference_seconds": 0.9025699999765493,
+      "elapsed_seconds": 0.9054223000421189,
+      "peak_cuda_memory_bytes": 1195109376,
+      "request_count": 153,
+      "batch_size": 4
+    },
+    "evidence_count": 11,
+    "context_bytes": 17729,
+    "evidence_bytes": 17729,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 16904,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "KGP",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "requested_names": [
+          "KGP"
+        ]
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "KGP",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "requested_names": [
+          "KGP"
+        ],
+        "eligible_candidate_count": 3,
+        "selected_chunk_ids": [
+          "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+          "chunk_09f2c9b37899a9ec2d8998655fe27425"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "CuriousLLM",
+        "paper_id": "paper_89aee91e4037c087e3c100bfc84ed45f",
+        "requested_names": [
+          "CuriousLLM"
+        ],
+        "eligible_candidate_count": 20,
+        "selected_chunk_ids": [
+          "chunk_43145c0748762d6b4c650c65721f826f",
+          "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+          "chunk_9f06285c9b321c365675a3b670256a07",
+          "chunk_d911a73017c3747c65463e9c0b9e089d",
+          "chunk_50ac7448bcb598aae5034af337bca656",
+          "chunk_f783bd933d0d2a437496939e022a776a"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4507,
+    "total_tokens": 4804,
+    "completion_tokens": 297,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 4507
+    },
+    "completion_tokens_details": {
+      "text_tokens": 297
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"原文的方向是 CuriousLLM 增强 KGP，而不是 KGP 反过来使用 CuriousLLM 的 Follow-upQA 训练。CuriousLLM 被定位为融入 KGP 的 LLM 图遍历智能体，用来提升 KGP 框架的检索效率与精度 [E5, E8]。Follow-upQA 是新构建的数据集，用于训练 LLM 生成后续问题，并作为基准 [E6]；其输入是问题与支持证据，后续问题作为真实标签 [E2]。因此可见职责是：KGP 负责构建知识图并进行图遍历 [E1]；CuriousLLM 作为遍历智能体，通过生成后续问题引导检索，并在证据足够时终止搜索 [E5]；Follow-upQA 用于训练该智能体 [E6, E8]。关于“KGP 使用 CuriousLLM 的 Follow-upQA 训练”这一反向训练关系，原文证据不足，未见支持。\",\"citations\":[{\"eid\":\"E1\",\"quote_id\":\"q1\"},{\"eid\":\"E2\",\"quote_id\":\"q2\"},{\"eid\":\"E5\",\"quote_id\":\"q1\"},{\"eid\":\"E5\",\"quote_id\":\"q2\"},{\"eid\":\"E6\",\"quote_id\":\"q2\"},{\"eid\":\"E8\",\"quote_id\":\"q1\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.03252247488101534,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 17.59869384765625
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.870084285736084
+        }
+      ],
+      "rerank_score": 0.9880388379096985
+    },
+    {
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.03200204813108039,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 17.145036697387695
+        },
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8689846992492676
+        }
+      ],
+      "rerank_score": 0.9748690724372864
+    },
+    {
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.03125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 14.587503433227539
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8377180099487305
+        }
+      ],
+      "rerank_score": 0.9603611826896667
+    },
+    {
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.030536130536130537,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 12.644172668457031
+        },
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8252158164978027
+        }
+      ],
+      "rerank_score": 0.9468920826911926
+    },
+    {
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 7.057193756103516
+        }
+      ],
+      "rerank_score": 0.9272316098213196
+    },
+    {
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.032266458495966696,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 18.113861083984375
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8590707778930664
+        }
+      ],
+      "rerank_score": 0.9145963191986084
+    },
+    {
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 8.814809799194336
+        }
+      ],
+      "rerank_score": 0.891999363899231
+    },
+    {
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "score": 0.027272727272727275,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 6.564830303192139
+        },
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.7959928512573242
+        }
+      ],
+      "rerank_score": 0.8826303482055664
+    },
+    {
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 0.03007688828584351,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 12.507634162902832
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8122458457946777
+        }
+      ],
+      "rerank_score": 0.8537908792495728
+    },
+    {
+      "chunk_id": "chunk_f46ac2b9c96b3169b250df92b61e528f",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 9.233945846557617
+        }
+      ],
+      "rerank_score": 0.8386797308921814
+    },
+    {
+      "chunk_id": "chunk_69407b618c1969f701e74bd3cf523c95",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 5.844435691833496
+        }
+      ],
+      "rerank_score": 0.8316905498504639
+    },
+    {
+      "chunk_id": "chunk_ba08d3e55b962d6032077a51bafe9eca",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 6.13479471206665
+        }
+      ],
+      "rerank_score": 0.8000679016113281
+    },
+    {
+      "chunk_id": "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 10.915902137756348
+        }
+      ],
+      "rerank_score": 0.7961340546607971
+    },
+    {
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 0.01282051282051282,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 6.564830303192139
+        }
+      ],
+      "rerank_score": 0.791015088558197
+    },
+    {
+      "chunk_id": "chunk_f58319afb1c636475f807715f48a7a93",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 7.418497085571289
+        }
+      ],
+      "rerank_score": 0.7583317160606384
+    },
+    {
+      "chunk_id": "chunk_5b721f972c7b5804123038b6fafc6105",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 8.45924186706543
+        }
+      ],
+      "rerank_score": 0.7172099947929382
+    },
+    {
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 8.20417308807373
+        }
+      ],
+      "rerank_score": 0.683208167552948
+    },
+    {
+      "chunk_id": "chunk_27b6486b825caa61f6f8fd333d2d11b2",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 14.050431251525879
+        }
+      ],
+      "rerank_score": 0.6792850494384766
+    },
+    {
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8098268508911133
+        }
+      ],
+      "rerank_score": 0.6441131830215454
+    },
+    {
+      "chunk_id": "chunk_ffc5734810fca0ae66c78d761d392ba7",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 7.594120502471924
+        }
+      ],
+      "rerank_score": 0.6300022602081299
+    },
+    {
+      "chunk_id": "chunk_c2920b251352513dcecfea08afddafa9",
+      "score": 0.014492753623188406,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.7961916923522949
+        }
+      ],
+      "rerank_score": 0.5181956887245178
+    },
+    {
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "score": 0.027106227106227107,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 9.178709030151367
+        },
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.7885518074035645
+        }
+      ],
+      "rerank_score": 0.46693673729896545
+    },
+    {
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.7955460548400879
+        }
+      ],
+      "rerank_score": 0.3319854736328125
+    },
+    {
+      "chunk_id": "chunk_9b7abacf7f2b491b3d96cb2f09e81d67",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7910847663879395
+        }
+      ],
+      "rerank_score": 0.3170032203197479
+    },
+    {
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.7950582504272461
+        }
+      ],
+      "rerank_score": 0.22953522205352783
+    },
+    {
+      "chunk_id": "chunk_bb6c258ff3a6d9e0cb0053c1e9330d43",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7902846336364746
+        }
+      ],
+      "rerank_score": 0.20323272049427032
+    },
+    {
+      "chunk_id": "chunk_358a932cf9be09a75cae0606806b9318",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7889366149902344
+        }
+      ],
+      "rerank_score": 0.19390946626663208
+    },
+    {
+      "chunk_id": "chunk_e1abb19b2eb43ee8aa1fa325f83cea09",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7874135971069336
+        }
+      ],
+      "rerank_score": 0.18683576583862305
+    },
+    {
+      "chunk_id": "chunk_2e26e275af68336c0f0c3b3d19ab8564",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7869915962219238
+        }
+      ],
+      "rerank_score": 0.16913124918937683
+    },
+    {
+      "chunk_id": "chunk_d6bd0011be13058eaf14a03f66d2c20f",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.7920827865600586
+        }
+      ],
+      "rerank_score": 0.1653234362602234
+    },
+    {
+      "chunk_id": "chunk_b926195b594b5226494ac67d3237e329",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8093276023864746
+        }
+      ],
+      "rerank_score": 0.16184942424297333
+    },
+    {
+      "chunk_id": "chunk_83b2e1c47a7c36fb451544679c81bcfd",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.7934017181396484
+        }
+      ],
+      "rerank_score": 0.00851130299270153
+    }
+  ],
+  "case_id": "N07",
+  "question": "CuriousLLM 增强 KGP，是否意味着反过来 KGP 使用 CuriousLLM 的 Follow-upQA 训练？请给出有来源的方向与各自职责。",
+  "category": "negative",
+  "arm": "P0-SingleQuery",
+  "order": 1,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.00036349997390061617
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.021045400004368275
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 6.499991286545992e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 0.9063242000411265
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.001563900033943355
+    }
+  ],
+  "retrieval_compute_seconds": 0.9293035000446253,
+  "request_wall_seconds": 8.889104200003203,
+  "embedding_source": "shared frozen Q00 vector + live batch for planned subqueries",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.3675755000440404,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 5.120060299988836,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4438829999999143,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 4.199091399961617,
+      "usage": "{\"prompt_tokens\": 4507, \"total_tokens\": 4804, \"completion_tokens\": 297}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 0.870084285736084
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 0.8689846992492676
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 0.8590707778930664
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 0.8377180099487305
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 0.8252158164978027
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 0.8122458457946777
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_4c2f9284ed69432f1dd6ad5217a9a783",
+      "score": 0.8098268508911133
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_b926195b594b5226494ac67d3237e329",
+      "score": 0.8093276023864746
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_c2920b251352513dcecfea08afddafa9",
+      "score": 0.7961916923522949
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "score": 0.7959928512573242
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_09f2c9b37899a9ec2d8998655fe27425",
+      "score": 0.7955460548400879
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_172b595be2772856ff4cac52163a736a",
+      "score": 0.7950582504272461
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_83b2e1c47a7c36fb451544679c81bcfd",
+      "score": 0.7934017181396484
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_d6bd0011be13058eaf14a03f66d2c20f",
+      "score": 0.7920827865600586
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_9b7abacf7f2b491b3d96cb2f09e81d67",
+      "score": 0.7910847663879395
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_bb6c258ff3a6d9e0cb0053c1e9330d43",
+      "score": 0.7902846336364746
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_358a932cf9be09a75cae0606806b9318",
+      "score": 0.7889366149902344
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "score": 0.7885518074035645
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_e1abb19b2eb43ee8aa1fa325f83cea09",
+      "score": 0.7874135971069336
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_2e26e275af68336c0f0c3b3d19ab8564",
+      "score": 0.7869915962219238
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_f783bd933d0d2a437496939e022a776a",
+      "score": 18.113861083984375
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_43145c0748762d6b4c650c65721f826f",
+      "score": 17.59869384765625
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_5fc8dbfce1b251b220ab2cf787ef236b",
+      "score": 17.145036697387695
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_9f06285c9b321c365675a3b670256a07",
+      "score": 14.587503433227539
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_27b6486b825caa61f6f8fd333d2d11b2",
+      "score": 14.050431251525879
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_d911a73017c3747c65463e9c0b9e089d",
+      "score": 12.644172668457031
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_e81a3933dd3c4e99786251f6dbc9b66a",
+      "score": 12.507634162902832
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_9c4ed8fb017cd0f15b601822cb9b8718",
+      "score": 10.915902137756348
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_f46ac2b9c96b3169b250df92b61e528f",
+      "score": 9.233945846557617
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_8e57fb05b711b97bf1a88bf918fa57a5",
+      "score": 9.178709030151367
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_fb24ed864a9886ec8722f831391af3b7",
+      "score": 8.814809799194336
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_5b721f972c7b5804123038b6fafc6105",
+      "score": 8.45924186706543
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_bf0253a0494926a37f68352dc236b9eb",
+      "score": 8.20417308807373
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_ffc5734810fca0ae66c78d761d392ba7",
+      "score": 7.594120502471924
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_f58319afb1c636475f807715f48a7a93",
+      "score": 7.418497085571289
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_50ac7448bcb598aae5034af337bca656",
+      "score": 7.057193756103516
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_dfaf52b10157ecfff59f042049b83d35",
+      "score": 6.564830303192139
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_1c31546f7f4375c1f684f59dc4fa0521",
+      "score": 6.564830303192139
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_ba08d3e55b962d6032077a51bafe9eca",
+      "score": 6.13479471206665
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_69407b618c1969f701e74bd3cf523c95",
+      "score": 5.844435691833496
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "N07.C01",
+      "requirement": "增强方向是 CuriousLLM 指向 KGP。",
+      "selected_matches_by_unit": {
+        "curious": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "N07.C02",
+      "requirement": "Follow-upQA 学习后续问题。",
+      "selected_matches_by_unit": {
+        "curious": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "N07.C03",
+      "requirement": "KGP 的代理收集支持段落。",
+      "selected_matches_by_unit": {
+        "kgp": []
+      },
+      "missing_units": [
+        "kgp"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "N07.C04",
+      "requirement": "不确认反向训练关系。",
+      "selected_matches_by_unit": {
+        "kgp": [],
+        "curious": [
+          "chunk_43145c0748762d6b4c650c65721f826f"
+        ]
+      },
+      "missing_units": [
+        "kgp"
+      ],
+      "required_sources_available": false,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 1.0,
+    "evidence_coverage": 0.5,
+    "all_units": false
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/cb816a59-5245-4a07-8f17-043a48b05999?poll=true"
+}

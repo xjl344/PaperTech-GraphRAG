@@ -1,0 +1,2308 @@
+{
+  "request_id": "79f5fbde-dc97-47d6-96a1-8139a2ced7f9",
+  "status": "partial",
+  "answer": "ToG-2 方面：作者主张其用知识图谱（KG）引导文档检索，并把文档作为实体上下文来实现精确的图检索，二者交替进行、紧密耦合 [E3]。具体检索流程是：先从问题中抽取主题实体作为图搜索起点，每轮先在 KG 上做关系检索以扩展候选实体，再取这些候选实体关联文档中的相关文本 [E5]；随后依据上下文检索结果裁剪候选实体、更新主题实体集合并用于下一轮 [E5]；每轮检索后提示 LLM 基于检索到的知识三元组与上下文作答，信息不足则继续下一轮 [E5]。方法描述进一步区分为“上下文增强的图检索”与“知识引导的上下文检索”两部分并迭代执行 [E7]；初始化后先对初始主题实体关联文档做稠密检索抽取 top-k 文本块，再由 LLM 判断信息是否充分 [E8]。其目标被表述为通过 KG 与文本的协同检索获得深度知识，以实现深度且忠实的 LLM 推理 [E6]。至于 LPKG，证据只给出其总体流程：先利用 KG 中丰富的模式构建规划数据，再用这些数据微调规划 LLM，使其能在下游数据集上进行规划，最后通过解析和执行得到最终答案 [E2]；作者称该框架把规划与 RAG 解耦为两个独立模型，并特别用来源于 KG 的规划数据微调规划部分 [E4]。除上述“KG→规划数据→微调规划 LLM”的描述外，证据未给出规划数据的具体构造步骤或检索流程细节，这部分流程证据不足。",
+  "citations": [
+    {
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 621,
+          "end_char": 2250,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1629,
+          "block_bboxes": [
+            [
+              143.866,
+              279.608,
+              468.139,
+              530.667
+            ]
+          ]
+        }
+      ],
+      "quote": "Retrieval-augmented generation (RAG) has improved large language models\n(LLMs) by using knowledge retrieval to overcome knowledge deficiencies. How-\never, current RAG methods often fall short of ensuring the depth and complete-\nness of retrieved information, which is necessary for complex reasoning tasks.\nIn this work, we introduce Think-on-Graph 2.0 (ToG-2), a hybrid RAG frame-\nwork that iteratively retrieves information from both unstructured and structured\nknowledge sources in a tight-coupling manner.\nSpecifically, ToG-2 leverages\nknowledge graphs (KGs) to link documents via entities, facilitating deep and\nknowledge-guided context retrieval. Simultaneously, it utilizes documents as en-\ntity contexts to achieve precise and efficient graph retrieval. ToG-2 alternates\nbetween graph retrieval and context retrieval to search for in-depth clues rele-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 2.888340473175049
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8308348655700684
+        }
+      ],
+      "rerank_score": 0.8034823536872864,
+      "context_bytes": 2023,
+      "eid": "E3"
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2179,
+          "end_char": 3450,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1271,
+          "block_bboxes": [
+            [
+              108.0,
+              590.569,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 223,
+          "chunk_start_char": 1272,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              84.268,
+              504.003,
+              105.19
+            ]
+          ]
+        }
+      ],
+      "quote": "Considering the aforementioned challenges, we propose Think-on-Graph 2.0 (ToG-2), a tight-\ncoupling hybrid (KG×Text) RAG paradigm which effectively integrates unstructured knowledge\nfrom texts with structured insights from KGs, serving as a roadmap to enhance complex problem-\nsolving. As shown in Figure 1(d), ToG-2 first initializes the starting point for graph search by\nextracting topic entities from the question. At the beginning of each retrieval round, ToG-2 explores\nmore candidate entities by performing relation retrieval on the KG and retrieves relevant text from\ndocuments associated with these candidate entities. Following knowledge-guided context retrieval,\nToG-2 prunes the candidate entities based on the results of the context retrieval, updates the set of\ntopic entities and uses it as the starting point for the next round of retrieval. After each retrieval",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 2.7626757621765137
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8362646102905273
+        }
+      ],
+      "rerank_score": 0.7509182095527649,
+      "context_bytes": 1885,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2179,
+          "end_char": 3450,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1271,
+          "block_bboxes": [
+            [
+              108.0,
+              590.569,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 223,
+          "chunk_start_char": 1272,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              84.268,
+              504.003,
+              105.19
+            ]
+          ]
+        }
+      ],
+      "quote": "round, ToG-2 prompts the LLM to answer the question based on the highly relevant knowledge\ntriples and contexts obtained during the retrieval process. If the retrieved information is insufficient\nto answer the question, the next round of retrieval continues for searching more in-depth clues. Such\na tight-coupling hybrid RAG paradigm makes LLM perform closer to human when solving complex\n2\n\nPublished as a conference paper at ICLR 2025\nproblems: examining current clues and associating potential entities based on their existing knowl-\nedge framework, continuously digging into the topic until finding the answer.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 2.7626757621765137
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8362646102905273
+        }
+      ],
+      "rerank_score": 0.7509182095527649,
+      "context_bytes": 1885,
+      "eid": "E5"
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 3,
+      "page_end": 4,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 4482,
+          "end_char": 4688,
+          "chunk_start_char": 0,
+          "chunk_end_char": 206,
+          "block_bboxes": [
+            [
+              108.299,
+              685.254,
+              209.231,
+              697.209
+            ],
+            [
+              108.0,
+              711.347,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 1380,
+          "chunk_start_char": 207,
+          "chunk_end_char": 1587,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              191.097,
+              271.545,
+              420.903,
+              281.738
+            ],
+            [
+              108.0,
+              289.117,
+              504.003,
+              331.957
+            ],
+            [
+              108.0,
+              338.93,
+              504.003,
+              436.565
+            ],
+            [
+              108.249,
+              451.234,
+              194.499,
+              461.197
+            ]
+          ]
+        }
+      ],
+      "quote": "METHODOLOGY\nThe proposed method ToG-2 draws from the ToG approach Sun et al. (2024) in multi-hop searches\nwithin KGs, starting from key entities identified in the query and exploring outward based on en-\n3\n\nPublished as a conference paper at ICLR 2025\nFigure 2: An example illustrating the workflow of ToG-2.\ntities and relationships with a prompt-driven inferential process. ToG-2 combines the logical chain\nextensions based on triples with unstructured contextual knowledge of relevant entities by iteratively\nperforming knowledge-guided context retrieval and context-enhance graph retrieval, thus more ef-\nfectively integrating and utilizing heterogeneous external knowledge.\nSpecifically, ToG-2 begins by extracting entities from the given question as initial topic entities.\nIt then performs an iterative process of graph retrieval, context retrieval and LLM reasoning. At",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 2.8346166610717773
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8260021209716797
+        }
+      ],
+      "rerank_score": 0.6813028454780579,
+      "context_bytes": 1980,
+      "eid": "E7"
+    },
+    {
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1380,
+          "end_char": 2784,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1404,
+          "block_bboxes": [
+            [
+              108.0,
+              471.527,
+              504.004,
+              525.556
+            ],
+            [
+              144.53,
+              515.234,
+              366.053,
+              527.918
+            ],
+            [
+              108.0,
+              532.529,
+              504.004,
+              564.41
+            ],
+            [
+              108.0,
+              554.447,
+              504.003,
+              586.328
+            ],
+            [
+              108.249,
+              600.998,
+              289.634,
+              610.961
+            ],
+            [
+              108.0,
+              621.291,
+              504.002,
+              664.361
+            ],
+            [
+              211.214,
+              652.888,
+              261.535,
+              666.723
+            ],
+            [
+              108.0,
+              650.552,
+              504.002,
+              677.951
+            ],
+            [
+              119.378,
+              665.973,
+              159.504,
+              679.955
+            ],
+            [
+              145.1,
+              665.973,
+              202.938,
+              679.955
+            ],
+            [
+              188.534,
+              665.973,
+              235.681,
+              680.075
+            ],
+            [
+              221.277,
+              666.71,
+              267.832,
+              680.075
+            ],
+            [
+              263.857,
+              666.71,
+              281.741,
+              679.892
+            ],
+            [
+              277.766,
+              665.973,
+              322.408,
+              679.892
+            ]
+          ]
+        }
+      ],
+      "quote": "Given a question q, ToG-2 first identifies the entities present in q and links them to entities in the\nKG. This step can be done by different entity linking (EL) methods, such as LLMs or specialized EL\ntools 1. Then, ToG-2 performs a Topic Prune (TP) step to select suitable entities as starting points\nof exploring in a KG, which prompts the LLM to evaluate q and appearing entities, selecting topic\nentities E0\ntopic = {e1, e2, . . . , eN} and N is determined by LLM.\nPrior to the 1st-round graph retrieval, ToG-2 uses dense retrieval models (DRMs, including dual-\ntower and single-tower models) to extract the top-k chunks from the documents associated with\nthe initial topic entities E0\ntopic. The LLM then evaluates whether this information is sufficient to\nanswer the question, drawing on its own knowledge. If it concludes that the available information is",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8317303657531738
+        }
+      ],
+      "rerank_score": 0.6673644781112671,
+      "context_bytes": 1821,
+      "eid": "E8"
+    },
+    {
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 10,
+      "page_end": 11,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 10,
+          "start_char": 2789,
+          "end_char": 3580,
+          "chunk_start_char": 0,
+          "chunk_end_char": 791,
+          "block_bboxes": [
+            [
+              108.299,
+              608.209,
+              195.378,
+              620.164
+            ],
+            [
+              108.0,
+              634.635,
+              504.003,
+              732.269
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 11,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 792,
+          "chunk_end_char": 837,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "CONCLUSION\nExisting RAG systems based on KGs or texts struggle to ensure in-depth knowledge retrieval\nwhen dealing with complex knowledge reasoning tasks. In this work, we introduce a hybrid RAG\nparadigm, KG×Text RAG, which tightly couples KG-based and text-based RAG, and propose the\nThink-on-Graph 2.0 (ToG-2) algorithmic framework that enables reliable graph retrieval by using\ntextual contexts, achieves knowledge-guided context retrieval via the KG, and iteratively perform a\ncooperative retrieval process to obtain in-depth knowledge for achieving deep and faithful LLM rea-\nsoning. Experimental results demonstrate that ToG-2 can significantly improve LLMs of different\nsizes and outperform existing various LLM reasoning methods and RAG methods without additional\ntraining costs.\n10\n\nPublished as a conference paper at ICLR 2025",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8222064971923828
+        }
+      ],
+      "rerank_score": 0.7396105527877808,
+      "context_bytes": 1193,
+      "eid": "E6"
+    },
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3661,
+          "end_char": 4405,
+          "chunk_start_char": 0,
+          "chunk_end_char": 744,
+          "block_bboxes": [
+            [
+              306.142,
+              552.544,
+              381.209,
+              564.499
+            ],
+            [
+              305.804,
+              574.956,
+              526.318,
+              775.47
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 754,
+          "chunk_start_char": 745,
+          "chunk_end_char": 1499,
+          "block_bboxes": [
+            [
+              180.817,
+              292.104,
+              414.46,
+              302.067
+            ],
+            [
+              70.866,
+              324.955,
+              125.334,
+              336.91
+            ],
+            [
+              70.866,
+              346.852,
+              290.946,
+              371.348
+            ],
+            [
+              70.593,
+              373.953,
+              290.947,
+              452.691
+            ],
+            [
+              70.473,
+              455.399,
+              289.317,
+              547.583
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nIn this paper, we try to enhance the planning ability\nin retrieval-augmented LLMs using KGs. Specifi-\ncally, we design a framework for Learning to Plan\nfrom KG (LPKG). The proposed LPKG framework\nfirst utilizes the rich patterns in the KGs to con-\nstruct planning data, then fine-tune planning LLMs\nbased on such data to enable them to conduct plan-\nning on downstream datasets, and ultimately get\nthe final answer through parsing and execution.\nThe experimental results reveal the excellent per-\nformance of the LPKG framework and also demon-\nstrate the effectiveness of using KG-sourced data to\nenhance LLMs’ planning ability. Finally, we con-\nstruct CLQA-Wiki, providing a more challenging\ncomplex QA benchmark for the community.\n\nFigure 4: Fine-grained evaluation based on question types.\nLimitation\nIn our view, the limitations of our work at the cur-",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 2.672600507736206
+        }
+      ],
+      "rerank_score": 0.3967691659927368,
+      "context_bytes": 1879,
+      "eid": "E2"
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 6,
+      "page_end": 7,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 3600,
+          "end_char": 4612,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1012,
+          "block_bboxes": [
+            [
+              305.749,
+              484.585,
+              526.225,
+              752.948
+            ],
+            [
+              318.794,
+              764.492,
+              520.035,
+              775.0
+            ]
+          ]
+        },
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 354,
+          "chunk_start_char": 1013,
+          "chunk_end_char": 1367,
+          "block_bboxes": [
+            [
+              91.629,
+              76.141,
+              503.646,
+              208.042
+            ]
+          ]
+        }
+      ],
+      "quote": "Main Results (RQ1,RQ2)\nTable 2 shows results\non conventional complex QA datasets. Since the\nQA LLM remains unchanged in our framework, we\nuse “LPKG(Llama3)” and “LPKG(CodeQwen)” to\nrepresent LPKG frameworks using different plan-\nning LLMs, respectively. They are fine-tuned on\nLlama3-8B-Instruct and CodeQwen1.5-7B-Chat\nwith KG-sourced planning data. It can be found\nthat our framework outperforms the baseline meth-\nods on the majority of datasets. Particularly, com-\npared to ReAct and Self-Ask, our approach shows\nsignificant improvement. It is worth noting that\nboth ReAct and Self-Ask iterative planning and\nRAG in their workflows, whereas our approach de-\ncouples planning and RAG into two separate mod-\nels. This allows each model to focus more inten-\nsively on its individual task. Moreover, we specifi-\ncally enhance the planning part by fine-tuning Mp\nwith planning data sourced from KG.",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 3.203895092010498
+        }
+      ],
+      "rerank_score": 0.3253061771392822,
+      "context_bytes": 1817,
+      "eid": "E4"
+    }
+  ],
+  "premise_check": null,
+  "evidence": [
+    {
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 3,
+      "page_end": 3,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 223,
+          "end_char": 1439,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1216,
+          "block_bboxes": [
+            [
+              108.0,
+              112.073,
+              504.003,
+              253.634
+            ],
+            [
+              108.299,
+              272.586,
+              217.097,
+              284.541
+            ]
+          ]
+        }
+      ],
+      "quote": "The advantage of ToG-2 can be summarized as: (1) In-depth retrieval: ToG-2 achieves in-depth\nand reliable context retrieval through the guide of KGs and performs precise graph retrieval by\ntreating documents as node contexts, achieving a tight-coupling combination of KG and text RAG,\nenabling deep and comprehensive retrieval processes. (2) Faithful reasoning: ToG-2 iteratively\nperforms a collaborative retrieval process based on KG and text, using retrieved heterogeneous\nknowledge as the basis for LLM reasoning and enhancing the faithfulness of LLM-generated con-\ntent (3) Efficiency and Effectiveness: a) ToG-2 is a training-free and plug-and-play framework that\ncan be applied to various LLMs; b) ToG-2 can be executed between any associated KG and docu-\nment database, while for purely document database, entities can be extracted from the documents\nfirst, and then a graph can be constructed through relation extraction or entity co-occurrence (Edge\net al., 2024); c) ToG-2 achieves new SOTA performances on various complex knowledge reasoning\ndatasets and can elevate the reasoning capabilities of smaller LLMs, e.g., Llama2-13B to a level\ncomparable to direct reasoning with powerful LLMs like GPT-3.5.\n2\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 2.927487373352051
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8203268051147461
+        }
+      ],
+      "rerank_score": 0.8770562410354614,
+      "context_bytes": 1601
+    },
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 8,
+      "page_end": 9,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 8,
+          "start_char": 3661,
+          "end_char": 4405,
+          "chunk_start_char": 0,
+          "chunk_end_char": 744,
+          "block_bboxes": [
+            [
+              306.142,
+              552.544,
+              381.209,
+              564.499
+            ],
+            [
+              305.804,
+              574.956,
+              526.318,
+              775.47
+            ]
+          ]
+        },
+        {
+          "pdf_page": 9,
+          "start_char": 0,
+          "end_char": 754,
+          "chunk_start_char": 745,
+          "chunk_end_char": 1499,
+          "block_bboxes": [
+            [
+              180.817,
+              292.104,
+              414.46,
+              302.067
+            ],
+            [
+              70.866,
+              324.955,
+              125.334,
+              336.91
+            ],
+            [
+              70.866,
+              346.852,
+              290.946,
+              371.348
+            ],
+            [
+              70.593,
+              373.953,
+              290.947,
+              452.691
+            ],
+            [
+              70.473,
+              455.399,
+              289.317,
+              547.583
+            ]
+          ]
+        }
+      ],
+      "quote": "Conclusion\nIn this paper, we try to enhance the planning ability\nin retrieval-augmented LLMs using KGs. Specifi-\ncally, we design a framework for Learning to Plan\nfrom KG (LPKG). The proposed LPKG framework\nfirst utilizes the rich patterns in the KGs to con-\nstruct planning data, then fine-tune planning LLMs\nbased on such data to enable them to conduct plan-\nning on downstream datasets, and ultimately get\nthe final answer through parsing and execution.\nThe experimental results reveal the excellent per-\nformance of the LPKG framework and also demon-\nstrate the effectiveness of using KG-sourced data to\nenhance LLMs’ planning ability. Finally, we con-\nstruct CLQA-Wiki, providing a more challenging\ncomplex QA benchmark for the community.\n\nFigure 4: Fine-grained evaluation based on question types.\nLimitation\nIn our view, the limitations of our work at the cur-\nrent stage mainly stem from two aspects:\n(1) During the fine-tuning phase of planning\nLLMs, we simply mixed various types of ques-\ntions together uniformly for training. We have not\nyet explored the impact of question type distribu-\ntion on the experimental results, which could be\nthe focus of future work.\n(2) At present, the datasets we test have explicit\ntypes of questions (multi-hop, comparison, and\nunion/intersection), but in reality, some question\ntypes may be implicit or even not be included in\nthe types we define. The future direction of our\nwork can be to study planning methods for these\ntypes of unclear questions.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 2.672600507736206
+        }
+      ],
+      "rerank_score": 0.3967691659927368,
+      "context_bytes": 1879
+    },
+    {
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 1,
+      "page_end": 1,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 1,
+          "start_char": 621,
+          "end_char": 2250,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1629,
+          "block_bboxes": [
+            [
+              143.866,
+              279.608,
+              468.139,
+              530.667
+            ]
+          ]
+        }
+      ],
+      "quote": "Retrieval-augmented generation (RAG) has improved large language models\n(LLMs) by using knowledge retrieval to overcome knowledge deficiencies. How-\never, current RAG methods often fall short of ensuring the depth and complete-\nness of retrieved information, which is necessary for complex reasoning tasks.\nIn this work, we introduce Think-on-Graph 2.0 (ToG-2), a hybrid RAG frame-\nwork that iteratively retrieves information from both unstructured and structured\nknowledge sources in a tight-coupling manner.\nSpecifically, ToG-2 leverages\nknowledge graphs (KGs) to link documents via entities, facilitating deep and\nknowledge-guided context retrieval. Simultaneously, it utilizes documents as en-\ntity contexts to achieve precise and efficient graph retrieval. ToG-2 alternates\nbetween graph retrieval and context retrieval to search for in-depth clues rele-\nvant to the question, enabling LLMs to generate answers. We conduct a series\nof well-designed experiments to highlight the following advantages of ToG-2:\n1) ToG-2 tightly couples the processes of context retrieval and graph retrieval,\ndeepening context retrieval via the KG while enabling reliable graph retrieval\nbased on contexts; 2) it achieves deep and faithful reasoning in LLMs through\nan iterative knowledge retrieval process of collaboration between contexts and\nthe KG; and 3) ToG-2 is training-free and plug-and-play compatible with vari-\nous LLMs. Extensive experiments demonstrate that ToG-2 achieves overall state-\nof-the-art (SOTA) performance on 6 out of 7 knowledge-intensive datasets with\nGPT-3.5, and can elevate the performance of smaller models (e.g",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 2.888340473175049
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8308348655700684
+        }
+      ],
+      "rerank_score": 0.8034823536872864,
+      "context_bytes": 2023
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "paper_id": "paper_900c57868044724d396de2c95dd00435",
+      "parse_id": "parse_ade4a33d5a1fe3868f2e9bf4ed4de363",
+      "title": "Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs",
+      "page_start": 6,
+      "page_end": 7,
+      "source_relative_path": "Methods/024_Learning to Plan for Retrieval-Augmented Large Language Models from Knowledge Graphs.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 6,
+          "start_char": 3600,
+          "end_char": 4612,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1012,
+          "block_bboxes": [
+            [
+              305.749,
+              484.585,
+              526.225,
+              752.948
+            ],
+            [
+              318.794,
+              764.492,
+              520.035,
+              775.0
+            ]
+          ]
+        },
+        {
+          "pdf_page": 7,
+          "start_char": 0,
+          "end_char": 354,
+          "chunk_start_char": 1013,
+          "chunk_end_char": 1367,
+          "block_bboxes": [
+            [
+              91.629,
+              76.141,
+              503.646,
+              208.042
+            ]
+          ]
+        }
+      ],
+      "quote": "Main Results (RQ1,RQ2)\nTable 2 shows results\non conventional complex QA datasets. Since the\nQA LLM remains unchanged in our framework, we\nuse “LPKG(Llama3)” and “LPKG(CodeQwen)” to\nrepresent LPKG frameworks using different plan-\nning LLMs, respectively. They are fine-tuned on\nLlama3-8B-Instruct and CodeQwen1.5-7B-Chat\nwith KG-sourced planning data. It can be found\nthat our framework outperforms the baseline meth-\nods on the majority of datasets. Particularly, com-\npared to ReAct and Self-Ask, our approach shows\nsignificant improvement. It is worth noting that\nboth ReAct and Self-Ask iterative planning and\nRAG in their workflows, whereas our approach de-\ncouples planning and RAG into two separate mod-\nels. This allows each model to focus more inten-\nsively on its individual task. Moreover, we specifi-\ncally enhance the planning part by fine-tuning Mp\nwith planning data sourced from KG. These two\nchanges have brought significant improvements to\n1https://platform.openai.com/docs/models/gpt-3-5-turbo\n\nPlanning\nRAG\nHotPotQA\n2WikiMQA\nBamboogle\nMuSiQue\nDirect\n%\n%\n0.268\n0.284\n0.128\n0.090\nCoT\n\"\n%\n0.288\n0.286\n0.280\n0.090\nDirect RAG\n%\n\"\n0.292\n0.230\n0.080\n0.088\nReAct\n\"\n\"\n0.211\n0.216\n0.168\n0.060\nSelf-Ask\n\"\n\"\n0.176\n0.194\n0.136\n0.116\nICLPKG(GPT-3.5)\n\"\n\"\n0.352\n0.344\n0.296\n0.254\nLPKG(CodeQwen)\n\"\n\"\n0.338\n0.356\n0.280\n0.266\nLPKG(Llama3)\n\"\n\"\n0.376\n0.372\n0.304\n0.296\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 3.203895092010498
+        }
+      ],
+      "rerank_score": 0.3253061771392822,
+      "context_bytes": 1817
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 2,
+      "page_end": 3,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 2,
+          "start_char": 2179,
+          "end_char": 3450,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1271,
+          "block_bboxes": [
+            [
+              108.0,
+              590.569,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 3,
+          "start_char": 0,
+          "end_char": 223,
+          "chunk_start_char": 1272,
+          "chunk_end_char": 1495,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              84.268,
+              504.003,
+              105.19
+            ]
+          ]
+        }
+      ],
+      "quote": "Considering the aforementioned challenges, we propose Think-on-Graph 2.0 (ToG-2), a tight-\ncoupling hybrid (KG×Text) RAG paradigm which effectively integrates unstructured knowledge\nfrom texts with structured insights from KGs, serving as a roadmap to enhance complex problem-\nsolving. As shown in Figure 1(d), ToG-2 first initializes the starting point for graph search by\nextracting topic entities from the question. At the beginning of each retrieval round, ToG-2 explores\nmore candidate entities by performing relation retrieval on the KG and retrieves relevant text from\ndocuments associated with these candidate entities. Following knowledge-guided context retrieval,\nToG-2 prunes the candidate entities based on the results of the context retrieval, updates the set of\ntopic entities and uses it as the starting point for the next round of retrieval. After each retrieval\nround, ToG-2 prompts the LLM to answer the question based on the highly relevant knowledge\ntriples and contexts obtained during the retrieval process. If the retrieved information is insufficient\nto answer the question, the next round of retrieval continues for searching more in-depth clues. Such\na tight-coupling hybrid RAG paradigm makes LLM perform closer to human when solving complex\n2\n\nPublished as a conference paper at ICLR 2025\nproblems: examining current clues and associating potential entities based on their existing knowl-\nedge framework, continuously digging into the topic until finding the answer.\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 2.7626757621765137
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8362646102905273
+        }
+      ],
+      "rerank_score": 0.7509182095527649,
+      "context_bytes": 1885
+    },
+    {
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 10,
+      "page_end": 11,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 10,
+          "start_char": 2789,
+          "end_char": 3580,
+          "chunk_start_char": 0,
+          "chunk_end_char": 791,
+          "block_bboxes": [
+            [
+              108.299,
+              608.209,
+              195.378,
+              620.164
+            ],
+            [
+              108.0,
+              634.635,
+              504.003,
+              732.269
+            ],
+            [
+              301.019,
+              752.194,
+              310.982,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 11,
+          "start_char": 0,
+          "end_char": 45,
+          "chunk_start_char": 792,
+          "chunk_end_char": 837,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ]
+          ]
+        }
+      ],
+      "quote": "CONCLUSION\nExisting RAG systems based on KGs or texts struggle to ensure in-depth knowledge retrieval\nwhen dealing with complex knowledge reasoning tasks. In this work, we introduce a hybrid RAG\nparadigm, KG×Text RAG, which tightly couples KG-based and text-based RAG, and propose the\nThink-on-Graph 2.0 (ToG-2) algorithmic framework that enables reliable graph retrieval by using\ntextual contexts, achieves knowledge-guided context retrieval via the KG, and iteratively perform a\ncooperative retrieval process to obtain in-depth knowledge for achieving deep and faithful LLM rea-\nsoning. Experimental results demonstrate that ToG-2 can significantly improve LLMs of different\nsizes and outperform existing various LLM reasoning methods and RAG methods without additional\ntraining costs.\n10\n\nPublished as a conference paper at ICLR 2025\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8222064971923828
+        }
+      ],
+      "rerank_score": 0.7396105527877808,
+      "context_bytes": 1193
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 3,
+      "page_end": 4,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 4482,
+          "end_char": 4688,
+          "chunk_start_char": 0,
+          "chunk_end_char": 206,
+          "block_bboxes": [
+            [
+              108.299,
+              685.254,
+              209.231,
+              697.209
+            ],
+            [
+              108.0,
+              711.347,
+              504.003,
+              732.269
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 1380,
+          "chunk_start_char": 207,
+          "chunk_end_char": 1587,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              191.097,
+              271.545,
+              420.903,
+              281.738
+            ],
+            [
+              108.0,
+              289.117,
+              504.003,
+              331.957
+            ],
+            [
+              108.0,
+              338.93,
+              504.003,
+              436.565
+            ],
+            [
+              108.249,
+              451.234,
+              194.499,
+              461.197
+            ]
+          ]
+        }
+      ],
+      "quote": "METHODOLOGY\nThe proposed method ToG-2 draws from the ToG approach Sun et al. (2024) in multi-hop searches\nwithin KGs, starting from key entities identified in the query and exploring outward based on en-\n3\n\nPublished as a conference paper at ICLR 2025\nFigure 2: An example illustrating the workflow of ToG-2.\ntities and relationships with a prompt-driven inferential process. ToG-2 combines the logical chain\nextensions based on triples with unstructured contextual knowledge of relevant entities by iteratively\nperforming knowledge-guided context retrieval and context-enhance graph retrieval, thus more ef-\nfectively integrating and utilizing heterogeneous external knowledge.\nSpecifically, ToG-2 begins by extracting entities from the given question as initial topic entities.\nIt then performs an iterative process of graph retrieval, context retrieval and LLM reasoning. At\nthe start of each iteration, ToG-2 selectively explores entities neighboring the current topic entities\non the KG, using the newly encountered entities to refine the retrieval scope, thereby enhancing\nboth efficiency and accuracy. Next, ToG-2 ranks and selects entities based on the query and the\ncontextual knowledge retrieved from relevant documents, reducing ambiguity and ensuring accurate\nexploration for the next step. After, the LLM utilizes heterogeneous knowledge, including triple\npaths and entity contexts, to either answer the question or proceed with further rounds of retrieval if\nthe information gathered is insufficient. In this section, we will explain each step in detail.\n3.1\nINITIALIZTION\n",
+      "retrieval_sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 2.8346166610717773
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8260021209716797
+        }
+      ],
+      "rerank_score": 0.6813028454780579,
+      "context_bytes": 1980
+    },
+    {
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+      "parse_id": "parse_7051b1d9c2050dca68d7773860fc817a",
+      "title": "Think-on-Graph 2.0: Deep and Interpretable Large Language Model Reasoning with Knowledge Graph-guided Retrieval",
+      "page_start": 4,
+      "page_end": 4,
+      "source_relative_path": "Methods/015_Think-on-Graph 2.0 Deep and Interpretable Large Language Model Reasoning with Knowledge Gr.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 4,
+          "start_char": 1380,
+          "end_char": 2784,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1404,
+          "block_bboxes": [
+            [
+              108.0,
+              471.527,
+              504.004,
+              525.556
+            ],
+            [
+              144.53,
+              515.234,
+              366.053,
+              527.918
+            ],
+            [
+              108.0,
+              532.529,
+              504.004,
+              564.41
+            ],
+            [
+              108.0,
+              554.447,
+              504.003,
+              586.328
+            ],
+            [
+              108.249,
+              600.998,
+              289.634,
+              610.961
+            ],
+            [
+              108.0,
+              621.291,
+              504.002,
+              664.361
+            ],
+            [
+              211.214,
+              652.888,
+              261.535,
+              666.723
+            ],
+            [
+              108.0,
+              650.552,
+              504.002,
+              677.951
+            ],
+            [
+              119.378,
+              665.973,
+              159.504,
+              679.955
+            ],
+            [
+              145.1,
+              665.973,
+              202.938,
+              679.955
+            ],
+            [
+              188.534,
+              665.973,
+              235.681,
+              680.075
+            ],
+            [
+              221.277,
+              666.71,
+              267.832,
+              680.075
+            ],
+            [
+              263.857,
+              666.71,
+              281.741,
+              679.892
+            ],
+            [
+              277.766,
+              665.973,
+              322.408,
+              679.892
+            ]
+          ]
+        }
+      ],
+      "quote": "Given a question q, ToG-2 first identifies the entities present in q and links them to entities in the\nKG. This step can be done by different entity linking (EL) methods, such as LLMs or specialized EL\ntools 1. Then, ToG-2 performs a Topic Prune (TP) step to select suitable entities as starting points\nof exploring in a KG, which prompts the LLM to evaluate q and appearing entities, selecting topic\nentities E0\ntopic = {e1, e2, . . . , eN} and N is determined by LLM.\nPrior to the 1st-round graph retrieval, ToG-2 uses dense retrieval models (DRMs, including dual-\ntower and single-tower models) to extract the top-k chunks from the documents associated with\nthe initial topic entities E0\ntopic. The LLM then evaluates whether this information is sufficient to\nanswer the question, drawing on its own knowledge. If it concludes that the available information is\nadequate, no further steps will be required.\n3.2\nHYBRID KNOWLEDGE EXPLORATION\nThe following will illustrate how ToG-2 iteratively harmonizes and tightly couples heterogeneous\nknowledge. The iterative process will be explained in two main parts, Context-enhanced Graph\nSearch and Knowledge-guided Context Retrieval.\nFormally, in the i-th iteration, the topic\nentities are denoted as Ei\ntopic = {ei\n1, ei\n2, . . . , ei\nj} and their preceding triple paths are Pi−1 =\n{P i−1\n1\n, P i−1\n2\n, . . . , P i−1\nj\n}, P i−1\nj\n= {p0\nj, p1\nj, . . . , pi−1\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8317303657531738
+        }
+      ],
+      "rerank_score": 0.6673644781112671,
+      "context_bytes": 1821
+    },
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 3,
+      "page_end": 3,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 1410,
+          "end_char": 2828,
+          "chunk_start_char": 0,
+          "chunk_end_char": 1418,
+          "block_bboxes": [
+            [
+              108.0,
+              324.877,
+              504.363,
+              378.751
+            ],
+            [
+              107.671,
+              404.127,
+              503.998,
+              425.124
+            ],
+            [
+              107.691,
+              431.931,
+              505.656,
+              529.732
+            ],
+            [
+              108.299,
+              549.669,
+              178.722,
+              561.625
+            ]
+          ]
+        }
+      ],
+      "quote": "Figure 2: An example workflow of ToG. The glowing entities are the central entities where the\nsearch starts at each iteration (depth), and the entities with boldface are the selected central entities\nfor the next iteration after pruning. At each pruning step, the darkness of the edges represents the\nranking score given by LLM, and the dashed lines indicate relations that have been pruned due to low\nevaluation scores.\ninformation through the top-N reasoning paths in beam search is gathered to answer the question\n(judged by LLMs in \"Think\" step) or the predefined maximum search depth is reached.\nThe advantage of ToG can be abbreviated as (1) Deep reasoning: ToG extracts diverse and multi-\nhop reasoning paths from KGs as the basis for LLM reasoning, enhancing LLMs’ deep reasoning\ncapabilities for knowledge-intensive tasks. (2) Responsible reasoning: Explicit, editable reasoning\npaths improve the explainability of the reasoning process of LLMs, and enable the tracing and\ncorrection of the provenances of models’ outputs. (3) Flexibility and efficiency: a) ToG is a plug-\nand-play framework that can be applied to a variety of LLMs and KGs seamlessly. b) Under ToG\nframework, knowledge can be updated frequently via KG instead of LLM whose knowledge-update\nis expensive and slow. c) ToG enhances the reasoning ability of small LLMs (e.g., LLAMA2-70B) to\nbe competitive with big LLMs (e.g., GPT-4).\n2\nMETHODS\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8024282455444336
+        }
+      ],
+      "rerank_score": 0.2941135764122009,
+      "context_bytes": 1793
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "paper_id": "paper_7c66d58cf7a3a8aa9ff0f9d02c1de6ed",
+      "parse_id": "parse_c4951b3f56f23d344d6d65d486f62440",
+      "title": "Think-on-Graph: Deep and Responsible Reasoning of Large Language Model with Knowledge Graph",
+      "page_start": 3,
+      "page_end": 4,
+      "source_relative_path": "Methods/215_Think-on-Graph Deep and Responsible Reasoning of Large Language Model with Knowledge Graph.pdf",
+      "source_spans": [
+        {
+          "pdf_page": 3,
+          "start_char": 2828,
+          "end_char": 3753,
+          "chunk_start_char": 0,
+          "chunk_end_char": 925,
+          "block_bboxes": [
+            [
+              107.691,
+              575.993,
+              504.005,
+              641.11
+            ],
+            [
+              108.249,
+              658.672,
+              211.179,
+              668.635
+            ],
+            [
+              108.249,
+              680.202,
+              293.39,
+              690.165
+            ],
+            [
+              108.0,
+              700.313,
+              504.002,
+              732.268
+            ],
+            [
+              303.509,
+              752.194,
+              308.49,
+              762.157
+            ]
+          ]
+        },
+        {
+          "pdf_page": 4,
+          "start_char": 0,
+          "end_char": 487,
+          "chunk_start_char": 926,
+          "chunk_end_char": 1413,
+          "block_bboxes": [
+            [
+              108.0,
+              27.813,
+              293.095,
+              37.776
+            ],
+            [
+              108.0,
+              80.423,
+              232.161,
+              94.255
+            ],
+            [
+              108.0,
+              82.759,
+              503.999,
+              105.19
+            ],
+            [
+              108.249,
+              122.764,
+              201.665,
+              132.727
+            ],
+            [
+              107.641,
+              143.134,
+              504.002,
+              165.406
+            ],
+            [
+              121.495,
+              154.164,
+              146.392,
+              167.216
+            ],
+            [
+              141.966,
+              154.164,
+              166.242,
+              167.346
+            ],
+            [
+              162.093,
+              153.426,
+              199.6,
+              167.216
+            ],
+            [
+              182.67,
+              154.164,
+              243.19,
+              168.665
+            ],
+            [
+              239.041,
+              154.164,
+              280.776,
+              168.123
+            ],
+            [
+              276.627,
+              154.164,
+              444.946,
+              168.123
+            ],
+            [
+              108.0,
+              155.598,
+              504.003,
+              179.71
+            ],
+            [
+              213.519,
+              168.214,
+              238.417,
+              181.266
+            ],
+            [
+              233.991,
+              168.214,
+              258.266,
+              181.397
+            ],
+            [
+              254.117,
+              168.214,
+              313.207,
+              181.266
+            ],
+            [
+              298.969,
+              167.568,
+              337.139,
+              181.919
+            ],
+            [
+              322.624,
+              168.214,
+              360.938,
+              182.233
+            ]
+          ]
+        }
+      ],
+      "quote": "ToG implements the “LLM ⊗KG” paradigm by asking LLM to perform beam search on knowledge\ngraph. Specifically, it prompts the LLM to iteratively explore multiple possible reasoning paths on\nKGs until the LLM determines that the question can be answered based on the current reasoning\npaths. ToG constantly updates and maintains top-N reasoning paths P = {p1, p2, . . . , pN} for the\nquestion x after each iteration, where N denotes the width of beam search. The entire inference\nprocess of ToG contains the following 3 phases: initialization, exploration, and reasoning.\n2.1\nTHINK-ON-GRAPH\n2.1.1\nINITIALIZATION OF GRAPH SEARCH\nGiven a question, ToG leverages the underlying LLM to localize the initial entity of the reasoning\npaths on knowledge graph. This phase can be regarded as the initialization of the top-N reasoning\npaths P. ToG first prompts LLMs to automatically extract the topic entities in question and gets the\n3\n\nPublished as a conference paper at ICLR 2024\ntop-N topic entities E0 = {e0\n1, e0\n2, ..., e0\nN} to the question. Note that the number of topic entities\nmight possibly be less than N.\n2.1.2\nEXPLORATION\nAt the beginning of the D-th iteration, each path pn consists of D −1 triples, i.e., pn =\n{(ed\ns,n, rd\nj,n, ed\no,n)}D−1\nd=1 , where ed\ns,n and ed\no,n denote subject and object entities, rd\nj,n is a specific\nrelation between them, (ed\ns,n, rd\nj,n, ed\no,n) and (ed+1\ns,n , rd+1\nj,n , ed+1\n",
+      "retrieval_sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8134555816650391
+        }
+      ],
+      "rerank_score": 0.26114246249198914,
+      "context_bytes": 1813
+    }
+  ],
+  "graph_paths": [],
+  "generation_paths": [],
+  "limitations": [
+    "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+  ],
+  "retrieval_summary": {
+    "backend": "neo4j",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "embedding_model_id": "066c2824814cdb9cdf3e81959d872caba285ca86d0643fae21365a8d356dd000",
+    "query_mode": "cloud",
+    "fulltext_hits": 20,
+    "dense_hits": 20,
+    "candidate_count": 33,
+    "graph_executed": false,
+    "graph_hits": 0,
+    "fusion": "RRF k=60",
+    "fulltext_scoring": "Neo4j Lucene fulltext (actual version in index report)",
+    "degraded": false,
+    "graph_skip_reason": "disabled",
+    "reranker": {
+      "model_id": "65396e405c6bfa2881c661a40c0c96f2acd5ee796018a8791111a6224c31f2a5",
+      "device": "cuda",
+      "max_pair_tokens": 1024,
+      "truncation": true,
+      "contextual_input": "title+section+text",
+      "rerank_mode": "original_query",
+      "dtype": "float16",
+      "persistent": true,
+      "model_reused": true,
+      "load_seconds": 14.144518400018569,
+      "inference_seconds": 0.9956891000038013,
+      "elapsed_seconds": 1.0003506999928504,
+      "peak_cuda_memory_bytes": 1194297344,
+      "request_count": 45,
+      "batch_size": 4
+    },
+    "evidence_count": 10,
+    "context_bytes": 17805,
+    "evidence_bytes": 17805,
+    "graph_context_bytes": 0,
+    "serialized_content_bytes": 17058,
+    "prompt_graph_paths": [],
+    "path_policy": "evidence_first",
+    "path_format": "references",
+    "comparison_groups": [
+      {
+        "name": "ToG-2",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "requested_names": [
+          "ToG-2"
+        ]
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ]
+      }
+    ],
+    "missing_comparison_groups": [],
+    "source_coverage": [
+      {
+        "name": "ToG-2",
+        "paper_id": "paper_1f0f648a6595c842e4881196687e103c",
+        "requested_names": [
+          "ToG-2"
+        ],
+        "eligible_candidate_count": 21,
+        "selected_chunk_ids": [
+          "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+          "chunk_9b63637ef18ed2d67ff105ef55092df3",
+          "chunk_fd05fc6099086f633f4ad41747c6caac",
+          "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+          "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+          "chunk_362a4aa0f89367fe96563183423db354"
+        ],
+        "missing_reason": null
+      },
+      {
+        "name": "LPKG",
+        "paper_id": "paper_900c57868044724d396de2c95dd00435",
+        "requested_names": [
+          "LPKG"
+        ],
+        "eligible_candidate_count": 5,
+        "selected_chunk_ids": [
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+          "chunk_36fd3f5ddb484701ba81edeecc069767"
+        ],
+        "missing_reason": null
+      }
+    ],
+    "limitations": [
+      "检索到同一数据集不代表实验条件可比；仅按原文核对数据划分、底座模型、指标和协议，缺项须说明。"
+    ],
+    "score_policy": "relative",
+    "reservation_policy": "round_robin",
+    "context_budget_bytes": 18000,
+    "generation_path_count": 0,
+    "evidence_sufficiency": "retrieval_only; semantic support requires answer review"
+  },
+  "usage": {
+    "prompt_tokens": 4591,
+    "total_tokens": 5054,
+    "completion_tokens": 463,
+    "prompt_tokens_details": {
+      "cached_tokens": 256,
+      "image_tokens": 0,
+      "text_tokens": 4591
+    },
+    "completion_tokens_details": {
+      "text_tokens": 463
+    }
+  },
+  "model_name": "deepseek-v4.1-flash-1017",
+  "errors": [],
+  "raw": "{\"answer\":\"ToG-2 方面：作者主张其用知识图谱（KG）引导文档检索，并把文档作为实体上下文来实现精确的图检索，二者交替进行、紧密耦合 [E3]。具体检索流程是：先从问题中抽取主题实体作为图搜索起点，每轮先在 KG 上做关系检索以扩展候选实体，再取这些候选实体关联文档中的相关文本 [E5]；随后依据上下文检索结果裁剪候选实体、更新主题实体集合并用于下一轮 [E5]；每轮检索后提示 LLM 基于检索到的知识三元组与上下文作答，信息不足则继续下一轮 [E5]。方法描述进一步区分为“上下文增强的图检索”与“知识引导的上下文检索”两部分并迭代执行 [E7]；初始化后先对初始主题实体关联文档做稠密检索抽取 top-k 文本块，再由 LLM 判断信息是否充分 [E8]。其目标被表述为通过 KG 与文本的协同检索获得深度知识，以实现深度且忠实的 LLM 推理 [E6]。至于 LPKG，证据只给出其总体流程：先利用 KG 中丰富的模式构建规划数据，再用这些数据微调规划 LLM，使其能在下游数据集上进行规划，最后通过解析和执行得到最终答案 [E2]；作者称该框架把规划与 RAG 解耦为两个独立模型，并特别用来源于 KG 的规划数据微调规划部分 [E4]。除上述“KG→规划数据→微调规划 LLM”的描述外，证据未给出规划数据的具体构造步骤或检索流程细节，这部分流程证据不足。\",\"citations\":[{\"eid\":\"E3\",\"quote_id\":\"q1\"},{\"eid\":\"E5\",\"quote_id\":\"q1\"},{\"eid\":\"E5\",\"quote_id\":\"q2\"},{\"eid\":\"E7\",\"quote_id\":\"q1\"},{\"eid\":\"E8\",\"quote_id\":\"q1\"},{\"eid\":\"E6\",\"quote_id\":\"q1\"},{\"eid\":\"E2\",\"quote_id\":\"q1\"},{\"eid\":\"E4\",\"quote_id\":\"q1\"}],\"status\":\"partial\"}",
+  "ranked": [
+    {
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "score": 0.030303030303030304,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 6,
+          "score": 2.927487373352051
+        },
+        {
+          "channel": "dense",
+          "rank": 6,
+          "score": 0.8203268051147461
+        }
+      ],
+      "rerank_score": 0.8770562410354614
+    },
+    {
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "score": 0.03036576949620428,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 9,
+          "score": 2.888340473175049
+        },
+        {
+          "channel": "dense",
+          "rank": 3,
+          "score": 0.8308348655700684
+        }
+      ],
+      "rerank_score": 0.8034823536872864
+    },
+    {
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 0.029726775956284153,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 15,
+          "score": 2.7626757621765137
+        },
+        {
+          "channel": "dense",
+          "rank": 1,
+          "score": 0.8362646102905273
+        }
+      ],
+      "rerank_score": 0.7509182095527649
+    },
+    {
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 5,
+          "score": 0.8222064971923828
+        }
+      ],
+      "rerank_score": 0.7396105527877808
+    },
+    {
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "score": 0.0293236301369863,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 13,
+          "score": 2.8346166610717773
+        },
+        {
+          "channel": "dense",
+          "rank": 4,
+          "score": 0.8260021209716797
+        }
+      ],
+      "rerank_score": 0.6813028454780579
+    },
+    {
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 2,
+          "score": 0.8317303657531738
+        }
+      ],
+      "rerank_score": 0.6673644781112671
+    },
+    {
+      "chunk_id": "chunk_dbc1fae04646d9e523a5b16481732daf",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 20,
+          "score": 2.668804883956909
+        }
+      ],
+      "rerank_score": 0.6383845806121826
+    },
+    {
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.027313266443701224,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 18,
+          "score": 2.695990800857544
+        },
+        {
+          "channel": "dense",
+          "rank": 9,
+          "score": 0.8127884864807129
+        }
+      ],
+      "rerank_score": 0.6196439266204834
+    },
+    {
+      "chunk_id": "chunk_9c3795187f69ce14c244c9ad74c8e821",
+      "score": 0.015625,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 4,
+          "score": 3.00386381149292
+        }
+      ],
+      "rerank_score": 0.574573814868927
+    },
+    {
+      "chunk_id": "chunk_a68d09dd1334dcb0207c235cca9292cf",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 12,
+          "score": 2.861908435821533
+        }
+      ],
+      "rerank_score": 0.4690034091472626
+    },
+    {
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.014925373134328358,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 7,
+          "score": 0.8180241584777832
+        }
+      ],
+      "rerank_score": 0.46739253401756287
+    },
+    {
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 8,
+          "score": 2.888340473175049
+        }
+      ],
+      "rerank_score": 0.4455898106098175
+    },
+    {
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 0.027745885954841176,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 7,
+          "score": 2.8958616256713867
+        },
+        {
+          "channel": "dense",
+          "rank": 18,
+          "score": 0.795219898223877
+        }
+      ],
+      "rerank_score": 0.40268567204475403
+    },
+    {
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 19,
+          "score": 2.672600507736206
+        }
+      ],
+      "rerank_score": 0.3967691659927368
+    },
+    {
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.027242401779095628,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 11,
+          "score": 2.8649117946624756
+        },
+        {
+          "channel": "dense",
+          "rank": 16,
+          "score": 0.7972450256347656
+        }
+      ],
+      "rerank_score": 0.38231441378593445
+    },
+    {
+      "chunk_id": "chunk_4e496c498fc0ed5a85dbab9bf21e5612",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 14,
+          "score": 0.8007493019104004
+        }
+      ],
+      "rerank_score": 0.336985319852829
+    },
+    {
+      "chunk_id": "chunk_1a7aefe8737b9f7d3691f99a3361dc94",
+      "score": 0.012658227848101266,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 19,
+          "score": 0.7927556037902832
+        }
+      ],
+      "rerank_score": 0.3342633843421936
+    },
+    {
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 0.015873015873015872,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 3,
+          "score": 3.203895092010498
+        }
+      ],
+      "rerank_score": 0.3253061771392822
+    },
+    {
+      "chunk_id": "chunk_8eeb2944a7ceb3bfebc67f8259978867",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 17,
+          "score": 0.7969541549682617
+        }
+      ],
+      "rerank_score": 0.29838913679122925
+    },
+    {
+      "chunk_id": "chunk_36588119f2aacd0893d97ed15e4ed276",
+      "score": 0.013513513513513514,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 14,
+          "score": 2.80495548248291
+        }
+      ],
+      "rerank_score": 0.29533153772354126
+    },
+    {
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.013888888888888888,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 12,
+          "score": 0.8024282455444336
+        }
+      ],
+      "rerank_score": 0.2941135764122009
+    },
+    {
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 10,
+          "score": 2.8768553733825684
+        }
+      ],
+      "rerank_score": 0.26340988278388977
+    },
+    {
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.014705882352941176,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 8,
+          "score": 0.8134555816650391
+        }
+      ],
+      "rerank_score": 0.26114246249198914
+    },
+    {
+      "chunk_id": "chunk_031b7aaba8f20d011a94bb6a15b0f3b1",
+      "score": 0.015384615384615385,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 5,
+          "score": 2.927487373352051
+        }
+      ],
+      "rerank_score": 0.2564593553543091
+    },
+    {
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 0.012987012987012988,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 17,
+          "score": 2.738679885864258
+        }
+      ],
+      "rerank_score": 0.24346251785755157
+    },
+    {
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "score": 0.0136986301369863,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 13,
+          "score": 0.8008995056152344
+        }
+      ],
+      "rerank_score": 0.2112540602684021
+    },
+    {
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 0.016129032258064516,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 2,
+          "score": 3.2934648990631104
+        }
+      ],
+      "rerank_score": 0.19698064029216766
+    },
+    {
+      "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9",
+      "score": 0.013157894736842105,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 16,
+          "score": 2.7430615425109863
+        }
+      ],
+      "rerank_score": 0.1711997091770172
+    },
+    {
+      "chunk_id": "chunk_92e5d004a12fc8fd1f2a524170ac0d91",
+      "score": 0.013333333333333334,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 15,
+          "score": 0.7978982925415039
+        }
+      ],
+      "rerank_score": 0.11838508397340775
+    },
+    {
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.014285714285714285,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 10,
+          "score": 0.8038983345031738
+        }
+      ],
+      "rerank_score": 0.09619516879320145
+    },
+    {
+      "chunk_id": "chunk_b78209859c4376c24c898742978604f0",
+      "score": 0.014084507042253521,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 11,
+          "score": 0.8032889366149902
+        }
+      ],
+      "rerank_score": 0.07978200167417526
+    },
+    {
+      "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+      "score": 0.0125,
+      "sources": [
+        {
+          "channel": "dense",
+          "rank": 20,
+          "score": 0.7914314270019531
+        }
+      ],
+      "rerank_score": 0.0384661927819252
+    },
+    {
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 0.01639344262295082,
+      "sources": [
+        {
+          "channel": "fulltext",
+          "rank": 1,
+          "score": 4.6362762451171875
+        }
+      ],
+      "rerank_score": 0.0005233757547102869
+    }
+  ],
+  "case_id": "R06",
+  "question": "ToG-2 与 LPKG 中的图知识分别在什么阶段发挥作用、服务什么目标？请分别说明协作检索与规划数据的路径。",
+  "category": "cross",
+  "arm": "P0-SingleQuery",
+  "order": 2,
+  "generate_requested": true,
+  "compute_timings": [
+    {
+      "name": "validate",
+      "seconds": 0.0007198000093922019
+    },
+    {
+      "name": "retrieve",
+      "seconds": 0.058023300021886826
+    },
+    {
+      "name": "graph_expand",
+      "seconds": 8.400005754083395e-06
+    },
+    {
+      "name": "rerank",
+      "seconds": 1.0014986000023782
+    },
+    {
+      "name": "evidence",
+      "seconds": 0.002987799991387874
+    }
+  ],
+  "retrieval_compute_seconds": 1.0632379000307992,
+  "request_wall_seconds": 11.29528369999025,
+  "embedding_source": "shared frozen Q00 vector + live batch for planned subqueries",
+  "stage_timings": [
+    {
+      "name": "retrieval_pipeline",
+      "seconds": 1.5561091999989003,
+      "status": "ok"
+    },
+    {
+      "name": "generate",
+      "seconds": 7.30109290004475,
+      "status": "ok"
+    },
+    {
+      "name": "citations",
+      "seconds": 0.4520953000173904,
+      "status": "ok"
+    }
+  ],
+  "provider_calls": [
+    {
+      "provider": "deepseek",
+      "attempt": 1,
+      "status": "ok",
+      "http_status": 200,
+      "seconds": 6.324152500019409,
+      "usage": "{\"prompt_tokens\": 4591, \"total_tokens\": 5054, \"completion_tokens\": 463}"
+    }
+  ],
+  "candidate_channels": [
+    {
+      "channel": "dense",
+      "rank": 1,
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 0.8362646102905273
+    },
+    {
+      "channel": "dense",
+      "rank": 2,
+      "chunk_id": "chunk_362a4aa0f89367fe96563183423db354",
+      "score": 0.8317303657531738
+    },
+    {
+      "channel": "dense",
+      "rank": 3,
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "score": 0.8308348655700684
+    },
+    {
+      "channel": "dense",
+      "rank": 4,
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "score": 0.8260021209716797
+    },
+    {
+      "channel": "dense",
+      "rank": 5,
+      "chunk_id": "chunk_44ca1868cc8294f6cfe2d5991cbd0d4b",
+      "score": 0.8222064971923828
+    },
+    {
+      "channel": "dense",
+      "rank": 6,
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "score": 0.8203268051147461
+    },
+    {
+      "channel": "dense",
+      "rank": 7,
+      "chunk_id": "chunk_529e795e797b26de48cdc1fe5cbea79c",
+      "score": 0.8180241584777832
+    },
+    {
+      "channel": "dense",
+      "rank": 8,
+      "chunk_id": "chunk_d6a1257a27b9a4e3fd151b8c87ebf491",
+      "score": 0.8134555816650391
+    },
+    {
+      "channel": "dense",
+      "rank": 9,
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 0.8127884864807129
+    },
+    {
+      "channel": "dense",
+      "rank": 10,
+      "chunk_id": "chunk_e09b5a88c34014513aad6c0d6121f790",
+      "score": 0.8038983345031738
+    },
+    {
+      "channel": "dense",
+      "rank": 11,
+      "chunk_id": "chunk_b78209859c4376c24c898742978604f0",
+      "score": 0.8032889366149902
+    },
+    {
+      "channel": "dense",
+      "rank": 12,
+      "chunk_id": "chunk_b160799030dcc4aeb6145d3dd00db7f3",
+      "score": 0.8024282455444336
+    },
+    {
+      "channel": "dense",
+      "rank": 13,
+      "chunk_id": "chunk_73bc55c51e0886e7dda37a98fe4fe0cb",
+      "score": 0.8008995056152344
+    },
+    {
+      "channel": "dense",
+      "rank": 14,
+      "chunk_id": "chunk_4e496c498fc0ed5a85dbab9bf21e5612",
+      "score": 0.8007493019104004
+    },
+    {
+      "channel": "dense",
+      "rank": 15,
+      "chunk_id": "chunk_92e5d004a12fc8fd1f2a524170ac0d91",
+      "score": 0.7978982925415039
+    },
+    {
+      "channel": "dense",
+      "rank": 16,
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 0.7972450256347656
+    },
+    {
+      "channel": "dense",
+      "rank": 17,
+      "chunk_id": "chunk_8eeb2944a7ceb3bfebc67f8259978867",
+      "score": 0.7969541549682617
+    },
+    {
+      "channel": "dense",
+      "rank": 18,
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 0.795219898223877
+    },
+    {
+      "channel": "dense",
+      "rank": 19,
+      "chunk_id": "chunk_1a7aefe8737b9f7d3691f99a3361dc94",
+      "score": 0.7927556037902832
+    },
+    {
+      "channel": "dense",
+      "rank": 20,
+      "chunk_id": "chunk_c558da35a49faad6c4cbcb0f6cd6d9cf",
+      "score": 0.7914314270019531
+    },
+    {
+      "channel": "fulltext",
+      "rank": 1,
+      "chunk_id": "chunk_d1768d8a0877e6dd8b3f41159ac2948b",
+      "score": 4.6362762451171875
+    },
+    {
+      "channel": "fulltext",
+      "rank": 2,
+      "chunk_id": "chunk_0bd33867fd3e8c1883e6ad37bcb38ec6",
+      "score": 3.2934648990631104
+    },
+    {
+      "channel": "fulltext",
+      "rank": 3,
+      "chunk_id": "chunk_36fd3f5ddb484701ba81edeecc069767",
+      "score": 3.203895092010498
+    },
+    {
+      "channel": "fulltext",
+      "rank": 4,
+      "chunk_id": "chunk_9c3795187f69ce14c244c9ad74c8e821",
+      "score": 3.00386381149292
+    },
+    {
+      "channel": "fulltext",
+      "rank": 5,
+      "chunk_id": "chunk_031b7aaba8f20d011a94bb6a15b0f3b1",
+      "score": 2.927487373352051
+    },
+    {
+      "channel": "fulltext",
+      "rank": 6,
+      "chunk_id": "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2",
+      "score": 2.927487373352051
+    },
+    {
+      "channel": "fulltext",
+      "rank": 7,
+      "chunk_id": "chunk_a27025c247baa354ac6ee877d6df28aa",
+      "score": 2.8958616256713867
+    },
+    {
+      "channel": "fulltext",
+      "rank": 8,
+      "chunk_id": "chunk_635558ad0cf82fb9b2de3d6fba4d2af0",
+      "score": 2.888340473175049
+    },
+    {
+      "channel": "fulltext",
+      "rank": 9,
+      "chunk_id": "chunk_9b63637ef18ed2d67ff105ef55092df3",
+      "score": 2.888340473175049
+    },
+    {
+      "channel": "fulltext",
+      "rank": 10,
+      "chunk_id": "chunk_7d8a9ac9d054b8b2a730410c6aafbaec",
+      "score": 2.8768553733825684
+    },
+    {
+      "channel": "fulltext",
+      "rank": 11,
+      "chunk_id": "chunk_734b4d6c3516e11a7a54795847f3f56f",
+      "score": 2.8649117946624756
+    },
+    {
+      "channel": "fulltext",
+      "rank": 12,
+      "chunk_id": "chunk_a68d09dd1334dcb0207c235cca9292cf",
+      "score": 2.861908435821533
+    },
+    {
+      "channel": "fulltext",
+      "rank": 13,
+      "chunk_id": "chunk_ae3b975ae8b5619f33cca171b000c8b6",
+      "score": 2.8346166610717773
+    },
+    {
+      "channel": "fulltext",
+      "rank": 14,
+      "chunk_id": "chunk_36588119f2aacd0893d97ed15e4ed276",
+      "score": 2.80495548248291
+    },
+    {
+      "channel": "fulltext",
+      "rank": 15,
+      "chunk_id": "chunk_fd05fc6099086f633f4ad41747c6caac",
+      "score": 2.7626757621765137
+    },
+    {
+      "channel": "fulltext",
+      "rank": 16,
+      "chunk_id": "chunk_bb6434ecbc91c99f9e81bd6e4191b3c9",
+      "score": 2.7430615425109863
+    },
+    {
+      "channel": "fulltext",
+      "rank": 17,
+      "chunk_id": "chunk_5850f1e050af430b0a9f17150c790c83",
+      "score": 2.738679885864258
+    },
+    {
+      "channel": "fulltext",
+      "rank": 18,
+      "chunk_id": "chunk_b2b1f9967726b7979691a73a7daba4af",
+      "score": 2.695990800857544
+    },
+    {
+      "channel": "fulltext",
+      "rank": 19,
+      "chunk_id": "chunk_cea61ca4533fd32e6f63ea730fb194ab",
+      "score": 2.672600507736206
+    },
+    {
+      "channel": "fulltext",
+      "rank": 20,
+      "chunk_id": "chunk_dbc1fae04646d9e523a5b16481732daf",
+      "score": 2.668804883956909
+    }
+  ],
+  "criterion_source_coverage": [
+    {
+      "criterion_id": "R06.C01",
+      "requirement": "ToG-2 在推理时协作检索图与文档上下文。",
+      "selected_matches_by_unit": {
+        "tog2": [
+          "chunk_9b63637ef18ed2d67ff105ef55092df3",
+          "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R06.C02",
+      "requirement": "LPKG 从 KG 派生规划数据。",
+      "selected_matches_by_unit": {
+        "lpdata": [
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R06.C03",
+      "requirement": "规划数据用于训练规划能力。",
+      "selected_matches_by_unit": {
+        "lpdata": [
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    },
+    {
+      "criterion_id": "R06.C04",
+      "requirement": "在线检索与训练用途必须分开，不能视为同一训练协议。",
+      "selected_matches_by_unit": {
+        "tog2": [
+          "chunk_9b63637ef18ed2d67ff105ef55092df3",
+          "chunk_c9284a24e2b28b371a7e43a2bc6ae3c2"
+        ],
+        "lpdata": [
+          "chunk_cea61ca4533fd32e6f63ea730fb194ab"
+        ]
+      },
+      "missing_units": [],
+      "required_sources_available": true,
+      "semantic_status": "not_reviewed",
+      "semantic_score": null
+    }
+  ],
+  "metrics": {
+    "recall5": 0.5,
+    "recall8": 0.5,
+    "mrr40": 1.0,
+    "evidence_coverage": 1.0,
+    "all_units": true
+  },
+  "trace_url": "https://smith.langchain.com/o/01386dcd-db0e-4ed5-bcc3-2592e81692e2/projects/p/f755f52c-a0c2-431f-8ded-d4ebe88979de/r/003797d8-04ee-4ae1-8175-aeb6c11c6ed7?poll=true"
+}

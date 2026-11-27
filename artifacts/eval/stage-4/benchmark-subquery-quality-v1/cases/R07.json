@@ -1,0 +1,296 @@
+{
+  "id": "9c868edf-05d8-5cf1-aac4-686922d72784",
+  "inputs": {
+    "question": "请从论文库找出两种让“语义上相关的材料”在图中连起来的不同办法：一种连接不同叫法的概念，另一种学习相邻支持段落。分别说明建边依据和训练信号。"
+  },
+  "outputs": {
+    "expected_answer": "HippoRAG 用检索编码器表示的余弦相似度超过阈值来增加同义边。\nKGP 的MDR句子编码器学习由已知支持事实预测后续支持事实，再用嵌入相似构建KNN图。",
+    "answerable": true,
+    "negative_kind": null,
+    "source_references": [
+      {
+        "unit_id": "R07.S01",
+        "answer_point": "HippoRAG 用检索编码器表示的余弦相似度超过阈值来增加同义边。",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "primary_chunk": "chunk_008861356c216ab780f62dad7796e2d4",
+        "pages": [
+          4,
+          4
+        ],
+        "known_support_chunks": [
+          "chunk_008861356c216ab780f62dad7796e2d4"
+        ]
+      },
+      {
+        "unit_id": "R07.S02",
+        "answer_point": "KGP 的MDR句子编码器学习由已知支持事实预测后续支持事实，再用嵌入相似构建KNN图。",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "primary_chunk": "chunk_1da329a96f21568de531f98b40b330e7",
+        "pages": [
+          3,
+          3
+        ],
+        "known_support_chunks": [
+          "chunk_1da329a96f21568de531f98b40b330e7"
+        ]
+      }
+    ],
+    "relation_outline": null,
+    "must_not_claim": null,
+    "case_id": "R07",
+    "category": "cross",
+    "required_facts": [
+      {
+        "unit_id": "R07.S01",
+        "required_fact": "HippoRAG 用检索编码器表示的余弦相似度超过阈值来增加同义边。",
+        "primary_chunk": "chunk_008861356c216ab780f62dad7796e2d4",
+        "supporting_chunks": [
+          "chunk_008861356c216ab780f62dad7796e2d4"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      },
+      {
+        "unit_id": "R07.S02",
+        "required_fact": "KGP 的MDR句子编码器学习由已知支持事实预测后续支持事实，再用嵌入相似构建KNN图。",
+        "primary_chunk": "chunk_1da329a96f21568de531f98b40b330e7",
+        "supporting_chunks": [
+          "chunk_1da329a96f21568de531f98b40b330e7"
+        ],
+        "coverage_rule": "本事实的任一已核查支持来源即可；不同必要事实必须全部覆盖。"
+      }
+    ],
+    "source_evidence": [
+      {
+        "chunk_id": "chunk_008861356c216ab780f62dad7796e2d4",
+        "paper_id": "paper_45e21fe95d28e544e8b55c6a986ff63e",
+        "parse_id": "parse_b16c94cfd20b80ea47ed99844e40d03c",
+        "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "source_relative_path": "Methods/035_HippoRAG Neurobiologically Inspired Long-Term Memory for Large Language Models.pdf",
+        "page_start": 4,
+        "page_end": 4,
+        "source_spans": [
+          {
+            "pdf_page": 4,
+            "start_char": 1381,
+            "end_char": 2535,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1154,
+            "block_bboxes": [
+              [
+                107.253,
+                445.556,
+                505.658,
+                575.749
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "513e8af1dd62ac1274c657d1b38ffba433a47012da68b86cb6ee54a868be9741",
+        "section": "Introduction",
+        "text": "Offline Indexing. Our indexing process involves processing a set of passages P using an instruction-\ntuned LLM L and a retrieval encoder M. As seen in Figure 2 we first use L to extract a set of noun\nphrase nodes N and relation edges E from each passage in P via OpenIE. This process is done via\n1-shot prompting of the LLM with the prompts shown in Appendix I. Specifically, we first extract a\nset of named entities from each passage. We then add the named entities to the OpenIE prompt to\nextract the final triples, which also contain concepts (noun phrases) beyond named entities. We find\nthat this two-step prompt configuration leads to an appropriate balance between generality and bias\ntowards named entities. Finally, we use M to add the extra set of synonymy relations E′ discussed\nabove when the cosine similarity between two entity representations in N is above a threshold τ. As\nstated above, this introduces more edges to our hippocampal index and allows for more effective\npattern completion. This indexing process defines a |N| × |P| matrix P, which contains the number\nof times each noun phrase in the KG appears in each original passage.\n"
+      },
+      {
+        "chunk_id": "chunk_1da329a96f21568de531f98b40b330e7",
+        "paper_id": "paper_57e4088ab0410527356a07d8b6f88f3b",
+        "parse_id": "parse_bd79792cc116e8e6baf3c3d90c2f9c3c",
+        "title": "Knowledge Graph Prompting for Multi-Document Question Answering",
+        "source_relative_path": "Methods/209_Knowledge Graph Prompting for Multi-Document Question Answering.pdf",
+        "page_start": 3,
+        "page_end": 3,
+        "source_spans": [
+          {
+            "pdf_page": 3,
+            "start_char": 2234,
+            "end_char": 3823,
+            "chunk_start_char": 0,
+            "chunk_end_char": 1589,
+            "block_bboxes": [
+              [
+                54.0,
+                584.764,
+                292.505,
+                704.407
+              ],
+              [
+                319.5,
+                284.592,
+                558.005,
+                469.988
+              ]
+            ]
+          }
+        ],
+        "text_sha256": "df47e2b4a63562674f3ee0f9b73bca9f73e45f37a56e7ea614e8b02bb39c901b",
+        "section": "Introduction",
+        "text": "TF-IDF KG Construction\nFor adding edges according to\nlexical similarity, we first apply TF-IDF keyword extrac-\ntion (Ramos et al. 2003) over each document to filter out\nmeaningless words such as supporting verbs and articles,\nwhich also reduces the dimension of bag-of-word (BOW)\nfeatures, sparsifies the constructed graph and increases the\ngraph traversal efficiency. In addition, we add the document\ntitle into the extracted keyword set since some questions fo-\ncus on title entities. We collect the extracted keywords from\nall documents to form the keyword space W and then con-\nnect two passages if they share any common keyword in W.\nKNN-ST/MDR KG Construction\nFor adding edges ac-\ncording to semantic similarity, we can readily employ pre-\nexisting models such as sentence transformers to gener-\nate passage embedding Xi for each node vi and subse-\nquently compute pairwise similarity matrix to construct the\nK-nearest neighbor (KNN) graph. However, these off-the-\nshelf models, typically trained on tasks not so-related to\nMD-QA, may not adequately encapsulate necessary logical\nassociations in their embedding similarity demanded by the\nquestion. To overcome this problem, we follow the train-\ning strategy of MDR (Xiong et al. 2020) and train a sen-\ntence encoder by predicting the subsequent supporting facts\nbased on previously supporting facts, thereby endowing the\nencoder with reasoning capability. Consequently, the em-\nbedding similarity and the corresponding constructed KNN\ngraph fundamentally encapsulate the necessary logical asso-\nciations between different passages.\n"
+      }
+    ],
+    "required_source_papers": [
+      "paper_45e21fe95d28e544e8b55c6a986ff63e",
+      "paper_57e4088ab0410527356a07d8b6f88f3b"
+    ],
+    "min_source_papers": 2,
+    "relation_review": {
+      "evidence": "核对全部必要事实、引用与原文；没有来源时不得补造。",
+      "semantics": "核对关系方向、实体角色、任务/实验条件和题干前提。",
+      "uncertainty": "必要证据不足时明确说明缺口；反例允许纠正前提。"
+    },
+    "scoring_rules": {
+      "automatic": [
+        "valid source fragments",
+        "method coverage",
+        "non-method-only output",
+        "shared-task presence"
+      ],
+      "semantic": "Codex review of task retention and ownership; not independent human scoring",
+      "rubric": [
+        "only named methods",
+        "no invented facts",
+        "no unsupported method/technical-term pairing",
+        "retain per-method retrieval target",
+        "record unresolved text",
+        "preserve no-anchor behavior"
+      ],
+      "primary": "逐题保留目标与归属质量审阅；不把JSON成功当质量成功",
+      "latency": "wall time includes model load; separately report load/prompt/eval durations",
+      "tokens": "Ollama prompt_eval_count / eval_count; no estimation",
+      "negative_policy": "not applicable: no answer evaluation"
+    },
+    "evaluation_config": {
+      "generate": false,
+      "planned_output": "题面子查询拆分；不运行检索或答案生成",
+      "controls": {
+        "arms": [
+          "Rule",
+          "Local-LLM"
+        ],
+        "prompt": "你是题面解析器。只解析用户给的题面，不回答问题，不使用论文常识，不补充事实。\n输入只有 question 和 allowed_methods。每个 allowed_methods 方法输出一个单元，顺序不变。\nlocal_aspect: 明确归属于该方法的题面原文片段数组。shared_task: 可用于该方法的共同任务原文片段数组。\n所有数组中的字符串必须是题面的连续原文，不得改写、增加字词或补问号。方法名无需重复放入片段。\n可以依据题面中明确的“前者/后者”解析归属；不能根据论文常识或“分别”的列举顺序，把未绑定的方法与技术词配对。\n若题面只列举两个方法，再列举两种技术，没有显式归属，就不分配技术词，记录在 unresolved；每个方法仍保留有用的共享任务。\nshared_task 应保留任务目的、比较维度和限定条件；不要把“前者/后者”的专属描述当作共享内容，也不要只输出方法名。\n局部描述若包含另一个方法的名字（如某方法对另一工作的观察），可以保留这一显式引用，不得猜测其论文内容。\nassignment 只能是 explicit（明确绑定）、pronoun（显式指代）、shared_only（没有明确局部描述）。\nunresolved 记录不能确定归属的原文片段。reason 简短说明题面依据，不解释答案。\n仅输出符合 schema 的 JSON。不要输出完整回答。",
+        "schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "methods": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "method": {
+                    "type": "string"
+                  },
+                  "local_aspect": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shared_task": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "assignment": {
+                    "type": "string",
+                    "enum": [
+                      "explicit",
+                      "pronoun",
+                      "shared_only"
+                    ]
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "method",
+                  "local_aspect",
+                  "shared_task",
+                  "assignment",
+                  "reason"
+                ]
+              }
+            },
+            "unresolved": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "methods",
+            "unresolved"
+          ]
+        },
+        "options": {
+          "temperature": 0,
+          "seed": 42,
+          "num_ctx": 8192,
+          "num_predict": 2200
+        },
+        "inputs": "question + explicit method names only",
+        "corpus_or_reference_in_model": false,
+        "no_anchor": "keep original question, skip LLM",
+        "query_assembly": "verified source snippets; resolved pronoun prefix may be removed",
+        "retrieval": false,
+        "embedding": false,
+        "reranking": false,
+        "answer_generation": false
+      },
+      "models": {
+        "local_decomposer": "qwen2.5:14b",
+        "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6"
+      }
+    },
+    "result_display": {
+      "location": "Rule / Local-LLM Experiments",
+      "fields": [
+        "子查询原文",
+        "题面来源片段与偏移",
+        "归属与未解析内容",
+        "机械校验",
+        "时延与Token",
+        "逐题质量审阅",
+        "Trace"
+      ],
+      "semantic_review": "自动覆盖分数不是答案正确性；语义判读单独标注。"
+    },
+    "decomposition_rubric": {
+      "automatic": [
+        "valid source fragments",
+        "method coverage",
+        "non-method-only output",
+        "shared-task presence"
+      ],
+      "semantic": "Codex review of task retention and ownership; not independent human scoring",
+      "rubric": [
+        "only named methods",
+        "no invented facts",
+        "no unsupported method/technical-term pairing",
+        "retain per-method retrieval target",
+        "record unresolved text",
+        "preserve no-anchor behavior"
+      ],
+      "primary": "逐题保留目标与归属质量审阅；不把JSON成功当质量成功",
+      "latency": "wall time includes model load; separately report load/prompt/eval durations",
+      "tokens": "Ollama prompt_eval_count / eval_count; no estimation",
+      "negative_policy": "not applicable: no answer evaluation"
+    }
+  },
+  "metadata": {
+    "case_id": "R07",
+    "category": "cross",
+    "benchmark": "benchmark-subquery-quality-v1",
+    "benchmark_sha256": "01c6c36e97b5713368ad074d51b4d3cc06d83fe4764559009593aaad1cb225ff",
+    "corpus_id": "a6a19e2e97b11d9c450e",
+    "review_origin": "Codex delegated source review; not independent human scoring",
+    "detail_profile": "per-question-details-v1",
+    "content_scope": "逐题参考事实、原文证据和位置、关系判读、评分与运行配置；实际结果关联 Experiment。"
+  },
+  "split": [
+    "cross"
+  ]
+}
