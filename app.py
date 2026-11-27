@@ -1,4 +1,4 @@
-"""User-facing PaperTech Q&A workbench; developer controls stay hidden behind an explicit toggle."""
+"""User-facing PaperTech Q&A workbench styled with Minimalism & Swiss Academic design system."""
 import html
 import json
 from pathlib import Path
@@ -19,25 +19,181 @@ st.set_page_config(
     initial_sidebar_state='collapsed',
 )
 
+# Design System: Minimalism & Swiss Style + Academic Palette (#2563EB Primary, #F8FAFC Canvas, #0F172A Ink)
 st.markdown(
     """
     <style>
-    [data-testid="stAppDeployButton"] { display: none; }
-    .block-container { padding-top: 2.2rem; padding-bottom: 3rem; max-width: 820px; }
-    .pt-subtitle { color: #64748b; font-size: 0.96rem; margin-top: -0.6rem; margin-bottom: 1.4rem; }
-    .pt-answer { font-size: 1.02rem; line-height: 1.8; color: #0f172a; }
-    .pt-quote {
-        background: #f8fafc;
-        border-left: 3px solid #2563eb;
-        padding: 0.75rem 1rem;
-        border-radius: 0 6px 6px 0;
-        font-size: 0.9rem;
-        line-height: 1.65;
-        color: #334155;
-        white-space: pre-wrap;
-        margin: 0.4rem 0 0.6rem 0;
+    @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Crimson+Pro:wght@600;700&display=swap');
+
+    :root {
+        --pt-primary: #2563EB;
+        --pt-primary-soft: #EFF6FF;
+        --pt-primary-border: #BFDBFE;
+        --pt-bg: #F8FAFC;
+        --pt-surface: #FFFFFF;
+        --pt-border: #E2E8F0;
+        --pt-ink: #0F172A;
+        --pt-muted: #475569;
+        --pt-accent: #D97706;
     }
-    .pt-meta { color: #64748b; font-size: 0.82rem; }
+
+    [data-testid="stAppDeployButton"] { display: none; }
+    .stApp {
+        background-color: var(--pt-bg);
+        color: var(--pt-ink);
+        font-family: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+    .block-container {
+        padding-top: 3.25rem;
+        padding-bottom: 3.5rem;
+        max-width: 840px;
+    }
+
+    /* Header */
+    .pt-hero {
+        margin-bottom: 1.25rem;
+    }
+    .pt-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        color: var(--pt-primary);
+        background: var(--pt-primary-soft);
+        border: 1px solid var(--pt-primary-border);
+        padding: 3px 10px;
+        border-radius: 999px;
+        margin-bottom: 0.65rem;
+    }
+    .pt-title {
+        font-family: 'Crimson Pro', 'Noto Serif SC', Georgia, serif;
+        font-size: 2.15rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--pt-ink);
+        margin: 0 0 0.4rem 0;
+    }
+    .pt-subtitle {
+        color: var(--pt-muted);
+        font-size: 0.98rem;
+        line-height: 1.55;
+        margin: 0;
+    }
+
+    /* Form & Interactive Controls (min 44px touch targets, clear focus rings) */
+    [data-testid="stForm"] {
+        background: var(--pt-surface);
+        border: 1px solid var(--pt-border);
+        border-radius: 12px;
+        padding: 1rem 1.1rem 1.05rem 1.1rem;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    .stTextArea textarea {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        color: var(--pt-ink) !important;
+        background: #FFFFFF !important;
+        border-radius: 8px !important;
+    }
+    .stButton > button, .stFormSubmitButton > button {
+        min-height: 44px !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        transition: background-color 180ms ease, border-color 180ms ease, transform 120ms ease !important;
+    }
+    .stButton > button:focus-visible, .stFormSubmitButton > button:focus-visible {
+        outline: 2px solid var(--pt-primary) !important;
+        outline-offset: 2px !important;
+    }
+    .stButton > button[kind="secondary"] {
+        background: var(--pt-surface) !important;
+        border: 1px solid var(--pt-border) !important;
+        color: var(--pt-ink) !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+        padding: 0.65rem 0.9rem !important;
+        font-weight: 500 !important;
+        font-size: 0.92rem !important;
+        line-height: 1.45 !important;
+        height: auto !important;
+    }
+    .stButton > button[kind="secondary"]:hover {
+        border-color: var(--pt-primary) !important;
+        background: var(--pt-primary-soft) !important;
+        color: var(--pt-primary) !important;
+    }
+
+    /* Answer Card */
+    .pt-question-h2 {
+        font-size: 1.32rem;
+        font-weight: 700;
+        line-height: 1.4;
+        color: var(--pt-ink);
+        margin: 1.4rem 0 0.75rem 0;
+        padding-bottom: 0.45rem;
+        border-bottom: 1px solid var(--pt-border);
+    }
+    .pt-answer-card {
+        background: var(--pt-surface);
+        border: 1px solid var(--pt-border);
+        border-radius: 12px;
+        padding: 1.2rem 1.35rem;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+        margin-bottom: 1rem;
+        font-size: 1.02rem;
+        line-height: 1.82;
+        color: var(--pt-ink);
+    }
+    .pt-cite {
+        display: inline-block;
+        font-size: 0.74rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--pt-primary);
+        background: var(--pt-primary-soft);
+        border: 1px solid var(--pt-primary-border);
+        border-radius: 4px;
+        padding: 2px 5px;
+        margin: 0 2px;
+        vertical-align: super;
+    }
+
+    /* Sources Section */
+    .pt-sources-h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--pt-ink);
+        margin: 1.1rem 0 0.6rem 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .pt-quote {
+        background: #F8FAFC;
+        border-left: 3px solid var(--pt-primary);
+        padding: 0.85rem 1.05rem;
+        border-radius: 0 8px 8px 0;
+        font-size: 0.94rem;
+        line-height: 1.7;
+        color: #1E293B;
+        white-space: pre-wrap;
+        margin: 0.25rem 0 0.65rem 0;
+    }
+    .pt-meta {
+        color: var(--pt-muted);
+        font-size: 0.84rem;
+        line-height: 1.45;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            transition: none !important;
+            animation: none !important;
+        }
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -133,10 +289,8 @@ def format_answer_and_sources(result, chunk_map):
         return ''.join(f'[{n}]' for n in uniq)
 
     clean_answer = re.sub(r'\[([^\[\]\n]+)\]', _replace_bracket, answer)
-    # Clean redundant adjacent duplicates like [1][1] -> [1]
     clean_answer = re.sub(r'(\[\d+\])\1+', r'\1', clean_answer)
 
-    # Fallback: if no explicit citations (e.g., evidence_only or unverified), surface top retrieved evidence cleanly.
     fallback_sources = []
     if not sources and result.get('evidence'):
         for idx, e in enumerate(result['evidence'][:5], 1):
@@ -152,6 +306,18 @@ def format_answer_and_sources(result, chunk_map):
                 chunk_id=e.get('chunk_id', ''),
             ))
     return clean_answer, sources, fallback_sources
+
+
+def render_answer_html(clean_answer):
+    """Escape raw text safely, preserve line breaks, and turn [1] into crisp citation badges."""
+    escaped = html.escape(clean_answer)
+    with_badges = re.sub(r'\[(\d+)\]', r'<sup class="pt-cite">\1</sup>', escaped)
+    paragraphs = [p.strip() for p in re.split(r'\n{2,}', with_badges) if p.strip()]
+    if not paragraphs:
+        return f'<div class="pt-answer-card">{with_badges}</div>'
+    body = ''.join(f'<p style="margin:0 0 0.75rem 0;">{p.replace(chr(10), "<br>")}</p>' for p in paragraphs[:-1])
+    body += f'<p style="margin:0;">{paragraphs[-1].replace(chr(10), "<br>")}</p>'
+    return f'<div class="pt-answer-card">{body}</div>'
 
 
 cfg = settings(ROOT)
@@ -180,10 +346,21 @@ with st.sidebar:
     else:
         mode, rerank, query_planner, use_graph_cards, premise_check = default_mode, True, True, True, True
 
-# Main user-facing header
-st.title('PaperTech 论文问答')
+# Header (Hero with inline SVG icon, sequential h1)
 st.markdown(
-    f'<div class="pt-subtitle">基于当前收录的 {len(papers)} 篇论文，提供带逐字原文出处的问答与跨论文对比（左上角可查看收录论文清单）</div>',
+    f"""
+    <div class="pt-hero">
+        <div class="pt-hero-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+            已收录 {len(papers)} 篇论文 · 逐字原文可溯源
+        </div>
+        <h1 class="pt-title">PaperTech 论文问答</h1>
+        <p class="pt-subtitle">输入研究问题或跨论文对比问题，回答中的每条结论均附带论文原文摘录与页码出处（左上角可查看收录清单）。</p>
+    </div>
+    """,
     unsafe_allow_html=True,
 )
 
@@ -198,17 +375,17 @@ EXAMPLES = [
     'G-Retriever 为什么不把大图全部转成文本交给模型？',
 ]
 
-# Input form right at the top
+# Input form
 with st.form('question_form', clear_on_submit=False):
     question = st.text_area(
-        '输入你的问题',
+        '输入你的研究问题',
         value=st.session_state.draft_question,
         placeholder='例如：比较 ToG 与 ToG-2 的检索流程有什么不同？',
-        height=92,
+        height=96,
         max_chars=2000,
         label_visibility='collapsed',
     )
-    col_btn, col_clear = st.columns([4, 1])
+    col_btn, col_clear = st.columns([4, 1], gap='small')
     submit = col_btn.form_submit_button('提问', type='primary', use_container_width=True)
     clear_clicked = col_clear.form_submit_button('清空', use_container_width=True)
 
@@ -217,12 +394,11 @@ if clear_clicked:
     st.session_state.draft_question = ''
     st.rerun()
 
-# Show clickable example questions when conversation is empty
+# Full-width clickable example questions when conversation is empty (prevents text truncation)
 if not st.session_state.history:
-    st.caption('试试这些问题：')
-    ex_cols = st.columns(len(EXAMPLES))
-    for col, ex in zip(ex_cols, EXAMPLES):
-        if col.button(ex, use_container_width=True):
+    st.caption('试试以下问题：')
+    for idx, ex in enumerate(EXAMPLES):
+        if st.button(ex, key=f'ex_{idx}', use_container_width=True):
             st.session_state.draft_question = ex
             question = ex
             submit = True
@@ -258,7 +434,7 @@ for turn_idx, turn in enumerate(st.session_state.history):
 
     if turn_idx > 0:
         st.divider()
-    st.markdown(f'#### {q_text}')
+    st.markdown(f'<h2 class="pt-question-h2">{html.escape(q_text)}</h2>', unsafe_allow_html=True)
 
     status = result.get('status')
     if status == 'refused':
@@ -268,12 +444,23 @@ for turn_idx, turn in enumerate(st.session_state.history):
     elif status in ('error', 'citation_error'):
         st.warning('本次未能生成可核验的完整回答，下方已保留查找到的相关论文片段供参考。')
 
-    st.markdown(clean_answer)
+    st.markdown(render_answer_html(clean_answer), unsafe_allow_html=True)
 
     display_sources = sources if sources else fallback_sources
     if display_sources:
         heading = f'原文来源（{len(display_sources)} 处）' if sources else f'相关论文片段（{len(display_sources)} 处）'
-        st.markdown(f'**{heading}**')
+        st.markdown(
+            f'''<h3 class="pt-sources-h3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+                {html.escape(heading)}
+            </h3>''',
+            unsafe_allow_html=True,
+        )
         for s in display_sources:
             page_txt = format_pages(s['page_start'], s['page_end'])
             label = f"[{s['num']}] {s['title']}" + (f" · {page_txt}" if page_txt else '')
